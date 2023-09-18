@@ -1,7 +1,7 @@
 {
   "baseUrl": "",
   "titlePrefix": "HomeBoss",
-  "titleSuffix": "",
+  "titleSuffix": "HomeBoss",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
     "codeTheme": "light"
