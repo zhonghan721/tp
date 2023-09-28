@@ -1,203 +1,375 @@
----
-  layout: default.md
-  title: "User Guide"
-  pageNav: 3
----
+# User Guide for HomeBoss
 
-# AB-3 User Guide
+This comprehensive user guide is your key to a seamless start with our cutting-edge software designed specifically for
+home-based businesses. Our solution is tailored to enhance the efficiency of managing delivery addresses, simplifying
+your operations. Within these pages, you'll find detailed coverage of the following essential topics:
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+* Getting Started
+* Features
+    * User
+        * Secure account with a password
+        * Login
+        * Logout
+        * Register
+        * Recover password
+    * Customer
+        * Add customer
+        * List customers
+        * Update customer details
+        * Delete customer
+    * Delivery
+        * Create delivery
+        * View all deliveries
+        * Sorted deliveries
+        * View details of a delivery
+        * Update details of a delivery
+        * Delete delivery
+* Troubleshooting / FAQ
 
-<!-- * Table of Contents -->
-<page-nav-print />
+#          
 
---------------------------------------------------------------------------------------------------------------------
+# Getting Started
 
-## Quick start
+To get started, you will need to create an account and download the software. Once you have done that, you can follow
+the instructions in the Getting Started Guide to start using the software.
 
-1. Ensure you have Java `11` or above installed in your Computer.
+#          
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+# Features
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+*[ ] specifies optional fields
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+## <span style="text-decoration:underline;">User</span>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+### Login
 
-   * `list` : Lists all contacts.
+**Format: `login --user USERNAME --password PASSWORD`**
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+**Example: `login --user gabriel --password gabrielIsGreat`**
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+![drawing](https://docs.google.com/drawings/d/12345/export/png)
 
-   * `clear` : Deletes all contacts.
+**Accepted Values: **
 
-   * `exit` : Exits the app.
+    _USERNAME:_ String
 
-1. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+    _PASSWORD:_ String
 
-## Features
+**Command succeeds: _Log in successful._**
 
-<box type="info" seamless>
+**Command fails (missing fields): _Please fill up all the required fields._**
 
-**Notes about the command format:**<br>
+**Command fails (wrong login credentials):_ Wrong username and/or password. Try again. _**
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+### Logout
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+**Format: `logout`**
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+**Example: `logout`**
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+![drawing](https://docs.google.com/drawings/d/12345/export/png)
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+**Command succeeds: _Logout successful._**
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+### Register
 
-### Viewing help : `help`
+**Format: `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD`**
 
-Shows a message explaning how to access the help page.
+**Example: `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat`**
 
-![help message](images/helpMessage.png)
+![drawing](https://docs.google.com/drawings/d/12345/export/png)
 
-Format: `help`
+**Accepted Values: **
 
+    _USERNAME:_ String
 
-### Adding a person: `add`
 
-Adds a person to the address book.
+    _PASSWORD:_ String
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<box type="tip" seamless>
+    _CONFIRM PASSWORD:_ String that is the same as PASSWORD.
 
-**Tip:** A person can have any number of tags (including 0)
-</box>
+**Command succeeds: _Register successful._**
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+**Command fails (missing fields): _Please fill up all the required fields._**
 
-### Listing all persons : `list`
+**Command fails (password does not match):_ Passwords do not match. Try again. _**
 
-Shows a list of all persons in the address book.
+##          
 
-Format: `list`
+## <span style="text-decoration:underline;">Customer</span>
 
-### Editing a person : `edit`
+### Add a customer
 
-Edits an existing person in the address book.
+Adds a customer to the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+**Format: `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`**
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+**Example: <code>customer add --name Gabriel --phone 8765 4321
+--email [gabrielrocks@gmail.com](mailto:gabrielrocks@gmail.com) --address RVRC Block B</code></strong>
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+**Accepted Values:**
 
-### Locating persons by name: `find`
+    _NAME_: String
 
-Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+    _PHONE_NUMBER: _8 digit Integer
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+    _EMAIL_: String with @ and . in valid email format
 
-### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+    _ADDRESS: _String
 
-Format: `delete INDEX`
+**Command succeeds: _Customer 1, Gabriel added._**
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+**Command fails (missing field): _Please fill up all the required fields (--name NAME --phone PHONE_NUMBER --email EMAIL
+--address ADDRESS)._**
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+### List customers
 
-### Clearing all entries : `clear`
+Lists all the customers added in the address book.
 
-Clears all entries from the address book.
+**Format: `customer list`**
 
-Format: `clear`
+**Example: `customer list`**
 
-### Exiting the program : `exit`
+**Accepted Values:**
 
-Exits the program.
+    NIL
 
-Format: `exit`
+**Command succeeds (>0 customers):** _Here is the list of customers:_
 
-### Saving the data
+1. _Benjamin, Phone: 9898 2323, Email: benjaminCSGod@gmail.com, Address: Carnegie Mellon University, South Block._
+2. _Gambe, Phone: 9797 1313, Email: gambeRizzLord@gmail.com, Address: Kent Ridge Hall_
+3. _Gabriel, Phone: 9090 9241, Email: gabrielSoCool@gmail.com, Address: RVRC Tower Block_
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+**Command succeeds (0 customer):** _There are no customers added yet!_
 
-### Editing the data file
+###          
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+### Update customer details
 
-<box type="warning" seamless>
+Updates the personal details of an existing customer in the address book.
 
-**Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
-</box>
+**Format: `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`**
 
-### Archiving data files `[coming in v2.0]`
+**
+Example: `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`**
 
-_Details coming soon ..._
+**Accepted Values:**
 
---------------------------------------------------------------------------------------------------------------------
+    _NAME_: String
 
-## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+    _PHONE_NUMBER: _8 digit Integer
 
---------------------------------------------------------------------------------------------------------------------
+``
+_EMAIL_: String with @ and . in valid email format
 
-## Known issues
+    _ADDRESS: _String
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
---------------------------------------------------------------------------------------------------------------------
+    _CUSTOMER_ID_: Integer
 
-## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+    *At least one of the optional fields must be provided.
+
+**Command succeeds:** _Customer 1, Gabriel has been updated!_
+
+**Command fails (missing_index): _Please specify the customer to update._**
+
+**Command fails (invalid_index):** _The customer does not exist!_
+
+**Command fails (missing_fields): _Please provide at least one field to update!_**
+
+### Delete customer
+
+Deletes the specified customer from the address book.
+
+**Format: `customer delete CUSTOMER_ID`**
+
+**Example:** `customer delete 1001`
+
+**Accepted Values: **
+
+    _CUSTOMER_ID:_ Integer
+
+**Command succeeds: _Customer 1, Gabriel has been deleted!_**
+
+**Command fails (missing_index): _Please specify the customer to delete._**
+
+**Command fails (invalid_index):** _The customer does not exist!_
+
+**Command fails (pending_delivery_customer_index): _Delivery for Customer 1, Gabriel is not completed yet! _**
+
+## <span style="text-decoration:underline;">Delivery</span>
+
+### Create delivery
+
+Creates a delivery.
+
+**Format:** `delivery create DELIVERY_NAME --customer CUSTOMER_ID --date DATE`
+
+**Example:** `delivery create furniture --customer 5 --date 2023-12-03`
+
+**Accepted Values:**
+
+    _DELIVERY_NAME:_ String of 50 characters
+
+
+    _CUSTOMER_ID: _Integer
+
+
+    _DATE: _YYYY-MM-DD format
+
+**Command succeeds:** _Delivery [1001] furniture created successfully for Customer 1, Gabriel! _
+
+**Command fails (missing_fields): _Please fill up all the required fields (--name NAME --id CUSTOMER_ID --date DATE)!_**
+
+**Command fails (invalid_date): _Invalid date provided!_**
+
+**Command fails (invalid_date_format):** _Please provide the date in the format: YYYY-MM-DD._
+
+### View all deliveries
+
+Shows a list of all deliveries.
+
+**Format:** `delivery list STATUS [--sort SORT]`
+
+**Example:** `delivery list all --sort desc`
+
+**Accepted Values:**
+
+_    STATUS_: all or pending or complete
+
+	_SORT: _asc for ascending or desc for descending. If unspecified, default to sort by delivery date. 
+
+**Command succeeds (>0 deliveries):**
+
+_Here are all the deliveries:_
+
+1. [1001] Gabriel’s Milk - Completed - Ordered 20th Sept 2023  : Delivered on 30th Sept 2023
+2. [1002] Gambe’s Meat - Completed - Ordered 22th Sept 2023 : Delivered on 29th Sept 2023
+3. [1003] Ben’s Coffee - Pending - Ordered 25th Sept 2023 : Delivery on 1st October 2023
+
+**Command failed (0 deliveries): **
+
+_There are currently no deliveries!_
+
+### View details of deliveries
+
+Shows the details of the specified delivery.
+
+**Format:** `delivery view DELIVERY_ID `
+
+**Example:** `delivery view 1001`
+
+**Accepted Values:**
+
+_DELIVERY_ID_: Integer
+
+**Command succeeds:**
+
+    _[1001] Gabriel’s Milk_
+
+
+    _Customer ID: 1_
+
+
+    _Customer: Gabriel_
+
+
+    _Ordered on : 23rd September 2023_
+
+
+    _Delivery Status: Pending_
+
+
+    _Delivery on : 1st October 2023_
+
+**Command failed (0 deliveries): _There are currently no deliveries. _**
+
+### Update details of deliveries
+
+* Mark delivery as complete
+* Mark delivery as pending
+* Change date of delivery
+
+#### Mark delivery as complete
+
+#### **Format**: `delivery complete DELIVERY_ID`
+
+**Example**: `delivery complete 1001`
+
+**Accepted Values:**
+
+    _DELIVERY_ID_: Integer
+
+**Command succeeds:** _Delivery [1001] Gabriel’s Milk marked as pending! _
+
+**Command failed (delivery_name missing): _Please specify a delivery name to delete!_**
+
+**Command failed (delivery_name not in database):** _This delivery does not seem to exist!_
+
+**Command failed (delivery already complete): _This delivery is already marked as complete._**
+
+####          
+
+#### Mark delivery as pending
+
+**Format:** `delivery pending DELIVERY_ID`
+
+**Example: `delivery pending 1001`**
+
+**Accepted Values:**
+
+_DELIVERY_ID_: Integer
+
+**Command succeeds:** _Delivery [1001] Gabriel’s Milk marked as pending! _
+
+**Command failed (delivery_name missing):** _Please specify a delivery name to delete!_
+
+**Command failed (delivery_name not in database):** _This delivery does not seem to exist! _
+
+**Command failed (delivery already pending): _This delivery is already marked as pending._**
+
+#### Change date of delivery
+
+**Format**: `delivery edit date DELIVERY_ID --date DATE`
+
+**Example**: `delivery edit date 1001 --date 2023-12-12`
+
+**Accepted Values:**
+
+    _DELIVERY_ID_: Integer
+
+
+    _DATE: _YYYY-MM-DD
+
+**Command succeeds:** _Delivery [1001] Gabriel’s Milk changed delivery date to 1st Oct 2023! _
+
+**Command failed (one field missing): _Please specify a delivery name and date!_**
+
+**Command failed (invalid date format): _Please format date as YYYY-MM-DD. _**
+
+**Command failed (delivery_name not in database): _This delivery does not seem to exist!  _**
+
+### Delete delivery
+
+Deletes the specified delivery.
+
+**Format**: `delivery delete DELIVERY_ID`
+
+**Example**: `delivery delete 1001`
+
+**Accepted Values:**
+
+_DELIVERY_ID_: Integer
+
+**Command succeeds:** _Delivery [1001] Gabriel’s Milk deleted! _
+
+**Command failed (delivery_name missing):** _Please specify a delivery name to delete!_
+
+**Command failed (delivery_name not in database): _This delivery does not seem to exist_**
