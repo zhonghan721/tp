@@ -18,7 +18,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/b-enguin)]
 [[portfolio](team/b-enguin.md)]
 
-* Role: Project Advisor
+* Role: Member
 
 ### Jane Doe
 
