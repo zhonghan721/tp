@@ -1,6 +1,6 @@
 ---
-  layout: default.md
-  title: "About Us"
+layout: default.md
+title: "About Us"
 ---
 
 # About Us
@@ -11,15 +11,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Benjamin Koh Zhao Hui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/b-enguin.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/b-enguin)]
+[[portfolio](team/b-enguin.md)]
 
-* Role: Project Advisor
+* Role: Member
 
 ### Jane Doe
 
