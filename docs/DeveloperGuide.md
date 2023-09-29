@@ -334,12 +334,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Java**: A general-purpose programming language that is class-based, object-oriented, and designed to have as few implementation dependencies as possible.
-* **Gradle**: A build automation tool that is designed to be flexible and extensible.
-* **Testing**: The process of evaluating a system or its component(s) with the intent to find whether it satisfies the specified requirements or not.
-* **Deployment**: The process of making a software system available for use.
-
-*{More to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
 
