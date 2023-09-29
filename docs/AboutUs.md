@@ -20,15 +20,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Member
 
-### Jane Doe
+### Lim Jian Yang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jianyangg.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jianyangg)]
+[[portfolio](team/jianyangg.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
 
 ### Johnny Doe
 
