@@ -374,14 +374,14 @@ _DELIVERY_ID_: Integer
 
 **Command failed (delivery_name not in database): _This delivery does not seem to exist_**
 
-### View deliveries for the day `[coming in v1.3]`
+### View deliveries for the day `[coming soon in v1.3]`
 *Details coming soon...*
 
-### Add customer data to delivery `[coming in v1.3]`
+### Add customer data to delivery `[coming soon in v1.3]`
 *Details coming soon...*
 
-### Remove customer from delivery `[coming in v1.3]`
+### Remove customer from delivery `[coming soon in v1.3]`
 *Details coming soon...*
 
-### Look up delivery details `[coming in v1.3]`
+### Look up delivery details `[coming soon in v1.3]`
 *Details coming soon...*
