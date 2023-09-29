@@ -291,7 +291,7 @@ _DELIVERY_ID_: Integer
 
 **Command failed (0 deliveries): _There are currently no deliveries. _**
 
-### Update details of deliveries
+### Update delivery status and date
 
 * Mark delivery as complete
 * Mark delivery as pending
@@ -373,3 +373,15 @@ _DELIVERY_ID_: Integer
 **Command failed (delivery_name missing):** _Please specify a delivery name to delete!_
 
 **Command failed (delivery_name not in database): _This delivery does not seem to exist_**
+
+### View deliveries for the day `[coming in v1.3]`
+*Details coming soon...*
+
+### Add customer data to delivery `[coming in v1.3]`
+*Details coming soon...*
+
+### Remove customer from delivery `[coming in v1.3]`
+*Details coming soon...*
+
+### Look up delivery details `[coming in v1.3]`
+*Details coming soon...*
