@@ -4,73 +4,42 @@ This comprehensive user guide is your key to a seamless start with our cutting-e
 home-based businesses. Our solution is tailored to enhance the efficiency of managing delivery addresses, simplifying
 your operations. Within these pages, you'll find detailed coverage of the following essential topics:
 
-* Getting Started
-* Features
-    * User
-        * Secure account with a password
-        * Login
-        * Logout
-        * Register
-        * Recover password
-    * Customer
-        * Add customer
-        * List customers
-        * Update customer details
-        * Delete customer
-    * Delivery
-        * Create delivery
-        * View all deliveries
-        * Sorted deliveries
-        * View details of a delivery
-        * Update details of a delivery
-        * Delete delivery
-* Troubleshooting / FAQ
+- Getting Started
+- Features
+    - User
+        - Secure account with a password
+        - Login
+        - Logout
+        - Register
+        - Recover password
+    - Customer
+        - Add customer
+        - List customers
+        - Update customer details
+        - Delete customer
+    - Delivery
+        - Create delivery
+        - View all deliveries
+        - Sorted deliveries
+        - View details of a delivery
+        - Update details of a delivery
+        - Delete delivery
+- Troubleshooting / FAQ
 
-#          
+#
 
 # Getting Started
 
 To get started, you will need to create an account and download the software. Once you have done that, you can follow
 the instructions in the Getting Started Guide to start using the software.
 
-#          
+#
 
 # Features
 
-*[ ] specifies optional fields
+\*[ ] specifies optional fields
 
 ## <span style="text-decoration:underline;">User</span>
-
-### Login
-
-**Format: `login --user USERNAME --password PASSWORD`**
-
-**Example: `login --user gabriel --password gabrielIsGreat`**
-
-![drawing](https://docs.google.com/drawings/d/12345/export/png)
-
-**Accepted Values: **
-
-    _USERNAME:_ String
-
-
-    _PASSWORD:_ String
-
-**Command succeeds: _Log in successful._**
-
-**Command fails (missing fields): _Please fill up all the required fields._**
-
-**Command fails (wrong login credentials):_ Wrong username and/or password. Try again. _**
-
-### Logout
-
-**Format: `logout`**
-
-**Example: `logout`**
-
-![drawing](https://docs.google.com/drawings/d/12345/export/png)
-
-**Command succeeds: _Logout successful._**
 
 ### Register
 
@@ -78,25 +47,51 @@ the instructions in the Getting Started Guide to start using the software.
 
 **Example: `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat`**
 
-![drawing](https://docs.google.com/drawings/d/12345/export/png)
+**Accepted Values:**
 
-**Accepted Values: **
+_USERNAME:_ String
 
-    _USERNAME:_ String
+_PASSWORD:_ String
 
-
-    _PASSWORD:_ String
-
-
-    _CONFIRM PASSWORD:_ String that is the same as PASSWORD.
+_CONFIRM PASSWORD:_ String that is the same as PASSWORD.
 
 **Command succeeds: _Register successful._**
 
 **Command fails (missing fields): _Please fill up all the required fields._**
 
-**Command fails (password does not match):_ Passwords do not match. Try again. _**
+**Command fails (password does not match): _Passwords do not match. Try again._**
 
-##          
+### Login
+
+**Format: `login --user USERNAME --password PASSWORD`**
+
+**Example: `login --user gabriel --password gabrielIsGreat`**
+
+**Accepted Values:**
+
+_USERNAME:_ String
+
+_PASSWORD:_ String
+
+**Command succeeds: _Log in successful._**
+
+**Command fails (missing fields): _Please fill up all the required fields._**
+
+**Command fails (wrong login credentials): _Wrong username and/or password. Try again._**
+
+### Forget Password [coming soon]
+
+### Logout
+
+**Format: `logout`**
+
+**Example: `logout`**
+
+**Command succeeds: _Logout successful._**
+
+### Change Password [coming soon]
+
+### Delete Account [coming soon]
 
 ## <span style="text-decoration:underline;">Customer</span>
 
@@ -106,7 +101,7 @@ Adds a customer to the address book.
 
 **Format: `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`**
 
-**Example: <code>customer add --name Gabriel --phone 8765 4321
+\*\*Example: <code>customer add --name Gabriel --phone 8765 4321
 --email [gabrielrocks@gmail.com](mailto:gabrielrocks@gmail.com) --address RVRC Block B</code></strong>
 
 **Accepted Values:**
@@ -159,18 +154,13 @@ Updates the personal details of an existing customer in the address book.
 
 _NAME_: String
 
-
 _PHONE_NUMBER_: 8 digit Integer
-
 
 _EMAIL_: String with @ and . in valid email format
 
-
 _ADDRESS_: String
 
-
 _CUSTOMER_ID_: Integer
-
 
 *At least one of the optional fields must be provided.
 
@@ -216,9 +206,7 @@ Creates a delivery.
 
 _DELIVERY_NAME:_ String of 50 characters
 
-
 _CUSTOMER_ID:_ Integer
-
 
 _DATE:_ YYYY-MM-DD format
 
@@ -248,7 +236,7 @@ _SORT_: String of either `asc` for ascending or `desc` for descending or empty s
 
 _Here are all the deliveries:_
 
-1. [1001] Gabriel’s Milk - Completed - Ordered 20th Sept 2023  : Delivered on 30th Sept 2023
+1. [1001] Gabriel’s Milk - Completed - Ordered 20th Sept 2023 : Delivered on 30th Sept 2023
 2. [1002] Gambe’s Meat - Completed - Ordered 22th Sept 2023 : Delivered on 29th Sept 2023
 3. [1003] Ben’s Coffee - Pending - Ordered 25th Sept 2023 : Delivery on 1st October 2023
 
@@ -286,9 +274,9 @@ _Delivery on : 1st October 2023_
 
 ### Update delivery status and date
 
-* Mark delivery as complete
-* Mark delivery as pending
-* Change date of delivery
+- Mark delivery as complete
+- Mark delivery as pending
+- Change date of delivery
 
 #### Mark delivery as complete
 
@@ -368,13 +356,17 @@ _DELIVERY_ID_: Integer
 *Details coming soon...*
 
 ### View deliveries for the day `[coming soon in v1.3]`
-*Details coming soon...*
+
+_Details coming soon..._
 
 ### Add customer data to delivery `[coming soon in v1.3]`
-*Details coming soon...*
+
+_Details coming soon..._
 
 ### Remove customer from delivery `[coming soon in v1.3]`
-*Details coming soon...*
+
+_Details coming soon..._
 
 ### Look up delivery details `[coming soon in v1.3]`
-*Details coming soon...*
+
+_Details coming soon..._
