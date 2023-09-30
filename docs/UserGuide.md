@@ -131,13 +131,13 @@ Adds a customer to the address book.
 
 Lists all the customers added in the address book.
 
-**Format: `customer list`**
+**Format**: `customer list`
 
-**Example: `customer list`**
+**Example**: `customer list`
 
 **Accepted Values:**
 
-    NIL
+_NIL_
 
 **Command succeeds (>0 customers):** _Here is the list of customers:_
 
@@ -147,62 +147,60 @@ Lists all the customers added in the address book.
 
 **Command succeeds (0 customer):** _There are no customers added yet!_
 
-###          
-
 ### Update customer details
 
 Updates the personal details of an existing customer in the address book.
 
-**Format: `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`**
+**Format**: `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`
 
-**
-Example: `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`**
+**Example**: `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
 
 **Accepted Values:**
 
-    _NAME_: String
+_NAME_: String
 
 
-    _PHONE_NUMBER: _8 digit Integer
+_PHONE_NUMBER_: 8 digit Integer
 
-``
+
 _EMAIL_: String with @ and . in valid email format
 
-    _ADDRESS: _String
+
+_ADDRESS_: String
 
 
-    _CUSTOMER_ID_: Integer
+_CUSTOMER_ID_: Integer
 
 
-    *At least one of the optional fields must be provided.
+*At least one of the optional fields must be provided.
 
 **Command succeeds:** _Customer 1, Gabriel has been updated!_
 
-**Command fails (missing_index): _Please specify the customer to update._**
+**Command fails (missing_index):** _Please specify the customer to update._
 
 **Command fails (invalid_index):** _The customer does not exist!_
 
-**Command fails (missing_fields): _Please provide at least one field to update!_**
+**Command fails (missing_fields):** _Please provide at least one field to update!_
 
 ### Delete customer
 
 Deletes the specified customer from the address book.
 
-**Format: `customer delete CUSTOMER_ID`**
+**Format:** `customer delete CUSTOMER_ID`
 
 **Example:** `customer delete 1001`
 
-**Accepted Values: **
+**Accepted Values:**
 
-    _CUSTOMER_ID:_ Integer
+_CUSTOMER_ID:_ Integer
 
-**Command succeeds: _Customer 1, Gabriel has been deleted!_**
+**Command succeeds:** _Customer 1, Gabriel has been deleted!_
 
-**Command fails (missing_index): _Please specify the customer to delete._**
+**Command fails (missing_index):** _Please specify the customer to delete._
 
 **Command fails (invalid_index):** _The customer does not exist!_
 
-**Command fails (pending_delivery_customer_index): _Delivery for Customer 1, Gabriel is not completed yet! _**
+**Command fails (pending_delivery_customer_index):** _Delivery for Customer 1, Gabriel is not completed yet!_
 
 ## <span style="text-decoration:underline;">Delivery</span>
 
@@ -216,19 +214,19 @@ Creates a delivery.
 
 **Accepted Values:**
 
-    _DELIVERY_NAME:_ String of 50 characters
+_DELIVERY_NAME:_ String of 50 characters
 
 
-    _CUSTOMER_ID: _Integer
+_CUSTOMER_ID:_ Integer
 
 
-    _DATE: _YYYY-MM-DD format
+_DATE:_ YYYY-MM-DD format
 
-**Command succeeds:** _Delivery [1001] furniture created successfully for Customer 1, Gabriel! _
+**Command succeeds:** _Delivery [1001] furniture created successfully for Customer 1, Gabriel!_
 
-**Command fails (missing_fields): _Please fill up all the required fields (--name NAME --id CUSTOMER_ID --date DATE)!_**
+**Command fails (missing_fields):** _Please fill up all the required fields (--name NAME --id CUSTOMER_ID --date DATE)!_
 
-**Command fails (invalid_date): _Invalid date provided!_**
+**Command fails (invalid_date):** _Invalid date provided!_
 
 **Command fails (invalid_date_format):** _Please provide the date in the format: YYYY-MM-DD._
 
@@ -291,7 +289,7 @@ _DELIVERY_ID_: Integer
 
 **Command failed (0 deliveries): _There are currently no deliveries. _**
 
-### Update details of deliveries
+### Update delivery status and date
 
 * Mark delivery as complete
 * Mark delivery as pending
@@ -373,3 +371,18 @@ _DELIVERY_ID_: Integer
 **Command failed (delivery_name missing):** _Please specify a delivery name to delete!_
 
 **Command failed (delivery_name not in database): _This delivery does not seem to exist_**
+
+### Create a note for a delivery `[coming soon in v1.3]`
+*Details coming soon...*
+
+### View deliveries for the day `[coming soon in v1.3]`
+*Details coming soon...*
+
+### Add customer data to delivery `[coming soon in v1.3]`
+*Details coming soon...*
+
+### Remove customer from delivery `[coming soon in v1.3]`
+*Details coming soon...*
+
+### Look up delivery details `[coming soon in v1.3]`
+*Details coming soon...*
