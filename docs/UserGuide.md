@@ -6,24 +6,24 @@ your operations. Within these pages, you'll find detailed coverage of the follow
 
 - Getting Started
 - Features
-  - User
-    - Secure account with a password
-    - Login
-    - Logout
-    - Register
-    - Recover password
-  - Customer
-    - Add customer
-    - List customers
-    - Update customer details
-    - Delete customer
-  - Delivery
-    - Create delivery
-    - View all deliveries
-    - Sorted deliveries
-    - View details of a delivery
-    - Update details of a delivery
-    - Delete delivery
+    - User
+        - Secure account with a password
+        - Login
+        - Logout
+        - Register
+        - Recover password
+    - Customer
+        - Add customer
+        - List customers
+        - Update customer details
+        - Delete customer
+    - Delivery
+        - Create delivery
+        - View all deliveries
+        - Sorted deliveries
+        - View details of a delivery
+        - Update details of a delivery
+        - Delete delivery
 - Troubleshooting / FAQ
 
 #
@@ -61,8 +61,6 @@ _CONFIRM PASSWORD:_ String that is the same as PASSWORD.
 
 **Command fails (password does not match): _Passwords do not match. Try again._**
 
----
-
 ### Login
 
 **Format: `login --user USERNAME --password PASSWORD`**
@@ -81,11 +79,7 @@ _PASSWORD:_ String
 
 **Command fails (wrong login credentials): _Wrong username and/or password. Try again._**
 
----
-
 ### Forget Password [coming soon]
-
----
 
 ### Logout
 
@@ -95,15 +89,9 @@ _PASSWORD:_ String
 
 **Command succeeds: _Logout successful._**
 
----
-
 ### Change Password [coming soon]
 
----
-
 ### Delete Account [coming soon]
-
----
 
 ## <span style="text-decoration:underline;">Customer</span>
 
@@ -160,7 +148,8 @@ Updates the personal details of an existing customer in the address book.
 
 **Format**: `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`
 
-**Example**: `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
+**
+Example**: `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
 
 **Accepted Values:**
 
