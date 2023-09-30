@@ -330,7 +330,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a home business
+* want to oversee customers in an organised manner
+* want to manage deliveries efficiently and effectively
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
