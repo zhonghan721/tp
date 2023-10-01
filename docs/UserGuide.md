@@ -7,23 +7,33 @@ your operations. Within these pages, you'll find detailed coverage of the follow
 - Getting Started
 - Features
     - User
-        - Secure account with a password
-        - Login
-        - Logout
         - Register
-        - Recover password
+        - Secure account with a password (?)
+        - Login
+        - Forget password [Coming Soon]
+        - Logout
+        - Change password [Coming Soon]
+        - Update details [Coming Soon]
+        - Delete account [Coming Soon]
+        - Recover password (?)
     - Customer
         - Add customer
+        - Search for a customer [Coming Soon]
         - List customers
+        - Sort the list of customers [Coming Soon]
         - Update customer details
         - Delete customer
     - Delivery
         - Create delivery
         - View all deliveries
-        - Sorted deliveries
-        - View details of a delivery
-        - Update details of a delivery
+        - View details of deliveries
+        - Update delivery status and date 
         - Delete delivery
+        - Create a note for a delivery [Coming Soon]
+        - View deliveries for the day [Coming Soon]
+        - Add customer data to delivery [Coming Soon]
+        - Remove customer from delivery [Coming Soon]
+        - Look up delivery details [Coming Soon]
 - Troubleshooting / FAQ
 
 #
@@ -79,7 +89,8 @@ _PASSWORD:_ String
 
 **Command fails (wrong login credentials): _Wrong username and/or password. Try again._**
 
-### Forget Password [coming soon]
+### Forget Password `[Coming Soon in v1.3]`
+_Details coming soon..._
 
 ### Logout
 
@@ -89,9 +100,15 @@ _PASSWORD:_ String
 
 **Command succeeds: _Logout successful._**
 
-### Change Password [coming soon]
+### Change Password `[Coming Soon in v1.3]`
+_Details coming soon..._
 
-### Delete Account [coming soon]
+### Update details `[Coming Soon in v1.3]`
+_Details coming soon..._
+
+### Delete Account `[Coming Soon in v1.3]`
+_Details coming soon..._
+
 
 ## <span style="text-decoration:underline;">Customer</span>
 
@@ -101,26 +118,26 @@ Adds a customer to the address book.
 
 **Format: `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`**
 
-\*\*Example: <code>customer add --name Gabriel --phone 8765 4321
+**Example: <code>customer add --name Gabriel --phone 8765 4321**
 --email [gabrielrocks@gmail.com](mailto:gabrielrocks@gmail.com) --address RVRC Block B</code></strong>
 
 **Accepted Values:**
 
-    _NAME_: String
+_NAME_: String
 
+_PHONE_NUMBER_: 8 digit Integer
 
-    _PHONE_NUMBER: _8 digit Integer
+_EMAIL_: String with @ and . in valid email format
 
-
-    _EMAIL_: String with @ and . in valid email format
-
-
-    _ADDRESS: _String
+_ADDRESS_: String
 
 **Command succeeds: _Customer 1, Gabriel added._**
 
-**Command fails (missing field): _Please fill up all the required fields (--name NAME --phone PHONE_NUMBER --email EMAIL
---address ADDRESS)._**
+**Command fails (missing field): _Please fill up all the required fields (--name NAME --phone PHONE_NUMBER --email 
+EMAIL --address ADDRESS)._**
+
+### Search for a customer `[Coming Soon in v1.3]`
+_Details coming soon..._
 
 ### List customers
 
@@ -141,6 +158,9 @@ _NIL_
 3. _Gabriel, Phone: 9090 9241, Email: gabrielSoCool@gmail.com, Address: RVRC Tower Block_
 
 **Command succeeds (0 customer):** _There are no customers added yet!_
+
+### Sort the list of customers `[Coming Soon in v1.3]`
+_Details coming soon..._
 
 ### Update customer details
 
@@ -343,21 +363,22 @@ _DELIVERY_ID_: Integer
 
 **Command failed (delivery_name not in database):** _This delivery does not seem to exist!_
 
-### Create a note for a delivery `[coming soon in v1.3]`
-*Details coming soon...*
-
-### View deliveries for the day `[coming soon in v1.3]`
+### Create a note for a delivery `[Coming Soon in v1.3]`
 
 _Details coming soon..._
 
-### Add customer data to delivery `[coming soon in v1.3]`
+### View deliveries for the day `[Coming Soon in v1.3]`
 
 _Details coming soon..._
 
-### Remove customer from delivery `[coming soon in v1.3]`
+### Add customer data to delivery `[Coming Soon in v1.3]`
 
 _Details coming soon..._
 
-### Look up delivery details `[coming soon in v1.3]`
+### Remove customer from delivery `[Coming Soon in v1.3]`
+
+_Details coming soon..._
+
+### Look up delivery details `[Coming Soon in v1.3]`
 
 _Details coming soon..._
