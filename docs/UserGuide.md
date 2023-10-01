@@ -148,8 +148,7 @@ Updates the personal details of an existing customer in the address book.
 
 **Format**: `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`
 
-**
-Example**: `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
+**Example**: `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
 
 **Accepted Values:**
 
@@ -163,7 +162,7 @@ _ADDRESS_: String
 
 _CUSTOMER_ID_: Integer
 
-\*At least one of the optional fields must be provided.
+*At least one of the optional fields must be provided.
 
 **Command succeeds:** _Customer 1, Gabriel has been updated!_
 
@@ -229,9 +228,9 @@ Shows a list of all deliveries.
 
 **Accepted Values:**
 
-_STATUS:_ all or pending or complete
+_STATUS_: String of either `all` or `pending` or `complete`
 
-_SORT:_ asc for ascending or desc for descending. If unspecified, default to sort by delivery date.
+_SORT_: String of either `asc` for ascending or `desc` for descending or empty string for sorting by delivery date
 
 **Command succeeds (>0 deliveries):** _Here are all the deliveries:_
 
@@ -272,7 +271,7 @@ _Delivery on : 1st October 2023_
 
 #### Mark delivery as complete
 
-#### **Format**: `delivery complete DELIVERY_ID`
+**Format**: `delivery complete DELIVERY_ID`
 
 **Example**: `delivery complete 1001`
 
@@ -287,8 +286,6 @@ _DELIVERY_ID:_ Integer
 **Command failed (delivery_name not in database):** _This delivery does not seem to exist!_
 
 **Command failed (delivery already complete):** _This delivery is already marked as complete._
-
-####
 
 #### Mark delivery as pending
 
@@ -318,8 +315,7 @@ _DELIVERY_ID_: Integer
 
 _DELIVERY_ID:_ Integer
 
-
-_DATE:_ YYYY-MM-DD format
+_DATE:_ String of format YYYY-MM-DD
 
 **Command succeeds:** _Delivery [1001] Gabriel’s Milk changed delivery date to 1st Oct 2023!_
 
@@ -348,8 +344,7 @@ _DELIVERY_ID_: Integer
 **Command failed (delivery_name not in database):** _This delivery does not seem to exist!_
 
 ### Create a note for a delivery `[coming soon in v1.3]`
-
-_Details coming soon..._
+*Details coming soon...*
 
 ### View deliveries for the day `[coming soon in v1.3]`
 
