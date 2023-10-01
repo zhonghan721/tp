@@ -338,7 +338,10 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+Home-based business owners can have a huge base of customers. 
+HomeBoss streamlines and simplifies the management of customer contacts and deliveries,
+thereby improving efficiency for business owners.
 
 ### User stories
 
