@@ -47,12 +47,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 
-### James Doe
+### Gabriel Seethor Jun Hao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gabriel4357.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/gabriel4357)]
+[[portfolio](team/gabriel4357.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Scheduling and Tracking 
+* Responsibilities:  In charge of defining, assigning, and tracking project tasks.
