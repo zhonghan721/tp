@@ -4,7 +4,7 @@ title: "Developer Guide"
 pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# HomeBoss Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -429,9 +429,17 @@ otherwise)
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+2. Should be able to hold up to 
+   1. 1000 customers without a noticeable sluggishness in performance for typical usage.
+   2. 1000 deliveries without a noticeable sluggishness in performance for typical usage.
+3. The system should be easily picked up by a novice with no experience with contact management software.
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
+5. Data stored should be persistent until removal by user, and Private Contact Details should be secure.
+6. The project is expected to adhere to a schedule which delivers a feature set every milestone up to _V1.3_
+7. The application is not expected to 
+   1. Perform Inventory Management
+   2. Perform Route Planning
 
 *{More to be added}*
 
