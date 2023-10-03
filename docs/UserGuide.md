@@ -116,10 +116,9 @@ _Details coming soon..._
 
 Adds a customer to the address book.
 
-**Format: `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`**
+**Format:** `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`
 
-**Example: <code>customer add --name Gabriel --phone 8765 4321**
---email [gabrielrocks@gmail.com](mailto:gabrielrocks@gmail.com) --address RVRC Block B</code></strong>
+**Example:** `customer add --name Gabriel --phone 8765 4321 --email gabrielrocks@gmail.com --address RVRC Block B`
 
 **Accepted Values:**
 
@@ -131,10 +130,10 @@ _EMAIL_: String with @ and . in valid email format
 
 _ADDRESS_: String
 
-**Command succeeds: _Customer 1, Gabriel added._**
+**Command succeeds:** _Customer 1, Gabriel added._
 
-**Command fails (missing field): _Please fill up all the required fields (--name NAME --phone PHONE_NUMBER --email 
-EMAIL --address ADDRESS)._**
+**Command fails (missing field):** _Please fill up all the required fields (--name NAME --phone PHONE_NUMBER --email 
+EMAIL --address ADDRESS)._
 
 ### Search for a customer `[Coming Soon in v1.3]`
 _Details coming soon..._
