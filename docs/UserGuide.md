@@ -8,14 +8,12 @@ your operations. Within these pages, you'll find detailed coverage of the follow
 - Features
     - User
         - Register
-        - Secure account with a password (?)
         - Login
         - Forget password [Coming Soon]
         - Logout
         - Change password [Coming Soon]
-        - Update details [Coming Soon]
+        - Update user details [Coming Soon]
         - Delete account [Coming Soon]
-        - Recover password (?)
     - Customer
         - Add customer
         - Search for a customer [Coming Soon]
@@ -27,7 +25,7 @@ your operations. Within these pages, you'll find detailed coverage of the follow
         - Create delivery
         - View all deliveries
         - View details of deliveries
-        - Update delivery status and date 
+        - Update delivery status and date
         - Delete delivery
         - Create a note for a delivery [Coming Soon]
         - View deliveries for the day [Coming Soon]
@@ -36,14 +34,10 @@ your operations. Within these pages, you'll find detailed coverage of the follow
         - Look up delivery details [Coming Soon]
 - Troubleshooting / FAQ
 
-#
-
 # Getting Started
 
 To get started, you will need to create an account and download the software. Once you have done that, you can follow
 the instructions in the Getting Started Guide to start using the software.
-
-#
 
 # Features
 
@@ -53,9 +47,9 @@ the instructions in the Getting Started Guide to start using the software.
 
 ### Register
 
-**Format: `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD`**
+**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD`
 
-**Example: `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat`**
+**Example:** `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat`
 
 **Accepted Values:**
 
@@ -63,19 +57,19 @@ _USERNAME:_ String
 
 _PASSWORD:_ String
 
-_CONFIRM PASSWORD:_ String that is the same as PASSWORD.
+_CONFIRM PASSWORD:_ String that is the same as _PASSWORD_.
 
-**Command succeeds: _Register successful._**
+**Command succeeds:** _Register successful._
 
-**Command fails (missing fields): _Please fill up all the required fields._**
+**Command fails (missing fields):** _Please fill up all the required fields._
 
-**Command fails (password does not match): _Passwords do not match. Try again._**
+**Command fails (password does not match):** _Passwords do not match. Try again._
 
 ### Login
 
-**Format: `login --user USERNAME --password PASSWORD`**
+**Format:** `login --user USERNAME --password PASSWORD`
 
-**Example: `login --user gabriel --password gabrielIsGreat`**
+**Example:** `login --user gabriel --password gabrielIsGreat`
 
 **Accepted Values:**
 
@@ -83,32 +77,35 @@ _USERNAME:_ String
 
 _PASSWORD:_ String
 
-**Command succeeds: _Log in successful._**
+**Command succeeds:** _Log in successful._
 
-**Command fails (missing fields): _Please fill up all the required fields._**
+**Command fails (missing fields):** _Please fill up all the required fields._
 
-**Command fails (wrong login credentials): _Wrong username and/or password. Try again._**
+**Command fails (wrong login credentials):** _Wrong username and/or password. Try again._
 
 ### Forget Password `[Coming Soon in v1.3]`
+
 _Details coming soon..._
 
 ### Logout
 
-**Format: `logout`**
+**Format:** `logout`
 
-**Example: `logout`**
+**Example:** `logout`
 
-**Command succeeds: _Logout successful._**
+**Command succeeds:** _Logout successful._
 
 ### Change Password `[Coming Soon in v1.3]`
+
 _Details coming soon..._
 
 ### Update details `[Coming Soon in v1.3]`
+
 _Details coming soon..._
 
 ### Delete Account `[Coming Soon in v1.3]`
-_Details coming soon..._
 
+_Details coming soon..._
 
 ## <span style="text-decoration:underline;">Customer</span>
 
@@ -136,6 +133,7 @@ _ADDRESS_: String
 EMAIL --address ADDRESS)._
 
 ### Search for a customer `[Coming Soon in v1.3]`
+
 _Details coming soon..._
 
 ### List customers
@@ -160,6 +158,7 @@ _Here is the list of customers:_
 **Command succeeds (0 customer):** _There are no customers added yet!_
 
 ### Sort the list of customers `[Coming Soon in v1.3]`
+
 _Details coming soon..._
 
 ### Update customer details
