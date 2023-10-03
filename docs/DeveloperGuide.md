@@ -435,7 +435,7 @@ otherwise)
 2. Should be able to hold up to 
    1. 1000 customers without a noticeable sluggishness in performance for typical usage.
    2. 1000 deliveries without a noticeable sluggishness in performance for typical usage.
-3. The system should be easily picked up by a novice with no experience with contact management software.
+3. The system should be easily picked up by a novice with no experience with delivery management software.
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
 5. Data stored should be persistent until removal by user, and Private Contact Details should be secure.
