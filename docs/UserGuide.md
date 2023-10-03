@@ -242,23 +242,29 @@ _DATE:_ YYYY-MM-DD format
 
 Shows a list of all deliveries.
 
-**Format:** `delivery list STATUS [--sort SORT]`
+**Format:** `delivery list [STATUS] [--sort SORT]`
 
-**Example:** `delivery list all --sort desc`
+**Example:** `delivery list pending --sort desc`
 
 **Accepted Values:**
 
-_STATUS_: String of either `all` or `pending` or `complete`
+_STATUS_: String of either `pending` or `complete` or defaults to show all deliveries
 
-_SORT_: String of either `asc` for ascending or `desc` for descending or empty string for sorting by delivery date
+_SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by delivery date
 
-**Command succeeds (>0 deliveries):** _Here are all the deliveries:_
+**Command succeeds (>0 deliveries):** 
 
+_Here are all the deliveries:_
 1. _[1001] Gabriel’s Milk - Completed - Ordered 20th Sept 2023 : Delivered on 30th Sept 2023_
 2. _[1002] Gambe’s Meat - Completed - Ordered 22th Sept 2023 : Delivered on 29th Sept 2023_
 3. _[1003] Ben’s Coffee - Pending - Ordered 25th Sept 2023 : Delivery on 1st October 2023_
 
 **Command failed (0 deliveries):** _There are currently no deliveries!_
+
+### View deliveries for the day `[Coming Soon in v1.3]`
+
+_Details coming soon..._
+
 
 ### View details of deliveries
 
@@ -282,6 +288,10 @@ _Delivery Status: Pending_<br />
 _Delivery on : 1st October 2023_
 
 **Command failed (0 deliveries):** _There are currently no deliveries._
+
+### Look up delivery details `[Coming Soon in v1.3]`
+
+_Details coming soon..._
 
 ### Update delivery status and date
 
@@ -345,6 +355,10 @@ _DATE:_ String of format YYYY-MM-DD
 
 **Command failed (delivery_name not in database):** _This delivery does not seem to exist!_
 
+### Add customer data to delivery `[Coming Soon in v1.3]`
+
+_Details coming soon..._
+
 ### Delete delivery
 
 Deletes the specified delivery.
@@ -363,22 +377,10 @@ _DELIVERY_ID_: Integer
 
 **Command failed (delivery_name not in database):** _This delivery does not seem to exist!_
 
-### Create a note for a delivery `[Coming Soon in v1.3]`
-
-_Details coming soon..._
-
-### View deliveries for the day `[Coming Soon in v1.3]`
-
-_Details coming soon..._
-
-### Add customer data to delivery `[Coming Soon in v1.3]`
-
-_Details coming soon..._
-
 ### Remove customer from delivery `[Coming Soon in v1.3]`
 
 _Details coming soon..._
 
-### Look up delivery details `[Coming Soon in v1.3]`
+### Create a note for a delivery `[Coming Soon in v1.3]`
 
 _Details coming soon..._
