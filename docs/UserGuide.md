@@ -113,10 +113,9 @@ _Details coming soon..._
 
 Adds a customer to the address book.
 
-**Format: `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`**
+**Format:** `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`
 
-**Example: <code>customer add --name Gabriel --phone 8765 4321**
---email [gabrielrocks@gmail.com](mailto:gabrielrocks@gmail.com) --address RVRC Block B</code></strong>
+**Example:** `customer add --name Gabriel --phone 8765 4321 --email gabrielrocks@gmail.com --address RVRC Block B`
 
 **Accepted Values:**
 
@@ -128,10 +127,10 @@ _EMAIL_: String with @ and . in valid email format
 
 _ADDRESS_: String
 
-**Command succeeds: _Customer 1, Gabriel added._**
+**Command succeeds:** _Customer 1, Gabriel added._
 
-**Command fails (missing field): _Please fill up all the required fields (--name NAME --phone PHONE_NUMBER --email
-EMAIL --address ADDRESS)._**
+**Command fails (missing field):** _Please fill up all the required fields (--name NAME --phone PHONE_NUMBER --email 
+EMAIL --address ADDRESS)._
 
 ### Search for a customer `[Coming Soon in v1.3]`
 
@@ -141,16 +140,17 @@ _Details coming soon..._
 
 Lists all the customers added in the address book.
 
-**Format**: `customer list`
+**Format:** `customer list`
 
-**Example**: `customer list`
+**Example:** `customer list`
 
 **Accepted Values:**
 
 _NIL_
 
-**Command succeeds (>0 customers):** _Here is the list of customers:_
+**Command succeeds (>0 customers):** 
 
+_Here is the list of customers:_
 1. _Benjamin, Phone: 9898 2323, Email: benjaminCSGod@gmail.com, Address: Carnegie Mellon University, South Block._
 2. _Gambe, Phone: 9797 1313, Email: gambeRizzLord@gmail.com, Address: Kent Ridge Hall_
 3. _Gabriel, Phone: 9090 9241, Email: gabrielSoCool@gmail.com, Address: RVRC Tower Block_
@@ -165,10 +165,9 @@ _Details coming soon..._
 
 Updates the personal details of an existing customer in the address book.
 
-**Format**: `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`
+**Format:** `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`
 
-**
-Example**: `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
+**Example:** `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
 
 **Accepted Values:**
 
@@ -228,15 +227,19 @@ _DELIVERY_NAME:_ String of 50 characters
 
 _CUSTOMER_ID:_ Integer
 
-_DATE:_ YYYY-MM-DD format
+_DATE:_ String in YYYY-MM-DD format
 
 **Command succeeds:** _Delivery [1001] furniture created successfully for Customer 1, Gabriel!_
 
-**Command fails (missing_fields):** _Please fill up all the required fields (--name NAME --id CUSTOMER_ID --date DATE)!_
+**Command fails (missing_fields):** _Please fill up all the required fields (DELIVERY_NAME --customer CUSTOMER_ID --date DATE)!_
 
 **Command fails (invalid_date):** _Invalid date provided!_
 
 **Command fails (invalid_date_format):** _Please provide the date in the format: YYYY-MM-DD._
+
+### Create a note for a delivery `[Coming Soon in v1.3]`
+
+_Details coming soon..._
 
 ### View all deliveries
 
@@ -362,10 +365,6 @@ _DELIVERY_ID_: Integer
 **Command failed (delivery_name missing):** _Please specify a delivery name to delete!_
 
 **Command failed (delivery_name not in database):** _This delivery does not seem to exist!_
-
-### Create a note for a delivery `[Coming Soon in v1.3]`
-
-_Details coming soon..._
 
 ### View deliveries for the day `[Coming Soon in v1.3]`
 
