@@ -607,6 +607,155 @@ otherwise)
 
 ---
 
+#### **Use Case: UC07 - Update Details**
+**System:** User System (US)
+**Actor:** Logged-in owner
+**Preconditions:** Owner is logged in
+**Guarantees:**
+* Old details will be changed to the new details keyed in only if the command is executed successfully
+
+**MSS:**
+
+1. Logged-in Owner types in command and new details to update details.
+2. US shows a success message.
+
+   Use Case ends.
+
+**Extensions:**
+
+* 1a. Logged-in Owner does not specify at least one updated field(s).
+
+    * 1a1. US requests Logged-in Owner to specify at least one updated field.
+
+      Use Case ends.
+
+---
+
+#### **Use Case: UC08 - Create Customer**
+
+**System:** Customer Management System (CMS)
+
+**Actor:** Logged-in owner
+
+**Preconditions:** Owner is logged in
+
+**Guarantees**
+
+* Customer is created only if the command is executed successfully.
+* The total number of customers will increase or remain the same.
+
+**MSS:**
+
+1. Logged-in Owner types in command and customer’s details to create a customer.
+2. CMS shows success message.
+
+   Use Case ends.
+
+**Extensions:**
+
+* 1a. Logged-in Owner does not specify the required field(s)
+
+    * 1a1. CMS requests Logged-in Owner to key in all the fields required to create a customer.
+
+      Use Case ends.
+
+---
+
+#### **Use Case: UC09 - View customer’s details**
+
+**System:** Customer Management System (CMS)
+
+**Actor:** Logged-in owner
+
+**Preconditions:** Owner is logged in
+
+**Guarantees**
+
+* Shows customer’s details if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in Owner types in command and customer’s id.
+2. CMS shows that customer’s details.
+
+   Use Case ends.
+
+**Extensions:**
+
+* 1a. Logged-in Owner does not specify the id.
+
+    * 1a1. CMS requests Logged-in Owner to key in an id.
+
+      Use Case ends.
+
+* 1b. Logged-in Owner specifies a customer id that does not exist.
+
+    * 1b1. CMS displays a message that customer id does not exist.
+
+      Use Case ends.
+
+--- 
+
+#### **Use Case: UC10 - Sort customers**
+
+**System:** Customer Management System (CMS)
+
+**Actor:** Logged-in owner
+
+**Preconditions:** Owner is logged in
+
+**Guarantees**
+
+* A list of deliveries of a customer is shown if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in Owner types in command to view what deliveries a particular customer has.
+2. CMS shows the list of deliveries of that specific customer.
+
+--- 
+
+#### **Use Case: UC11 - Search for a Customer**
+
+**System:** Customer Management System (CMS)
+
+**Actor:** Logged-in owner
+
+**Preconditions:** Owner is logged in
+
+**Guarantees**
+
+* List of customers  with the specified keyword will be shown only if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in Owner types in the command and keyword to search for a customer.
+2. US shows a list of customers, with that keyword, and all their details.
+
+   Use Case ends.
+
+**Extensions**
+
+* 1a. Logged-in Owner does not include any keyword.
+
+    * 1a1. CMS requests Logged-in Owner to specify a keyword.
+
+      Use Case ends.
+
+* 1b. No customer with specified keyword is found.
+
+    * 1b1. CMS displays a message where no customers with the specified keyword is    found.
+
+      Use Case ends.
+
+* 1c. There are no customers.
+
+    * 1c1. CMS displays a message where there are no customers at all.
+
+      Use Case ends.
+
+---
+
 #### **Use case:** UC12 - Customer Detail Update
 
 **System:** Customer Management System (CMS)
