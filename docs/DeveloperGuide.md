@@ -595,7 +595,8 @@ otherwise)
 2. User system shows a confirmation message.
 3. Logged-in owner confirms.
 4. User system shows a success message.
-   Use case ends.
+   
+    Use case ends.
 
 **Extensions**
 
@@ -604,6 +605,155 @@ otherwise)
     * 3a2. User system shows a cancellation message.
 
       Use case ends.
+
+---
+
+#### **Use Case: UC07 - Update Details**
+**System:** User System (US)
+**Actor:** Logged-in owner
+**Preconditions:** Owner is logged in
+**Guarantees:**
+* Old details will be changed to the new details keyed in only if the command is executed successfully
+
+**MSS:**
+
+1. Logged-in Owner types in command and new details to update details.
+2. US shows a success message.
+
+   Use Case ends.
+
+**Extensions:**
+
+* 1a. Logged-in Owner does not specify at least one updated field(s).
+
+    * 1a1. US requests Logged-in Owner to specify at least one updated field.
+
+      Use Case ends.
+
+---
+
+#### **Use Case: UC08 - Create Customer**
+
+**System:** Customer Management System (CMS)
+
+**Actor:** Logged-in owner
+
+**Preconditions:** Owner is logged in
+
+**Guarantees**
+
+* Customer is created only if the command is executed successfully.
+* The total number of customers will increase or remain the same.
+
+**MSS:**
+
+1. Logged-in Owner types in command and customer’s details to create a customer.
+2. CMS shows success message.
+
+   Use Case ends.
+
+**Extensions:**
+
+* 1a. Logged-in Owner does not specify the required field(s)
+
+    * 1a1. CMS requests Logged-in Owner to key in all the fields required to create a customer.
+
+      Use Case ends.
+
+---
+
+#### **Use Case: UC09 - View customer’s details**
+
+**System:** Customer Management System (CMS)
+
+**Actor:** Logged-in owner
+
+**Preconditions:** Owner is logged in
+
+**Guarantees**
+
+* Shows customer’s details if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in Owner types in command and customer’s id.
+2. CMS shows that customer’s details.
+
+   Use Case ends.
+
+**Extensions:**
+
+* 1a. Logged-in Owner does not specify the id.
+
+    * 1a1. CMS requests Logged-in Owner to key in an id.
+
+      Use Case ends.
+
+* 1b. Logged-in Owner specifies a customer id that does not exist.
+
+    * 1b1. CMS displays a message that customer id does not exist.
+
+      Use Case ends.
+
+--- 
+
+#### **Use Case: UC10 - Sort customers**
+
+**System:** Customer Management System (CMS)
+
+**Actor:** Logged-in owner
+
+**Preconditions:** Owner is logged in
+
+**Guarantees**
+
+* A list of deliveries of a customer is shown if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in Owner types in command to view what deliveries a particular customer has.
+2. CMS shows the list of deliveries of that specific customer.
+
+--- 
+
+#### **Use Case: UC11 - Search for a Customer**
+
+**System:** Customer Management System (CMS)
+
+**Actor:** Logged-in owner
+
+**Preconditions:** Owner is logged in
+
+**Guarantees**
+
+* List of customers  with the specified keyword will be shown only if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in Owner types in the command and keyword to search for a customer.
+2. US shows a list of customers, with that keyword, and all their details.
+
+   Use Case ends.
+
+**Extensions**
+
+* 1a. Logged-in Owner does not include any keyword.
+
+    * 1a1. CMS requests Logged-in Owner to specify a keyword.
+
+      Use Case ends.
+
+* 1b. No customer with specified keyword is found.
+
+    * 1b1. CMS displays a message where no customers with the specified keyword is    found.
+
+      Use Case ends.
+
+* 1c. There are no customers.
+
+    * 1c1. CMS displays a message where there are no customers at all.
+
+      Use Case ends.
 
 ---
 
@@ -657,7 +807,7 @@ otherwise)
 1. Logged-in Owner types command to delete a customer.
 2. CMS shows success message.
 
-   Use Case Ends.
+    Use Case Ends.
 
 **Extensions:**
 * 1a. Logged-in Owner specifies invalid customer.
@@ -686,7 +836,7 @@ otherwise)
 1. Logged-in Owner types command to list all customers.
 2. CMS shows list of all customers sorted by ascending alphanumeric order.
 
-   Use Case Ends.
+    Use Case Ends.
 
 **Extensions:**
 * 1a. Logged -in Owner specifies optional sort field.
@@ -715,7 +865,7 @@ otherwise)
 1. Logged-in Owner types command to create a delivery.
 2. DMS shows success message.
 
-   Use Case Ends.
+    Use Case Ends.
 
 **Extensions:**
 * 1a. Command has missing fields.
@@ -750,7 +900,7 @@ otherwise)
 1. Logged-in Owner types command to create a note for a delivery.
 2. DMS shows success message.
 
-   Use Case Ends.
+    Use Case Ends.
 
 **Extensions:**
 * 1a. Command has missing fields.
@@ -774,7 +924,7 @@ otherwise)
 1. Logged-in Owner types command to view a list of deliveries.
 2. DMS displays a list of all deliveries sorted by delivery date.
 
-   Use Case Ends.
+    Use Case Ends.
 
 **Extensions:**
 * 1a. User specifies status field in command.
@@ -791,6 +941,321 @@ otherwise)
   * 1c1. DMS displays a list of deliveries filtered by the specified status and sorted by the specified sort order.
     
     Use Case Ends.
+
+---
+
+#### **Use case:** UC18 - Delivery List for the Day
+
+**System:** Delivery Management System (DMS) 
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged in.
+
+**Guarantees:**
+* A list of deliveries for the day is displayed only if the command is executed successfully.
+
+**MSS:**
+1. Logged-in Owner types command to view a list of deliveries for the day.
+2. DMS displays a list of deliveries for the day.
+
+    Use Case Ends.
+
+**Extensions:**
+* 1a. Command has missing fields.
+  * 1a1. DMS displays an error to Logged-in Owner.
+
+    Use Case Ends.
+
+---
+
+#### **Use case:** UC19 - Add Customer to Delivery
+
+**System:** Delivery Management System (DMS)
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged in.
+
+**Guarantees:**
+* A customer is added to a delivery only if the command is executed successfully.
+
+**MSS:**
+1. Logged-in Owner types command to add a customer to a delivery.
+2. DMS shows success message.
+
+    Use Case Ends.
+
+**Extensions:**
+* 1a. Command has missing fields.
+  * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+
+    Use Case Ends.
+
+* 1b. Command has invalid customer details.
+  * 1b1. DMS displays an error to Logged-in Owner that the specified customer details is invalid.
+
+    Use Case Ends.
+
+---
+
+#### **Use case:** UC20 - Remove Customer from Delivery
+
+**System:** Delivery Management System (DMS)
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged in.
+
+**Guarantees:**
+* A customer is removed from a delivery only if the command is executed successfully.
+
+**MSS:**
+1. Logged-in Owner types command to remove a customer from a delivery.
+2. DMS shows success message.
+
+    Use Case Ends.
+
+**Extensions:**
+* 1a. Command has missing fields.
+  * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+
+    Use Case Ends.
+
+* 1b. Command has invalid customer details.
+  * 1b1. DMS displays an error to Logged-in Owner that the specified customer cannot be found.
+  
+    Use Case Ends.
+
+---
+
+#### **Use case:** UC21 - Specify Delivery Method
+
+**System:** Delivery Management System (DMS)
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged in.
+
+**Guarantees:**
+* A delivery method is specified only if the command is executed successfully.
+
+**MSS:**
+1. Logged-in Owner types command to specify a delivery method.
+2. DMS shows success message.
+
+    Use Case Ends.
+
+**Extensions:**
+* 1a. Command has missing fields.
+  * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+
+    Use Case Ends.
+
+* 1b. Command has invalid delivery options.
+  * 1b1. DMS displays an error to Logged-in Owner that the specified delivery method is invalid.
+
+    Use Case Ends.
+
+---
+
+#### **Use case:** UC22 - Search for Delivery
+
+**System:** Delivery Management System (DMS)
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged in.
+
+**Guarantees:**
+* A delivery is searched for only if the command is executed successfully.
+
+**MSS:**
+1. Logged-in Owner types command and keywords to search for a delivery.
+2. DMS displays a list of deliveries that match the keywords in the search query.
+
+    Use Case Ends.
+
+**Extensions:**
+* 1a. Command has missing fields.
+  * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+
+    Use Case Ends.
+
+---
+
+#### Use Case: UC23 - View location of delivery
+
+**System:** Delivery Management System (DMS)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged-in.
+
+**Guarantees:**
+
+* Delivery location is shown only if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in owner types command to view location of delivery.
+2. DMS displays the address of the customer associated with the delivery.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Logged-in owner did not specify the delivery id.
+    * 1a1. DMS informs the logged-in owner of the missing field.
+
+      Use case ends.
+
+* 1b. Logged-in owner specified a delivery id that does not exist.
+    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+
+      Use case ends.
+
+---
+
+#### Use Case: UC24 - View details of delivery
+
+**System:** Delivery Management System (DMS)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged-in.
+
+**Guarantees:**
+
+* Details of the delivery are displayed only if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in owner types command to view details of delivery.
+2. DMS shows details of the delivery.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Logged-in owner did not specify the delivery id.
+    * 1a1. DMS informs the logged-in owner of the missing field.
+
+      Use case ends.
+
+* 1b. Logged-in owner specified a delivery id that does not exist.
+    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+
+      Use case ends.
+
+---
+
+#### Use Case: UC25 - Update delivery status
+
+**System:** Delivery Management System (DMS)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged-in.
+
+**Guarantees:**
+
+* The status of the delivery is updated only if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in owner types command to update the status of a delivery.
+2. DMS updates the status of the delivery and shows a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Logged-in owner did not specify the delivery id.
+    * 1a1. DMS informs the logged-in owner of the missing field.
+
+      Use case ends.
+
+* 1b. Logged-in owner specified a delivery id that does not exist.
+    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+
+      Use case ends.
+
+* 1c. DMS detects that the specified delivery id is already marked as completed/pending.
+    * 1c1. DMS informs the logged-in owner that the delivery is already marked as completed/pending.
+
+      Use case ends
+
+---
+
+#### Use Case: UC26 - Update delivery details
+
+**System:** Delivery Management System (DMS)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged-in.
+
+**Guarantees:**
+
+* The details of the delivery is updated only if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in owner types command to update the details(date) of a delivery.
+2. DMS updates the details of the delivery and shows a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Logged-in owner did not specify all the fields.
+    * 1a1. DMS informs the logged-in owner to specify all the fields.
+
+      Use case ends.
+
+* 1b. Logged-in owner specified a delivery id that does not exist.
+    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+
+      Use case ends.
+
+* 1c. Logged-in owner entered date in the wrong format.
+    * 1c1. DMS informs the logged-in owner of invalid format and shows the correct format.
+
+      Use case ends
+
+---
+
+#### Use Case: UC27 - Delete delivery
+
+**System:** Delivery Management System (DMS)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged-in.
+
+**Guarantees:**
+
+* The delivery is deleted only if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in owner types command to delete a delivery.
+2. DMS deletes the delivery and shows a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Logged-in owner did not specify the delivery id.
+    * 1a1. DMS informs the logged-in owner of the missing field.
+
+      Use case ends.
+
+* 1b. Logged-in owner specified a delivery id that does not exist.
+    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+
+      Use case ends.
+
+* 1c. Logged-in owner specified a delivery that is in-progress.
+    * 1c1. DMS informs the logged-in owner of the status of the delivery and does not delete it.
+
+      Use case ends
 
 ---
 
