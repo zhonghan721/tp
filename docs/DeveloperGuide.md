@@ -385,8 +385,225 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified
+(For all use cases below, the **System** is the `HomeBoss` and the **Actor** is the `user`, unless specified
 otherwise)
+
+#### Use Case: UC01 - Create Accoumt
+
+**System:** User System (US)
+
+**Actor:** Unregistered owner
+
+**Preconditions:** User system has no account.
+
+**Guarantees:**
+
+* Account is created if the command is executed successfully.
+* Unregistered owner is registered and logged in if the command is executed successfully.
+
+**MSS:**
+
+1. Unregistered owner opens HomeBoss application.
+2. US asks unregistered owner to either login, forget password or register.
+3. Unregistered owner enters register command with his username, password, confirm password, a forget password question
+   and answer.
+4. US creates an account and shows a welcome message with the newly created username.
+   Use case ends.
+
+**Extensions:**
+
+* 3a. Unregistered owner does not enter one of the fields.
+
+    * 3a1. US requests unregistered owner to fill up all the required fields.
+
+      Use case ends.
+
+* 3b. Unregistered owner types incorrect confirm password.
+
+    * 3b1. US requests unregistered owner to retype their confirm password.
+
+      Use case ends.
+
+---
+
+#### Use Case: UC02 - Login
+
+**System:** User System (US)
+
+**Actor:** Registered owner
+
+**Preconditions:** Registered owner is logged out.
+
+**Guarantees:**
+
+* Registered owner is logged in.
+
+**MSS:**
+
+1. Registered owner opens the HomeBoss application.
+2. US asks the registered owner to either login, forget password or register.
+3. Registered owner enters the login command with his username, password.
+4. US logs in and shows a welcome message.
+   Use case ends.
+
+**Extensions:**
+
+* 3a. Registered owner does not enter one of the fields
+    * 3a1. US requests registered owner to fill up all the required fields
+
+      Use case ends.
+
+* 3b. Registered owner types incorrect password or username
+    * 3b1. US requests registered owner to retype their username or password
+
+      Use case ends.
+
+---
+
+#### Use Case: UC03 - Forget Password
+
+**System:** User System (US)
+
+**Actor:** Registered owner
+
+**Preconditions:** Registered owner is logged out.
+
+**Guarantees:**
+
+* Password would be changed.
+
+**MSS:**
+
+1. Registered owner opens the HomeBoss application.
+2. US asks the registered owner to either login, forget password or register.
+3. Registered owner enters the forgot password command with his username.
+4. US asks the forget password question of the user.
+5. Registered owner answers the question correctly.
+6. US asks the registered owner to change password and confirm change password.
+7. Registered owner types password and confirms password.
+8. US logins and shows a success message.
+   Use case ends.
+
+**Extensions:**
+
+* 3a. Registered owner does not enter the username field.
+    * 3a1. US requests registered owner to fill up the username field.
+
+      Use case ends.
+
+* 3b. Registered owner types incorrect username
+    * 3b1. US requests registered owner to retype their username
+
+      Use case ends.
+
+* 5a. Registered owner does not enter the answer field.
+    * 5a1. US requests registered owner to fill up the answer field.
+
+      Use case ends.
+
+* 5b. Registered owner types incorrect answer
+    * 5b1. US requests registered owner to retype their answer.
+
+      Use case ends.
+
+* 7a. Registered owner does not enter one of the password or confirm password fields.
+    * 7a1. US requests registered owner to fill up all the required fields
+
+      Use case ends.
+
+* 7b. Registered owner types incorrect confirm password.
+    * 7b1. US requests registered owner to retype their confirm password.
+
+      Use case ends.
+
+
+* *a. At any time, registered owner can choose to cancel the forget password.
+    * *a1. Registered owner types cancel.
+    * *a2. US asks the registered owner to either login, forget password or register.
+
+      Use case ends.
+
+---
+
+#### Use Case: UC04 - Logout
+
+**System:** User System (US)
+
+**Actor:** Logged-In owner
+
+**Preconditions:** Owner is logged in.
+
+**Guarantees:**
+
+* Logged-in owner would be logged out.
+
+**MSS:**
+
+1. Logged-In owner types logout
+2. US logs owner out and shows success message.
+   Use case ends.
+
+---
+
+#### Use Case: UC05 - Update Password
+
+**System:** User System (US)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged in.
+
+**Guarantees:**
+
+* Password of logged-in owner is updated.
+
+**MSS:**
+
+1. Logged-in owner types command to update password with password and confirm password.
+2. User system shows a success message.
+   Use case ends.
+
+**Extensions:**
+
+* 1a. Logged-in owner does not enter one of the fields
+    * 1a1. US requests logged-in owner to fill up all the required fields
+
+      Use case ends.
+
+* 1b. Logged-in owner types incorrect confirm password
+    * 1b1. US requests logged-in owner to retype their confirm password
+
+      Use case ends.
+
+---
+
+#### Use Case: UC06 - Delete Account
+
+**System:** User System (US)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged-in.
+
+**Guarantees:**
+
+* Logged-in owner’s account is deleted.
+
+**MSS:**
+
+1. Logged-in owner types command to delete his account.
+2. User system shows a confirmation message.
+3. Logged-in owner confirms.
+4. User system shows a success message.
+   Use case ends.
+
+**Extensions**
+
+* 3a. Logged-in owner cancels.
+    * 3a1. Logged-in owner cancels.
+    * 3a2. User system shows a cancellation message.
+
+      Use case ends.
 
 ---
 
@@ -577,8 +794,6 @@ otherwise)
 
 ---
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -599,7 +814,9 @@ otherwise)
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Private Contact Detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command Line Interface
+* **Owner**: The person who owns the home-based business and who uses the app
 
 --------------------------------------------------------------------------------------------------------------------
 
