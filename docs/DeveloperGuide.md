@@ -388,28 +388,194 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified
 otherwise)
 
-**Use case: Delete a person**
+---
 
-**MSS**
+#### **Use case:** UC12 - Customer Detail Update
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person
+**System:** Customer Management System (CMS)
 
-   Use case ends.
+**Actor:** Logged-in owner.
 
-**Extensions**
+**Preconditions:** Owner is logged in.
 
-* 2a. The list is empty.
+**Guarantees:** 
+* Selected customer’s details are updated only if the command is executed successfully.
 
-  Use case ends.
+**MSS:**
+1. Logged-in Owner types command to update a customer’s details with at least one field specified.
+2. CMS shows success message.
 
-* 3a. The given index is invalid.
+    Use Case Ends.
 
-    * 3a1. AddressBook shows an error message.
+**Extensions:**
+* 1a. Logged-in Owner does not specify at least one updated field(s).
+  * 1a1. CMS displays an error to Logged-in Owner to specify at least one field to update.
+    
+    Use Case Ends.
 
-      Use case resumes at step 2.
+* 1b. Logged-in Owner specifies invalid customer.
+  * 1b1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
+  
+    Use Case Ends.
+
+* 1c. Logged-in Owner does not specify customer.
+  * 1c1. CMS displays an error to Logged-in Owner to specify a customer to update.
+    
+    Use Case Ends.
+
+---
+
+#### **Use case:** UC13 - Customer Deletion
+
+**System:** Customer Management System (CMS)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged in.
+
+**Guarantees:**
+* Selected customer is deleted only if the command is executed successfully.
+
+**MSS:**
+1. Logged-in Owner types command to delete a customer.
+2. CMS shows success message.
+
+   Use Case Ends.
+
+**Extensions:**
+* 1a. Logged-in Owner specifies invalid customer.
+  * 1a1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
+
+    Use Case Ends.
+
+* 1b. Logged-in Owner does not specify customer.
+  * 1b1. CMS displays an error to Logged-in Owner to specify a customer to update.
+
+    Use Case Ends.
+
+---
+
+#### **Use case:** UC14 - List Customers
+**System:** Customer Management System (CMS)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged in.
+
+**Guarantees:**
+* All Customers are listed only if the command is executed successfully.
+
+**MSS:**
+1. Logged-in Owner types command to list all customers.
+2. CMS shows list of all customers sorted by ascending alphanumeric order.
+
+   Use Case Ends.
+
+**Extensions:**
+* 1a. Logged -in Owner specifies optional sort field.
+    * 1a1. CMS shows list of all customers sorted by the specified sort order.
+
+      Use Case Ends.
+
+* 1b. Logged-in Owner specifies invalid sort field.
+    * 1b1. CMS displays an error to Logged-in Owner to specify a valid sort option.
+
+      Use Case Ends.
+
+---
+
+#### **Use case:** UC15 - Delivery Creation
+**System:** Delivery Management System (DMS)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged in.
+
+**Guarantees:**
+* A new delivery is created only if the command is executed successfully.
+
+**MSS:**
+1. Logged-in Owner types command to create a delivery.
+2. DMS shows success message.
+
+   Use Case Ends.
+
+**Extensions:**
+* 1a. Command has missing fields.
+  * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+  
+    Use Case Ends.
+
+* 1b. Command has invalid date.
+  * 1b1. DMS displays an error to Logged-in Owner that an invalid date was given.
+  
+    Use Case Ends.
+
+* 1c. Command has invalid date format.
+  * 1c1. DMS displays an error to Logged-in Owner to specify the date in a valid format.
+  
+    Use Case Ends.
+
+---
+
+#### **Use case:** UC16 - Delivery Notes Creation
+
+**System:** Delivery Management System (DMS)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged in.
+
+**Guarantees:**
+* A new note is added to a delivery only if the command is executed successfully.
+
+**MSS:**
+1. Logged-in Owner types command to create a note for a delivery.
+2. DMS shows success message.
+
+   Use Case Ends.
+
+**Extensions:**
+* 1a. Command has missing fields.
+    * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+
+      Use Case Ends.
+
+---
+
+#### **Use case:** UC17 - Delivery List
+
+**System:** Delivery Management System (DMS) 
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged in.
+
+**Guarantees:**
+* A list of deliveries is displayed only if the command is executed successfully.
+
+**MSS:**
+1. Logged-in Owner types command to view a list of deliveries.
+2. DMS displays a list of all deliveries sorted by delivery date.
+
+   Use Case Ends.
+
+**Extensions:**
+* 1a. User specifies status field in command.
+  * 1a1. DMS display a list of deliveries filtered by the specified status.
+  
+    Use Case Ends.
+
+* 1b. User specifies sort field in command.
+  * 1b1. DMS displays a list of all deliveries sorted by the specified sort order.
+  
+    Use Case Ends.
+
+* 1c. User Specifies both status and sort fields.
+  * 1c1. DMS displays a list of deliveries filtered by the specified status and sorted by the specified sort order.
+    
+    Use Case Ends.
+
+---
 
 *{More to be added}*
 
