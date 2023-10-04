@@ -1079,6 +1079,186 @@ otherwise)
 
 ---
 
+#### Use Case: UC23 - View location of delivery
+
+**System:** Delivery Management System (DMS)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged-in.
+
+**Guarantees:**
+
+* Delivery location is shown only if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in owner types command to view location of delivery.
+2. DMS displays the address of the customer associated with the delivery.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Logged-in owner did not specify the delivery id.
+    * 1a1. DMS informs the logged-in owner of the missing field.
+
+      Use case ends.
+
+* 1b. Logged-in owner specified a delivery id that does not exist.
+    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+
+      Use case ends.
+
+---
+
+#### Use Case: UC24 - View details of delivery
+
+**System:** Delivery Management System (DMS)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged-in.
+
+**Guarantees:**
+
+* Details of the delivery are displayed only if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in owner types command to view details of delivery.
+2. DMS shows details of the delivery.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Logged-in owner did not specify the delivery id.
+    * 1a1. DMS informs the logged-in owner of the missing field.
+
+      Use case ends.
+
+* 1b. Logged-in owner specified a delivery id that does not exist.
+    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+
+      Use case ends.
+
+---
+
+#### Use Case: UC25 - Update delivery status
+
+**System:** Delivery Management System (DMS)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged-in.
+
+**Guarantees:**
+
+* The status of the delivery is updated only if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in owner types command to update the status of a delivery.
+2. DMS updates the status of the delivery and shows a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Logged-in owner did not specify the delivery id.
+    * 1a1. DMS informs the logged-in owner of the missing field.
+
+      Use case ends.
+
+* 1b. Logged-in owner specified a delivery id that does not exist.
+    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+
+      Use case ends.
+
+* 1c. DMS detects that the specified delivery id is already marked as completed/pending.
+    * 1c1. DMS informs the logged-in owner that the delivery is already marked as completed/pending.
+
+      Use case ends
+
+---
+
+#### Use Case: UC26 - Update delivery details
+
+**System:** Delivery Management System (DMS)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged-in.
+
+**Guarantees:**
+
+* The details of the delivery is updated only if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in owner types command to update the details(date) of a delivery.
+2. DMS updates the details of the delivery and shows a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Logged-in owner did not specify all the fields.
+    * 1a1. DMS informs the logged-in owner to specify all the fields.
+
+      Use case ends.
+
+* 1b. Logged-in owner specified a delivery id that does not exist.
+    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+
+      Use case ends.
+
+* 1c. Logged-in owner entered date in the wrong format.
+    * 1c1. DMS informs the logged-in owner of invalid format and shows the correct format.
+
+      Use case ends
+
+---
+
+#### Use Case: UC27 - Delete delivery
+
+**System:** Delivery Management System (DMS)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged-in.
+
+**Guarantees:**
+
+* The delivery is deleted only if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in owner types command to delete a delivery.
+2. DMS deletes the delivery and shows a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Logged-in owner did not specify the delivery id.
+    * 1a1. DMS informs the logged-in owner of the missing field.
+
+      Use case ends.
+
+* 1b. Logged-in owner specified a delivery id that does not exist.
+    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+
+      Use case ends.
+
+* 1c. Logged-in owner specified a delivery that is in-progress.
+    * 1c1. DMS informs the logged-in owner of the status of the delivery and does not delete it.
+
+      Use case ends
+
+---
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
