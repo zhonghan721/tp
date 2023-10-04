@@ -5,8 +5,9 @@
 
 # HomeBoss
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+![CI](https://github.com/AY2324S1-CS2103T-T13-3/tp/actions/workflows/gradle.yml/badge.svg)
+![Docs CI](https://github.com/AY2324S1-CS2103T-T13-3/tp/actions/workflows/docs.yml/badge.svg)
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-T13-3/tp/graph/badge.svg?token=4M3CE4H1O1)](https://codecov.io/gh/AY2324S1-CS2103T-T13-3/tp)
 
 ![Ui](images/Ui.png)
 
