@@ -257,10 +257,9 @@ _SORT_: String of either `asc` for ascending or `desc` for descending or default
 
 **Command succeeds (>0 deliveries):** 
 
-_Here are all the deliveries:_
-1. _[1001] Gabriel’s Milk - Completed - Ordered 20th Sept 2023 : Delivered on 30th Sept 2023_
-2. _[1002] Gambe’s Meat - Completed - Ordered 22th Sept 2023 : Delivered on 29th Sept 2023_
-3. _[1003] Ben’s Coffee - Pending - Ordered 25th Sept 2023 : Delivery on 1st October 2023_
+1. _[1001] Gabriel’s Milk - Completed - Ordered 20th Sept 2023: Delivered on 30th Sept 2023_
+2. _[1002] Gambe’s Meat - Completed - Ordered 22th Sept 2023: Delivered on 29th Sept 2023_
+3. _[1003] Ben’s Coffee - Pending - Ordered 25th Sept 2023: Delivery on 1st October 2023_
 
 **Command failed (0 deliveries):** _There are currently no deliveries!_
 
@@ -273,7 +272,7 @@ _Details coming soon..._
 
 Shows the details of the specified delivery.
 
-**Format:** `delivery view DELIVERY_ID `
+**Format:** `delivery view DELIVERY_ID`
 
 **Example:** `delivery view 1001`
 
@@ -283,12 +282,13 @@ _DELIVERY_ID_: Integer
 
 **Command succeeds:**
 
-_[1001] Gabriel’s Milk_<br />
+_[1001] Gabriel’s Milk_
+
 _Customer ID: 1_<br />
 _Customer: Gabriel_<br />
-_Ordered on : 23rd September 2023_<br />
+_Ordered on: 23rd September 2023_<br />
 _Delivery Status: Pending_<br />
-_Delivery on : 1st October 2023_
+_Delivery on: 1st October 2023_
 
 **Command failed (0 deliveries):** _There are currently no deliveries._
 
@@ -314,9 +314,9 @@ _DELIVERY_ID:_ Integer
 
 **Command succeeds:** _Delivery [1001] Gabriel’s Milk marked as complete!_
 
-**Command failed (delivery_name missing):** _Please specify a delivery name!_
+**Command failed (delivery_id missing):** _Please specify a delivery id!_
 
-**Command failed (delivery_name not in database):** _This delivery does not seem to exist!_
+**Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
 
 **Command failed (delivery already complete):** _This delivery is already marked as complete._
 
@@ -332,9 +332,9 @@ _DELIVERY_ID_: Integer
 
 **Command succeeds:** _Delivery [1001] Gabriel’s Milk marked as pending!_
 
-**Command failed (delivery_name missing):** _Please specify a delivery name!_
+**Command failed (delivery_id missing):** _Please specify a delivery id!_
 
-**Command failed (delivery_name not in database):** _This delivery does not seem to exist!_
+**Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
 
 **Command failed (delivery already pending):** _This delivery is already marked as pending._
 
@@ -352,11 +352,11 @@ _DATE:_ String of format YYYY-MM-DD
 
 **Command succeeds:** _Delivery [1001] Gabriel’s Milk changed delivery date to 1st Oct 2023!_
 
-**Command failed (one field missing):** _Please specify a delivery name and date!_
+**Command failed (one field missing):** _Please specify a delivery id and date!_
 
 **Command failed (invalid date format):** _Please format date as YYYY-MM-DD._
 
-**Command failed (delivery_name not in database):** _This delivery does not seem to exist!_
+**Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
 
 ### Add customer data to delivery `[Coming Soon in v1.3]`
 
@@ -376,9 +376,9 @@ _DELIVERY_ID_: Integer
 
 **Command succeeds:** _Delivery [1001] Gabriel’s Milk deleted!_
 
-**Command failed (delivery_name missing):** _Please specify a delivery name to delete!_
+**Command failed (delivery_id missing):** _Please specify a delivery id to delete!_
 
-**Command failed (delivery_name not in database):** _This delivery does not seem to exist!_
+**Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
 
 ### Remove customer from delivery `[Coming Soon in v1.3]`
 
