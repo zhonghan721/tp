@@ -345,57 +345,41 @@ thereby improving efficiency for business owners.
 
 ### User stories
 
-As a registered owner, I can create a customer, so that I can tie deliveries to customers’ information.
-As a registered owner, I can view any customer so that I can see their detailed information.
-As a registered owner, I can see a list of deliveries sorted by status for the customer so that I can easily see if
-products are delivered or not.
-As a registered owner, I can quickly search for the details of a client so that I can monitor the progress of an order
-efficiently and effectively.
-As a registered owner, I can update customer details so that I can change details if keyed in wrongly.
-As a registered owner, I can delete a customer so that I can remove redundant or incorrect customer records, especially
-when unforeseen errors occur.
-As a registered owner, I can view the list of customers to provide an overview so that I can have a comprehensive
-overview of my customer base
-
-As an owner, I can relate my inventory to my orders. (Optional)
-As an owner, I want to know the sum of all the materials required for a fixed delivery schedule.
-As an owner, I can have different user authorisation levels (Optional)
-
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikely to have) - `*`
 
 | Priority | As a …​            | I want to …​           | So that I can…​                                                                                                                                                                         |
-|----------|--------------------|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | an owner           | create a local account | I can personalise and secure my account.                                                                                                                                                |
-| `* * *` | a registered owner | log in to my local account | I can access my data.                                                                                                                                                                   |
-| `* * *` | a forgetful owner  | retrieve my account | I can still recover my data.                                                                                                                                                            |
-| `* * *` | a logged-in owner  | log out of my account | I can keep my data secure.                                                                                                                                                              |
-| `* * *` | a registered owner | update my password | I can constantly keep my data secure.                                                                                                                                                   |
-| `* * *` | a registered owner | delete my account | I can have greater control over my data and account removal for privacy reasons.                                                                                                        |
-| `* * *` | a registered owner | update my details | I can change my personalisation.                                                                                                                                                        |
-| `* * *` | a registered owner | create a customer | I can tie deliveries to customers’ information.                                                                                                                                         |
-| `* * *` | a registered owner | view a customer | I can see their detailed information.                                                                                                                                                   |
-| `* * *` | a registered owner | update a customer | I can change details if keyed in wrongly.                                                                                                                                               |
-| `* * *` | a registered owner | delete a customer | I can remove redundant or incorrect customer records, especially when unforeseen errors occur.                                                                                          |
-| `* * *` | a registered owner | view a list of customers | I can have a comprehensive overview of my customer base.                                                                                                                                |
-|` * * *` | a registered owner | see a list of deliveries sorted by status for the customer | I can easily see if products are delivered or not.                                                                                                                                      |
-| `* * *` | a registered owner | quickly search for the details of a client | I can monitor the progress of an order efficiently and effectively.                                                                                                                     |
-| `* * *` | a registered owner | create a delivery | I can efficiently organise and access delivery information.                                                                                                                             |
-| `* * *` | a registered owner | create notes about deliveries | I can add additional information about deliveries.                                                                                                                                      |
-| `* * *` | a registered owner | view a list of deliveries | I can plan the optimal route.                                                                                                                                                           |
-| `* * *` | a registered owner | see the list of deliveries that would be delivered for the day | I can prioritise particular orders.                                                                                                                                                     |
-| `* * *` | a registered owner | add a customer to a delivery | I know who the delivery is for.                                                                                                                                                         |
-| `* * *` | a registered owner | remove a customer from a delivery | The delivery details are updated.                                                                                                                                                       |
-| `* * *` | a registered owner | specify the method of delivery | I know how to send the orders over.                                                                                                                                                     |
-| `* * *` | a registered owner | quickly search for the details of a delivery | I can monitor the progress of a                                                                 delivery.                                                                               |
-| `* * *` | a registered owner | see a list of deliveries sorted by their delivery status and date of delivery | It is                                                                                                     more organised and easier for me to get and overview of all orders.           |
-| `* * *` | a registered owner | see the location of the delivery | I know where to deliver the order to.                                                                                                                                                   |
-| `* * *` | a registered owner | view the details of a delivery | I know what the order is and where to deliver it to.                                                                                                                                    |
-| `* * *` | a registered owner | update the status of the delivery | I can keep track of the delivery progress and notify my client.                                                                                                                         |
-| `* * *` | a registered owner | update delivery details | I can change any information if there was an error from                                                                                                                        user/me. |
-| `* * *` | a registered owner | delete a delivery | I can get rid of deliveries that are redundant.                                                                                                                                         |
-| `*` | a registered owner | relate my inventory to my orders | I can keep track of my inventory.                                                                                                                                                       |
-| `*` | a registered owner | know the sum of all the materials required for a fixed delivery schedule | I can plan my                                                                                             inventory. |
-| `*` | a registered owner | have different user authorisation levels | I can control who has access to what.                                                                                                                                                   |
+|-------|--------------------|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `***` | an owner           | create a local account | I can personalise and secure my account.                                                                                                                                                |
+| `***` | a registered owner | log in to my local account | I can access my data.                                                                                                                                                                   |
+| `***` | a forgetful owner  | retrieve my account | I can still recover my data.                                                                                                                                                            |
+| `***` | a logged-in owner  | log out of my account | I can keep my data secure.                                                                                                                                                              |
+| `***` | a registered owner | update my password | I can constantly keep my data secure.                                                                                                                                                   |
+| `***` | a registered owner | delete my account | I can have greater control over my data and account removal for privacy reasons.                                                                                                        |
+| `***` | a registered owner | update my details | I can change my personalisation.                                                                                                                                                        |
+| `***` | a registered owner | create a customer | I can tie deliveries to customers’ information.                                                                                                                                         |
+| `***` | a registered owner | view a customer | I can see their detailed information.                                                                                                                                                   |
+| `***` | a registered owner | update a customer | I can change details if keyed in wrongly.                                                                                                                                               |
+| `***` | a registered owner | delete a customer | I can remove redundant or incorrect customer records, especially when unforeseen errors occur.                                                                                          |
+| `***` | a registered owner | view a list of customers | I can have a comprehensive overview of my customer base.                                                                                                                                |
+| `***` | a registered owner | see a list of deliveries sorted by status for the customer | I can easily see if products are delivered or not.                                                                                                                                      |
+| `***` | a registered owner | quickly search for the details of a client | I can monitor the progress of an order efficiently and effectively.                                                                                                                     |
+| `***` | a registered owner | create a delivery | I can efficiently organise and access delivery information.                                                                                                                             |
+| `***` | a registered owner | create notes about deliveries | I can add additional information about deliveries.                                                                                                                                      |
+| `***` | a registered owner | view a list of deliveries | I can plan the optimal route.                                                                                                                                                           |
+| `***` | a registered owner | see the list of deliveries that would be delivered for the day | I can prioritise particular orders.                                                                                                                                                     |
+| `***` | a registered owner | add a customer to a delivery | I know who the delivery is for.                                                                                                                                                         |
+| `***` | a registered owner | remove a customer from a delivery | The delivery details are updated.                                                                                                                                                       |
+| `***` | a registered owner | specify the method of delivery | I know how to send the orders over.                                                                                                                                                     |
+| `***` | a registered owner | quickly search for the details of a delivery | I can monitor the progress of a                                                                 delivery.                                                                               |
+| `***` | a registered owner | see a list of deliveries sorted by their delivery status and date of delivery | It is                                                                                                     more organised and easier for me to get and overview of all orders.           |
+| `***` | a registered owner | see the location of the delivery | I know where to deliver the order to.                                                                                                                                                   |
+| `***` | a registered owner | view the details of a delivery | I know what the order is and where to deliver it to.                                                                                                                                    |
+| `***` | a registered owner | update the status of the delivery | I can keep track of the delivery progress and notify my client.                                                                                                                         |
+| `***` | a registered owner | update delivery details | I can change any information if there was an error from                                                                                                                        user/me. |
+| `***` | a registered owner | delete a delivery | I can get rid of deliveries that are redundant.                                                                                                                                         |
+| `*`   | a registered owner | relate my inventory to my orders | I can keep track of my inventory.                                                                                                                                                       |
+| `*`   | a registered owner | know the sum of all the materials required for a fixed delivery schedule | I can plan my                                                                                             inventory. |
+| `*`   | a registered owner | have different user authorisation levels | I can control who has access to what.                                                                                                                                                   |
 
 *{More to be added}*
 
