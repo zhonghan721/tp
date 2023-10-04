@@ -627,7 +627,9 @@ otherwise)
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Private Contact Detail**: A contact detail that is not meant to be shared with others
+* **CLI**: Command Line Interface
+* **Owner**: The person who owns the home-based business and who uses the app
 
 --------------------------------------------------------------------------------------------------------------------
 
