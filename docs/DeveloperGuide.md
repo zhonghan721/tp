@@ -577,6 +577,36 @@ otherwise)
 
 ---
 
+#### Use Case: UC06 - Delete Account
+
+**System:** User System (US)
+
+**Actor:** Logged-in owner.
+
+**Preconditions:** Owner is logged-in.
+
+**Guarantees:**
+
+* Logged-in owner’s account is deleted.
+
+**MSS:**
+
+1. Logged-in owner types command to delete his account.
+2. User system shows a confirmation message.
+3. Logged-in owner confirms.
+4. User system shows a success message.
+   Use case ends.
+
+**Extensions**
+
+* 3a. Logged-in owner cancels.
+    * 3a1. Logged-in owner cancels.
+    * 3a2. User system shows a cancellation message.
+
+      Use case ends.
+
+---
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
