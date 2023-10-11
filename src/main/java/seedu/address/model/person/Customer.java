@@ -77,7 +77,8 @@ public class Customer {
         }
 
         return otherCustomer != null
-                && otherCustomer.getCustomerId() == this.getCustomerId();
+            && otherCustomer.getCustomerId() == getCustomerId()
+            && otherCustomer.getName().equals(getName());
     }
 
     /**
@@ -97,10 +98,10 @@ public class Customer {
 
         Customer otherCustomer = (Customer) other;
         return name.equals(otherCustomer.name)
-                && phone.equals(otherCustomer.phone)
-                && email.equals(otherCustomer.email)
-                && address.equals(otherCustomer.address)
-                && tags.equals(otherCustomer.tags);
+            && phone.equals(otherCustomer.phone)
+            && email.equals(otherCustomer.email)
+            && address.equals(otherCustomer.address)
+            && tags.equals(otherCustomer.tags);
     }
 
     @Override
@@ -112,12 +113,12 @@ public class Customer {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
-                .toString();
+            .add("name", name)
+            .add("phone", phone)
+            .add("email", email)
+            .add("address", address)
+            .add("tags", tags)
+            .toString();
     }
 
 }
