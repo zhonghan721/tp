@@ -77,7 +77,6 @@ public class Customer {
         }
 
         return otherCustomer != null
-//            && otherCustomer.getCustomerId() == getCustomerId()
             && otherCustomer.getName().equals(getName());
     }
 
