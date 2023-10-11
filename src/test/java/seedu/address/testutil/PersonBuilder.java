@@ -87,7 +87,7 @@ public class PersonBuilder {
     }
 
     public Customer build() {
-        return new Customer(name, phone, email, address, tags);
+        return new Customer(1, name, phone, email, address, tags);
     }
 
 }
