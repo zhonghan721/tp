@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
 
@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Customer;
@@ -14,20 +15,20 @@ import seedu.address.model.person.Customer;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class CustomerDeleteCommand extends CustomerCommand {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " " + "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the customer identified by the index number used in the displayed customer list.\n"
+            + "Parameters: CUSTOMER_ID (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 0001";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public CustomerDeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -52,11 +53,11 @@ public class DeleteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof CustomerDeleteCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
+        CustomerDeleteCommand otherDeleteCommand = (CustomerDeleteCommand) other;
         return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
 
