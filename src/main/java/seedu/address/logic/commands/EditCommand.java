@@ -101,7 +101,8 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(customerToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(customerToEdit.getTags());
 
-        return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Customer(customerToEdit.getCustomerId(), updatedName, updatedPhone,
+                updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override

@@ -97,6 +97,12 @@ public class Customer {
         Customer.customerCount = count + 1;
     }
 
+    /**
+     * Returns current customerCount.
+     * Used by {@code PersonBuilder} to create customer with expected customerId.
+     *
+     * @return customerCount
+     */
     public static int getCustomerCount() {
         return Customer.customerCount;
     }
