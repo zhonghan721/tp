@@ -37,7 +37,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Customer editedCustomer = new PersonBuilder().withCustomerId(Customer.getCustomerCount()).build();
+        Customer editedCustomer = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedCustomer).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
@@ -90,10 +90,11 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Customer customerInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Customer editedCustomer = new PersonBuilder(customerInFilteredList).withCustomerId(Customer.getCustomerCount())
-                .withName(VALID_NAME_BOB).build();
+        Customer editedCustomer = new PersonBuilder(customerInFilteredList)
+                .withCustomerId(customerInFilteredList.getCustomerId()).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
-            new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditPersonDescriptorBuilder().withCustomerId(customerInFilteredList.getCustomerId())
+                        .withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
             Messages.format(editedCustomer));

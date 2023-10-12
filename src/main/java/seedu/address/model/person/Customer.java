@@ -17,7 +17,7 @@ import seedu.address.model.tag.Tag;
 public class Customer {
 
     // Customer ID Generation
-    private static int customerCount;
+    private static int customerCount = 1;
 
     // Identity fields
     private final int customerId;
