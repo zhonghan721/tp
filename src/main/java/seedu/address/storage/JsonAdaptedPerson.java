@@ -103,7 +103,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Customer(0, modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Customer(modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
 }
