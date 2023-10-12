@@ -16,7 +16,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.customer.CustomerListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -27,7 +27,9 @@ public class AddressBookParser {
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
+            "(?<commandWord>customer \\S+|delivery \\S+|\\S+)(?<arguments>.*)"
+    );
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
@@ -68,8 +70,8 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case CustomerListCommand.COMMAND_WORD:
+            return new CustomerListCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
