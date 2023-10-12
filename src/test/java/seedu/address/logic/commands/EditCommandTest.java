@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
+import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -27,7 +28,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Customer;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
