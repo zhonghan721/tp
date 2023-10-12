@@ -44,10 +44,10 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Customer customer, int displayedIndex) {
+    public PersonCard(Customer customer) {
         super(FXML);
         this.customer = customer;
-        id.setText(displayedIndex + ". ");
+        id.setText(String.format("[ %04d ]", customer.getCustomerId()));
         name.setText(customer.getName().fullName);
         phone.setText(customer.getPhone().value);
         address.setText(customer.getAddress().value);

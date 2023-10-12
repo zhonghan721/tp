@@ -16,6 +16,9 @@ import seedu.address.model.tag.Tag;
  */
 public class Customer {
 
+    // Customer ID Generation
+    private static int customerCount;
+
     // Identity fields
     private final int customerId;
     private final Name name;
@@ -29,9 +32,9 @@ public class Customer {
     /**
      * Every field must be present and not null.
      */
-    public Customer(int customerId, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Customer(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
-        this.customerId = customerId;
+        this.customerId = customerCount++;
         this.name = name;
         this.phone = phone;
         this.email = email;
