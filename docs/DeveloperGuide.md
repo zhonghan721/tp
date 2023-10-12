@@ -125,7 +125,7 @@ How the `Logic` component works:
    a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
    is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a customer).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -218,14 +218,15 @@ initial address book state, and the `currentStatePointer` pointing to that singl
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command
+Step 2. The user executes `delete 5` command to delete the 5th customer in the address book. The `delete` command
 calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
 to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
 state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`
+Step 3. The user executes `add n/David …​` to add a new customer. The `add` command also
+calls `Model#commitAddressBook()`
 , causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
@@ -237,7 +238,7 @@ not be saved into the `addressBookStateList`.
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing
+Step 4. The user now decides that adding the customer was a mistake, and decides to undo that action by executing
 the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
 once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
@@ -302,7 +303,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Pros: Will use less memory (e.g. for `delete`, just save the customer being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -338,8 +339,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
-Home-based business owners can have a huge base of customers. 
+**Value proposition**:
+Home-based business owners can have a huge base of customers.
 HomeBoss streamlines and simplifies the management of customer contacts and deliveries,
 thereby improving efficiency for business owners.
 
@@ -595,8 +596,8 @@ otherwise)
 2. User system shows a confirmation message.
 3. Logged-in owner confirms.
 4. User system shows a success message.
-   
-    Use case ends.
+
+   Use case ends.
 
 **Extensions**
 
@@ -609,10 +610,12 @@ otherwise)
 ---
 
 #### **Use Case: UC07 - Update Details**
+
 **System:** User System (US)
 **Actor:** Logged-in owner
 **Preconditions:** Owner is logged in
 **Guarantees:**
+
 * Old details will be changed to the new details keyed in only if the command is executed successfully
 
 **MSS:**
@@ -726,7 +729,7 @@ otherwise)
 
 **Guarantees**
 
-* List of customers  with the specified keyword will be shown only if the command is executed successfully.
+* List of customers with the specified keyword will be shown only if the command is executed successfully.
 
 **MSS:**
 
@@ -745,7 +748,7 @@ otherwise)
 
 * 1b. No customer with specified keyword is found.
 
-    * 1b1. CMS displays a message where no customers with the specified keyword is    found.
+    * 1b1. CMS displays a message where no customers with the specified keyword is found.
 
       Use Case ends.
 
@@ -765,30 +768,33 @@ otherwise)
 
 **Preconditions:** Owner is logged in.
 
-**Guarantees:** 
+**Guarantees:**
+
 * Selected customer’s details are updated only if the command is executed successfully.
 
 **MSS:**
+
 1. Logged-in Owner types command to update a customer’s details with at least one field specified.
 2. CMS shows success message.
 
-    Use Case Ends.
+   Use Case Ends.
 
 **Extensions:**
+
 * 1a. Logged-in Owner does not specify at least one updated field(s).
-  * 1a1. CMS displays an error to Logged-in Owner to specify at least one field to update.
-    
-    Use Case Ends.
+    * 1a1. CMS displays an error to Logged-in Owner to specify at least one field to update.
+
+      Use Case Ends.
 
 * 1b. Logged-in Owner specifies invalid customer.
-  * 1b1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
-  
-    Use Case Ends.
+    * 1b1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
+
+      Use Case Ends.
 
 * 1c. Logged-in Owner does not specify customer.
-  * 1c1. CMS displays an error to Logged-in Owner to specify a customer to update.
-    
-    Use Case Ends.
+    * 1c1. CMS displays an error to Logged-in Owner to specify a customer to update.
+
+      Use Case Ends.
 
 ---
 
@@ -801,28 +807,32 @@ otherwise)
 **Preconditions:** Owner is logged in.
 
 **Guarantees:**
+
 * Selected customer is deleted only if the command is executed successfully.
 
 **MSS:**
+
 1. Logged-in Owner types command to delete a customer.
 2. CMS shows success message.
 
-    Use Case Ends.
+   Use Case Ends.
 
 **Extensions:**
-* 1a. Logged-in Owner specifies invalid customer.
-  * 1a1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
 
-    Use Case Ends.
+* 1a. Logged-in Owner specifies invalid customer.
+    * 1a1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
+
+      Use Case Ends.
 
 * 1b. Logged-in Owner does not specify customer.
-  * 1b1. CMS displays an error to Logged-in Owner to specify a customer to update.
+    * 1b1. CMS displays an error to Logged-in Owner to specify a customer to update.
 
-    Use Case Ends.
+      Use Case Ends.
 
 ---
 
 #### **Use case:** UC14 - List Customers
+
 **System:** Customer Management System (CMS)
 
 **Actor:** Logged-in owner.
@@ -830,15 +840,18 @@ otherwise)
 **Preconditions:** Owner is logged in.
 
 **Guarantees:**
+
 * All Customers are listed only if the command is executed successfully.
 
 **MSS:**
+
 1. Logged-in Owner types command to list all customers.
 2. CMS shows list of all customers sorted by ascending alphanumeric order.
 
-    Use Case Ends.
+   Use Case Ends.
 
 **Extensions:**
+
 * 1a. Logged -in Owner specifies optional sort field.
     * 1a1. CMS shows list of all customers sorted by the specified sort order.
 
@@ -852,6 +865,7 @@ otherwise)
 ---
 
 #### **Use case:** UC15 - Delivery Creation
+
 **System:** Delivery Management System (DMS)
 
 **Actor:** Logged-in owner.
@@ -859,29 +873,32 @@ otherwise)
 **Preconditions:** Owner is logged in.
 
 **Guarantees:**
+
 * A new delivery is created only if the command is executed successfully.
 
 **MSS:**
+
 1. Logged-in Owner types command to create a delivery.
 2. DMS shows success message.
 
-    Use Case Ends.
+   Use Case Ends.
 
 **Extensions:**
+
 * 1a. Command has missing fields.
-  * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
-  
-    Use Case Ends.
+    * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+
+      Use Case Ends.
 
 * 1b. Command has invalid date.
-  * 1b1. DMS displays an error to Logged-in Owner that an invalid date was given.
-  
-    Use Case Ends.
+    * 1b1. DMS displays an error to Logged-in Owner that an invalid date was given.
+
+      Use Case Ends.
 
 * 1c. Command has invalid date format.
-  * 1c1. DMS displays an error to Logged-in Owner to specify the date in a valid format.
-  
-    Use Case Ends.
+    * 1c1. DMS displays an error to Logged-in Owner to specify the date in a valid format.
+
+      Use Case Ends.
 
 ---
 
@@ -894,15 +911,18 @@ otherwise)
 **Preconditions:** Owner is logged in.
 
 **Guarantees:**
+
 * A new note is added to a delivery only if the command is executed successfully.
 
 **MSS:**
+
 1. Logged-in Owner types command to create a note for a delivery.
 2. DMS shows success message.
 
-    Use Case Ends.
+   Use Case Ends.
 
 **Extensions:**
+
 * 1a. Command has missing fields.
     * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
@@ -912,59 +932,65 @@ otherwise)
 
 #### **Use case:** UC17 - Delivery List
 
-**System:** Delivery Management System (DMS) 
+**System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
 
 **Preconditions:** Owner is logged in.
 
 **Guarantees:**
+
 * A list of deliveries is displayed only if the command is executed successfully.
 
 **MSS:**
+
 1. Logged-in Owner types command to view a list of deliveries.
 2. DMS displays a list of all deliveries sorted by delivery date.
 
-    Use Case Ends.
+   Use Case Ends.
 
 **Extensions:**
+
 * 1a. User specifies status field in command.
-  * 1a1. DMS display a list of deliveries filtered by the specified status.
-  
-    Use Case Ends.
+    * 1a1. DMS display a list of deliveries filtered by the specified status.
+
+      Use Case Ends.
 
 * 1b. User specifies sort field in command.
-  * 1b1. DMS displays a list of all deliveries sorted by the specified sort order.
-  
-    Use Case Ends.
+    * 1b1. DMS displays a list of all deliveries sorted by the specified sort order.
+
+      Use Case Ends.
 
 * 1c. User Specifies both status and sort fields.
-  * 1c1. DMS displays a list of deliveries filtered by the specified status and sorted by the specified sort order.
-    
-    Use Case Ends.
+    * 1c1. DMS displays a list of deliveries filtered by the specified status and sorted by the specified sort order.
+
+      Use Case Ends.
 
 ---
 
 #### **Use case:** UC18 - Delivery List for the Day
 
-**System:** Delivery Management System (DMS) 
+**System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
 
 **Preconditions:** Owner is logged in.
 
 **Guarantees:**
+
 * A list of deliveries for the day is displayed only if the command is executed successfully.
 
 **MSS:**
+
 1. Logged-in Owner types command to view a list of deliveries for the day.
 2. DMS displays a list of deliveries for the day.
 
-    Use Case Ends.
+   Use Case Ends.
 
 **Extensions:**
-* 1a. Command has missing fields.
-  * 1a1. DMS displays an error to Logged-in Owner.
 
-    Use Case Ends.
+* 1a. Command has missing fields.
+    * 1a1. DMS displays an error to Logged-in Owner.
+
+      Use Case Ends.
 
 ---
 
@@ -976,24 +1002,27 @@ otherwise)
 **Preconditions:** Owner is logged in.
 
 **Guarantees:**
+
 * A customer is added to a delivery only if the command is executed successfully.
 
 **MSS:**
+
 1. Logged-in Owner types command to add a customer to a delivery.
 2. DMS shows success message.
 
-    Use Case Ends.
+   Use Case Ends.
 
 **Extensions:**
-* 1a. Command has missing fields.
-  * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
-    Use Case Ends.
+* 1a. Command has missing fields.
+    * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+
+      Use Case Ends.
 
 * 1b. Command has invalid customer details.
-  * 1b1. DMS displays an error to Logged-in Owner that the specified customer details is invalid.
+    * 1b1. DMS displays an error to Logged-in Owner that the specified customer details is invalid.
 
-    Use Case Ends.
+      Use Case Ends.
 
 ---
 
@@ -1005,24 +1034,27 @@ otherwise)
 **Preconditions:** Owner is logged in.
 
 **Guarantees:**
+
 * A customer is removed from a delivery only if the command is executed successfully.
 
 **MSS:**
+
 1. Logged-in Owner types command to remove a customer from a delivery.
 2. DMS shows success message.
 
-    Use Case Ends.
+   Use Case Ends.
 
 **Extensions:**
-* 1a. Command has missing fields.
-  * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
-    Use Case Ends.
+* 1a. Command has missing fields.
+    * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+
+      Use Case Ends.
 
 * 1b. Command has invalid customer details.
-  * 1b1. DMS displays an error to Logged-in Owner that the specified customer cannot be found.
-  
-    Use Case Ends.
+    * 1b1. DMS displays an error to Logged-in Owner that the specified customer cannot be found.
+
+      Use Case Ends.
 
 ---
 
@@ -1034,24 +1066,27 @@ otherwise)
 **Preconditions:** Owner is logged in.
 
 **Guarantees:**
+
 * A delivery method is specified only if the command is executed successfully.
 
 **MSS:**
+
 1. Logged-in Owner types command to specify a delivery method.
 2. DMS shows success message.
 
-    Use Case Ends.
+   Use Case Ends.
 
 **Extensions:**
-* 1a. Command has missing fields.
-  * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
-    Use Case Ends.
+* 1a. Command has missing fields.
+    * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+
+      Use Case Ends.
 
 * 1b. Command has invalid delivery options.
-  * 1b1. DMS displays an error to Logged-in Owner that the specified delivery method is invalid.
+    * 1b1. DMS displays an error to Logged-in Owner that the specified delivery method is invalid.
 
-    Use Case Ends.
+      Use Case Ends.
 
 ---
 
@@ -1063,19 +1098,22 @@ otherwise)
 **Preconditions:** Owner is logged in.
 
 **Guarantees:**
+
 * A delivery is searched for only if the command is executed successfully.
 
 **MSS:**
+
 1. Logged-in Owner types command and keywords to search for a delivery.
 2. DMS displays a list of deliveries that match the keywords in the search query.
 
-    Use Case Ends.
+   Use Case Ends.
 
 **Extensions:**
-* 1a. Command has missing fields.
-  * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
-    Use Case Ends.
+* 1a. Command has missing fields.
+    * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+
+      Use Case Ends.
 
 ---
 
@@ -1262,17 +1300,17 @@ otherwise)
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 
-   1. 1000 customers without a noticeable sluggishness in performance for typical usage.
-   2. 1000 deliveries without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to
+    1. 1000 customers without a noticeable sluggishness in performance for typical usage.
+    2. 1000 deliveries without a noticeable sluggishness in performance for typical usage.
 3. The system should be easily picked up by a novice with no experience with delivery management software.
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
 5. Data stored should be persistent until removal by user, and Private Contact Details should be secure.
 6. The project is expected to adhere to a schedule which delivers a feature set every milestone up to _V1.3_
-7. The application is not expected to 
-   1. Perform Inventory Management
-   2. Perform Route Planning
+7. The application is not expected to
+    1. Perform Inventory Management
+    2. Perform Route Planning
 
 *{More to be added}*
 
@@ -1281,7 +1319,7 @@ otherwise)
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private Contact Detail**: A contact detail that is not meant to be shared with others
 * **CLI**: Command Line Interface
-* **Owner**: The person who owns the home-based business and who uses the app
+* **Owner**: The customer who owns the home-based business and who uses the app
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1314,18 +1352,18 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a customer
 
-1. Deleting a person while all persons are being shown
+1. Deleting a customer while all customers are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all customers using the `list` command. Multiple customers in the list.
 
     1. Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
        Timestamp in the status bar is updated.
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
