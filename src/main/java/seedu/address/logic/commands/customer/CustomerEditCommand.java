@@ -91,12 +91,10 @@ public class CustomerEditCommand extends CustomerCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         } else if (!customerToEdit.isSamePerson(editedCustomer) && model.hasPerson(editedCustomer)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        } else if (found && customerToEdit != null) {
+        } else {
             model.setPerson(customerToEdit, editedCustomer);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedCustomer)));
-        } else {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
     }
