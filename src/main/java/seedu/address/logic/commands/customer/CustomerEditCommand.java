@@ -87,16 +87,14 @@ public class CustomerEditCommand extends CustomerCommand {
         }
         boolean isNull = customerToEdit == null || editedCustomer == null || !found;
 
-        if (!customerToEdit.isSamePerson(editedCustomer) && model.hasPerson(editedCustomer)) {
+        if (isNull) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        } else if (!customerToEdit.isSamePerson(editedCustomer) && model.hasPerson(editedCustomer)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        if (found && customerToEdit != null) {
+        } else if (found && customerToEdit != null) {
             model.setPerson(customerToEdit, editedCustomer);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedCustomer)));
-        } else if (isNull) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
