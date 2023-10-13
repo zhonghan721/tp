@@ -92,9 +92,13 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Customer customerInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Customer editedCustomer = new PersonBuilder(customerInFilteredList).withName(VALID_NAME_BOB).build();
+
+        Customer editedCustomer = new PersonBuilder(customerInFilteredList)
+                .withCustomerId(customerInFilteredList.getCustomerId()).withName(VALID_NAME_BOB).build();
         CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_FIRST_PERSON,
-            new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditPersonDescriptorBuilder().withCustomerId(customerInFilteredList.getCustomerId())
+                        .withName(VALID_NAME_BOB).build());
+
 
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
             Messages.format(editedCustomer));

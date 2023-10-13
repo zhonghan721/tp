@@ -53,18 +53,18 @@ public class CustomerEditCommand extends CustomerCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    private final Index index;
+    private final Index targetIndex;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
      * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public CustomerEditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
+    public CustomerEditCommand(Index targetIndex, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(targetIndex);
         requireNonNull(editPersonDescriptor);
 
-        this.index = index;
+        this.targetIndex = targetIndex;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
@@ -73,20 +73,33 @@ public class CustomerEditCommand extends CustomerCommand {
         requireNonNull(model);
         List<Customer> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() > lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Customer customerToEdit = lastShownList.get(index.getZeroBased());
+        boolean found = false;
+        Customer customerToEdit = null;
+        for (Customer customer : lastShownList) {
+            if (customer.getCustomerId() == targetIndex.getOneBased()) {
+                found = true;
+                customerToEdit = customer;
+                break;
+            }
+        }
         Customer editedCustomer = createEditedPerson(customerToEdit, editPersonDescriptor);
 
         if (!customerToEdit.isSamePerson(editedCustomer) && model.hasPerson(editedCustomer)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(customerToEdit, editedCustomer);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedCustomer)));
+        if (found && customerToEdit != null) {
+            model.setPerson(customerToEdit, editedCustomer);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedCustomer)));
+        } else {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
     }
 
     /**
@@ -102,7 +115,8 @@ public class CustomerEditCommand extends CustomerCommand {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(customerToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(customerToEdit.getTags());
 
-        return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Customer(customerToEdit.getCustomerId(), updatedName, updatedPhone,
+                updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -117,14 +131,14 @@ public class CustomerEditCommand extends CustomerCommand {
         }
 
         CustomerEditCommand otherEditCommand = (CustomerEditCommand) other;
-        return index.equals(otherEditCommand.index)
+        return targetIndex.equals(otherEditCommand.targetIndex)
             && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("index", index)
+            .add("index", targetIndex)
             .add("editPersonDescriptor", editPersonDescriptor)
             .toString();
     }
@@ -134,6 +148,7 @@ public class CustomerEditCommand extends CustomerCommand {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
+        private int customerId;
         private Name name;
         private Phone phone;
         private Email email;
@@ -148,6 +163,7 @@ public class CustomerEditCommand extends CustomerCommand {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            setCustomerId(toCopy.customerId);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -160,6 +176,10 @@ public class CustomerEditCommand extends CustomerCommand {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+        }
+
+        public void setCustomerId(int customerId) {
+            this.customerId = customerId;
         }
 
         public void setName(Name name) {
