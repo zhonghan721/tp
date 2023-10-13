@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -21,6 +20,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.customer.AddCommand;
 import seedu.address.logic.commands.customer.CustomerListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Customer;
@@ -35,7 +35,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Customer customer = new PersonBuilder().build();
+        Customer customer = new PersonBuilder().withCustomerId(Customer.getCustomerCount()).build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(customer));
         assertEquals(new AddCommand(customer), command);
     }

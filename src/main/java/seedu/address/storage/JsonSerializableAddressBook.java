@@ -47,12 +47,15 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+        int maxCustomerId = 0;
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Customer customer = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(customer)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(customer);
+            maxCustomerId = Math.max(maxCustomerId, customer.getCustomerId());
+            Customer.setCustomerCount(maxCustomerId);
         }
         return addressBook;
     }
