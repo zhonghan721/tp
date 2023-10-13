@@ -73,20 +73,19 @@ public class CustomerEditCommand extends CustomerCommand {
         requireNonNull(model);
         List<Customer> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() > lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
         boolean found = false;
         Customer customerToEdit = null;
+        Customer editedCustomer = null;
+
         for (Customer customer : lastShownList) {
             if (customer.getCustomerId() == targetIndex.getOneBased()) {
                 found = true;
                 customerToEdit = customer;
+                editedCustomer = createEditedPerson(customerToEdit, editPersonDescriptor);
                 break;
             }
         }
-        Customer editedCustomer = createEditedPerson(customerToEdit, editPersonDescriptor);
+        boolean isNull = customerToEdit == null || editedCustomer == null || !found;
 
         if (!customerToEdit.isSamePerson(editedCustomer) && model.hasPerson(editedCustomer)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -96,6 +95,8 @@ public class CustomerEditCommand extends CustomerCommand {
             model.setPerson(customerToEdit, editedCustomer);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedCustomer)));
+        } else if (isNull) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
