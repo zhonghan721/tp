@@ -101,7 +101,8 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(customerToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(customerToEdit.getTags());
 
-        return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Customer(customerToEdit.getCustomerId(), updatedName, updatedPhone,
+                updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -133,6 +134,7 @@ public class EditCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
+        private int customerId;
         private Name name;
         private Phone phone;
         private Email email;
@@ -147,6 +149,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            setCustomerId(toCopy.customerId);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -159,6 +162,10 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+        }
+
+        public void setCustomerId(int customerId) {
+            this.customerId = customerId;
         }
 
         public void setName(Name name) {

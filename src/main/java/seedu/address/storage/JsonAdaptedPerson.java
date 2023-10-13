@@ -22,8 +22,9 @@ import seedu.address.model.tag.Tag;
  */
 class JsonAdaptedPerson {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Customer's %s field is missing!";
 
+    private final String customerId;
     private final String name;
     private final String phone;
     private final String email;
@@ -34,9 +35,11 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+    public JsonAdaptedPerson(@JsonProperty("customerId") String customerId, @JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+                             @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+        this.customerId = customerId;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -50,6 +53,7 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Customer source) {
+        customerId = String.valueOf(source.getCustomerId());
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -103,7 +107,22 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Customer(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        // For customers without customerId
+        if (customerId == null) {
+            return new Customer(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        }
+
+        final int modelCustomerId;
+
+        try {
+            modelCustomerId = Integer.parseInt(customerId);
+        } catch (NumberFormatException e) {
+            throw new IllegalValueException("Customer ID should only contain numbers, "
+                    + "and it should be at most 3 digits long");
+        }
+
+        return new Customer(modelCustomerId, modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
 }

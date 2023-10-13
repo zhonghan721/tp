@@ -32,11 +32,20 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder(Customer customer) {
         descriptor = new EditPersonDescriptor();
+        descriptor.setCustomerId(customer.getCustomerId());
         descriptor.setName(customer.getName());
         descriptor.setPhone(customer.getPhone());
         descriptor.setEmail(customer.getEmail());
         descriptor.setAddress(customer.getAddress());
         descriptor.setTags(customer.getTags());
+    }
+
+    /**
+     * Sets the customerId of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withCustomerId(int customerId) {
+        descriptor.setCustomerId(customerId);
+        return this;
     }
 
     /**

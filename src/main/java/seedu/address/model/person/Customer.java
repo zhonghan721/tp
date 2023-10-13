@@ -11,13 +11,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Customer in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Customer {
 
     // Customer ID Generation
-    private static int customerCount;
+    private static int customerCount = 1;
 
     // Identity fields
     private final int customerId;
@@ -27,6 +27,8 @@ public class Customer {
 
     // Data fields
     private final Address address;
+
+    @Deprecated
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -35,6 +37,27 @@ public class Customer {
     public Customer(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.customerId = customerCount++;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Creates a customer with a given customerId.
+     * To be used only when creating customer from storage file.
+     *
+     * @param customerId Customer id of the customer.
+     * @param name Name of the customer.
+     * @param phone Phone number of the customer.
+     * @param email Email of the customer.
+     * @param address Address of the customer.
+     * @param tags Tags associated with the customer.
+     */
+    public Customer(int customerId, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.customerId = customerId;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -70,6 +93,20 @@ public class Customer {
         return Collections.unmodifiableSet(tags);
     }
 
+    public static void setCustomerCount(int count) {
+        Customer.customerCount = count + 1;
+    }
+
+    /**
+     * Returns current customerCount.
+     * Used by {@code PersonBuilder} to create customer with expected customerId.
+     *
+     * @return customerCount
+     */
+    public static int getCustomerCount() {
+        return Customer.customerCount;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -99,7 +136,8 @@ public class Customer {
         }
 
         Customer otherCustomer = (Customer) other;
-        return name.equals(otherCustomer.name)
+        return customerId == otherCustomer.customerId
+            && name.equals(otherCustomer.name)
             && phone.equals(otherCustomer.phone)
             && email.equals(otherCustomer.email)
             && address.equals(otherCustomer.address)
@@ -109,12 +147,13 @@ public class Customer {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(customerId, name, phone, email, address, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+            .add("customerId", customerId)
             .add("name", name)
             .add("phone", phone)
             .add("email", email)
