@@ -1,6 +1,5 @@
 package seedu.address.model.delivery;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -15,11 +14,13 @@ public class Delivery {
 
     // Identity fields
     private final int deliveryId;
-    private final String name;
+    private final DeliveryName name;
     private final Customer customer;
-    private LocalDate orderedAt;
-    private LocalDate deliveredAt;
+    private OrderDate orderedAt;
+    private DeliveryDate deliveryDate;
     private DeliveryStatus status;
+
+    private Note note;
 
     /**
      * Constructor for Delivery.
@@ -28,47 +29,56 @@ public class Delivery {
      * @param name     The name of the delivery.
      * @param customer The customer who ordered the delivery.
      */
-    public Delivery(String name, Customer customer) {
+    public Delivery(DeliveryName name, Customer customer) {
         this.deliveryId = Delivery.deliveryCount++;
         this.name = name;
         this.customer = customer;
-        this.status = DeliveryStatus.PENDING;
+        this.status = DeliveryStatus.CREATED;
     }
 
     /**
      * Constructor for Delivery.
      *
-     * @param deliveryId  The ID of the delivery.
-     * @param name        The name of the delivery.
-     * @param customer    The customer who ordered the delivery.
-     * @param orderedAt   The date the delivery was ordered.
-     * @param deliveredAt The date the delivery was delivered.
-     * @param status      The status of the delivery.
+     * @param deliveryId   The ID of the delivery.
+     * @param name         The name of the delivery.
+     * @param customer     The customer who ordered the delivery.
+     * @param orderedAt    The date the delivery was ordered.
+     * @param deliveryDate The date the delivery was delivered.
+     * @param status       The status of the delivery.
      */
-    public Delivery(int deliveryId, String name, Customer customer, LocalDate orderedAt, LocalDate deliveredAt,
+    public Delivery(int deliveryId, DeliveryName name, Customer customer, OrderDate orderedAt,
+                    DeliveryDate deliveryDate,
                     DeliveryStatus status) {
         Delivery.deliveryCount = Math.max(deliveryCount, deliveryId + 1);
         this.deliveryId = deliveryId;
         this.name = name;
         this.customer = customer;
         this.orderedAt = orderedAt;
-        this.deliveredAt = deliveredAt;
+        this.deliveryDate = deliveryDate;
         this.status = status;
     }
 
-    public void setOrderedAt(LocalDate orderedAt) {
+    public void setOrderedAt(OrderDate orderedAt) {
         this.orderedAt = orderedAt;
     }
 
-    public void setDeliveredAt(LocalDate deliveredAt) {
-        this.deliveredAt = deliveredAt;
+    public void setDeliveryDate(DeliveryDate deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
+    public void setStatus(DeliveryStatus status) {
+        this.status = status;
+    }
+
+    public void setNote(Note note) {
+        this.note = note;
     }
 
     public int getDeliveryId() {
         return deliveryId;
     }
 
-    public String getName() {
+    public DeliveryName getName() {
         return name;
     }
 
@@ -76,16 +86,20 @@ public class Delivery {
         return customer;
     }
 
-    public LocalDate getOrderedAt() {
+    public OrderDate getOrderedAt() {
         return orderedAt;
     }
 
-    public LocalDate getDeliveredAt() {
-        return deliveredAt;
+    public DeliveryDate getDeliveryDate() {
+        return deliveryDate;
     }
 
     public DeliveryStatus getStatus() {
         return status;
+    }
+
+    public Note getNote() {
+        return note;
     }
 
     /**
@@ -104,7 +118,7 @@ public class Delivery {
             && otherDelivery.getName().equals(getName())
             && otherDelivery.getCustomer().equals(getCustomer())
             && otherDelivery.getOrderedAt().equals(getOrderedAt())
-            && otherDelivery.getDeliveredAt().equals(getDeliveredAt())
+            && otherDelivery.getDeliveryDate().equals(getDeliveryDate())
             && otherDelivery.getStatus().equals(getStatus());
     }
 
@@ -131,13 +145,13 @@ public class Delivery {
             && otherDelivery.getName().equals(getName())
             && otherDelivery.getCustomer().equals(getCustomer())
             && otherDelivery.getOrderedAt().equals(getOrderedAt())
-            && otherDelivery.getDeliveredAt().equals(getDeliveredAt())
+            && otherDelivery.getDeliveryDate().equals(getDeliveryDate())
             && otherDelivery.getStatus().equals(getStatus());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deliveryId, name, customer, orderedAt, deliveredAt);
+        return Objects.hash(deliveryId, name, customer, orderedAt, deliveryDate);
     }
 
     @Override
@@ -146,7 +160,7 @@ public class Delivery {
             .add("name", name)
             .add("customer", customer)
             .add("orderedAt", orderedAt)
-            .add("deliveredAt", deliveredAt)
+            .add("deliveredAt", deliveryDate)
             .toString();
     }
 }

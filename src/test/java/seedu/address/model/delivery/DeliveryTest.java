@@ -21,11 +21,11 @@ public class DeliveryTest {
         assertFalse(GABRIELS_MILK.isSameDelivery(null));
 
         // same id, other attributes different -> returns false
-        Delivery editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withName("Gabriel's Milk Updated").build();
+        Delivery editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withName("Gabriel Milk Updated").build();
         assertFalse(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
 
         // same id, different status -> returns false
-        editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withStatus(DeliveryStatus.DELIVERED).build();
+        editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withStatus(DeliveryStatus.COMPLETED).build();
         assertFalse(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
 
         // same id, different customer -> returns false
@@ -54,11 +54,11 @@ public class DeliveryTest {
         assertFalse(GABRIELS_MILK.equals(GAMBES_RICE));
 
         // different name -> returns false
-        Delivery editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withName("Gabriel's Milk Updated").build();
+        Delivery editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withName("Gabriel Milk Updated").build();
         assertFalse(GABRIELS_MILK.equals(editedGabrielsMilk));
 
         // different status -> returns false
-        editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withStatus(DeliveryStatus.DELIVERED).build();
+        editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withStatus(DeliveryStatus.COMPLETED).build();
         assertFalse(GABRIELS_MILK.equals(editedGabrielsMilk));
 
         // different customer -> returns false
@@ -70,8 +70,8 @@ public class DeliveryTest {
         assertFalse(GABRIELS_MILK.equals(editedGabrielsMilk));
 
         // same id, different attributes -> returns false
-        editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withName("Gabriel's Milk Updated")
-            .withStatus(DeliveryStatus.DELIVERED).withCustomer(TypicalPersons.BOB).build();
+        editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withName("Gabriel Milk Updated")
+            .withStatus(DeliveryStatus.COMPLETED).withCustomer(TypicalPersons.BOB).build();
         assertFalse(GABRIELS_MILK.equals(editedGabrielsMilk));
 
 

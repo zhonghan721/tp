@@ -1,9 +1,11 @@
 package seedu.address.testutil;
 
-import java.time.LocalDate;
-
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryDate;
+import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.delivery.DeliveryStatus;
+import seedu.address.model.delivery.Note;
+import seedu.address.model.delivery.OrderDate;
 import seedu.address.model.person.Customer;
 
 /**
@@ -11,20 +13,22 @@ import seedu.address.model.person.Customer;
  */
 public class DeliveryBuilder {
     public static final int DEFAULT_ID = 1;
-    public static final String DEFAULT_NAME = "Gabriel's Milk";
+    public static final DeliveryName DEFAULT_NAME = new DeliveryName("Gabriels");
     public static final Customer DEFAULT_CUSTOMER = new PersonBuilder().withName("Gabriel Seethor")
         .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
         .withPhone("94351253")
         .withTags("friends").build();
-    public static final LocalDate DEFAULT_ORDERED_AT = LocalDate.now();
-    public static final LocalDate DEFAULT_DELIVERED_AT = LocalDate.of(2023, 12, 12);
-    public static final DeliveryStatus DEFAULT_STATUS = DeliveryStatus.PENDING;
+    public static final OrderDate DEFAULT_ORDERED_AT = new OrderDate("2021-12-12");
+    public static final DeliveryDate DEFAULT_DELIVERED_AT = new DeliveryDate("2021-12-12");
+    public static final DeliveryStatus DEFAULT_STATUS = DeliveryStatus.CREATED;
+
+    public static final Note DEFAULT_NOTE = new Note("This is a note.");
 
     private int deliveryId;
-    private String name;
+    private DeliveryName name;
     private Customer customer;
-    private LocalDate orderedAt;
-    private LocalDate deliveredAt;
+    private OrderDate orderedAt;
+    private DeliveryDate deliveredAt;
     private DeliveryStatus status;
 
 
@@ -50,7 +54,7 @@ public class DeliveryBuilder {
         this.name = delivery.getName();
         this.customer = delivery.getCustomer();
         this.orderedAt = delivery.getOrderedAt();
-        this.deliveredAt = delivery.getDeliveredAt();
+        this.deliveredAt = delivery.getDeliveryDate();
         this.status = delivery.getStatus();
     }
 
@@ -72,7 +76,7 @@ public class DeliveryBuilder {
      * @return The DeliveryBuilder with the name set.
      */
     public DeliveryBuilder withName(String name) {
-        this.name = name;
+        this.name = new DeliveryName(name);
         return this;
     }
 
@@ -90,22 +94,22 @@ public class DeliveryBuilder {
     /**
      * Sets the {@code orderedAt} of the {@code Delivery} that we are building.
      *
-     * @param orderedAt The orderedAt to set.
+     * @param orderDate The orderedAt to set.
      * @return The DeliveryBuilder with the orderedAt set.
      */
-    public DeliveryBuilder withOrderedAt(LocalDate orderedAt) {
-        this.orderedAt = orderedAt;
+    public DeliveryBuilder withOrderDate(String orderDate) {
+        this.orderedAt = new OrderDate(orderDate);
         return this;
     }
 
     /**
      * Sets the {@code deliveredAt} of the {@code Delivery} that we are building.
      *
-     * @param deliveredAt The deliveredAt to set.
+     * @param deliveryDate The deliveredAt to set.
      * @return The DeliveryBuilder with the deliveredAt set.
      */
-    public DeliveryBuilder withDeliveredAt(LocalDate deliveredAt) {
-        this.deliveredAt = deliveredAt;
+    public DeliveryBuilder withDeliveryDate(String deliveryDate) {
+        this.deliveredAt = new DeliveryDate(deliveryDate);
         return this;
     }
 
