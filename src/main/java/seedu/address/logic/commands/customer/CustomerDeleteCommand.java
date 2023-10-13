@@ -37,13 +37,23 @@ public class CustomerDeleteCommand extends CustomerCommand {
         requireNonNull(model);
         List<Customer> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        // Instead of the above, loop through the list, and check if the customer ID matches
+        boolean found = false;
+        Customer customerToDelete = null;
+        for (Customer customer : lastShownList) {
+            if (customer.getCustomerId() == targetIndex.getOneBased()) {
+                found = true;
+                customerToDelete = customer;
+                break;
+            }
         }
 
-        Customer customerToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(customerToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(customerToDelete)));
+        if (found && customerToDelete != null) {
+            model.deletePerson(customerToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(customerToDelete)));
+        } else {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
     }
 
     @Override
