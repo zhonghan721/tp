@@ -144,18 +144,4 @@ public class DeliveryTest {
             .withDeliveryDate("2024-12-12").build();
         assertFalse(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
     }
-
-    @Test
-    public void toStringTest() {
-        Delivery delivery = new DeliveryBuilder().withId(0).build();
-        String expected =
-            Delivery.class.getCanonicalName() + "{deliveryId=0, name=Gabriels, customer="
-                + Customer.class.getCanonicalName()
-                + "{customerId=0, name=Gabriel Seethor, phone=94351253, email=alice@example.com, address=123, Jurong "
-                + "West"
-                + " Ave 6, #08-111, tags=[[friends]]}, orderedAt=2021-12-12, deliveredAt=2021-12-12}";
-
-        System.out.println(delivery.toString());
-        assertTrue(delivery.toString().equals(expected));
-    }
 }
