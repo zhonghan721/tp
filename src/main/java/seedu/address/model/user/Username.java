@@ -3,6 +3,9 @@ package seedu.address.model.user;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a User's username in the address book.
+ */
 public class Username {
 
     public static final String MESSAGE_CONSTRAINTS =

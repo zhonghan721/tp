@@ -1,12 +1,15 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_AARON;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_FOODBEAR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_AARON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_FOODBEAR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_AARON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_FOODBEAR;
 
 import seedu.address.model.user.User;
 
+/**
+ * A utility class containing a list of {@code User} objects to be used in tests.
+ */
 public class TypicalUsers {
 
     public static final User ANDY = new UserBuilder().withUsername("andy").withPassword("abcd1234").build();

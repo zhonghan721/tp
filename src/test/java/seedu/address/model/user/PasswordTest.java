@@ -1,10 +1,10 @@
 package seedu.address.model.user;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class PasswordTest {
 
@@ -42,21 +42,21 @@ public class PasswordTest {
 
     @Test
     public void equals() {
-        Password Password = new Password("ValidPa55word");
+        Password password = new Password("ValidPa55word");
 
         // same values -> returns true
-        assertTrue(Password.equals(new Password("ValidPa55word")));
+        assertTrue(password.equals(new Password("ValidPa55word")));
 
         // same object -> returns true
-        assertTrue(Password.equals(Password));
+        assertTrue(password.equals(password));
 
         // null -> returns false
-        assertFalse(Password.equals(null));
+        assertFalse(password.equals(null));
 
         // different types -> returns false
-        assertFalse(Password.equals(5.0f));
+        assertFalse(password.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(Password.equals(new Password("ValidPassword")));
+        assertFalse(password.equals(new Password("ValidPassword")));
     }
 }

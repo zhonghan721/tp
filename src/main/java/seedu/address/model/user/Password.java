@@ -3,8 +3,10 @@ package seedu.address.model.user;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a User's password in the address book.
+ */
 public class Password {
-
 
     public static final String MESSAGE_CONSTRAINTS =
             "Password should only contain alphanumeric characters, at least 8 characters, and it should not be blank";

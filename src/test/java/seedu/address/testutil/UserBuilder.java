@@ -4,6 +4,9 @@ import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
+/**
+ * A utility class to help with building User objects.
+ */
 public class UserBuilder {
     public static final String DEFAULT_USERNAME = "validUsername";
     public static final String DEFAULT_PASSWORD = "Pa55word";

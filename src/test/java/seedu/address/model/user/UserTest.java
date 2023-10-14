@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalUsers.AARON;
 import static seedu.address.testutil.TypicalUsers.FOODBEAR;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.testutil.UserBuilder;
 
 public class UserTest {
