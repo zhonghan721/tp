@@ -7,11 +7,69 @@ import static seedu.address.testutil.TypicalDeliveries.GAMBES_RICE;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.Customer;
 import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.TypicalPersons;
 
 
 public class DeliveryTest {
+
+    @Test
+    public void deliveryId_success() {
+        Delivery delivery = new DeliveryBuilder().autoBuild();
+        System.out.println(delivery);
+        Delivery delivery1 = new DeliveryBuilder().autoBuild();
+        System.out.println(delivery1);
+        assertTrue(delivery.getDeliveryId() != delivery1.getDeliveryId());
+    }
+
+    @Test
+    public void deliveryId_failure() {
+        Delivery delivery = new DeliveryBuilder().autoBuild();
+        System.out.println(delivery);
+        Delivery delivery1 = new DeliveryBuilder().autoBuild();
+        System.out.println(delivery1);
+        assertFalse(delivery.getDeliveryId() == delivery1.getDeliveryId());
+    }
+
+    @Test
+    public void setOrderDate() {
+        Delivery delivery = new DeliveryBuilder().autoBuild();
+        OrderDate orderDate = new OrderDate("2020-10-10");
+        delivery.setOrderDate(orderDate);
+        assertTrue(delivery.getOrderDate().equals(orderDate));
+    }
+
+    @Test
+    public void setDeliveryDate() {
+        Delivery delivery = new DeliveryBuilder().autoBuild();
+        DeliveryDate deliveryDate = new DeliveryDate("2020-10-10");
+        delivery.setDeliveryDate(deliveryDate);
+        assertTrue(delivery.getDeliveryDate().equals(deliveryDate));
+    }
+
+    @Test
+    public void setStatus() {
+        Delivery delivery = new DeliveryBuilder().autoBuild();
+        DeliveryStatus status = DeliveryStatus.SHIPPED;
+        delivery.setStatus(status);
+        assertTrue(delivery.getStatus().equals(status));
+        status = DeliveryStatus.COMPLETED;
+        delivery.setStatus(status);
+        assertTrue(delivery.getStatus().equals(status));
+        status = DeliveryStatus.CANCELLED;
+        delivery.setStatus(status);
+        assertTrue(delivery.getStatus().equals(status));
+    }
+
+    @Test
+    public void setNote() {
+        Delivery delivery = new DeliveryBuilder().autoBuild();
+        Note note = new Note("Hi!");
+        delivery.setNote(note);
+        assertTrue(delivery.getNote().equals(note));
+    }
+
     @Test
     public void isSameDelivery() {
         // same object -> returns true
@@ -35,6 +93,12 @@ public class DeliveryTest {
         // different id, all other attributes same -> returns false
         Delivery gambesRice = new DeliveryBuilder(GAMBES_RICE).build();
         assertFalse(GABRIELS_MILK.isSameDelivery(gambesRice));
+
+        // different id, all other attributes different -> returns false
+        editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withName("Gabriel Milk Updated")
+            .withStatus(DeliveryStatus.COMPLETED).withCustomer(TypicalPersons.BOB).withOrderDate("2019-12-12")
+            .withDeliveryDate("2024-12-12").build();
+        assertFalse(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
     }
 
     @Test
@@ -74,6 +138,24 @@ public class DeliveryTest {
             .withStatus(DeliveryStatus.COMPLETED).withCustomer(TypicalPersons.BOB).build();
         assertFalse(GABRIELS_MILK.equals(editedGabrielsMilk));
 
+        // different id, all other attributes different -> returns false
+        editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withName("Gabriel Milk Updated")
+            .withStatus(DeliveryStatus.COMPLETED).withCustomer(TypicalPersons.BOB).withOrderDate("2019-12-12")
+            .withDeliveryDate("2024-12-12").build();
+        assertFalse(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
+    }
 
+    @Test
+    public void toStringTest() {
+        Delivery delivery = new DeliveryBuilder().withId(0).build();
+        String expected =
+            Delivery.class.getCanonicalName() + "{deliveryId=0, name=Gabriels, customer="
+                + Customer.class.getCanonicalName()
+                + "{customerId=0, name=Gabriel Seethor, phone=94351253, email=alice@example.com, address=123, Jurong "
+                + "West"
+                + " Ave 6, #08-111, tags=[[friends]]}, orderedAt=2021-12-12, deliveredAt=2021-12-12}";
+
+        System.out.println(delivery.toString());
+        assertTrue(delivery.toString().equals(expected));
     }
 }

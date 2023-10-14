@@ -16,7 +16,7 @@ public class Delivery {
     private final int deliveryId;
     private final DeliveryName name;
     private final Customer customer;
-    private OrderDate orderedAt;
+    private OrderDate orderDate;
     private DeliveryDate deliveryDate;
     private DeliveryStatus status;
 
@@ -29,12 +29,17 @@ public class Delivery {
      * @param name     The name of the delivery.
      * @param customer The customer who ordered the delivery.
      */
-    public Delivery(DeliveryName name, Customer customer) {
+    public Delivery(DeliveryName name, Customer customer, OrderDate orderDate,
+                    DeliveryDate deliveryDate,
+                    DeliveryStatus status) {
         this.deliveryId = Delivery.deliveryCount++;
         this.name = name;
         this.customer = customer;
-        this.status = DeliveryStatus.CREATED;
+        this.orderDate = orderDate;
+        this.deliveryDate = deliveryDate;
+        this.status = status;
     }
+
 
     /**
      * Constructor for Delivery.
@@ -42,24 +47,24 @@ public class Delivery {
      * @param deliveryId   The ID of the delivery.
      * @param name         The name of the delivery.
      * @param customer     The customer who ordered the delivery.
-     * @param orderedAt    The date the delivery was ordered.
+     * @param orderDate    The date the delivery was ordered.
      * @param deliveryDate The date the delivery was delivered.
      * @param status       The status of the delivery.
      */
-    public Delivery(int deliveryId, DeliveryName name, Customer customer, OrderDate orderedAt,
+    public Delivery(int deliveryId, DeliveryName name, Customer customer, OrderDate orderDate,
                     DeliveryDate deliveryDate,
                     DeliveryStatus status) {
         Delivery.deliveryCount = Math.max(deliveryCount, deliveryId + 1);
         this.deliveryId = deliveryId;
         this.name = name;
         this.customer = customer;
-        this.orderedAt = orderedAt;
+        this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.status = status;
     }
 
-    public void setOrderedAt(OrderDate orderedAt) {
-        this.orderedAt = orderedAt;
+    public void setOrderDate(OrderDate orderDate) {
+        this.orderDate = orderDate;
     }
 
     public void setDeliveryDate(DeliveryDate deliveryDate) {
@@ -86,8 +91,8 @@ public class Delivery {
         return customer;
     }
 
-    public OrderDate getOrderedAt() {
-        return orderedAt;
+    public OrderDate getOrderDate() {
+        return orderDate;
     }
 
     public DeliveryDate getDeliveryDate() {
@@ -117,7 +122,7 @@ public class Delivery {
             && otherDelivery.getDeliveryId() == getDeliveryId()
             && otherDelivery.getName().equals(getName())
             && otherDelivery.getCustomer().equals(getCustomer())
-            && otherDelivery.getOrderedAt().equals(getOrderedAt())
+            && otherDelivery.getOrderDate().equals(getOrderDate())
             && otherDelivery.getDeliveryDate().equals(getDeliveryDate())
             && otherDelivery.getStatus().equals(getStatus());
     }
@@ -144,14 +149,14 @@ public class Delivery {
         return otherDelivery.getDeliveryId() == getDeliveryId()
             && otherDelivery.getName().equals(getName())
             && otherDelivery.getCustomer().equals(getCustomer())
-            && otherDelivery.getOrderedAt().equals(getOrderedAt())
+            && otherDelivery.getOrderDate().equals(getOrderDate())
             && otherDelivery.getDeliveryDate().equals(getDeliveryDate())
             && otherDelivery.getStatus().equals(getStatus());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deliveryId, name, customer, orderedAt, deliveryDate);
+        return Objects.hash(deliveryId, name, customer, orderDate, deliveryDate);
     }
 
     @Override
@@ -159,7 +164,7 @@ public class Delivery {
         return new ToStringBuilder(this).add("deliveryId", deliveryId)
             .add("name", name)
             .add("customer", customer)
-            .add("orderedAt", orderedAt)
+            .add("orderedAt", orderDate)
             .add("deliveredAt", deliveryDate)
             .toString();
     }

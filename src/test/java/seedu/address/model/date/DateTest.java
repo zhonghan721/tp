@@ -35,4 +35,30 @@ public class DateTest {
         assertTrue(Date.isValidDate("2023-12-12")); // correct date
         assertTrue(Date.isValidDate("2021-12-12")); // correct date
     }
+
+    @Test
+    public void equals() {
+        Date date = new Date("2023-12-12");
+        Date dateCopy = new Date("2023-12-12");
+        Date dateDiff = new Date("2021-12-12");
+        Date dateDiff2 = new Date("2023-12-13");
+
+        // same object -> returns true
+        assertTrue(date.equals(date));
+
+        // same values -> returns true
+        assertTrue(date.equals(dateCopy));
+
+        // different types -> returns false
+        assertFalse(date.equals(1));
+
+        // null -> returns false
+        assertFalse(date.equals(null));
+
+        // different date -> returns false
+        assertFalse(date.equals(dateDiff));
+
+        // different date -> returns false
+        assertFalse(date.equals(dateDiff2));
+    }
 }

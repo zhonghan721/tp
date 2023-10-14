@@ -53,7 +53,7 @@ public class DeliveryBuilder {
         this.deliveryId = delivery.getDeliveryId();
         this.name = delivery.getName();
         this.customer = delivery.getCustomer();
-        this.orderedAt = delivery.getOrderedAt();
+        this.orderedAt = delivery.getOrderDate();
         this.deliveredAt = delivery.getDeliveryDate();
         this.status = delivery.getStatus();
     }
@@ -131,5 +131,14 @@ public class DeliveryBuilder {
      */
     public Delivery build() {
         return new Delivery(deliveryId, name, customer, orderedAt, deliveredAt, status);
+    }
+
+    /**
+     * Builds the {@code Delivery} with the given parameters with id automatically generated.
+     *
+     * @return The Delivery with the given parameters.
+     */
+    public Delivery autoBuild() {
+        return new Delivery(name, customer, orderedAt, deliveredAt, status);
     }
 }
