@@ -7,7 +7,6 @@ import static seedu.address.testutil.TypicalDeliveries.GAMBES_RICE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Customer;
 import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.TypicalPersons;
 
