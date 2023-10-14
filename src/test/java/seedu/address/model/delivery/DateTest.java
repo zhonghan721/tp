@@ -1,4 +1,4 @@
-package seedu.address.model.date;
+package seedu.address.model.delivery;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

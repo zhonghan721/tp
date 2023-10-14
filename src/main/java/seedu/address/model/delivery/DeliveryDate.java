@@ -2,8 +2,6 @@ package seedu.address.model.delivery;
 
 import java.time.LocalDate;
 
-import seedu.address.model.date.Date;
-
 /**
  * Represents a Delivery's delivery date in the delivery list.
  */
