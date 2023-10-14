@@ -35,7 +35,7 @@ public class User {
     /**
      * Returns true if both persons have the same username.
      */
-    public boolean isSameUser(User otherUser) {
+    public boolean hasSameUsername(User otherUser) {
         if (otherUser == this) {
             return true;
         }
