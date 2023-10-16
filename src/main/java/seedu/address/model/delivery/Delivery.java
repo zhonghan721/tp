@@ -26,18 +26,24 @@ public class Delivery {
      * Constructor for Delivery.
      * Every field must be present and not null.
      *
-     * @param name     The name of the delivery.
-     * @param customer The customer who ordered the delivery.
+     * @param name         The name of the delivery.
+     * @param customer     The customer who ordered the delivery.
+     * @param orderDate    The date the delivery was ordered.
+     * @param deliveryDate The date the delivery was delivered.
+     * @param status       The status of the delivery.
+     * @param note         The note of the delivery
      */
     public Delivery(DeliveryName name, Customer customer, OrderDate orderDate,
                     DeliveryDate deliveryDate,
-                    DeliveryStatus status) {
+                    DeliveryStatus status,
+                    Note note) {
         this.deliveryId = Delivery.deliveryCount++;
         this.name = name;
         this.customer = customer;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.status = status;
+        this.note = note;
     }
 
 
@@ -61,6 +67,53 @@ public class Delivery {
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.status = status;
+    }
+
+    /**
+     * Constructor for Delivery.
+     * Every field must be present and not null.
+     *
+     * @param name         The name of the delivery.
+     * @param customer     The customer who ordered the delivery.
+     * @param orderDate    The date the delivery was ordered.
+     * @param deliveryDate The date the delivery was delivered.
+     * @param status       The status of the delivery.
+     */
+    public Delivery(DeliveryName name, Customer customer, OrderDate orderDate,
+                    DeliveryDate deliveryDate,
+                    DeliveryStatus status) {
+        this.deliveryId = Delivery.deliveryCount++;
+        this.name = name;
+        this.customer = customer;
+        this.orderDate = orderDate;
+        this.deliveryDate = deliveryDate;
+        this.status = status;
+    }
+
+
+    /**
+     * Constructor for Delivery.
+     *
+     * @param deliveryId   The ID of the delivery.
+     * @param name         The name of the delivery.
+     * @param customer     The customer who ordered the delivery.
+     * @param orderDate    The date the delivery was ordered.
+     * @param deliveryDate The date the delivery was delivered.
+     * @param status       The status of the delivery.
+     * @param note         The note of the delivery
+     */
+    public Delivery(int deliveryId, DeliveryName name, Customer customer, OrderDate orderDate,
+                    DeliveryDate deliveryDate,
+                    DeliveryStatus status,
+                    Note note) {
+        Delivery.deliveryCount = Math.max(deliveryCount, deliveryId + 1);
+        this.deliveryId = deliveryId;
+        this.name = name;
+        this.customer = customer;
+        this.orderDate = orderDate;
+        this.deliveryDate = deliveryDate;
+        this.status = status;
+        this.note = note;
     }
 
     public void setOrderDate(OrderDate orderDate) {
@@ -107,6 +160,10 @@ public class Delivery {
         return note;
     }
 
+    public static void setDeliveryCount(int deliveryCount) {
+        Delivery.deliveryCount = deliveryCount;
+    }
+
     /**
      * Returns true if both deliveries have the same identity and data fields.
      *
@@ -119,12 +176,7 @@ public class Delivery {
         }
 
         return otherDelivery != null
-            && otherDelivery.getDeliveryId() == getDeliveryId()
-            && otherDelivery.getName().equals(getName())
-            && otherDelivery.getCustomer().equals(getCustomer())
-            && otherDelivery.getOrderDate().equals(getOrderDate())
-            && otherDelivery.getDeliveryDate().equals(getDeliveryDate())
-            && otherDelivery.getStatus().equals(getStatus());
+            && otherDelivery.getDeliveryId() == getDeliveryId();
     }
 
     /**
@@ -146,12 +198,7 @@ public class Delivery {
 
         Delivery otherDelivery = (Delivery) other;
 
-        return otherDelivery.getDeliveryId() == getDeliveryId()
-            && otherDelivery.getName().equals(getName())
-            && otherDelivery.getCustomer().equals(getCustomer())
-            && otherDelivery.getOrderDate().equals(getOrderDate())
-            && otherDelivery.getDeliveryDate().equals(getDeliveryDate())
-            && otherDelivery.getStatus().equals(getStatus());
+        return otherDelivery.getDeliveryId() == getDeliveryId();
     }
 
     @Override

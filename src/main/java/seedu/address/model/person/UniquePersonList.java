@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -95,6 +96,20 @@ public class UniquePersonList implements Iterable<Customer> {
         }
 
         internalList.setAll(customers);
+    }
+
+    /**
+     * Retrieves Customer by its id
+     * @param id The id of the delivery to be retrieved
+     * @return Optional containing the delivery if it exists
+     */
+    public Optional<Customer> getById(int id) {
+        for (Customer c: internalList) {
+            if (c.getCustomerId() == id) {
+                return Optional.of(c);
+            }
+        }
+        return Optional.empty();
     }
 
     /**
