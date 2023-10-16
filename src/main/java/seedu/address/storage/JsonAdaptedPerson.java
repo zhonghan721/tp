@@ -117,9 +117,12 @@ class JsonAdaptedPerson {
 
         try {
             modelCustomerId = Integer.parseInt(customerId);
+            if (modelCustomerId <= 0) {
+                throw new NumberFormatException();
+            }
         } catch (NumberFormatException e) {
             throw new IllegalValueException("Customer ID should only contain numbers, "
-                    + "and it should be at most 3 digits long");
+                    + "and it should be more than 0");
         }
 
         return new Customer(modelCustomerId, modelName, modelPhone, modelEmail, modelAddress, modelTags);
