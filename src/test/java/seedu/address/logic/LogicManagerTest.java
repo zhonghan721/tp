@@ -18,8 +18,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.customer.AddCommand;
 import seedu.address.logic.commands.customer.CustomerListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -60,7 +60,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "customer delete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
@@ -172,7 +172,8 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Customer expectedCustomer = new PersonBuilder(AMY).withTags().build();
+        Customer expectedCustomer = new PersonBuilder(AMY)
+                .withCustomerId(Customer.getCustomerCount()).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedCustomer);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
