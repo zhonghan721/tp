@@ -1,11 +1,10 @@
 package seedu.address.model.delivery;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Customer;
-
 import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.ToStringBuilder;
 
 /**
  * Tests that a {@code Delivery}'s {@code DeliveryName} matches any of the keywords given.
@@ -34,8 +33,8 @@ public class DeliveryNameContainsKeywordsPredicate implements Predicate<Delivery
             return false;
         }
 
-        DeliveryNameContainsKeywordsPredicate otherNameContainsKeywordsPredicate
-            = (DeliveryNameContainsKeywordsPredicate) other;
+        DeliveryNameContainsKeywordsPredicate otherNameContainsKeywordsPredicate =
+            (DeliveryNameContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 
