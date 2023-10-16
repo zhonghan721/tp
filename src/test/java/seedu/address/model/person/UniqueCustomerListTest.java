@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalDeliveries.GABRIELS_MILK;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -17,7 +16,6 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -180,7 +178,7 @@ public class UniqueCustomerListTest {
     }
 
     @Test
-    public void getById_InvalidId_givesEmptyCustomerOptional() {
+    public void getById_invalidId_givesEmptyCustomerOptional() {
         uniquePersonList.add(ALICE);
         Optional<Customer> c = uniquePersonList.getById(ALICE.getCustomerId() + 1);
         assertTrue(c.isEmpty());

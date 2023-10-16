@@ -17,9 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.delivery.exceptions.DeliveryNotFoundException;
 import seedu.address.model.delivery.exceptions.DuplicateDeliveryException;
-import seedu.address.model.person.Customer;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.DeliveryBuilder;
 
 public class UniqueDeliveryListTest {
@@ -115,7 +112,8 @@ public class UniqueDeliveryListTest {
     public void setDelivery_editedDeliveryHasNonUniqueIdentity_throwsDuplicateDeliveryException() {
         uniqueDeliveryList.add(GABRIELS_MILK);
         uniqueDeliveryList.add(GAMBES_RICE);
-        assertThrows(DuplicateDeliveryException.class, () -> uniqueDeliveryList.setDelivery(GABRIELS_MILK, GAMBES_RICE));
+        assertThrows(DuplicateDeliveryException.class, ()
+            -> uniqueDeliveryList.setDelivery(GABRIELS_MILK, GAMBES_RICE));
     }
 
     @Test
@@ -187,7 +185,7 @@ public class UniqueDeliveryListTest {
     }
 
     @Test
-    public void getById_InvalidId_givesEmptyDeliveryOptional() {
+    public void getById_invalidId_givesEmptyDeliveryOptional() {
         uniqueDeliveryList.add(GABRIELS_MILK);
         Optional<Delivery> d = uniqueDeliveryList.getById(GABRIELS_MILK.getDeliveryId() + 1);
         assertTrue(d.isEmpty());
@@ -196,7 +194,7 @@ public class UniqueDeliveryListTest {
     @Test
     public void asUnmodifiableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-        -> uniqueDeliveryList.asUnmodifiableObservableList().remove(0));
+            -> uniqueDeliveryList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test

@@ -1,17 +1,17 @@
 package seedu.address.model.delivery;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
-import seedu.address.testutil.DeliveryBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.DeliveryBuilder;
 
 public class DeliveryNameContainsKeywordsPredicateTest {
 

@@ -3,13 +3,9 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalDeliveries.GABRIELS_MILK;
 import static seedu.address.testutil.TypicalDeliveries.GAMBES_RICE;
 import static seedu.address.testutil.TypicalDeliveries.JY_CAKE;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
@@ -20,11 +16,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.DeliveryBook;
 import seedu.address.model.ReadOnlyBook;
 import seedu.address.model.delivery.Delivery;
-import seedu.address.model.person.Customer;
 
 public class JsonDeliveryBookStorageTest {
     private static final Path TEST_DATA_FOLDER =
@@ -41,7 +35,7 @@ public class JsonDeliveryBookStorageTest {
     private java.util.Optional<ReadOnlyBook<Delivery>> readDeliveryBook(String filePath) throws Exception {
         JsonDeliveryBookStorage jsonDeliveryBookStorage = new JsonDeliveryBookStorage(Paths.get(filePath));
         jsonDeliveryBookStorage.setReferencingBook(getTypicalAddressBook());
-        return  jsonDeliveryBookStorage.readBook(addToTestDataPathIfNotNull(filePath));
+        return jsonDeliveryBookStorage.readBook(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {

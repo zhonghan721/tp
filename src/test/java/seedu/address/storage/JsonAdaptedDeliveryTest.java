@@ -12,13 +12,11 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDate;
+import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.delivery.OrderDate;
-import seedu.address.model.person.Customer;
-import seedu.address.model.delivery.DeliveryName;
 
 public class JsonAdaptedDeliveryTest {
     private static final String INVALID_DELIVERY_NAME = "G@briel Milk";
