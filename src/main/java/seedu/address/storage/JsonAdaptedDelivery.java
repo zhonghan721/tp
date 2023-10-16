@@ -60,8 +60,8 @@ class JsonAdaptedDelivery {
         deliveryId = String.valueOf(source.getDeliveryId());
         name = source.getName().deliveryName;
         customerId = String.valueOf(source.getCustomer().getCustomerId());
-        orderDate = source.getOrderDate().date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        deliveryDate = source.getDeliveryDate().date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        orderDate = source.getOrderDate().toString();
+        deliveryDate = source.getDeliveryDate().toString();
         status = source.getStatus().name();
         note = source.getNote().note;
     }
@@ -105,6 +105,7 @@ class JsonAdaptedDelivery {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, OrderDate.class.getSimpleName()));
         }
+
         if (!OrderDate.isValidOrderDate(orderDate)) {
             throw new IllegalValueException(OrderDate.MESSAGE_CONSTRAINTS);
         }
@@ -130,9 +131,12 @@ class JsonAdaptedDelivery {
 
         final Note modelNote;
         if (note != null) {
+            if (!Note.isNotEmpty(note)) {
+                throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
+            }
             modelNote = new Note(note);
         } else {
-            modelNote = new Note("");
+            modelNote = null;
         }
 
         // For customers without customerId

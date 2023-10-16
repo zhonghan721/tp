@@ -14,10 +14,10 @@ import java.util.List;
  */
 public class TypicalDeliveries {
     public static final Delivery GABRIELS_MILK = new DeliveryBuilder().withId(1).withName("Gabriel Milk")
-        .withCustomer(TypicalPersons.ALICE).build();
+        .withCustomer(TypicalPersons.ALICE).withNote("Note").build();
 
     public static final Delivery GAMBES_RICE = new DeliveryBuilder().withId(2).withName("Gambe Rice")
-        .withCustomer(TypicalPersons.BENSON).build();
+        .withCustomer(TypicalPersons.BENSON).withNote("Note").build();
 
     private TypicalDeliveries() {
     } // prevents instantiation
