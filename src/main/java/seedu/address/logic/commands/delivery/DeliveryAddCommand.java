@@ -45,11 +45,11 @@ public class DeliveryAddCommand extends DeliveryCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasDelivery(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_DELIVERY);
         }
 
-        model.addPerson(toAdd);
+        model.addDelivery(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
@@ -64,7 +64,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
+        DeliveryAddCommand otherAddCommand = (DeliveryAddCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
 

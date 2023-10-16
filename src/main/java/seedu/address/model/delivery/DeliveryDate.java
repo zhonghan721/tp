@@ -1,6 +1,7 @@
 package seedu.address.model.delivery;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Delivery's delivery date in the delivery list.
@@ -35,5 +36,14 @@ public class DeliveryDate extends Date {
      */
     public static boolean isValidDeliveryDate(String test) {
         return Date.isValidDate(test) && isFutureDate(test);
+    }
+
+    /**
+     * Returns a string in the application's format
+     * @return A string representing the date
+     */
+    @Override
+    public String toString() {
+        return this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 }

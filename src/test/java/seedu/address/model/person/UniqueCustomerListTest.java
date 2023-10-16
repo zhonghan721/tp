@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -160,6 +161,27 @@ public class UniqueCustomerListTest {
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Customer> listWithDuplicateCustomers = Arrays.asList(ALICE, ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicateCustomers));
+    }
+
+    @Test
+    public void getById_validId_givesPresentCustomerOptional() {
+        uniquePersonList.add(ALICE);
+        Optional<Customer> c = uniquePersonList.getById(ALICE.getCustomerId());
+        assertTrue(c.isPresent());
+        assertEquals(c.get(), ALICE);
+    }
+
+    @Test
+    public void getById_negativeId_givesEmptyCusotmerOptional() {
+        Optional<Customer> c = uniquePersonList.getById(-1);
+        assertTrue(c.isEmpty());
+    }
+
+    @Test
+    public void getById_invalidId_givesEmptyCustomerOptional() {
+        uniquePersonList.add(ALICE);
+        Optional<Customer> c = uniquePersonList.getById(ALICE.getCustomerId() + 1);
+        assertTrue(c.isEmpty());
     }
 
     @Test

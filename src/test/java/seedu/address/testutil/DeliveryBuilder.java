@@ -19,7 +19,7 @@ public class DeliveryBuilder {
         .withPhone("94351253")
         .withTags("friends").build();
     public static final OrderDate DEFAULT_ORDERED_AT = new OrderDate("2021-12-12");
-    public static final DeliveryDate DEFAULT_DELIVERED_AT = new DeliveryDate("2021-12-12");
+    public static final DeliveryDate DEFAULT_DELIVERED_AT = new DeliveryDate("2023-12-12");
     public static final DeliveryStatus DEFAULT_STATUS = DeliveryStatus.CREATED;
 
     public static final Note DEFAULT_NOTE = new Note("This is a note.");
@@ -30,6 +30,7 @@ public class DeliveryBuilder {
     private OrderDate orderedAt;
     private DeliveryDate deliveredAt;
     private DeliveryStatus status;
+    private Note note;
 
 
     /**
@@ -42,6 +43,7 @@ public class DeliveryBuilder {
         this.orderedAt = DEFAULT_ORDERED_AT;
         this.deliveredAt = DEFAULT_DELIVERED_AT;
         this.status = DEFAULT_STATUS;
+        this.note = DEFAULT_NOTE;
     }
 
     /**
@@ -56,6 +58,7 @@ public class DeliveryBuilder {
         this.orderedAt = delivery.getOrderDate();
         this.deliveredAt = delivery.getDeliveryDate();
         this.status = delivery.getStatus();
+        this.note = delivery.getNote();
     }
 
     /**
@@ -125,12 +128,23 @@ public class DeliveryBuilder {
     }
 
     /**
+     * Sets the {@code note} of the {@code Delivery} that we are building.
+     *
+     * @param note The status to set.
+     * @return The DeliveryBuilder with the status set.
+     */
+    public DeliveryBuilder withNote(String note) {
+        this.note = new Note(note);
+        return this;
+    }
+
+    /**
      * Builds the {@code Delivery} with the given parameters.
      *
      * @return The Delivery with the given parameters.
      */
     public Delivery build() {
-        return new Delivery(deliveryId, name, customer, orderedAt, deliveredAt, status);
+        return new Delivery(deliveryId, name, customer, orderedAt, deliveredAt, status, note);
     }
 
     /**
@@ -139,6 +153,6 @@ public class DeliveryBuilder {
      * @return The Delivery with the given parameters.
      */
     public Delivery autoBuild() {
-        return new Delivery(name, customer, orderedAt, deliveredAt, status);
+        return new Delivery(name, customer, orderedAt, deliveredAt, status, note);
     }
 }
