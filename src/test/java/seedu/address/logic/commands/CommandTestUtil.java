@@ -28,8 +28,8 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 public class CommandTestUtil {
 
     // Delivery
-    public static final String VALID_NAME_GABRIELS_MILK = "Gabriel's Milk";
-    public static final String VALID_NAME_JAMES_MILK = "James' Milk";
+    public static final String VALID_NAME_GABRIELS_MILK = "Gabriel Milk";
+    public static final String VALID_NAME_JAMES_MILK = "Jame Milk";
 
     // Customer
     public static final String VALID_NAME_AMY = "Amy Bee";

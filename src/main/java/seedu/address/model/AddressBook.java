@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -13,7 +14,7 @@ import seedu.address.model.person.UniquePersonList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class AddressBook implements ReadOnlyBook<Customer> {
 
     private final UniquePersonList persons;
 
@@ -22,9 +23,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Data in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public AddressBook(ReadOnlyBook<Customer> toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -42,10 +43,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyBook<Customer> newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setPersons(newData.getList());
     }
 
     //// person-level operations
@@ -95,8 +96,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Customer> getPersonList() {
+    public ObservableList<Customer> getList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Returns the item with the specified id if it exists
+     *
+     * @param id the id of the item
+     * @return the item specified by the id
+     */
+    @Override
+    public Optional<Customer> getById(int id) {
+        return persons.getById(id);
     }
 
     @Override

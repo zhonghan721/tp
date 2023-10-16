@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
 
 /**
@@ -20,24 +21,32 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final DeliveryBook deliveryBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Customer> filteredCustomers;
+    private final FilteredList<Delivery> filteredDeliveries;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, deliveryBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyBook<Customer> addressBook,
+                        ReadOnlyBook<Delivery> deliveryBook,
+                        ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook
+                + ", delivery book" + deliveryBook
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.deliveryBook = new DeliveryBook(deliveryBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredCustomers = new FilteredList<>(this.addressBook.getPersonList());
+        filteredCustomers = new FilteredList<>(this.addressBook.getList());
+        filteredDeliveries = new FilteredList<>(this.deliveryBook.getList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new DeliveryBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -75,15 +84,26 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Path getDeliveryBookFilePath() {
+        return userPrefs.getDeliveryBookFilePath();
+    }
+
+    @Override
+    public void setDeliveryBookFilePath(Path deliveryBookFilePath) {
+        requireNonNull(deliveryBookFilePath);
+        userPrefs.setDeliveryBookFilePath(deliveryBookFilePath);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+    public void setAddressBook(ReadOnlyBook<Customer> addressBook) {
         this.addressBook.resetData(addressBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyBook<Customer> getAddressBook() {
         return addressBook;
     }
 
@@ -128,6 +148,59 @@ public class ModelManager implements Model {
         filteredCustomers.setPredicate(predicate);
     }
 
+    //=========== DeliveryBook ================================================================================
+
+    @Override
+    public void setDeliveryBook(ReadOnlyBook<Delivery> deliveryBook) {
+        this.deliveryBook.resetData(deliveryBook);
+    }
+
+    @Override
+    public ReadOnlyBook<Delivery> getDeliveryBook() {
+        return deliveryBook;
+    }
+
+    @Override
+    public boolean hasDelivery(Delivery delivery) {
+        requireNonNull(delivery);
+        return deliveryBook.hasDelivery(delivery);
+    }
+
+    @Override
+    public void deleteDelivery(Delivery target) {
+        deliveryBook.removeDelivery(target);
+    }
+
+    @Override
+    public void addDelivery(Delivery delivery) {
+        deliveryBook.addDelivery(delivery);
+        updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+    }
+
+    @Override
+    public void setDelivery(Delivery target, Delivery editedDelivery) {
+        requireAllNonNull(target, editedDelivery);
+
+        deliveryBook.setDelivery(target, editedDelivery);
+    }
+
+    //=========== Filtered Person List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Delivery> getFilteredDeliveryList() {
+        return filteredDeliveries;
+    }
+
+    @Override
+    public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
+        requireNonNull(predicate);
+        filteredDeliveries.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -141,8 +214,10 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
+                && deliveryBook.equals(otherModelManager.deliveryBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredCustomers.equals(otherModelManager.filteredCustomers);
+                && filteredCustomers.equals(otherModelManager.filteredCustomers)
+                && filteredDeliveries.equals(otherModelManager.filteredDeliveries);
     }
 
 }
