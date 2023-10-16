@@ -198,7 +198,13 @@ public class Delivery {
 
         Delivery otherDelivery = (Delivery) other;
 
-        return otherDelivery.getDeliveryId() == getDeliveryId();
+        return otherDelivery.getDeliveryId() == getDeliveryId()
+            && otherDelivery.getDeliveryDate() == getDeliveryDate()
+            && otherDelivery.getName() == getName()
+            && otherDelivery.getCustomer().equals(getCustomer())
+            && otherDelivery.getNote() == getNote()
+            && otherDelivery.getOrderDate() == getOrderDate()
+            && otherDelivery.getStatus() == getStatus();
     }
 
     @Override

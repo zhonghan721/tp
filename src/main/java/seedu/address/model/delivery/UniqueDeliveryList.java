@@ -100,11 +100,12 @@ public class UniqueDeliveryList implements Iterable<Delivery> {
     }
 
     /**
-     * Retrives delivery by its id
-     * @param id The id of the delivery to be retrived
+     * Retrieves delivery by its id
+     * @param id The id of the delivery to be retrieved
      * @return Optional containing the delivery if it exists
      */
     public Optional<Delivery> getById(int id) {
+
         for (Delivery d: internalList) {
             if (d.getDeliveryId() == id) {
                 return Optional.of(d);
