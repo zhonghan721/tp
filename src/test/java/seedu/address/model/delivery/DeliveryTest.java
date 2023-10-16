@@ -77,17 +77,17 @@ public class DeliveryTest {
         // null -> returns false
         assertFalse(GABRIELS_MILK.isSameDelivery(null));
 
-        // same id, other attributes different -> returns false
+        // same id, other attributes different -> returns true
         Delivery editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withName("Gabriel Milk Updated").build();
-        assertFalse(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
+        assertTrue(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
 
-        // same id, different status -> returns false
+        // same id, different status -> returns true
         editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withStatus(DeliveryStatus.COMPLETED).build();
-        assertFalse(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
+        assertTrue(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
 
-        // same id, different customer -> returns false
+        // same id, different customer -> returns true
         editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withCustomer(TypicalPersons.BOB).build();
-        assertFalse(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
+        assertTrue(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
 
         // different id, all other attributes same -> returns false
         Delivery gambesRice = new DeliveryBuilder(GAMBES_RICE).build();
@@ -96,7 +96,7 @@ public class DeliveryTest {
         // different id, all other attributes different -> returns false
         editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withName("Gabriel Milk Updated")
             .withStatus(DeliveryStatus.COMPLETED).withCustomer(TypicalPersons.BOB).withOrderDate("2019-12-12")
-            .withDeliveryDate("2024-12-12").build();
+            .withDeliveryDate("2024-12-12").autoBuild();
         assertFalse(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
     }
 
@@ -140,7 +140,7 @@ public class DeliveryTest {
         // different id, all other attributes different -> returns false
         editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withName("Gabriel Milk Updated")
             .withStatus(DeliveryStatus.COMPLETED).withCustomer(TypicalPersons.BOB).withOrderDate("2019-12-12")
-            .withDeliveryDate("2024-12-12").build();
+            .withDeliveryDate("2024-12-12").autoBuild();
         assertFalse(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
     }
 }
