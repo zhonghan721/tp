@@ -20,6 +20,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_USER_NOT_AUTHENTICATED = "Access denied! You are currently not logged in.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -68,4 +69,5 @@ public class Messages {
             .append(delivery.getNote());
         return builder.toString();
     }
+
 }

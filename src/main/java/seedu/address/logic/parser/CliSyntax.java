@@ -8,9 +8,7 @@ public class CliSyntax {
     /* Prefix definitions */
 
     public static final Prefix PREFIX_USER = new Prefix("--user");
-
     public static final Prefix PREFIX_PASSWORD = new Prefix("--password");
-
     public static final Prefix PREFIX_PASSWORD_CONFIRM = new Prefix("--confirmPass");
     public static final Prefix PREFIX_NAME = new Prefix("--name");
     public static final Prefix PREFIX_PHONE = new Prefix("--phone");

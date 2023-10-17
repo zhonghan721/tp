@@ -23,6 +23,16 @@ public interface Model {
     Predicate<Delivery> PREDICATE_SHOW_ALL_DELIVERIES = unused -> true;
 
     /**
+     * {@code Predicate} that always evaluate to true
+     */
+    Predicate<Customer> PREDICATE_SHOW_NO_CUSTOMERS = unused -> false;
+
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
+    Predicate<Delivery> PREDICATE_SHOW_NO_DELIVERIES = unused -> false;
+
+    /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
@@ -157,4 +167,18 @@ public interface Model {
     void updateFilteredDeliveryList(Predicate<Delivery> predicate);
 
 
+    /**
+     * Returns true if the {@code user} is currently logged in.
+     */
+    boolean getUserLoginStatus();
+
+    /**
+     * Sets the login flag to true.
+     */
+    void setLoginSuccess();
+
+    /**
+     * Sets the logout flag to true.
+     */
+    void setLogoutSuccess();
 }
