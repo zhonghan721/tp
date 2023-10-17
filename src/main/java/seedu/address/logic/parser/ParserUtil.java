@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -25,6 +26,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -120,5 +122,43 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String status} into a {@code DeliveryStatus}.
+     *
+     * @param status the status to be parsed.
+     * @return the parsed DeliveryStatus.
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static DeliveryStatus parseDeliveryStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim().toUpperCase();
+
+        if (trimmedStatus.equals("ALL")) {
+            return null;
+        }
+
+        if (!DeliveryStatus.isValidStatus(trimmedStatus)) {
+            throw new ParseException(DeliveryStatus.MESSAGE_CONSTRAINTS);
+        }
+
+        return DeliveryStatus.valueOf(trimmedStatus);
+    }
+
+    /**
+     * Parses a {@code String sort} into a {@code String}.
+     *
+     * @param sort the sort to be parsed.
+     * @return the parsed sort.
+     * @throws ParseException if the given {@code sort} is invalid.
+     */
+    public static String parseSort(String sort) throws ParseException {
+        requireNonNull(sort);
+        String trimmedSort = sort.trim();
+        if (!sort.equals("asc") && !sort.equals("desc")) {
+            throw new ParseException("Sort must be asc or desc");
+        }
+        return trimmedSort;
     }
 }

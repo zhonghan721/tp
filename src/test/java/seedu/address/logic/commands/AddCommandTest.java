@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -42,7 +43,7 @@ public class AddCommandTest {
         CommandResult commandResult = new AddCommand(validCustomer).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
-                commandResult.getFeedbackToUser());
+            commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validCustomer), modelStub.personsAdded);
     }
 
@@ -206,7 +207,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Delivery> getSortedDeliveryList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortFilteredDeliveryList(Comparator<Delivery> comparator) {
             throw new AssertionError("This method should not be called.");
         }
     }

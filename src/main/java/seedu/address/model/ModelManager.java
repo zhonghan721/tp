@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.delivery.Delivery;
@@ -26,6 +28,8 @@ public class ModelManager implements Model {
     private final FilteredList<Customer> filteredCustomers;
     private final FilteredList<Delivery> filteredDeliveries;
 
+    private final SortedList<Delivery> sortedDeliveries;
+
     /**
      * Initializes a ModelManager with the given addressBook, deliveryBook and userPrefs.
      */
@@ -35,14 +39,15 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
-                + ", delivery book" + deliveryBook
-                + " and user prefs " + userPrefs);
+            + ", delivery book" + deliveryBook
+            + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.deliveryBook = new DeliveryBook(deliveryBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredCustomers = new FilteredList<>(this.addressBook.getList());
         filteredDeliveries = new FilteredList<>(this.deliveryBook.getList());
+        sortedDeliveries = new SortedList<>(filteredDeliveries);
     }
 
     public ModelManager() {
@@ -196,9 +201,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Delivery> getSortedDeliveryList() {
+        return sortedDeliveries;
+    }
+
+    @Override
     public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
         requireNonNull(predicate);
         filteredDeliveries.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortFilteredDeliveryList(Comparator<Delivery> comparator) {
+        requireNonNull(comparator);
+        sortedDeliveries.setComparator(comparator);
     }
 
     @Override
@@ -214,10 +230,10 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                && deliveryBook.equals(otherModelManager.deliveryBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredCustomers.equals(otherModelManager.filteredCustomers)
-                && filteredDeliveries.equals(otherModelManager.filteredDeliveries);
+            && deliveryBook.equals(otherModelManager.deliveryBook)
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredCustomers.equals(otherModelManager.filteredCustomers)
+            && filteredDeliveries.equals(otherModelManager.filteredDeliveries);
     }
 
 }

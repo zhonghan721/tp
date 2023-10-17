@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -149,6 +150,8 @@ public interface Model {
      */
     ObservableList<Delivery> getFilteredDeliveryList();
 
+    ObservableList<Delivery> getSortedDeliveryList();
+
     /**
      * Updates the filter of the filtered delivery list to filter by the given {@code predicate}.
      *
@@ -157,4 +160,5 @@ public interface Model {
     void updateFilteredDeliveryList(Predicate<Delivery> predicate);
 
 
+    void sortFilteredDeliveryList(Comparator<Delivery> comparator);
 }
