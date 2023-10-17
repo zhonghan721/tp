@@ -16,14 +16,19 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.DeliveryBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.person.Customer;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.BookStorage;
+import seedu.address.storage.BookStorageWithReference;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonDeliveryBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -57,8 +62,10 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        BookStorage<Customer> addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        BookStorageWithReference<Delivery, Customer> deliveryBookStorage =
+                new JsonDeliveryBookStorage(userPrefs.getDeliveryBookFilePath());
+        storage = new StorageManager(addressBookStorage, deliveryBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -75,22 +82,40 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyBook<Customer>> addressBookOptional;
+        ReadOnlyBook<Customer> initialAddressData;
+        Optional<ReadOnlyBook<Delivery>> deliveryBookOptional;
+        ReadOnlyBook<Delivery> initialDeliveryData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialAddressData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            initialAddressData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        try {
+            storage.setDeliveryBookReference(initialAddressData);
+            deliveryBookOptional = storage.readDeliveryBook();
+            if (!deliveryBookOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getDeliveryBookFilePath()
+                        + " populated with a sample DeliveryBook.");
+            }
+            final ReadOnlyBook<Customer> addressData = initialAddressData;
+            initialDeliveryData = deliveryBookOptional
+                    .orElseGet(() -> SampleDataUtil.getSampleDeliveryBook(addressData));
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty AddressBook.");
+            initialDeliveryData = new DeliveryBook();
+        }
+
+        return new ModelManager(initialAddressData, initialDeliveryData, userPrefs);
     }
 
     private void initLogging(Config config) {

@@ -4,8 +4,15 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.DeliveryBook;
+import seedu.address.model.ReadOnlyBook;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryDate;
+import seedu.address.model.delivery.DeliveryName;
+import seedu.address.model.delivery.DeliveryStatus;
+import seedu.address.model.delivery.OrderDate;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.Email;
@@ -43,7 +50,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyBook<Customer> getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Customer sampleCustomer : getSamplePersons()) {
             sampleAb.addPerson(sampleCustomer);
@@ -58,6 +65,48 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
             .map(Tag::new)
             .collect(Collectors.toSet());
+    }
+
+    public static Delivery[] getSampleDeliveries(ReadOnlyBook<Customer> customerBook) {
+        ObservableList<Customer> customers = customerBook.getList();
+        return new Delivery[]{
+            new Delivery(
+                new DeliveryName("Chocolate Cake"),
+                customers.get(0),
+                new OrderDate("2020-12-12"),
+                new DeliveryDate("2023-12-12"),
+                DeliveryStatus.CREATED
+            ),
+            new Delivery(
+                new DeliveryName("Strawberry Cake"),
+                customers.get(1),
+                new OrderDate("2020-12-12"),
+                new DeliveryDate("2021-12-12"),
+                DeliveryStatus.COMPLETED
+            ),
+            new Delivery(
+                new DeliveryName("Matcha Cake"),
+                customers.get(2),
+                new OrderDate("2020-12-12"),
+                new DeliveryDate("2023-12-12"),
+                DeliveryStatus.CREATED
+            ),
+            new Delivery(
+                new DeliveryName("Chocolate Cake"),
+                customers.get(2),
+                new OrderDate("2020-12-12"),
+                new DeliveryDate("2023-12-12"),
+                DeliveryStatus.SHIPPED
+            ),
+        };
+    }
+
+    public static ReadOnlyBook<Delivery> getSampleDeliveryBook(ReadOnlyBook<Customer> customerBook) {
+        DeliveryBook sampleDb = new DeliveryBook();
+        for (Delivery sampleDelivery : getSampleDeliveries(customerBook)) {
+            sampleDb.addDelivery(sampleDelivery);
+        }
+        return sampleDb;
     }
 
 }
