@@ -136,6 +136,7 @@ public class ModelManagerTest {
 
     @Test
     public void sortDeliveryBookByNameAsc() {
+        modelManager.setLoginSuccess();
         modelManager.addDelivery(GABRIELS_MILK);
         modelManager.addDelivery(GAMBES_RICE);
         modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName));
@@ -144,6 +145,7 @@ public class ModelManagerTest {
 
     @Test
     public void sortDeliveryBookByNameDesc() {
+        modelManager.setLoginSuccess();
         modelManager.addDelivery(GABRIELS_MILK);
         modelManager.addDelivery(GAMBES_RICE);
         modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName).reversed());

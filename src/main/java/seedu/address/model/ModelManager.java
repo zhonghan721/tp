@@ -29,7 +29,7 @@ public class ModelManager implements Model {
     private final FilteredList<Customer> filteredCustomers;
     private final FilteredList<Delivery> filteredDeliveries;
 
-    private final SortedList<Delivery> sortedDeliveries;
+    private SortedList<Delivery> sortedDeliveries;
 
     /**
      * Initializes a ModelManager with the given addressBook, deliveryBook and userPrefs.
@@ -163,6 +163,8 @@ public class ModelManager implements Model {
         } else {
             filteredCustomers.setPredicate(PREDICATE_SHOW_NO_CUSTOMERS);
         }
+
+
     }
 
     //=========== User Related Methods =======================================================================
@@ -256,6 +258,9 @@ public class ModelManager implements Model {
         } else {
             filteredDeliveries.setPredicate(PREDICATE_SHOW_NO_DELIVERIES);
         }
+
+        // Update the sorted list
+        this.sortedDeliveries = new SortedList<>(filteredDeliveries);
     }
 
     @Override
