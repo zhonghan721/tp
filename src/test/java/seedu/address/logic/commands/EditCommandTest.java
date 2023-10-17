@@ -36,7 +36,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -49,7 +49,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
-                new UserPrefs());
+                new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedCustomer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -73,7 +73,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
-                new UserPrefs());
+                new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setPerson(lastCustomer, editedCustomer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -89,7 +89,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
-                new UserPrefs());
+                new UserPrefs(), model.getUserLoginStatus());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -112,7 +112,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
-                new UserPrefs());
+                new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedCustomer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -163,6 +163,40 @@ public class EditCommandTest {
             new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_allFieldsSpecifiedUnfilteredListLoggedOut_failure() {
+        // set state of model to be logged out
+        model.setLogoutSuccess();
+        Customer editedCustomer = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedCustomer).build();
+        CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+
+    @Test
+    public void execute_someFieldsSpecifiedUnfilteredListLoggedOut_failure() {
+        // set state of model to be logged out
+        model.setLogoutSuccess();
+        // customerId = 1
+        Index indexLastPerson = Index.fromOneBased(1);
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withCustomerId(1).withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).build();
+        CustomerEditCommand editCommand = new CustomerEditCommand(indexLastPerson, descriptor);
+
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+
+    @Test
+    public void execute_noFieldSpecifiedUnfilteredListLoggedOut_failure() {
+        // set state of model to be logged out
+        model.setLogoutSuccess();
+        CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_SECOND_PERSON, new EditPersonDescriptor());
+
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
     @Test

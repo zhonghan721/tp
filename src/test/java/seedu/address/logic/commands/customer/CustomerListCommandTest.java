@@ -24,8 +24,9 @@ public class CustomerListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
+        expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
+                new UserPrefs(), model.getUserLoginStatus());
     }
 
     @Test
