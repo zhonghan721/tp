@@ -56,7 +56,7 @@ public class UserLoginCommand extends Command {
         if (!model.userMatches(user)) {
             throw new CommandException(MESSAGE_WRONG_CREDENTIALS);
         }
-        
+
         model.setLoginSuccess();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
         return new CommandResult(MESSAGE_SUCCESS);

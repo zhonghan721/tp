@@ -3,10 +3,13 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.Files;
 import java.util.Objects;
+import java.util.logging.Logger;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,21 +19,17 @@ import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 import seedu.address.storage.StorageManager;
 
-import java.util.logging.Logger;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 
 /**
  * Represents User's preferences.
  */
 public class UserPrefs implements ReadOnlyUserPrefs {
 
+    private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
     private Path deliveryBookFilePath = Paths.get("data" , "deliverybook.json");
     private Path authenticationPath = Paths.get("data" , "authentication.json");
-    private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -127,10 +126,14 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public User getStoredUser() {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            AuthenticationData authenticationData = objectMapper.readValue(authenticationPath.toFile(), AuthenticationData.class);
+            AuthenticationData authenticationData =
+                objectMapper.readValue(authenticationPath.toFile(), AuthenticationData.class);
 
             // Create User objects
-            User storedUser = new User(new Username(authenticationData.getUsername()), new Password(authenticationData.getPassword(), true), true);
+            User storedUser =
+                new User(new Username(authenticationData.getUsername()),
+                         new Password(authenticationData.getPassword(), true),
+                         true);
             return storedUser;
         } catch (IOException e) {
             logger.fine("Error reading authentication file: " + e.getMessage());
@@ -146,16 +149,17 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         try {
             // Create an ObjectMapper
             ObjectMapper objectMapper = new ObjectMapper();
-    
+
             // Create an AuthenticationData object from the User
-            AuthenticationData authenticationData = new AuthenticationData(user.getUsername().toString(), user.getPassword().toString());
-    
+            AuthenticationData authenticationData =
+                new AuthenticationData(user.getUsername().toString(), user.getPassword().toString());
+
             // Serialize the authenticationData to a JSON file
             objectMapper.writeValue(authenticationPath.toFile(), authenticationData);
-            
+
             // Optionally, you can add logging to indicate successful registration
             logger.info("User registered: " + user.getUsername());
-    
+
         } catch (IOException e) {
             // Handle any exceptions related to file I/O or JSON serialization
             logger.warning("Error writing to authentication file: " + e.getMessage());
@@ -194,5 +198,4 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         sb.append("\nLocal authentication data file location : " + authenticationPath);
         return sb.toString();
     }
-
 }

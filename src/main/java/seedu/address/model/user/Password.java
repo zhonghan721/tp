@@ -25,11 +25,9 @@ public class Password {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "^[\\p{Alnum}]{8,}$";
-
-    public final String hashedPassword;
-
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
 
+    public final String hashedPassword;
 
     /**
      * Constructs a {@code Password}.
@@ -37,7 +35,7 @@ public class Password {
      * @param passwordString A valid password.
      */
 
-     public Password(String passwordString) {
+    public Password(String passwordString) {
         this.hashedPassword = hashAndValidatePassword(passwordString, true);
     }
 

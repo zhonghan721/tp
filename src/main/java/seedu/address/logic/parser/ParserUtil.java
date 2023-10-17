@@ -1,9 +1,11 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -150,7 +152,7 @@ public class ParserUtil {
         if (!Password.isValidPassword(trimmedPassword)) {
             throw new ParseException(Password.MESSAGE_CONSTRAINTS);
         }
-        
+
         return new Password(trimmedPassword);
     }
 }

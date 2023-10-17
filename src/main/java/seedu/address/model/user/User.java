@@ -15,7 +15,7 @@ public class User {
     private final Username username;
     private final Password hashedPassword;
 
-    
+
     /**
      * Every field must be present and not null.
      * This constructor assumes a non-hashed password is passed in
@@ -25,9 +25,10 @@ public class User {
         this.username = username;
         this.hashedPassword = new Password(password.toString());
     }
-    
-    /*
+
+    /**
      * Overloaded constructor for creating a new user with a hashed password
+     * @param isHashed indicates whether the password is hashed
      */
     public User(Username username, Password password, boolean isHashed) {
         requireAllNonNull(username, password);
