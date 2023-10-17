@@ -91,4 +91,19 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Customer> predicate);
+
+    /**
+     * Returns true if the {@code user} is currently logged in.
+     */
+    boolean getUserLoginStatus();
+
+    /**
+     * Sets the login flag to true.
+     */
+    void setLoginSuccess();
+
+    /**
+     * Sets the logout flag to true.
+     */
+    void setLogoutSuccess();
 }

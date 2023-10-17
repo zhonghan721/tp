@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -71,6 +72,12 @@ public class CustomerEditCommand extends CustomerCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // User cannot perform this operation before logging in
+        if (!model.getUserLoginStatus()) {
+            throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
+        }
+
         List<Customer> lastShownList = model.getFilteredPersonList();
 
         boolean found = false;

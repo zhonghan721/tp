@@ -158,6 +158,21 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Customer> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean getUserLoginStatus() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLoginSuccess() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLogoutSuccess() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -175,6 +190,11 @@ public class AddCommandTest {
         public boolean hasPerson(Customer customer) {
             requireNonNull(customer);
             return this.customer.isSamePerson(customer);
+        }
+
+        @Override
+        public boolean getUserLoginStatus() {
+            return true;
         }
     }
 
@@ -199,6 +219,11 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public boolean getUserLoginStatus() {
+            return true;
         }
     }
 

@@ -99,6 +99,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    public ObservableList<Customer> getEmptyPersonList() {
+        return new UniquePersonList().asUnmodifiableObservableList();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

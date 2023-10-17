@@ -18,6 +18,7 @@ import seedu.address.model.person.Customer;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private boolean isLoggedIn = false;
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -119,13 +120,50 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Customer> getFilteredPersonList() {
+        // only shows the customer list if the user is logged in
+        if (!isLoggedIn) {
+            filteredCustomers.setPredicate(x -> false);
+        }
         return filteredCustomers;
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Customer> predicate) {
         requireNonNull(predicate);
-        filteredCustomers.setPredicate(predicate);
+        // only shows the customer list if the user is logged in
+        if (isLoggedIn) {
+            filteredCustomers.setPredicate(predicate);
+        } else {
+            filteredCustomers.setPredicate(x -> false);
+        }
+    }
+
+
+
+    //=========== User Related Methods =======================================================================
+
+    /**
+     * Returns true if the {@code user} is currently logged in.
+     */
+    @Override
+    public boolean getUserLoginStatus() {
+        return isLoggedIn;
+    }
+
+    /**
+     * Sets the login flag to true.
+     */
+    @Override
+    public void setLoginSuccess() {
+        isLoggedIn = true;
+    }
+
+    /**
+     * Sets the logout flag to true.
+     */
+    @Override
+    public void setLogoutSuccess() {
+        isLoggedIn = false;
     }
 
     @Override
