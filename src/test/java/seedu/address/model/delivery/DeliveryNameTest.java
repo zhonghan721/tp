@@ -39,6 +39,13 @@ public class DeliveryNameTest {
     }
 
     @Test
+    public void compareTo() {
+        assertTrue(new DeliveryName("A").compareTo(new DeliveryName("B")) < 0);
+        assertTrue(new DeliveryName("B").compareTo(new DeliveryName("A")) > 0);
+        assertTrue(new DeliveryName("A").compareTo(new DeliveryName("A")) == 0);
+    }
+
+    @Test
     public void equals() {
         DeliveryName name = new DeliveryName("Valid Name");
 
