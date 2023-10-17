@@ -130,6 +130,13 @@ public interface Model {
     ReadOnlyBook<Delivery> getDeliveryBook();
 
     /**
+     * Returns the delivery with the given id.
+     * @param id the id of the delivery
+     * @return the delivery with the given id
+     */
+//    Delivery getDelivery(int id);
+
+    /**
      * Returns true if a delivery with the same identity as {@code delivery} exists in the address book.
      */
     boolean hasDelivery(Delivery delivery);
