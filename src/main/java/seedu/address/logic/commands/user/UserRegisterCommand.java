@@ -26,7 +26,7 @@ public class UserRegisterCommand extends Command {
             + PREFIX_USER + " yourUsername "
             + PREFIX_PASSWORD + " yourPassword "
             + PREFIX_PASSWORD_CONFIRM + " yourPassword";
-    public static final String MESSAGE_SUCCESS = "Registration successful. Welcome back to HomeBoss!";
+    public static final String MESSAGE_SUCCESS = "Registration successful. Welcome to HomeBoss!";
     public static final String MESSAGE_PASSWORD_MISMATCH = "Passwords do not match. Please try again.";
     public static final String MESSAGE_ALREADY_HAVE_ACCOUNT = "You have an account already with username %s. ";
 

@@ -40,7 +40,7 @@ public class UserRegisterCommandParser implements Parser<UserRegisterCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM);
         Username username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USER).get());
         Password password = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD).get());
-        Password confirmPassword = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD).get());
+        Password confirmPassword = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD_CONFIRM).get());
 
         if (!password.equals(confirmPassword)) {
             throw new ParseException(UserRegisterCommand.MESSAGE_PASSWORD_MISMATCH);

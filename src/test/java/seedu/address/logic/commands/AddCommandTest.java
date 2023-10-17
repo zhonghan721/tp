@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
+import seedu.address.model.user.User;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -233,6 +234,21 @@ public class AddCommandTest {
 
         @Override
         public void setLogoutSuccess() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean userMatches(User user) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public User getStoredUser() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void registerUser(User user) {
             throw new AssertionError("This method should not be called.");
         }
     }
