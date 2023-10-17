@@ -6,6 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 import java.util.Comparator;
 import java.util.List;
 
+import seedu.address.logic.Sort;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
@@ -19,7 +20,7 @@ public class DeliveryListCommand extends DeliveryCommand {
     public static final String MESSAGE_SUCCESS = "Listed all Deliveries";
 
     private DeliveryStatus status;
-    private String sortType = "asc";
+    private Sort sortType = Sort.ASC;
 
     /**
      * Default constructor for a DeliveryList Command with status filter and ascending sort.
@@ -36,7 +37,7 @@ public class DeliveryListCommand extends DeliveryCommand {
      * @param status   status to filter by.
      * @param sortType asc or desc.
      */
-    public DeliveryListCommand(DeliveryStatus status, String sortType) {
+    public DeliveryListCommand(DeliveryStatus status, Sort sortType) {
         this(status);
         this.sortType = sortType;
     }
@@ -75,14 +76,6 @@ public class DeliveryListCommand extends DeliveryCommand {
 
         DeliveryListCommand otherCommand = (DeliveryListCommand) other;
 
-        if (otherCommand.status != this.status) {
-            return false;
-        }
-
-        if (!otherCommand.sortType.equals(this.sortType)) {
-            return false;
-        }
-
-        return true;
+        return otherCommand.status == this.status && otherCommand.sortType.equals(this.sortType);
     }
 }

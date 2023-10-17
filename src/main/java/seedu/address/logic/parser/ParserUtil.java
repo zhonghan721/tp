@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Sort;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.person.Address;
@@ -42,6 +43,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Id} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static int parseId(String oneBasedIndex) throws ParseException {
@@ -156,7 +158,7 @@ public class ParserUtil {
         if (!DeliveryStatus.isValidStatus(trimmedStatus)) {
             throw new ParseException(DeliveryStatus.MESSAGE_CONSTRAINTS);
         }
-      
+
         return DeliveryStatus.valueOf(trimmedStatus);
     }
 
@@ -167,15 +169,21 @@ public class ParserUtil {
      * @return the parsed sort.
      * @throws ParseException if the given {@code sort} is invalid.
      */
-    public static String parseSort(String sort) throws ParseException {
+    public static Sort parseSort(String sort) throws ParseException {
         requireNonNull(sort);
-        String trimmedSort = sort.trim();
-        if (!sort.equals("asc") && !sort.equals("desc")) {
-            throw new ParseException("Sort must be asc or desc");
+        String trimmedSort = sort.trim().toUpperCase();
+
+        if (!Sort.isValidSort(trimmedSort)) {
+            throw new ParseException(Sort.MESSAGE_CONSTRAINTS);
         }
-        return trimmedSort;
+
+        Sort sortEnum = Sort.valueOf(trimmedSort);
+        if (!sortEnum.equals(Sort.ASC) && !sortEnum.equals(Sort.DESC)) {
+            throw new ParseException(Sort.MESSAGE_CONSTRAINTS);
+        }
+        return sortEnum;
     }
-  
+
     /**
      * Parses a {@code String tag} into a {@code Username}.
      * Leading and trailing whitespaces will be trimmed.

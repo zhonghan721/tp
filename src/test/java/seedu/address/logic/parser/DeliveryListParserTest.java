@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_S
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Sort;
 import seedu.address.logic.commands.delivery.DeliveryListCommand;
 import seedu.address.model.delivery.DeliveryStatus;
 
@@ -39,11 +40,11 @@ public class DeliveryListParserTest {
 
         CommandParserTestUtil.assertParseSuccess(parser, DeliveryListCommand.COMMAND_WORD
                 + VALID_DELIVERY_LIST_ALL + VALID_DELIVERY_LIST_SORT_ASC,
-            new DeliveryListCommand(null, "asc"));
+            new DeliveryListCommand(null, Sort.ASC));
 
         CommandParserTestUtil.assertParseSuccess(parser, DeliveryListCommand.COMMAND_WORD
                 + VALID_DELIVERY_LIST_ALL + VALID_DELIVERY_LIST_SORT_DESC,
-            new DeliveryListCommand(null, "desc"));
+            new DeliveryListCommand(null, Sort.DESC));
     }
 
     @Test
@@ -67,7 +68,7 @@ public class DeliveryListParserTest {
     @Test
     public void parse_invalidSort_throwsParseException() {
         CommandParserTestUtil.assertParseFailure(parser, DeliveryListCommand.COMMAND_WORD + INVALID_DELIVERY_LIST_SORT,
-            String.format("Sort must be asc or desc"));
+            String.format(Sort.MESSAGE_CONSTRAINTS));
     }
 
     @Test
@@ -81,9 +82,9 @@ public class DeliveryListParserTest {
     public void parse_validStatusAndSort_returnsDeliveryListCommand() {
         CommandParserTestUtil.assertParseSuccess(parser, DeliveryListCommand.COMMAND_WORD
                 + VALID_DELIVERY_LIST_SHIPPED + VALID_DELIVERY_LIST_SORT_ASC,
-            new DeliveryListCommand(DeliveryStatus.SHIPPED, "asc"));
+            new DeliveryListCommand(DeliveryStatus.SHIPPED, Sort.ASC));
         CommandParserTestUtil.assertParseSuccess(parser, DeliveryListCommand.COMMAND_WORD
                 + VALID_DELIVERY_LIST_SHIPPED + VALID_DELIVERY_LIST_SORT_DESC,
-            new DeliveryListCommand(DeliveryStatus.SHIPPED, "desc"));
+            new DeliveryListCommand(DeliveryStatus.SHIPPED, Sort.DESC));
     }
 }

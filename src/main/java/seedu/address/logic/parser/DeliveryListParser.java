@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.Optional;
 
+import seedu.address.logic.Sort;
 import seedu.address.logic.commands.delivery.DeliveryListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.DeliveryStatus;
@@ -26,7 +27,7 @@ public class DeliveryListParser implements Parser<DeliveryListCommand> {
             return new DeliveryListCommand(status);
         }
 
-        String sortString = ParserUtil.parseSort(sort.get());
+        Sort sortString = ParserUtil.parseSort(sort.get());
 
         return new DeliveryListCommand(status, sortString);
     }
