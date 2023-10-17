@@ -153,7 +153,7 @@ public class ParserUtil {
         }
         return new Note(trimmedNote);
     }
-  
+
     /**
      * Parses a {@code String status} into an {@code DeliveryStatus}.
      * Leading and trailing whitespaces will be trimmed.

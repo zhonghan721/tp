@@ -84,7 +84,7 @@ public class AddressBookParser {
         // ================ Delivery Commands ====================================
         case DeliveryCreateNoteCommand.COMMAND_WORD:
             return new DeliveryCreateNoteCommandParser().parse(arguments);
-            
+
         case DeliveryStatusCommand.COMMAND_WORD:
             return new DeliveryStatusCommandParser().parse(arguments);
 
@@ -106,5 +106,4 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

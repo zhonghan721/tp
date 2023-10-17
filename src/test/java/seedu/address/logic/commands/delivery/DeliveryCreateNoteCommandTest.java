@@ -24,7 +24,7 @@ import seedu.address.model.delivery.Note;
 import seedu.address.testutil.DeliveryBuilder;
 public class DeliveryCreateNoteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
 
     @Test
     public void execute_replaceNote_success() {
@@ -38,7 +38,8 @@ public class DeliveryCreateNoteCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new DeliveryBook(model.getDeliveryBook()),
-            new UserPrefs());
+            new UserPrefs(),
+            true);
         expectedModel.setDelivery(model.getDeliveryBook().getById(GABRIELS_MILK.getDeliveryId()).get(),
             expectedDelivery);
 
@@ -57,7 +58,8 @@ public class DeliveryCreateNoteCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new DeliveryBook(model.getDeliveryBook()),
-            new UserPrefs());
+            new UserPrefs(),
+            true);
         expectedModel.setDelivery(model.getDeliveryBook().getById(GAMBES_RICE.getDeliveryId()).get(),
             expectedDelivery);
 
