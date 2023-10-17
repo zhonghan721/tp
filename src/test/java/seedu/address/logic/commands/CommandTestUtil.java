@@ -30,6 +30,8 @@ public class CommandTestUtil {
     // Delivery
     public static final String VALID_NAME_GABRIELS_MILK = "Gabriel Milk";
     public static final String VALID_NAME_JAMES_MILK = "Jame Milk";
+    public static final String INVALID_NOTE = "";
+    public static final String VALID_NOTE = "VALID NOTE";
 
     // Customer
     public static final String VALID_NAME_AMY = "Amy Bee";

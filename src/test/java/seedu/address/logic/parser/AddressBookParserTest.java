@@ -22,7 +22,9 @@ import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.customer.CustomerListCommand;
+import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.delivery.Note;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -44,6 +46,13 @@ public class AddressBookParserTest {
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+    }
+
+    @Test
+    public void parseCommand_deliveryCreateNote() throws Exception {
+        DeliveryCreateNoteCommand command = (DeliveryCreateNoteCommand) parser.parseCommand(
+            DeliveryCreateNoteCommand.COMMAND_WORD + " 1 --note This is a note");
+        assertEquals(new DeliveryCreateNoteCommand(1, new Note("This is a note")), command);
     }
 
     @Test
