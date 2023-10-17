@@ -59,7 +59,8 @@ public class DeliveryListCommand extends DeliveryCommand {
 
         List<Delivery> deliveryList = model.getSortedDeliveryList();
 
-        return new CommandResult(MESSAGE_SUCCESS, Messages.format(deliveryList));
+        //TODO: UI
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
