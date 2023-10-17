@@ -21,8 +21,9 @@ import seedu.address.logic.commands.customer.AddCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
 import seedu.address.testutil.PersonBuilder;
 
@@ -125,12 +126,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAddressBook(ReadOnlyBook<Customer> newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyBook<Customer> getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -160,17 +161,64 @@ public class AddCommandTest {
         }
 
         @Override
+<<<<<<< HEAD
         public boolean getUserLoginStatus() {
+=======
+        public Path getDeliveryBookFilePath() {
+>>>>>>> master
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+<<<<<<< HEAD
         public void setLoginSuccess() {
+=======
+        public void setDeliveryBookFilePath(Path deliveryBookFilePath) {
+>>>>>>> master
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+<<<<<<< HEAD
         public void setLogoutSuccess() {
+=======
+        public void setDeliveryBook(ReadOnlyBook<Delivery> deliveryBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyBook<Delivery> getDeliveryBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasDelivery(Delivery delivery) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteDelivery(Delivery target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addDelivery(Delivery customer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDelivery(Delivery target, Delivery editedCustomer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Delivery> getFilteredDeliveryList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
+>>>>>>> master
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -217,7 +265,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyBook<Customer> getAddressBook() {
             return new AddressBook();
         }
 
