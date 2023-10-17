@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -35,6 +36,19 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Id} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static int parseId(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Integer.parseInt(trimmedIndex);
     }
 
     /**
@@ -125,6 +139,26 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String status} into an {@code DeliveryStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static DeliveryStatus parseDeliveryStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+
+        if (trimmedStatus.equals("all")) {
+            return null;
+        }
+
+        if (!DeliveryStatus.isValidStatus(trimmedStatus)) {
+            throw new ParseException(DeliveryStatus.MESSAGE_CONSTRAINTS);
+        }
+
+        return DeliveryStatus.valueOf(trimmedStatus.toUpperCase());
+    }
+    /**
      * Parses a {@code String tag} into a {@code Username}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -153,4 +187,5 @@ public class ParserUtil {
         }
         return new Password(trimmedPassword);
     }
+
 }

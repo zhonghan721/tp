@@ -1,11 +1,22 @@
 package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
+import java.util.Optional;
+
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryDate;
+import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.delivery.DeliveryStatus;
+import seedu.address.model.delivery.Note;
+import seedu.address.model.delivery.OrderDate;
+import seedu.address.model.person.Customer;
 
 /**
  * Represents a Command to update DeliveryStatus
@@ -19,6 +30,8 @@ public class DeliveryStatusCommand extends DeliveryCommand {
             + "Parameters: STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) "
             + "ID (must be a integer representing a valid ID)\n"
             + "Example: " + COMMAND_WORD + "COMPLETED 1";
+
+    public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery: %1$s";
 
     private final int targetId;
     private final DeliveryStatus updatedStatus;
@@ -38,6 +51,63 @@ public class DeliveryStatusCommand extends DeliveryCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        throw new CommandException("Command not implemented");
+        // Find Delivery
+        Optional<Delivery> targetDelivery = model.getDeliveryBook().getById(targetId);
+
+        if (targetDelivery.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+        }
+
+        // Edit Delivery
+        Delivery editedDelivery = createDeliveryWithNewStatus(targetDelivery.get(), updatedStatus);
+
+        // Update Delivery
+        model.setDelivery(targetDelivery.get(), editedDelivery);
+        model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        return new CommandResult(String.format(MESSAGE_EDIT_DELIVERY_SUCCESS, Messages.format(editedDelivery)));
+    }
+
+    /**
+     * Creates and returns a {@code Delivery} with the details of {@code deliveryToEdit}
+     * edited with {@code newStatus}.
+     */
+    private static Delivery createDeliveryWithNewStatus(Delivery deliveryToEdit, DeliveryStatus newStatus) {
+        assert deliveryToEdit != null;
+
+        int updatedId = deliveryToEdit.getDeliveryId();
+        DeliveryName updatedName = deliveryToEdit.getName();
+        Customer updatedCustomer = deliveryToEdit.getCustomer();
+        OrderDate updatedOrderDate = deliveryToEdit.getOrderDate();
+        DeliveryDate updatedDeliveryDate = deliveryToEdit.getDeliveryDate();
+        DeliveryStatus updatedStatus = newStatus;
+        Note updatedNote = deliveryToEdit.getNote();
+
+
+        return new Delivery(updatedId, updatedName, updatedCustomer, updatedOrderDate,
+            updatedDeliveryDate, updatedStatus, updatedNote);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeliveryStatusCommand)) {
+            return false;
+        }
+
+        DeliveryStatusCommand otherStatusCommand = (DeliveryStatusCommand) other;
+        return targetId == otherStatusCommand.targetId
+            && updatedStatus.equals(otherStatusCommand.updatedStatus);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+            .add("targetId", targetId)
+            .add("status", updatedStatus)
+            .toString();
     }
 }
