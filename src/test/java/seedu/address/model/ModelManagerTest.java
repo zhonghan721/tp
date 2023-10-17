@@ -142,8 +142,8 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, deliveryBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, deliveryBook, userPrefs);
+        modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, true);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, deliveryBook, userPrefs, true);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -156,15 +156,15 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, deliveryBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, deliveryBook, userPrefs, true)));
 
         // different deliverybook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentDeliveryBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentDeliveryBook, userPrefs, true)));
 
         // different filteredPersonList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, userPrefs, true)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
@@ -172,7 +172,7 @@ public class ModelManagerTest {
         // different filteredDeliveryList -> returns false
         String[] deliveryKeywords = GABRIELS_MILK.getName().deliveryName.split("\\s+");
         modelManager.updateFilteredDeliveryList(new DeliveryNameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, userPrefs, true)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
@@ -180,6 +180,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, differentUserPrefs, true)));
     }
 }
