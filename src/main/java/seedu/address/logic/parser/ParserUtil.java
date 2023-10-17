@@ -162,8 +162,9 @@ public class ParserUtil {
             throw new ParseException("Sort must be asc or desc");
         }
         return trimmedSort;
+    }
 
-   /**
+    /**
      * Parses a {@code String tag} into a {@code Username}.
      * Leading and trailing whitespaces will be trimmed.
      *

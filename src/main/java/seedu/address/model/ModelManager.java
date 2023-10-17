@@ -280,7 +280,7 @@ public class ModelManager implements Model {
             && deliveryBook.equals(otherModelManager.deliveryBook)
             && userPrefs.equals(otherModelManager.userPrefs)
             && filteredCustomers.equals(otherModelManager.filteredCustomers)
-            && filteredDeliveries.equals(otherModelManager.filteredDeliveries);
+            && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
             && isLoggedIn == otherModelManager.isLoggedIn;
     }
 

@@ -64,7 +64,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validCustomer);
 
         assertThrows(CommandException.class,
-                Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> addCommand.execute(modelStub));
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -229,7 +229,7 @@ public class AddCommandTest {
 
         @Override
         public void sortFilteredDeliveryList(Comparator<Delivery> comparator) {
-            throw new AssertionError("This method should not be called."); 
+            throw new AssertionError("This method should not be called.");
         }
 
         public boolean getUserLoginStatus() {
