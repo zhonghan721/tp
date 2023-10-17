@@ -46,8 +46,14 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_USERNAME_AARON = "aAron1sMe";
     public static final String VALID_USERNAME_FOODBEAR = "FoodBear";
+    // password string is qwerty1234
     public static final String VALID_PASSWORD_AARON = "qwerty1234";
+    public static final String VALID_HASHED_PASSWORD_AARON =
+            "17F80754644D33AC685B0842A402229ADBB43FC9312F7BDF36BA24237A1F1FFB";
+    // password string is BEARYf00d
     public static final String VALID_PASSWORD_FOODBEAR = "BEARYf00d";
+    public static final String VALID_HASHED_PASSWORD_FOODBEAR =
+            "26CC1E3D7988F3AE6FB06859123B5046A5A84D47611092037E059F66E1C0E461";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
