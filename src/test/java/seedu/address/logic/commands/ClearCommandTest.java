@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -33,6 +35,22 @@ public class ClearCommandTest {
         expectedModel.setAddressBook(new AddressBook());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_emptyAddressBookLoggedOut_failure() {
+        Model model = new ModelManager();
+        model.setLogoutSuccess();
+
+        assertCommandFailure(new ClearCommand(), model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+
+    @Test
+    public void execute_nonEmptyAddressBookLoggedOut_failure() {
+        Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(),
+                new UserPrefs(), false);
+
+        assertCommandFailure(new ClearCommand(), model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
 }

@@ -48,4 +48,24 @@ public class AddCommandIntegrationTest {
                 AddCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
+    @Test
+    public void execute_newPersonLoggedOut_failure() {
+        model.setLogoutSuccess();
+        Customer validCustomer = new PersonBuilder().build();
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
+                new UserPrefs(), model.getUserLoginStatus());
+        expectedModel.addPerson(validCustomer);
+
+        assertCommandFailure(new AddCommand(validCustomer), model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+
+    @Test
+    public void execute_duplicatePersonLoggedOut_throwsCommandException() {
+        model.setLogoutSuccess();
+        Customer customerInList = model.getAddressBook().getList().get(0);
+        assertCommandFailure(new AddCommand(customerInList), model,
+                Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+
 }

@@ -166,6 +166,40 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_allFieldsSpecifiedUnfilteredListLoggedOut_failure() {
+        // set state of model to be logged out
+        model.setLogoutSuccess();
+        Customer editedCustomer = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedCustomer).build();
+        CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+
+    @Test
+    public void execute_someFieldsSpecifiedUnfilteredListLoggedOut_failure() {
+        // set state of model to be logged out
+        model.setLogoutSuccess();
+        // customerId = 1
+        Index indexLastPerson = Index.fromOneBased(1);
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withCustomerId(1).withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).build();
+        CustomerEditCommand editCommand = new CustomerEditCommand(indexLastPerson, descriptor);
+
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+
+    @Test
+    public void execute_noFieldSpecifiedUnfilteredListLoggedOut_failure() {
+        // set state of model to be logged out
+        model.setLogoutSuccess();
+        CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_SECOND_PERSON, new EditPersonDescriptor());
+
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+
+    @Test
     public void equals() {
         final CustomerEditCommand standardCommand = new CustomerEditCommand(INDEX_FIRST_PERSON, DESC_AMY);
 

@@ -56,6 +56,17 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_personAcceptedByModelLoggedOut_addFailure() throws Exception {
+        ModelStubAcceptingPersonAddedLoggedOut modelStub = new ModelStubAcceptingPersonAddedLoggedOut();
+        Customer validCustomer = new PersonBuilder().build();
+
+        AddCommand addCommand = new AddCommand(validCustomer);
+
+        assertThrows(CommandException.class,
+                Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
     public void equals() {
         Customer alice = new PersonBuilder().withName("Alice").build();
         Customer bob = new PersonBuilder().withName("Bob").build();
@@ -275,6 +286,32 @@ public class AddCommandTest {
         @Override
         public boolean getUserLoginStatus() {
             return true;
+        }
+    }
+
+    private class ModelStubAcceptingPersonAddedLoggedOut extends ModelStub {
+        final ArrayList<Customer> personsAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasPerson(Customer customer) {
+            requireNonNull(customer);
+            return personsAdded.stream().anyMatch(customer::isSamePerson);
+        }
+
+        @Override
+        public void addPerson(Customer customer) {
+            requireNonNull(customer);
+            personsAdded.add(customer);
+        }
+
+        @Override
+        public ReadOnlyBook<Customer> getAddressBook() {
+            return new AddressBook();
+        }
+
+        @Override
+        public boolean getUserLoginStatus() {
+            return false;
         }
     }
 

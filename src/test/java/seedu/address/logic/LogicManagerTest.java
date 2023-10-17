@@ -182,7 +182,8 @@ public class LogicManagerTest {
         Customer expectedCustomer = new PersonBuilder(AMY)
                 .withCustomerId(Customer.getCustomerCount()).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.setLoginSuccess();    // sets the expected model to be in logged in state
+        // sets the expected model to be in logged in state
+        expectedModel.setLoginSuccess();
         expectedModel.addPerson(expectedCustomer);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }

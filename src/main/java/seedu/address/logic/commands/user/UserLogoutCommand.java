@@ -1,12 +1,15 @@
 package seedu.address.logic.commands.user;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Logs out the user.
+ */
 public class UserLogoutCommand extends Command {
 
     public static final String COMMAND_WORD = "logout";
