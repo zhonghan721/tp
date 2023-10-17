@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
@@ -68,7 +69,9 @@ public class CommandTestUtil {
     public static final String USERNAME_DESC_AARON = " " + PREFIX_USER + VALID_USERNAME_AARON;
     public static final String USERNAME_DESC_FOODBEAR = " " + PREFIX_USER + VALID_USERNAME_FOODBEAR;
     public static final String PASSWORD_DESC_AARON = " " + PREFIX_PASSWORD + VALID_PASSWORD_AARON;
+    public static final String PASSWORD_CONFIRM_DESC_AARON = " " + PREFIX_PASSWORD_CONFIRM + VALID_PASSWORD_AARON;
     public static final String PASSWORD_DESC_FOODBEAR = " " + PREFIX_PASSWORD + VALID_PASSWORD_FOODBEAR;
+    public static final String PASSWORD_CONFIRM_DESC_FOODBEAR = " " + PREFIX_PASSWORD_CONFIRM + VALID_PASSWORD_FOODBEAR;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -79,7 +82,7 @@ public class CommandTestUtil {
     public static final String INVALID_USERNAME_DESC = " " + PREFIX_USER
             + "thisIs^myName"; // '^' not allowed in username
     public static final String INVALID_PASSWORD_DESC = " " + PREFIX_PASSWORD + "qwerty"; // lesser than 8 characters
-
+    public static final String INVALID_PASSWORD_CONFIRM_DESC = " " + PREFIX_PASSWORD_CONFIRM + "qwerty";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
