@@ -6,7 +6,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 import java.util.Comparator;
 import java.util.List;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
