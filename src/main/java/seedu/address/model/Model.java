@@ -23,6 +23,16 @@ public interface Model {
     Predicate<Delivery> PREDICATE_SHOW_ALL_DELIVERIES = unused -> true;
 
     /**
+     * {@code Predicate} that always evaluate to true
+     */
+    Predicate<Customer> PREDICATE_SHOW_NO_CUSTOMERS = unused -> false;
+
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
+    Predicate<Delivery> PREDICATE_SHOW_NO_DELIVERIES = unused -> false;
+
+    /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);

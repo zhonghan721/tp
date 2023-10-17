@@ -1,10 +1,11 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.user;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 
 import seedu.address.logic.commands.user.UserLoginCommand;
+import seedu.address.logic.parser.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;

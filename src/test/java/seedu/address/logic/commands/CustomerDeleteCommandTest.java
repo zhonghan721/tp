@@ -27,7 +27,7 @@ import seedu.address.model.person.Customer;
  */
 public class CustomerDeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -37,7 +37,8 @@ public class CustomerDeleteCommandTest {
         String expectedMessage = String.format(CustomerDeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(customerToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
+                new UserPrefs(), model.getUserLoginStatus());
         expectedModel.deletePerson(customerToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -61,7 +62,8 @@ public class CustomerDeleteCommandTest {
         String expectedMessage = String.format(CustomerDeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(customerToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
+                new UserPrefs(), model.getUserLoginStatus());
         expectedModel.deletePerson(customerToDelete);
         showNoPerson(expectedModel);
 

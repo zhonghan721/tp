@@ -161,27 +161,16 @@ public class AddCommandTest {
         }
 
         @Override
-<<<<<<< HEAD
-        public boolean getUserLoginStatus() {
-=======
         public Path getDeliveryBookFilePath() {
->>>>>>> master
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-<<<<<<< HEAD
-        public void setLoginSuccess() {
-=======
         public void setDeliveryBookFilePath(Path deliveryBookFilePath) {
->>>>>>> master
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-<<<<<<< HEAD
-        public void setLogoutSuccess() {
-=======
         public void setDeliveryBook(ReadOnlyBook<Delivery> deliveryBook) {
             throw new AssertionError("This method should not be called.");
         }
@@ -218,7 +207,21 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
->>>>>>> master
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getUserLoginStatus() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLoginSuccess() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLogoutSuccess() {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -32,7 +32,7 @@ public class ModelManager implements Model {
      */
     public ModelManager(ReadOnlyBook<Customer> addressBook,
                         ReadOnlyBook<Delivery> deliveryBook,
-                        ReadOnlyUserPrefs userPrefs) {
+                        ReadOnlyUserPrefs userPrefs, boolean isLoggedIn) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
@@ -44,10 +44,11 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredCustomers = new FilteredList<>(this.addressBook.getList());
         filteredDeliveries = new FilteredList<>(this.deliveryBook.getList());
+        this.isLoggedIn = isLoggedIn;
     }
 
     public ModelManager() {
-        this(new AddressBook(), new DeliveryBook(), new UserPrefs());
+        this(new AddressBook(), new DeliveryBook(), new UserPrefs(), false);
     }
 
     //=========== UserPrefs ==================================================================================
@@ -142,7 +143,7 @@ public class ModelManager implements Model {
     public ObservableList<Customer> getFilteredPersonList() {
         // only shows the customer list if the user is logged in
         if (!isLoggedIn) {
-            filteredCustomers.setPredicate(x -> false);
+            filteredCustomers.setPredicate(PREDICATE_SHOW_NO_CUSTOMERS);
         }
         return filteredCustomers;
     }
@@ -154,7 +155,7 @@ public class ModelManager implements Model {
         if (isLoggedIn) {
             filteredCustomers.setPredicate(predicate);
         } else {
-            filteredCustomers.setPredicate(x -> false);
+            filteredCustomers.setPredicate(PREDICATE_SHOW_NO_CUSTOMERS);
         }
     }
 
@@ -228,13 +229,22 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Delivery> getFilteredDeliveryList() {
+        // only shows the delivery list if the user is logged in
+        if (!isLoggedIn) {
+            filteredDeliveries.setPredicate(PREDICATE_SHOW_NO_DELIVERIES);
+        }
         return filteredDeliveries;
     }
 
     @Override
     public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
         requireNonNull(predicate);
-        filteredDeliveries.setPredicate(predicate);
+        // only shows the delivery list if the user is logged in
+        if (isLoggedIn) {
+            filteredDeliveries.setPredicate(predicate);
+        } else {
+            filteredDeliveries.setPredicate(PREDICATE_SHOW_NO_DELIVERIES);
+        }
     }
 
     @Override
@@ -253,7 +263,8 @@ public class ModelManager implements Model {
                 && deliveryBook.equals(otherModelManager.deliveryBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredCustomers.equals(otherModelManager.filteredCustomers)
-                && filteredDeliveries.equals(otherModelManager.filteredDeliveries);
+                && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
+                && isLoggedIn == otherModelManager.isLoggedIn;
     }
 
 }

@@ -18,13 +18,18 @@ public class ClearCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
+        model.setLoginSuccess();
+        expectedModel.setLoginSuccess();
+
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(),
+                new UserPrefs(), true);
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(),
+                new UserPrefs(), true);
         expectedModel.setAddressBook(new AddressBook());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);

@@ -25,14 +25,15 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
     }
 
     @Test
     public void execute_newPerson_success() {
         Customer validCustomer = new PersonBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
+                new UserPrefs(), model.getUserLoginStatus());
         expectedModel.addPerson(validCustomer);
 
         assertCommandSuccess(new AddCommand(validCustomer), model,

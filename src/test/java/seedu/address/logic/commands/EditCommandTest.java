@@ -36,7 +36,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -49,7 +49,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
-                new UserPrefs());
+                new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedCustomer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -73,7 +73,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
-                new UserPrefs());
+                new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setPerson(lastCustomer, editedCustomer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -89,7 +89,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
-                new UserPrefs());
+                new UserPrefs(), model.getUserLoginStatus());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -112,7 +112,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
-                new UserPrefs());
+                new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedCustomer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
