@@ -35,6 +35,14 @@ public class CommandTestUtil {
     // Delivery
     public static final String VALID_NAME_GABRIELS_MILK = "Gabriel Milk";
     public static final String VALID_NAME_JAMES_MILK = "Jame Milk";
+    public static final String INVALID_STATUS = "INVALID";
+    public static final String VALID_STATUS_CREATED = "CREATED";
+    public static final String VALID_STATUS_SHIPPED = "SHIPPED";
+    public static final String VALID_STATUS_COMPLETED = "COMPLETED";
+    public static final String VALID_STATUS_CANCELLED = "CANCELLED";
+    public static final String INVALID_ID_NEGATIVE = "-1";
+    public static final String INVALID_ID_NAN = "NaN";
+
 
     // Customer
     public static final String VALID_NAME_AMY = "Amy Bee";

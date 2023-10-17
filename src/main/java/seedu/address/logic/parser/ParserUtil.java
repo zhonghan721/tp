@@ -40,6 +40,19 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code oneBasedIndex} into an {@code Id} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static int parseId(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Integer.parseInt(trimmedIndex);
+    }
+
+    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -127,10 +140,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String status} into a {@code DeliveryStatus}.
+     * Parses a {@code String status} into an {@code DeliveryStatus}.
+     * Leading and trailing whitespaces will be trimmed.
      *
-     * @param status the status to be parsed.
-     * @return the parsed DeliveryStatus.
      * @throws ParseException if the given {@code status} is invalid.
      */
     public static DeliveryStatus parseDeliveryStatus(String status) throws ParseException {
@@ -144,7 +156,7 @@ public class ParserUtil {
         if (!DeliveryStatus.isValidStatus(trimmedStatus)) {
             throw new ParseException(DeliveryStatus.MESSAGE_CONSTRAINTS);
         }
-
+      
         return DeliveryStatus.valueOf(trimmedStatus);
     }
 
@@ -163,7 +175,7 @@ public class ParserUtil {
         }
         return trimmedSort;
     }
-
+  
     /**
      * Parses a {@code String tag} into a {@code Username}.
      * Leading and trailing whitespaces will be trimmed.
@@ -193,4 +205,5 @@ public class ParserUtil {
         }
         return new Password(trimmedPassword);
     }
+
 }
