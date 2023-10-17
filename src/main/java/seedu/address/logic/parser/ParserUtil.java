@@ -9,6 +9,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.delivery.Date;
+import seedu.address.model.delivery.DeliveryDate;
+import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -121,4 +124,38 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    public static DeliveryName parseDeliveryName(String deliveryName) throws ParseException {
+        requireNonNull(deliveryName);
+        String trimmedDeliveryName = deliveryName.trim();
+        if (!DeliveryName.isValidName(deliveryName)) {
+            throw new ParseException(DeliveryName.MESSAGE_CONSTRAINTS);
+        }
+        return new DeliveryName(trimmedDeliveryName);
+    }
+
+    public static DeliveryDate parseDeliveryDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!seedu.address.model.delivery.Date.isValidDate(date)) {
+            throw new ParseException(seedu.address.model.delivery.Date.MESSAGE_CONSTRAINTS);
+        }
+        return new DeliveryDate(trimmedDate);
+    }
+
+
+    //Replace with Ben's version
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Id} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static int parseId(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Integer.parseInt(trimmedIndex);
+    }
+
 }

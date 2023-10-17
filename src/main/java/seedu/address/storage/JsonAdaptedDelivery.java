@@ -15,6 +15,8 @@ import seedu.address.model.delivery.Note;
 import seedu.address.model.delivery.OrderDate;
 import seedu.address.model.person.Customer;
 
+import javax.swing.text.html.Option;
+
 /**
  * Jackson-friendly version of {@link Customer}.
  */
@@ -62,7 +64,7 @@ class JsonAdaptedDelivery {
         orderDate = source.getOrderDate().toString();
         deliveryDate = source.getDeliveryDate().toString();
         status = source.getStatus().name();
-        note = source.getNote().note;
+        note = Optional.ofNullable(source.getNote()).map(n -> n.note).orElse(null);
     }
 
     /**
