@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 
 import java.util.List;
 
@@ -35,6 +36,12 @@ public class CustomerDeleteCommand extends CustomerCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        // User cannot perform this operation before logging in
+        if (!model.getUserLoginStatus()) {
+            throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
+        }
+
         List<Customer> lastShownList = model.getFilteredPersonList();
 
         // Instead of the above, loop through the list, and check if the customer ID matches

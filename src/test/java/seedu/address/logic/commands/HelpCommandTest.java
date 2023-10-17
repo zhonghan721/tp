@@ -13,7 +13,17 @@ public class HelpCommandTest {
     private Model expectedModel = new ModelManager();
 
     @Test
-    public void execute_help_success() {
+    public void execute_helpLoggedIn_success() {
+        model.setLoginSuccess();
+        expectedModel.setLoginSuccess();
+        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_helpLoggedOut_success() {
+        model.setLogoutSuccess();
+        expectedModel.setLogoutSuccess();
         CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }

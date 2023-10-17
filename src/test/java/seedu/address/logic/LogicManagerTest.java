@@ -46,6 +46,7 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
+        model.setLoginSuccess();
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonDeliveryBookStorage deliveryBookStorage =
@@ -130,7 +131,8 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
+                new UserPrefs(), model.getUserLoginStatus());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -180,6 +182,8 @@ public class LogicManagerTest {
         Customer expectedCustomer = new PersonBuilder(AMY)
                 .withCustomerId(Customer.getCustomerCount()).withTags().build();
         ModelManager expectedModel = new ModelManager();
+        // sets the expected model to be in logged in state
+        expectedModel.setLoginSuccess();
         expectedModel.addPerson(expectedCustomer);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
