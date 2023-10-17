@@ -24,7 +24,7 @@ import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.testutil.DeliveryBuilder;
 
 public class DeliveryStatusCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
 
     @Test
     public void execute_allFieldsValid_success() {
@@ -38,7 +38,8 @@ public class DeliveryStatusCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new DeliveryBook(model.getDeliveryBook()),
-            new UserPrefs());
+            new UserPrefs(),
+            true);
         expectedModel.setDelivery(model.getDeliveryBook().getById(GABRIELS_MILK.getDeliveryId()).get(),
             expectedDelivery);
 

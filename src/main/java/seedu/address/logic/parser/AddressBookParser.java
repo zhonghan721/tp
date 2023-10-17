@@ -18,9 +18,9 @@ import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.customer.CustomerListCommand;
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
-import seedu.address.logic.parser.delivery.DeliveryStatusCommandParser;
 import seedu.address.logic.commands.user.UserLoginCommand;
 import seedu.address.logic.commands.user.UserLogoutCommand;
+import seedu.address.logic.parser.delivery.DeliveryStatusCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.UserLoginCommandParser;
 
