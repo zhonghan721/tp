@@ -54,7 +54,7 @@ public class Delivery {
      * @param name         The name of the delivery.
      * @param customer     The customer who ordered the delivery.
      * @param orderDate    The date the delivery was ordered.
-     * @param deliveryDate The date the delivery was delivered.
+     * @param deliveryDate The date the delivery will be delivered.
      * @param status       The status of the delivery.
      */
     public Delivery(int deliveryId, DeliveryName name, Customer customer, OrderDate orderDate,

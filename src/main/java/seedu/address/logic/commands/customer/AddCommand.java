@@ -20,7 +20,7 @@ public class AddCommand extends CustomerCommand {
 
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " " + "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the HomeBoss. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the HomeBoss database. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -54,7 +54,7 @@ public class AddCommand extends CustomerCommand {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatCustomer(toAdd)));
     }
 
     @Override
