@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -201,5 +202,11 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, differentUserPrefs, true)));
+    }
+
+    @Test
+    public void getDelivery_returnsDelivery() {
+        modelManager.addDelivery(GABRIELS_MILK);
+        assertEquals(modelManager.getDelivery(1), Optional.of(GABRIELS_MILK));
     }
 }
