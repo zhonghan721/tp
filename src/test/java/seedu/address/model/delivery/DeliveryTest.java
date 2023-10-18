@@ -16,9 +16,7 @@ public class DeliveryTest {
     @Test
     public void deliveryId_success() {
         Delivery delivery = new DeliveryBuilder().autoBuild();
-
         Delivery delivery1 = new DeliveryBuilder().autoBuild();
-        
         assertTrue(delivery.getDeliveryId() != delivery1.getDeliveryId());
     }
 
