@@ -1,4 +1,5 @@
 package seedu.address.model.authentication;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Represents the authentication data stored in the authentication.json file.
@@ -13,6 +14,9 @@ public class AuthenticationData {
      * @param password
      */
     public AuthenticationData(String username, String password) {
+        requireNonNull(username);
+        requireNonNull(password);
+
         this.username = username;
         this.password = password;
     }

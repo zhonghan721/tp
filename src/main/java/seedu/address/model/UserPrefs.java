@@ -146,6 +146,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
      * @param user
      */
     public void registerUser(User user) {
+        requireNonNull(user);
         try {
             // Create an ObjectMapper
             ObjectMapper objectMapper = new ObjectMapper();
