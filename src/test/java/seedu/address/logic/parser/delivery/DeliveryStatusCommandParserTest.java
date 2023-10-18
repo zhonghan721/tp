@@ -78,6 +78,11 @@ public class DeliveryStatusCommandParserTest {
     }
 
     @Test
+    public void parse_invalidAllStatus_failure() {
+        assertParseFailure(parser, "ALL 1", MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
     public void parse_missingStatus_failure() {
         assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
     }

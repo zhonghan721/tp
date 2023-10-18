@@ -22,7 +22,7 @@ public class DeliveryBuilder {
     public static final DeliveryDate DEFAULT_DELIVERED_AT = new DeliveryDate("2023-12-12");
     public static final DeliveryStatus DEFAULT_STATUS = DeliveryStatus.CREATED;
 
-    public static final Note DEFAULT_NOTE = new Note("This is a note.");
+    public static final Note DEFAULT_NOTE = null;
 
     private int deliveryId;
     private DeliveryName name;
