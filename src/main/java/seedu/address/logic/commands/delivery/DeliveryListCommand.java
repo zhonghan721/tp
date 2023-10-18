@@ -60,7 +60,7 @@ public class DeliveryListCommand extends DeliveryCommand {
         List<Delivery> deliveryList = model.getSortedDeliveryList();
 
         //TODO: UI
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, true);
     }
 
     @Override

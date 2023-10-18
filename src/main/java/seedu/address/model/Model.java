@@ -2,12 +2,14 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
+import seedu.address.ui.ListItem;
 
 /**
  * The API of the Model component.
@@ -52,6 +54,12 @@ public interface Model {
      * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    void setUiListDelivery();
+
+    void setUiListCustomer();
+
+    ObservableList<ListItem> getUiList();
 
     /**
      * Returns the user prefs' address book file path.
@@ -168,7 +176,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredDeliveryList(Predicate<Delivery> predicate);
-
 
 
     void sortFilteredDeliveryList(Comparator<Delivery> comparator);
