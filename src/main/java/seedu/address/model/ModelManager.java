@@ -4,49 +4,63 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
+import seedu.address.ui.ListItem;
 
 /**
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private boolean isLoggedIn = false;
 
     private final AddressBook addressBook;
     private final DeliveryBook deliveryBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Customer> filteredCustomers;
     private final FilteredList<Delivery> filteredDeliveries;
+    private SortedList<Delivery> sortedDeliveries;
+
+    private ObservableList<ListItem> uiList;
 
     /**
      * Initializes a ModelManager with the given addressBook, deliveryBook and userPrefs.
      */
     public ModelManager(ReadOnlyBook<Customer> addressBook,
                         ReadOnlyBook<Delivery> deliveryBook,
-                        ReadOnlyUserPrefs userPrefs) {
+                        ReadOnlyUserPrefs userPrefs, boolean isLoggedIn) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
-                + ", delivery book" + deliveryBook
-                + " and user prefs " + userPrefs);
+            + ", delivery book" + deliveryBook
+            + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.deliveryBook = new DeliveryBook(deliveryBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredCustomers = new FilteredList<>(this.addressBook.getList());
         filteredDeliveries = new FilteredList<>(this.deliveryBook.getList());
+        sortedDeliveries = new SortedList<>(filteredDeliveries);
+        this.isLoggedIn = isLoggedIn;
+        this.setUiListCustomer();
+
     }
 
     public ModelManager() {
-        this(new AddressBook(), new DeliveryBook(), new UserPrefs());
+        this(new AddressBook(), new DeliveryBook(), new UserPrefs(), false);
     }
 
     //=========== UserPrefs ==================================================================================
@@ -71,6 +85,31 @@ public class ModelManager implements Model {
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         userPrefs.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public void setUiListDelivery() {
+
+        this.uiList = this.getSortedDeliveryList().stream().map(
+                delivery -> new ListItem(String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName()),
+                    delivery.getOrderDate().toString(), delivery.getStatus().toString(),
+                    delivery.getDeliveryDate().toString()))
+            .collect(Collectors.toCollection(
+                FXCollections::observableArrayList));
+    }
+
+
+    @Override
+    public void setUiListCustomer() {
+        this.uiList = this.getFilteredPersonList().stream().map(
+                person -> new ListItem(String.format("[%d] %s", person.getCustomerId(), person.getName()),
+                    person.getEmail().toString(), person.getPhone().toString()))
+            .collect(Collectors.toCollection(FXCollections::observableArrayList));
+    }
+
+    @Override
+    public ObservableList<ListItem> getUiList() {
+        return this.uiList;
     }
 
     @Override
@@ -139,13 +178,50 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Customer> getFilteredPersonList() {
+        // only shows the customer list if the user is logged in
+        if (!isLoggedIn) {
+            filteredCustomers.setPredicate(PREDICATE_SHOW_NO_CUSTOMERS);
+        }
         return filteredCustomers;
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Customer> predicate) {
         requireNonNull(predicate);
-        filteredCustomers.setPredicate(predicate);
+        // only shows the customer list if the user is logged in
+        if (isLoggedIn) {
+            filteredCustomers.setPredicate(predicate);
+        } else {
+            filteredCustomers.setPredicate(PREDICATE_SHOW_NO_CUSTOMERS);
+        }
+
+        setUiListCustomer();
+    }
+
+    //=========== User Related Methods =======================================================================
+
+    /**
+     * Returns true if the {@code user} is currently logged in.
+     */
+    @Override
+    public boolean getUserLoginStatus() {
+        return isLoggedIn;
+    }
+
+    /**
+     * Sets the login flag to true.
+     */
+    @Override
+    public void setLoginSuccess() {
+        isLoggedIn = true;
+    }
+
+    /**
+     * Sets the logout flag to true.
+     */
+    @Override
+    public void setLogoutSuccess() {
+        isLoggedIn = false;
     }
 
     //=========== DeliveryBook ================================================================================
@@ -158,6 +234,11 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyBook<Delivery> getDeliveryBook() {
         return deliveryBook;
+    }
+
+    @Override
+    public Optional<Delivery> getDelivery(int id) {
+        return this.deliveryBook.getById(id);
     }
 
     @Override
@@ -192,13 +273,39 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Delivery> getFilteredDeliveryList() {
+        // only shows the delivery list if the user is logged in
+        if (!isLoggedIn) {
+            filteredDeliveries.setPredicate(PREDICATE_SHOW_NO_DELIVERIES);
+        }
         return filteredDeliveries;
+    }
+
+    @Override
+    public ObservableList<Delivery> getSortedDeliveryList() {
+        return sortedDeliveries;
     }
 
     @Override
     public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
         requireNonNull(predicate);
-        filteredDeliveries.setPredicate(predicate);
+        // only shows the delivery list if the user is logged in
+        if (isLoggedIn) {
+            filteredDeliveries.setPredicate(predicate);
+        } else {
+            filteredDeliveries.setPredicate(PREDICATE_SHOW_NO_DELIVERIES);
+        }
+
+        // Update the sorted list
+        this.sortedDeliveries = new SortedList<>(filteredDeliveries);
+
+        setUiListDelivery();
+    }
+
+    @Override
+    public void sortFilteredDeliveryList(Comparator<Delivery> comparator) {
+        requireNonNull(comparator);
+        sortedDeliveries.setComparator(comparator);
+        setUiListDelivery();
     }
 
     @Override
@@ -214,10 +321,11 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                && deliveryBook.equals(otherModelManager.deliveryBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredCustomers.equals(otherModelManager.filteredCustomers)
-                && filteredDeliveries.equals(otherModelManager.filteredDeliveries);
+            && deliveryBook.equals(otherModelManager.deliveryBook)
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredCustomers.equals(otherModelManager.filteredCustomers)
+            && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
+            && isLoggedIn == otherModelManager.isLoggedIn;
     }
 
 }

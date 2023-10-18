@@ -1,12 +1,15 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
+import seedu.address.ui.ListItem;
 
 /**
  * The API of the Model component.
@@ -21,6 +24,16 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Delivery> PREDICATE_SHOW_ALL_DELIVERIES = unused -> true;
+
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
+    Predicate<Customer> PREDICATE_SHOW_NO_CUSTOMERS = unused -> false;
+
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
+    Predicate<Delivery> PREDICATE_SHOW_NO_DELIVERIES = unused -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -41,6 +54,12 @@ public interface Model {
      * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    void setUiListDelivery();
+
+    void setUiListCustomer();
+
+    ObservableList<ListItem> getUiList();
 
     /**
      * Returns the user prefs' address book file path.
@@ -120,6 +139,14 @@ public interface Model {
     ReadOnlyBook<Delivery> getDeliveryBook();
 
     /**
+     * Returns an optional containing a delivery with the given id.
+     *
+     * @param id the id of the delivery
+     * @return the optional containing delivery with the given id
+     */
+    Optional<Delivery> getDelivery(int id);
+
+    /**
      * Returns true if a delivery with the same identity as {@code delivery} exists in the address book.
      */
     boolean hasDelivery(Delivery delivery);
@@ -149,6 +176,8 @@ public interface Model {
      */
     ObservableList<Delivery> getFilteredDeliveryList();
 
+    ObservableList<Delivery> getSortedDeliveryList();
+
     /**
      * Updates the filter of the filtered delivery list to filter by the given {@code predicate}.
      *
@@ -157,4 +186,20 @@ public interface Model {
     void updateFilteredDeliveryList(Predicate<Delivery> predicate);
 
 
+    void sortFilteredDeliveryList(Comparator<Delivery> comparator);
+
+    /**
+     * Returns true if the {@code user} is currently logged in.
+     */
+    boolean getUserLoginStatus();
+
+    /**
+     * Sets the login flag to true.
+     */
+    void setLoginSuccess();
+
+    /**
+     * Sets the logout flag to true.
+     */
+    void setLogoutSuccess();
 }

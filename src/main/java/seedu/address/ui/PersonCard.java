@@ -1,13 +1,10 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Customer;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -24,36 +21,31 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Customer customer;
+    public final ListItem item;
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label title;
     @FXML
-    private Label id;
+    private Label description;
     @FXML
-    private Label phone;
+    private Label accessory;
+
     @FXML
-    private Label address;
-    @FXML
-    private Label email;
+    private Label mainAccessory;
     @FXML
     private FlowPane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Customer customer) {
+    public PersonCard(ListItem item) {
         super(FXML);
-        this.customer = customer;
-        id.setText(String.format("[ %04d ]", customer.getCustomerId()));
-        name.setText(customer.getName().fullName);
-        phone.setText(customer.getPhone().value);
-        address.setText(customer.getAddress().value);
-        email.setText(customer.getEmail().value);
-        customer.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        this.item = item;
+
+        this.title.setText(item.getTitle());
+        this.description.setText(item.getDescription());
+        this.accessory.setText(item.getMainAccessory());
     }
 }

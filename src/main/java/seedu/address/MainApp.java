@@ -115,7 +115,7 @@ public class MainApp extends Application {
             initialDeliveryData = new DeliveryBook();
         }
 
-        return new ModelManager(initialAddressData, initialDeliveryData, userPrefs);
+        return new ModelManager(initialAddressData, initialDeliveryData, userPrefs, false);
     }
 
     private void initLogging(Config config) {
