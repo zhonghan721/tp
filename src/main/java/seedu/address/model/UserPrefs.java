@@ -173,6 +173,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
             // Handle any exceptions related to file I/O or JSON serialization
             logger.warning("Error writing to authentication file: " + e.getMessage());
             return false;
+        } catch (Exception e) {
+            logger.warning("Error: " + e.getMessage());
+            return false;
         }
     }
 

@@ -1,17 +1,16 @@
 package seedu.address.logic.commands.user;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -33,7 +32,7 @@ public class UserRegisterCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(),
                 new UserPrefs(), true);
         User user = new User(new Username("username"), new Password("password"), false);
-
+        model.setLoggedInUser(user);
         UserRegisterCommand userRegisterCommand = new UserRegisterCommand(user);
 
         assertCommandFailure(userRegisterCommand, model,
@@ -45,7 +44,7 @@ public class UserRegisterCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(),
                 new UserPrefs(), false);
         User user = new User(new Username("username"), new Password("password"), false);
-
+        model.setLoggedInUser(user);
         UserRegisterCommand userRegisterCommand = new UserRegisterCommand(user);
 
         assertCommandFailure(userRegisterCommand, model,
@@ -70,15 +69,7 @@ public class UserRegisterCommandTest {
         CommandResult result;
 
         model.setLoggedInUser(null);
-
-        try {
-            result = userRegisterCommand.execute(model);
-        } catch (CommandException e) {
-            throw new AssertionError("Execution of command should not fail.", e);
-        }
-
-        // Assert that the result indicates success
-        assertEquals(UserRegisterCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+        assertCommandSuccess(userRegisterCommand, model, UserRegisterCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
