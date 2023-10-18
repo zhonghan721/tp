@@ -97,20 +97,20 @@ public class ModelManager implements Model {
     public void setUiListDelivery() {
 
         this.uiList = this.getSortedDeliveryList().stream().map(
-                delivery -> new ListItem(String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName()),
-                    delivery.getOrderDate().toString(), delivery.getStatus().toString(),
-                    delivery.getDeliveryDate().toString()))
-            .collect(Collectors.toCollection(
-                FXCollections::observableArrayList));
+                        delivery -> new ListItem(String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName()),
+                                delivery.getOrderDate().toString(), delivery.getStatus().toString(),
+                                delivery.getDeliveryDate().toString()))
+                .collect(Collectors.toCollection(
+                        FXCollections::observableArrayList));
     }
 
 
     @Override
     public void setUiListCustomer() {
         this.uiList = this.getFilteredPersonList().stream().map(
-                person -> new ListItem(String.format("[%d] %s", person.getCustomerId(), person.getName()),
-                    person.getEmail().toString(), person.getPhone().toString()))
-            .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                        person -> new ListItem(String.format("[%d] %s", person.getCustomerId(), person.getName()),
+                                person.getEmail().toString(), person.getPhone().toString()))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     @Override
@@ -220,10 +220,15 @@ public class ModelManager implements Model {
     /**
      * Returns true if the stored username and password matches the given {@code user}.
      */
+//    @Override
+//    public boolean userMatches(User user) {
+//        requireNonNull(user);
+//        return userPrefs.userMatches(user);
+//    }
     @Override
     public boolean userMatches(User user) {
         requireNonNull(user);
-        return userPrefs.userMatches(user);
+        return user.equals(loggedInUser);
     }
 
     /**

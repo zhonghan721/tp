@@ -113,18 +113,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     /**
-     * Returns true if stored username and password matches the given {@code user}.
-     *
-     * @param currentUser
-     * @return true if stored username and password matches the given {@code user}
-     */
-    public boolean userMatches(User currentUser) {
-        requireNonNull(currentUser);
-        User storedUser = getStoredUser();
-        return currentUser.equals(storedUser);
-    }
-
-    /**
      * Returns the stored user.
      *
      * @return storedUser

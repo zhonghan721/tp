@@ -38,24 +38,6 @@ public class UserPrefsTest {
     }
 
     @Test
-    // test different cases
-    public void userMatches_nullUser_throwsNullPointerException() {
-        UserPrefs userPrefs = new UserPrefs();
-
-        assertThrows(NullPointerException.class, () -> userPrefs.userMatches(null));
-    }
-
-    @Test
-    public void userMatches_differentUser_returnsFalse() {
-        UserPrefs userPrefs = new UserPrefs();
-        userPrefs.registerUser(new User(new Username("username1"), new Password("password1"), false));
-        Username username = new Username("username2");
-        Password password = new Password("password2");
-        User user = new User(username, password, true);
-        assertFalse(userPrefs.userMatches(user));
-    }
-
-    @Test
     public void getStoredUser_nullUser_returnsNull() {
         // assume authentication file is empty
         UserPrefs userPrefs = new UserPrefs();
