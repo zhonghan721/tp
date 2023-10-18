@@ -1,28 +1,28 @@
 package seedu.address.logic.commands.delivery;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.customer.AddCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.Messages;
-import seedu.address.model.delivery.Delivery;
-import seedu.address.model.delivery.DeliveryDate;
-import seedu.address.model.delivery.DeliveryName;
-import seedu.address.model.delivery.DeliveryStatus;
-import seedu.address.model.delivery.OrderDate;
-import seedu.address.model.Model;
-import seedu.address.model.person.Customer;
-import seedu.address.model.ReadOnlyBook;
-
-
-
-import java.time.LocalDate;
-
-import java.util.Objects;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DELIVERY_DATE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+
+import java.io.ObjectInputFilter;
+import java.time.LocalDate;
+import java.util.Objects;
+
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.customer.AddCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyBook;
+import seedu.address.model.delivery.*;
+import seedu.address.model.person.Customer;
+
+/**
+ * Adds a delivery to the delivery book.
+ */
 public class DeliveryAddCommand extends DeliveryCommand {
 
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "add";
@@ -55,7 +55,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
 
         requireNonNull(model);
 
-        Delivery toAdd = createDelivery(model,deliveryAddDescriptor);
+        Delivery toAdd = createDelivery(model, deliveryAddDescriptor);
 
         if (model.hasDelivery(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_DELIVERY);
@@ -88,12 +88,13 @@ public class DeliveryAddCommand extends DeliveryCommand {
                 .toString();
     }
 
-    private static Delivery createDelivery(Model model, DeliveryAddDescriptor deliveryAddDescriptor) throws CommandException {
+    private static Delivery createDelivery(Model model, DeliveryAddDescriptor deliveryAddDescriptor)
+            throws CommandException {
 
         DeliveryName deliveryName = deliveryAddDescriptor.getDeliveryName();
         int customerId = deliveryAddDescriptor.getCustomerId();
         Customer customer = null;
-        DeliveryDate deliveryDate = deliveryAddDescriptor.getDate();
+        DeliveryDate deliveryDate = null;
 
         LocalDate now = LocalDate.now();
         OrderDate orderDate = new OrderDate(now.toString());
@@ -104,11 +105,15 @@ public class DeliveryAddCommand extends DeliveryCommand {
 
         if (checkValidCustomer(model, deliveryAddDescriptor)) {
             customer = customerReadOnlyBook.getById(customerId).get();
-            return new Delivery(deliveryName, customer, orderDate, deliveryDate, newDeliveryStatus);
         } else {
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
+        if (checkValidDeliveryDate(deliveryAddDescriptor)) {
+            deliveryDate = deliveryAddDescriptor.getDate();
+        } else {
+            throw new CommandException(MESSAGE_INVALID_DELIVERY_DATE);
+        }
+        return new Delivery(deliveryName, customer, orderDate, deliveryDate, newDeliveryStatus);
 
     }
 
@@ -125,11 +130,34 @@ public class DeliveryAddCommand extends DeliveryCommand {
         } return false;
     }
 
+    /**
+     * Checks if the delivery date input is valid.
+     * If the delivery date is before the current date, return false as it would not be possible.
+     * @param deliveryAddDescriptor deliveryAddDescriptor to supply the delivery date input by user.
+     * @return If the delivery date is valid or not.
+     */
+    private static boolean checkValidDeliveryDate(DeliveryAddDescriptor deliveryAddDescriptor) {
+        DeliveryDate deliveryDate = deliveryAddDescriptor.getDate();
+        return DeliveryDate.isValidDeliveryDate(deliveryDate.toString());
+    }
 
+    /**
+     * Stores the details to edit the delivery with. Each non-empty field value will replace the
+     * corresponding field value of the delivery.
+     */
     public static class DeliveryAddDescriptor {
         private DeliveryName deliveryName;
         private int customerId;
         private DeliveryDate deliveryDate;
+
+        private int deliveryId;
+
+        private OrderDate orderDate;
+
+        private DeliveryStatus deliveryStatus;
+
+        private Note note;
+        private Customer customer;
 
 
         public DeliveryAddDescriptor() {
@@ -171,6 +199,45 @@ public class DeliveryAddCommand extends DeliveryCommand {
             return deliveryDate;
         }
 
+        public void setOrderDate(OrderDate orderDate) {
+            this.orderDate = orderDate;
+        }
+
+        public OrderDate getOrderDate() {
+            return orderDate;
+        }
+
+        public void setDeliveryId(int deliveryId) {
+            this.deliveryId = deliveryId;
+        }
+        public int getDeliveryId() {
+            return deliveryId;
+        }
+
+        public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
+            this.deliveryStatus = deliveryStatus;
+        }
+
+        public DeliveryStatus getDeliveryStatus() {
+            return deliveryStatus;
+        }
+
+        public void setNote(Note note) {
+            this.note = note;
+        }
+
+        public Note getNote() {
+            return note;
+        }
+
+        public void setCustomer(Customer customer) {
+            this.customer = customer;
+        }
+
+        public Customer getCustomer() {
+            return customer;
+        }
+
 
         @Override
         public boolean equals(Object other) {
@@ -193,13 +260,12 @@ public class DeliveryAddCommand extends DeliveryCommand {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("deliveryName", deliveryName)
-                    .add("customerId", customerId)
-                    .add("date", deliveryDate)
+                    .add("deliveryId", deliveryId)
+                    .add("name", deliveryName)
+                    .add("customer", customerId)
+                    .add("orderedAt", orderDate)
+                    .add("deliveredAt", deliveryDate)
                     .toString();
         }
     }
-
-
-
 }

@@ -1,15 +1,19 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.delivery.DeliveryAddCommand;
-import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
-import seedu.address.logic.parser.exceptions.ParseException;
-
-import java.util.stream.Stream;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
+import java.util.stream.Stream;
+
+import seedu.address.logic.commands.delivery.DeliveryAddCommand;
+import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+/**
+ * Parses input arguments and creates a new DeliveryAddCommand object
+ */
 public class DeliveryAddCommandParser implements Parser<DeliveryAddCommand> {
 
     /**
@@ -21,9 +25,9 @@ public class DeliveryAddCommandParser implements Parser<DeliveryAddCommand> {
     public DeliveryAddCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args,PREFIX_CUSTOMER_ID, PREFIX_DATE);
+                ArgumentTokenizer.tokenize(args, PREFIX_CUSTOMER_ID, PREFIX_DATE);
 
-        if (!arePrefixesPresent(argMultimap,PREFIX_CUSTOMER_ID, PREFIX_DATE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_CUSTOMER_ID, PREFIX_DATE)
                 || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeliveryAddCommand.MESSAGE_USAGE));
         }

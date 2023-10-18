@@ -9,7 +9,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.person.Address;
@@ -125,6 +124,12 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a {@code String deliveryName} into an {@code DeliveryName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code DeliveryName} is invalid.
+     */
     public static DeliveryName parseDeliveryName(String deliveryName) throws ParseException {
         requireNonNull(deliveryName);
         String trimmedDeliveryName = deliveryName.trim();
@@ -134,6 +139,12 @@ public class ParserUtil {
         return new DeliveryName(trimmedDeliveryName);
     }
 
+    /**
+     * Parses a {@code String date} into an {@code DeliveryDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code DeliveryDate} is invalid.
+     */
     public static DeliveryDate parseDeliveryDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
@@ -143,8 +154,6 @@ public class ParserUtil {
         return new DeliveryDate(trimmedDate);
     }
 
-
-    //Replace with Ben's version
     /**
      * Parses {@code oneBasedIndex} into an {@code Id} and returns it. Leading and trailing whitespaces will be
      * trimmed.

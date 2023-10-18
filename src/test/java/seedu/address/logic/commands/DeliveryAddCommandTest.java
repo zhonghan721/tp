@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -18,72 +17,52 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.customer.AddCommand;
+import seedu.address.logic.commands.delivery.DeliveryAddCommand;
+import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.DeliveryBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
+import seedu.address.testutil.DeliveryAddDescriptorBuilder;
+import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+
+public class DeliveryAddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
-    }
-
-    @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Customer validCustomer = new PersonBuilder().build();
-
-        CommandResult commandResult = new AddCommand(validCustomer).execute(modelStub);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.formatCustomer(validCustomer)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validCustomer), modelStub.personsAdded);
-    }
-
-    @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Customer validCustomer = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validCustomer);
-        ModelStub modelStub = new ModelStubWithPerson(validCustomer);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    public void constructor_nullDeliveryAddDescriptor_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new DeliveryAddCommand(null));
     }
 
     @Test
     public void equals() {
-        Customer alice = new PersonBuilder().withName("Alice").build();
-        Customer bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Delivery gabrielMilk = new DeliveryBuilder().withName("Gabriel Milk").build();
+        DeliveryAddDescriptor deliveryMilkAddDescriptor = new DeliveryAddDescriptorBuilder(gabrielMilk).build();
+        DeliveryAddCommand addMilkCommand = new DeliveryAddCommand(deliveryMilkAddDescriptor);
+
+        Delivery gambeRice = new DeliveryBuilder().withName("Gambe Rice").build();
+        DeliveryAddDescriptor deliveryRiceAddDescriptor = new DeliveryAddDescriptorBuilder(gambeRice).build();
+        DeliveryAddCommand addRiceCommand = new DeliveryAddCommand(deliveryRiceAddDescriptor);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addMilkCommand.equals(addMilkCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        DeliveryAddCommand addMilkCommandCopy = new DeliveryAddCommand(deliveryMilkAddDescriptor);
+        assertTrue(addMilkCommandCopy.equals(addMilkCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addMilkCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addMilkCommandCopy.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }
-
-    @Test
-    public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        assertFalse(addMilkCommand.equals(addRiceCommand));
     }
 
     /**
@@ -212,45 +191,45 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single delivery.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Customer customer;
+    private class ModelStubWithDelivery extends ModelStub {
+        private final Delivery delivery;
 
-        ModelStubWithPerson(Customer customer) {
-            requireNonNull(customer);
-            this.customer = customer;
+        ModelStubWithDelivery(Delivery delivery) {
+            requireNonNull(delivery);
+            this.delivery = delivery;
         }
 
         @Override
-        public boolean hasPerson(Customer customer) {
-            requireNonNull(customer);
-            return this.customer.isSamePerson(customer);
+        public boolean hasDelivery(Delivery delivery) {
+            requireNonNull(delivery);
+            return this.delivery.isSameDelivery(delivery);
         }
     }
 
     /**
      * A Model stub that always accept the person being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Customer> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingDeliveryAdded extends ModelStub {
+        final ArrayList<Delivery> deliveriesAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Customer customer) {
-            requireNonNull(customer);
-            return personsAdded.stream().anyMatch(customer::isSamePerson);
+        public boolean hasDelivery(Delivery delivery) {
+            requireNonNull(delivery);
+            return deliveriesAdded.stream().anyMatch(delivery::isSameDelivery);
         }
 
         @Override
-        public void addPerson(Customer customer) {
-            requireNonNull(customer);
-            personsAdded.add(customer);
+        public void addDelivery(Delivery delivery) {
+            requireNonNull(delivery);
+            deliveriesAdded.add(delivery);
         }
 
         @Override
-        public ReadOnlyBook<Customer> getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyBook<Delivery> getDeliveryBook() {
+            return new DeliveryBook();
         }
     }
-
 }
+

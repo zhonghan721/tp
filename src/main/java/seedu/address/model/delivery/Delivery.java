@@ -10,7 +10,7 @@ import seedu.address.model.person.Customer;
  */
 public class Delivery {
     // Delivery ID Generation
-    private static int deliveryCount;
+    private static int deliveryCount = 1;
 
     // Identity fields
     private final int deliveryId;

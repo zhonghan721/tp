@@ -15,8 +15,6 @@ import seedu.address.model.delivery.Note;
 import seedu.address.model.delivery.OrderDate;
 import seedu.address.model.person.Customer;
 
-import javax.swing.text.html.Option;
-
 /**
  * Jackson-friendly version of {@link Customer}.
  */

@@ -20,6 +20,9 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
 
+    public static final String MESSAGE_INVALID_DELIVERY_DATE =
+            "Delivery Date cannot be before today.";
+    public static final String MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX = "The delivery index provided is invalid";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -48,6 +51,10 @@ public class Messages {
         customer.getTags().forEach(builder::append);
         return builder.toString();
     }
+
+    /**
+     * Formats the {@code delivery} for display to the user.
+     */
     public static String formatDelivery(Delivery delivery) {
         final StringBuilder builder = new StringBuilder();
         builder.append(delivery.getName())

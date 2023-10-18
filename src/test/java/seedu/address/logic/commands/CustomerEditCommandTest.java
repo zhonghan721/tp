@@ -34,7 +34,7 @@ import seedu.address.testutil.PersonBuilder;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
-public class EditCommandTest {
+public class CustomerEditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs());
 
@@ -45,7 +45,7 @@ public class EditCommandTest {
         CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-            Messages.format(editedCustomer));
+            Messages.formatCustomer(editedCustomer));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
@@ -69,7 +69,7 @@ public class EditCommandTest {
         CustomerEditCommand editCommand = new CustomerEditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-            Messages.format(editedCustomer));
+            Messages.formatCustomer(editedCustomer));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
@@ -85,7 +85,7 @@ public class EditCommandTest {
         Customer editedCustomer = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-            Messages.format(editedCustomer));
+            Messages.formatCustomer(editedCustomer));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
@@ -108,7 +108,7 @@ public class EditCommandTest {
 
 
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-            Messages.format(editedCustomer));
+            Messages.formatCustomer(editedCustomer));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),

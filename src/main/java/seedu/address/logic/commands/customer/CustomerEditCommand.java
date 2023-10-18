@@ -94,7 +94,8 @@ public class CustomerEditCommand extends CustomerCommand {
         } else {
             model.setPerson(customerToEdit, editedCustomer);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
-            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.formatCustomer(editedCustomer)));
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
+                    Messages.formatCustomer(editedCustomer)));
         }
 
     }
