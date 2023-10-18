@@ -50,21 +50,34 @@ public class UserRegisterCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Logged in user cannot register
-        if (model.getUserLoginStatus()) {
-            throw new CommandException(MESSAGE_ALREADY_HAVE_ACCOUNT);
-        }
-
         User storedUser = model.getStoredUser();
 
-        // Check if there's already a registered user
-        if (storedUser != null) {
+        // Logged in user cannot register
+        if (model.getUserLoginStatus() || storedUser != null) {
             throw new CommandException(String.format(MESSAGE_ALREADY_HAVE_ACCOUNT, storedUser.getUsername()));
         }
 
         model.registerUser(this.user);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    /**
+     * Executes the register user command
+     * @param model {@code Model} which the command should operate on.
+     * @param isTestNoStoredUser boolean to indicate if the test is run without a stored user
+     * @return {@code CommandResult} that indicates success.
+     * @throws CommandException if the user is already logged in or the user credentials are wrong.
+     */
+    public CommandResult execute(Model model, boolean isTestNoStoredUser) throws CommandException {
+        if (isTestNoStoredUser) {
+            model.getStoredUser(true);
+            model.registerUser(this.user);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
+            return new CommandResult(MESSAGE_SUCCESS);
+        } else {
+            return execute(model);
+        }
     }
 
     /**

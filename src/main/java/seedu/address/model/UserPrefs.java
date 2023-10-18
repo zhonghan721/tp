@@ -115,7 +115,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
      */
     public boolean userMatches(User currentUser) {
         requireNonNull(currentUser);
-        User storedUser = getStoredUser();
+        User storedUser = getStoredUser(false);
         return currentUser.equals(storedUser);
     }
 
@@ -123,7 +123,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
      * Returns the stored user.
      * @return storedUser
      */
-    public User getStoredUser() {
+    public User getStoredUser(boolean isTestNoStoredUser) {
+        if (isTestNoStoredUser) {
+            return null;
+        }
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             AuthenticationData authenticationData =
@@ -141,11 +144,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         }
     }
 
+    public User getStoredUser() {
+        return getStoredUser(false);
+    }
+
     /**
      * Registers the given {@code user}.
      * @param user
      */
-    public void registerUser(User user) {
+    public boolean registerUser(User user) {
         requireNonNull(user);
         try {
             // Create an ObjectMapper
@@ -160,10 +167,12 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
             // Optionally, you can add logging to indicate successful registration
             logger.info("User registered: " + user.getUsername());
+            return true;
 
         } catch (IOException e) {
             // Handle any exceptions related to file I/O or JSON serialization
             logger.warning("Error writing to authentication file: " + e.getMessage());
+            return false;
         }
     }
 

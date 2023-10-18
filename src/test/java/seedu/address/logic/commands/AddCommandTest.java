@@ -259,9 +259,15 @@ public class AddCommandTest {
         }
 
         @Override
+        public User getStoredUser(boolean isTestNoStoredUser) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void registerUser(User user) {
             throw new AssertionError("This method should not be called.");
         }
+
     }
 
     /**

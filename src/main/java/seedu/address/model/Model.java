@@ -200,7 +200,13 @@ public interface Model {
     User getStoredUser();
 
     /**
+     * Returns the stored user for testing.
+     */
+    User getStoredUser(boolean isTestNoStoredUser);
+
+    /**
      * Registers the given {@code user}.
      */
     void registerUser(User user);
+
 }

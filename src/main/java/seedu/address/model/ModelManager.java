@@ -215,6 +215,16 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Returns the stored user for testing.
+     * @param isTestNoStoredUser
+     * @return
+     */
+    @Override
+    public User getStoredUser(boolean isTestNoStoredUser) {
+        return userPrefs.getStoredUser(isTestNoStoredUser);
+    }
+
+    /**
      * Registers the given {@code user}.
      */
     @Override
