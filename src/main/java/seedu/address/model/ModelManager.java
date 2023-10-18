@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -203,6 +204,11 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyBook<Delivery> getDeliveryBook() {
         return deliveryBook;
+    }
+
+    @Override
+    public Optional<Delivery> getDelivery(int id) {
+        return this.deliveryBook.getById(id);
     }
 
     @Override

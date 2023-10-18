@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -129,6 +130,14 @@ public interface Model {
      * Returns the AddressBook
      */
     ReadOnlyBook<Delivery> getDeliveryBook();
+
+    /**
+     * Returns an optional containing a delivery with the given id.
+     *
+     * @param id the id of the delivery
+     * @return the optional containing delivery with the given id
+     */
+    Optional<Delivery> getDelivery(int id);
 
     /**
      * Returns true if a delivery with the same identity as {@code delivery} exists in the address book.
