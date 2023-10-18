@@ -14,10 +14,13 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
@@ -133,17 +136,35 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void sortDeliveryBookByNameAsc() {
+        modelManager.setLoginSuccess();
+        modelManager.addDelivery(GABRIELS_MILK);
+        modelManager.addDelivery(GAMBES_RICE);
+        modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName));
+        assertEquals(Arrays.asList(GABRIELS_MILK, GAMBES_RICE), modelManager.getSortedDeliveryList());
+    }
+
+    @Test
+    public void sortDeliveryBookByNameDesc() {
+        modelManager.setLoginSuccess();
+        modelManager.addDelivery(GABRIELS_MILK);
+        modelManager.addDelivery(GAMBES_RICE);
+        modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName).reversed());
+        assertEquals(Arrays.asList(GAMBES_RICE, GABRIELS_MILK), modelManager.getSortedDeliveryList());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         DeliveryBook deliveryBook =
-                new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+            new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         AddressBook differentAddressBook = new AddressBook();
         DeliveryBook differentDeliveryBook = new DeliveryBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, deliveryBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, deliveryBook, userPrefs);
+        modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, true);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, deliveryBook, userPrefs, true);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -156,15 +177,15 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, deliveryBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, deliveryBook, userPrefs, true)));
 
         // different deliverybook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentDeliveryBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentDeliveryBook, userPrefs, true)));
 
         // different filteredPersonList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, userPrefs, true)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
@@ -172,7 +193,7 @@ public class ModelManagerTest {
         // different filteredDeliveryList -> returns false
         String[] deliveryKeywords = GABRIELS_MILK.getName().deliveryName.split("\\s+");
         modelManager.updateFilteredDeliveryList(new DeliveryNameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, userPrefs, true)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
@@ -180,6 +201,12 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, differentUserPrefs, true)));
+    }
+
+    @Test
+    public void getDelivery_returnsDelivery() {
+        modelManager.addDelivery(GABRIELS_MILK);
+        assertEquals(modelManager.getDelivery(1), Optional.of(GABRIELS_MILK));
     }
 }

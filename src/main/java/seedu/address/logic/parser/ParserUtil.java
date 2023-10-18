@@ -8,14 +8,19 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Sort;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryName;
+import seedu.address.model.delivery.DeliveryStatus;
+import seedu.address.model.delivery.Note;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.Username;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -27,6 +32,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -35,6 +41,20 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Id} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     *
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static int parseId(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Integer.parseInt(trimmedIndex);
     }
 
     /**
@@ -155,16 +175,91 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Id} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
      */
-    public static int parseId(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+    public static Note parseNote(String note) throws ParseException {
+        requireNonNull(note);
+        String trimmedNote = note.trim();
+        if (!Note.isNotEmpty(trimmedNote)) {
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
-        return Integer.parseInt(trimmedIndex);
+        return new Note(trimmedNote);
+    }
+
+    /**
+     * Parses a {@code String status} into an {@code DeliveryStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static DeliveryStatus parseDeliveryStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim().toUpperCase();
+
+        if (trimmedStatus.equals("ALL")) {
+            return null;
+        }
+
+        if (!DeliveryStatus.isValidStatus(trimmedStatus)) {
+            throw new ParseException(DeliveryStatus.MESSAGE_CONSTRAINTS);
+        }
+
+        return DeliveryStatus.valueOf(trimmedStatus);
+    }
+
+    /**
+     * Parses a {@code String sort} into a {@code String}.
+     *
+     * @param sort the sort to be parsed.
+     * @return the parsed sort.
+     * @throws ParseException if the given {@code sort} is invalid.
+     */
+    public static Sort parseSort(String sort) throws ParseException {
+        requireNonNull(sort);
+        String trimmedSort = sort.trim().toUpperCase();
+
+        if (!Sort.isValidSort(trimmedSort)) {
+            throw new ParseException(Sort.MESSAGE_CONSTRAINTS);
+        }
+
+        Sort sortEnum = Sort.valueOf(trimmedSort);
+        if (!sortEnum.equals(Sort.ASC) && !sortEnum.equals(Sort.DESC)) {
+            throw new ParseException(Sort.MESSAGE_CONSTRAINTS);
+        }
+        return sortEnum;
+    }
+
+    /**
+     * Parses a {@code String tag} into a {@code Username}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Username} is invalid.
+     */
+    public static Username parseUsername(String username) throws ParseException {
+        requireNonNull(username);
+        String trimmedUsername = username.trim();
+        if (!Username.isValidUsername(trimmedUsername)) {
+            throw new ParseException(Username.MESSAGE_CONSTRAINTS);
+        }
+        return new Username(trimmedUsername);
+    }
+
+    /**
+     * Parses a {@code String tag} into a {@code Password}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Password} is invalid.
+     */
+    public static Password parsePassword(String password) throws ParseException {
+        requireNonNull(password);
+        String trimmedPassword = password.trim();
+        if (!Password.isValidPassword(trimmedPassword)) {
+            throw new ParseException(Password.MESSAGE_CONSTRAINTS);
+        }
+        return new Password(trimmedPassword);
     }
 
 }

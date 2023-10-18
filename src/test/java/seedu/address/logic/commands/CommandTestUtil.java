@@ -5,8 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -24,14 +28,26 @@ import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
+
 /**
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
 
     // Delivery
+    public static final String VALID_VIEW_DELIVERY_ID = " 1";
+    public static final String INVALID_VIEW_DELIVERY_ID = "11";
     public static final String VALID_NAME_GABRIELS_MILK = "Gabriel Milk";
     public static final String VALID_NAME_JAMES_MILK = "Jame Milk";
+    public static final String INVALID_NOTE = "";
+    public static final String VALID_NOTE = "VALID NOTE";
+    public static final String INVALID_STATUS = "INVALID";
+    public static final String VALID_STATUS_CREATED = "CREATED";
+    public static final String VALID_STATUS_SHIPPED = "SHIPPED";
+    public static final String VALID_STATUS_COMPLETED = "COMPLETED";
+    public static final String VALID_STATUS_CANCELLED = "CANCELLED";
+    public static final String INVALID_ID_NEGATIVE = "-1";
+    public static final String INVALID_ID_NAN = "NaN";
 
     // Customer
     public static final String VALID_NAME_AMY = "Amy Bee";
@@ -59,6 +75,10 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String USERNAME_DESC_AARON = " " + PREFIX_USER + VALID_USERNAME_AARON;
+    public static final String USERNAME_DESC_FOODBEAR = " " + PREFIX_USER + VALID_USERNAME_FOODBEAR;
+    public static final String PASSWORD_DESC_AARON = " " + PREFIX_PASSWORD + VALID_PASSWORD_AARON;
+    public static final String PASSWORD_DESC_FOODBEAR = " " + PREFIX_PASSWORD + VALID_PASSWORD_FOODBEAR;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -66,9 +86,23 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    public static final String INVALID_USERNAME_DESC = " " + PREFIX_USER
+        + "thisIs^myName"; // '^' not allowed in username
+    public static final String INVALID_PASSWORD_DESC = " " + PREFIX_PASSWORD + "qwerty"; // lesser than 8 characters
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
+    public static final String VALID_DELIVERY_LIST_ALL = " " + PREFIX_STATUS + "all";
+    public static final String VALID_DELIVERY_LIST_CREATED = " " + PREFIX_STATUS + "created";
+    public static final String VALID_DELIVERY_LIST_SHIPPED = " " + PREFIX_STATUS + "SHIPPED";
+    public static final String VALID_DELIVERY_LIST_COMPLETED = " " + PREFIX_STATUS + "completed";
+    public static final String VALID_DELIVERY_LIST_CANCELLED = " " + PREFIX_STATUS + "cancelled";
+
+    public static final String INVALID_DELIVERY_LIST = " " + PREFIX_STATUS + "invalid";
+    public static final String VALID_DELIVERY_LIST_SORT_ASC = " " + PREFIX_SORT + "asc";
+    public static final String VALID_DELIVERY_LIST_SORT_DESC = " " + PREFIX_SORT + "desc";
+    public static final String INVALID_DELIVERY_LIST_SORT = " " + PREFIX_SORT + "invalid";
     public static final EditPersonDescriptor DESC_AMY;
     public static final EditPersonDescriptor DESC_BOB;
 
@@ -104,6 +138,16 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
                                             Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
+     * that takes a string {@code expectedMessage}.
+     */
+    public static void assertCommandListSuccess(Command command, Model actualModel, String expectedMessage,
+                                                Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, true);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 

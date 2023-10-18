@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -26,6 +28,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.ListItem;
 
 public class AddCommandTest {
 
@@ -41,8 +44,10 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validCustomer).execute(modelStub);
 
+
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.formatCustomer(validCustomer)),
                 commandResult.getFeedbackToUser());
+
         assertEquals(Arrays.asList(validCustomer), modelStub.personsAdded);
     }
 
@@ -53,6 +58,17 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validCustomer);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_personAcceptedByModelLoggedOut_addFailure() throws Exception {
+        ModelStubAcceptingPersonAddedLoggedOut modelStub = new ModelStubAcceptingPersonAddedLoggedOut();
+        Customer validCustomer = new PersonBuilder().build();
+
+        AddCommand addCommand = new AddCommand(validCustomer);
+
+        assertThrows(CommandException.class,
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -108,6 +124,21 @@ public class AddCommandTest {
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setUiListDelivery() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setUiListCustomer() {
+
+        }
+
+        @Override
+        public ObservableList<ListItem> getUiList() {
+            return null;
         }
 
         @Override
@@ -181,6 +212,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Optional<Delivery> getDelivery(int id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasDelivery(Delivery delivery) {
             throw new AssertionError("This method should not be called.");
         }
@@ -206,7 +242,32 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Delivery> getSortedDeliveryList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortFilteredDeliveryList(Comparator<Delivery> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public boolean getUserLoginStatus() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLoginSuccess() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLogoutSuccess() {
+
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -226,6 +287,11 @@ public class AddCommandTest {
         public boolean hasPerson(Customer customer) {
             requireNonNull(customer);
             return this.customer.isSamePerson(customer);
+        }
+
+        @Override
+        public boolean getUserLoginStatus() {
+            return true;
         }
     }
 
@@ -250,6 +316,37 @@ public class AddCommandTest {
         @Override
         public ReadOnlyBook<Customer> getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public boolean getUserLoginStatus() {
+            return true;
+        }
+    }
+
+    private class ModelStubAcceptingPersonAddedLoggedOut extends ModelStub {
+        final ArrayList<Customer> personsAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasPerson(Customer customer) {
+            requireNonNull(customer);
+            return personsAdded.stream().anyMatch(customer::isSamePerson);
+        }
+
+        @Override
+        public void addPerson(Customer customer) {
+            requireNonNull(customer);
+            personsAdded.add(customer);
+        }
+
+        @Override
+        public ReadOnlyBook<Customer> getAddressBook() {
+            return new AddressBook();
+        }
+
+        @Override
+        public boolean getUserLoginStatus() {
+            return false;
         }
     }
 
