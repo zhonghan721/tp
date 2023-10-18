@@ -17,7 +17,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_CUSTOMER_ID = new Prefix("--customer");
     public static final Prefix PREFIX_DATE = new Prefix("--date");
     public static final Prefix PREFIX_SORT = new Prefix("--sort");
+    public static final Prefix PREFIX_STATUS = new Prefix("--status");
     @Deprecated
     public static final Prefix PREFIX_TAG = new Prefix("--tag");
-
 }
