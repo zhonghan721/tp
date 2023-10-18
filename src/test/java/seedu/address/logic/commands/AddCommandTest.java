@@ -28,6 +28,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.ListItem;
 
 public class AddCommandTest {
 
@@ -121,6 +122,21 @@ public class AddCommandTest {
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setUiListDelivery() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setUiListCustomer() {
+
+        }
+
+        @Override
+        public ObservableList<ListItem> getUiList() {
+            return null;
         }
 
         @Override
