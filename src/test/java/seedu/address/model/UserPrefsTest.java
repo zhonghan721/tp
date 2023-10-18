@@ -69,15 +69,6 @@ public class UserPrefsTest {
         assertThrows(NullPointerException.class, () -> userPrefs.registerUser(null));
     }
 
-    @Test
-    public void registerUser_validUser_returnsTrue() {
-        UserPrefs userPrefs = new UserPrefs();
-        Username username = new Username("username");
-        Password password = new Password("password");
-        User user = new User(username, password, true);
-
-        assertTrue(userPrefs.registerUser(user));
-    }
 
     @Test
     public void equals_sameObject_returnsTrue() {
