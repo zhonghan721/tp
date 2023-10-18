@@ -1,8 +1,6 @@
 package seedu.address.logic.parser.delivery;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_DELIVERY_ID;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_VIEW_DELIVERY_ID;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VIEW_DELIVERY_ID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
