@@ -14,6 +14,7 @@ public enum DeliveryStatus {
 
     /**
      * Checks if string given is a valid status.
+     *
      * @param test string to be tested.
      * @return true if is a valid status, false otherwise.
      */

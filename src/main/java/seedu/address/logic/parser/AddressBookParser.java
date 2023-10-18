@@ -17,10 +17,13 @@ import seedu.address.logic.commands.customer.AddCommand;
 import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.customer.CustomerListCommand;
+import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
+import seedu.address.logic.commands.delivery.DeliveryListCommand;
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
 import seedu.address.logic.commands.user.UserLoginCommand;
 import seedu.address.logic.commands.user.UserLogoutCommand;
 import seedu.address.logic.commands.user.UserRegisterCommand;
+import seedu.address.logic.parser.delivery.DeliveryCreateNoteCommandParser;
 import seedu.address.logic.parser.delivery.DeliveryStatusCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.UserLoginCommandParser;
@@ -35,7 +38,7 @@ public class AddressBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
-            "(?<commandWord>customer \\S+|delivery \\S+|\\S+)(?<arguments>.*)"
+        "(?<commandWord>customer \\S+|delivery \\S+|\\S+)(?<arguments>.*)"
     );
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
@@ -82,6 +85,9 @@ public class AddressBookParser {
             return new CustomerListCommand();
 
         // ================ Delivery Commands ====================================
+        case DeliveryCreateNoteCommand.COMMAND_WORD:
+            return new DeliveryCreateNoteCommandParser().parse(arguments);
+
         case DeliveryStatusCommand.COMMAND_WORD:
             return new DeliveryStatusCommandParser().parse(arguments);
 
@@ -92,12 +98,14 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case DeliveryListCommand.COMMAND_WORD:
+            return new DeliveryListParser().parse(arguments);
+
         case UserLoginCommand.COMMAND_WORD:
             return new UserLoginCommandParser().parse(arguments);
 
         case UserLogoutCommand.COMMAND_WORD:
             return new UserLogoutCommand();
-
         case UserRegisterCommand.COMMAND_WORD:
             return new UserRegisterCommandParser().parse(arguments);
 
@@ -106,5 +114,4 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
