@@ -26,7 +26,6 @@ public class DeliveryViewCommandParser implements Parser<DeliveryViewCommand> {
                 DeliveryViewCommand.MESSAGE_USAGE));
         }
 
-        System.out.println(args);
         final Matcher matcher = ARGUMENT_FORMAT.matcher(args.trim().toUpperCase());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

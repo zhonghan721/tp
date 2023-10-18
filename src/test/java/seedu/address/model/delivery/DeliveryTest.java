@@ -16,18 +16,18 @@ public class DeliveryTest {
     @Test
     public void deliveryId_success() {
         Delivery delivery = new DeliveryBuilder().autoBuild();
-        System.out.println(delivery);
+
         Delivery delivery1 = new DeliveryBuilder().autoBuild();
-        System.out.println(delivery1);
+        
         assertTrue(delivery.getDeliveryId() != delivery1.getDeliveryId());
     }
 
     @Test
     public void deliveryId_failure() {
         Delivery delivery = new DeliveryBuilder().autoBuild();
-        System.out.println(delivery);
+
         Delivery delivery1 = new DeliveryBuilder().autoBuild();
-        System.out.println(delivery1);
+
         assertFalse(delivery.getDeliveryId() == delivery1.getDeliveryId());
     }
 
