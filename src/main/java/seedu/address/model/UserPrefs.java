@@ -136,11 +136,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
             AuthenticationData authenticationData =
                     objectMapper.readValue(authenticationPath.toFile(), AuthenticationData.class);
 
-            // if authenticationData.getUsername() is null, then the file is empty
-            if (authenticationData.getUsername() == null) {
-                return null;
-            }
-
             // Create User objects
             User storedUser =
                     new User(new Username(authenticationData.getUsername()),
@@ -215,17 +210,5 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         sb.append("\nLocal delivery data file location : " + deliveryBookFilePath);
         sb.append("\nLocal authentication data file location : " + authenticationPath);
         return sb.toString();
-    }
-
-    /**
-     * Deletes the user by deleting the authentication file.
-     */
-    public void deleteUser() {
-        try {
-            Files.deleteIfExists(Paths.get("data", "authentication.json"));
-            logger.info("Files deleted successfully.");
-        } catch (IOException e) {
-            logger.warning("Error deleting files: " + e.getMessage());
-        }
     }
 }

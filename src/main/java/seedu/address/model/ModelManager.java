@@ -214,21 +214,13 @@ public class ModelManager implements Model {
      */
     @Override
     public User getStoredUser() {
+
         return this.loggedInUser;
     }
 
     @Override
     public void setLoggedInUser(User user) {
         this.loggedInUser = user;
-    }
-
-    @Override
-    public void deleteUser() {
-        userPrefs.deleteUser();
-        // set the logged in user to null
-        setAddressBook(new AddressBook());
-        this.setLoggedInUser(null);
-        setLogoutSuccess();
     }
 
     /**
