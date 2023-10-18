@@ -42,6 +42,7 @@ public class UserRegisterCommand extends Command {
 
     /**
      * Executes the register user command.
+     *
      * @param model {@code Model} which the command should operate on.
      * @return {@code CommandResult} that indicates success.
      * @throws CommandException if the user is already logged in or the user credentials are wrong.
@@ -50,14 +51,9 @@ public class UserRegisterCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Logged in user cannot register
-        if (model.getUserLoginStatus()) {
-            throw new CommandException(MESSAGE_ALREADY_HAVE_ACCOUNT);
-        }
-
         User storedUser = model.getStoredUser();
 
-        // Check if there's already a registered user
+        // Logged in user cannot register
         if (storedUser != null) {
             throw new CommandException(String.format(MESSAGE_ALREADY_HAVE_ACCOUNT, storedUser.getUsername()));
         }
