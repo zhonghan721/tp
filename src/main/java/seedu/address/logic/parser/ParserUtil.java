@@ -25,6 +25,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -185,6 +186,7 @@ public class ParserUtil {
         if (!Password.isValidPassword(trimmedPassword)) {
             throw new ParseException(Password.MESSAGE_CONSTRAINTS);
         }
+
         return new Password(trimmedPassword);
     }
 

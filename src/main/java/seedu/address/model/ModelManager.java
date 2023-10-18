@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
+import seedu.address.model.user.User;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -148,6 +149,9 @@ public class ModelManager implements Model {
         return filteredCustomers;
     }
 
+    /**
+     * Updates the filter of the filtered customer list to filter by the given {@code predicate}.
+     */
     @Override
     public void updateFilteredPersonList(Predicate<Customer> predicate) {
         requireNonNull(predicate);
@@ -170,6 +174,15 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Returns true if the stored username and password matches the given {@code user}.
+     */
+    @Override
+    public boolean userMatches(User user) {
+        requireNonNull(user);
+        return userPrefs.userMatches(user);
+    }
+
+    /**
      * Sets the login flag to true.
      */
     @Override
@@ -185,35 +198,71 @@ public class ModelManager implements Model {
         isLoggedIn = false;
     }
 
+    /**
+     * Returns the stored user.
+     */
+    @Override
+    public User getStoredUser() {
+        return userPrefs.getStoredUser();
+    }
+
+    /**
+     * Registers the given {@code user}.
+     */
+    @Override
+    public void registerUser(User user) {
+        userPrefs.registerUser(user);
+        // set login flag to true
+        isLoggedIn = true;
+    }
+
     //=========== DeliveryBook ================================================================================
 
+    /**
+     * Replaces delivery book data with the data in {@code deliveryBook}.
+     */
     @Override
     public void setDeliveryBook(ReadOnlyBook<Delivery> deliveryBook) {
         this.deliveryBook.resetData(deliveryBook);
     }
 
+    /**
+     * Returns the DeliveryBook
+     */
     @Override
     public ReadOnlyBook<Delivery> getDeliveryBook() {
         return deliveryBook;
     }
 
+    /**
+     * Returns true if a delivery with the same identity as {@code delivery} exists in the delivery book.
+     */
     @Override
     public boolean hasDelivery(Delivery delivery) {
         requireNonNull(delivery);
         return deliveryBook.hasDelivery(delivery);
     }
 
+    /**
+     * Deletes the given delivery.
+     */
     @Override
     public void deleteDelivery(Delivery target) {
         deliveryBook.removeDelivery(target);
     }
 
+    /**
+     * Adds the given delivery.
+     */
     @Override
     public void addDelivery(Delivery delivery) {
         deliveryBook.addDelivery(delivery);
         updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
     }
 
+    /**
+     * Replaces the given delivery {@code target} with {@code editedDelivery}.
+     */
     @Override
     public void setDelivery(Delivery target, Delivery editedDelivery) {
         requireAllNonNull(target, editedDelivery);
@@ -236,6 +285,9 @@ public class ModelManager implements Model {
         return filteredDeliveries;
     }
 
+    /**
+     * Updates the filter of the filtered delivery list to filter by the given {@code predicate}.
+     */
     @Override
     public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
         requireNonNull(predicate);
@@ -246,6 +298,7 @@ public class ModelManager implements Model {
             filteredDeliveries.setPredicate(PREDICATE_SHOW_NO_DELIVERIES);
         }
     }
+
 
     @Override
     public boolean equals(Object other) {

@@ -13,23 +13,43 @@ public class User {
 
     // Identity fields
     private final Username username;
-    private final Password password;
+    private final Password hashedPassword;
+
 
     /**
      * Every field must be present and not null.
+     * This constructor assumes a non-hashed password is passed in
      */
     public User(Username username, Password password) {
         requireAllNonNull(username, password);
         this.username = username;
-        this.password = password;
+        this.hashedPassword = new Password(password.toString());
     }
 
+    /**
+     * Overloaded constructor for creating a new user with a hashed password
+     * @param isHashed indicates whether the password is hashed
+     */
+    public User(Username username, Password password, boolean isHashed) {
+        requireAllNonNull(username, password);
+        this.username = username;
+        this.hashedPassword = isHashed ? password : new Password(password.toString());
+    }
+
+    /**
+     * Returns the username of the user.
+     * @return username
+     */
     public Username getUsername() {
         return username;
     }
 
+    /**
+     * Returns the password of the user.
+     * @return
+     */
     public Password getPassword() {
-        return password;
+        return hashedPassword;
     }
 
     /**
@@ -60,13 +80,13 @@ public class User {
 
         User otherUser = (User) other;
         return username.equals(otherUser.username)
-            && password.equals(otherUser.password);
+            && hashedPassword.equals(otherUser.hashedPassword);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(username, password);
+        return Objects.hash(username, hashedPassword);
     }
 
     @Override
