@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -223,11 +224,20 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Delivery> getSortedDeliveryList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public void sortFilteredDeliveryList(Comparator<Delivery> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public boolean getUserLoginStatus() {
             throw new AssertionError("This method should not be called.");
         }
@@ -239,6 +249,7 @@ public class AddCommandTest {
 
         @Override
         public void setLogoutSuccess() {
+
             throw new AssertionError("This method should not be called.");
         }
     }

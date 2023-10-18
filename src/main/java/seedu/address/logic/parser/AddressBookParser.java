@@ -17,10 +17,13 @@ import seedu.address.logic.commands.customer.AddCommand;
 import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.customer.CustomerListCommand;
+import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
+import seedu.address.logic.commands.delivery.DeliveryListCommand;
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
 import seedu.address.logic.commands.delivery.DeliveryViewCommand;
 import seedu.address.logic.commands.user.UserLoginCommand;
 import seedu.address.logic.commands.user.UserLogoutCommand;
+import seedu.address.logic.parser.delivery.DeliveryCreateNoteCommandParser;
 import seedu.address.logic.parser.delivery.DeliveryStatusCommandParser;
 import seedu.address.logic.parser.delivery.DeliveryViewCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -82,6 +85,9 @@ public class AddressBookParser {
             return new CustomerListCommand();
 
         // ================ Delivery Commands ====================================
+        case DeliveryCreateNoteCommand.COMMAND_WORD:
+            return new DeliveryCreateNoteCommandParser().parse(arguments);
+
         case DeliveryStatusCommand.COMMAND_WORD:
             return new DeliveryStatusCommandParser().parse(arguments);
 
@@ -95,16 +101,17 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case DeliveryListCommand.COMMAND_WORD:
+            return new DeliveryListParser().parse(arguments);
+
         case UserLoginCommand.COMMAND_WORD:
             return new UserLoginCommandParser().parse(arguments);
 
         case UserLogoutCommand.COMMAND_WORD:
             return new UserLogoutCommand();
-
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

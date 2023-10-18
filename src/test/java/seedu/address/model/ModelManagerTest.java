@@ -14,11 +14,13 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
@@ -131,6 +133,24 @@ public class ModelManagerTest {
     @Test
     public void getFilteredDeliveryList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredDeliveryList().remove(0));
+    }
+
+    @Test
+    public void sortDeliveryBookByNameAsc() {
+        modelManager.setLoginSuccess();
+        modelManager.addDelivery(GABRIELS_MILK);
+        modelManager.addDelivery(GAMBES_RICE);
+        modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName));
+        assertEquals(Arrays.asList(GABRIELS_MILK, GAMBES_RICE), modelManager.getSortedDeliveryList());
+    }
+
+    @Test
+    public void sortDeliveryBookByNameDesc() {
+        modelManager.setLoginSuccess();
+        modelManager.addDelivery(GABRIELS_MILK);
+        modelManager.addDelivery(GAMBES_RICE);
+        modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName).reversed());
+        assertEquals(Arrays.asList(GAMBES_RICE, GABRIELS_MILK), modelManager.getSortedDeliveryList());
     }
 
     @Test

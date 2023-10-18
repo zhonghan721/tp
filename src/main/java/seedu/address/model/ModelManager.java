@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.delivery.Delivery;
@@ -28,6 +30,8 @@ public class ModelManager implements Model {
     private final FilteredList<Customer> filteredCustomers;
     private final FilteredList<Delivery> filteredDeliveries;
 
+    private SortedList<Delivery> sortedDeliveries;
+
     /**
      * Initializes a ModelManager with the given addressBook, deliveryBook and userPrefs.
      */
@@ -45,7 +49,9 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredCustomers = new FilteredList<>(this.addressBook.getList());
         filteredDeliveries = new FilteredList<>(this.deliveryBook.getList());
+        sortedDeliveries = new SortedList<>(filteredDeliveries);
         this.isLoggedIn = isLoggedIn;
+
     }
 
     public ModelManager() {
@@ -158,6 +164,8 @@ public class ModelManager implements Model {
         } else {
             filteredCustomers.setPredicate(PREDICATE_SHOW_NO_CUSTOMERS);
         }
+
+
     }
 
     //=========== User Related Methods =======================================================================
@@ -243,6 +251,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Delivery> getSortedDeliveryList() {
+        return sortedDeliveries;
+    }
+
+    @Override
     public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
         requireNonNull(predicate);
         // only shows the delivery list if the user is logged in
@@ -251,6 +264,15 @@ public class ModelManager implements Model {
         } else {
             filteredDeliveries.setPredicate(PREDICATE_SHOW_NO_DELIVERIES);
         }
+
+        // Update the sorted list
+        this.sortedDeliveries = new SortedList<>(filteredDeliveries);
+    }
+
+    @Override
+    public void sortFilteredDeliveryList(Comparator<Delivery> comparator) {
+        requireNonNull(comparator);
+        sortedDeliveries.setComparator(comparator);
     }
 
     @Override

@@ -15,7 +15,7 @@ public class TypicalDeliveries {
         .withCustomer(TypicalPersons.ALICE).withNote("Note").build();
 
     public static final Delivery GAMBES_RICE = new DeliveryBuilder().withId(2).withName("Gambe Rice")
-        .withCustomer(TypicalPersons.BENSON).withNote("Note").build();
+        .withCustomer(TypicalPersons.BENSON).build();
 
     public static final Delivery JY_CAKE = new DeliveryBuilder().withId(3).withName("Jian Yang Cake")
         .withCustomer(TypicalPersons.BENSON).withNote("Note").build();
