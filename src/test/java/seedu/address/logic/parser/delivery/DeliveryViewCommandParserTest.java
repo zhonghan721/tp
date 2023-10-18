@@ -15,6 +15,13 @@ public class DeliveryViewCommandParserTest {
     private DeliveryViewCommandParser parser = new DeliveryViewCommandParser();
 
     @Test
+    public void parse_emptyArg_throwsParseException() {
+        assertParseFailure(parser, "",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeliveryViewCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validArgs_returnsDeliveryViewCommand() {
         assertParseSuccess(parser, VALID_VIEW_DELIVERY_ID,
             new DeliveryViewCommand(1));
