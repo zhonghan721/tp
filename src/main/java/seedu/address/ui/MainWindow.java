@@ -182,11 +182,9 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isListCommand()) {
                 listPanel.setListItems(logic.getUiList());
             }
-            
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
-
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }

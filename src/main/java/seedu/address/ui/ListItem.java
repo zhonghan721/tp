@@ -10,6 +10,13 @@ public class ListItem {
 
     private String accessory;
 
+    /**
+     * Constructor for ListItem.
+     *
+     * @param title         title of the list item.
+     * @param description   description of the list item.
+     * @param mainAccessory main accessory of the list item.
+     */
 
     public ListItem(String title, String description, String mainAccessory) {
         this.title = title;
@@ -17,6 +24,14 @@ public class ListItem {
         this.mainAccessory = mainAccessory;
     }
 
+    /**
+     * Constructor for ListItem.
+     *
+     * @param title         title of the list item.
+     * @param description   description of the list item.
+     * @param mainAccessory main accessory of the list item.
+     * @param accessory     accessory of the list item.
+     */
     public ListItem(String title, String description, String mainAccessory, String accessory) {
         this(title, description, mainAccessory);
         this.accessory = accessory;

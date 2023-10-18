@@ -126,7 +126,7 @@ public class AddCommandTest {
 
         @Override
         public void setUiListDelivery() {
-            
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

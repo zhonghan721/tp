@@ -8,7 +8,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Customer;
 
 /**
  * Panel containing the list of persons.
@@ -21,29 +20,30 @@ public class ListPanel extends UiPart<Region> {
     private ListView<ListItem> listItems;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ListPanel} with the given {@code ObservableList}.
+     *
+     * @param items list of items to display.
      */
-//    public PersonListPanel(ObservableList<Customer> customerList) {
-//        super(FXML);
-//        personListView.setItems(customerList);
-//        personListView.setCellFactory(listView -> new PersonListViewCell());
-//    }
-    public ListPanel(ObservableList<ListItem> item) {
+    public ListPanel(ObservableList<ListItem> items) {
         super(FXML);
-        System.out.println("LIST " + item);
-        listItems.setItems(item);
-        listItems.setCellFactory(listView -> new PersonListViewCell());
+        listItems.setItems(items);
+        listItems.setCellFactory(listView -> new ItemListViewCell());
     }
 
-    public void setListItems(ObservableList<ListItem> item) {
-        listItems.setItems(item);
-        listItems.setCellFactory(listView -> new PersonListViewCell());
+    /**
+     * Creates a {@code ListPanel} with the given {@code ObservableList}.
+     *
+     * @param items list of items to display.
+     */
+    public void setListItems(ObservableList<ListItem> items) {
+        listItems.setItems(items);
+        listItems.setCellFactory(listView -> new ItemListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class PersonListViewCell extends ListCell<ListItem> {
+    class ItemListViewCell extends ListCell<ListItem> {
         @Override
         protected void updateItem(ListItem item, boolean empty) {
             super.updateItem(item, empty);

@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -90,17 +89,18 @@ public class ModelManager implements Model {
 
     @Override
     public void setUiListDelivery() {
-        setLoginSuccess();
-        this.uiList = this.getFilteredDeliveryList().stream().map(
+
+        this.uiList = this.getSortedDeliveryList().stream().map(
                 delivery -> new ListItem(String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName()),
-                    delivery.getOrderDate().toString(), delivery.getDeliveryDate().toString()))
+                    delivery.getOrderDate().toString(), delivery.getStatus().toString(),
+                    delivery.getDeliveryDate().toString()))
             .collect(Collectors.toCollection(
                 FXCollections::observableArrayList));
     }
 
+
     @Override
     public void setUiListCustomer() {
-        setLoginSuccess();
         this.uiList = this.getFilteredPersonList().stream().map(
                 person -> new ListItem(String.format("[%d] %s", person.getCustomerId(), person.getName()),
                     person.getEmail().toString(), person.getPhone().toString()))
@@ -305,6 +305,7 @@ public class ModelManager implements Model {
     public void sortFilteredDeliveryList(Comparator<Delivery> comparator) {
         requireNonNull(comparator);
         sortedDeliveries.setComparator(comparator);
+        setUiListDelivery();
     }
 
     @Override

@@ -21,8 +21,6 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-//    public final Customer customer;
-
     public final ListItem item;
 
     @FXML
@@ -45,18 +43,9 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(ListItem item) {
         super(FXML);
         this.item = item;
-//        id.setText(String.format("[ %04d ]", customer.getCustomerId()));
 
         this.title.setText(item.getTitle());
         this.description.setText(item.getDescription());
         this.accessory.setText(item.getMainAccessory());
-
-//        name.setText(customer.getName().fullName);
-//        phone.setText(customer.getPhone().value);
-//        address.setText(customer.getAddress().value);
-//        email.setText(customer.getEmail().value);
-//        customer.getTags().stream()
-//            .sorted(Comparator.comparing(tag -> tag.tagName))
-//            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 }
