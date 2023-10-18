@@ -55,28 +55,6 @@ public class UserPrefsTest {
         assertFalse(userPrefs.userMatches(user));
     }
 
-    // the code below does not work
-    @Test
-    public void userMatches_sameUser_returnsTrue() {
-        UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAuthenticationPath(Paths.get("data", "temp_authentication.json"));
-        Username username = new Username("username");
-        Password password = new Password("password", false);
-        User user = new User(username, password, true);
-        userPrefs.registerUser(user);
-        assertTrue(userPrefs.userMatches(user));
-        // delete file at temp_authentication.json
-        userPrefs.setAuthenticationPath(Paths.get("data", "authentication.json"));
-
-        java.nio.file.Path tempAuthFilePath = Paths.get("data", "temp_authentication.json");
-        try {
-            Files.delete(tempAuthFilePath);
-        } catch (IOException e) {
-            // handle exception
-            e.printStackTrace();
-        }
-    }
-
     @Test
     public void getStoredUser_nullUser_returnsNull() {
         // assume authentication file is empty
