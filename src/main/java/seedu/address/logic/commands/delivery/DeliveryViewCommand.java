@@ -1,13 +1,14 @@
 package seedu.address.logic.commands.delivery;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DELIVERY_ID;
+
+import java.util.Optional;
+
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
-
-import java.util.Optional;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_DELIVERY_ID;
 
 /**
  * Represents a DeliveryViewCommand which displays a single delivery order.
@@ -29,18 +30,17 @@ public class DeliveryViewCommand extends DeliveryCommand {
      * Creates a DeliveryViewCommand to display the specified {@code Delivery}.
      */
     public DeliveryViewCommand(int deliveryId) {
-
         this.deliveryId = deliveryId;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Optional<Delivery> delivery = model.getDeliveryBook().getById(deliveryId);
+        Optional<Delivery> delivery = model.getDelivery(deliveryId);
 
         if (delivery.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_INVALID_DELIVERY_ID, deliveryId));
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, delivery.toString()));
+        return new CommandResult(Messages.format(delivery.get()));
     }
 }

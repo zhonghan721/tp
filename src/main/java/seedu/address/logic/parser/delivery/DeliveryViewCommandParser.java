@@ -1,15 +1,18 @@
 package seedu.address.logic.parser.delivery;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import seedu.address.logic.commands.delivery.DeliveryViewCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
+/**
+ * Parses input arguments and creates a new DeliveryViewCommand object
+ */
 public class DeliveryViewCommandParser implements Parser<DeliveryViewCommand> {
 
     private static final Pattern ARGUMENT_FORMAT = Pattern.compile(

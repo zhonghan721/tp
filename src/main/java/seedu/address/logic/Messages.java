@@ -53,22 +53,18 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code person} for display to the delivery.
      */
     public static String format(Delivery delivery) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(delivery.getName())
-            .append("; Customer: ")
-            .append(delivery.getCustomer())
-            .append("; Order Date: ")
-            .append(delivery.getOrderDate())
-            .append("; Delivery Date: ")
-            .append(delivery.getDeliveryDate())
-            .append("; Status: ")
-            .append(delivery.getStatus())
-            .append("; Note: ")
-            .append(delivery.getNote());
+        builder.append(String.format("[%d]", delivery.getDeliveryId()))
+            .append(String.format(" %s", delivery.getName()))
+            .append(String.format("\n %s", delivery.getStatus().toString()))
+            .append(String.format("\n Customer: %s", delivery.getCustomer().getName()))
+            .append(String.format("\n Customer Id: %d", delivery.getCustomer().getCustomerId()))
+            .append(String.format("\n Ordered On: %s", delivery.getOrderDate().toString()))
+            .append(String.format("\n Delivered On: %s", delivery.getDeliveryDate().toString()));
+
         return builder.toString();
     }
-
 }

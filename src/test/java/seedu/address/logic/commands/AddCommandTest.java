@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -42,7 +43,7 @@ public class AddCommandTest {
         CommandResult commandResult = new AddCommand(validCustomer).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
-                commandResult.getFeedbackToUser());
+            commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validCustomer), modelStub.personsAdded);
     }
 
@@ -63,7 +64,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validCustomer);
 
         assertThrows(CommandException.class,
-                Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> addCommand.execute(modelStub));
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -188,6 +189,11 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyBook<Delivery> getDeliveryBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Delivery> getDelivery(int id) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -36,8 +37,8 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
-                + ", delivery book" + deliveryBook
-                + " and user prefs " + userPrefs);
+            + ", delivery book" + deliveryBook
+            + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.deliveryBook = new DeliveryBook(deliveryBook);
@@ -198,6 +199,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Optional<Delivery> getDelivery(int id) {
+        return this.deliveryBook.getById(id);
+    }
+
+    @Override
     public boolean hasDelivery(Delivery delivery) {
         requireNonNull(delivery);
         return deliveryBook.hasDelivery(delivery);
@@ -260,11 +266,11 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-                && deliveryBook.equals(otherModelManager.deliveryBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredCustomers.equals(otherModelManager.filteredCustomers)
-                && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
-                && isLoggedIn == otherModelManager.isLoggedIn;
+            && deliveryBook.equals(otherModelManager.deliveryBook)
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredCustomers.equals(otherModelManager.filteredCustomers)
+            && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
+            && isLoggedIn == otherModelManager.isLoggedIn;
     }
 
 }
