@@ -34,7 +34,7 @@ public class DeliveryStatusCommandTest {
             new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(), deliveryStatus);
 
         String expectedMessage = String.format(DeliveryStatusCommand.MESSAGE_EDIT_DELIVERY_SUCCESS,
-            Messages.format(expectedDelivery));
+            Messages.formatDelivery(expectedDelivery));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new DeliveryBook(model.getDeliveryBook()),

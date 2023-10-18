@@ -6,7 +6,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDE
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
-import java.io.ObjectInputFilter;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -17,7 +16,11 @@ import seedu.address.logic.commands.customer.AddCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyBook;
-import seedu.address.model.delivery.*;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryDate;
+import seedu.address.model.delivery.DeliveryName;
+import seedu.address.model.delivery.DeliveryStatus;
+import seedu.address.model.delivery.OrderDate;
 import seedu.address.model.person.Customer;
 
 /**

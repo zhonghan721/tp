@@ -34,7 +34,7 @@ public class DeliveryCreateNoteCommandTest {
             new DeliveryCreateNoteCommand(GABRIELS_MILK.getDeliveryId(), note);
 
         String expectedMessage = String.format(DeliveryCreateNoteCommand.MESSAGE_NOTE_SUCCESS,
-            Messages.format(expectedDelivery));
+            Messages.formatDelivery(expectedDelivery));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new DeliveryBook(model.getDeliveryBook()),
@@ -54,7 +54,7 @@ public class DeliveryCreateNoteCommandTest {
             new DeliveryCreateNoteCommand(GAMBES_RICE.getDeliveryId(), note);
 
         String expectedMessage = String.format(DeliveryCreateNoteCommand.MESSAGE_NOTE_SUCCESS,
-            Messages.format(expectedDelivery));
+            Messages.formatDelivery(expectedDelivery));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new DeliveryBook(model.getDeliveryBook()),

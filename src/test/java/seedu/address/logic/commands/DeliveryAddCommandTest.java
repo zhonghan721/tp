@@ -1,25 +1,22 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.customer.AddCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.DeliveryBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyBook;
@@ -28,8 +25,7 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
 import seedu.address.testutil.DeliveryAddDescriptorBuilder;
 import seedu.address.testutil.DeliveryBuilder;
-import seedu.address.testutil.PersonBuilder;
-
+import seedu.address.ui.ListItem;
 
 public class DeliveryAddCommandTest {
 
@@ -87,6 +83,21 @@ public class DeliveryAddCommandTest {
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setUiListDelivery() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setUiListCustomer() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ListItem> getUiList() {
+            return null;
         }
 
         @Override
@@ -160,6 +171,11 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
+        public Optional<Delivery> getDelivery(int id) {
+            return Optional.empty();
+        }
+
+        @Override
         public boolean hasDelivery(Delivery delivery) {
             throw new AssertionError("This method should not be called.");
         }
@@ -185,7 +201,32 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
+        public ObservableList<Delivery> getSortedDeliveryList() {
+            return null;
+        }
+
+        @Override
         public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortFilteredDeliveryList(Comparator<Delivery> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getUserLoginStatus() {
+            return false;
+        }
+
+        @Override
+        public void setLoginSuccess() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLogoutSuccess() {
             throw new AssertionError("This method should not be called.");
         }
     }

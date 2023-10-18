@@ -4,7 +4,6 @@ import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescr
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryName;
-import seedu.address.model.delivery.OrderDate;
 import seedu.address.model.person.Customer;
 
 /**
@@ -29,11 +28,6 @@ public class DeliveryAddDescriptorBuilder {
         descriptor.setDeliveryName(delivery.getName());
         descriptor.setDeliveryDate(delivery.getDeliveryDate());
         descriptor.setCustomerId(delivery.getCustomer().getCustomerId());
-        descriptor.setOrderDate(delivery.getOrderDate());
-        descriptor.setDeliveryId(delivery.getDeliveryId());
-        descriptor.setCustomer(delivery.getCustomer());
-        descriptor.setDeliveryStatus(delivery.getStatus());
-        descriptor.setNote(delivery.getNote());
     }
 
     /**
@@ -41,14 +35,6 @@ public class DeliveryAddDescriptorBuilder {
      */
     public DeliveryAddDescriptorBuilder withDeliveryName(String deliveryName) {
         descriptor.setDeliveryName(new DeliveryName(deliveryName));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public DeliveryAddDescriptorBuilder withDeliveryId(int deliveryId) {
-        descriptor.setDeliveryId(deliveryId);
         return this;
     }
 
@@ -68,13 +54,6 @@ public class DeliveryAddDescriptorBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public DeliveryAddDescriptorBuilder withOrderDate(String orderDate) {
-        descriptor.setOrderDate(new OrderDate(orderDate));
-        return this;
-    }
 
     public DeliveryAddDescriptor build() {
         return descriptor;

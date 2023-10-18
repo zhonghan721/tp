@@ -25,7 +25,7 @@ class DeliveryViewCommandTest {
     public void execute_allFieldsValid_success() throws CommandException {
         DeliveryViewCommand deliveryViewCommand = new DeliveryViewCommand(1);
         Optional<Delivery> delivery = model.getDelivery(1);
-        String expectedMessage = Messages.format(delivery.get());
+        String expectedMessage = Messages.formatDelivery(delivery.get());
 
         assertCommandSuccess(deliveryViewCommand, model, expectedMessage, model);
     }

@@ -20,7 +20,8 @@ import seedu.address.model.delivery.Delivery;
 
 public class DeliveryDeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(),
+            new UserPrefs(), true);
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -30,7 +31,8 @@ public class DeliveryDeleteCommandTest {
         String expectedMessage = String.format(DeliveryDeleteCommand.MESSAGE_DELETE_DELIVERY_SUCCESS,
                 Messages.formatDelivery(deliveryToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
+                new UserPrefs(), true);
         expectedModel.deleteDelivery(deliveryToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -54,7 +56,8 @@ public class DeliveryDeleteCommandTest {
         String expectedMessage = String.format(DeliveryDeleteCommand.MESSAGE_DELETE_DELIVERY_SUCCESS,
                 Messages.formatDelivery(deliveryToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
+                new UserPrefs(), true);
         expectedModel.deleteDelivery(deliveryToDelete);
         showNoDelivery(expectedModel);
 
