@@ -1,5 +1,7 @@
 package seedu.address.logic.commands.delivery;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
@@ -32,5 +34,19 @@ class DeliveryViewCommandTest {
     public void execute_invalidTargetId_throwsCommandException() {
         DeliveryViewCommand deliveryViewCommand = new DeliveryViewCommand(-1);
         assertCommandFailure(deliveryViewCommand, model, Messages.MESSAGE_INVALID_DELIVERY_ID);
+    }
+
+    @Test
+    public void equals() {
+        DeliveryViewCommand deliveryViewCommand = new DeliveryViewCommand(1);
+        DeliveryViewCommand deliveryViewCommandCopy = new DeliveryViewCommand(1);
+        DeliveryViewCommand deliveryViewCommandDifferent = new DeliveryViewCommand(2);
+
+        // same object -> returns true
+        assertTrue(deliveryViewCommand.equals(deliveryViewCommandCopy));
+
+        // different object -> returns false
+        assertFalse(deliveryViewCommand.equals(deliveryViewCommandDifferent));
+
     }
 }

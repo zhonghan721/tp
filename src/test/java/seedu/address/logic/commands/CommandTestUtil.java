@@ -30,6 +30,10 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 public class CommandTestUtil {
 
     // Delivery
+    public static final String VALID_VIEW_DELIVERY_ID = " 1";
+    public static final String INVALID_VIEW_DELIVERY_ID = "11";
+    
+
     public static final String VALID_NAME_GABRIELS_MILK = "Gabriel Milk";
     public static final String VALID_NAME_JAMES_MILK = "Jame Milk";
     public static final String INVALID_STATUS = "INVALID";
@@ -79,7 +83,7 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String INVALID_USERNAME_DESC = " " + PREFIX_USER
-            + "thisIs^myName"; // '^' not allowed in username
+        + "thisIs^myName"; // '^' not allowed in username
     public static final String INVALID_PASSWORD_DESC = " " + PREFIX_PASSWORD + "qwerty"; // lesser than 8 characters
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

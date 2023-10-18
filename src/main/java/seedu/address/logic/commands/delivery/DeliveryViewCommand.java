@@ -43,4 +43,11 @@ public class DeliveryViewCommand extends DeliveryCommand {
 
         return new CommandResult(Messages.format(delivery.get()));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+            || (other instanceof DeliveryViewCommand // instanceof handles nulls
+            && deliveryId == ((DeliveryViewCommand) other).deliveryId); // state check
+    }
 }
