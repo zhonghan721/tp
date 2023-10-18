@@ -150,16 +150,6 @@ public class DeliveryAddCommand extends DeliveryCommand {
         private int customerId;
         private DeliveryDate deliveryDate;
 
-        private int deliveryId;
-
-        private OrderDate orderDate;
-
-        private DeliveryStatus deliveryStatus;
-
-        private Note note;
-        private Customer customer;
-
-
         public DeliveryAddDescriptor() {
         }
 
@@ -199,46 +189,6 @@ public class DeliveryAddCommand extends DeliveryCommand {
             return deliveryDate;
         }
 
-        public void setOrderDate(OrderDate orderDate) {
-            this.orderDate = orderDate;
-        }
-
-        public OrderDate getOrderDate() {
-            return orderDate;
-        }
-
-        public void setDeliveryId(int deliveryId) {
-            this.deliveryId = deliveryId;
-        }
-        public int getDeliveryId() {
-            return deliveryId;
-        }
-
-        public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
-            this.deliveryStatus = deliveryStatus;
-        }
-
-        public DeliveryStatus getDeliveryStatus() {
-            return deliveryStatus;
-        }
-
-        public void setNote(Note note) {
-            this.note = note;
-        }
-
-        public Note getNote() {
-            return note;
-        }
-
-        public void setCustomer(Customer customer) {
-            this.customer = customer;
-        }
-
-        public Customer getCustomer() {
-            return customer;
-        }
-
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -260,10 +210,8 @@ public class DeliveryAddCommand extends DeliveryCommand {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("deliveryId", deliveryId)
                     .add("name", deliveryName)
                     .add("customer", customerId)
-                    .add("orderedAt", orderDate)
                     .add("deliveredAt", deliveryDate)
                     .toString();
         }
