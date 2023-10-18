@@ -34,6 +34,9 @@ public class DeliveryAddCommandTest {
         assertThrows(NullPointerException.class, () -> new DeliveryAddCommand(null));
     }
 
+    public void execute_deliveryAcceptedByModel_addSuccessful() {
+
+    }
     @Test
     public void equals() {
         Delivery gabrielMilk = new DeliveryBuilder().withName("Gabriel Milk").build();
