@@ -30,8 +30,8 @@ public class DeliveryCreateNoteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to the delivery identified "
         + "by the ID of the delivery. Existing note if any will be replaced with the input note.\n"
         + "Parameters: DELIVERY_ID (must be a integer representing a valid ID) "
-        + PREFIX_NOTE + "NAME\n"
-        + "Example: " + COMMAND_WORD + "1 --note This is a note";
+        + PREFIX_NOTE + " Note\n"
+        + "Example: " + COMMAND_WORD + " 1 --note This is a note";
 
     public static final String MESSAGE_NOTE_SUCCESS = "Added Note to Delivery: %1$s";
 
