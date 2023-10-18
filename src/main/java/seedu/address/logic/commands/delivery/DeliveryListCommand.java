@@ -54,13 +54,14 @@ public class DeliveryListCommand extends DeliveryCommand {
 
         // sort
         model.sortFilteredDeliveryList(
-            sortType.equals("asc") ? Comparator.comparing(Delivery::getName) : Comparator.comparing(Delivery::getName)
+            sortType.equals(Sort.ASC) ? Comparator.comparing(Delivery::getName) : Comparator.comparing(
+                    Delivery::getName)
                 .reversed());
 
         List<Delivery> deliveryList = model.getSortedDeliveryList();
 
         //TODO: UI
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, true);
     }
 
     @Override

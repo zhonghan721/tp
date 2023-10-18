@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyBook;
 import seedu.address.model.person.Customer;
+import seedu.address.ui.ListItem;
 
 /**
  * API of the Logic component
@@ -45,6 +46,8 @@ public interface Logic {
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
+
+    ObservableList<ListItem> getUiList();
 
     /**
      * Set the user prefs' GUI settings.

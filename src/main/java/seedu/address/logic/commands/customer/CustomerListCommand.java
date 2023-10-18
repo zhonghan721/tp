@@ -27,6 +27,6 @@ public class CustomerListCommand extends CustomerCommand {
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, true);
     }
 }
