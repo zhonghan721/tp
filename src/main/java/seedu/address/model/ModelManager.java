@@ -29,7 +29,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Customer> filteredCustomers;
     private final FilteredList<Delivery> filteredDeliveries;
-
+    private User loggedInUser;
     private SortedList<Delivery> sortedDeliveries;
 
     /**
@@ -41,8 +41,8 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
-            + ", delivery book" + deliveryBook
-            + " and user prefs " + userPrefs);
+                + ", delivery book" + deliveryBook
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.deliveryBook = new DeliveryBook(deliveryBook);
@@ -211,7 +211,21 @@ public class ModelManager implements Model {
      */
     @Override
     public User getStoredUser() {
-        return userPrefs.getStoredUser();
+        return this.loggedInUser;
+    }
+
+    @Override
+    public void setLoggedInUser(User user) {
+        this.loggedInUser = user;
+    }
+
+    @Override
+    public void deleteUser() {
+        userPrefs.deleteUser();
+        // set the logged in user to null
+        setAddressBook(new AddressBook());
+        this.setLoggedInUser(null);
+        setLogoutSuccess();
     }
 
     /**
@@ -335,11 +349,11 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-            && deliveryBook.equals(otherModelManager.deliveryBook)
-            && userPrefs.equals(otherModelManager.userPrefs)
-            && filteredCustomers.equals(otherModelManager.filteredCustomers)
-            && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
-            && isLoggedIn == otherModelManager.isLoggedIn;
+                && deliveryBook.equals(otherModelManager.deliveryBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredCustomers.equals(otherModelManager.filteredCustomers)
+                && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
+                && isLoggedIn == otherModelManager.isLoggedIn;
     }
 
 }

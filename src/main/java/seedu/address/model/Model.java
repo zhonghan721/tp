@@ -171,7 +171,6 @@ public interface Model {
     void updateFilteredDeliveryList(Predicate<Delivery> predicate);
 
 
-
     void sortFilteredDeliveryList(Comparator<Delivery> comparator);
 
     /**
@@ -203,4 +202,10 @@ public interface Model {
      * Registers the given {@code user}.
      */
     void registerUser(User user);
+
+    void setLoggedInUser(User user);
+
+    void deleteUser();
 }
+
+
