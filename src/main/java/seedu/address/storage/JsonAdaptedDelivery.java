@@ -62,7 +62,7 @@ class JsonAdaptedDelivery {
         orderDate = source.getOrderDate().toString();
         deliveryDate = source.getDeliveryDate().toString();
         status = source.getStatus().name();
-        note = source.getNote().note;
+        note = Optional.ofNullable(source.getNote()).map(n -> n.note).orElse(null);
     }
 
     /**
