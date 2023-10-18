@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -25,6 +27,7 @@ import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
+
 /**
  * Contains helper methods for testing commands.
  */
@@ -33,6 +36,8 @@ public class CommandTestUtil {
     // Delivery
     public static final String VALID_NAME_GABRIELS_MILK = "Gabriel Milk";
     public static final String VALID_NAME_JAMES_MILK = "Jame Milk";
+    public static final String INVALID_NOTE = "";
+    public static final String VALID_NOTE = "VALID NOTE";
     public static final String INVALID_STATUS = "INVALID";
     public static final String VALID_STATUS_CREATED = "CREATED";
     public static final String VALID_STATUS_SHIPPED = "SHIPPED";
@@ -40,7 +45,6 @@ public class CommandTestUtil {
     public static final String VALID_STATUS_CANCELLED = "CANCELLED";
     public static final String INVALID_ID_NEGATIVE = "-1";
     public static final String INVALID_ID_NAN = "NaN";
-
 
     // Customer
     public static final String VALID_NAME_AMY = "Amy Bee";
@@ -94,6 +98,16 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
+    public static final String VALID_DELIVERY_LIST_ALL = " " + PREFIX_STATUS + "all";
+    public static final String VALID_DELIVERY_LIST_CREATED = " " + PREFIX_STATUS + "created";
+    public static final String VALID_DELIVERY_LIST_SHIPPED = " " + PREFIX_STATUS + "SHIPPED";
+    public static final String VALID_DELIVERY_LIST_COMPLETED = " " + PREFIX_STATUS + "completed";
+    public static final String VALID_DELIVERY_LIST_CANCELLED = " " + PREFIX_STATUS + "cancelled";
+
+    public static final String INVALID_DELIVERY_LIST = " " + PREFIX_STATUS + "invalid";
+    public static final String VALID_DELIVERY_LIST_SORT_ASC = " " + PREFIX_SORT + "asc";
+    public static final String VALID_DELIVERY_LIST_SORT_DESC = " " + PREFIX_SORT + "desc";
+    public static final String INVALID_DELIVERY_LIST_SORT = " " + PREFIX_SORT + "invalid";
     public static final EditPersonDescriptor DESC_AMY;
     public static final EditPersonDescriptor DESC_BOB;
 
