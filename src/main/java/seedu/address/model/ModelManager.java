@@ -218,13 +218,11 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns true if the stored username and password matches the given {@code user}.
+     * Returns true if the {@code user} matches the stored user.
+     *
+     * @param user the user to be checked
+     * @return true if the {@code user} matches the stored user
      */
-//    @Override
-//    public boolean userMatches(User user) {
-//        requireNonNull(user);
-//        return userPrefs.userMatches(user);
-//    }
     @Override
     public boolean userMatches(User user) {
         requireNonNull(user);
