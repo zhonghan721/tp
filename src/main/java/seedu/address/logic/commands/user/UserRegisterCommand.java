@@ -53,7 +53,7 @@ public class UserRegisterCommand extends Command {
         User storedUser = model.getStoredUser();
 
         // Logged in user cannot register
-        if (model.getUserLoginStatus() || storedUser != null) {
+        if (storedUser != null) {
             throw new CommandException(String.format(MESSAGE_ALREADY_HAVE_ACCOUNT, storedUser.getUsername()));
         }
 

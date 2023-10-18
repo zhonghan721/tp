@@ -211,6 +211,7 @@ public class ModelManager implements Model {
      */
     @Override
     public User getStoredUser() {
+
         return userPrefs.getStoredUser();
     }
 

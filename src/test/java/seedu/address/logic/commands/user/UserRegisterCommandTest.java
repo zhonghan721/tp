@@ -21,6 +21,8 @@ import seedu.address.model.user.Username;
 
 public class UserRegisterCommandTest {
 
+
+
     @Test
     public void execute_nullModel_throwsNullPointerException() {
         User user = new User(new Username("username"), new Password("password"), false);
@@ -32,6 +34,7 @@ public class UserRegisterCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(),
                 new UserPrefs(), true);
         User user = new User(new Username("username"), new Password("password"), false);
+
         UserRegisterCommand userRegisterCommand = new UserRegisterCommand(user);
 
         assertCommandFailure(userRegisterCommand, model,
@@ -45,10 +48,9 @@ public class UserRegisterCommandTest {
         User user = new User(new Username("username"), new Password("password"), false);
 
         UserRegisterCommand userRegisterCommand = new UserRegisterCommand(user);
+
         assertCommandFailure(userRegisterCommand, model,
                 String.format(UserRegisterCommand.MESSAGE_ALREADY_HAVE_ACCOUNT, user.getUsername()));
-
-
     }
 
     @Test // expect success when storedUser is null
