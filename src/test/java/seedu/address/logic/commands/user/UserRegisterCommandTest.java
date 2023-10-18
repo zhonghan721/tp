@@ -28,24 +28,14 @@ public class UserRegisterCommandTest {
     }
 
     @Test
-    // // Logged in user cannot register
-    // if (model.getUserLoginStatus()) {
-    // throw new CommandException(MESSAGE_ALREADY_HAVE_ACCOUNT);
-    // }
     public void execute_userAlreadyLoggedIn_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(),
                 new UserPrefs(), true);
         User user = new User(new Username("username"), new Password("password"), false);
         UserRegisterCommand userRegisterCommand = new UserRegisterCommand(user);
-        // catch the exception thrown when executing command
-        // Use assertThrows to catch the exception and verify its message
-//        CommandException exception = assertThrows(CommandException.class, () -> userRegisterCommand.execute(model));
-//
-//        // Verify the exception message
-//        assertEquals(String.format(UserRegisterCommand.MESSAGE_ALREADY_HAVE_ACCOUNT, user.getUsername()),
-//                exception.getMessage());
 
-        assertCommandFailure(userRegisterCommand, model,  String.format(UserRegisterCommand.MESSAGE_ALREADY_HAVE_ACCOUNT, user.getUsername()));
+        assertCommandFailure(userRegisterCommand, model,
+                String.format(UserRegisterCommand.MESSAGE_ALREADY_HAVE_ACCOUNT, user.getUsername()));
     }
 
     @Test
@@ -53,16 +43,10 @@ public class UserRegisterCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(),
                 new UserPrefs(), false);
         User user = new User(new Username("username"), new Password("password"), false);
-//        model.registerUser(user);
+
         UserRegisterCommand userRegisterCommand = new UserRegisterCommand(user);
-////        // catch the exception thrown when executing command
-////        // Use assertThrows to catch the exception and verify its message
-//        CommandException exception = assertThrows(CommandException.class, () -> userRegisterCommand.execute(model));
-//
-//        // Verify the exception message
-//        assertEquals(String.format(UserRegisterCommand.MESSAGE_ALREADY_HAVE_ACCOUNT, user.getUsername()),
-//                exception.getMessage());
-        assertCommandFailure(userRegisterCommand, model, String.format(UserRegisterCommand.MESSAGE_ALREADY_HAVE_ACCOUNT, user.getUsername()));
+        assertCommandFailure(userRegisterCommand, model,
+                String.format(UserRegisterCommand.MESSAGE_ALREADY_HAVE_ACCOUNT, user.getUsername()));
 
 
     }
