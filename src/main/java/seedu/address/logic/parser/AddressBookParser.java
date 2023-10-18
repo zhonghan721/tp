@@ -20,10 +20,12 @@ import seedu.address.logic.commands.customer.CustomerListCommand;
 import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
 import seedu.address.logic.commands.delivery.DeliveryListCommand;
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
+import seedu.address.logic.commands.delivery.DeliveryViewCommand;
 import seedu.address.logic.commands.user.UserLoginCommand;
 import seedu.address.logic.commands.user.UserLogoutCommand;
 import seedu.address.logic.parser.delivery.DeliveryCreateNoteCommandParser;
 import seedu.address.logic.parser.delivery.DeliveryStatusCommandParser;
+import seedu.address.logic.parser.delivery.DeliveryViewCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.UserLoginCommandParser;
 
@@ -88,6 +90,9 @@ public class AddressBookParser {
 
         case DeliveryStatusCommand.COMMAND_WORD:
             return new DeliveryStatusCommandParser().parse(arguments);
+
+        case DeliveryViewCommand.COMMAND_WORD:
+            return new DeliveryViewCommandParser().parse(arguments);
 
         // ================ System Commands ======================================
         case ExitCommand.COMMAND_WORD:
