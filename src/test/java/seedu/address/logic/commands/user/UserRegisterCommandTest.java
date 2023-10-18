@@ -20,11 +20,6 @@ import seedu.address.model.user.Username;
 
 public class UserRegisterCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(),
-            new UserPrefs(), false);
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(),
-            new UserPrefs(), false);
-
     @Test
     public void execute_nullModel_throwsNullPointerException() {
         User user = new User(new Username("username"), new Password("password"), false);
@@ -37,8 +32,9 @@ public class UserRegisterCommandTest {
     // throw new CommandException(MESSAGE_ALREADY_HAVE_ACCOUNT);
     // }
     public void execute_userAlreadyLoggedIn_throwsCommandException() {
+        Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(),
+                new UserPrefs(), true);
         User user = new User(new Username("username"), new Password("password"), false);
-        model.setLoginSuccess();
         UserRegisterCommand userRegisterCommand = new UserRegisterCommand(user);
         // catch the exception thrown when executing command
         // Use assertThrows to catch the exception and verify its message
@@ -51,6 +47,8 @@ public class UserRegisterCommandTest {
 
     @Test
     public void execute_storedUserExists_throwsCommandException() {
+        Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(),
+                new UserPrefs(), false);
         User user = new User(new Username("username"), new Password("password"), false);
         model.registerUser(user);
         UserRegisterCommand userRegisterCommand = new UserRegisterCommand(user);

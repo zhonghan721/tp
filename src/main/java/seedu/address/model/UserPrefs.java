@@ -165,7 +165,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
             // Serialize the authenticationData to a JSON file
             objectMapper.writeValue(authenticationPath.toFile(), authenticationData);
 
-            // Optionally, you can add logging to indicate successful registration
             logger.info("User registered: " + user.getUsername());
             return true;
 
