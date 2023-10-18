@@ -42,6 +42,7 @@ public class UserRegisterCommand extends Command {
 
     /**
      * Executes the register user command.
+     *
      * @param model {@code Model} which the command should operate on.
      * @return {@code CommandResult} that indicates success.
      * @throws CommandException if the user is already logged in or the user credentials are wrong.
@@ -60,24 +61,6 @@ public class UserRegisterCommand extends Command {
         model.registerUser(this.user);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
         return new CommandResult(MESSAGE_SUCCESS);
-    }
-
-    /**
-     * Executes the register user command
-     * @param model {@code Model} which the command should operate on.
-     * @param isTestNoStoredUser boolean to indicate if the test is run without a stored user
-     * @return {@code CommandResult} that indicates success.
-     * @throws CommandException if the user is already logged in or the user credentials are wrong.
-     */
-    public CommandResult execute(Model model, boolean isTestNoStoredUser) throws CommandException {
-        if (isTestNoStoredUser) {
-            model.getStoredUser(true);
-            model.registerUser(this.user);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
-            return new CommandResult(MESSAGE_SUCCESS);
-        } else {
-            return execute(model);
-        }
     }
 
     /**

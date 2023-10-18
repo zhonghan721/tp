@@ -171,7 +171,6 @@ public interface Model {
     void updateFilteredDeliveryList(Predicate<Delivery> predicate);
 
 
-
     void sortFilteredDeliveryList(Comparator<Delivery> comparator);
 
     /**
@@ -200,13 +199,10 @@ public interface Model {
     User getStoredUser();
 
     /**
-     * Returns the stored user for testing.
-     */
-    User getStoredUser(boolean isTestNoStoredUser);
-
-    /**
      * Registers the given {@code user}.
      */
     void registerUser(User user);
+
+    void setLoggedInUser(User user);
 
 }

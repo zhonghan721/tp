@@ -27,8 +27,11 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final DeliveryBook deliveryBook;
     private final UserPrefs userPrefs;
+
     private final FilteredList<Customer> filteredCustomers;
     private final FilteredList<Delivery> filteredDeliveries;
+
+    private User loggedInUser;
 
     private SortedList<Delivery> sortedDeliveries;
 
@@ -41,8 +44,8 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
-            + ", delivery book" + deliveryBook
-            + " and user prefs " + userPrefs);
+                + ", delivery book" + deliveryBook
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.deliveryBook = new DeliveryBook(deliveryBook);
@@ -51,7 +54,7 @@ public class ModelManager implements Model {
         filteredDeliveries = new FilteredList<>(this.deliveryBook.getList());
         sortedDeliveries = new SortedList<>(filteredDeliveries);
         this.isLoggedIn = isLoggedIn;
-
+        this.loggedInUser = userPrefs.getStoredUser();
     }
 
     public ModelManager() {
@@ -212,17 +215,12 @@ public class ModelManager implements Model {
     @Override
     public User getStoredUser() {
 
-        return userPrefs.getStoredUser();
+        return this.loggedInUser;
     }
 
-    /**
-     * Returns the stored user for testing.
-     * @param isTestNoStoredUser
-     * @return
-     */
     @Override
-    public User getStoredUser(boolean isTestNoStoredUser) {
-        return userPrefs.getStoredUser(isTestNoStoredUser);
+    public void setLoggedInUser(User user) {
+        this.loggedInUser = user;
     }
 
     /**
@@ -231,8 +229,8 @@ public class ModelManager implements Model {
     @Override
     public void registerUser(User user) {
         userPrefs.registerUser(user);
-        // set login flag to true
-        isLoggedIn = true;
+        this.setLoggedInUser(user);
+        this.setLoginSuccess();
     }
 
     //=========== DeliveryBook ================================================================================
@@ -346,11 +344,11 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-            && deliveryBook.equals(otherModelManager.deliveryBook)
-            && userPrefs.equals(otherModelManager.userPrefs)
-            && filteredCustomers.equals(otherModelManager.filteredCustomers)
-            && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
-            && isLoggedIn == otherModelManager.isLoggedIn;
+                && deliveryBook.equals(otherModelManager.deliveryBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredCustomers.equals(otherModelManager.filteredCustomers)
+                && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
+                && isLoggedIn == otherModelManager.isLoggedIn;
     }
 
 }

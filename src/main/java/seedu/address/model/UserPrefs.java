@@ -27,14 +27,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
-    private Path deliveryBookFilePath = Paths.get("data" , "deliverybook.json");
-    private Path authenticationPath = Paths.get("data" , "authentication.json");
+    private Path addressBookFilePath = Paths.get("data", "addressbook.json");
+    private Path deliveryBookFilePath = Paths.get("data", "deliverybook.json");
+    private Path authenticationPath = Paths.get("data", "authentication.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
      */
-    public UserPrefs() {}
+    public UserPrefs() {
+    }
 
     /**
      * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}.
@@ -83,6 +84,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     /**
      * Returns the path of the authentication file.
+     *
      * @return authenticationPath
      */
     public Path getAuthenticationPath() {
@@ -91,6 +93,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     /**
      * Sets the path of the authentication file.
+     *
      * @param authenticationPath
      */
     public void setAuthenticationPath(Path authenticationPath) {
@@ -100,6 +103,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     /**
      * Returns the contents of the authentication file as a String.
+     *
      * @param filePath path of the authentication file
      * @return String representation of the authentication file
      * @throws Exception if there is an error reading the file
@@ -110,33 +114,33 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     /**
      * Returns true if stored username and password matches the given {@code user}.
+     *
      * @param currentUser
      * @return true if stored username and password matches the given {@code user}
      */
     public boolean userMatches(User currentUser) {
         requireNonNull(currentUser);
-        User storedUser = getStoredUser(false);
+        User storedUser = getStoredUser();
         return currentUser.equals(storedUser);
     }
 
     /**
      * Returns the stored user.
+     *
      * @return storedUser
      */
-    public User getStoredUser(boolean isTestNoStoredUser) {
-        if (isTestNoStoredUser) {
-            return null;
-        }
+    public User getStoredUser() {
+
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             AuthenticationData authenticationData =
-                objectMapper.readValue(authenticationPath.toFile(), AuthenticationData.class);
+                    objectMapper.readValue(authenticationPath.toFile(), AuthenticationData.class);
 
             // Create User objects
             User storedUser =
-                new User(new Username(authenticationData.getUsername()),
-                         new Password(authenticationData.getPassword(), true),
-                         true);
+                    new User(new Username(authenticationData.getUsername()),
+                            new Password(authenticationData.getPassword(), true),
+                            true);
             return storedUser;
         } catch (IOException e) {
             logger.fine("Error reading authentication file: " + e.getMessage());
@@ -144,12 +148,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         }
     }
 
-    public User getStoredUser() {
-        return getStoredUser(false);
-    }
-
     /**
      * Registers the given {@code user}.
+     *
      * @param user
      */
     public boolean registerUser(User user) {
@@ -160,7 +161,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
             // Create an AuthenticationData object from the User
             AuthenticationData authenticationData =
-                new AuthenticationData(user.getUsername().toString(), user.getPassword().toString());
+                    new AuthenticationData(user.getUsername().toString(), user.getPassword().toString());
 
             // Serialize the authenticationData to a JSON file
             objectMapper.writeValue(authenticationPath.toFile(), authenticationData);

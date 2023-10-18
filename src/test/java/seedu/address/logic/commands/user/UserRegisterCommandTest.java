@@ -22,7 +22,6 @@ import seedu.address.model.user.Username;
 public class UserRegisterCommandTest {
 
 
-
     @Test
     public void execute_nullModel_throwsNullPointerException() {
         User user = new User(new Username("username"), new Password("password"), false);
@@ -61,6 +60,7 @@ public class UserRegisterCommandTest {
                 new UserPrefs(), false);
 
         // Create a User instance that you want to register
+
         User user = new User(new Username("username"), new Password("password"), false);
 
         // Create the UserRegisterCommand with the user
@@ -69,8 +69,10 @@ public class UserRegisterCommandTest {
         // Execute the command
         CommandResult result;
 
+        model.setLoggedInUser(null);
+
         try {
-            result = userRegisterCommand.execute(model, true);
+            result = userRegisterCommand.execute(model);
         } catch (CommandException e) {
             throw new AssertionError("Execution of command should not fail.", e);
         }
