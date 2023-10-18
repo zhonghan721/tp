@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -38,11 +39,13 @@ public class UserRegisterCommandTest {
         UserRegisterCommand userRegisterCommand = new UserRegisterCommand(user);
         // catch the exception thrown when executing command
         // Use assertThrows to catch the exception and verify its message
-        CommandException exception = assertThrows(CommandException.class, () -> userRegisterCommand.execute(model));
+//        CommandException exception = assertThrows(CommandException.class, () -> userRegisterCommand.execute(model));
+//
+//        // Verify the exception message
+//        assertEquals(String.format(UserRegisterCommand.MESSAGE_ALREADY_HAVE_ACCOUNT, user.getUsername()),
+//                exception.getMessage());
 
-        // Verify the exception message
-        assertEquals(String.format(UserRegisterCommand.MESSAGE_ALREADY_HAVE_ACCOUNT, user.getUsername()),
-                exception.getMessage());
+        assertCommandFailure(userRegisterCommand, model,  String.format(UserRegisterCommand.MESSAGE_ALREADY_HAVE_ACCOUNT, user.getUsername()));
     }
 
     @Test
@@ -50,15 +53,18 @@ public class UserRegisterCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(),
                 new UserPrefs(), false);
         User user = new User(new Username("username"), new Password("password"), false);
-        model.registerUser(user);
+//        model.registerUser(user);
         UserRegisterCommand userRegisterCommand = new UserRegisterCommand(user);
-        // catch the exception thrown when executing command
-        // Use assertThrows to catch the exception and verify its message
-        CommandException exception = assertThrows(CommandException.class, () -> userRegisterCommand.execute(model));
+////        // catch the exception thrown when executing command
+////        // Use assertThrows to catch the exception and verify its message
+//        CommandException exception = assertThrows(CommandException.class, () -> userRegisterCommand.execute(model));
+//
+//        // Verify the exception message
+//        assertEquals(String.format(UserRegisterCommand.MESSAGE_ALREADY_HAVE_ACCOUNT, user.getUsername()),
+//                exception.getMessage());
+        assertCommandFailure(userRegisterCommand, model, String.format(UserRegisterCommand.MESSAGE_ALREADY_HAVE_ACCOUNT, user.getUsername()));
 
-        // Verify the exception message
-        assertEquals(String.format(UserRegisterCommand.MESSAGE_ALREADY_HAVE_ACCOUNT, user.getUsername()),
-                exception.getMessage());
+
     }
 
     @Test // expect success when storedUser is null
