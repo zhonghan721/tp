@@ -7,7 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.GABRIELS_MILK;
-import static seedu.address.testutil.TypicalDeliveries.GAMBES_RICE;
+import static seedu.address.testutil.TypicalDeliveries.JAMES_RICE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -139,25 +139,25 @@ public class ModelManagerTest {
     public void sortDeliveryBookByNameAsc() {
         modelManager.setLoginSuccess();
         modelManager.addDelivery(GABRIELS_MILK);
-        modelManager.addDelivery(GAMBES_RICE);
+        modelManager.addDelivery(JAMES_RICE);
         modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName));
-        assertEquals(Arrays.asList(GABRIELS_MILK, GAMBES_RICE), modelManager.getSortedDeliveryList());
+        assertEquals(Arrays.asList(GABRIELS_MILK, JAMES_RICE), modelManager.getSortedDeliveryList());
     }
 
     @Test
     public void sortDeliveryBookByNameDesc() {
         modelManager.setLoginSuccess();
         modelManager.addDelivery(GABRIELS_MILK);
-        modelManager.addDelivery(GAMBES_RICE);
+        modelManager.addDelivery(JAMES_RICE);
         modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName).reversed());
-        assertEquals(Arrays.asList(GAMBES_RICE, GABRIELS_MILK), modelManager.getSortedDeliveryList());
+        assertEquals(Arrays.asList(JAMES_RICE, GABRIELS_MILK), modelManager.getSortedDeliveryList());
     }
 
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         DeliveryBook deliveryBook =
-            new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+            new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(JAMES_RICE).build();
         AddressBook differentAddressBook = new AddressBook();
         DeliveryBook differentDeliveryBook = new DeliveryBook();
         UserPrefs userPrefs = new UserPrefs();

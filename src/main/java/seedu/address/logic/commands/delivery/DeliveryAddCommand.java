@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -94,8 +95,8 @@ public class DeliveryAddCommand extends DeliveryCommand {
     private static Delivery createDelivery(Model model, DeliveryAddDescriptor deliveryAddDescriptor)
             throws CommandException {
 
-        DeliveryName deliveryName = deliveryAddDescriptor.getDeliveryName();
-        int customerId = deliveryAddDescriptor.getCustomerId();
+        DeliveryName deliveryName = deliveryAddDescriptor.getDeliveryName().get();
+        int customerId = deliveryAddDescriptor.getCustomerId().get();
         Customer customer = null;
         DeliveryDate deliveryDate = null;
 
@@ -112,7 +113,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         if (checkValidDeliveryDate(deliveryAddDescriptor)) {
-            deliveryDate = deliveryAddDescriptor.getDate();
+            deliveryDate = deliveryAddDescriptor.getDate().get();
         } else {
             throw new CommandException(MESSAGE_INVALID_DELIVERY_DATE);
         }
@@ -121,7 +122,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
     }
 
     private static boolean checkValidCustomer(Model model, DeliveryAddDescriptor deliveryAddDescriptor) {
-        int customerId = deliveryAddDescriptor.getCustomerId();
+        int customerId = deliveryAddDescriptor.getCustomerId().get();
 
         ReadOnlyBook<Customer> customerReadOnlyBook = model.getAddressBook();
         boolean found = false;
@@ -140,7 +141,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
      * @return If the delivery date is valid or not.
      */
     private static boolean checkValidDeliveryDate(DeliveryAddDescriptor deliveryAddDescriptor) {
-        DeliveryDate deliveryDate = deliveryAddDescriptor.getDate();
+        DeliveryDate deliveryDate = deliveryAddDescriptor.getDate().get();
         return DeliveryDate.isValidDeliveryDate(deliveryDate.toString());
     }
 
@@ -173,23 +174,23 @@ public class DeliveryAddCommand extends DeliveryCommand {
             this.deliveryName = deliveryName;
         }
 
-        public DeliveryName getDeliveryName() {
-            return deliveryName;
+        public Optional<DeliveryName> getDeliveryName() {
+            return Optional.of(deliveryName);
         }
         public void setCustomerId(int customerId) {
             this.customerId = customerId;
         }
 
-        public int getCustomerId() {
-            return customerId;
+        public Optional<Integer> getCustomerId() {
+            return Optional.of(customerId);
         }
 
         public void setDeliveryDate(DeliveryDate deliveryDate) {
             this.deliveryDate = deliveryDate;
         }
 
-        public DeliveryDate getDate() {
-            return deliveryDate;
+        public Optional<DeliveryDate> getDate() {
+            return Optional.of(deliveryDate);
         }
 
         @Override

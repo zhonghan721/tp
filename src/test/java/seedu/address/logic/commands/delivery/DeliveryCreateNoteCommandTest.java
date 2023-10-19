@@ -5,9 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalDeliveries.GABRIELS_MILK;
-import static seedu.address.testutil.TypicalDeliveries.GAMBES_RICE;
-import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
+import static seedu.address.testutil.TypicalDeliveries.*;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -49,9 +47,9 @@ public class DeliveryCreateNoteCommandTest {
     @Test
     public void execute_newNote_success() {
         Note note = new Note("This is a new note");
-        Delivery expectedDelivery = new DeliveryBuilder(GAMBES_RICE).withNote(note.note).build();
+        Delivery expectedDelivery = new DeliveryBuilder(JAMES_RICE).withNote(note.note).build();
         DeliveryCreateNoteCommand deliveryCreateNoteCommand =
-            new DeliveryCreateNoteCommand(GAMBES_RICE.getDeliveryId(), note);
+            new DeliveryCreateNoteCommand(JAMES_RICE.getDeliveryId(), note);
 
         String expectedMessage = String.format(DeliveryCreateNoteCommand.MESSAGE_NOTE_SUCCESS,
             Messages.formatDelivery(expectedDelivery));
@@ -60,7 +58,7 @@ public class DeliveryCreateNoteCommandTest {
             new DeliveryBook(model.getDeliveryBook()),
             new UserPrefs(),
             true);
-        expectedModel.setDelivery(model.getDeliveryBook().getById(GAMBES_RICE.getDeliveryId()).get(),
+        expectedModel.setDelivery(model.getDeliveryBook().getById(JAMES_RICE.getDeliveryId()).get(),
             expectedDelivery);
 
         assertCommandSuccess(deliveryCreateNoteCommand, model, expectedMessage, expectedModel);
@@ -94,7 +92,7 @@ public class DeliveryCreateNoteCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new DeliveryCreateNoteCommand(GAMBES_RICE.getDeliveryId(),
+        assertFalse(standardCommand.equals(new DeliveryCreateNoteCommand(JAMES_RICE.getDeliveryId(),
             note)));
 
         // different note -> returns false

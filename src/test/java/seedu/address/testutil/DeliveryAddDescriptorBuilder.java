@@ -41,8 +41,8 @@ public class DeliveryAddDescriptorBuilder {
     /**
      * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
      */
-    public DeliveryAddDescriptorBuilder withCustomer(Customer customer) {
-        descriptor.setCustomerId(customer.getCustomerId());
+    public DeliveryAddDescriptorBuilder withCustomerId(int customerId) {
+        descriptor.setCustomerId(customerId);
         return this;
     }
 

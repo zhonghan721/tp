@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.delivery;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -8,6 +8,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.delivery.DeliveryDeleteCommand;
+import seedu.address.logic.commands.delivery.DeliveryListCommand;
+import seedu.address.logic.parser.CommandParserTestUtil;
+import seedu.address.logic.parser.DeliveryDeleteCommandParser;
 
 public class DeliveryDeleteCommandParserTest {
     private DeliveryDeleteCommandParser parser = new DeliveryDeleteCommandParser();
