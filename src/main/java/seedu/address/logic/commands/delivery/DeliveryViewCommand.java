@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.delivery;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DELIVERY_ID;
+import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 
 import java.util.Optional;
 
@@ -35,6 +36,11 @@ public class DeliveryViewCommand extends DeliveryCommand {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        // User cannot perform this operation before logging in
+        if (!model.getUserLoginStatus()) {
+            throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
+        }
+
         Optional<Delivery> delivery = model.getDelivery(deliveryId);
 
         if (delivery.isEmpty()) {

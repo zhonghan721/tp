@@ -72,6 +72,24 @@ public class DeliveryCreateNoteCommandTest {
     }
 
     @Test
+    public void execute_newNoteLoggedOut_throwsCommandException() {
+        model.setLogoutSuccess();
+        Note note = new Note("This is a new note");
+        DeliveryCreateNoteCommand deliveryCreateNoteCommand =
+                new DeliveryCreateNoteCommand(GAMBES_RICE.getDeliveryId(), note);
+
+        assertCommandFailure(deliveryCreateNoteCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+
+    @Test
+    public void execute_invalidLoggedOut_throwsCommandException() {
+        model.setLogoutSuccess();
+        Note note = new Note("This is a note");
+        DeliveryCreateNoteCommand deliveryCreateNoteCommand = new DeliveryCreateNoteCommand(-1, note);
+        assertCommandFailure(deliveryCreateNoteCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+
+    @Test
     public void equals() {
         Note note = new Note("This is a note");
         final DeliveryCreateNoteCommand standardCommand =

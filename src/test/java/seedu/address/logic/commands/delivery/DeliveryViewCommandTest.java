@@ -37,6 +37,20 @@ class DeliveryViewCommandTest {
     }
 
     @Test
+    public void execute_allFieldsValidLoggedOut_throwsCommandException() {
+        model.setLogoutSuccess();
+        DeliveryViewCommand deliveryViewCommand = new DeliveryViewCommand(1);
+        assertCommandFailure(deliveryViewCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+
+    @Test
+    public void execute_invalidTargetIdLoggedOut_throwsCommandException() {
+        model.setLogoutSuccess();
+        DeliveryViewCommand deliveryViewCommand = new DeliveryViewCommand(-1);
+        assertCommandFailure(deliveryViewCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+
+    @Test
     public void equals() {
         DeliveryViewCommand deliveryViewCommand = new DeliveryViewCommand(1);
         DeliveryViewCommand deliveryViewCommandCopy = new DeliveryViewCommand(1);

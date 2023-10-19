@@ -21,7 +21,6 @@ public class PasswordTest {
 
     @Test
     public void isValidPassword() {
-        // null name
         assertThrows(NullPointerException.class, () -> Password.isValidPassword(null));
 
         // invalid name
@@ -59,4 +58,25 @@ public class PasswordTest {
         // different values -> returns false
         assertFalse(password.equals(new Password("ValidPassword")));
     }
+
+    @Test
+    public void toStringTest() {
+        // password is "password"
+        Password password = new Password("5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8", true);
+        assertTrue(password.toString().equals("5E884898DA28047151D0E56F8DC6292773603D0D6AABBDD62A11EF721D1542D8"));
+    }
+
+    @Test
+    public void hashCode_sameHashCode_returnsTrue() {
+        Password password = new Password("ValidPa55word");
+        assertTrue(password.hashCode() == password.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentHashCode_returnsFalse() {
+        Password password = new Password("ValidPa55word");
+        Password differentPassword = new Password("DifferentPa55word");
+        assertFalse(password.hashCode() == differentPassword.hashCode());
+    }
+
 }

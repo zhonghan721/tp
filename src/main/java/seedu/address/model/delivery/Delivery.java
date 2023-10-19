@@ -1,6 +1,7 @@
 package seedu.address.model.delivery;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Customer;
@@ -219,6 +220,8 @@ public class Delivery {
             .add("customer", customer)
             .add("orderedAt", orderDate)
             .add("deliveredAt", deliveryDate)
+            .add("note:", Optional.ofNullable(note)
+                .map(n -> String.format("\n Note:%s", n)).orElse(""))
             .toString();
     }
 }

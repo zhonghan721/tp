@@ -21,17 +21,17 @@ public class AddCommand extends CustomerCommand {
 
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " " + "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the HomeBoss database. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the HomeBoss."
+            + "\nParameters: "
+            + PREFIX_NAME + " NAME "
+            + PREFIX_PHONE + " PHONE "
+            + PREFIX_EMAIL + " EMAIL "
+            + PREFIX_ADDRESS + " ADDRESS\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25";
+            + PREFIX_NAME + " John Doe "
+            + PREFIX_PHONE + " 98765432 "
+            + PREFIX_EMAIL + " johnd@example.com "
+            + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25";
 
     public static final String MESSAGE_SUCCESS = "New customer added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This customer already exists in HomeBoss";
@@ -60,7 +60,7 @@ public class AddCommand extends CustomerCommand {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatCustomer(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override

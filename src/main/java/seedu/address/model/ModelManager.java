@@ -18,6 +18,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
+import seedu.address.model.user.User;
 import seedu.address.ui.ListItem;
 
 /**
@@ -30,8 +31,10 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final DeliveryBook deliveryBook;
     private final UserPrefs userPrefs;
+
     private final FilteredList<Customer> filteredCustomers;
     private final FilteredList<Delivery> filteredDeliveries;
+    private User loggedInUser;
     private SortedList<Delivery> sortedDeliveries;
 
     private ObservableList<ListItem> uiList;
@@ -45,8 +48,8 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
-            + ", delivery book" + deliveryBook
-            + " and user prefs " + userPrefs);
+                + ", delivery book" + deliveryBook
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.deliveryBook = new DeliveryBook(deliveryBook);
@@ -55,6 +58,7 @@ public class ModelManager implements Model {
         filteredDeliveries = new FilteredList<>(this.deliveryBook.getList());
         sortedDeliveries = new SortedList<>(filteredDeliveries);
         this.isLoggedIn = isLoggedIn;
+        this.loggedInUser = userPrefs.getStoredUser();
         this.setUiListCustomer();
 
     }
@@ -91,20 +95,20 @@ public class ModelManager implements Model {
     public void setUiListDelivery() {
 
         this.uiList = this.getSortedDeliveryList().stream().map(
-                delivery -> new ListItem(String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName()),
-                    delivery.getOrderDate().toString(), delivery.getStatus().toString(),
-                    delivery.getDeliveryDate().toString()))
-            .collect(Collectors.toCollection(
-                FXCollections::observableArrayList));
+                        delivery -> new ListItem(String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName()),
+                                delivery.getOrderDate().toString(), delivery.getStatus().toString(),
+                                delivery.getDeliveryDate().toString()))
+                .collect(Collectors.toCollection(
+                        FXCollections::observableArrayList));
     }
 
 
     @Override
     public void setUiListCustomer() {
         this.uiList = this.getFilteredPersonList().stream().map(
-                person -> new ListItem(String.format("[%d] %s", person.getCustomerId(), person.getName()),
-                    person.getEmail().toString(), person.getPhone().toString()))
-            .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                        person -> new ListItem(String.format("[%d] %s", person.getCustomerId(), person.getName()),
+                                person.getEmail().toString(), person.getPhone().toString()))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     @Override
@@ -185,6 +189,9 @@ public class ModelManager implements Model {
         return filteredCustomers;
     }
 
+    /**
+     * Updates the filter of the filtered customer list to filter by the given {@code predicate}.
+     */
     @Override
     public void updateFilteredPersonList(Predicate<Customer> predicate) {
         requireNonNull(predicate);
@@ -209,6 +216,18 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Returns true if the {@code user} matches the stored user.
+     *
+     * @param user the user to be checked
+     * @return true if the {@code user} matches the stored user
+     */
+    @Override
+    public boolean userMatches(User user) {
+        requireNonNull(user);
+        return user.equals(loggedInUser);
+    }
+
+    /**
      * Sets the login flag to true.
      */
     @Override
@@ -224,18 +243,59 @@ public class ModelManager implements Model {
         isLoggedIn = false;
     }
 
+    /**
+     * Returns the stored user.
+     */
+    @Override
+    public User getStoredUser() {
+        return this.loggedInUser;
+    }
+
+    @Override
+    public void setLoggedInUser(User user) {
+        this.loggedInUser = user;
+    }
+
+    @Override
+    public void deleteUser() {
+        userPrefs.deleteUser();
+        // set the logged in user to null
+        setAddressBook(new AddressBook());
+        this.setLoggedInUser(null);
+        setLogoutSuccess();
+    }
+
+    /**
+     * Registers the given {@code user}.
+     */
+    @Override
+    public void registerUser(User user) {
+        userPrefs.registerUser(user);
+        this.setLoggedInUser(user);
+        this.setLoginSuccess();
+    }
+
     //=========== DeliveryBook ================================================================================
 
+    /**
+     * Replaces delivery book data with the data in {@code deliveryBook}.
+     */
     @Override
     public void setDeliveryBook(ReadOnlyBook<Delivery> deliveryBook) {
         this.deliveryBook.resetData(deliveryBook);
     }
 
+    /**
+     * Returns the DeliveryBook
+     */
     @Override
     public ReadOnlyBook<Delivery> getDeliveryBook() {
         return deliveryBook;
     }
 
+    /**
+     * Returns true if a delivery with the same identity as {@code delivery} exists in the delivery book.
+     */
     @Override
     public Optional<Delivery> getDelivery(int id) {
         return this.deliveryBook.getById(id);
@@ -247,17 +307,26 @@ public class ModelManager implements Model {
         return deliveryBook.hasDelivery(delivery);
     }
 
+    /**
+     * Deletes the given delivery.
+     */
     @Override
     public void deleteDelivery(Delivery target) {
         deliveryBook.removeDelivery(target);
     }
 
+    /**
+     * Adds the given delivery.
+     */
     @Override
     public void addDelivery(Delivery delivery) {
         deliveryBook.addDelivery(delivery);
         updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
     }
 
+    /**
+     * Replaces the given delivery {@code target} with {@code editedDelivery}.
+     */
     @Override
     public void setDelivery(Delivery target, Delivery editedDelivery) {
         requireAllNonNull(target, editedDelivery);
@@ -280,6 +349,9 @@ public class ModelManager implements Model {
         return filteredDeliveries;
     }
 
+    /**
+     * Updates the filter of the filtered delivery list to filter by the given {@code predicate}.
+     */
     @Override
     public ObservableList<Delivery> getSortedDeliveryList() {
         return sortedDeliveries;
@@ -308,6 +380,7 @@ public class ModelManager implements Model {
         setUiListDelivery();
     }
 
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -321,11 +394,11 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-            && deliveryBook.equals(otherModelManager.deliveryBook)
-            && userPrefs.equals(otherModelManager.userPrefs)
-            && filteredCustomers.equals(otherModelManager.filteredCustomers)
-            && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
-            && isLoggedIn == otherModelManager.isLoggedIn;
+                && deliveryBook.equals(otherModelManager.deliveryBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredCustomers.equals(otherModelManager.filteredCustomers)
+                && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
+                && isLoggedIn == otherModelManager.isLoggedIn;
     }
 
 }
