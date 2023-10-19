@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
+import seedu.address.model.user.User;
 import seedu.address.ui.ListItem;
 
 /**
@@ -202,4 +203,25 @@ public interface Model {
      * Sets the logout flag to true.
      */
     void setLogoutSuccess();
+
+    /**
+     * Returns true if the {@code user} matches the user loaded in the model.
+     */
+    boolean userMatches(User user);
+
+    /**
+     * Returns the stored user.
+     */
+    User getStoredUser();
+
+    /**
+     * Registers the given {@code user}.
+     */
+    void registerUser(User user);
+
+    void setLoggedInUser(User user);
+
+    void deleteUser();
 }
+
+

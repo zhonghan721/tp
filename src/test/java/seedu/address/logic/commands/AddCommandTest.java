@@ -27,6 +27,7 @@ import seedu.address.model.ReadOnlyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
+import seedu.address.model.user.User;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.ui.ListItem;
 
@@ -45,7 +46,7 @@ public class AddCommandTest {
         CommandResult commandResult = new AddCommand(validCustomer).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
-            commandResult.getFeedbackToUser());
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validCustomer), modelStub.personsAdded);
     }
 
@@ -66,7 +67,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validCustomer);
 
         assertThrows(CommandException.class,
-            Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> addCommand.execute(modelStub));
+                Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -268,6 +269,32 @@ public class AddCommandTest {
 
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean userMatches(User user) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public User getStoredUser() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void registerUser(User user) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLoggedInUser(User user) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteUser() {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

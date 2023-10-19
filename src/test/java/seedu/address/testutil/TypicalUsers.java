@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_AARON;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_FOODBEAR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HASHED_PASSWORD_AARON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HASHED_PASSWORD_FOODBEAR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_AARON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_FOODBEAR;
 
@@ -17,10 +17,10 @@ public class TypicalUsers {
 
     // Manually added
     public static final User AARON = new UserBuilder().withUsername(VALID_USERNAME_AARON)
-            .withPassword(VALID_PASSWORD_AARON).build();
+            .withPassword(VALID_HASHED_PASSWORD_AARON).build();
 
     public static final User FOODBEAR = new UserBuilder().withUsername(VALID_USERNAME_FOODBEAR)
-            .withPassword(VALID_PASSWORD_FOODBEAR).build();
+            .withPassword(VALID_HASHED_PASSWORD_FOODBEAR).build();
 
     private TypicalUsers() {
     } // prevents instantiation

@@ -41,7 +41,7 @@ public class UserBuilder {
      * Sets the {@code Password} of the {@code User} that we are building.
      */
     public UserBuilder withPassword(String password) {
-        this.password = new Password(password);
+        this.password = new Password(password, true);
         return this;
     }
 
@@ -51,6 +51,6 @@ public class UserBuilder {
      * @return The User with the given parameters.
      */
     public User build() {
-        return new User(username, password);
+        return new User(username, password, true);
     }
 }

@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.GABRIELS_MILK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -26,6 +29,7 @@ import seedu.address.logic.commands.customer.CustomerListCommand;
 import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
 import seedu.address.logic.commands.delivery.DeliveryViewCommand;
+import seedu.address.logic.commands.user.UserRegisterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
@@ -55,29 +59,29 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_deliveryCreateNote() throws Exception {
         DeliveryCreateNoteCommand command = (DeliveryCreateNoteCommand) parser.parseCommand(
-            DeliveryCreateNoteCommand.COMMAND_WORD + " 1 --note This is a note");
+                DeliveryCreateNoteCommand.COMMAND_WORD + " 1 --note This is a note");
         assertEquals(new DeliveryCreateNoteCommand(1, new Note("This is a note")), command);
     }
 
     @Test
     public void parseCommand_delete() throws Exception {
         CustomerDeleteCommand command = (CustomerDeleteCommand) parser.parseCommand(
-            CustomerDeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+                CustomerDeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new CustomerDeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
     public void parseCommand_deliveryStatus() throws Exception {
         DeliveryStatusCommand command = (DeliveryStatusCommand) parser.parseCommand(
-            DeliveryStatusCommand.COMMAND_WORD + " "
-                + DeliveryStatus.COMPLETED + " " + GABRIELS_MILK.getDeliveryId());
+                DeliveryStatusCommand.COMMAND_WORD + " "
+                        + DeliveryStatus.COMPLETED + " " + GABRIELS_MILK.getDeliveryId());
         assertEquals(new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(), DeliveryStatus.COMPLETED), command);
     }
 
     @Test
     public void parseCommand_deliveryView() throws Exception {
         DeliveryViewCommand command = (DeliveryViewCommand) parser.parseCommand(
-            DeliveryViewCommand.COMMAND_WORD + " " + GABRIELS_MILK.getDeliveryId());
+                DeliveryViewCommand.COMMAND_WORD + " " + GABRIELS_MILK.getDeliveryId());
         assertEquals(new DeliveryViewCommand(GABRIELS_MILK.getDeliveryId()), command);
     }
 
@@ -86,7 +90,7 @@ public class AddressBookParserTest {
         Customer customer = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(customer).build();
         CustomerEditCommand command = (CustomerEditCommand) parser.parseCommand(CustomerEditCommand.COMMAND_WORD + " "
-            + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new CustomerEditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
@@ -100,7 +104,7 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-            FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -119,7 +123,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test
@@ -131,8 +135,16 @@ public class AddressBookParserTest {
     public void parseCommand_invalidPrefix_throwsParseException() {
         // Cannot wrap lines due to Separator Wrap not allowing lambda on newline
         assertThrows(
-            ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("invalidPrefix list"));
+                ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("invalidPrefix list"));
     }
 
+    @Test
+    // test user register command
+    public void parseCommand_userRegister() throws Exception {
+        assertTrue(parser.parseCommand(UserRegisterCommand.COMMAND_WORD + " "
+                + PREFIX_USER + " username "
+                + PREFIX_PASSWORD + " password "
+                + PREFIX_PASSWORD_CONFIRM + " password") instanceof UserRegisterCommand);
+    }
 
 }

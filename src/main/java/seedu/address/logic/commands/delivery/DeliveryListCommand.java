@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
 import java.util.Comparator;
@@ -8,6 +9,7 @@ import java.util.List;
 
 import seedu.address.logic.Sort;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryStatus;
@@ -43,8 +45,13 @@ public class DeliveryListCommand extends DeliveryCommand {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        // User cannot perform this operation before logging in
+        if (!model.getUserLoginStatus()) {
+            throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
+        }
+
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
 
         if (status != null) {
