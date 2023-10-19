@@ -2,11 +2,12 @@ package seedu.address.logic.parser.user;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.user.UserLoginCommand;
+import seedu.address.logic.commands.user.UserRegisterCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -18,31 +19,36 @@ import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
 /**
- * Parses input arguments and creates a new UserLoginCommand object
+ * Parses input arguments and creates a new UserRegisterCommand object
  */
-public class UserLoginCommandParser implements Parser<UserLoginCommand> {
+public class UserRegisterCommandParser implements Parser<UserRegisterCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the UserLoginCommand
-     * and returns an UserLoginCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the UserRegisterCommand
+     * and returns an UserRegisterCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public UserLoginCommand parse(String args) throws ParseException {
+    public UserRegisterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_USER, PREFIX_PASSWORD);
+                ArgumentTokenizer.tokenize(args, PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_USER, PREFIX_PASSWORD)
+        if (!arePrefixesPresent(argMultimap, PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UserLoginCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UserRegisterCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_USER, PREFIX_PASSWORD);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM);
         Username username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USER).get());
         Password password = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD).get());
+        Password confirmPassword = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD_CONFIRM).get());
+
+        if (!password.equals(confirmPassword)) {
+            throw new ParseException(UserRegisterCommand.MESSAGE_PASSWORD_MISMATCH);
+        }
 
         User user = new User(username, password, true);
 
-        return new UserLoginCommand(user);
+        return new UserRegisterCommand(user);
     }
 
     /**

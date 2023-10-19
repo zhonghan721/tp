@@ -23,6 +23,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.DeliveryBookBuilder;
 
@@ -157,7 +160,7 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         DeliveryBook deliveryBook =
-            new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+                new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         AddressBook differentAddressBook = new AddressBook();
         DeliveryBook differentDeliveryBook = new DeliveryBook();
         UserPrefs userPrefs = new UserPrefs();
@@ -208,5 +211,15 @@ public class ModelManagerTest {
     public void getDelivery_returnsDelivery() {
         modelManager.addDelivery(GABRIELS_MILK);
         assertEquals(modelManager.getDelivery(1), Optional.of(GABRIELS_MILK));
+    }
+
+    @Test
+    public void userMatches() {
+        Model modelManager = new ModelManager();
+        User user = new User(new Username("user1"), new Password("password1"), true);
+        User wrongUser = new User(new Username("user2"), new Password("password2"), true);
+        modelManager.setLoggedInUser(user);
+        assertTrue(modelManager.userMatches(user));
+        assertFalse(modelManager.userMatches(wrongUser));
     }
 }
