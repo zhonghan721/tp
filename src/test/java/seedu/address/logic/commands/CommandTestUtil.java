@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
@@ -12,8 +14,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -77,8 +77,11 @@ public class CommandTestUtil {
     public static final String VALID_VIEW_CUSTOMER_ID_1 = "1";
     public static final String VALID_VIEW_CUSTOMER_ID_2 = "2";
     public static final String INVALID_CUSTOMER_ID = "a";
+    public static final int TOO_LARGE_CUSTOMER_ID = 999;
 
     public static final String INVALID_CUSTOMER_ID_DESC = " " + PREFIX_CUSTOMER_ID + INVALID_CUSTOMER_ID;
+
+    public static final String TOO_LARGE_CUSTOMER_ID_DESC = " " + PREFIX_CUSTOMER_ID + TOO_LARGE_CUSTOMER_ID;
     public static final String CUSTOMER_ID_DESC_MILK = " " + PREFIX_CUSTOMER_ID + VALID_VIEW_CUSTOMER_ID_1;
     public static final String CUSTOMER_ID_DESC_RICE = " " + PREFIX_CUSTOMER_ID + VALID_VIEW_CUSTOMER_ID_2;
     public static final String VALID_NAME_AMY = "Amy Bee";

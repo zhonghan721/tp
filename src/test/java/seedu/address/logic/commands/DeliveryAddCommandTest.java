@@ -1,28 +1,33 @@
 package seedu.address.logic.commands;
 
-import static java.util.Collections.emptyList;
+
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.TOO_LARGE_CUSTOMER_ID;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import javafx.collections.FXCollections;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.customer.AddCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.*;
+import seedu.address.model.AddressBook;
+import seedu.address.model.DeliveryBook;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyBook;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
 import seedu.address.model.user.User;
@@ -60,31 +65,37 @@ public class DeliveryAddCommandTest {
     }
 
     @Test
-    public void execute_duplicateDelivery_throwsCommandException() {
+    public void execute_invalidPerson_throwsCommandException() {
         PersonBuilder personBuilder = new PersonBuilder();
-        Customer validCustomer = personBuilder.build();
-        ModelStub modelStub = new ModelwithDuplicateDelivery();
+        Customer invalidCustomer = personBuilder.withCustomerId(TOO_LARGE_CUSTOMER_ID).build();
 
-        Delivery validDelivery = new DeliveryBuilder().withCustomer(validCustomer).build();
+        ModelStub modelStub = new ModelStubAcceptingDeliveryAdded();
+        Delivery validDelivery = new DeliveryBuilder().withCustomer(invalidCustomer).build();
 
-        DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(new DeliveryAddDescriptorBuilder(validDelivery).build());
+        DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(
+                new DeliveryAddDescriptorBuilder(validDelivery).build());
 
-        assertThrows(CommandException.class, DeliveryAddCommand.MESSAGE_DUPLICATE_DELIVERY, () -> deliveryAddCommand.execute(modelStub));
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
+                deliveryAddCommand.execute(modelStub));
     }
 
     @Test
-    public void execute_invalidPerson_throwsCommandException() {
+    public void execute_invalidDeliveryDate_throwsCommandException() {
         PersonBuilder personBuilder = new PersonBuilder();
         Customer validCustomer = personBuilder.build();
 
         ModelStub modelStub = new ModelStubAcceptingDeliveryAdded();
-        Delivery validDelivery = new DeliveryBuilder().withCustomer(validCustomer).build();
+        Delivery validDelivery =
+                new DeliveryBuilder().withCustomer(validCustomer)
+                        .withDeliveryDate(INVALID_DELIVERY_DATE).build();
 
-        DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(new DeliveryAddDescriptorBuilder(validDelivery).build());
+        DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(new
+                DeliveryAddDescriptorBuilder(validDelivery).build());
 
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                () -> deliveryAddCommand.execute(modelStub));
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_DELIVERY_DATE, () ->
+                deliveryAddCommand.execute(modelStub));
     }
+
 
 
 
@@ -114,7 +125,6 @@ public class DeliveryAddCommandTest {
         // different person -> returns false
         assertFalse(addMilkCommand.equals(addRiceCommand));
     }
-
     /**
      * A default model stub that have all of the methods failing.
      */
@@ -141,11 +151,13 @@ public class DeliveryAddCommandTest {
 
         @Override
         public void setUiListDelivery() {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setUiListCustomer() {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -156,6 +168,7 @@ public class DeliveryAddCommandTest {
 
         @Override
         public Path getAddressBookFilePath() {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -166,6 +179,7 @@ public class DeliveryAddCommandTest {
 
         @Override
         public void addPerson(Customer customer) {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -186,6 +200,7 @@ public class DeliveryAddCommandTest {
 
         @Override
         public void deletePerson(Customer target) {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -276,6 +291,7 @@ public class DeliveryAddCommandTest {
 
         @Override
         public void setLoginSuccess() {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -287,6 +303,7 @@ public class DeliveryAddCommandTest {
 
         @Override
         public boolean userMatches(User user) {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -362,46 +379,39 @@ public class DeliveryAddCommandTest {
         }
     }
 
-        private class ModelwithDuplicateDelivery extends ModelStub {
+    private class ModelwithDuplicateDelivery extends ModelStub {
 
-            final ArrayList<Delivery> deliveriesAdded = new ArrayList<>();
-            ModelwithDuplicateDelivery() {
-                final PersonBuilder personBuilder = new PersonBuilder();
-                final Customer validCustomer = personBuilder.build();
-                final Delivery validDelivery = new DeliveryBuilder().withCustomer(validCustomer).build();
-                deliveriesAdded.add(validDelivery);
-            }
-
-
-
-
-            @Override
-            public boolean hasDelivery(Delivery delivery) {
-                requireNonNull(delivery);
-                return deliveriesAdded.stream().anyMatch(delivery::isSameDelivery);
-            }
-
-            @Override
-            public void addDelivery(Delivery delivery) {
-                requireNonNull(delivery);
-                deliveriesAdded.add(delivery);
-            }
-
-            @Override
-            public ReadOnlyBook<Delivery> getDeliveryBook() {
-                return new DeliveryBook();
-            }
-
-            @Override
-            public ReadOnlyBook<Customer> getAddressBook() {
-                PersonBuilder personBuilder = new PersonBuilder();
-                Customer validCustomer = personBuilder.build();
-                AddressBook addressBook = new AddressBook();
-                addressBook.addPerson(validCustomer);
-                return addressBook;
-            }
-
-
+        final ArrayList<Delivery> deliveriesAdded = new ArrayList<>();
+        ModelwithDuplicateDelivery() {
+            final PersonBuilder personBuilder = new PersonBuilder();
+            final Customer validCustomer = personBuilder.build();
+            final Delivery validDelivery = new DeliveryBuilder().withCustomer(validCustomer).build();
+            deliveriesAdded.add(validDelivery);
         }
+        @Override
+        public boolean hasDelivery(Delivery delivery) {
+            requireNonNull(delivery);
+            return deliveriesAdded.stream().anyMatch(delivery::isSameDelivery);
+        }
+        @Override
+        public void addDelivery(Delivery delivery) {
+            requireNonNull(delivery);
+            deliveriesAdded.add(delivery);
+        }
+
+        @Override
+        public ReadOnlyBook<Delivery> getDeliveryBook() {
+            return new DeliveryBook();
+        }
+
+        @Override
+        public ReadOnlyBook<Customer> getAddressBook() {
+            PersonBuilder personBuilder = new PersonBuilder();
+            Customer validCustomer = personBuilder.build();
+            AddressBook addressBook = new AddressBook();
+            addressBook.addPerson(validCustomer);
+            return addressBook;
+        }
+    }
 }
 

@@ -1,16 +1,17 @@
 package seedu.address.logic.commands;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_MILK;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_RICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CUSTOMER_ID_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DATE_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_JAMES_MILK;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.testutil.DeliveryAddDescriptorBuilder;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-
-
 public class DeliveryAddDescriptorTest {
     @Test
     public void equals() {

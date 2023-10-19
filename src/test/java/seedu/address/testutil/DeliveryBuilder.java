@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
+
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryName;
@@ -7,8 +9,6 @@ import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.delivery.OrderDate;
 import seedu.address.model.person.Customer;
-
-import java.time.LocalDate;
 
 /**
  * A utility class to help with building Delivery objects.
@@ -40,11 +40,11 @@ public class DeliveryBuilder {
      * Creates a {@code DeliveryBuilder} with the default details.
      */
     public DeliveryBuilder() {
-        LocalDate DEFAULT_NOW =  LocalDate.now();
+        LocalDate defaultNow = LocalDate.now();
         this.deliveryId = DEFAULT_ID;
         this.name = DEFAULT_NAME;
         this.customer = DEFAULT_CUSTOMER;
-        this.orderedAt = new OrderDate(DEFAULT_NOW.toString());
+        this.orderedAt = new OrderDate(defaultNow.toString());
         this.deliveredAt = DEFAULT_DELIVERED_AT;
         this.status = DEFAULT_STATUS;
         this.note = DEFAULT_NOTE;

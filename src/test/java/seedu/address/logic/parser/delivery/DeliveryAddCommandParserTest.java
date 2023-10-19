@@ -1,28 +1,28 @@
 package seedu.address.logic.parser.delivery;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.customer.AddCommand;
-import seedu.address.logic.commands.delivery.DeliveryAddCommand;
-import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
-import seedu.address.logic.parser.DeliveryAddCommandParser;
-import seedu.address.model.delivery.Delivery;
-import seedu.address.model.delivery.DeliveryDate;
-import seedu.address.model.delivery.DeliveryName;
-import seedu.address.model.person.Customer;
-import seedu.address.testutil.DeliveryBuilder;
-import seedu.address.testutil.PersonBuilder;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
+import static seedu.address.logic.commands.CommandTestUtil.CUSTOMER_ID_DESC_MILK;
+import static seedu.address.logic.commands.CommandTestUtil.DELIVERY_DATE_DESC_MILK;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_MILK;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CUSTOMER_ID_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_MILK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CUSTOMER_ID_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DATE_1;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.delivery.DeliveryAddCommand;
+import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
+import seedu.address.logic.parser.DeliveryAddCommandParser;
+import seedu.address.model.delivery.DeliveryDate;
+import seedu.address.model.delivery.DeliveryName;
 public class DeliveryAddCommandParserTest {
-    DeliveryAddCommandParser parser = new DeliveryAddCommandParser();
+    private DeliveryAddCommandParser parser = new DeliveryAddCommandParser();
 
 
     @Test
@@ -50,7 +50,7 @@ public class DeliveryAddCommandParserTest {
     public void parse_missingPreamble_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeliveryAddCommand.MESSAGE_USAGE);
 
-        assertParseFailure(parser,  CUSTOMER_ID_DESC_MILK
+        assertParseFailure(parser, CUSTOMER_ID_DESC_MILK
                 + DELIVERY_DATE_DESC_MILK, expectedMessage);
 
     }
@@ -59,7 +59,7 @@ public class DeliveryAddCommandParserTest {
     public void parse_duplicatePrefix_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeliveryAddCommand.MESSAGE_USAGE);
 
-        assertParseFailure(parser,  CUSTOMER_ID_DESC_MILK + CUSTOMER_ID_DESC_MILK
+        assertParseFailure(parser, CUSTOMER_ID_DESC_MILK + CUSTOMER_ID_DESC_MILK
                 + DELIVERY_DATE_DESC_MILK, expectedMessage);
     }
 
@@ -67,7 +67,7 @@ public class DeliveryAddCommandParserTest {
     public void parse_noArgs_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeliveryAddCommand.MESSAGE_USAGE);
 
-        assertParseFailure(parser,  "", expectedMessage);
+        assertParseFailure(parser, "", expectedMessage);
     }
     @Test
     public void parse_invalidArgs_throwsParseException() {
@@ -81,11 +81,9 @@ public class DeliveryAddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_MILK + CUSTOMER_ID_DESC_MILK
                 + INVALID_DELIVERY_DATE_DESC, DeliveryDate.MESSAGE_CONSTRAINTS);
 
-
-//        // invalid customer id
+        // invalid customer id
         assertParseFailure(parser, NAME_DESC_MILK + INVALID_CUSTOMER_ID_DESC
                 + DELIVERY_DATE_DESC_MILK, MESSAGE_INVALID_INDEX);
 
     }
-
 }

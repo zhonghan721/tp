@@ -8,8 +8,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.delivery.DeliveryDeleteCommand;
-import seedu.address.logic.commands.delivery.DeliveryListCommand;
-import seedu.address.logic.parser.CommandParserTestUtil;
 import seedu.address.logic.parser.DeliveryDeleteCommandParser;
 
 public class DeliveryDeleteCommandParserTest {

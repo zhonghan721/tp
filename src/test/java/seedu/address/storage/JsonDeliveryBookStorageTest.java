@@ -50,8 +50,7 @@ public class JsonDeliveryBookStorageTest {
     }
 
     @Test
-    public void
-    read_notJsonFormat_exceptionThrown() {
+    public void read_notJsonFormat_exceptionThrown() {
         assertThrows(DataLoadingException.class, () -> readDeliveryBook("notJsonformatBook.json"));
     }
 

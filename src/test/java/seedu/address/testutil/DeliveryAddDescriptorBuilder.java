@@ -4,7 +4,6 @@ import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescr
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryName;
-import seedu.address.model.person.Customer;
 
 /**
  * A utility class to help with building DeliveryAddDescriptor objects.

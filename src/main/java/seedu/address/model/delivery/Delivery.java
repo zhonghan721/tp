@@ -199,21 +199,6 @@ public class Delivery {
 
         Delivery otherDelivery = (Delivery) other;
 
-
-        // write tests to debug, print check equals
-        // delivery id is false. print to debug
-        System.out.println(otherDelivery.deliveryId);
-        System.out.println(deliveryId);
-//        System.out.println(otherDelivery.deliveryId == deliveryId);
-//        System.out.println(otherDelivery.deliveryDate.equals(deliveryDate));
-//        System.out.println(otherDelivery.name.equals(name));
-//        System.out.println(otherDelivery.customer.equals(customer));
-//        System.out.println(Objects.equals(otherDelivery.note, note));
-//        System.out.println(otherDelivery.orderDate.equals(orderDate));
-//        System.out.println(otherDelivery.status.equals(status));
-
-
-
         return otherDelivery.deliveryId == deliveryId
             && otherDelivery.deliveryDate.equals(deliveryDate)
             && otherDelivery.name.equals(name)
