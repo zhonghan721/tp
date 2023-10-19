@@ -3,10 +3,10 @@ package seedu.address.model.delivery;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_JAMES_RICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_JAMES_MILK;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.GABRIELS_MILK;
-import static seedu.address.testutil.TypicalDeliveries.JAMES_RICE;
+import static seedu.address.testutil.TypicalDeliveries.GAMBES_RICE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -42,7 +42,7 @@ public class UniqueDeliveryListTest {
     @Test
     public void contains_deliveryWithSameIdDifferentFields_returnsTrue() {
         uniqueDeliveryList.add(GABRIELS_MILK);
-        Delivery delivery = new DeliveryBuilder(JAMES_RICE).withId(1).build();
+        Delivery delivery = new DeliveryBuilder(GAMBES_RICE).withId(1).build();
         assertTrue(uniqueDeliveryList.contains(delivery));
     }
 
@@ -92,7 +92,7 @@ public class UniqueDeliveryListTest {
     @Test
     public void setDelivery_editedDeliveryHasSameIdentity_success() {
         uniqueDeliveryList.add(GABRIELS_MILK);
-        Delivery editedDelivery = new DeliveryBuilder(GABRIELS_MILK).withName(VALID_NAME_JAMES_RICE).build();
+        Delivery editedDelivery = new DeliveryBuilder(GABRIELS_MILK).withName(VALID_NAME_JAMES_MILK).build();
         uniqueDeliveryList.setDelivery(GABRIELS_MILK, editedDelivery);
         UniqueDeliveryList expectedUniqueDeliveryList = new UniqueDeliveryList();
         expectedUniqueDeliveryList.add(editedDelivery);
@@ -102,18 +102,18 @@ public class UniqueDeliveryListTest {
     @Test
     public void setDelivery_editedDeliveryHasDifferentIdentity_success() {
         uniqueDeliveryList.add(GABRIELS_MILK);
-        uniqueDeliveryList.setDelivery(GABRIELS_MILK, JAMES_RICE);
+        uniqueDeliveryList.setDelivery(GABRIELS_MILK, GAMBES_RICE);
         UniqueDeliveryList expectedUniqueDeliveryList = new UniqueDeliveryList();
-        expectedUniqueDeliveryList.add(JAMES_RICE);
+        expectedUniqueDeliveryList.add(GAMBES_RICE);
         assertEquals(expectedUniqueDeliveryList, uniqueDeliveryList);
     }
 
     @Test
     public void setDelivery_editedDeliveryHasNonUniqueIdentity_throwsDuplicateDeliveryException() {
         uniqueDeliveryList.add(GABRIELS_MILK);
-        uniqueDeliveryList.add(JAMES_RICE);
+        uniqueDeliveryList.add(GAMBES_RICE);
         assertThrows(DuplicateDeliveryException.class, ()
-            -> uniqueDeliveryList.setDelivery(GABRIELS_MILK, JAMES_RICE));
+            -> uniqueDeliveryList.setDelivery(GABRIELS_MILK, GAMBES_RICE));
     }
 
     @Test
@@ -143,7 +143,7 @@ public class UniqueDeliveryListTest {
     public void setDeliveries_uniqueDeliveryList_replacesOwnListWithProvidedUniqueDeliveryList() {
         uniqueDeliveryList.add(GABRIELS_MILK);
         UniqueDeliveryList expectedUniqueDeliveryList = new UniqueDeliveryList();
-        expectedUniqueDeliveryList.add(JAMES_RICE);
+        expectedUniqueDeliveryList.add(GAMBES_RICE);
         uniqueDeliveryList.setDeliveries(expectedUniqueDeliveryList);
         assertEquals(expectedUniqueDeliveryList, uniqueDeliveryList);
     }
@@ -156,10 +156,10 @@ public class UniqueDeliveryListTest {
     @Test
     public void setDeliveries_list_replacesOwnListWithProvidedList() {
         uniqueDeliveryList.add(GABRIELS_MILK);
-        List<Delivery> deliveryList = Collections.singletonList(JAMES_RICE);
+        List<Delivery> deliveryList = Collections.singletonList(GAMBES_RICE);
         uniqueDeliveryList.setDeliveries(deliveryList);
         UniqueDeliveryList expectedUniqueDeliveryList = new UniqueDeliveryList();
-        expectedUniqueDeliveryList.add(JAMES_RICE);
+        expectedUniqueDeliveryList.add(GAMBES_RICE);
         assertEquals(expectedUniqueDeliveryList, uniqueDeliveryList);
     }
 

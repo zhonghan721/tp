@@ -3,7 +3,7 @@ package seedu.address.model.delivery;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalDeliveries.GABRIELS_MILK;
-import static seedu.address.testutil.TypicalDeliveries.JAMES_RICE;
+import static seedu.address.testutil.TypicalDeliveries.GAMBES_RICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -88,7 +88,7 @@ public class DeliveryTest {
         assertTrue(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
 
         // different id, all other attributes same -> returns false
-        Delivery gambesRice = new DeliveryBuilder(JAMES_RICE).build();
+        Delivery gambesRice = new DeliveryBuilder(GAMBES_RICE).build();
         assertFalse(GABRIELS_MILK.isSameDelivery(gambesRice));
 
         // different id, all other attributes different -> returns false
@@ -112,7 +112,7 @@ public class DeliveryTest {
         assertFalse(GABRIELS_MILK.equals(5));
 
         // different delivery -> returns false
-        assertFalse(GABRIELS_MILK.equals(JAMES_RICE));
+        assertFalse(GABRIELS_MILK.equals(GAMBES_RICE));
 
         // different name -> returns false
         Delivery editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withName("Gabriel Milk Updated").build();

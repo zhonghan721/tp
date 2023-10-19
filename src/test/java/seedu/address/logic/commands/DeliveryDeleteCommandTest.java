@@ -29,7 +29,7 @@ public class DeliveryDeleteCommandTest {
         DeliveryDeleteCommand deleteCommand = new DeliveryDeleteCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeliveryDeleteCommand.MESSAGE_DELETE_DELIVERY_SUCCESS,
-                Messages.formatDelivery(deliveryToDelete));
+                Messages.format(deliveryToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
                 new UserPrefs(), true);
@@ -54,7 +54,7 @@ public class DeliveryDeleteCommandTest {
         DeliveryDeleteCommand deleteCommand = new DeliveryDeleteCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeliveryDeleteCommand.MESSAGE_DELETE_DELIVERY_SUCCESS,
-                Messages.formatDelivery(deliveryToDelete));
+                Messages.format(deliveryToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
                 new UserPrefs(), true);

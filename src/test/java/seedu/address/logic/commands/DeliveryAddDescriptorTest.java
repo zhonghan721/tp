@@ -32,7 +32,7 @@ public class DeliveryAddDescriptorTest {
 
         // different name -> returns false
         DeliveryAddDescriptor editedMilk =
-                new DeliveryAddDescriptorBuilder(DESC_MILK).withDeliveryName(VALID_NAME_JAMES_RICE).build();
+                new DeliveryAddDescriptorBuilder(DESC_MILK).withDeliveryName(VALID_NAME_JAMES_MILK).build();
         assertFalse(DESC_MILK.equals(editedMilk));
 
         // different customer id -> returns false

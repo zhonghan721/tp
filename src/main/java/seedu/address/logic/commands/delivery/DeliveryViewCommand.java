@@ -47,7 +47,7 @@ public class DeliveryViewCommand extends DeliveryCommand {
             throw new CommandException(String.format(MESSAGE_INVALID_DELIVERY_ID, deliveryId));
         }
 
-        return new CommandResult(Messages.formatDelivery(delivery.get()));
+        return new CommandResult(Messages.format(delivery.get()));
     }
 
     @Override

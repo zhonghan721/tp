@@ -14,7 +14,7 @@ public class TypicalDeliveries {
     public static final Delivery GABRIELS_MILK = new DeliveryBuilder().withId(1).withName("Gabriel Milk")
         .withCustomer(TypicalPersons.ALICE).withNote("Note").build();
 
-    public static final Delivery JAMES_RICE = new DeliveryBuilder().withId(2).withName("James Rice")
+    public static final Delivery GAMBES_RICE = new DeliveryBuilder().withId(2).withName("Gambe Rice")
         .withCustomer(TypicalPersons.BENSON).build();
 
     public static final Delivery JY_CAKE = new DeliveryBuilder().withId(3).withName("Jian Yang Cake")
@@ -35,6 +35,6 @@ public class TypicalDeliveries {
     }
 
     public static List<Delivery> getTypicalDeliveries() {
-        return new ArrayList<>(Arrays.asList(GABRIELS_MILK, JAMES_RICE));
+        return new ArrayList<>(Arrays.asList(GABRIELS_MILK, GAMBES_RICE));
     }
 }

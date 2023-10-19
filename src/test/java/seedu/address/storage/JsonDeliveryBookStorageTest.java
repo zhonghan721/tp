@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalDeliveries.JAMES_RICE;
+import static seedu.address.testutil.TypicalDeliveries.GAMBES_RICE;
 import static seedu.address.testutil.TypicalDeliveries.JY_CAKE;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -50,8 +50,9 @@ public class JsonDeliveryBookStorageTest {
     }
 
     @Test
-    public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataLoadingException.class, () -> readDeliveryBook("notJsonFormatDeliveryBook.json"));
+    public void
+    read_notJsonFormat_exceptionThrown() {
+        assertThrows(DataLoadingException.class, () -> readDeliveryBook("notJsonformatBook.json"));
     }
 
     @Test
@@ -78,13 +79,13 @@ public class JsonDeliveryBookStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         original.addDelivery(JY_CAKE);
-        original.removeDelivery(JAMES_RICE);
+        original.removeDelivery(GAMBES_RICE);
         jsonDeliveryBookStorage.saveBook(original, filePath);
         readBack = jsonDeliveryBookStorage.readBook(filePath).get();
         assertEquals(original, new DeliveryBook(readBack));
 
         // Save and read without specifying file path
-        original.addDelivery(JAMES_RICE);
+        original.addDelivery(GAMBES_RICE);
         jsonDeliveryBookStorage.saveBook(original); // file path not specified
         readBack = jsonDeliveryBookStorage.readBook().get(); // file path not specified
         assertEquals(original, new DeliveryBook(readBack));

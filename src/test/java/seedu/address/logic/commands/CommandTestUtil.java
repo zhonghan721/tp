@@ -12,6 +12,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -57,6 +59,9 @@ public class CommandTestUtil {
     public static final String VALID_DELIVERY_DATE_2 = "2025-11-11";
     public static final String INVALID_DELIVERY_DATE = "2022-01-01";
 
+    public static final String INVALID_DELIVERY_NAME = "Gabriel&";
+    public static final String INVALID_DELIVERY_DATE_DESC = " " + PREFIX_DATE + INVALID_DELIVERY_DATE;
+
     public static final String NAME_DESC_MILK = VALID_NAME_GABRIELS_MILK;
 
     public static final String NAME_DESC_RICE = VALID_NAME_JAMES_MILK;
@@ -71,9 +76,11 @@ public class CommandTestUtil {
     public static final int VALID_CUSTOMER_ID_2 = 2;
     public static final String VALID_VIEW_CUSTOMER_ID_1 = "1";
     public static final String VALID_VIEW_CUSTOMER_ID_2 = "2";
+    public static final String INVALID_CUSTOMER_ID = "a";
 
-    public static final String CUSTOMER_DESC_MILK = " " + PREFIX_CUSTOMER_ID + VALID_VIEW_CUSTOMER_ID_1;
-    public static final String CUSTOMER_DESC_RICE = " " + PREFIX_CUSTOMER_ID + VALID_VIEW_CUSTOMER_ID_2;
+    public static final String INVALID_CUSTOMER_ID_DESC = " " + PREFIX_CUSTOMER_ID + INVALID_CUSTOMER_ID;
+    public static final String CUSTOMER_ID_DESC_MILK = " " + PREFIX_CUSTOMER_ID + VALID_VIEW_CUSTOMER_ID_1;
+    public static final String CUSTOMER_ID_DESC_RICE = " " + PREFIX_CUSTOMER_ID + VALID_VIEW_CUSTOMER_ID_2;
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -155,7 +162,7 @@ public class CommandTestUtil {
                 .withDeliveryDate(VALID_DELIVERY_DATE_1).withDeliveryName(VALID_NAME_GABRIELS_MILK).build();
 
         DESC_RICE = new DeliveryAddDescriptorBuilder().withCustomerId(VALID_CUSTOMER_ID_2)
-                .withDeliveryDate(VALID_DELIVERY_DATE_2).withDeliveryName(VALID_NAME_JAMES_RICE).build();
+                .withDeliveryDate(VALID_DELIVERY_DATE_2).withDeliveryName(VALID_NAME_JAMES_MILK).build();
 
     }
 

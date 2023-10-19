@@ -45,7 +45,7 @@ public class CustomerEditCommandTest {
         CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-            Messages.formatCustomer(editedCustomer));
+            Messages.format(editedCustomer));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
@@ -69,7 +69,7 @@ public class CustomerEditCommandTest {
         CustomerEditCommand editCommand = new CustomerEditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-            Messages.formatCustomer(editedCustomer));
+            Messages.format(editedCustomer));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
@@ -85,7 +85,7 @@ public class CustomerEditCommandTest {
         Customer editedCustomer = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-            Messages.formatCustomer(editedCustomer));
+            Messages.format(editedCustomer));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
@@ -108,7 +108,7 @@ public class CustomerEditCommandTest {
 
 
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-            Messages.formatCustomer(editedCustomer));
+            Messages.format(editedCustomer));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),

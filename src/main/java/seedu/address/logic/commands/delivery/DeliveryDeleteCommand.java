@@ -50,7 +50,7 @@ public class DeliveryDeleteCommand extends DeliveryCommand {
         if (found && deliveryToDelete != null) {
             model.deleteDelivery(deliveryToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_DELIVERY_SUCCESS,
-                    Messages.formatDelivery(deliveryToDelete)));
+                    Messages.format(deliveryToDelete)));
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
         }

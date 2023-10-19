@@ -41,7 +41,8 @@ public class DeliveryAddCommand extends DeliveryCommand {
             + PREFIX_CUSTOMER_ID + "5 "
             + PREFIX_DATE + "2023-12-03 ";
 
-    public static final String MESSAGE_SUCCESS = "New delivery added: %1$s";
+    // public static final String MESSAGE_SUCCESS = "New delivery added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New delivery added: ";
     public static final String MESSAGE_DUPLICATE_DELIVERY = "This delivery already exists in HomeBoss";
 
     private final DeliveryAddDescriptor deliveryAddDescriptor;
@@ -61,12 +62,8 @@ public class DeliveryAddCommand extends DeliveryCommand {
 
         Delivery toAdd = createDelivery(model, deliveryAddDescriptor);
 
-        if (model.hasDelivery(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_DELIVERY);
-        }
-
         model.addDelivery(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatDelivery(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
 
     }
 
@@ -77,7 +74,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof DeliveryAddCommand)) {
             return false;
         }
 
@@ -117,7 +114,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
         } else {
             throw new CommandException(MESSAGE_INVALID_DELIVERY_DATE);
         }
-        return new Delivery(deliveryName, customer, orderDate, deliveryDate, newDeliveryStatus);
+        return new Delivery(deliveryName, customer, orderDate, deliveryDate, newDeliveryStatus, null);
 
     }
 
@@ -205,6 +202,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
             }
 
             DeliveryAddDescriptor otherDeliveryAddDescriptor = (DeliveryAddDescriptor) other;
+
             return Objects.equals(deliveryName, otherDeliveryAddDescriptor.deliveryName)
                     && Objects.equals(customerId, otherDeliveryAddDescriptor.customerId)
                     && Objects.equals(deliveryDate, otherDeliveryAddDescriptor.deliveryDate);

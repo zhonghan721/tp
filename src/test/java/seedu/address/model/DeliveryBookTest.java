@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_JAMES_RICE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_JAMES_MILK;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.GABRIELS_MILK;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
@@ -44,7 +44,7 @@ public class DeliveryBookTest {
 
     @Test
     public void resetData_withDuplicateDeliveries_throwsDuplicateDeliveryException() {
-        Delivery editedGabriel = new DeliveryBuilder(GABRIELS_MILK).withName(VALID_NAME_JAMES_RICE).build();
+        Delivery editedGabriel = new DeliveryBuilder(GABRIELS_MILK).withName(VALID_NAME_JAMES_MILK).build();
         List<Delivery> newDeliveries = Arrays.asList(GABRIELS_MILK, editedGabriel);
         DeliveryBookStub newData = new DeliveryBookStub(newDeliveries);
 
@@ -70,7 +70,7 @@ public class DeliveryBookTest {
     @Test
     public void hasDelivery_deliveryWithSameIdentityFieldsInDeliveryBook_returnsTrue() {
         deliveryBook.addDelivery(GABRIELS_MILK);
-        Delivery editedGabriel = new DeliveryBuilder(GABRIELS_MILK).withName(VALID_NAME_JAMES_RICE).build();
+        Delivery editedGabriel = new DeliveryBuilder(GABRIELS_MILK).withName(VALID_NAME_JAMES_MILK).build();
         assertTrue(deliveryBook.hasDelivery(editedGabriel));
     }
 

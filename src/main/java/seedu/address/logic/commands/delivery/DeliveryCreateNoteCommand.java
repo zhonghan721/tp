@@ -75,7 +75,7 @@ public class DeliveryCreateNoteCommand extends Command {
         // Update Delivery
         model.setDelivery(targetDelivery.get(), editedDelivery);
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
-        return new CommandResult(String.format(MESSAGE_NOTE_SUCCESS, Messages.formatDelivery(editedDelivery)));
+        return new CommandResult(String.format(MESSAGE_NOTE_SUCCESS, Messages.format(editedDelivery)));
     }
 
     /**

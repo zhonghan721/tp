@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalDeliveries.GABRIELS_MILK;
-import static seedu.address.testutil.TypicalDeliveries.JAMES_RICE;
+import static seedu.address.testutil.TypicalDeliveries.GAMBES_RICE;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -34,7 +34,7 @@ public class DeliveryStatusCommandTest {
             new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(), deliveryStatus);
 
         String expectedMessage = String.format(DeliveryStatusCommand.MESSAGE_EDIT_DELIVERY_SUCCESS,
-            Messages.formatDelivery(expectedDelivery));
+            Messages.format(expectedDelivery));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new DeliveryBook(model.getDeliveryBook()),
@@ -91,7 +91,7 @@ public class DeliveryStatusCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new DeliveryStatusCommand(JAMES_RICE.getDeliveryId(),
+        assertFalse(standardCommand.equals(new DeliveryStatusCommand(GAMBES_RICE.getDeliveryId(),
             DeliveryStatus.COMPLETED)));
 
         // different status -> returns false
