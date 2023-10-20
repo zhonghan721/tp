@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
@@ -96,9 +97,6 @@ public class DeliveryAddCommandTest {
                 deliveryAddCommand.execute(modelStub));
     }
 
-
-
-
     @Test
     public void equals() {
         Delivery gabrielMilk = new DeliveryBuilder().withName("Gabriel Milk").build();
@@ -124,6 +122,16 @@ public class DeliveryAddCommandTest {
 
         // different person -> returns false
         assertFalse(addMilkCommand.equals(addRiceCommand));
+    }
+
+    @Test
+    public void toStringTest() {
+        DeliveryAddDescriptor deliveryAddDescriptor = new DeliveryAddDescriptorBuilder().build();
+        DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(deliveryAddDescriptor);
+        String expected = new ToStringBuilder(deliveryAddCommand)
+                .add("toAdd", deliveryAddDescriptor)
+                .toString();
+        assertEquals(expected, deliveryAddCommand.toString());
     }
     /**
      * A default model stub that have all of the methods failing.

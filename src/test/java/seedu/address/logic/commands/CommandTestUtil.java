@@ -40,7 +40,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 public class CommandTestUtil {
 
     // Delivery
-    public static final String VALID_VIEW_DELIVERY_ID = " 1";
+    public static final String VALID_VIEW_DELIVERY_ID = "1";
     public static final String INVALID_VIEW_DELIVERY_ID = "11";
     public static final String VALID_NAME_GABRIELS_MILK = "Gabriel Milk";
     public static final String VALID_NAME_JAMES_MILK = "Jame Milk";
@@ -57,6 +57,7 @@ public class CommandTestUtil {
     public static final String VALID_DELIVERY_DATE_1 = "2025-12-12";
 
     public static final String VALID_DELIVERY_DATE_2 = "2025-11-11";
+    public static final String VALID_DELIVERY_DATE_3 = "2023-12-12";
     public static final String INVALID_DELIVERY_DATE = "2022-01-01";
 
     public static final String INVALID_DELIVERY_NAME = "Gabriel&";

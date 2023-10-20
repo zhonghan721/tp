@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DATE_3;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VIEW_CUSTOMER_ID_1;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
@@ -26,18 +30,25 @@ import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.customer.CustomerListCommand;
+import seedu.address.logic.commands.delivery.DeliveryAddCommand;
+import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
+import seedu.address.logic.commands.delivery.DeliveryDeleteCommand;
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
 import seedu.address.logic.commands.delivery.DeliveryViewCommand;
 import seedu.address.logic.commands.user.UserRegisterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.testutil.DeliveryAddDescriptorBuilder;
+import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+
 
 public class AddressBookParserTest {
 
@@ -94,6 +105,30 @@ public class AddressBookParserTest {
         assertEquals(new CustomerEditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
+    @Test
+    public void parseCommand_deleteDelivery() throws Exception {
+        DeliveryDeleteCommand command = (DeliveryDeleteCommand) parser.parseCommand(
+                DeliveryDeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeliveryDeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_addDelivery() throws Exception {
+        DeliveryAddCommand command = (DeliveryAddCommand) parser.parseCommand(
+                DeliveryAddCommand.COMMAND_WORD + " "
+                        + "Gabriels "
+                        + PREFIX_CUSTOMER_ID + VALID_VIEW_CUSTOMER_ID_1 + " "
+                        + PREFIX_DATE + VALID_DELIVERY_DATE_3);
+
+        DeliveryBuilder deliveryBuilder = new DeliveryBuilder();
+        Delivery validDelivery = deliveryBuilder.build();
+        DeliveryAddDescriptorBuilder deliveryAddDescriptorBuilder = new DeliveryAddDescriptorBuilder(validDelivery);
+        DeliveryAddDescriptor validDeliveryAddDescriptor = deliveryAddDescriptorBuilder.build();
+
+        assertEquals(new DeliveryAddCommand(validDeliveryAddDescriptor), command);
+
+
+    }
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);

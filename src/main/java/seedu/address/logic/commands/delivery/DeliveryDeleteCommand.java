@@ -22,7 +22,7 @@ public class DeliveryDeleteCommand extends DeliveryCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the delivery identified by the index number used in the displayed delivery list.\n"
             + "Parameters: DELIVERY_ID (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 0001";
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_DELIVERY_SUCCESS = "Deleted Delivery: %1$s";
 

@@ -108,7 +108,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
         } else {
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        if (checkValidDeliveryDate(deliveryAddDescriptor)) {
+        if (DeliveryDate.isValidDeliveryDate(deliveryAddDescriptor.getDate().get().toString())) {
             deliveryDate = deliveryAddDescriptor.getDate().get();
         } else {
             throw new CommandException(MESSAGE_INVALID_DELIVERY_DATE);
@@ -128,17 +128,6 @@ public class DeliveryAddCommand extends DeliveryCommand {
                 return true;
             }
         } return false;
-    }
-
-    /**
-     * Checks if the delivery date input is valid.
-     * If the delivery date is before the current date, return false as it would not be possible.
-     * @param deliveryAddDescriptor deliveryAddDescriptor to supply the delivery date input by user.
-     * @return If the delivery date is valid or not.
-     */
-    private static boolean checkValidDeliveryDate(DeliveryAddDescriptor deliveryAddDescriptor) {
-        DeliveryDate deliveryDate = deliveryAddDescriptor.getDate().get();
-        return DeliveryDate.isValidDeliveryDate(deliveryDate.toString());
     }
 
     /**
