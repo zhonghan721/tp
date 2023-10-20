@@ -172,12 +172,12 @@ public class Delivery {
      * @return True if both deliveries have the same identity and data fields.
      */
     public boolean isSameDelivery(Delivery otherDelivery) {
-        if (otherDelivery.equals(this)) {
+        if (otherDelivery == this) {
             return true;
         }
 
         return otherDelivery != null
-            && otherDelivery.getDeliveryId() == getDeliveryId();
+                && otherDelivery.getDeliveryId() == getDeliveryId();
     }
 
     /**
