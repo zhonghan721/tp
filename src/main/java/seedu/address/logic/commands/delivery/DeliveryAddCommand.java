@@ -33,12 +33,12 @@ public class DeliveryAddCommand extends DeliveryCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Delivery to the HomeBoss database. "
             + "Parameters: "
             + "DELIVERY_NAME "
-            + PREFIX_CUSTOMER_ID + "CUSTOMER_ID "
-            + PREFIX_DATE + "DATE\n "
+            + PREFIX_CUSTOMER_ID + " CUSTOMER_ID "
+            + PREFIX_DATE + " DATE\n "
             + "Example: " + COMMAND_WORD + " "
             + "furniture "
-            + PREFIX_CUSTOMER_ID + "5 "
-            + PREFIX_DATE + "2023-12-03 ";
+            + PREFIX_CUSTOMER_ID + " 5 "
+            + PREFIX_DATE + " 2023-12-03 ";
 
     // public static final String MESSAGE_SUCCESS = "New delivery added: %1$s";
     public static final String MESSAGE_SUCCESS = "New delivery added: ";

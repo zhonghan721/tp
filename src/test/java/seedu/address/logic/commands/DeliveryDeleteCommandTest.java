@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showDeliveryAtIndex;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -13,10 +14,12 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.delivery.DeliveryDeleteCommand;
+import seedu.address.logic.commands.delivery.DeliveryListCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryStatus;
 
 public class DeliveryDeleteCommandTest {
 
@@ -36,6 +39,17 @@ public class DeliveryDeleteCommandTest {
         expectedModel.deleteDelivery(deliveryToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+    @Test
+    public void execute_equals() {
+
+        DeliveryDeleteCommand deleteCommand = new DeliveryDeleteCommand(INDEX_FIRST_PERSON);
+        DeliveryDeleteCommand otherDeleteCommand = new DeliveryDeleteCommand(INDEX_SECOND_PERSON);
+        DeliveryListCommand deliveryListCommand = new DeliveryListCommand(DeliveryStatus.CREATED);
+
+        assertTrue(deleteCommand.equals(deleteCommand));
+        assertFalse(deleteCommand.equals(deliveryListCommand));
+        assertFalse(deleteCommand.equals(otherDeleteCommand));
     }
 
     @Test

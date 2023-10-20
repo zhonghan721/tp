@@ -387,39 +387,5 @@ public class DeliveryAddCommandTest {
         }
     }
 
-    private class ModelwithDuplicateDelivery extends ModelStub {
-
-        final ArrayList<Delivery> deliveriesAdded = new ArrayList<>();
-        ModelwithDuplicateDelivery() {
-            final PersonBuilder personBuilder = new PersonBuilder();
-            final Customer validCustomer = personBuilder.build();
-            final Delivery validDelivery = new DeliveryBuilder().withCustomer(validCustomer).build();
-            deliveriesAdded.add(validDelivery);
-        }
-        @Override
-        public boolean hasDelivery(Delivery delivery) {
-            requireNonNull(delivery);
-            return deliveriesAdded.stream().anyMatch(delivery::isSameDelivery);
-        }
-        @Override
-        public void addDelivery(Delivery delivery) {
-            requireNonNull(delivery);
-            deliveriesAdded.add(delivery);
-        }
-
-        @Override
-        public ReadOnlyBook<Delivery> getDeliveryBook() {
-            return new DeliveryBook();
-        }
-
-        @Override
-        public ReadOnlyBook<Customer> getAddressBook() {
-            PersonBuilder personBuilder = new PersonBuilder();
-            Customer validCustomer = personBuilder.build();
-            AddressBook addressBook = new AddressBook();
-            addressBook.addPerson(validCustomer);
-            return addressBook;
-        }
-    }
 }
 
