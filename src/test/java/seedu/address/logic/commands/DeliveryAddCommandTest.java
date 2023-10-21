@@ -98,6 +98,21 @@ public class DeliveryAddCommandTest {
     }
 
     @Test
+    public void execute_deliveryAcceptedByModelLoggedOut_addFailure() {
+        PersonBuilder personBuilder = new PersonBuilder();
+        Customer validCustomer = personBuilder.build();
+
+        ModelStubAcceptingDeliveryAddedLoggedOut modelStub = new ModelStubAcceptingDeliveryAddedLoggedOut();
+        Delivery validDelivery = new DeliveryBuilder().withCustomer(validCustomer).build();
+
+        DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(new
+                DeliveryAddDescriptorBuilder(validDelivery).build());
+        assertThrows(CommandException.class, Messages.MESSAGE_USER_NOT_AUTHENTICATED, () ->
+                deliveryAddCommand.execute(modelStub));
+
+    }
+
+    @Test
     public void equals() {
         Delivery gabrielMilk = new DeliveryBuilder().withName("Gabriel Milk").build();
         DeliveryAddDescriptor deliveryMilkAddDescriptor = new DeliveryAddDescriptorBuilder(gabrielMilk).build();
@@ -384,6 +399,49 @@ public class DeliveryAddCommandTest {
             AddressBook addressBook = new AddressBook();
             addressBook.addPerson(validCustomer);
             return addressBook;
+        }
+
+        @Override
+        public boolean getUserLoginStatus() {
+            return true;
+        }
+    }
+
+    /**
+     * A Model stub that always accept the person being added.
+     */
+    private class ModelStubAcceptingDeliveryAddedLoggedOut extends ModelStub {
+        final ArrayList<Delivery> deliveriesAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasDelivery(Delivery delivery) {
+            requireNonNull(delivery);
+            return deliveriesAdded.stream().anyMatch(delivery::isSameDelivery);
+        }
+
+        @Override
+        public void addDelivery(Delivery delivery) {
+            requireNonNull(delivery);
+            deliveriesAdded.add(delivery);
+        }
+
+        @Override
+        public ReadOnlyBook<Delivery> getDeliveryBook() {
+            return new DeliveryBook();
+        }
+
+        @Override
+        public ReadOnlyBook<Customer> getAddressBook() {
+            PersonBuilder personBuilder = new PersonBuilder();
+            Customer validCustomer = personBuilder.build();
+            AddressBook addressBook = new AddressBook();
+            addressBook.addPerson(validCustomer);
+            return addressBook;
+        }
+
+        @Override
+        public boolean getUserLoginStatus() {
+            return false;
         }
     }
 

@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.user;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_NO_CUSTOMERS;
+import static seedu.address.model.Model.PREDICATE_SHOW_NO_DELIVERIES;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -25,8 +27,12 @@ public class UserLogoutCommand extends Command {
             throw new CommandException(MESSAGE_ALREADY_LOGGED_OUT);
         }
 
+        // Set status in model to logged out, and update filtered lists
         model.setLogoutSuccess();
-        model.updateFilteredPersonList(x -> false);
-        return new CommandResult(MESSAGE_SUCCESS);
+        model.updateFilteredPersonList(PREDICATE_SHOW_NO_CUSTOMERS);
+        model.updateFilteredDeliveryList(PREDICATE_SHOW_NO_DELIVERIES);
+        // Display the updated empty list
+        model.setUiListCustomer();
+        return new CommandResult(MESSAGE_SUCCESS, true);
     }
 }

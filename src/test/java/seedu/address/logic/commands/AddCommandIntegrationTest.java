@@ -38,7 +38,7 @@ public class AddCommandIntegrationTest {
 
         assertCommandSuccess(new AddCommand(validCustomer), model,
                 String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
-                expectedModel);
+                expectedModel, true);
     }
 
     @Test

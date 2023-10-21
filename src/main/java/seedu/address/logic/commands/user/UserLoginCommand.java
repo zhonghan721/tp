@@ -59,7 +59,7 @@ public class UserLoginCommand extends Command {
 
         model.setLoginSuccess();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, true);
     }
 
     /**

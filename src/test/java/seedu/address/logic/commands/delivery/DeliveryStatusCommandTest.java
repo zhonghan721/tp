@@ -43,7 +43,7 @@ public class DeliveryStatusCommandTest {
         expectedModel.setDelivery(model.getDeliveryBook().getById(GABRIELS_MILK.getDeliveryId()).get(),
             expectedDelivery);
 
-        assertCommandSuccess(deliveryStatusCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deliveryStatusCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
