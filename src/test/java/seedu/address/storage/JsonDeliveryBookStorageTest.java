@@ -48,7 +48,6 @@ public class JsonDeliveryBookStorageTest {
     public void read_missingFile_emptyResult() throws Exception {
         assertFalse(readDeliveryBook("NonExistentFile.json").isPresent());
     }
-
     @Test
     public void read_notJsonFormat_exceptionThrown() {
         assertThrows(DataLoadingException.class, () -> readDeliveryBook("notJsonFormatDeliveryBook.json"));

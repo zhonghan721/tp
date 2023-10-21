@@ -160,7 +160,7 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         DeliveryBook deliveryBook =
-                new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+            new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         AddressBook differentAddressBook = new AddressBook();
         DeliveryBook differentDeliveryBook = new DeliveryBook();
         UserPrefs userPrefs = new UserPrefs();

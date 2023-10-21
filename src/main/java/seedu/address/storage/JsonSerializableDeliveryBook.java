@@ -58,8 +58,6 @@ class JsonSerializableDeliveryBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_DELIVERY);
             }
             deliveryBook.addDelivery(delivery);
-            maxDeliveryId = Math.max(maxDeliveryId, delivery.getDeliveryId());
-            Delivery.setDeliveryCount(maxDeliveryId);
         }
         return deliveryBook;
     }
