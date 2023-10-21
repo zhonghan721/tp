@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
@@ -20,11 +22,15 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.testutil.DeliveryAddDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 
@@ -34,7 +40,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 public class CommandTestUtil {
 
     // Delivery
-    public static final String VALID_VIEW_DELIVERY_ID = " 1";
+    public static final String VALID_VIEW_DELIVERY_ID = "1";
     public static final String INVALID_VIEW_DELIVERY_ID = "11";
     public static final String VALID_NAME_GABRIELS_MILK = "Gabriel Milk";
     public static final String VALID_NAME_JAMES_MILK = "Jame Milk";
@@ -48,7 +54,37 @@ public class CommandTestUtil {
     public static final String INVALID_ID_NEGATIVE = "-1";
     public static final String INVALID_ID_NAN = "NaN";
 
+    public static final String VALID_DELIVERY_DATE_1 = "2025-12-12";
+
+    public static final String VALID_DELIVERY_DATE_2 = "2025-11-11";
+    public static final String VALID_DELIVERY_DATE_3 = "2023-12-12";
+    public static final String INVALID_DELIVERY_DATE = "2022-01-01";
+
+    public static final String INVALID_DELIVERY_NAME = "Gabriel&";
+    public static final String INVALID_DELIVERY_DATE_DESC = " " + PREFIX_DATE + INVALID_DELIVERY_DATE;
+
+    public static final String NAME_DESC_MILK = VALID_NAME_GABRIELS_MILK;
+
+    public static final String NAME_DESC_RICE = VALID_NAME_JAMES_MILK;
+
+
+    public static final String DELIVERY_DATE_DESC_MILK = " " + PREFIX_DATE + VALID_DELIVERY_DATE_1;
+
+    public static final String DELIVERY_DATE_DESC_RICE = " " + PREFIX_DATE + VALID_DELIVERY_DATE_2;
+
     // Customer
+    public static final int VALID_CUSTOMER_ID_1 = 1;
+    public static final int VALID_CUSTOMER_ID_2 = 2;
+    public static final String VALID_VIEW_CUSTOMER_ID_1 = "1";
+    public static final String VALID_VIEW_CUSTOMER_ID_2 = "2";
+    public static final String INVALID_CUSTOMER_ID = "a";
+    public static final int TOO_LARGE_CUSTOMER_ID = 999;
+
+    public static final String INVALID_CUSTOMER_ID_DESC = " " + PREFIX_CUSTOMER_ID + INVALID_CUSTOMER_ID;
+
+    public static final String TOO_LARGE_CUSTOMER_ID_DESC = " " + PREFIX_CUSTOMER_ID + TOO_LARGE_CUSTOMER_ID;
+    public static final String CUSTOMER_ID_DESC_MILK = " " + PREFIX_CUSTOMER_ID + VALID_VIEW_CUSTOMER_ID_1;
+    public static final String CUSTOMER_ID_DESC_RICE = " " + PREFIX_CUSTOMER_ID + VALID_VIEW_CUSTOMER_ID_2;
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -113,6 +149,11 @@ public class CommandTestUtil {
     public static final EditPersonDescriptor DESC_AMY;
     public static final EditPersonDescriptor DESC_BOB;
 
+    public static final DeliveryAddDescriptor DESC_MILK;
+
+    public static final DeliveryAddDescriptor DESC_RICE;
+
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
             .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -120,6 +161,13 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        DESC_MILK = new DeliveryAddDescriptorBuilder().withCustomerId(VALID_CUSTOMER_ID_1)
+                .withDeliveryDate(VALID_DELIVERY_DATE_1).withDeliveryName(VALID_NAME_GABRIELS_MILK).build();
+
+        DESC_RICE = new DeliveryAddDescriptorBuilder().withCustomerId(VALID_CUSTOMER_ID_2)
+                .withDeliveryDate(VALID_DELIVERY_DATE_2).withDeliveryName(VALID_NAME_JAMES_MILK).build();
+
     }
 
     /**
@@ -187,6 +235,19 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+    /**
+     * Updates {@code model}'s filtered list to show only the delivery at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showDeliveryAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredDeliveryList().size());
+
+        Delivery delivery = model.getFilteredDeliveryList().get(targetIndex.getZeroBased());
+        final String[] splitName = delivery.getName().toString().split("\\s+");
+        model.updateFilteredDeliveryList(new DeliveryNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredDeliveryList().size());
     }
 
 }

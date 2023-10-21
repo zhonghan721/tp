@@ -25,7 +25,7 @@ public class DeliveryDate extends Date {
      */
     public static boolean isFutureDate(String date) {
         LocalDate deliveryDate = LocalDate.parse(date);
-        return deliveryDate.isAfter(LocalDate.now());
+        return !deliveryDate.isBefore(LocalDate.now());
     }
 
     /**

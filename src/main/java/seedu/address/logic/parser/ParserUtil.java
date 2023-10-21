@@ -10,6 +10,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Sort;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.delivery.DeliveryDate;
+import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.person.Address;
@@ -141,6 +143,36 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String deliveryName} into an {@code DeliveryName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code DeliveryName} is invalid.
+     */
+    public static DeliveryName parseDeliveryName(String deliveryName) throws ParseException {
+        requireNonNull(deliveryName);
+        String trimmedDeliveryName = deliveryName.trim();
+        if (!DeliveryName.isValidName(deliveryName)) {
+            throw new ParseException(DeliveryName.MESSAGE_CONSTRAINTS);
+        }
+        return new DeliveryName(trimmedDeliveryName);
+    }
+
+    /**
+     * Parses a {@code String date} into an {@code DeliveryDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code DeliveryDate} is invalid.
+     */
+    public static DeliveryDate parseDeliveryDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!DeliveryDate.isValidDeliveryDate(date)) {
+            throw new ParseException(seedu.address.model.delivery.Date.MESSAGE_CONSTRAINTS);
+        }
+        return new DeliveryDate(trimmedDate);
     }
 
     /**
