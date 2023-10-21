@@ -26,16 +26,16 @@ public class CommandResult {
     /**
      * The application should list all items.
      */
-    private final boolean listCommand;
+    private final boolean refreshListCommand;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean listCommand) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean refreshListCommand) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.listCommand = listCommand;
+        this.refreshListCommand = refreshListCommand;
     }
 
     /**
@@ -69,8 +69,8 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isListCommand() {
-        return listCommand;
+    public boolean isRefreshListCommand() {
+        return refreshListCommand;
     }
 
     @Override
@@ -88,12 +88,12 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
             && showHelp == otherCommandResult.showHelp
             && exit == otherCommandResult.exit
-            && listCommand == otherCommandResult.listCommand;
+            && refreshListCommand == otherCommandResult.refreshListCommand;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, listCommand);
+        return Objects.hash(feedbackToUser, showHelp, exit, refreshListCommand);
     }
 
     @Override
@@ -102,6 +102,7 @@ public class CommandResult {
             .add("feedbackToUser", feedbackToUser)
             .add("showHelp", showHelp)
             .add("exit", exit)
+            .add("refreshListCommand", refreshListCommand)
             .toString();
     }
 

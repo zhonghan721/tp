@@ -165,6 +165,7 @@ public class ModelManager implements Model {
     public void addPerson(Customer customer) {
         addressBook.addPerson(customer);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        setUiListCustomer();
     }
 
     @Override

@@ -69,7 +69,7 @@ public class UserRegisterCommandTest {
         CommandResult result;
 
         model.setLoggedInUser(null);
-        assertCommandSuccess(userRegisterCommand, model, UserRegisterCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(userRegisterCommand, model, UserRegisterCommand.MESSAGE_SUCCESS, model, true);
     }
 
     @Test

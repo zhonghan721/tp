@@ -150,6 +150,16 @@ public class CommandTestUtil {
 
     /**
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
+     * that takes a string {@code expectedMessage} and {@code refreshListCommand}.
+     */
+    public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
+                                            Model expectedModel, boolean refreshListCommand) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, refreshListCommand);
+        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}
      * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandListSuccess(Command command, Model actualModel, String expectedMessage,
