@@ -30,7 +30,7 @@ public class DeliveryStatusCommand extends DeliveryCommand {
             + "by the ID of the delivery. Existing status will be overwritten by the input status.\n"
             + "Parameters: STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) "
             + "ID (must be a integer representing a valid ID)\n"
-            + "Example: " + COMMAND_WORD + "COMPLETED 1";
+            + "Example: " + COMMAND_WORD + " COMPLETED 1";
 
     public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery: %1$s";
 
@@ -69,7 +69,7 @@ public class DeliveryStatusCommand extends DeliveryCommand {
         // Update Delivery
         model.setDelivery(targetDelivery.get(), editedDelivery);
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
-        return new CommandResult(String.format(MESSAGE_EDIT_DELIVERY_SUCCESS, Messages.format(editedDelivery)));
+        return new CommandResult(String.format(MESSAGE_EDIT_DELIVERY_SUCCESS, Messages.format(editedDelivery)), true);
     }
 
     /**

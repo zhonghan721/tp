@@ -41,14 +41,14 @@ public class CustomerEditCommand extends CustomerCommand {
         + "by the index number used in the displayed person list. "
         + "Existing values will be overwritten by the input values.\n"
         + "Parameters: INDEX (must be a positive integer) "
-        + "[" + PREFIX_NAME + "NAME] "
-        + "[" + PREFIX_PHONE + "PHONE] "
-        + "[" + PREFIX_EMAIL + "EMAIL] "
-        + "[" + PREFIX_ADDRESS + "ADDRESS] "
-        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "[" + PREFIX_NAME + " NAME] "
+        + "[" + PREFIX_PHONE + " PHONE] "
+        + "[" + PREFIX_EMAIL + " EMAIL] "
+        + "[" + PREFIX_ADDRESS + " ADDRESS] "
+        + "[" + PREFIX_TAG + " TAG]...\n"
         + "Example: " + COMMAND_WORD + " 1 "
-        + PREFIX_PHONE + "91234567 "
-        + PREFIX_EMAIL + "johndoe@example.com";
+        + PREFIX_PHONE + " 91234567 "
+        + PREFIX_EMAIL + " johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -58,7 +58,7 @@ public class CustomerEditCommand extends CustomerCommand {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index                of the person in the filtered person list to edit
+     * @param targetIndex of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public CustomerEditCommand(Index targetIndex, EditPersonDescriptor editPersonDescriptor) {
@@ -102,7 +102,7 @@ public class CustomerEditCommand extends CustomerCommand {
             model.setPerson(customerToEdit, editedCustomer);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
-                    Messages.format(editedCustomer)));
+                    Messages.format(editedCustomer)), true);
         }
 
     }

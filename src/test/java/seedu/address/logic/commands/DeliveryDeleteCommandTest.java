@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showDeliveryAtIndex;
@@ -38,7 +39,7 @@ public class DeliveryDeleteCommandTest {
                 new UserPrefs(), true);
         expectedModel.deleteDelivery(deliveryToDelete);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
     }
     @Test
     public void execute_equals() {
@@ -73,9 +74,16 @@ public class DeliveryDeleteCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
                 new UserPrefs(), true);
         expectedModel.deleteDelivery(deliveryToDelete);
-        showNoDelivery(expectedModel);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
+    }
+
+    @Test
+    public void execute_validIndexUnfilteredListLoggedOut_throwsCommandException() {
+        model.setLogoutSuccess();
+        DeliveryDeleteCommand deleteCommand = new DeliveryDeleteCommand(INDEX_FIRST_PERSON);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
     /**

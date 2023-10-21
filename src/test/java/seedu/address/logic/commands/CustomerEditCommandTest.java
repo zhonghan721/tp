@@ -52,7 +52,7 @@ public class CustomerEditCommandTest {
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedCustomer);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class CustomerEditCommandTest {
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setPerson(lastCustomer, editedCustomer);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class CustomerEditCommandTest {
                 new DeliveryBook(model.getDeliveryBook()),
                 new UserPrefs(), model.getUserLoginStatus());
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
@@ -115,7 +115,7 @@ public class CustomerEditCommandTest {
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedCustomer);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
