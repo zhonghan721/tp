@@ -27,7 +27,7 @@ your operations. Within these pages, you'll find detailed coverage of the follow
         - View details of deliveries
         - Update delivery status and date
         - Delete delivery
-        - Create a note for a delivery [Coming Soon]
+        - Create a note for a delivery
         - View deliveries for the day [Coming Soon]
         - Add customer data to delivery [Coming Soon]
         - Remove customer from delivery [Coming Soon]
@@ -296,49 +296,43 @@ _Delivery on: 1st October 2023_
 
 _Details coming soon..._
 
-### Update delivery status and date
+### Update delivery status
 
-- Mark delivery as complete
-- Mark delivery as pending
-- Change date of delivery
+Changes the status of a specified delivery
 
-#### Mark delivery as complete
+**Format:** `delivery status STATUS CUSTOMER_ID`
 
-**Format**: `delivery complete DELIVERY_ID`
-
-**Example**: `delivery complete 1001`
+**Example:** `delivery status completed 2`
 
 **Accepted Values:**
 
-_DELIVERY_ID:_ Integer
+_STATUS:_ Either `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`
 
-**Command succeeds:** _Delivery [1001] Gabriel’s Milk marked as complete!_
+_CUSTOMER_ID:_ Integer
 
-**Command failed (delivery_id missing):** _Please specify a delivery id!_
+**Command succeeds:**
 
-**Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
+_Edited Delivery: [2] milk_
+_COMPLETED_<br />
+_Customer: Alex Yeoh_<br />
+_Customer Id: 1_<br />
+_Ordered On: 2023-10-21_<br />
+_Delivered On: 2023-12-03_
 
-**Command failed (delivery already complete):** _This delivery is already marked as complete._
+**Command fails (invalid_status):** _Delivery Status should be one of CREATED, SHIPPED, COMPLETED, CANCELLED_
 
-#### Mark delivery as pending
+**Command fails (invalid_index):** _The delivery index provided is invalid_
 
-**Format:** `delivery pending DELIVERY_ID`
+**Command fails (missing_fields):** 
 
-**Example:** `delivery pending 1001`
-
-**Accepted Values:**
-
-_DELIVERY_ID_: Integer
-
-**Command succeeds:** _Delivery [1001] Gabriel’s Milk marked as pending!_
-
-**Command failed (delivery_id missing):** _Please specify a delivery id!_
-
-**Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
-
-**Command failed (delivery already pending):** _This delivery is already marked as pending._
+_Invalid command format!_<br />
+_delivery status: Edits the status of the delivery identified by the ID of the delivery. Existing status will be overwritten by the input status._<br />
+_Parameters: STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) ID (must be a integer representing a valid ID)_<br />
+_Example: delivery status COMPLETED 1_<br />
 
 #### Change date of delivery
+
+Changes the date of a specified delivery
 
 **Format:** `delivery edit date DELIVERY_ID --date DATE`
 
