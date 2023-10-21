@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.delivery;
 
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_SORT;
@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Sort;
 import seedu.address.logic.commands.delivery.DeliveryListCommand;
+import seedu.address.logic.parser.CommandParserTestUtil;
+import seedu.address.logic.parser.DeliveryListParser;
 import seedu.address.model.delivery.DeliveryStatus;
 
 

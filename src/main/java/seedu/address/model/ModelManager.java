@@ -159,6 +159,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Customer target) {
         addressBook.removePerson(target);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
 
     @Override
@@ -172,6 +173,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedCustomer);
 
         addressBook.setPerson(target, editedCustomer);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -263,6 +265,8 @@ public class ModelManager implements Model {
         setAddressBook(new AddressBook());
         this.setLoggedInUser(null);
         setLogoutSuccess();
+        updateFilteredPersonList(PREDICATE_SHOW_NO_CUSTOMERS);
+        updateFilteredDeliveryList(PREDICATE_SHOW_NO_DELIVERIES);
     }
 
     /**
@@ -273,6 +277,7 @@ public class ModelManager implements Model {
         userPrefs.registerUser(user);
         this.setLoggedInUser(user);
         this.setLoginSuccess();
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
 
     //=========== DeliveryBook ================================================================================
@@ -313,6 +318,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteDelivery(Delivery target) {
         deliveryBook.removeDelivery(target);
+        updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
     }
 
     /**
@@ -332,6 +338,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedDelivery);
 
         deliveryBook.setDelivery(target, editedDelivery);
+        updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
     }
 
     //=========== Filtered Person List Accessors =============================================================

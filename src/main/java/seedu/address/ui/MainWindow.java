@@ -179,7 +179,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isListCommand()) {
+            if (commandResult.isRefreshListCommand()) {
                 listPanel.setListItems(logic.getUiList());
             }
             if (commandResult.isShowHelp()) {

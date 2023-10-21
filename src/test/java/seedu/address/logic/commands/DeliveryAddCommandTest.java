@@ -1,15 +1,16 @@
 package seedu.address.logic.commands;
 
+
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.TOO_LARGE_CUSTOMER_ID;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -18,89 +19,135 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.customer.AddCommand;
+import seedu.address.logic.commands.delivery.DeliveryAddCommand;
+import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.DeliveryBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
 import seedu.address.model.user.User;
+import seedu.address.testutil.DeliveryAddDescriptorBuilder;
+import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.ui.ListItem;
 
-public class AddCommandTest {
+public class DeliveryAddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullDeliveryAddDescriptor_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new DeliveryAddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Customer validCustomer = new PersonBuilder().build();
+    public void execute_deliveryAcceptedByModel_addSuccessful() {
+        PersonBuilder personBuilder = new PersonBuilder();
+        Customer validCustomer = personBuilder.build();
 
-        CommandResult commandResult = new AddCommand(validCustomer).execute(modelStub);
+        ModelStubAcceptingDeliveryAdded modelStub = new ModelStubAcceptingDeliveryAdded();
+        Delivery validDelivery = new DeliveryBuilder().withCustomer(validCustomer).build();
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
+        CommandResult commandResult = null;
+        try {
+            commandResult = new DeliveryAddCommand(new DeliveryAddDescriptorBuilder(validDelivery).build())
+                    .execute(modelStub);
+        } catch (CommandException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(String.format(DeliveryAddCommand.MESSAGE_SUCCESS, Messages.format(validDelivery)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validCustomer), modelStub.personsAdded);
+
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Customer validCustomer = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validCustomer);
-        ModelStub modelStub = new ModelStubWithPerson(validCustomer);
+    public void execute_invalidPerson_throwsCommandException() {
+        PersonBuilder personBuilder = new PersonBuilder();
+        Customer invalidCustomer = personBuilder.withCustomerId(TOO_LARGE_CUSTOMER_ID).build();
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        ModelStub modelStub = new ModelStubAcceptingDeliveryAdded();
+        Delivery validDelivery = new DeliveryBuilder().withCustomer(invalidCustomer).build();
+
+        DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(
+                new DeliveryAddDescriptorBuilder(validDelivery).build());
+
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
+                deliveryAddCommand.execute(modelStub));
     }
 
     @Test
-    public void execute_personAcceptedByModelLoggedOut_addFailure() throws Exception {
-        ModelStubAcceptingPersonAddedLoggedOut modelStub = new ModelStubAcceptingPersonAddedLoggedOut();
-        Customer validCustomer = new PersonBuilder().build();
+    public void execute_invalidDeliveryDate_throwsCommandException() {
+        PersonBuilder personBuilder = new PersonBuilder();
+        Customer validCustomer = personBuilder.build();
 
-        AddCommand addCommand = new AddCommand(validCustomer);
+        ModelStub modelStub = new ModelStubAcceptingDeliveryAdded();
+        Delivery validDelivery =
+                new DeliveryBuilder().withCustomer(validCustomer)
+                        .withDeliveryDate(INVALID_DELIVERY_DATE).build();
 
-        assertThrows(CommandException.class,
-            Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> addCommand.execute(modelStub));
+        DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(new
+                DeliveryAddDescriptorBuilder(validDelivery).build());
+
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_DELIVERY_DATE, () ->
+                deliveryAddCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_deliveryAcceptedByModelLoggedOut_addFailure() {
+        PersonBuilder personBuilder = new PersonBuilder();
+        Customer validCustomer = personBuilder.build();
+
+        ModelStubAcceptingDeliveryAddedLoggedOut modelStub = new ModelStubAcceptingDeliveryAddedLoggedOut();
+        Delivery validDelivery = new DeliveryBuilder().withCustomer(validCustomer).build();
+
+        DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(new
+                DeliveryAddDescriptorBuilder(validDelivery).build());
+        assertThrows(CommandException.class, Messages.MESSAGE_USER_NOT_AUTHENTICATED, () ->
+                deliveryAddCommand.execute(modelStub));
+
     }
 
     @Test
     public void equals() {
-        Customer alice = new PersonBuilder().withName("Alice").build();
-        Customer bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Delivery gabrielMilk = new DeliveryBuilder().withName("Gabriel Milk").build();
+        DeliveryAddDescriptor deliveryMilkAddDescriptor = new DeliveryAddDescriptorBuilder(gabrielMilk).build();
+        DeliveryAddCommand addMilkCommand = new DeliveryAddCommand(deliveryMilkAddDescriptor);
+
+        Delivery gambeRice = new DeliveryBuilder().withName("Gambe Rice").build();
+        DeliveryAddDescriptor deliveryRiceAddDescriptor = new DeliveryAddDescriptorBuilder(gambeRice).build();
+        DeliveryAddCommand addRiceCommand = new DeliveryAddCommand(deliveryRiceAddDescriptor);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addMilkCommand.equals(addMilkCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        DeliveryAddCommand addMilkCommandCopy = new DeliveryAddCommand(deliveryMilkAddDescriptor);
+        assertTrue(addMilkCommandCopy.equals(addMilkCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addMilkCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addMilkCommandCopy.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addMilkCommand.equals(addRiceCommand));
     }
 
     @Test
-    public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+    public void toStringTest() {
+        DeliveryAddDescriptor deliveryAddDescriptor = new DeliveryAddDescriptorBuilder().build();
+        DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(deliveryAddDescriptor);
+        String expected = new ToStringBuilder(deliveryAddCommand)
+                .add("toAdd", deliveryAddDescriptor)
+                .toString();
+        assertEquals(expected, deliveryAddCommand.toString());
     }
-
     /**
      * A default model stub that have all of the methods failing.
      */
@@ -127,12 +174,14 @@ public class AddCommandTest {
 
         @Override
         public void setUiListDelivery() {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setUiListCustomer() {
 
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -142,6 +191,7 @@ public class AddCommandTest {
 
         @Override
         public Path getAddressBookFilePath() {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -152,6 +202,7 @@ public class AddCommandTest {
 
         @Override
         public void addPerson(Customer customer) {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -172,6 +223,7 @@ public class AddCommandTest {
 
         @Override
         public void deletePerson(Customer target) {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -212,7 +264,7 @@ public class AddCommandTest {
 
         @Override
         public Optional<Delivery> getDelivery(int id) {
-            throw new AssertionError("This method should not be called.");
+            return Optional.empty();
         }
 
         @Override
@@ -242,7 +294,7 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Delivery> getSortedDeliveryList() {
-            throw new AssertionError("This method should not be called.");
+            return null;
         }
 
         @Override
@@ -255,12 +307,14 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
         public boolean getUserLoginStatus() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setLoginSuccess() {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -272,46 +326,79 @@ public class AddCommandTest {
 
         @Override
         public boolean userMatches(User user) {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public User getStoredUser() {
-            throw new AssertionError("This method should not be called.");
+            return null;
         }
 
         @Override
         public void registerUser(User user) {
-            throw new AssertionError("This method should not be called.");
+
         }
 
         @Override
         public void setLoggedInUser(User user) {
-            throw new AssertionError("This method should not be called.");
+
         }
 
         @Override
         public void deleteUser() {
-            throw new AssertionError("This method should not be called.");
-        }
 
+        }
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single delivery.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Customer customer;
+    private class ModelStubWithDelivery extends ModelStub {
+        private final Delivery delivery;
 
-        ModelStubWithPerson(Customer customer) {
-            requireNonNull(customer);
-            this.customer = customer;
+        ModelStubWithDelivery(Delivery delivery) {
+            requireNonNull(delivery);
+            this.delivery = delivery;
         }
 
         @Override
-        public boolean hasPerson(Customer customer) {
-            requireNonNull(customer);
-            return this.customer.isSamePerson(customer);
+        public boolean hasDelivery(Delivery delivery) {
+            requireNonNull(delivery);
+            return this.delivery.isSameDelivery(delivery);
+        }
+    }
+
+    /**
+     * A Model stub that always accept the person being added.
+     */
+    private class ModelStubAcceptingDeliveryAdded extends ModelStub {
+        final ArrayList<Delivery> deliveriesAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasDelivery(Delivery delivery) {
+            requireNonNull(delivery);
+            return deliveriesAdded.stream().anyMatch(delivery::isSameDelivery);
+        }
+
+        @Override
+        public void addDelivery(Delivery delivery) {
+            requireNonNull(delivery);
+            deliveriesAdded.add(delivery);
+        }
+
+        @Override
+        public ReadOnlyBook<Delivery> getDeliveryBook() {
+            return new DeliveryBook();
+        }
+
+        @Override
+        public ReadOnlyBook<Customer> getAddressBook() {
+            PersonBuilder personBuilder = new PersonBuilder();
+            Customer validCustomer = personBuilder.build();
+            AddressBook addressBook = new AddressBook();
+            addressBook.addPerson(validCustomer);
+            return addressBook;
         }
 
         @Override
@@ -323,50 +410,33 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the person being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Customer> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingDeliveryAddedLoggedOut extends ModelStub {
+        final ArrayList<Delivery> deliveriesAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Customer customer) {
-            requireNonNull(customer);
-            return personsAdded.stream().anyMatch(customer::isSamePerson);
+        public boolean hasDelivery(Delivery delivery) {
+            requireNonNull(delivery);
+            return deliveriesAdded.stream().anyMatch(delivery::isSameDelivery);
         }
 
         @Override
-        public void addPerson(Customer customer) {
-            requireNonNull(customer);
-            personsAdded.add(customer);
+        public void addDelivery(Delivery delivery) {
+            requireNonNull(delivery);
+            deliveriesAdded.add(delivery);
         }
 
         @Override
-        public ReadOnlyBook<Customer> getAddressBook() {
-            return new AddressBook();
-        }
-
-        @Override
-        public boolean getUserLoginStatus() {
-            return true;
-        }
-    }
-
-    private class ModelStubAcceptingPersonAddedLoggedOut extends ModelStub {
-        final ArrayList<Customer> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Customer customer) {
-            requireNonNull(customer);
-            return personsAdded.stream().anyMatch(customer::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Customer customer) {
-            requireNonNull(customer);
-            personsAdded.add(customer);
+        public ReadOnlyBook<Delivery> getDeliveryBook() {
+            return new DeliveryBook();
         }
 
         @Override
         public ReadOnlyBook<Customer> getAddressBook() {
-            return new AddressBook();
+            PersonBuilder personBuilder = new PersonBuilder();
+            Customer validCustomer = personBuilder.build();
+            AddressBook addressBook = new AddressBook();
+            addressBook.addPerson(validCustomer);
+            return addressBook;
         }
 
         @Override
@@ -376,3 +446,4 @@ public class AddCommandTest {
     }
 
 }
+

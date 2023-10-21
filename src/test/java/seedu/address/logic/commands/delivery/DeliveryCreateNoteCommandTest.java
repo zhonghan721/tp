@@ -43,7 +43,7 @@ public class DeliveryCreateNoteCommandTest {
         expectedModel.setDelivery(model.getDeliveryBook().getById(GABRIELS_MILK.getDeliveryId()).get(),
             expectedDelivery);
 
-        assertCommandSuccess(deliveryCreateNoteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deliveryCreateNoteCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class DeliveryCreateNoteCommandTest {
         expectedModel.setDelivery(model.getDeliveryBook().getById(GAMBES_RICE.getDeliveryId()).get(),
             expectedDelivery);
 
-        assertCommandSuccess(deliveryCreateNoteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deliveryCreateNoteCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test

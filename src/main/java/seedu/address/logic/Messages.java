@@ -25,6 +25,9 @@ public class Messages {
 
     public static final String MESSAGE_USER_NOT_AUTHENTICATED = "Access denied! You are currently not logged in.";
 
+    public static final String MESSAGE_INVALID_DELIVERY_DATE =
+            "Delivery Date cannot be before today.";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
