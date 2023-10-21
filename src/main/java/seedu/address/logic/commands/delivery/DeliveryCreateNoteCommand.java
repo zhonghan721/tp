@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
@@ -56,6 +57,11 @@ public class DeliveryCreateNoteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        // User cannot perform this operation before logging in
+        if (!model.getUserLoginStatus()) {
+            throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
+        }
+
         // Find Delivery
         Optional<Delivery> targetDelivery = model.getDeliveryBook().getById(targetId);
 
@@ -69,7 +75,7 @@ public class DeliveryCreateNoteCommand extends Command {
         // Update Delivery
         model.setDelivery(targetDelivery.get(), editedDelivery);
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
-        return new CommandResult(String.format(MESSAGE_NOTE_SUCCESS, Messages.format(editedDelivery)));
+        return new CommandResult(String.format(MESSAGE_NOTE_SUCCESS, Messages.format(editedDelivery)), true);
     }
 
     /**

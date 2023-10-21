@@ -34,7 +34,7 @@ import seedu.address.testutil.PersonBuilder;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
-public class EditCommandTest {
+public class CustomerEditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
 
@@ -52,7 +52,7 @@ public class EditCommandTest {
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedCustomer);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class EditCommandTest {
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setPerson(lastCustomer, editedCustomer);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class EditCommandTest {
                 new DeliveryBook(model.getDeliveryBook()),
                 new UserPrefs(), model.getUserLoginStatus());
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
@@ -115,7 +115,7 @@ public class EditCommandTest {
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedCustomer);
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test

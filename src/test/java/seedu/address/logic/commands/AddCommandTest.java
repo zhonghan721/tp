@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,7 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
 import seedu.address.model.user.User;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.ListItem;
 
 public class AddCommandTest {
 
@@ -44,7 +46,7 @@ public class AddCommandTest {
         CommandResult commandResult = new AddCommand(validCustomer).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
-            commandResult.getFeedbackToUser());
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validCustomer), modelStub.personsAdded);
     }
 
@@ -124,6 +126,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setUiListDelivery() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setUiListCustomer() {
+
+        }
+
+        @Override
+        public ObservableList<ListItem> getUiList() {
+            return null;
+        }
+
+        @Override
         public Path getAddressBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
@@ -190,6 +207,11 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyBook<Delivery> getDeliveryBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Delivery> getDelivery(int id) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -262,6 +284,17 @@ public class AddCommandTest {
         public void registerUser(User user) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setLoggedInUser(User user) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteUser() {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

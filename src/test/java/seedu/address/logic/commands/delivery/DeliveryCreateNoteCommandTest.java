@@ -43,7 +43,7 @@ public class DeliveryCreateNoteCommandTest {
         expectedModel.setDelivery(model.getDeliveryBook().getById(GABRIELS_MILK.getDeliveryId()).get(),
             expectedDelivery);
 
-        assertCommandSuccess(deliveryCreateNoteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deliveryCreateNoteCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class DeliveryCreateNoteCommandTest {
         expectedModel.setDelivery(model.getDeliveryBook().getById(GAMBES_RICE.getDeliveryId()).get(),
             expectedDelivery);
 
-        assertCommandSuccess(deliveryCreateNoteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deliveryCreateNoteCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
@@ -71,6 +71,24 @@ public class DeliveryCreateNoteCommandTest {
         Note note = new Note("This is a note");
         DeliveryCreateNoteCommand deliveryCreateNoteCommand = new DeliveryCreateNoteCommand(-1, note);
         assertCommandFailure(deliveryCreateNoteCommand, model, Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_newNoteLoggedOut_throwsCommandException() {
+        model.setLogoutSuccess();
+        Note note = new Note("This is a new note");
+        DeliveryCreateNoteCommand deliveryCreateNoteCommand =
+                new DeliveryCreateNoteCommand(GAMBES_RICE.getDeliveryId(), note);
+
+        assertCommandFailure(deliveryCreateNoteCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+
+    @Test
+    public void execute_invalidLoggedOut_throwsCommandException() {
+        model.setLogoutSuccess();
+        Note note = new Note("This is a note");
+        DeliveryCreateNoteCommand deliveryCreateNoteCommand = new DeliveryCreateNoteCommand(-1, note);
+        assertCommandFailure(deliveryCreateNoteCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
     @Test

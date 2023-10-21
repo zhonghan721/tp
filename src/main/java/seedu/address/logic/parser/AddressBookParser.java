@@ -17,14 +17,19 @@ import seedu.address.logic.commands.customer.AddCommand;
 import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.customer.CustomerListCommand;
+import seedu.address.logic.commands.delivery.DeliveryAddCommand;
 import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
+import seedu.address.logic.commands.delivery.DeliveryDeleteCommand;
 import seedu.address.logic.commands.delivery.DeliveryListCommand;
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
+import seedu.address.logic.commands.delivery.DeliveryViewCommand;
+import seedu.address.logic.commands.user.UserDeleteCommand;
 import seedu.address.logic.commands.user.UserLoginCommand;
 import seedu.address.logic.commands.user.UserLogoutCommand;
 import seedu.address.logic.commands.user.UserRegisterCommand;
 import seedu.address.logic.parser.delivery.DeliveryCreateNoteCommandParser;
 import seedu.address.logic.parser.delivery.DeliveryStatusCommandParser;
+import seedu.address.logic.parser.delivery.DeliveryViewCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.UserLoginCommandParser;
 import seedu.address.logic.parser.user.UserRegisterCommandParser;
@@ -38,7 +43,7 @@ public class AddressBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
-        "(?<commandWord>customer \\S+|delivery \\S+|\\S+)(?<arguments>.*)"
+            "(?<commandWord>customer \\S+|delivery \\S+|delete \\S+|\\S+)(?<arguments>.*)"
     );
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
@@ -70,13 +75,19 @@ public class AddressBookParser {
             return new AddCommandParser().parse(arguments);
 
         case CustomerEditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new CustomerEditCommandParser().parse(arguments);
 
         case CustomerDeleteCommand.COMMAND_WORD:
             return new CustomerDeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+
+        case DeliveryAddCommand.COMMAND_WORD:
+            return new DeliveryAddCommandParser().parse(arguments);
+
+        case DeliveryDeleteCommand.COMMAND_WORD:
+            return new DeliveryDeleteCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -90,6 +101,9 @@ public class AddressBookParser {
 
         case DeliveryStatusCommand.COMMAND_WORD:
             return new DeliveryStatusCommandParser().parse(arguments);
+
+        case DeliveryViewCommand.COMMAND_WORD:
+            return new DeliveryViewCommandParser().parse(arguments);
 
         // ================ System Commands ======================================
         case ExitCommand.COMMAND_WORD:
@@ -109,6 +123,9 @@ public class AddressBookParser {
 
         case UserRegisterCommand.COMMAND_WORD:
             return new UserRegisterCommandParser().parse(arguments);
+
+        case UserDeleteCommand.COMMAND_WORD:
+            return new UserDeleteCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

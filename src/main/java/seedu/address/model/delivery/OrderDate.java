@@ -25,7 +25,7 @@ public class OrderDate extends Date {
      */
     public static boolean isPastDate(String date) {
         LocalDate orderDate = LocalDate.parse(date);
-        return orderDate.isBefore(LocalDate.now());
+        return !orderDate.isAfter(LocalDate.now());
     }
 
     /**

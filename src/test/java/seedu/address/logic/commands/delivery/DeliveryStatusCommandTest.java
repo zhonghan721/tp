@@ -43,7 +43,7 @@ public class DeliveryStatusCommandTest {
         expectedModel.setDelivery(model.getDeliveryBook().getById(GABRIELS_MILK.getDeliveryId()).get(),
             expectedDelivery);
 
-        assertCommandSuccess(deliveryStatusCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deliveryStatusCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
@@ -51,6 +51,24 @@ public class DeliveryStatusCommandTest {
         DeliveryStatus deliveryStatus = DeliveryStatus.COMPLETED;
         DeliveryStatusCommand deliveryStatusCommand = new DeliveryStatusCommand(-1, deliveryStatus);
         assertCommandFailure(deliveryStatusCommand, model, Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_allFieldsValidLoggedOut_throwsCommandException() {
+        model.setLogoutSuccess();
+        DeliveryStatus deliveryStatus = DeliveryStatus.COMPLETED;
+        DeliveryStatusCommand deliveryStatusCommand =
+                new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(), deliveryStatus);
+
+        assertCommandFailure(deliveryStatusCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+
+    @Test
+    public void execute_invalidTargetIdLoggedOut_throwsCommandException() {
+        model.setLogoutSuccess();
+        DeliveryStatus deliveryStatus = DeliveryStatus.COMPLETED;
+        DeliveryStatusCommand deliveryStatusCommand = new DeliveryStatusCommand(-1, deliveryStatus);
+        assertCommandFailure(deliveryStatusCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
     @Test

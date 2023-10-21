@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +23,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.DeliveryBookBuilder;
 
@@ -201,5 +205,21 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, differentUserPrefs, true)));
+    }
+
+    @Test
+    public void getDelivery_returnsDelivery() {
+        modelManager.addDelivery(GABRIELS_MILK);
+        assertEquals(modelManager.getDelivery(1), Optional.of(GABRIELS_MILK));
+    }
+
+    @Test
+    public void userMatches() {
+        Model modelManager = new ModelManager();
+        User user = new User(new Username("user1"), new Password("password1"), true);
+        User wrongUser = new User(new Username("user2"), new Password("password2"), true);
+        modelManager.setLoggedInUser(user);
+        assertTrue(modelManager.userMatches(user));
+        assertFalse(modelManager.userMatches(wrongUser));
     }
 }

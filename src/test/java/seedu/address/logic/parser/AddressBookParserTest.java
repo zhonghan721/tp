@@ -4,6 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DATE_3;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VIEW_CUSTOMER_ID_1;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.GABRIELS_MILK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -23,16 +30,25 @@ import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.customer.CustomerListCommand;
+import seedu.address.logic.commands.delivery.DeliveryAddCommand;
+import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
+import seedu.address.logic.commands.delivery.DeliveryDeleteCommand;
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
+import seedu.address.logic.commands.delivery.DeliveryViewCommand;
+import seedu.address.logic.commands.user.UserRegisterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.testutil.DeliveryAddDescriptorBuilder;
+import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+
 
 public class AddressBookParserTest {
 
@@ -54,23 +70,30 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_deliveryCreateNote() throws Exception {
         DeliveryCreateNoteCommand command = (DeliveryCreateNoteCommand) parser.parseCommand(
-            DeliveryCreateNoteCommand.COMMAND_WORD + " 1 --note This is a note");
+                DeliveryCreateNoteCommand.COMMAND_WORD + " 1 --note This is a note");
         assertEquals(new DeliveryCreateNoteCommand(1, new Note("This is a note")), command);
     }
 
     @Test
     public void parseCommand_delete() throws Exception {
         CustomerDeleteCommand command = (CustomerDeleteCommand) parser.parseCommand(
-            CustomerDeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+                CustomerDeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new CustomerDeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
     public void parseCommand_deliveryStatus() throws Exception {
         DeliveryStatusCommand command = (DeliveryStatusCommand) parser.parseCommand(
-            DeliveryStatusCommand.COMMAND_WORD + " "
-                + DeliveryStatus.COMPLETED + " " + GABRIELS_MILK.getDeliveryId());
+                DeliveryStatusCommand.COMMAND_WORD + " "
+                        + DeliveryStatus.COMPLETED + " " + GABRIELS_MILK.getDeliveryId());
         assertEquals(new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(), DeliveryStatus.COMPLETED), command);
+    }
+
+    @Test
+    public void parseCommand_deliveryView() throws Exception {
+        DeliveryViewCommand command = (DeliveryViewCommand) parser.parseCommand(
+                DeliveryViewCommand.COMMAND_WORD + " " + GABRIELS_MILK.getDeliveryId());
+        assertEquals(new DeliveryViewCommand(GABRIELS_MILK.getDeliveryId()), command);
     }
 
     @Test
@@ -82,6 +105,30 @@ public class AddressBookParserTest {
         assertEquals(new CustomerEditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
+    @Test
+    public void parseCommand_deleteDelivery() throws Exception {
+        DeliveryDeleteCommand command = (DeliveryDeleteCommand) parser.parseCommand(
+                DeliveryDeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeliveryDeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_addDelivery() throws Exception {
+        DeliveryAddCommand command = (DeliveryAddCommand) parser.parseCommand(
+                DeliveryAddCommand.COMMAND_WORD + " "
+                        + "Gabriels "
+                        + PREFIX_CUSTOMER_ID + VALID_VIEW_CUSTOMER_ID_1 + " "
+                        + PREFIX_DATE + VALID_DELIVERY_DATE_3);
+
+        DeliveryBuilder deliveryBuilder = new DeliveryBuilder();
+        Delivery validDelivery = deliveryBuilder.build();
+        DeliveryAddDescriptorBuilder deliveryAddDescriptorBuilder = new DeliveryAddDescriptorBuilder(validDelivery);
+        DeliveryAddDescriptor validDeliveryAddDescriptor = deliveryAddDescriptorBuilder.build();
+
+        assertEquals(new DeliveryAddCommand(validDeliveryAddDescriptor), command);
+
+
+    }
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
@@ -125,4 +172,14 @@ public class AddressBookParserTest {
         assertThrows(
                 ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("invalidPrefix list"));
     }
+
+    @Test
+    // test user register command
+    public void parseCommand_userRegister() throws Exception {
+        assertTrue(parser.parseCommand(UserRegisterCommand.COMMAND_WORD + " "
+                + PREFIX_USER + " username "
+                + PREFIX_PASSWORD + " password "
+                + PREFIX_PASSWORD_CONFIRM + " password") instanceof UserRegisterCommand);
+    }
+
 }
