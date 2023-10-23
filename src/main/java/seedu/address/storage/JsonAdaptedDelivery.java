@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.Messages;
 import seedu.address.model.ReadOnlyBook;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDate;
@@ -105,8 +106,12 @@ class JsonAdaptedDelivery {
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, OrderDate.class.getSimpleName()));
         }
 
-        if (!OrderDate.isValidOrderDate(orderDate)) {
+        if (!OrderDate.isValidDate(orderDate)) {
             throw new IllegalValueException(OrderDate.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!OrderDate.isPastDate(orderDate)) {
+            throw new IllegalValueException(Messages.MESSAGE_INVALID_ORDER_DATE);
         }
         final OrderDate modelOrderDate = new OrderDate(orderDate);
 
@@ -114,7 +119,7 @@ class JsonAdaptedDelivery {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryDate.class.getSimpleName()));
         }
-        if (!DeliveryDate.isValidDeliveryDate(deliveryDate)) {
+        if (!DeliveryDate.isValidDate(deliveryDate)) {
             throw new IllegalValueException(DeliveryDate.MESSAGE_CONSTRAINTS);
         }
         final DeliveryDate modelDeliveryDate = new DeliveryDate(deliveryDate);
