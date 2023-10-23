@@ -86,5 +86,4 @@ deactivate DeliveryStatusCommand
 [<--LogicManager
 deactivate LogicManager
 
-
 @enduml
