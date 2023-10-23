@@ -20,7 +20,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.customer.CustomerAddCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -57,7 +56,8 @@ public class CustomerAddCommandTest {
         CustomerAddCommand customerAddCommand = new CustomerAddCommand(validCustomer);
         ModelStub modelStub = new ModelStubWithPerson(validCustomer);
 
-        assertThrows(CommandException.class, CustomerAddCommand.MESSAGE_DUPLICATE_PERSON, () -> customerAddCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                CustomerAddCommand.MESSAGE_DUPLICATE_PERSON, () -> customerAddCommand.execute(modelStub));
     }
 
     @Test
