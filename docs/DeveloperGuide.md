@@ -221,7 +221,7 @@ The following activity diagram illustrates the logic of updating the `DeliverySt
 The sequence of the `delivery status` command is as follows:
 
 1. The command `delivery status DELIVERY_ID STATUS` is entered by the user (e.g. `delivery status 1 completed`)
-2. `Logic Manager` calls the `AddressBookParser#parseCommand()` with `delivery status DELIVERY_ID STATUS` 
+2. `LogicManager` calls the `AddressBookParser#parseCommand()` with `delivery status DELIVERY_ID STATUS` 
 3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryStatusCommandParser` calling
    `DeliveryStatusCommandParser#parse()` to parse the remaining input after the command word has been removed 
    (i.e. the command arguments)

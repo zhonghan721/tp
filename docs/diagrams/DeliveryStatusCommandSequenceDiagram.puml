@@ -55,19 +55,25 @@ activate Model
 Model --> DeliveryStatusCommand : userLoginStatus
 deactivate Model
 
-DeliveryStatusCommand -> Model : getDelivery()
+DeliveryStatusCommand -> Model : getDelivery(targetId)
 activate Model
 
 Model --> DeliveryStatusCommand : Delivery
 deactivate Model
 
-DeliveryStatusCommand -> Model : setDelivery()
+DeliveryStatusCommand -> DeliveryStatusCommand : createDeliveryWithNewStatus(deliveryToEdit, newStatus)
+activate DeliveryStatusCommand
+
+DeliveryStatusCommand --> DeliveryStatusCommand :editedDelivery
+deactivate DeliveryStatusCommand
+
+DeliveryStatusCommand -> Model : setDelivery(target, editedDelivery)
 activate Model
 
 Model --> DeliveryStatusCommand
 deactivate Model
 
-DeliveryStatusCommand -> Model : updateFilteredDeliveryList()
+DeliveryStatusCommand -> Model : updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES)
 activate Model
 
 Model --> DeliveryStatusCommand
