@@ -191,6 +191,53 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
+### Update Delivery Status Feature
+
+#### Overview
+
+The `delivery status` command is used to update the `DeliveryStatus` of a selected delivery with the new status
+specified by the user. 
+
+The format of the `delivery status` command can be found 
+[here](./UserGuide.md#update-delivery-status)
+
+#### Feature Details
+
+1. The user will specify a `Delivery` through its `id`. The user must specify a `DeliveryStatus` to replace the 
+current status of the selected delivery
+2. If a number followed by a string representing a status is not specified, or is in the incorrect format,
+an `ParseException` will be thrown.
+3. If the command is parsed successfully, a new `DeliveryStatusCommand` is created, and executed
+4. If the user is not logged in during command execution, a `CommandException` will be thrown.
+5. The number provided is used to fetch the associated `Delivery` from `Model` if it exists. If the provided number
+does not match any of the IDs of the `Delivery` stored in `Model`, a `CommandException` is thrown.
+6. If the command completes successfully, the selected `Delivery` will be replaced by an identical `Delivery` except
+for an updated `DeliveryStatus`.
+
+The following activity diagram illustrates the logic of updating the `DeliveryStatus` of a `Delivery`.
+
+<puml src="diagrams/DeliveryStatusCommandActivityDiagram.puml" width="450" />
+
+The sequence of the `delivery status` command is as follows:
+
+1. The command `delivery status DELIVERY_ID STATUS` is entered by the user (e.g. `delivery status 1 completed`)
+2. `Logic Manager` calls the `AddressBookParser#parseCommand()` with `delivery status DELIVERY_ID STATUS` 
+3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryStatusCommandParser` calling
+   `DeliveryStatusCommandParser#parse()` to parse the remaining input after the command word has been removed 
+   (i.e. the command arguments)
+4. `DeliveryStatusCommandParser` will parse the arguments, and return a new instance of `DeliveryStatusCommand` with
+   the parsed `DELIVERY_ID` and `STATUS` fields
+5. `LogicManager` calls `DeliveryStatusCommand#execute()`, first checking if the user is logged in by calling 
+   `Model#getUserLoginStatus()`
+6. It then attempts to fetch the `Delivery` with the specified `DELIVERY_ID`, and replaces that `Delivery` 
+   using `Model#setDelivery()` with a newly created `Delivery` with identical fields except for its status which is 
+   the updated `DeliveryStatus`
+7. It creates and returns a new `CommandResult` with the result of the execution
+
+The following sequence diagram illustrates the `delivery status` command sequence:
+
+<puml src="diagrams/DeliveryStatusCommandSequenceDiagram.puml" width="450" />
+
 This section describes some noteworthy details on how certain features are implemented.
 
 ### \[Proposed\] Undo/redo feature
