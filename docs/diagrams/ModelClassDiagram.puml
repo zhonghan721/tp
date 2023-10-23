@@ -53,28 +53,29 @@ ModelManager --> "1" AddressBook
 ModelManager --> "1" DeliveryBook
 ModelManager --> "1" UserPrefs
 ModelManager --> "1" User
-User --> Username
-User --> Password
+User --> "1" Username
+User --> "1" Password
 
 AddressBook *--> "1" UniqueCustomerList
 UniqueCustomerList --> "~* all" Customer
-Customer *--> Name
-Customer *--> Phone
-Customer *--> Email
-Customer *--> Address
+Customer *--> "1" Name
+Customer *--> "1" Phone
+Customer *--> "1" Email
+Customer *--> "1" Address
 Customer *--> "*" Tag
 
 
 DeliveryBook *--> "1" UniqueDeliveryList
 UniqueDeliveryList -down-> "~* all" Delivery
-Delivery *--> DeliveryName
-Delivery --> Customer
-Delivery *--> OrderDate
-Delivery *--> DeliveryDate
-Delivery *--> DeliveryStatus
-Delivery *--> Note
+Delivery *--> "1" DeliveryName
+Delivery --> "1" Customer
+Delivery *--> "1" OrderDate
+Delivery *--> "1" DeliveryDate
+Delivery *--> "1" DeliveryStatus
+Delivery *--> "1" Note
 
-Customer -[hidden]up--> I
+Customer -[hidden]down--> I
+
 UniqueCustomerList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
