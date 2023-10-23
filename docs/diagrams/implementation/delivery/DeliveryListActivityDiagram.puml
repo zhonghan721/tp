@@ -1,0 +1,41 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+!pragma useVerticalIf on
+start
+:User enters <i>delivery list --status completed \n <i> --sort asc </i> command;
+partition DeliveryListParser {
+    if (Check Arguments Present) then ([Empty arguments provided])
+        :ParseException: Invalid Command Format;
+        stop
+    elseif (Parse DeliveryStatus) then ([Invalid Status])
+        :ParseException: Invalid Delivery Status;
+        stop
+    elseif (Parse Sort) then ([Invalid Sort])
+        :ParseException: Invalid Sort;
+        stop
+    endif
+    :Create and Execute DeliveryListCommand;
+}
+
+partition DeliveryListCommand {
+    if (User Logged in?) then ([Not Logged In])
+        :CommandException: User Not Authenticated;
+        stop
+    endif
+    if (Check status null) then ([Status Provided])
+        :List deliveries filtered by status;
+        stop
+    else ([Status Not Provided])
+        : List deliveries filtered ;
+        : Sort by sort order;
+        : Refresh Displayed Delivery List;
+        : Return CommandResult;
+    endif
+}
+
+stop
+
+@enduml
