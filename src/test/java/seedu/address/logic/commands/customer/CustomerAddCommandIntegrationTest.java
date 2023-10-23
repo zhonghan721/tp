@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.customer;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.customer.AddCommand;
+import seedu.address.logic.commands.customer.CustomerAddCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -19,7 +19,7 @@ import seedu.address.testutil.PersonBuilder;
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
  */
-public class AddCommandIntegrationTest {
+public class CustomerAddCommandIntegrationTest {
 
     private Model model;
 
@@ -36,16 +36,16 @@ public class AddCommandIntegrationTest {
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.addPerson(validCustomer);
 
-        assertCommandSuccess(new AddCommand(validCustomer), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
+        assertCommandSuccess(new CustomerAddCommand(validCustomer), model,
+                String.format(CustomerAddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
                 expectedModel, true);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Customer customerInList = model.getAddressBook().getList().get(0);
-        assertCommandFailure(new AddCommand(customerInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new CustomerAddCommand(customerInList), model,
+                CustomerAddCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -57,14 +57,14 @@ public class AddCommandIntegrationTest {
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.addPerson(validCustomer);
 
-        assertCommandFailure(new AddCommand(validCustomer), model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
+        assertCommandFailure(new CustomerAddCommand(validCustomer), model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
     @Test
     public void execute_duplicatePersonLoggedOut_throwsCommandException() {
         model.setLogoutSuccess();
         Customer customerInList = model.getAddressBook().getList().get(0);
-        assertCommandFailure(new AddCommand(customerInList), model,
+        assertCommandFailure(new CustomerAddCommand(customerInList), model,
                 Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 

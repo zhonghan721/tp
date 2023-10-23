@@ -25,7 +25,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.customer.AddCommand;
+import seedu.address.logic.commands.customer.CustomerAddCommand;
 import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
@@ -57,8 +57,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Customer customer = new PersonBuilder().withCustomerId(Customer.getCustomerCount()).build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(customer));
-        assertEquals(new AddCommand(customer), command);
+        CustomerAddCommand command = (CustomerAddCommand) parser.parseCommand(PersonUtil.getAddCommand(customer));
+        assertEquals(new CustomerAddCommand(customer), command);
     }
 
     @Test
