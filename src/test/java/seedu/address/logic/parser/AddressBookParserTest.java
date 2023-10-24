@@ -36,6 +36,8 @@ import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
 import seedu.address.logic.commands.delivery.DeliveryDeleteCommand;
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
 import seedu.address.logic.commands.delivery.DeliveryViewCommand;
+import seedu.address.logic.commands.user.UserLoginCommand;
+import seedu.address.logic.commands.user.UserLogoutCommand;
 import seedu.address.logic.commands.user.UserRegisterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Delivery;
@@ -55,7 +57,7 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_customerAdd() throws Exception {
         Customer customer = new PersonBuilder().withCustomerId(Customer.getCustomerCount()).build();
         CustomerAddCommand command = (CustomerAddCommand) parser.parseCommand(PersonUtil.getAddCommand(customer));
         assertEquals(new CustomerAddCommand(customer), command);
@@ -75,7 +77,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
+    public void parseCommand_customerDelete() throws Exception {
         CustomerDeleteCommand command = (CustomerDeleteCommand) parser.parseCommand(
                 CustomerDeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new CustomerDeleteCommand(INDEX_FIRST_PERSON), command);
@@ -97,7 +99,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_customerEdit() throws Exception {
         Customer customer = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(customer).build();
         CustomerEditCommand command = (CustomerEditCommand) parser.parseCommand(CustomerEditCommand.COMMAND_WORD + " "
@@ -182,4 +184,15 @@ public class AddressBookParserTest {
                 + PREFIX_PASSWORD_CONFIRM + " password") instanceof UserRegisterCommand);
     }
 
+    @Test
+    public void parseCommand_userLogin() throws Exception {
+        assertTrue(parser.parseCommand(UserLoginCommand.COMMAND_WORD + " "
+                + PREFIX_USER + " username "
+                + PREFIX_PASSWORD + " password ") instanceof UserLoginCommand);
+    }
+    @Test
+    public void parseCommand_userLogout() throws Exception {
+        assertTrue(parser.parseCommand(UserLogoutCommand.COMMAND_WORD) instanceof UserLogoutCommand);
+        assertTrue(parser.parseCommand(UserLogoutCommand.COMMAND_WORD + " abc") instanceof UserLogoutCommand);
+    }
 }
