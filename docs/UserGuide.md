@@ -47,9 +47,9 @@ the instructions in the Getting Started Guide to start using the software.
 
 ### Register
 
-**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD`
+**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
 
-**Example:** `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat`
+**Example:** `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko`
 
 **Accepted Values:**
 
@@ -57,13 +57,19 @@ _USERNAME:_ String
 
 _PASSWORD:_ String
 
-_CONFIRM PASSWORD:_ String that is the same as _PASSWORD_.
+_CONFIRM\_PASSWORD:_ String that is the same as _PASSWORD_
 
-**Command succeeds:** _Register successful._
+_SECRET\_QUESTION:_ String
+
+_ANSWER:_ String, not case sensitive
+
+**Command succeeds:** _Registration successful._
 
 **Command fails (missing fields):** _Please fill up all the required fields._
 
 **Command fails (password does not match):** _Passwords do not match. Try again._
+
+**Command fails (missing secret question and answer):** _Please key in a secret question and answer for account recovery. Try again._
 
 ### Login
 
@@ -83,7 +89,7 @@ _PASSWORD:_ String
 
 **Command fails (wrong login credentials):** _Wrong username and/or password. Try again._
 
-### Forget Password `[Coming Soon in v1.3]`
+### Update details `[Coming Soon in v1.3]`
 
 _Details coming soon..._
 
@@ -95,17 +101,42 @@ _Details coming soon..._
 
 **Command succeeds:** _Logout successful._
 
-### Change Password `[Coming Soon in v1.3]`
+### Account Recovery
 
-_Details coming soon..._
+**Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`
 
-### Update details `[Coming Soon in v1.3]`
+**Example 1:** `recover account`
+**Example:** `recover account [--answer Koko --password newPassword123 --confirmPass newPassword123]`
 
-_Details coming soon..._
+**Accepted Values:**
 
-### Delete Account `[Coming Soon in v1.3]`
+_ANSWER:_ String, not case sensitive
 
-_Details coming soon..._
+_NEW\_PASSWORD:_ String
+
+_CONFIRM\_PASSWORD:_ String that is the same as _NEW\_PASSWORD_
+
+*`--answer`, `--password`, and `--confirmPass` flags have to be either all present or all absent.
+
+**Command succeeds (without flags):** _Your secret question is: \<previously stored secret qn\>._
+
+**Command succeeds (with flags):** _Your account has been recovered successfully. Welcome back to HomeBoss._
+
+**Command fails (missing fields):** _Please fill up all the required fields._
+
+**Command fails (wrong answer to secret question):** _Wrong answer to secret question. Either try again or call `delete account` (permanent loss of stored data)._
+
+**Command fails (password does not match):** _Passwords do not match. Try again._
+
+### Account Deletion
+
+**Format:** `delete account`
+
+**Example:** `delete account`
+
+**Command succeeds:** _User deleted successfully._
+
+**Command fails (no user registered):** _No accounts found. Please register an account first._
 
 ## <span style="text-decoration:underline;">Customer</span>
 
