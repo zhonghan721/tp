@@ -352,6 +352,41 @@ _DATE:_ String of format YYYY-MM-DD
 
 **Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
 
+### Create a note for a delivery
+
+Creates a note for a specified delivery
+
+**Format:** `delivery note DELIVERY_ID --note NOTE`
+
+**Example:** `delivery note 1 --note By FedEx`
+
+**Accepted Values:**
+
+_DELIVERY_ID_: Integer
+
+_NOTE_: Nonempty alphanumeric string
+
+**Command succeeds:**
+
+_Added Note to Delivery: [2] milk_</br>
+_COMPLETED_</br>
+_Customer: Alex Yeoh_</br>
+_Customer Id: 1_</br>
+_Ordered On: 2023-10-21_</br>
+_Delivered On: 2023-12-03_</br>
+_Note:By FedEx_
+
+**Command failed (invalid_index):** _The delivery index provided is invalid_
+
+**Command failed (invalid_note):** _Note should not be empty_
+
+**Command failed (missing_fields):**
+
+_Invalid command format!_</br>
+_delivery note: Adds a note to the delivery identified by the ID of the delivery. Existing note if any will be replaced with the input note._</br>
+_Parameters: DELIVERY_ID (must be a integer representing a valid ID) --note Note_</br>
+_Example: delivery note 1 --note This is a note_</br>
+
 ### Add customer data to delivery `[Coming Soon in v1.3]`
 
 _Details coming soon..._
@@ -375,9 +410,5 @@ _DELIVERY_ID_: Integer
 **Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
 
 ### Remove customer from delivery `[Coming Soon in v1.3]`
-
-_Details coming soon..._
-
-### Create a note for a delivery `[Coming Soon in v1.3]`
 
 _Details coming soon..._
