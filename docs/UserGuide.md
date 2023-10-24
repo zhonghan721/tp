@@ -106,7 +106,7 @@ _Details coming soon..._
 **Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`
 
 **Example 1:** `recover account`</br>
-**Example 2:** `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`
+**Example 2:** `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`</br>
 
 **Accepted Values:**
 
