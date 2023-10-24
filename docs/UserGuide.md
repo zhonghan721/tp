@@ -344,10 +344,8 @@ _Delivered On: 2023-12-03_
 **Command fails (missing_fields):**
 
 _Invalid command format!_<br />
-_delivery status: Edits the status of the delivery identified by the ID of the delivery. Existing status will be
-overwritten by the input status._<br />
-_Parameters: STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) ID (must be a integer representing a valid
-ID)_<br />
+_delivery status: Edits the status of the delivery identified by the ID of the delivery. Existing status will be overwritten by the input status._<br />
+_Parameters: STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) ID (must be a integer representing a valid ID)_<br />
 _Example: delivery status COMPLETED 1_<br />
 
 #### Change date of delivery
@@ -394,7 +392,7 @@ _Customer: Alex Yeoh_</br>
 _Customer Id: 1_</br>
 _Ordered On: 2023-10-21_</br>
 _Delivered On: 2023-12-03_</br>
-_Note:By FedEx_
+_Note: By FedEx_
 
 **Command failed (invalid_index):** _The delivery index provided is invalid_
 
