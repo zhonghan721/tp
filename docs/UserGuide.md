@@ -129,7 +129,7 @@ _ADDRESS_: String
 
 **Command succeeds:** _Customer 1, Gabriel added._
 
-**Command fails (missing field):** _Please fill up all the required fields (--name NAME --phone PHONE_NUMBER --email 
+**Command fails (missing field):** _Please fill up all the required fields (--name NAME --phone PHONE_NUMBER --email
 EMAIL --address ADDRESS)._
 
 ### Search for a customer `[Coming Soon in v1.3]`
@@ -148,9 +148,10 @@ Lists all the customers added in the address book.
 
 _NIL_
 
-**Command succeeds (>0 customers):** 
+**Command succeeds (>0 customers):**
 
 _Here is the list of customers:_
+
 1. _Benjamin, Phone: 9898 2323, Email: benjaminCSGod@gmail.com, Address: Carnegie Mellon University, South Block._
 2. _Gambe, Phone: 9797 1313, Email: gambeRizzLord@gmail.com, Address: Kent Ridge Hall_
 3. _Gabriel, Phone: 9090 9241, Email: gabrielSoCool@gmail.com, Address: RVRC Tower Block_
@@ -167,7 +168,8 @@ Updates the personal details of an existing customer in the address book.
 
 **Format:** `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`
 
-**Example:** `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
+**
+Example:** `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
 
 **Accepted Values:**
 
@@ -231,7 +233,8 @@ _DATE:_ String in YYYY-MM-DD format
 
 **Command succeeds:** _Delivery [1001] furniture created successfully for Customer 1, Gabriel!_
 
-**Command fails (missing_fields):** _Please fill up all the required fields (DELIVERY_NAME --customer CUSTOMER_ID --date DATE)!_
+**Command fails (missing_fields):** _Please fill up all the required fields (DELIVERY_NAME --customer CUSTOMER_ID --date
+DATE)!_
 
 **Command fails (invalid_date):** _Invalid date provided!_
 
@@ -245,28 +248,24 @@ _Details coming soon..._
 
 Shows a list of all deliveries.
 
-**Format:** `delivery list [STATUS] [--sort SORT]`
+**Format:** `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE]  [--sort SORT]`
 
-**Example:** `delivery list pending --sort desc`
+**Example:** `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`
 
 **Accepted Values:**
 
-_STATUS_: String of either `pending` or `complete` or defaults to show all deliveries
+_STATUS_: CREATED/SHIPPED/COMPLETED/CANCELLED. If unspecified, defaults to show all deliveries.
 
-_SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by delivery date
+_CUSTOMER_ID_: Integer
 
-**Command succeeds (>0 deliveries):** 
+_DATE_: String in YYYY-MM-DD format or `today` for today’s date
 
-1. _[1001] Gabriel’s Milk - Completed - Ordered 20th Sept 2023: Delivered on 30th Sept 2023_
-2. _[1002] Gambe’s Meat - Completed - Ordered 22th Sept 2023: Delivered on 29th Sept 2023_
-3. _[1003] Ben’s Coffee - Pending - Ordered 25th Sept 2023: Delivery on 1st October 2023_
+_SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by delivery date.
+
+**Command succeeds (>0 deliveries):**
+![](images/delivery/delivery_list.png)
 
 **Command failed (0 deliveries):** _There are currently no deliveries!_
-
-### View deliveries for the day `[Coming Soon in v1.3]`
-
-_Details coming soon..._
-
 
 ### View details of deliveries
 
@@ -282,13 +281,7 @@ _DELIVERY_ID_: Integer
 
 **Command succeeds:**
 
-_[1001] Gabriel’s Milk_
-
-_Customer ID: 1_<br />
-_Customer: Gabriel_<br />
-_Ordered on: 23rd September 2023_<br />
-_Delivery Status: Pending_<br />
-_Delivery on: 1st October 2023_
+![](images/delivery/delivery_view.png)
 
 **Command failed (0 deliveries):** _There are currently no deliveries._
 
