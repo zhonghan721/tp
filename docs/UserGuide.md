@@ -101,13 +101,11 @@ _Details coming soon..._
 
 **Example:** `logout`
 
-**Command succeeds:** _Logout successful._
-
 ### Account Recovery
 
 **Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`
 
-**Example 1:** `recover account`
+**Example 1:** `recover account`</br>
 **Example 2:** `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`
 
 **Accepted Values:**
@@ -359,11 +357,13 @@ _Delivered On: 2023-12-03_
 
 **Command fails (invalid_index):** _The delivery index provided is invalid_
 
-**Command fails (missing_fields):** 
+**Command fails (missing_fields):**
 
 _Invalid command format!_<br />
-_delivery status: Edits the status of the delivery identified by the ID of the delivery. Existing status will be overwritten by the input status._<br />
-_Parameters: STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) ID (must be a integer representing a valid ID)_<br />
+_delivery status: Edits the status of the delivery identified by the ID of the delivery. Existing status will be
+overwritten by the input status._<br />
+_Parameters: STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) ID (must be a integer representing a valid
+ID)_<br />
 _Example: delivery status COMPLETED 1_<br />
 
 #### Change date of delivery
