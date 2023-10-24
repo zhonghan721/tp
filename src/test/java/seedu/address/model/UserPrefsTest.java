@@ -4,9 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 public class UserPrefsTest {
 
@@ -34,7 +38,7 @@ public class UserPrefsTest {
     }
 
     @Test
-    public void getStoredUser_nullUser_returnsNull() {
+    public void getStoredUser_noUserStored_returnsNull() {
         // assume authentication file is empty
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAuthenticationPath(Paths.get("data", ""));
