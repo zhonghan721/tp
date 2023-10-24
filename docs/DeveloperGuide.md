@@ -574,11 +574,14 @@ otherwise)
 
 ---
 
-#### **Use Case: UC06 - Update Details**
+#### Use Case: UC06 - Update Details
 
 **System:** User System (US)
+
 **Actor:** Logged-in owner
+
 **Preconditions:** Owner is logged in
+
 **Guarantees:**
 
 * Old details will be changed to the new details keyed in only if the command is executed successfully
@@ -610,15 +613,21 @@ otherwise)
 
       Use Case ends.
 
-* 1d. Logged-in Owner specifies Secret Question field and not Answer field.
+* 1d. Logged-in Owner specifies passwords that do not match.
 
-    * 1d1. US requests Logged-in Owner to specify both Secret Question and Answer field.
+    * 1d1. US requests Logged-in Owner to retype their confirm password.
 
       Use Case ends.
 
-* 1e. Logged-in Owner specifies Answer field and not Secret Question field.
+* 1e. Logged-in Owner specifies Secret Question field and not Answer field.
 
     * 1e1. US requests Logged-in Owner to specify both Secret Question and Answer field.
+
+      Use Case ends.
+
+* 1f. Logged-in Owner specifies Answer field and not Secret Question field.
+
+    * 1f1. US requests Logged-in Owner to specify both Secret Question and Answer field.
 
       Use Case ends.
 
