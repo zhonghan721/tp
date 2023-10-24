@@ -115,7 +115,7 @@ Adds a customer to the address book.
 
 **Format:** `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`
 
-**Example:** `customer add --name Gabriel --phone 8765 4321 --email gabrielrocks@gmail.com --address RVRC Block B`
+**Example:** `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`
 
 **Accepted Values:**
 

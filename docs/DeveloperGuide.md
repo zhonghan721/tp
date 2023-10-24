@@ -238,7 +238,7 @@ the `User` constructed with details from the authentication.json file.
 2. The user inputs the `login` command with the username and password.
 3. The `userLoginCommandParser` checks whether all the required fields are present.
 If all fields are present, it creates a new `userLoginCommand`.
-4. The `userLoginCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`. 
+4. The `userLoginCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`.
 5. The `userLoginCommand` then checks if the user credentials match the stored user by calling `Model#userMatches()`.
 6. If the user is not logged in and the credentials match, the `userLoginCommand` calls `Model#setLoginSuccess()`,
 changing the login status to true and enabling the user access to all commands.
@@ -283,6 +283,48 @@ The following sequence diagram shows how the `login` command works:
 
 <puml src="diagrams/UserLogoutSequenceDiagram.puml" alt="UserLogoutSequenceDiagram" />
 
+
+### Customer Add Command
+
+**Overview:**
+
+The `customer add` command is used to create a new customer with information fields `Name`, `Phone`, `Email` and
+`Address`. A unique `ID` will be assigned to the customer upon creation.
+
+The format for the `customer add` command can be found [here](UserGuide.md#add-a-customer).
+
+**Feature details:**
+
+1. The user executes the `customer add` command.
+2. If any of the fields is not provided, an error message with the correct command usage will be shown.
+3. If invalid command parameters are provided, an error message with the correct parameter format will be shown.
+4. If the user is currently not logged in, an error message will be shown.
+5. The `Customer` is then cross-referenced in the `Model` to check if a customer with the same `Name` already exists.
+If a customer with the same `Name` exists, an error message will be shown.
+6. If all the previous steps are completed without exceptions, the new `Customer` will be successfully added to the
+database.
+
+The following activity diagram shows the logic of adding a `Customer` into the database:
+
+<puml src="diagrams/CustomerAddActivityDiagram.puml" alt="CustomerAddActivityDiagram" />
+
+The sequence of the `customer add` command is as follows:
+
+1. The user inputs the `customer add ARG` command (e.g. `customer add --name Gabriel --phone 87654321
+--email gabrielrocks@gmail.com --address RVRC Block B`).
+2. The `LogicManager` calls the `AddressBookParser#parseCommand` with `ARG` to parse the command.
+3. The `AddressBookParser` then creates a new `CustomerAddCommandParser` to parse the fields provided by the user.
+4. A corresponding `Customer` is created by the `CustomerAddCommandParser`, which is used to
+create a new `CustomerAddCommand`. 
+5. The `CustomerAddCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`.
+6. The `CustomerAddCommand` then checks if the `Model` contains a customer with the same `Name`
+by calling `Model#hasPerson`.
+7. If the user is logged in and the `Model` does not contain a customer with the same `Name`, the `CustomerAddCommand`
+calls `Model#addPerson` to add the new `Customer` to the database.
+
+The following sequence diagram shows how the `login` command works:
+
+<puml src="diagrams/CustomerAddSequenceDiagram.puml" alt="CustomerAddSequenceDiagram" />
 
 ### \[Proposed\] Undo/redo feature
 
