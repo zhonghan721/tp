@@ -21,10 +21,9 @@ public class Delivery {
     private OrderDate orderDate;
     private DeliveryDate deliveryDate;
     private DeliveryStatus status;
-
+    private Address address; //The address of the delivery, which is automatically tied to Customer's address.
     private Note note;
 
-    private Address address;
 
     /**
      * Constructor for Delivery.
@@ -40,7 +39,7 @@ public class Delivery {
     public Delivery(DeliveryName name, Customer customer, OrderDate orderDate,
                     DeliveryDate deliveryDate,
                     DeliveryStatus status,
-                    Note note, Address address) {
+                    Note note) {
         this.deliveryId = Delivery.deliveryCount++;
         this.name = name;
         this.customer = customer;
@@ -48,7 +47,6 @@ public class Delivery {
         this.deliveryDate = deliveryDate;
         this.status = status;
         this.note = note;
-        this.address = address;
     }
 
 
@@ -64,7 +62,7 @@ public class Delivery {
      */
     public Delivery(int deliveryId, DeliveryName name, Customer customer, OrderDate orderDate,
                     DeliveryDate deliveryDate,
-                    DeliveryStatus status, Address address) {
+                    DeliveryStatus status) {
         Delivery.deliveryCount = Math.max(deliveryCount, deliveryId + 1);
         this.deliveryId = deliveryId;
         this.name = name;
@@ -72,7 +70,7 @@ public class Delivery {
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.status = status;
-        this.address = address;
+        this.address = customer.getAddress();
     }
 
     /**
@@ -87,14 +85,14 @@ public class Delivery {
      */
     public Delivery(DeliveryName name, Customer customer, OrderDate orderDate,
                     DeliveryDate deliveryDate,
-                    DeliveryStatus status, Address address) {
+                    DeliveryStatus status) {
         this.deliveryId = Delivery.deliveryCount++;
         this.name = name;
         this.customer = customer;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.status = status;
-        this.address = address;
+        this.address = customer.getAddress();
     }
 
 
@@ -107,12 +105,11 @@ public class Delivery {
      * @param orderDate    The date the delivery was ordered.
      * @param deliveryDate The date the delivery was delivered.
      * @param status       The status of the delivery.
-     * @param note         The note of the delivery
+     * @param note         The note of the delivery.
      */
     public Delivery(int deliveryId, DeliveryName name, Customer customer, OrderDate orderDate,
                     DeliveryDate deliveryDate,
-                    DeliveryStatus status,
-                    Note note, Address address) {
+                    DeliveryStatus status, Note note) {
         Delivery.deliveryCount = Math.max(deliveryCount, deliveryId + 1);
         this.deliveryId = deliveryId;
         this.name = name;
@@ -121,7 +118,7 @@ public class Delivery {
         this.deliveryDate = deliveryDate;
         this.status = status;
         this.note = note;
-        this.address = address;
+        this.address = customer.getAddress();
     }
 
     public void setOrderDate(OrderDate orderDate) {
@@ -163,6 +160,8 @@ public class Delivery {
     public DeliveryStatus getStatus() {
         return status;
     }
+
+    public Address getAddress() { return address;}
 
     public Note getNote() {
         return note;
@@ -212,23 +211,25 @@ public class Delivery {
             && otherDelivery.customer.equals(customer)
             && Objects.equals(otherDelivery.note, note)
             && otherDelivery.orderDate.equals(orderDate)
-            && otherDelivery.status.equals(status);
+            && otherDelivery.status.equals(status)
+            && otherDelivery.address.equals(address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deliveryId, name, customer, orderDate, deliveryDate);
+        return Objects.hash(deliveryId, name, customer, orderDate, deliveryDate, address);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("deliveryId", deliveryId)
-            .add("name", name)
-            .add("customer", customer)
-            .add("orderedAt", orderDate)
-            .add("deliveredAt", deliveryDate)
-            .add("note:", Optional.ofNullable(note)
-                .map(n -> String.format("\n Note:%s", n)).orElse(""))
-            .toString();
+                .add("name", name)
+                .add("customer", customer)
+                .add("orderedAt", orderDate)
+                .add("deliveredAt", deliveryDate)
+                .add("address:", address)
+                .add("note:", Optional.ofNullable(note)
+                        .map(n -> String.format("\n Note:%s", n)).orElse(""))
+                .toString();
     }
 }

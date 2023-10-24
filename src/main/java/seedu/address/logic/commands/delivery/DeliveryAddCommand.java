@@ -109,7 +109,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
 
         if (checkValidCustomer(model, deliveryAddDescriptor)) {
             customer = customerReadOnlyBook.getById(customerId).get();
-            address = customer.getAddress();
+
         } else {
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -118,7 +118,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
         } else {
             throw new CommandException(MESSAGE_INVALID_DELIVERY_DATE);
         }
-        return new Delivery(deliveryName, customer, orderDate, deliveryDate, newDeliveryStatus, address);
+        return new Delivery(deliveryName, customer, orderDate, deliveryDate, newDeliveryStatus);
 
     }
 

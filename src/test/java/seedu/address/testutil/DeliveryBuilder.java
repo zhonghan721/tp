@@ -8,6 +8,7 @@ import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.delivery.OrderDate;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 
 /**
@@ -16,16 +17,19 @@ import seedu.address.model.person.Customer;
 public class DeliveryBuilder {
     public static final int DEFAULT_ID = 1;
     public static final DeliveryName DEFAULT_NAME = new DeliveryName("Gabriels");
-    public static final Customer DEFAULT_CUSTOMER = new PersonBuilder().withName("Gabriel Seethor")
-        .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-        .withPhone("94351253")
-        .withTags("friends").build();
+    public static final Customer DEFAULT_CUSTOMER = new PersonBuilder()
+            .withName(TypicalPersons.ALICE.getName().toString())
+            .withAddress(TypicalPersons.ALICE.getAddress().toString())
+            .withEmail(TypicalPersons.ALICE.getEmail().toString())
+            .withPhone(TypicalPersons.ALICE.getPhone().toString())
+            .build();
 
 
     public static final DeliveryDate DEFAULT_DELIVERED_AT = new DeliveryDate("2023-12-12");
     public static final DeliveryStatus DEFAULT_STATUS = DeliveryStatus.CREATED;
 
     public static final Note DEFAULT_NOTE = null;
+
 
     private int deliveryId;
     private DeliveryName name;
@@ -34,6 +38,7 @@ public class DeliveryBuilder {
     private DeliveryDate deliveredAt;
     private DeliveryStatus status;
     private Note note;
+    private Address address;
 
 
     /**
@@ -47,6 +52,7 @@ public class DeliveryBuilder {
         this.orderedAt = new OrderDate(defaultNow.toString());
         this.deliveredAt = DEFAULT_DELIVERED_AT;
         this.status = DEFAULT_STATUS;
+        this.address = DEFAULT_CUSTOMER.getAddress();
         this.note = DEFAULT_NOTE;
     }
 
@@ -62,6 +68,7 @@ public class DeliveryBuilder {
         this.orderedAt = delivery.getOrderDate();
         this.deliveredAt = delivery.getDeliveryDate();
         this.status = delivery.getStatus();
+        this.address = DEFAULT_CUSTOMER.getAddress();
         this.note = delivery.getNote();
     }
 
