@@ -62,7 +62,6 @@ Customer *--> "1" Name
 Customer *--> "1" Phone
 Customer *--> "1" Email
 Customer *--> "1" Address
-Customer *--> "*" Tag
 
 
 DeliveryBook *--> "1" UniqueDeliveryList
@@ -72,7 +71,7 @@ Delivery --> "1" Customer
 Delivery *--> "1" OrderDate
 Delivery *--> "1" DeliveryDate
 Delivery *--> "1" DeliveryStatus
-Delivery *--> "1" Note
+Delivery *--> "0..1" Note
 
 Customer -[hidden]down--> I
 
