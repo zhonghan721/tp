@@ -217,6 +217,11 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
+        public Optional<Customer> getCustomer(int id) {
+            return Optional.empty();
+        }
+
+        @Override
         public boolean hasPerson(Customer customer) {
             throw new AssertionError("This method should not be called.");
         }

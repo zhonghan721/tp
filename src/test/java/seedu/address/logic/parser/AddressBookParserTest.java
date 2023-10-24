@@ -30,6 +30,7 @@ import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.customer.CustomerListCommand;
+import seedu.address.logic.commands.customer.CustomerViewCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
@@ -84,6 +85,14 @@ public class AddressBookParserTest {
                 CustomerDeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new CustomerDeleteCommand(INDEX_FIRST_PERSON), command);
     }
+
+    @Test
+    public void parseCommand_customerView() throws Exception {
+        CustomerViewCommand command = (CustomerViewCommand) parser.parseCommand(
+            CustomerViewCommand.COMMAND_WORD + " " + VALID_VIEW_CUSTOMER_ID_1);
+        assertEquals(new CustomerViewCommand(Integer.parseInt(VALID_VIEW_CUSTOMER_ID_1)), command);
+    }
+
 
     @Test
     public void parseCommand_deliveryStatus() throws Exception {
