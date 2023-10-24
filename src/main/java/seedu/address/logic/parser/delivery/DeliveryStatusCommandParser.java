@@ -17,7 +17,7 @@ import seedu.address.model.delivery.DeliveryStatus;
 public class DeliveryStatusCommandParser implements Parser<DeliveryStatusCommand> {
 
     private static final Pattern ARGUMENT_FORMAT = Pattern.compile(
-        "^(?<status>\\w+)\\s+(?<id>\\d+)$"
+        "^(?<id>\\d+)\\s+(?<status>\\w+)$"
     );
 
     /**
