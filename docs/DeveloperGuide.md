@@ -386,7 +386,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 (For all use cases below, the **System** is the `HomeBoss` and the **Actor** is the `user`, unless specified
 otherwise)
 
-#### Use Case: UC01 - Create Accoumt
+#### Use Case: UC01 - Register an Account
 
 **System:** User System (US)
 
@@ -402,23 +402,22 @@ otherwise)
 **MSS:**
 
 1. Unregistered owner opens HomeBoss application.
-2. US asks unregistered owner to either login, forget password or register.
-3. Unregistered owner enters register command with his username, password, confirm password, a forget password question
+2. Unregistered owner enters register command with his username, password, confirm password, a "forget password" question
    and answer.
-4. US creates an account and shows a welcome message with the newly created username.
+3. US creates an account and shows a welcome message with the newly created username.
    Use case ends.
 
 **Extensions:**
 
-* 3a. Unregistered owner does not enter one of the fields.
+* 2a. Unregistered owner does not enter one of the fields.
 
-    * 3a1. US requests unregistered owner to fill up all the required fields.
+    * 2a1. US requests unregistered owner to fill up all the required fields.
 
       Use case ends.
 
-* 3b. Unregistered owner types incorrect confirm password.
+* 2b. Unregistered owner types incorrect confirm password.
 
-    * 3b1. US requests unregistered owner to retype their confirm password.
+    * 2b1. US requests unregistered owner to retype their confirm password.
 
       Use case ends.
 
@@ -439,26 +438,25 @@ otherwise)
 **MSS:**
 
 1. Registered owner opens the HomeBoss application.
-2. US asks the registered owner to either login, forget password or register.
-3. Registered owner enters the login command with his username, password.
-4. US logs in and shows a welcome message.
+2. Registered owner enters the login command with his username, password.
+3. US logs in and shows a welcome message.
    Use case ends.
 
 **Extensions:**
 
-* 3a. Registered owner does not enter one of the fields
-    * 3a1. US requests registered owner to fill up all the required fields
+* 2a. Registered owner does not enter one of the fields
+    * 2a1. US requests registered owner to fill up all the required fields
 
       Use case ends.
 
-* 3b. Registered owner types incorrect password or username
-    * 3b1. US requests registered owner to retype their username or password
+* 2b. Registered owner types incorrect password or username
+    * 2b1. US requests registered owner to retype their username or password
 
       Use case ends.
 
 ---
 
-#### Use Case: UC03 - Forget Password
+#### Use Case: UC03 - Account Recovery
 
 **System:** User System (US)
 
@@ -473,51 +471,31 @@ otherwise)
 **MSS:**
 
 1. Registered owner opens the HomeBoss application.
-2. US asks the registered owner to either login, forget password or register.
-3. Registered owner enters the forgot password command with his username.
-4. US asks the forget password question of the user.
-5. Registered owner answers the question correctly.
-6. US asks the registered owner to change password and confirm change password.
-7. Registered owner types password and confirms password.
-8. US logins and shows a success message.
+2. Registered owner enters the account recovery command without any command flags (i.e., `--answer`).
+3. US displays the forget password question that the user set during account registration.
+4. Registered owner enters the account recovery command, this time with the answer, new password and confirm password fields.
+5. US logins and shows a success message.
    Use case ends.
 
 **Extensions:**
 
-* 3a. Registered owner does not enter the username field.
-    * 3a1. US requests registered owner to fill up the username field.
+* 4a. Registered owner does not enter the answer field.
+    * 4a1. US requests registered owner to fill up the answer field.
 
       Use case ends.
 
-* 3b. Registered owner types incorrect username
-    * 3b1. US requests registered owner to retype their username
+* 4b. Registered owner types incorrect answer
+    * 4b1. US requests registered owner to retype their answer.
 
       Use case ends.
 
-* 5a. Registered owner does not enter the answer field.
-    * 5a1. US requests registered owner to fill up the answer field.
+* 4c. Registered owner does not enter one of the password or confirm password fields.
+    * 4c1. US requests registered owner to fill up all the required fields
 
       Use case ends.
 
-* 5b. Registered owner types incorrect answer
-    * 5b1. US requests registered owner to retype their answer.
-
-      Use case ends.
-
-* 7a. Registered owner does not enter one of the password or confirm password fields.
-    * 7a1. US requests registered owner to fill up all the required fields
-
-      Use case ends.
-
-* 7b. Registered owner types incorrect confirm password.
-    * 7b1. US requests registered owner to retype their confirm password.
-
-      Use case ends.
-
-
-* *a. At any time, registered owner can choose to cancel the forget password.
-    * *a1. Registered owner types cancel.
-    * *a2. US asks the registered owner to either login, forget password or register.
+* 4d. Registered owner types incorrect confirm password.
+    * 4d1. US requests registered owner to retype their confirm password.
 
       Use case ends.
 
@@ -581,28 +559,18 @@ otherwise)
 
 **Actor:** Logged-in owner.
 
-**Preconditions:** Owner is logged-in.
+**Preconditions:** Account is present.
 
 **Guarantees:**
 
-* Logged-in owner’s account is deleted.
+* User account is deleted.
 
 **MSS:**
 
 1. Logged-in owner types command to delete his account.
-2. User system shows a confirmation message.
-3. Logged-in owner confirms.
-4. User system shows a success message.
+2. User system shows a success message.
 
    Use case ends.
-
-**Extensions**
-
-* 3a. Logged-in owner cancels.
-    * 3a1. Logged-in owner cancels.
-    * 3a2. User system shows a cancellation message.
-
-      Use case ends.
 
 ---
 
