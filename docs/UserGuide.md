@@ -401,8 +401,7 @@ _Note: By FedEx_
 **Command failed (missing_fields):**
 
 _Invalid command format!_</br>
-_delivery note: Adds a note to the delivery identified by the ID of the delivery. Existing note if any will be replaced
-with the input note._</br>
+_delivery note: Adds a note to the delivery identified by the ID of the delivery. Existing note if any will be replaced with the input note._</br>
 _Parameters: DELIVERY_ID (must be a integer representing a valid ID) --note Note_</br>
 _Example: delivery note 1 --note This is a note_</br>
 
