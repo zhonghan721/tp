@@ -44,11 +44,11 @@ activate CustomerEditCommand
 CustomerEditCommand --> CustomerEditCommandParser
 deactivate CustomerEditCommand
 
-CustomerEditCommandParser --> AddressBookParser : editCommand
-CustomerEditCommandParser -[hidden]-> AddressBookParser : editCommand
+CustomerEditCommandParser --> AddressBookParser : customerEditCommand
+CustomerEditCommandParser -[hidden]-> AddressBookParser
 destroy CustomerEditCommandParser
 
-AddressBookParser --> LogicManager : editCommand
+AddressBookParser --> LogicManager : customerEditCommand
 deactivate AddressBookParser
 
 LogicManager -> CustomerEditCommand : execute(model)
@@ -58,11 +58,18 @@ CustomerEditCommand -> Model : getFilteredCustomerList()
 activate Model
 deactivate Model
 
+CustomerEditCommand -> CustomerEditCommand : createEditedCustomer(customer, editCustomerDescriptor)
+activate CustomerEditCommand
+
 create Customer
 CustomerEditCommand -> Customer
 activate Customer
+deactivate CustomerEditCommand
+
 Customer --> CustomerEditCommand : editedCustomer
 deactivate Customer
+
+
 
 CustomerEditCommand -> Model : setCustomer(customer, editedCustomer)
 activate Model

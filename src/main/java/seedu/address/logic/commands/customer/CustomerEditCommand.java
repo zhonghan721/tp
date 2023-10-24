@@ -111,7 +111,9 @@ public class CustomerEditCommand extends CustomerCommand {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editCustomerDescriptor}.
      */
-    private static Customer createEditedCustomer(Customer customerToEdit, EditCustomerDescriptor editCustomerDescriptor) {
+    private static Customer createEditedCustomer(Customer customerToEdit,
+                                                 EditCustomerDescriptor editCustomerDescriptor) {
+
         assert customerToEdit != null;
 
         Name updatedName = editCustomerDescriptor.getName().orElse(customerToEdit.getName());

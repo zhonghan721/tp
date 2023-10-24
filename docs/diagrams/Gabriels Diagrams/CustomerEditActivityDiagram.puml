@@ -16,7 +16,7 @@ start
   stop
   else ([Valid format and index provided])
   endif
-  :Edit Customer Success!;
+  :Customer Edit Success!;
 
 
 stop
