@@ -67,17 +67,17 @@ end
 
 
 alt sortType == Sort.ASC
-DeliveryListCommand -> Model : sortFilteredList sort by name ascending
+DeliveryListCommand -> Model : sortFilteredList sort by delivery date ascending
 activate Model
 
-Model --> DeliveryListCommand : sortedFilteredList sorted by name ascending
+Model --> DeliveryListCommand : sortedFilteredList sorted by delivery date ascending
 deactivate Model
 
 else sortType == Sort.DESC
-DeliveryListCommand -> Model : sortFilteredList sort by name descending
+DeliveryListCommand -> Model : sortFilteredList sort by delivery date descending
 activate Model
 
-Model --> DeliveryListCommand : sortedFilteredList sorted by name descending
+Model --> DeliveryListCommand : sortedFilteredList sorted by delivery date descending
 deactivate Model
 
 end
