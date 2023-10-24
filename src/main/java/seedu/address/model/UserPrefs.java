@@ -124,8 +124,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
             AuthenticationData authenticationData =
                     objectMapper.readValue(authenticationPath.toFile(), AuthenticationData.class);
 
-            // if authenticationData.getUsername() is null, then the file is empty
-            if (authenticationData.getUsername() == null) {
+            // if either field in the authentication file is empty, return null
+            if ((!Username.isValidUsername(authenticationData.getUsername())
+                    && authenticationData.getUsername() != null)
+                    || (!Password.isValidPassword(authenticationData.getPassword())
+                    && authenticationData.getPassword() != null)
+                    || !authenticationData.getSecretQuestion().equals("")
+                    || !authenticationData.getAnswer().equals("")) {
                 return null;
             }
 
@@ -133,7 +138,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
             User storedUser =
                     new User(new Username(authenticationData.getUsername()),
                             new Password(authenticationData.getPassword(), true),
-                            true);
+                            true,
+                            authenticationData.getSecretQuestion(),
+                            authenticationData.getAnswer());
             return storedUser;
         } catch (IOException e) {
             logger.fine("Error reading authentication file: " + e.getMessage());
@@ -154,7 +161,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
             // Create an AuthenticationData object from the User
             AuthenticationData authenticationData =
-                    new AuthenticationData(user.getUsername().toString(), user.getPassword().toString());
+                    new AuthenticationData(user.getUsername().toString(), user.getPassword().toString(),
+                            user.getSecretQuestion(), user.getAnswer());
 
             // Serialize the authenticationData to a JSON file
             objectMapper.writeValue(authenticationPath.toFile(), authenticationData);

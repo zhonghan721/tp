@@ -8,18 +8,18 @@ public class AuthenticationDataTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AuthenticationData(null, null));
+        assertThrows(NullPointerException.class, () -> new AuthenticationData(null, null, null, null));
     }
 
     @Test
     public void constructor_invalidUsername_throwsIllegalArgumentException() {
-        String invalidUsername = null;
-        assertThrows(NullPointerException.class, () -> new AuthenticationData(invalidUsername, null));
+        String invalidUsername = " ";
+        assertThrows(NullPointerException.class, () -> new AuthenticationData(invalidUsername, null, null, null));
     }
 
     @Test
     public void constructor_invalidPassword_throwsIllegalArgumentException() {
-        String invalidPassword = null;
-        assertThrows(NullPointerException.class, () -> new AuthenticationData(null, invalidPassword));
+        String invalidPassword = ";22 ";
+        assertThrows(NullPointerException.class, () -> new AuthenticationData(null, invalidPassword, null, null));
     }
 }
