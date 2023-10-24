@@ -145,7 +145,7 @@ Adds a customer to the address book.
 
 **Format:** `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`
 
-**Example:** `customer add --name Gabriel --phone 8765 4321 --email gabrielrocks@gmail.com --address RVRC Block B`
+**Example:** `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`
 
 **Accepted Values:**
 
@@ -269,35 +269,28 @@ DATE)!_
 
 **Command fails (invalid_date_format):** _Please provide the date in the format: YYYY-MM-DD._
 
-### Create a note for a delivery `[Coming Soon in v1.3]`
-
-_Details coming soon..._
-
 ### View all deliveries
 
 Shows a list of all deliveries.
 
-**Format:** `delivery list [STATUS] [--sort SORT]`
+**Format:** `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE]  [--sort SORT]`
 
-**Example:** `delivery list pending --sort desc`
+**Example:** `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`
 
 **Accepted Values:**
 
-_STATUS_: String of either `pending` or `complete` or defaults to show all deliveries
+_STATUS_: CREATED/SHIPPED/COMPLETED/CANCELLED. If unspecified, defaults to show all deliveries.
 
-_SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by delivery date
+_CUSTOMER_ID_: Integer
+
+_DATE_: String in YYYY-MM-DD format or `today` for today’s date
+
+_SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by delivery date.
 
 **Command succeeds (>0 deliveries):**
-
-1. _[1001] Gabriel’s Milk - Completed - Ordered 20th Sept 2023: Delivered on 30th Sept 2023_
-2. _[1002] Gambe’s Meat - Completed - Ordered 22th Sept 2023: Delivered on 29th Sept 2023_
-3. _[1003] Ben’s Coffee - Pending - Ordered 25th Sept 2023: Delivery on 1st October 2023_
+![](images/delivery/delivery_list.png)
 
 **Command failed (0 deliveries):** _There are currently no deliveries!_
-
-### View deliveries for the day `[Coming Soon in v1.3]`
-
-_Details coming soon..._
 
 ### View details of deliveries
 
@@ -313,13 +306,7 @@ _DELIVERY_ID_: Integer
 
 **Command succeeds:**
 
-_[1001] Gabriel’s Milk_
-
-_Customer ID: 1_<br />
-_Customer: Gabriel_<br />
-_Ordered on: 23rd September 2023_<br />
-_Delivery Status: Pending_<br />
-_Delivery on: 1st October 2023_
+![](images/delivery/delivery_view.png)
 
 **Command failed (0 deliveries):** _There are currently no deliveries._
 
@@ -385,6 +372,42 @@ _DATE:_ String of format YYYY-MM-DD
 
 **Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
 
+### Create a note for a delivery
+
+Creates a note for a specified delivery
+
+**Format:** `delivery note DELIVERY_ID --note NOTE`
+
+**Example:** `delivery note 1 --note By FedEx`
+
+**Accepted Values:**
+
+_DELIVERY_ID_: Integer
+
+_NOTE_: Nonempty alphanumeric string
+
+**Command succeeds:**
+
+_Added Note to Delivery: [2] milk_</br>
+_COMPLETED_</br>
+_Customer: Alex Yeoh_</br>
+_Customer Id: 1_</br>
+_Ordered On: 2023-10-21_</br>
+_Delivered On: 2023-12-03_</br>
+_Note:By FedEx_
+
+**Command failed (invalid_index):** _The delivery index provided is invalid_
+
+**Command failed (invalid_note):** _Note should not be empty_
+
+**Command failed (missing_fields):**
+
+_Invalid command format!_</br>
+_delivery note: Adds a note to the delivery identified by the ID of the delivery. Existing note if any will be replaced
+with the input note._</br>
+_Parameters: DELIVERY_ID (must be a integer representing a valid ID) --note Note_</br>
+_Example: delivery note 1 --note This is a note_</br>
+
 ### Add customer data to delivery `[Coming Soon in v1.3]`
 
 _Details coming soon..._
@@ -408,9 +431,5 @@ _DELIVERY_ID_: Integer
 **Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
 
 ### Remove customer from delivery `[Coming Soon in v1.3]`
-
-_Details coming soon..._
-
-### Create a note for a delivery `[Coming Soon in v1.3]`
 
 _Details coming soon..._
