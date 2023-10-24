@@ -11,8 +11,7 @@ your operations. Within these pages, you'll find detailed coverage of the follow
         - Login
         - Forget password [Coming Soon]
         - Logout
-        - Change password [Coming Soon]
-        - Update user details [Coming Soon]
+        - Update details
         - Delete account [Coming Soon]
     - Customer
         - Add customer
@@ -53,9 +52,9 @@ the instructions in the Getting Started Guide to start using the software.
 
 **Accepted Values:**
 
-_USERNAME:_ String
+_USERNAME:_ String, consisting of only alphanumeric characters
 
-_PASSWORD:_ String
+_PASSWORD:_ String, consisting of at least 8 alphanumeric characters
 
 _CONFIRM PASSWORD:_ String that is the same as _PASSWORD_.
 
@@ -73,9 +72,9 @@ _CONFIRM PASSWORD:_ String that is the same as _PASSWORD_.
 
 **Accepted Values:**
 
-_USERNAME:_ String
+_USERNAME:_ String, consisting of only alphanumeric characters
 
-_PASSWORD:_ String
+_PASSWORD:_ String, consisting of at least 8 alphanumeric characters
 
 **Command succeeds:** _Log in successful._
 
@@ -95,13 +94,43 @@ _Details coming soon..._
 
 **Command succeeds:** _Logout successful._
 
-### Change Password `[Coming Soon in v1.3]`
+### Update details
 
-_Details coming soon..._
+**Format:** `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD] 
+[--secretQn QUESTION --answer ANSWER]`
 
-### Update details `[Coming Soon in v1.3]`
+**Example:** `login --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest 
+--secretQn Favourite Pet --answer BoBo`
 
-_Details coming soon..._
+**Accepted Values:**
+
+_USERNAME:_ String, consisting of only alphanumeric characters
+
+_PASSWORD:_ String, consisting of at least 8 alphanumeric characters
+
+_CONFIRM PASSWORD:_ String that is the same as _PASSWORD_
+
+_QUESTION:_ String
+
+_ANSWER:_ String
+
+*At least one of the optional fields must be provided. 
+If PASSWORD is provided, CONFIRM_PASSWORD must also be provided, vice versa.
+If QUESTION is provided, ANSWER must also be provided, vice versa.
+The details will be updated without checking against the current details.
+
+**Command succeeds:** _Update successful._
+
+**Command fails (missing fields):** _Please provide at least one field to update!_
+
+**Command fails (passwords do not match):** _Passwords do not match. Try again._
+
+**Command fails (only one of password/confirm password is provided):**
+_Password and Confirm Password have to be either all present or all absent. Try again._
+
+**Command fails (only one of secret question/answer is provided):**
+_Secret Question and Answer have to be either all present or all absent. Try again._
+
 
 ### Delete Account `[Coming Soon in v1.3]`
 
