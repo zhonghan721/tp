@@ -28,7 +28,6 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.customer.AddCommand;
 import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
-import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.customer.CustomerListCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
@@ -99,7 +98,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Customer customer = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(customer).build();
+        CustomerEditCommand.EditCustomerDescriptor descriptor = new EditPersonDescriptorBuilder(customer).build();
         CustomerEditCommand command = (CustomerEditCommand) parser.parseCommand(CustomerEditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new CustomerEditCommand(INDEX_FIRST_PERSON, descriptor), command);

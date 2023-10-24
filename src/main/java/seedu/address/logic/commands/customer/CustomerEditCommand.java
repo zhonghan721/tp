@@ -31,7 +31,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing customer in the address book.
  */
 public class CustomerEditCommand extends CustomerCommand {
 
@@ -55,18 +55,18 @@ public class CustomerEditCommand extends CustomerCommand {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index targetIndex;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditCustomerDescriptor editCustomerDescriptor;
 
     /**
      * @param targetIndex of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param editCustomerDescriptor details to edit the person with
      */
-    public CustomerEditCommand(Index targetIndex, EditPersonDescriptor editPersonDescriptor) {
+    public CustomerEditCommand(Index targetIndex, EditCustomerDescriptor editCustomerDescriptor) {
         requireNonNull(targetIndex);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editCustomerDescriptor);
 
         this.targetIndex = targetIndex;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editCustomerDescriptor = new EditCustomerDescriptor(editCustomerDescriptor);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class CustomerEditCommand extends CustomerCommand {
             if (customer.getCustomerId() == targetIndex.getOneBased()) {
                 found = true;
                 customerToEdit = customer;
-                editedCustomer = createEditedPerson(customerToEdit, editPersonDescriptor);
+                editedCustomer = createEditedCustomer(customerToEdit, editCustomerDescriptor);
                 break;
             }
         }
@@ -109,16 +109,16 @@ public class CustomerEditCommand extends CustomerCommand {
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editCustomerDescriptor}.
      */
-    private static Customer createEditedPerson(Customer customerToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Customer createEditedCustomer(Customer customerToEdit, EditCustomerDescriptor editCustomerDescriptor) {
         assert customerToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(customerToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(customerToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(customerToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(customerToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(customerToEdit.getTags());
+        Name updatedName = editCustomerDescriptor.getName().orElse(customerToEdit.getName());
+        Phone updatedPhone = editCustomerDescriptor.getPhone().orElse(customerToEdit.getPhone());
+        Email updatedEmail = editCustomerDescriptor.getEmail().orElse(customerToEdit.getEmail());
+        Address updatedAddress = editCustomerDescriptor.getAddress().orElse(customerToEdit.getAddress());
+        Set<Tag> updatedTags = editCustomerDescriptor.getTags().orElse(customerToEdit.getTags());
 
         return new Customer(customerToEdit.getCustomerId(), updatedName, updatedPhone,
                 updatedEmail, updatedAddress, updatedTags);
@@ -137,14 +137,14 @@ public class CustomerEditCommand extends CustomerCommand {
 
         CustomerEditCommand otherEditCommand = (CustomerEditCommand) other;
         return targetIndex.equals(otherEditCommand.targetIndex)
-            && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+            && editCustomerDescriptor.equals(otherEditCommand.editCustomerDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
             .add("index", targetIndex)
-            .add("editPersonDescriptor", editPersonDescriptor)
+            .add("editCustomerDescriptor", editCustomerDescriptor)
             .toString();
     }
 
@@ -152,7 +152,7 @@ public class CustomerEditCommand extends CustomerCommand {
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
      */
-    public static class EditPersonDescriptor {
+    public static class EditCustomerDescriptor {
         private int customerId;
         private Name name;
         private Phone phone;
@@ -160,14 +160,14 @@ public class CustomerEditCommand extends CustomerCommand {
         private Address address;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {
+        public EditCustomerDescriptor() {
         }
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditCustomerDescriptor(EditCustomerDescriptor toCopy) {
             setCustomerId(toCopy.customerId);
             setName(toCopy.name);
             setPhone(toCopy.phone);
@@ -243,16 +243,16 @@ public class CustomerEditCommand extends CustomerCommand {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditCustomerDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                && Objects.equals(email, otherEditPersonDescriptor.email)
-                && Objects.equals(address, otherEditPersonDescriptor.address)
-                && Objects.equals(tags, otherEditPersonDescriptor.tags);
+            EditCustomerDescriptor otherEditCustomerDescriptor = (EditCustomerDescriptor) other;
+            return Objects.equals(name, otherEditCustomerDescriptor.name)
+                && Objects.equals(phone, otherEditCustomerDescriptor.phone)
+                && Objects.equals(email, otherEditCustomerDescriptor.email)
+                && Objects.equals(address, otherEditCustomerDescriptor.address)
+                && Objects.equals(tags, otherEditCustomerDescriptor.tags);
         }
 
         @Override
