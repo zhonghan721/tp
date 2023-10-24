@@ -170,18 +170,21 @@ each `Person` needing their own `Tag` objects.<br>
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 
-* can save both address book data and user preference data in JSON format, and read them back into corresponding
-  objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
-  the functionality of only one is needed).
+* can save user preference data, address book data and delivery book data  in JSON format, 
+* and read them back into corresponding objects.
+* inherits from  `UserPrefStorage`
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
+
+The concrete implementation of storage is done through `StorageManger`, which holds an instance of `UserPrefsStorage`,
+`BookStorage` and `BookStorageWithReference`. Which represents the User Preference Data, Address Book and Delivery Book 
+respectively.
 
 ### Common classes
 

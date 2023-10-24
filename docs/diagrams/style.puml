@@ -43,8 +43,8 @@ skinparam Class {
     FontColor #FFFFFF
     FontSize 15
     BorderThickness 1
-    BorderColor #FFFFFF
-    StereotypeFontColor #FFFFFF
+    BorderColor #000000
+    StereotypeFontColor #000000
     FontName Arial
 }
 
