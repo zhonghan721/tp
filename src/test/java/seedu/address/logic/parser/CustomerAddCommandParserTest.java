@@ -9,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC_2;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC_3;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
@@ -103,9 +105,17 @@ public class CustomerAddCommandParserTest {
         assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
-        // invalid phone
+        // invalid phone, with alphabets
         assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedPersonString,
             Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
+
+        // invalid phone, with less than 8 digits
+        assertParseFailure(parser, INVALID_PHONE_DESC_2 + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
+
+        // invalid phone, with more than 8 digits
+        assertParseFailure(parser, INVALID_PHONE_DESC_3 + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid address
         assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
@@ -170,9 +180,17 @@ public class CustomerAddCommandParserTest {
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
             + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
-        // invalid phone
+        // invalid phone with alphabets
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
             + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+
+        // invalid phone with less than 8 digits
+        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC_2 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+
+        // invalid phone with more than 8 digits
+        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC_3 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
