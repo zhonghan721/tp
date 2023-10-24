@@ -85,7 +85,7 @@ public class AddressBookParserTest {
     public void parseCommand_deliveryStatus() throws Exception {
         DeliveryStatusCommand command = (DeliveryStatusCommand) parser.parseCommand(
                 DeliveryStatusCommand.COMMAND_WORD + " "
-                        + DeliveryStatus.COMPLETED + " " + GABRIELS_MILK.getDeliveryId());
+                        + GABRIELS_MILK.getDeliveryId() + " " + DeliveryStatus.COMPLETED);
         assertEquals(new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(), DeliveryStatus.COMPLETED), command);
     }
 
