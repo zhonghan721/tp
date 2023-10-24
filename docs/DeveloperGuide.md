@@ -613,7 +613,7 @@ otherwise)
 
       Use Case ends.
 
-* 1d. Logged-in Owner specifies passwords that do not match.
+* 1d. Logged-in Owner types incorrect confirm password.
 
     * 1d1. US requests Logged-in Owner to retype their confirm password.
 
