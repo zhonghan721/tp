@@ -280,6 +280,18 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
 
+    /**
+     * Resets the password of the given {@code user}.
+     */
+    @Override
+    public void resetPassword(User user) {
+        // overrides the stored user
+        userPrefs.registerUser(user);
+        setLoggedInUser(user);
+        this.setLoggedInUser(user);
+        this.setLoginSuccess();
+    }
+
     //=========== DeliveryBook ================================================================================
 
     /**
