@@ -96,8 +96,6 @@ activate CommandResult
 
 CommandResult --> UserRegisterCommand
 deactivate CommandResult
-CommandResult -[hidden]-> UserRegisterCommand : result
-destroy CommandResult
 
 UserRegisterCommand --> LogicManager : result
 deactivate UserRegisterCommand
