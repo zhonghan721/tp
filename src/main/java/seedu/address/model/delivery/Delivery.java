@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 
 /**
@@ -23,6 +24,8 @@ public class Delivery {
 
     private Note note;
 
+    private Address address;
+
     /**
      * Constructor for Delivery.
      * Every field must be present and not null.
@@ -37,7 +40,7 @@ public class Delivery {
     public Delivery(DeliveryName name, Customer customer, OrderDate orderDate,
                     DeliveryDate deliveryDate,
                     DeliveryStatus status,
-                    Note note) {
+                    Note note, Address address) {
         this.deliveryId = Delivery.deliveryCount++;
         this.name = name;
         this.customer = customer;
@@ -45,6 +48,7 @@ public class Delivery {
         this.deliveryDate = deliveryDate;
         this.status = status;
         this.note = note;
+        this.address = address;
     }
 
 
@@ -60,7 +64,7 @@ public class Delivery {
      */
     public Delivery(int deliveryId, DeliveryName name, Customer customer, OrderDate orderDate,
                     DeliveryDate deliveryDate,
-                    DeliveryStatus status) {
+                    DeliveryStatus status, Address address) {
         Delivery.deliveryCount = Math.max(deliveryCount, deliveryId + 1);
         this.deliveryId = deliveryId;
         this.name = name;
@@ -68,6 +72,7 @@ public class Delivery {
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.status = status;
+        this.address = address;
     }
 
     /**
@@ -82,13 +87,14 @@ public class Delivery {
      */
     public Delivery(DeliveryName name, Customer customer, OrderDate orderDate,
                     DeliveryDate deliveryDate,
-                    DeliveryStatus status) {
+                    DeliveryStatus status, Address address) {
         this.deliveryId = Delivery.deliveryCount++;
         this.name = name;
         this.customer = customer;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.status = status;
+        this.address = address;
     }
 
 
@@ -106,7 +112,7 @@ public class Delivery {
     public Delivery(int deliveryId, DeliveryName name, Customer customer, OrderDate orderDate,
                     DeliveryDate deliveryDate,
                     DeliveryStatus status,
-                    Note note) {
+                    Note note, Address address) {
         Delivery.deliveryCount = Math.max(deliveryCount, deliveryId + 1);
         this.deliveryId = deliveryId;
         this.name = name;
@@ -115,6 +121,7 @@ public class Delivery {
         this.deliveryDate = deliveryDate;
         this.status = status;
         this.note = note;
+        this.address = address;
     }
 
     public void setOrderDate(OrderDate orderDate) {

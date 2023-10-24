@@ -17,11 +17,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyBook;
-import seedu.address.model.delivery.Delivery;
-import seedu.address.model.delivery.DeliveryDate;
-import seedu.address.model.delivery.DeliveryName;
-import seedu.address.model.delivery.DeliveryStatus;
-import seedu.address.model.delivery.OrderDate;
+import seedu.address.model.delivery.*;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 
 /**
@@ -101,6 +98,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
         int customerId = deliveryAddDescriptor.getCustomerId().get();
         Customer customer = null;
         DeliveryDate deliveryDate = null;
+        Address address = null;
 
         LocalDate now = LocalDate.now();
         OrderDate orderDate = new OrderDate(now.toString());
@@ -111,6 +109,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
 
         if (checkValidCustomer(model, deliveryAddDescriptor)) {
             customer = customerReadOnlyBook.getById(customerId).get();
+            address = customer.getAddress();
         } else {
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -119,7 +118,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
         } else {
             throw new CommandException(MESSAGE_INVALID_DELIVERY_DATE);
         }
-        return new Delivery(deliveryName, customer, orderDate, deliveryDate, newDeliveryStatus, null);
+        return new Delivery(deliveryName, customer, orderDate, deliveryDate, newDeliveryStatus, address);
 
     }
 
