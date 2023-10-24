@@ -9,11 +9,10 @@ your operations. Within these pages, you'll find detailed coverage of the follow
     - User
         - Register
         - Login
-        - Forget password [Coming Soon]
+        - Update details [Coming Soon]
         - Logout
-        - Change password [Coming Soon]
-        - Update user details [Coming Soon]
-        - Delete account [Coming Soon]
+        - Account recovery
+        - Account deletion
     - Customer
         - Add customer
         - Search for a customer [Coming Soon]
