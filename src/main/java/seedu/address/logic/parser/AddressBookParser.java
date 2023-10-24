@@ -17,17 +17,13 @@ import seedu.address.logic.commands.customer.AddCommand;
 import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.customer.CustomerListCommand;
-import seedu.address.logic.commands.delivery.DeliveryAddCommand;
-import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
-import seedu.address.logic.commands.delivery.DeliveryDeleteCommand;
-import seedu.address.logic.commands.delivery.DeliveryListCommand;
-import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
-import seedu.address.logic.commands.delivery.DeliveryViewCommand;
+import seedu.address.logic.commands.delivery.*;
 import seedu.address.logic.commands.user.UserDeleteCommand;
 import seedu.address.logic.commands.user.UserLoginCommand;
 import seedu.address.logic.commands.user.UserLogoutCommand;
 import seedu.address.logic.commands.user.UserRegisterCommand;
 import seedu.address.logic.parser.delivery.DeliveryCreateNoteCommandParser;
+import seedu.address.logic.parser.delivery.DeliveryEditCommandParser;
 import seedu.address.logic.parser.delivery.DeliveryStatusCommandParser;
 import seedu.address.logic.parser.delivery.DeliveryViewCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -85,6 +81,9 @@ public class AddressBookParser {
 
         case DeliveryAddCommand.COMMAND_WORD:
             return new DeliveryAddCommandParser().parse(arguments);
+
+        case DeliveryEditCommand.COMMAND_WORD:
+            return new DeliveryEditCommandParser().parse(arguments);
 
         case DeliveryDeleteCommand.COMMAND_WORD:
             return new DeliveryDeleteCommandParser().parse(arguments);

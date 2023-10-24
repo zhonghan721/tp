@@ -39,7 +39,7 @@ public class FindCommand extends Command {
 
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                String.format(Messages.MESSAGE_CUSTOMER_LISTED_OVERVIEW,
                         model.getFilteredPersonList().size()), true);
     }
 

@@ -34,6 +34,8 @@ import seedu.address.logic.commands.delivery.DeliveryAddCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
 import seedu.address.logic.commands.delivery.DeliveryDeleteCommand;
+import seedu.address.logic.commands.delivery.DeliveryEditCommand;
+import seedu.address.logic.commands.delivery.DeliveryEditCommand.DeliveryEditDescriptor;
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
 import seedu.address.logic.commands.delivery.DeliveryViewCommand;
 import seedu.address.logic.commands.user.UserRegisterCommand;
@@ -43,11 +45,7 @@ import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.DeliveryAddDescriptorBuilder;
-import seedu.address.testutil.DeliveryBuilder;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.*;
 
 
 public class AddressBookParserTest {
@@ -97,7 +95,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_editCustomer() throws Exception {
         Customer customer = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(customer).build();
         CustomerEditCommand command = (CustomerEditCommand) parser.parseCommand(CustomerEditCommand.COMMAND_WORD + " "
@@ -126,9 +124,18 @@ public class AddressBookParserTest {
         DeliveryAddDescriptor validDeliveryAddDescriptor = deliveryAddDescriptorBuilder.build();
 
         assertEquals(new DeliveryAddCommand(validDeliveryAddDescriptor), command);
-
-
     }
+
+    @Test
+    public void parseCommand_editDelivery() throws Exception {
+        Delivery delivery = new DeliveryBuilder().build();
+        DeliveryEditDescriptor descriptor = new DeliveryEditDescriptorBuilder(delivery).build();
+        DeliveryEditCommand command = (DeliveryEditCommand) parser.parseCommand(DeliveryEditCommand
+                .COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + " " + DeliveryUtil.getEditDeliveryDescriptorDetails(descriptor));
+        assertEquals(new DeliveryEditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);

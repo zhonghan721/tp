@@ -76,7 +76,7 @@ public class DeliveryAddCommandTest {
         DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(
                 new DeliveryAddDescriptorBuilder(validDelivery).build());
 
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX, () ->
                 deliveryAddCommand.execute(modelStub));
     }
 

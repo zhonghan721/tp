@@ -170,7 +170,7 @@ public interface Model {
      * The delivery identity of {@code editedDelivery} must not be the same
      * as another existing customer in the address book.
      */
-    void setDelivery(Delivery target, Delivery editedCustomer);
+    void setDelivery(Delivery target, Delivery editedDelivery);
 
     /**
      * Returns an unmodifiable view of the filtered delivery list
