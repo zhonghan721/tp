@@ -221,11 +221,11 @@ The format for the `login` command can be found [here](UserGuide.md#login).
 1. The user specifies the `Username` and `Password` in the `login` command.
 2. If any of the fields is not provided, an error message with the correct command usage will be shown.
 3. If invalid command parameters are provided, an error message with the correct parameter format will be shown.
-4. The `User` is then cross-referenced with the stored user in `Model` to check if the credentials match.
+4. If the user is currently logged in, an error message will be shown.
+5. The `User` is then cross-referenced with the stored user in `Model` to check if the credentials match.
 If incorrect credentials are provided, an error message regarding wrong credentials will be shown.
-5. If the user is currently logged in, an error message will be shown.
 6. If all the previous steps are completed without exceptions, the user will be logged in and the 
-`isLoggedIn` status in `Model` will be updated.
+`isLoggedIn` status in `Model` will be updated to `true`.
 
 The following activity diagram shows the logic of a user logging in:
 
@@ -254,7 +254,7 @@ The following sequence diagram shows how the `login` command works:
 
 The `logout` command is used to log out from the user's account.
 Once logged out, the user will have no access to all the commands available, except for `help`, `exit`, 
-`register` and `delete account`.
+`register`, `login` and `delete account`.
 
 The format for the `logout` command can be found [here](UserGuide.md#logout).
 
