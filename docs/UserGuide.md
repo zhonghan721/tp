@@ -46,9 +46,11 @@ the instructions in the Getting Started Guide to start using the software.
 
 ### Register
 
-**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
+**Format:
+** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
 
-**Example:** `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko`
+**Example:
+** `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko`
 
 **Accepted Values:**
 
@@ -68,7 +70,8 @@ _ANSWER:_ String, not case sensitive
 
 **Command fails (password does not match):** _Passwords do not match. Try again._
 
-**Command fails (missing secret question and answer):** _Please key in a secret question and answer for account recovery. Try again._
+**Command fails (missing secret question and answer):** _Please key in a secret question and answer for account
+recovery. Try again._
 
 ### Login
 
@@ -105,7 +108,7 @@ _Details coming soon..._
 **Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`
 
 **Example 1:** `recover account`
-**Example:** `recover account [--answer Koko --password newPassword123 --confirmPass newPassword123]`
+**Example 2:** `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`
 
 **Accepted Values:**
 
@@ -123,7 +126,8 @@ _CONFIRM\_PASSWORD:_ String that is the same as _NEW\_PASSWORD_
 
 **Command fails (missing fields):** _Please fill up all the required fields._
 
-**Command fails (wrong answer to secret question):** _Wrong answer to secret question. Either try again or call `delete account` (permanent loss of stored data)._
+**Command fails (wrong answer to secret question):** _Wrong answer to secret question. Either try again or
+call `delete account` (permanent loss of stored data)._
 
 **Command fails (password does not match):** _Passwords do not match. Try again._
 
@@ -159,7 +163,7 @@ _ADDRESS_: String
 
 **Command succeeds:** _Customer 1, Gabriel added._
 
-**Command fails (missing field):** _Please fill up all the required fields (--name NAME --phone PHONE_NUMBER --email 
+**Command fails (missing field):** _Please fill up all the required fields (--name NAME --phone PHONE_NUMBER --email
 EMAIL --address ADDRESS)._
 
 ### Search for a customer `[Coming Soon in v1.3]`
@@ -178,9 +182,10 @@ Lists all the customers added in the address book.
 
 _NIL_
 
-**Command succeeds (>0 customers):** 
+**Command succeeds (>0 customers):**
 
 _Here is the list of customers:_
+
 1. _Benjamin, Phone: 9898 2323, Email: benjaminCSGod@gmail.com, Address: Carnegie Mellon University, South Block._
 2. _Gambe, Phone: 9797 1313, Email: gambeRizzLord@gmail.com, Address: Kent Ridge Hall_
 3. _Gabriel, Phone: 9090 9241, Email: gabrielSoCool@gmail.com, Address: RVRC Tower Block_
@@ -197,7 +202,8 @@ Updates the personal details of an existing customer in the address book.
 
 **Format:** `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`
 
-**Example:** `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
+**Example:
+** `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
 
 **Accepted Values:**
 
@@ -261,7 +267,8 @@ _DATE:_ String in YYYY-MM-DD format
 
 **Command succeeds:** _Delivery [1001] furniture created successfully for Customer 1, Gabriel!_
 
-**Command fails (missing_fields):** _Please fill up all the required fields (DELIVERY_NAME --customer CUSTOMER_ID --date DATE)!_
+**Command fails (missing_fields):** _Please fill up all the required fields (DELIVERY_NAME --customer CUSTOMER_ID --date
+DATE)!_
 
 **Command fails (invalid_date):** _Invalid date provided!_
 
@@ -285,7 +292,7 @@ _STATUS_: String of either `pending` or `complete` or defaults to show all deliv
 
 _SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by delivery date
 
-**Command succeeds (>0 deliveries):** 
+**Command succeeds (>0 deliveries):**
 
 1. _[1001] Gabriel’s Milk - Completed - Ordered 20th Sept 2023: Delivered on 30th Sept 2023_
 2. _[1002] Gambe’s Meat - Completed - Ordered 22th Sept 2023: Delivered on 29th Sept 2023_
@@ -296,7 +303,6 @@ _SORT_: String of either `asc` for ascending or `desc` for descending or default
 ### View deliveries for the day `[Coming Soon in v1.3]`
 
 _Details coming soon..._
-
 
 ### View details of deliveries
 
