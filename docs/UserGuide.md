@@ -248,19 +248,19 @@ _Details coming soon..._
 
 Shows a list of all deliveries.
 
-**Format:** `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DATE] [--sort SORT]`
+**Format:** `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE]  [--sort SORT]`
 
 **Example:** `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`
 
 **Accepted Values:**
 
-_STATUS_: String of either `pending` or `complete` or defaults to show all deliveries
+_STATUS_: CREATED/SHIPPED/COMPLETED/CANCELLED. If unspecified, defaults to show all deliveries.
 
-_CUSTOMER_ID_: Integer or defaults to show all deliveries
+_CUSTOMER_ID_: Integer
 
-_DATE_: String in YYYY-MM-DD format or `today` for today’s date or defaults to show all deliveries
+_DATE_: String in YYYY-MM-DD format or `today` for today’s date
 
-_SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by delivery date
+_SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by delivery date.
 
 **Command succeeds (>0 deliveries):**
 ![](images/delivery/delivery_list.png)
