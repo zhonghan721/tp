@@ -31,6 +31,9 @@ public class AuthenticationData {
         this.answer = answer;
     }
 
+    AuthenticationData() {
+    }
+
     /**
      * Returns the username of the AuthenticationData object.
      *
