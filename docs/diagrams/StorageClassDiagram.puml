@@ -11,6 +11,7 @@ Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
 Class JsonUserPrefsStorage
 }
 
+
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 Class "<<interface>>\nBookStorage<T>" as BookStorage
@@ -18,6 +19,7 @@ Class "<<interface>>\nBookStorage<Customer>" as BookStorageCustomer
 Class "<<interface>>\nBookStorageWithReference<T,R>" as BookStorageWithReference
 Class "<<interface>>\nBookStorageWithReference<Delivery,Customer>" as BookStorageWithReferenceDeliveryCustomer
 BookStorageWithReference -|> BookStorage
+
 
 package "AddressBook Storage" #F4F6F6{
 Class JsonAddressBookStorage
@@ -34,7 +36,7 @@ Class JsonAdaptedDelivery
 
 }
 
-Class HiddenOutside #FFFFFF
+Class HiddenOutside<<HIDDEN>> #FFFFFF
 HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
