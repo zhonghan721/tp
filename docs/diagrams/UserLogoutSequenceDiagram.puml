@@ -12,10 +12,10 @@ end box
 box Model MODEL_COLOR_T1
 participant "model:Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute("logout")
+[-> LogicManager : execute(input)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("logout")
+LogicManager -> AddressBookParser : parseCommand(input)
 activate AddressBookParser
 
 create UserLogoutCommand
@@ -43,13 +43,13 @@ activate Model
 Model --> UserLogoutCommand
 deactivate Model
 
-UserLogoutCommand -> Model : updateFilteredPersonList()
+UserLogoutCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_NO_CUSTOMERS)
 activate Model
 
 Model --> UserLogoutCommand
 deactivate Model
 
-UserLogoutCommand -> Model : updateFilteredDeliveryList()
+UserLogoutCommand -> Model : updateFilteredDeliveryList(PREDICATE_SHOW_NO_DELIVERIES)
 activate Model
 
 Model --> UserLogoutCommand

@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant "u:User" as User MODEL_COLOR
 participant "model:Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute("login --user user1 ~--password myPassword")
+[-> LogicManager : execute(input)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("login --user user1 ~--password myPassword")
+LogicManager -> AddressBookParser : parseCommand(input)
 activate AddressBookParser
 
 create UserLoginCommandParser
@@ -27,11 +27,11 @@ activate UserLoginCommandParser
 UserLoginCommandParser --> AddressBookParser
 deactivate UserLoginCommandParser
 
-AddressBookParser -> UserLoginCommandParser : parse("--user user1 ~--password myPassword")
+AddressBookParser -> UserLoginCommandParser : parse(arg)
 activate UserLoginCommandParser
 
 create User
-UserLoginCommandParser -> User : User(user1, myPassword)
+UserLoginCommandParser -> User : User(username, password)
 activate User
 
 User --> UserLoginCommandParser
@@ -74,7 +74,7 @@ activate Model
 Model --> UserLoginCommand
 deactivate Model
 
-UserLoginCommand -> Model : updateFilteredPersonList()
+UserLoginCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS)
 activate Model
 
 Model --> UserLoginCommand
