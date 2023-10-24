@@ -161,7 +161,9 @@ public class Delivery {
         return status;
     }
 
-    public Address getAddress() { return address;}
+    public Address getAddress() {
+        return address;
+    }
 
     public Note getNote() {
         return note;

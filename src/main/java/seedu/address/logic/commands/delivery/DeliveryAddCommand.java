@@ -17,7 +17,11 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyBook;
-import seedu.address.model.delivery.*;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryDate;
+import seedu.address.model.delivery.DeliveryName;
+import seedu.address.model.delivery.DeliveryStatus;
+import seedu.address.model.delivery.OrderDate;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 
