@@ -97,7 +97,7 @@ _Details coming soon..._
 ### Update details
 
 **Format:** `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD] 
-[--secretQn QUESTION --answer ANSWER]`
+[--secretQn SECRET_QUESTION --answer ANSWER]`
 
 **Example:** `login --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest 
 --secretQn Favourite Pet --answer BoBo`
@@ -108,15 +108,15 @@ _USERNAME:_ String, consisting of only alphanumeric characters
 
 _PASSWORD:_ String, consisting of at least 8 alphanumeric characters
 
-_CONFIRM PASSWORD:_ String that is the same as _PASSWORD_
+_CONFIRM\_PASSWORD:_ String that is the same as _PASSWORD_
 
-_QUESTION:_ String
+_SECRET\_QUESTION:_ String
 
 _ANSWER:_ String
 
 *At least one of the optional fields must be provided. 
 If PASSWORD is provided, CONFIRM_PASSWORD must also be provided, vice versa.
-If QUESTION is provided, ANSWER must also be provided, vice versa.
+If SECRET_QUESTION is provided, ANSWER must also be provided, vice versa.
 The details will be updated without checking against the current details.
 
 **Command succeeds:** _Update successful._
