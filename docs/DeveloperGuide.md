@@ -224,7 +224,7 @@ The format for the `login` command can be found [here](UserGuide.md#login).
 4. If the user is currently logged in, an error message will be shown.
 5. The `User` is then cross-referenced with the stored user in `Model` to check if the credentials match.
 If incorrect credentials are provided, an error message regarding wrong credentials will be shown.
-6. If all the previous steps are completed without exceptions, the user will be logged in and the 
+6. If all the previous steps are completed without exceptions, the user will be logged in and the
 `isLoggedIn` status in `Model` will be updated to `true`.
 
 The following activity diagram shows the logic of a user logging in:
@@ -233,12 +233,12 @@ The following activity diagram shows the logic of a user logging in:
 
 The sequence of the `login` command is as follows:
 
-1. Upon launching the application, the `ModelManager` will be initialized with 
+1. Upon launching the application, the `ModelManager` will be initialized with
 the `User` constructed with details from the authentication.json file.
 2. The user inputs the `login` command with the username and password.
 3. The `userLoginCommandParser` checks whether all the required fields are present.
 If all fields are present, it creates a new `userLoginCommand`.
-4. The `userLoginCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`. 
+4. The `userLoginCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`.
 5. The `userLoginCommand` then checks if the user credentials match the stored user by calling `Model#userMatches()`.
 6. If the user is not logged in and the credentials match, the `userLoginCommand` calls `Model#setLoginSuccess()`,
 changing the login status to true and enabling the user access to all commands.
@@ -253,7 +253,7 @@ The following sequence diagram shows how the `login` command works:
 **Overview:**
 
 The `logout` command is used to log out from the user's account.
-Once logged out, the user will have no access to all the commands available, except for `help`, `exit`, 
+Once logged out, the user will have no access to all the commands available, except for `help`, `exit`,
 `register`, `login` and `delete account`.
 
 The format for the `logout` command can be found [here](UserGuide.md#logout).
@@ -263,7 +263,7 @@ The format for the `logout` command can be found [here](UserGuide.md#logout).
 1. The user executes the `logout` command.
 2. If extra command parameters are provided after specifying `logout`, the logout command will still be executed.
 3. If the user is currently logged out, an error message will be shown.
-4. If all the previous steps are completed without exceptions, the user will be logged out and the 
+4. If all the previous steps are completed without exceptions, the user will be logged out and the
 `isLoggedIn` status in `Model` will be updated to `false`.
 
 The following activity diagram shows the logic of a user logging out:
@@ -786,7 +786,7 @@ otherwise)
 
       Use Case ends.
 
---- 
+---
 
 #### **Use Case: UC10 - Sort customers**
 
@@ -805,7 +805,7 @@ otherwise)
 1. Logged-in Owner types in command to view what deliveries a particular customer has.
 2. CMS shows the list of deliveries of that specific customer.
 
---- 
+---
 
 #### **Use Case: UC11 - Search for a Customer**
 
