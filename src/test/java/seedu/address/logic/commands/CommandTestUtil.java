@@ -26,6 +26,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.user.UserUpdateCommand.UpdateUserDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
@@ -34,6 +35,7 @@ import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.DeliveryAddDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.UpdateUserDescriptorBuilder;
 
 
 /**
@@ -165,6 +167,9 @@ public class CommandTestUtil {
 
     public static final DeliveryAddDescriptor DESC_RICE;
 
+    public static final UpdateUserDescriptor DESC_AARON;
+    public static final UpdateUserDescriptor DESC_FOODBEAR;
+
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -180,6 +185,13 @@ public class CommandTestUtil {
         DESC_RICE = new DeliveryAddDescriptorBuilder().withCustomerId(VALID_CUSTOMER_ID_2)
                 .withDeliveryDate(VALID_DELIVERY_DATE_2).withDeliveryName(VALID_NAME_JAMES_MILK).build();
 
+        DESC_AARON = new UpdateUserDescriptorBuilder().withUsername(VALID_USERNAME_AARON)
+                .withPassword(VALID_PASSWORD_AARON).withSecretQuestion(VALID_SECRET_QUESTION_AARON)
+                .withAnswer(VALID_ANSWER_AARON).build();
+
+        DESC_FOODBEAR = new UpdateUserDescriptorBuilder().withUsername(VALID_USERNAME_FOODBEAR)
+                .withPassword(VALID_PASSWORD_FOODBEAR).withSecretQuestion(VALID_SECRET_QUESTION_FOODBEAR)
+                .withAnswer(VALID_ANSWER_FOODBEAR).build();
     }
 
     /**

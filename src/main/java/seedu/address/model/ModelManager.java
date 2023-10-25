@@ -280,6 +280,16 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
 
+    /**
+     * Updates the stored {@code user} to the given {@code user} by re-registering the {@code user}.
+     */
+    @Override
+    public void updateUser(User user) {
+        // re-register the user with updated details
+        userPrefs.registerUser(user);
+        this.setLoggedInUser(user);
+    }
+
     //=========== DeliveryBook ================================================================================
 
     /**
