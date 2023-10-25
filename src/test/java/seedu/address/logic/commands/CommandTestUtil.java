@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.customer.CustomerEditCommand.EditCustomerDescriptor;
+import seedu.address.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -158,8 +158,8 @@ public class CommandTestUtil {
     public static final String VALID_DELIVERY_LIST_SORT_ASC = " " + PREFIX_SORT + "asc";
     public static final String VALID_DELIVERY_LIST_SORT_DESC = " " + PREFIX_SORT + "desc";
     public static final String INVALID_DELIVERY_LIST_SORT = " " + PREFIX_SORT + "invalid";
-    public static final EditCustomerDescriptor DESC_AMY;
-    public static final EditCustomerDescriptor DESC_BOB;
+    public static final CustomerEditDescriptor DESC_AMY;
+    public static final CustomerEditDescriptor DESC_BOB;
 
     public static final DeliveryAddDescriptor DESC_MILK;
 

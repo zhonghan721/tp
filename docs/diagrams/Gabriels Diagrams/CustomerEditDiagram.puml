@@ -6,7 +6,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":CustomerEditCommandParser" as CustomerEditCommandParser LOGIC_COLOR
-participant ":EditCustomerDescriptor" as EditCustomerDescriptor LOGIC_COLOR
+participant ":CustomerEditDescriptor" as CustomerEditDescriptor LOGIC_COLOR
 participant ":CustomerEditCommand" as CustomerEditCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -32,11 +32,11 @@ deactivate CustomerEditCommandParser
 AddressBookParser -> CustomerEditCommandParser : parse(args)
 activate CustomerEditCommandParser
 
-create EditCustomerDescriptor
-CustomerEditCommandParser -> EditCustomerDescriptor
-activate EditCustomerDescriptor
-EditCustomerDescriptor --> CustomerEditCommandParser
-deactivate EditCustomerDescriptor
+create CustomerEditDescriptor
+CustomerEditCommandParser -> CustomerEditDescriptor
+activate CustomerEditDescriptor
+CustomerEditDescriptor --> CustomerEditCommandParser
+deactivate CustomerEditDescriptor
 
 create CustomerEditCommand
 CustomerEditCommandParser -> CustomerEditCommand

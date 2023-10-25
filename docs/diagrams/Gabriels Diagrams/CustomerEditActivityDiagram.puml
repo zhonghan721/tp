@@ -9,10 +9,10 @@ start
   :Error:  Invalid command format! Parameters: INDEX (must be a positive integer);
   stop
   elseif () then ([Provide an index of an invalid customer])
-  : Error: The person index provided is invalid;
+  : Error: The customer index provided is invalid;
   stop
   elseif () then ([Provide the exact same details of the customer]))
-  : Error: This person already exists in the address book.;
+  : Error: This customer already exists in the address book.;
   stop
   else ([Valid format and index provided])
   endif

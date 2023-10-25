@@ -20,7 +20,7 @@ public class DeliveryAddDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditCustomerDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code CustomerEditDescriptor} with fields containing {@code person}'s details
      */
     public DeliveryAddDescriptorBuilder(Delivery delivery) {
         descriptor = new DeliveryAddDescriptor();
@@ -30,7 +30,7 @@ public class DeliveryAddDescriptorBuilder {
     }
 
     /**
-     * Sets the customerId of the {@code EditCustomerDescriptor} that we are building.
+     * Sets the customerId of the {@code CustomerEditDescriptor} that we are building.
      */
     public DeliveryAddDescriptorBuilder withDeliveryName(String deliveryName) {
         descriptor.setDeliveryName(new DeliveryName(deliveryName));
@@ -38,7 +38,7 @@ public class DeliveryAddDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditCustomerDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code CustomerEditDescriptor} that we are building.
      */
     public DeliveryAddDescriptorBuilder withCustomerId(int customerId) {
         descriptor.setCustomerId(customerId);
@@ -46,7 +46,7 @@ public class DeliveryAddDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditCustomerDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code CustomerEditDescriptor} that we are building.
      */
     public DeliveryAddDescriptorBuilder withDeliveryDate(String deliveryDate) {
         descriptor.setDeliveryDate(new DeliveryDate(deliveryDate));

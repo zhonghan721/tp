@@ -15,7 +15,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
-import seedu.address.logic.commands.customer.CustomerEditCommand.EditCustomerDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
@@ -45,27 +44,27 @@ public class CustomerEditCommandParser implements Parser<CustomerEditCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
-        EditCustomerDescriptor editCustomerDescriptor = new EditCustomerDescriptor();
+        CustomerEditCommand.CustomerEditDescriptor customerEditDescriptor = new CustomerEditCommand.CustomerEditDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editCustomerDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            customerEditDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editCustomerDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            customerEditDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editCustomerDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            customerEditDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editCustomerDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            customerEditDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editCustomerDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(customerEditDescriptor::setTags);
 
-        if (!editCustomerDescriptor.isAnyFieldEdited()) {
+        if (!customerEditDescriptor.isAnyFieldEdited()) {
             throw new ParseException(CustomerEditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new CustomerEditCommand(index, editCustomerDescriptor);
+        return new CustomerEditCommand(index, customerEditDescriptor);
     }
 
     /**

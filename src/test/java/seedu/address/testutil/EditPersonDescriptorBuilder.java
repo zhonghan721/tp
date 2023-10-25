@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.customer.CustomerEditCommand;
-import seedu.address.logic.commands.customer.CustomerEditCommand.EditCustomerDescriptor;
+import seedu.address.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.Email;
@@ -15,25 +15,25 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * A utility class to help with building EditCustomerDescriptor objects.
+ * A utility class to help with building CustomerEditDescriptor objects.
  */
 public class EditPersonDescriptorBuilder {
 
-    private CustomerEditCommand.EditCustomerDescriptor descriptor;
+    private CustomerEditCommand.CustomerEditDescriptor descriptor;
 
     public EditPersonDescriptorBuilder() {
-        descriptor = new EditCustomerDescriptor();
+        descriptor = new CustomerEditDescriptor();
     }
 
-    public EditPersonDescriptorBuilder(CustomerEditCommand.EditCustomerDescriptor descriptor) {
-        this.descriptor = new CustomerEditCommand.EditCustomerDescriptor(descriptor);
+    public EditPersonDescriptorBuilder(CustomerEditCommand.CustomerEditDescriptor descriptor) {
+        this.descriptor = new CustomerEditDescriptor(descriptor);
     }
 
     /**
-     * Returns an {@code EditCustomerDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code CustomerEditDescriptor} with fields containing {@code person}'s details
      */
     public EditPersonDescriptorBuilder(Customer customer) {
-        descriptor = new CustomerEditCommand.EditCustomerDescriptor();
+        descriptor = new CustomerEditCommand.CustomerEditDescriptor();
         descriptor.setCustomerId(customer.getCustomerId());
         descriptor.setName(customer.getName());
         descriptor.setPhone(customer.getPhone());
@@ -43,7 +43,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the customerId of the {@code EditCustomerDescriptor} that we are building.
+     * Sets the customerId of the {@code CustomerEditDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withCustomerId(int customerId) {
         descriptor.setCustomerId(customerId);
@@ -51,7 +51,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditCustomerDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code CustomerEditDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -59,7 +59,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditCustomerDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code CustomerEditDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
@@ -67,7 +67,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditCustomerDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code CustomerEditDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
@@ -75,7 +75,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditCustomerDescriptor} that we are building.
+     * Sets the {@code Address} of the {@code CustomerEditDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
@@ -83,7 +83,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditCustomerDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code CustomerEditDescriptor}
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
@@ -92,7 +92,7 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
-    public EditCustomerDescriptor build() {
+    public CustomerEditDescriptor build() {
         return descriptor;
     }
 }
