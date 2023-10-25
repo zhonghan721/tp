@@ -7,22 +7,22 @@ skinparam ArrowFontSize 12
 start
 :User enters <i>delivery note</i> command;
 partition DeliveryStatusCommandParser {
-    if (Check Arguments Not Null) then ([Null arguments provided])
+    if () then ([Null arguments provided])
         :NullPointerException: Args cannot be Null;
         stop
     else ([Not Null])
     endif
     : Tokenize Arguments with Note prefix;
-    if (Check Prefix Present\nand Preamble Empty) then ([Prefix Not Present or Preamble not Empty])
+    if () then ([Prefix Not Present or Preamble not Empty])
         :ParseException: Invalid Command Format;
         stop
-    elseif (Check Duplicate Prefix) then ([Duplicate Prefix])
+    elseif () then ([Duplicate Prefix])
         :ParseException: Duplicate Prefix;
         stop
-    elseif (Parse ID) then ([Invalid ID])
+    elseif () then ([Invalid Delivery ID])
         :ParseException: Invalid Delivery ID;
          stop
-    elseif (Parse Note) then ([Invalid Note])
+    elseif () then ([Invalid Note])
         :ParseException: Invalid Note;
         stop
     else ([Valid ID and Note Provided])
@@ -31,10 +31,10 @@ partition DeliveryStatusCommandParser {
 }
 
 partition DeliveryCreateNoteCommand {
-    if (User Logged in?) then ([Not Logged In])
+    if () then ([User Not Logged In])
         :CommandException: User Not Authenticated;
         stop
-    elseif (Delivery ID Exists) then ([Delivery not Found)
+    elseif () then ([Delivery ID Not Found])
         :CommandException: Invalid Delivery;
         stop
     else ()
