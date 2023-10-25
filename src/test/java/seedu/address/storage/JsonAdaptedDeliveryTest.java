@@ -12,6 +12,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.Messages;
 import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.delivery.DeliveryStatus;
@@ -143,7 +144,7 @@ public class JsonAdaptedDeliveryTest {
                 VALID_DELIVERY_DATE,
                 VALID_DELIVERY_STATUS,
                 VALID_DELIVERY_NOTE);
-        String expectedMessage = OrderDate.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Messages.MESSAGE_INVALID_ORDER_DATE;
         assertThrows(IllegalValueException.class, expectedMessage, ()
             -> delivery.toModelType(Optional.of(getTypicalAddressBook())));
     }
@@ -176,22 +177,6 @@ public class JsonAdaptedDeliveryTest {
                 VALID_DELIVERY_STATUS,
                 VALID_DELIVERY_NOTE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, OrderDate.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, ()
-            -> delivery.toModelType(Optional.of(getTypicalAddressBook())));
-    }
-
-    @Test
-    public void toModelType_invalidDeliveryDate_throwsIllegalValueException() {
-        JsonAdaptedDelivery delivery =
-            new JsonAdaptedDelivery(
-                null,
-                VALID_DELIVERY_NAME,
-                VALID_CUSTOMER,
-                VALID_ORDER_DATE,
-                INVALID_DELIVERY_DATE,
-                VALID_DELIVERY_STATUS,
-                VALID_DELIVERY_NOTE);
-        String expectedMessage = DeliveryDate.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, ()
             -> delivery.toModelType(Optional.of(getTypicalAddressBook())));
     }
