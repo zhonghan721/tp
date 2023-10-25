@@ -199,7 +199,7 @@ This section describes some noteworthy details on how certain features are imple
 - [User Logout Command](#user-logout-command)
 - User Account Recovery
 - User Account Deletion
-- Customer Edit Command 
+- Customer Edit Command
 - Delivery Add Command
 
 
@@ -326,29 +326,29 @@ The following sequence diagram shows how the `login` command works:
 
 //Can state somewhere that all commands need to be logged in before can use
 
-### Customer Edit Command 
+### Customer Edit Command
 
 **Overview:**
 
-The `customer edit` command is used to edit an existing Customer with at least one of the information fields 
+The `customer edit` command is used to edit an existing Customer with at least one of the information fields
 specified by the user, namely the customer's `Name`, `Phone`, `Email` or/and `Address`.
 
 The format for the `customer edit` command can be found [here](UserGuide.md#login).
 
 **Feature details:**
 
-1. The user specifies the customer id of the `Customer` to be edited, followed by at least one of the information fields 
-to be edited,`Name`, `Phone`, `Email` or/and `Address`.
+1. The user specifies the customer id of the `Customer` to be edited, followed by at least one of the information
+fields to be edited,`Name`, `Phone`, `Email` or/and `Address`.
 e.g.(`customer edit 1 --name John --phone 92149601)
 2. If no fields are provided, an error message will prompt the user to key in at least one of the fields.
-3. If the customer id provided is negative or zero, an error message will prompt the user to key in an unsigned 
+3. If the customer id provided is negative or zero, an error message will prompt the user to key in an unsigned
 positive integer.
-4. The customer id provided is then cross-referenced with the stored customer list in `Model` to ensure that 
-it corresponds to an existing `Customer`. If the customer id is not tied to any `Customer`, an error message will 
+4. The customer id provided is then cross-referenced with the stored customer list in `Model` to ensure that
+it corresponds to an existing `Customer`. If the customer id is not tied to any `Customer`, an error message will
 inform the user that that is the case.
-5. If the details provided exactly match the details of the `Customer` that was specified, an error message will inform 
+5. If the details provided exactly match the details of the `Customer` that was specified, an error message will inform
    the user that the customer already exists in the address book.
-6. If all the previous steps are completed without exceptions, the fields of the `Customer` that was specified will 
+6. If all the previous steps are completed without exceptions, the fields of the `Customer` that was specified will
 be updated with the new information provided by the user.
 
 The following activity diagram shows the logic of a user editing a customer's information:
@@ -357,19 +357,18 @@ The following activity diagram shows the logic of a user editing a customer's in
 
 The sequence of the `customer edit` command is as follows:
 
-1. The user inputs the `customer edit` command with `input` as the customer id and `Name`, `Phone`, `Email` and/or 
+1. The user inputs the `customer edit` command with `input` as the customer id and `Name`, `Phone`, `Email` and/or
 `Address` as the fields to be edited. e.g.(`customer edit 1 --name John --phone 92149601)
-2. The `LogicManager` calls `AddressBookParser#parseCommand` to create its corresponding CommandParser.  
-3. In this case, the `AddressBookParser` creates an instance of `CustomerEditCommandParser` and calls 
-`CustomerEditCommandParser#parse` to parse the given `input` using various parse methods from `ParserUtil` and 
+2. The `LogicManager` calls `AddressBookParser#parseCommand` to create its corresponding CommandParser.
+3. In this case, the `AddressBookParser` creates an instance of `CustomerEditCommandParser` and calls
+`CustomerEditCommandParser#parse` to parse the given `input` using various parse methods from `ParserUtil` and
    creates a `CustomerEditDescriptor` object.
-4. The `CustomerEditCommandParser` then creates a `CustomerEditCommand` object. The `CustomerEditCommand` object 
-takes in the `CustomerEditDescriptor` instance and the customer id from Step 1 as a 
-parameter.
-5. The `CustomerEditCommand` is then returned to the `LogicManager` where its execute method is called. This creates 
-a `Customer` object by calling `CustomerEditCommand#createEditedCustomer`. Also, it edits the `Customer` with the 
+4. The `CustomerEditCommandParser` then creates a `CustomerEditCommand` object. The `CustomerEditCommand` object
+takes in the `CustomerEditDescriptor` instance and the customer id from Step 1 as a parameter.
+5. The `CustomerEditCommand` is then returned to the `LogicManager` where its execute method is called. This creates
+a `Customer` object by calling `CustomerEditCommand#createEditedCustomer`. Also, it edits the `Customer` with the
    customer id input in Step 1. This is done by calling `Model#setCustomer`.
-6. With the `Customer` specified edited, a `CommandResult` with a success message is then returned. 
+6. With the `Customer` specified edited, a `CommandResult` with a success message is then returned.
 
 The following sequence diagram shows how the `customer edit` command works:
 
@@ -381,7 +380,7 @@ The following sequence diagram shows how the `customer edit` command works:
 
 The `delivery add` command is used to add a new Delivery with all the given information fields
 specified by the user, namely the delivery's `DeliveryName`, customer id of a `Customer` and `DeliveryDate`. All 
-fields are compulsory. 
+fields are compulsory.
 
 The format for the `delivery add` command can be found [here](UserGuide.md#login).
 
@@ -390,12 +389,12 @@ The format for the `delivery add` command can be found [here](UserGuide.md#login
 1. The user inputs `delivery add`, followed by the `DeliveryName`, customer id of a `Customer` and `DeliveryDate`.
 e.g.(delivery add --name Chocolate Cake --customer 1 --date 2024-10-10)
 2. If no fields or incorrect fields are provided, an error message will inform the user of the correct command usage.
-3. If the delivery date provided is before today's date, an error message will prompt the user to key in a date that 
+3. If the delivery date provided is before today's date, an error message will prompt the user to key in a date that
    is today or after today.
 4. The customer id provided is then cross-referenced with the stored customer list in `Model` to ensure that
    it corresponds to an existing `Customer`. If the customer id is not tied to any `Customer`, an error message will
    inform the user that that is the case.
-5. If all the previous steps are completed without exceptions, a new `Delivery` will be added with the 
+5. If all the previous steps are completed without exceptions, a new `Delivery` will be added with the
    information provided by the user and added to the `Model`.
 
 The following activity diagram shows the logic of a user adding a delivery:
@@ -404,17 +403,17 @@ The following activity diagram shows the logic of a user adding a delivery:
 
 The sequence of the `delivery add` command is as follows:
 
-1. The user inputs the `delivery add` command with `input` as the `DeliveryName`, customer id of a `Customer` and 
+1. The user inputs the `delivery add` command with `input` as the `DeliveryName`, customer id of a `Customer` and
 `DeliveryDate`.
 e.g.(`delivery add --name Chocolate Cake --customer 1 --date 2024-10-10)
 2. The `LogicManager` calls `AddressBookParser#parseCommand` to create its corresponding CommandParser.
 3. In this case, the `AddressBookParser` creates an instance of `DeliveryAddCommandParser` and calls
-   `DeliveryAddCommandParser#parse` to parse the given `input` using various parse methods from `ParserUtil` and 
+   `DeliveryAddCommandParser#parse` to parse the given `input` using various parse methods from `ParserUtil` and
    creates a `DeliveryAddCommand` object.
 4. The `DeliveryAddCommandParser` then creates a `DeliveryAddCommand` object.
    The `DeliveryAddCommand` object takes in the `DeliveryAddDescriptor` instance as a parameter.
 5. The `DeliveryAddCommand` is then returned to the `LogicManager` where its execute method is called. This creates
-   a `Delivery` object by calling `DeliveryAddCommand#createDelivery`. Also, it adds this new `Delivery` with the 
+   a `Delivery` object by calling `DeliveryAddCommand#createDelivery`. Also, it adds this new `Delivery` with the
    details input by the user in Step 1 to the `Model`. This is done by calling `Model#addDelivery`.
 6. With the `Delivery` created with the details specified, a `CommandResult` with a success message is then returned.
 
@@ -893,7 +892,7 @@ otherwise)
 
       Use Case ends.
 
---- 
+---
 
 #### **Use Case: UC10 - Sort customers**
 
@@ -912,7 +911,7 @@ otherwise)
 1. Logged-in Owner types in command to view what deliveries a particular customer has.
 2. CMS shows the list of deliveries of that specific customer.
 
---- 
+---
 
 #### **Use Case: UC11 - Search for a Customer**
 
