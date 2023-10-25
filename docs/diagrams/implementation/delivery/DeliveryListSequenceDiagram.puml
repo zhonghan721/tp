@@ -60,10 +60,26 @@ opt status != null
 DeliveryListCommand -> Model : updateFilteredList filter by status
 activate Model
 
-Model --> DeliveryListCommand : filtered list filtered by status
+Model --> DeliveryListCommand : delivery list filtered by status
 deactivate Model
 end
 
+opt deliveryDate != null
+DeliveryListCommand -> Model : updateFilteredList filter by delivery date
+activate Model
+
+Model --> DeliveryListCommand : delivery list filtered by delivery date
+deactivate Model
+end
+
+
+opt customerId != null
+DeliveryListCommand -> Model : updateFilteredList filter by customer id
+activate Model
+
+Model --> DeliveryListCommand : delivery list filtered by customer id
+deactivate Model
+end
 
 
 alt sortType == Sort.ASC

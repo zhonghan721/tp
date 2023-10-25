@@ -289,11 +289,16 @@ The format of the `delivery list` command can be found
 4. If the user enters an invalid or empty sort that is prefixed by `--sort`, a `ParseException` will be thrown.
 5. If the command is parsed successfully, a `DeliveryListCommand` object will be created, and executed.
 6. If the user is not logged in, a `CommandException` will be thrown.
-7. If the status was provided, the status is used to fetch all deliveries with the specified status.
-8. If the sort was provided, the sort is used to sort the deliveries. By default, the deliveries will be sorted in the
-   order of their delivery date.
-9. The list on the ui will be updated with the filtered and sorted deliveries.
-10. If the command completed successfully, a `CommandResult` object will be created, and returned.
+7. If the status was provided, the status is used to filter the current delivery list with the specified status.
+8. If the customer id was provided, the customer id is used to filter the current delivery list with the specified
+   customer id.
+9. If the delivery date was provided, the delivery date is used to filter the current delivery list with the specified
+   delivery date.
+10. If the sort was provided, the sort is used to sort the current delivery list. By default, the deliveries will be
+    sorted in the
+    order of their delivery date.
+11. The list on the ui will be updated with the filtered and sorted deliveries.
+12. If the command completed successfully, a `CommandResult` object will be created, and returned.
 
 The following activity diagram illustrates the logic for listing `Delivery`
 
@@ -311,13 +316,19 @@ The sequence of the `delivery list` command is as follows:
    with the parsed `STATUS` and `SORT`
 5. `LogicManager` calls `DeliveryListCommand#execute()`, first checking if the user is logged in by calling
    `Model#getUserLoginStatus()`
-6. If status is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus()` to filter the
+6. If status is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)` to
+   filter the
    delivery list by the specified status.
-7. If the sort is `asc`, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList()` to sort the delivery
+7. If delivery date is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)`
+   to filter the delivery list by the specified date.
+8. If customer id is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)`
+   to filter the delivery list by the specified customer id.
+9. If the sort is `asc`, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList(Comparator)` to sort the
+   delivery
    list by delivery date in ascending order.
-8. Else, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList()` to sort the delivery list by delivery
-   date in descending order.
-9. It creates a new "CommandResult" with the result of the execution.
+10. Else, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList()` to sort the delivery list by delivery
+    date in descending order.
+11. It creates a new "CommandResult" with the result of the execution.
 
 The default delivery sort is `asc`.
 
@@ -364,6 +375,82 @@ The sequence of the `delivery view` command is as follows:
 The following sequence diagram illustrates the `delivery view` command sequence:
 
 <puml src="diagrams/implementations/DeliveryViewCommandSequenceDiagram.puml" width="450" />
+
+### User Login Command
+
+**Overview:**
+
+The `login` command is used to log in to the user's account.
+Once logged in, the user will have access to all the commands available.
+
+The format for the `login` command can be found [here](UserGuide.md#login).
+
+**Feature details:**
+
+1. The user specifies the `Username` and `Password` in the `login` command.
+2. If any of the fields is not provided, an error message with the correct command usage will be shown.
+3. If invalid command parameters are provided, an error message with the correct parameter format will be shown.
+4. If the user is currently logged in, an error message will be shown.
+5. The `User` is then cross-referenced with the stored user in `Model` to check if the credentials match.
+   If incorrect credentials are provided, an error message regarding wrong credentials will be shown.
+6. If all the previous steps are completed without exceptions, the user will be logged in and the
+   `isLoggedIn` status in `Model` will be updated to `true`.
+
+The following activity diagram shows the logic of a user logging in:
+
+<puml src="diagrams/UserLoginActivityDiagram.puml" alt="UserLoginActivityDiagram" />
+
+The sequence of the `login` command is as follows:
+
+1. Upon launching the application, the `ModelManager` will be initialized with
+   the `User` constructed with details from the authentication.json file.
+2. The user inputs the `login` command with the username and password.
+3. The `userLoginCommandParser` checks whether all the required fields are present.
+   If all fields are present, it creates a new `userLoginCommand`.
+4. The `userLoginCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`.
+5. The `userLoginCommand` then checks if the user credentials match the stored user by calling `Model#userMatches()`.
+6. If the user is not logged in and the credentials match, the `userLoginCommand` calls `Model#setLoginSuccess()`,
+   changing the login status to true and enabling the user access to all commands.
+7. The `userLoginCommand` also calls `Model#updateFilteredPersonList()` to display the list of customers.
+
+The following sequence diagram shows how the `login` command works:
+
+<puml src="diagrams/UserLoginSequenceDiagram.puml" alt="UserLoginSequenceDiagram" />
+
+### User Logout Command
+
+**Overview:**
+
+The `logout` command is used to log out from the user's account.
+Once logged out, the user will have no access to all the commands available, except for `help`, `exit`,
+`register`, `login` and `delete account`.
+
+The format for the `logout` command can be found [here](UserGuide.md#logout).
+
+**Feature details:**
+
+1. The user executes the `logout` command.
+2. If extra command parameters are provided after specifying `logout`, the logout command will still be executed.
+3. If the user is currently logged out, an error message will be shown.
+4. If all the previous steps are completed without exceptions, the user will be logged out and the
+   `isLoggedIn` status in `Model` will be updated to `false`.
+
+The following activity diagram shows the logic of a user logging out:
+
+<puml src="diagrams/UserLogoutActivityDiagram.puml" alt="UserLogoutActivityDiagram" />
+
+The sequence of the `logout` command is as follows:
+
+1. The user inputs the `logout` command.
+2. A new `userLogoutCommand` is created and checks whether the user is currently logged out
+   by calling `Model#getUserLoginStatus()`.
+3. If the user is currently logged in, the `userLogoutCommand` calls `Model#setLogoutSuccess()`,
+   changing the login status to false and restricting the user access to most commands.
+4. The `userLoginCommand` also calls `Model#updateFilteredPersonList()` to hide the list of customers.
+
+The following sequence diagram shows how the `login` command works:
+
+<puml src="diagrams/UserLogoutSequenceDiagram.puml" alt="UserLogoutSequenceDiagram" />
 
 ### \[Proposed\] Undo/redo feature
 

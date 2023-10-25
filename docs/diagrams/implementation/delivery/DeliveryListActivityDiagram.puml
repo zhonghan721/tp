@@ -25,15 +25,18 @@ partition DeliveryListCommand {
         :CommandException: User Not Authenticated;
         stop
     endif
-    if (Check status null) then ([Status Provided])
-        :List deliveries filtered by status;
-        stop
-    else ([Status Not Provided])
+
+    if (Check status present) then ([Status Provided])
+        :Filter deliveries by status;
+    elseif (Check customer id present) then ([Customer ID Provided])
+        :Filter deliveries by customer id;
+    elseif (Check data present) then ([Data Provided])
+        :Filter deliveries by date;
+    endif
         : List deliveries filtered ;
         : Sort by sort order;
         : Refresh Displayed Delivery List;
         : Return CommandResult;
-    endif
 }
 
 stop
