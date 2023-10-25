@@ -92,6 +92,10 @@ public class UserRecoverAccountCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS_WITH_FLAGS);
     }
 
+    public boolean isShowSecretQuestion() {
+        return isShowSecretQuestion;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

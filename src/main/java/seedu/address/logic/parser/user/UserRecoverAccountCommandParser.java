@@ -27,6 +27,7 @@ public class UserRecoverAccountCommandParser implements Parser<UserRecoverAccoun
      * @throws ParseException if the user input does not conform the expected format
      */
     public UserRecoverAccountCommand parse(String args) throws ParseException {
+        System.out.println(args);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ANSWER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM);

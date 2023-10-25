@@ -38,8 +38,10 @@ import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
 import seedu.address.logic.commands.delivery.DeliveryDeleteCommand;
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
 import seedu.address.logic.commands.delivery.DeliveryViewCommand;
+import seedu.address.logic.commands.user.UserDeleteCommand;
 import seedu.address.logic.commands.user.UserLoginCommand;
 import seedu.address.logic.commands.user.UserLogoutCommand;
+import seedu.address.logic.commands.user.UserRecoverAccountCommand;
 import seedu.address.logic.commands.user.UserRegisterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Delivery;
@@ -200,5 +202,22 @@ public class AddressBookParserTest {
     public void parseCommand_userLogout() throws Exception {
         assertTrue(parser.parseCommand(UserLogoutCommand.COMMAND_WORD) instanceof UserLogoutCommand);
         assertTrue(parser.parseCommand(UserLogoutCommand.COMMAND_WORD + " abc") instanceof UserLogoutCommand);
+    }
+
+    @Test
+    public void parseCommand_userDelete() throws Exception {
+        assertTrue(parser.parseCommand(UserDeleteCommand.COMMAND_WORD) instanceof UserDeleteCommand);
+        assertTrue(parser.parseCommand(UserDeleteCommand.COMMAND_WORD + " abc") instanceof UserDeleteCommand);
+    }
+
+    @Test
+    public void parseCommand_userRecoverAccount() throws Exception {
+        assertTrue(parser.parseCommand(UserRecoverAccountCommand.COMMAND_WORD) instanceof UserRecoverAccountCommand);
+        assertTrue(parser.parseCommand(UserRecoverAccountCommand.COMMAND_WORD + " abc")
+                instanceof UserRecoverAccountCommand);
+        assertTrue(parser.parseCommand(UserRecoverAccountCommand.COMMAND_WORD + " "
+                + PREFIX_ANSWER + " answer "
+                + PREFIX_PASSWORD + " password "
+                + PREFIX_PASSWORD_CONFIRM + " password") instanceof UserRecoverAccountCommand);
     }
 }
