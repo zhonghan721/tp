@@ -41,8 +41,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
             + PREFIX_CUSTOMER_ID + " 5 "
             + PREFIX_DATE + " 2023-12-03 ";
 
-    // public static final String MESSAGE_SUCCESS = "New delivery added: %1$s";
-    public static final String MESSAGE_SUCCESS = "New delivery added: ";
+    public static final String MESSAGE_SUCCESS = "New delivery added: %1$s";
     public static final String MESSAGE_DUPLICATE_DELIVERY = "This delivery already exists in HomeBoss";
 
     private final DeliveryAddDescriptor deliveryAddDescriptor;
@@ -64,7 +63,6 @@ public class DeliveryAddCommand extends DeliveryCommand {
         if (!model.getUserLoginStatus()) {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
-
         Delivery toAdd = createDelivery(model, deliveryAddDescriptor);
 
         model.addDelivery(toAdd);
@@ -213,3 +211,4 @@ public class DeliveryAddCommand extends DeliveryCommand {
         }
     }
 }
+

@@ -9,11 +9,10 @@ your operations. Within these pages, you'll find detailed coverage of the follow
     - User
         - Register
         - Login
-        - Forget password [Coming Soon]
+        - Update details [Coming Soon]
         - Logout
-        - Change password [Coming Soon]
-        - Update user details [Coming Soon]
-        - Delete account [Coming Soon]
+        - Account recovery
+        - Account deletion
     - Customer
         - Add customer
         - Search for a customer [Coming Soon]
@@ -47,9 +46,9 @@ the instructions in the Getting Started Guide to start using the software.
 
 ### Register
 
-**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD`
+**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
 
-**Example:** `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat`
+**Example:** `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko`
 
 **Accepted Values:**
 
@@ -57,13 +56,20 @@ _USERNAME:_ String
 
 _PASSWORD:_ String
 
-_CONFIRM PASSWORD:_ String that is the same as _PASSWORD_.
+_CONFIRM\_PASSWORD:_ String that is the same as _PASSWORD_
 
-**Command succeeds:** _Register successful._
+_SECRET\_QUESTION:_ String
+
+_ANSWER:_ String, not case sensitive
+
+**Command succeeds:** _Registration successful._
 
 **Command fails (missing fields):** _Please fill up all the required fields._
 
 **Command fails (password does not match):** _Passwords do not match. Try again._
+
+**Command fails (missing secret question and answer):** _Please key in a secret question and answer for account
+recovery. Try again._
 
 ### Login
 
@@ -83,7 +89,7 @@ _PASSWORD:_ String
 
 **Command fails (wrong login credentials):** _Wrong username and/or password. Try again._
 
-### Forget Password `[Coming Soon in v1.3]`
+### Update details `[Coming Soon in v1.3]`
 
 _Details coming soon..._
 
@@ -93,19 +99,43 @@ _Details coming soon..._
 
 **Example:** `logout`
 
-**Command succeeds:** _Logout successful._
+### Account Recovery
 
-### Change Password `[Coming Soon in v1.3]`
+**Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`
 
-_Details coming soon..._
+**Example 1:** `recover account`</br>
+**Example 2:** `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`</br>
 
-### Update details `[Coming Soon in v1.3]`
+**Accepted Values:**
 
-_Details coming soon..._
+_ANSWER:_ String, not case sensitive
 
-### Delete Account `[Coming Soon in v1.3]`
+_NEW\_PASSWORD:_ String
 
-_Details coming soon..._
+_CONFIRM\_PASSWORD:_ String that is the same as _NEW\_PASSWORD_
+
+*`--answer`, `--password`, and `--confirmPass` flags have to be either all present or all absent.
+
+**Command succeeds (without flags):** _Your secret question is: \<previously stored secret qn\>._
+
+**Command succeeds (with flags):** _Your account has been recovered successfully. Welcome back to HomeBoss._
+
+**Command fails (missing fields):** _Please fill up all the required fields._
+
+**Command fails (wrong answer to secret question):** _Wrong answer to secret question. Either try again or
+call `delete account` (permanent loss of stored data)._
+
+**Command fails (password does not match):** _Passwords do not match. Try again._
+
+### Account Deletion
+
+**Format:** `delete account`
+
+**Example:** `delete account`
+
+**Command succeeds:** _User deleted successfully._
+
+**Command fails (no user registered):** _No accounts found. Please register an account first._
 
 ## <span style="text-decoration:underline;">Customer</span>
 
@@ -115,7 +145,7 @@ Adds a customer to the address book.
 
 **Format:** `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`
 
-**Example:** `customer add --name Gabriel --phone 8765 4321 --email gabrielrocks@gmail.com --address RVRC Block B`
+**Example:** `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`
 
 **Accepted Values:**
 
@@ -168,8 +198,7 @@ Updates the personal details of an existing customer in the address book.
 
 **Format:** `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`
 
-**
-Example:** `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
+**Example:** `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
 
 **Accepted Values:**
 
@@ -239,10 +268,6 @@ DATE)!_
 **Command fails (invalid_date):** _Invalid date provided!_
 
 **Command fails (invalid_date_format):** _Please provide the date in the format: YYYY-MM-DD._
-
-### Create a note for a delivery `[Coming Soon in v1.3]`
-
-_Details coming soon..._
 
 ### View all deliveries
 
@@ -316,7 +341,7 @@ _Delivered On: 2023-12-03_
 
 **Command fails (invalid_index):** _The delivery index provided is invalid_
 
-**Command fails (missing_fields):** 
+**Command fails (missing_fields):**
 
 _Invalid command format!_<br />
 _delivery status: Edits the status of the delivery identified by the ID of the delivery. Existing status will be overwritten by the input status._<br />
@@ -367,7 +392,7 @@ _Customer: Alex Yeoh_</br>
 _Customer Id: 1_</br>
 _Ordered On: 2023-10-21_</br>
 _Delivered On: 2023-12-03_</br>
-_Note:By FedEx_
+_Note: By FedEx_
 
 **Command failed (invalid_index):** _The delivery index provided is invalid_
 

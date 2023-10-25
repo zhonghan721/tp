@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -49,19 +48,22 @@ public class DeliveryAddCommandTest {
         PersonBuilder personBuilder = new PersonBuilder();
         Customer validCustomer = personBuilder.build();
 
-        ModelStubAcceptingDeliveryAdded modelStub = new ModelStubAcceptingDeliveryAdded();
+        ModelStubStoringDeliveries modelStub = new ModelStubStoringDeliveries();
         Delivery validDelivery = new DeliveryBuilder().withCustomer(validCustomer).build();
+        DeliveryAddDescriptor deliveryAddDescriptor = new DeliveryAddDescriptorBuilder(validDelivery).build();
+
 
         CommandResult commandResult = null;
         try {
-            commandResult = new DeliveryAddCommand(new DeliveryAddDescriptorBuilder(validDelivery).build())
+            commandResult = new DeliveryAddCommand(deliveryAddDescriptor)
                     .execute(modelStub);
         } catch (CommandException e) {
             e.printStackTrace();
         }
 
-        assertEquals(String.format(DeliveryAddCommand.MESSAGE_SUCCESS, Messages.format(validDelivery)),
-                commandResult.getFeedbackToUser());
+
+        assertEquals(String.format(DeliveryAddCommand.MESSAGE_SUCCESS, Messages
+                .format(modelStub.getDelivery(0).get())), commandResult.getFeedbackToUser());
 
     }
 
@@ -148,6 +150,7 @@ public class DeliveryAddCommandTest {
                 .toString();
         assertEquals(expected, deliveryAddCommand.toString());
     }
+
     /**
      * A default model stub that have all of the methods failing.
      */
@@ -448,7 +451,41 @@ public class DeliveryAddCommandTest {
         public boolean getUserLoginStatus() {
             return false;
         }
+
+
+    }
+
+    private class ModelStubStoringDeliveries extends ModelStub {
+        final ArrayList<Delivery> deliveriesAdded = new ArrayList<>();
+
+
+        @Override
+        public void addDelivery(Delivery delivery) {
+            requireNonNull(delivery);
+            deliveriesAdded.add(delivery);
+        }
+
+        @Override
+        public Optional<Delivery> getDelivery(int id) {
+            return Optional.of(deliveriesAdded.get(id));
+        }
+
+
+        @Override
+        public ReadOnlyBook<Customer> getAddressBook() {
+            PersonBuilder personBuilder = new PersonBuilder();
+            Customer validCustomer = personBuilder.build();
+            AddressBook addressBook = new AddressBook();
+            addressBook.addPerson(validCustomer);
+            return addressBook;
+        }
+
+        @Override
+        public boolean getUserLoginStatus() {
+            return true;
+        }
+
+
     }
 
 }
-

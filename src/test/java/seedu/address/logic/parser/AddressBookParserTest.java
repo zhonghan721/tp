@@ -6,10 +6,12 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DATE_3;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VIEW_CUSTOMER_ID_1;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SECRET_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.GABRIELS_MILK;
@@ -202,7 +204,9 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(UserRegisterCommand.COMMAND_WORD + " "
                 + PREFIX_USER + " username "
                 + PREFIX_PASSWORD + " password "
-                + PREFIX_PASSWORD_CONFIRM + " password") instanceof UserRegisterCommand);
+                + PREFIX_PASSWORD_CONFIRM + " password "
+                + PREFIX_SECRET_QUESTION + " secret question "
+                + PREFIX_ANSWER + " answer") instanceof UserRegisterCommand);
     }
 
     @Test
@@ -211,6 +215,7 @@ public class AddressBookParserTest {
                 + PREFIX_USER + " username "
                 + PREFIX_PASSWORD + " password ") instanceof UserLoginCommand);
     }
+
     @Test
     public void parseCommand_userLogout() throws Exception {
         assertTrue(parser.parseCommand(UserLogoutCommand.COMMAND_WORD) instanceof UserLogoutCommand);
