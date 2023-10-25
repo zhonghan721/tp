@@ -5,12 +5,14 @@ import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
 import java.util.Comparator;
-import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
 
 import seedu.address.logic.Sort;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryStatus;
 
@@ -22,16 +24,9 @@ public class DeliveryListCommand extends DeliveryCommand {
     public static final String MESSAGE_SUCCESS = "Listed all Deliveries";
 
     private DeliveryStatus status;
-    private Sort sortType = Sort.ASC;
-
-    /**
-     * Default constructor for a DeliveryList Command with status filter and ascending sort.
-     *
-     * @param status status to filter by.
-     */
-    public DeliveryListCommand(DeliveryStatus status) {
-        this.status = status;
-    }
+    private final Integer customerId;
+    private final Date deliveryDate;
+    private Sort sortType = Sort.DESC;
 
     /**
      * Constructor for a DeliveryList Command with status filter and sort type.
@@ -39,10 +34,16 @@ public class DeliveryListCommand extends DeliveryCommand {
      * @param status   status to filter by.
      * @param sortType asc or desc.
      */
-    public DeliveryListCommand(DeliveryStatus status, Sort sortType) {
-        this(status);
-        this.sortType = sortType;
+    public DeliveryListCommand(DeliveryStatus status, Integer customerId, Date deliveryDate, Sort sortType) {
+        this.status = status;
+        this.customerId = customerId;
+        this.deliveryDate = deliveryDate;
+
+        if (sortType != null) {
+            this.sortType = sortType;
+        }
     }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -52,20 +53,32 @@ public class DeliveryListCommand extends DeliveryCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+
+        Predicate<Delivery> filters = PREDICATE_SHOW_ALL_DELIVERIES;
+
 
         if (status != null) {
             // filter by status
-            model.updateFilteredDeliveryList(delivery -> delivery.getStatus().equals(status));
+            filters = filters.and(delivery -> delivery.getStatus().equals(status));
         }
 
-        // sort
-        model.sortFilteredDeliveryList(
-            sortType.equals(Sort.ASC) ? Comparator.comparing(Delivery::getName) : Comparator.comparing(
-                    Delivery::getName)
-                .reversed());
+        if (customerId != null) {
+            // filter by customer id
+            filters = filters.and(delivery -> delivery.getCustomer().getCustomerId() == customerId);
+        }
 
-        List<Delivery> deliveryList = model.getSortedDeliveryList();
+        if (deliveryDate != null) {
+            // filter by delivery date
+            filters = filters.and(delivery -> delivery.getDeliveryDate().equals(deliveryDate));
+        }
+
+        model.updateFilteredDeliveryList(filters);
+
+        // sort by delivery date
+        model.sortFilteredDeliveryList(
+            sortType.equals(Sort.ASC) ? Comparator.comparing(Delivery::getDeliveryDate) : Comparator.comparing(
+                    Delivery::getDeliveryDate)
+                .reversed());
 
         //TODO: UI
         return new CommandResult(MESSAGE_SUCCESS, true);
@@ -82,8 +95,21 @@ public class DeliveryListCommand extends DeliveryCommand {
             return false;
         }
 
-        DeliveryListCommand otherCommand = (DeliveryListCommand) other;
+        DeliveryListCommand otherDeliveryListCommand = (DeliveryListCommand) other;
 
-        return otherCommand.status == this.status && otherCommand.sortType.equals(this.sortType);
+        if (this.status != otherDeliveryListCommand.status) {
+            return false;
+        }
+
+        if (!Objects.equals(this.customerId, otherDeliveryListCommand.customerId)) {
+            return false;
+        }
+
+        if (this.deliveryDate != null && otherDeliveryListCommand.deliveryDate != null
+            && !this.deliveryDate.equals(otherDeliveryListCommand.deliveryDate)) {
+            return false;
+        }
+
+        return sortType.equals(otherDeliveryListCommand.sortType);
     }
 }
