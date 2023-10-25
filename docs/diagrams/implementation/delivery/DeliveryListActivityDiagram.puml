@@ -34,7 +34,7 @@ partition DeliveryListCommand {
         :Filter deliveries by date;
     endif
         : List deliveries filtered ;
-        : Sort by sort order;
+        : Sort by delivery date according to sort order;
         : Refresh Displayed Delivery List;
         : Return CommandResult;
 }

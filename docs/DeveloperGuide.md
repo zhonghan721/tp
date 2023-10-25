@@ -295,8 +295,7 @@ The format of the `delivery list` command can be found
 9. If the delivery date was provided, the delivery date is used to filter the current delivery list with the specified
    delivery date.
 10. If the sort was provided, the sort is used to sort the current delivery list. By default, the deliveries will be
-    sorted in the
-    order of their delivery date.
+    sorted in descending order of their delivery date.
 11. The list on the ui will be updated with the filtered and sorted deliveries.
 12. If the command completed successfully, a `CommandResult` object will be created, and returned.
 
@@ -324,8 +323,7 @@ The sequence of the `delivery list` command is as follows:
 8. If customer id is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)`
    to filter the delivery list by the specified customer id.
 9. If the sort is `asc`, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList(Comparator)` to sort the
-   delivery
-   list by delivery date in ascending order.
+   delivery list by delivery date in descending order.
 10. Else, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList()` to sort the delivery list by delivery
     date in descending order.
 11. It creates a new "CommandResult" with the result of the execution.
@@ -554,13 +552,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 - **Alternative 1 (current choice):** Saves the entire address book.
 
-  - Pros: Easy to implement.
-  - Cons: May have performance issues in terms of memory usage.
+    - Pros: Easy to implement.
+    - Cons: May have performance issues in terms of memory usage.
 
 - **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  - Pros: Will use less memory (e.g. for `delete`, just save the customer being deleted).
-  - Cons: We must ensure that the implementation of each individual command are correct.
+    - Pros: Will use less memory (e.g. for `delete`, just save the customer being deleted).
+    - Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -670,15 +668,15 @@ otherwise)
 
 - 3a. Unregistered owner does not enter one of the fields.
 
-  - 3a1. US requests unregistered owner to fill up all the required fields.
+    - 3a1. US requests unregistered owner to fill up all the required fields.
 
-    Use case ends.
+      Use case ends.
 
 - 3b. Unregistered owner types incorrect confirm password.
 
-  - 3b1. US requests unregistered owner to retype their confirm password.
+    - 3b1. US requests unregistered owner to retype their confirm password.
 
-    Use case ends.
+      Use case ends.
 
 ---
 
@@ -706,15 +704,15 @@ otherwise)
 
 - 3a. Registered owner does not enter one of the fields
 
-  - 3a1. US requests registered owner to fill up all the required fields
+    - 3a1. US requests registered owner to fill up all the required fields
 
-    Use case ends.
+      Use case ends.
 
 - 3b. Registered owner types incorrect password or username
 
-  - 3b1. US requests registered owner to retype their username or password
+    - 3b1. US requests registered owner to retype their username or password
 
-    Use case ends.
+      Use case ends.
 
 ---
 
@@ -746,46 +744,46 @@ otherwise)
 
 - 3a. Registered owner does not enter the username field.
 
-  - 3a1. US requests registered owner to fill up the username field.
+    - 3a1. US requests registered owner to fill up the username field.
 
-    Use case ends.
+      Use case ends.
 
 - 3b. Registered owner types incorrect username
 
-  - 3b1. US requests registered owner to retype their username
+    - 3b1. US requests registered owner to retype their username
 
-    Use case ends.
+      Use case ends.
 
 - 5a. Registered owner does not enter the answer field.
 
-  - 5a1. US requests registered owner to fill up the answer field.
+    - 5a1. US requests registered owner to fill up the answer field.
 
-    Use case ends.
+      Use case ends.
 
 - 5b. Registered owner types incorrect answer
 
-  - 5b1. US requests registered owner to retype their answer.
+    - 5b1. US requests registered owner to retype their answer.
 
-    Use case ends.
+      Use case ends.
 
 - 7a. Registered owner does not enter one of the password or confirm password fields.
 
-  - 7a1. US requests registered owner to fill up all the required fields
+    - 7a1. US requests registered owner to fill up all the required fields
 
-    Use case ends.
+      Use case ends.
 
 - 7b. Registered owner types incorrect confirm password.
 
-  - 7b1. US requests registered owner to retype their confirm password.
+    - 7b1. US requests registered owner to retype their confirm password.
 
-    Use case ends.
+      Use case ends.
 
 - \*a. At any time, registered owner can choose to cancel the forget password.
 
-  - \*a1. Registered owner types cancel.
-  - \*a2. US asks the registered owner to either login, forget password or register.
+    - \*a1. Registered owner types cancel.
+    - \*a2. US asks the registered owner to either login, forget password or register.
 
-    Use case ends.
+      Use case ends.
 
 ---
 
@@ -831,15 +829,15 @@ otherwise)
 
 - 1a. Logged-in owner does not enter one of the fields
 
-  - 1a1. US requests logged-in owner to fill up all the required fields
+    - 1a1. US requests logged-in owner to fill up all the required fields
 
-    Use case ends.
+      Use case ends.
 
 - 1b. Logged-in owner types incorrect confirm password
 
-  - 1b1. US requests logged-in owner to retype their confirm password
+    - 1b1. US requests logged-in owner to retype their confirm password
 
-    Use case ends.
+      Use case ends.
 
 ---
 
@@ -868,10 +866,10 @@ otherwise)
 
 - 3a. Logged-in owner cancels.
 
-  - 3a1. Logged-in owner cancels.
-  - 3a2. User system shows a cancellation message.
+    - 3a1. Logged-in owner cancels.
+    - 3a2. User system shows a cancellation message.
 
-    Use case ends.
+      Use case ends.
 
 ---
 
@@ -895,9 +893,9 @@ otherwise)
 
 - 1a. Logged-in Owner does not specify at least one updated field(s).
 
-  - 1a1. US requests Logged-in Owner to specify at least one updated field.
+    - 1a1. US requests Logged-in Owner to specify at least one updated field.
 
-    Use Case ends.
+      Use Case ends.
 
 ---
 
@@ -925,9 +923,9 @@ otherwise)
 
 - 1a. Logged-in Owner does not specify the required field(s)
 
-  - 1a1. CMS requests Logged-in Owner to key in all the fields required to create a customer.
+    - 1a1. CMS requests Logged-in Owner to key in all the fields required to create a customer.
 
-    Use Case ends.
+      Use Case ends.
 
 ---
 
@@ -954,15 +952,15 @@ otherwise)
 
 - 1a. Logged-in Owner does not specify the id.
 
-  - 1a1. CMS requests Logged-in Owner to key in an id.
+    - 1a1. CMS requests Logged-in Owner to key in an id.
 
-    Use Case ends.
+      Use Case ends.
 
 - 1b. Logged-in Owner specifies a customer id that does not exist.
 
-  - 1b1. CMS displays a message that customer id does not exist.
+    - 1b1. CMS displays a message that customer id does not exist.
 
-    Use Case ends.
+      Use Case ends.
 
 ---
 
@@ -1008,21 +1006,21 @@ otherwise)
 
 - 1a. Logged-in Owner does not include any keyword.
 
-  - 1a1. CMS requests Logged-in Owner to specify a keyword.
+    - 1a1. CMS requests Logged-in Owner to specify a keyword.
 
-    Use Case ends.
+      Use Case ends.
 
 - 1b. No customer with specified keyword is found.
 
-  - 1b1. CMS displays a message where no customers with the specified keyword is found.
+    - 1b1. CMS displays a message where no customers with the specified keyword is found.
 
-    Use Case ends.
+      Use Case ends.
 
 - 1c. There are no customers.
 
-  - 1c1. CMS displays a message where there are no customers at all.
+    - 1c1. CMS displays a message where there are no customers at all.
 
-    Use Case ends.
+      Use Case ends.
 
 ---
 
@@ -1049,21 +1047,21 @@ otherwise)
 
 - 1a. Logged-in Owner does not specify at least one updated field(s).
 
-  - 1a1. CMS displays an error to Logged-in Owner to specify at least one field to update.
+    - 1a1. CMS displays an error to Logged-in Owner to specify at least one field to update.
 
-    Use Case Ends.
+      Use Case Ends.
 
 - 1b. Logged-in Owner specifies invalid customer.
 
-  - 1b1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
+    - 1b1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
 
-    Use Case Ends.
+      Use Case Ends.
 
 - 1c. Logged-in Owner does not specify customer.
 
-  - 1c1. CMS displays an error to Logged-in Owner to specify a customer to update.
+    - 1c1. CMS displays an error to Logged-in Owner to specify a customer to update.
 
-    Use Case Ends.
+      Use Case Ends.
 
 ---
 
@@ -1090,15 +1088,15 @@ otherwise)
 
 - 1a. Logged-in Owner specifies invalid customer.
 
-  - 1a1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
+    - 1a1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
 
-    Use Case Ends.
+      Use Case Ends.
 
 - 1b. Logged-in Owner does not specify customer.
 
-  - 1b1. CMS displays an error to Logged-in Owner to specify a customer to update.
+    - 1b1. CMS displays an error to Logged-in Owner to specify a customer to update.
 
-    Use Case Ends.
+      Use Case Ends.
 
 ---
 
@@ -1125,15 +1123,15 @@ otherwise)
 
 - 1a. Logged -in Owner specifies optional sort field.
 
-  - 1a1. CMS shows list of all customers sorted by the specified sort order.
+    - 1a1. CMS shows list of all customers sorted by the specified sort order.
 
-    Use Case Ends.
+      Use Case Ends.
 
 - 1b. Logged-in Owner specifies invalid sort field.
 
-  - 1b1. CMS displays an error to Logged-in Owner to specify a valid sort option.
+    - 1b1. CMS displays an error to Logged-in Owner to specify a valid sort option.
 
-    Use Case Ends.
+      Use Case Ends.
 
 ---
 
@@ -1160,21 +1158,21 @@ otherwise)
 
 - 1a. Command has missing fields.
 
-  - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
-    Use Case Ends.
+      Use Case Ends.
 
 - 1b. Command has invalid date.
 
-  - 1b1. DMS displays an error to Logged-in Owner that an invalid date was given.
+    - 1b1. DMS displays an error to Logged-in Owner that an invalid date was given.
 
-    Use Case Ends.
+      Use Case Ends.
 
 - 1c. Command has invalid date format.
 
-  - 1c1. DMS displays an error to Logged-in Owner to specify the date in a valid format.
+    - 1c1. DMS displays an error to Logged-in Owner to specify the date in a valid format.
 
-    Use Case Ends.
+      Use Case Ends.
 
 ---
 
@@ -1201,9 +1199,9 @@ otherwise)
 
 - 1a. Command has missing fields.
 
-  - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
-    Use Case Ends.
+      Use Case Ends.
 
 ---
 
@@ -1229,21 +1227,21 @@ otherwise)
 
 - 1a. User specifies status field in command.
 
-  - 1a1. DMS display a list of deliveries filtered by the specified status.
+    - 1a1. DMS display a list of deliveries filtered by the specified status.
 
-    Use Case Ends.
+      Use Case Ends.
 
 - 1b. User specifies sort field in command.
 
-  - 1b1. DMS displays a list of all deliveries sorted by the specified sort order.
+    - 1b1. DMS displays a list of all deliveries sorted by the specified sort order.
 
-    Use Case Ends.
+      Use Case Ends.
 
 - 1c. User Specifies both status and sort fields.
 
-  - 1c1. DMS displays a list of deliveries filtered by the specified status and sorted by the specified sort order.
+    - 1c1. DMS displays a list of deliveries filtered by the specified status and sorted by the specified sort order.
 
-    Use Case Ends.
+      Use Case Ends.
 
 ---
 
@@ -1269,9 +1267,9 @@ otherwise)
 
 - 1a. Command has missing fields.
 
-  - 1a1. DMS displays an error to Logged-in Owner.
+    - 1a1. DMS displays an error to Logged-in Owner.
 
-    Use Case Ends.
+      Use Case Ends.
 
 ---
 
@@ -1297,15 +1295,15 @@ otherwise)
 
 - 1a. Command has missing fields.
 
-  - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
-    Use Case Ends.
+      Use Case Ends.
 
 - 1b. Command has invalid customer details.
 
-  - 1b1. DMS displays an error to Logged-in Owner that the specified customer details is invalid.
+    - 1b1. DMS displays an error to Logged-in Owner that the specified customer details is invalid.
 
-    Use Case Ends.
+      Use Case Ends.
 
 ---
 
@@ -1331,15 +1329,15 @@ otherwise)
 
 - 1a. Command has missing fields.
 
-  - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
-    Use Case Ends.
+      Use Case Ends.
 
 - 1b. Command has invalid customer details.
 
-  - 1b1. DMS displays an error to Logged-in Owner that the specified customer cannot be found.
+    - 1b1. DMS displays an error to Logged-in Owner that the specified customer cannot be found.
 
-    Use Case Ends.
+      Use Case Ends.
 
 ---
 
@@ -1365,15 +1363,15 @@ otherwise)
 
 - 1a. Command has missing fields.
 
-  - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
-    Use Case Ends.
+      Use Case Ends.
 
 - 1b. Command has invalid delivery options.
 
-  - 1b1. DMS displays an error to Logged-in Owner that the specified delivery method is invalid.
+    - 1b1. DMS displays an error to Logged-in Owner that the specified delivery method is invalid.
 
-    Use Case Ends.
+      Use Case Ends.
 
 ---
 
@@ -1399,9 +1397,9 @@ otherwise)
 
 - 1a. Command has missing fields.
 
-  - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
-    Use Case Ends.
+      Use Case Ends.
 
 ---
 
@@ -1428,15 +1426,15 @@ otherwise)
 
 - 1a. Logged-in owner did not specify the delivery id.
 
-  - 1a1. DMS informs the logged-in owner of the missing field.
+    - 1a1. DMS informs the logged-in owner of the missing field.
 
-    Use case ends.
+      Use case ends.
 
 - 1b. Logged-in owner specified a delivery id that does not exist.
 
-  - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+    - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
 
-    Use case ends.
+      Use case ends.
 
 ---
 
@@ -1463,15 +1461,15 @@ otherwise)
 
 - 1a. Logged-in owner did not specify the delivery id.
 
-  - 1a1. DMS informs the logged-in owner of the missing field.
+    - 1a1. DMS informs the logged-in owner of the missing field.
 
-    Use case ends.
+      Use case ends.
 
 - 1b. Logged-in owner specified a delivery id that does not exist.
 
-  - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+    - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
 
-    Use case ends.
+      Use case ends.
 
 ---
 
@@ -1498,21 +1496,21 @@ otherwise)
 
 - 1a. Logged-in owner did not specify the delivery id.
 
-  - 1a1. DMS informs the logged-in owner of the missing field.
+    - 1a1. DMS informs the logged-in owner of the missing field.
 
-    Use case ends.
+      Use case ends.
 
 - 1b. Logged-in owner specified a delivery id that does not exist.
 
-  - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+    - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
 
-    Use case ends.
+      Use case ends.
 
 - 1c. DMS detects that the specified delivery id is already marked as completed/pending.
 
-  - 1c1. DMS informs the logged-in owner that the delivery is already marked as completed/pending.
+    - 1c1. DMS informs the logged-in owner that the delivery is already marked as completed/pending.
 
-    Use case ends
+      Use case ends
 
 ---
 
@@ -1539,21 +1537,21 @@ otherwise)
 
 - 1a. Logged-in owner did not specify all the fields.
 
-  - 1a1. DMS informs the logged-in owner to specify all the fields.
+    - 1a1. DMS informs the logged-in owner to specify all the fields.
 
-    Use case ends.
+      Use case ends.
 
 - 1b. Logged-in owner specified a delivery id that does not exist.
 
-  - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+    - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
 
-    Use case ends.
+      Use case ends.
 
 - 1c. Logged-in owner entered date in the wrong format.
 
-  - 1c1. DMS informs the logged-in owner of invalid format and shows the correct format.
+    - 1c1. DMS informs the logged-in owner of invalid format and shows the correct format.
 
-    Use case ends
+      Use case ends
 
 ---
 
@@ -1580,21 +1578,21 @@ otherwise)
 
 - 1a. Logged-in owner did not specify the delivery id.
 
-  - 1a1. DMS informs the logged-in owner of the missing field.
+    - 1a1. DMS informs the logged-in owner of the missing field.
 
-    Use case ends.
+      Use case ends.
 
 - 1b. Logged-in owner specified a delivery id that does not exist.
 
-  - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+    - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
 
-    Use case ends.
+      Use case ends.
 
 - 1c. Logged-in owner specified a delivery that is in-progress.
 
-  - 1c1. DMS informs the logged-in owner of the status of the delivery and does not delete it.
+    - 1c1. DMS informs the logged-in owner of the status of the delivery and does not delete it.
 
-    Use case ends
+      Use case ends
 
 ---
 
@@ -1602,16 +1600,16 @@ otherwise)
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to
-   1. 1000 customers without a noticeable sluggishness in performance for typical usage.
-   2. 1000 deliveries without a noticeable sluggishness in performance for typical usage.
+    1. 1000 customers without a noticeable sluggishness in performance for typical usage.
+    2. 1000 deliveries without a noticeable sluggishness in performance for typical usage.
 3. The system should be easily picked up by a novice with no experience with delivery management software.
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
 5. Data stored should be persistent until removal by user, and Private Contact Details should be secure.
 6. The project is expected to adhere to a schedule which delivers a feature set every milestone up to _V1.3_
 7. The application is not expected to
-   1. Perform Inventory Management
-   2. Perform Route Planning
+    1. Perform Inventory Management
+    2. Perform Route Planning
 
 _{More to be added}_
 
@@ -1639,17 +1637,17 @@ testers are expected to do more _exploratory_ testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
-      optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
+       optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-      Expected: The most recent window size and location is retained.
+    1. Re-launch the app by double-clicking the jar file.<br>
+       Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
 
@@ -1657,17 +1655,17 @@ testers are expected to do more _exploratory_ testing.
 
 1. Deleting a customer while all customers are being shown
 
-   1. Prerequisites: List all customers using the `list` command. Multiple customers in the list.
+    1. Prerequisites: List all customers using the `list` command. Multiple customers in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-      Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+       Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -1675,6 +1673,6 @@ testers are expected to do more _exploratory_ testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
