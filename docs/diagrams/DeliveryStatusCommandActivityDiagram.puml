@@ -7,16 +7,16 @@ skinparam ArrowFontSize 12
 start
 :User enters <i>delivery status</i> command;
 partition DeliveryStatusCommandParser {
-    if (Check Arguments Valid) then ([Empty arguments provided])
+    if () then ([Empty arguments provided])
         :ParseException: Invalid Command Format;
         stop
-    elseif (Regex Match) then ([Not Number and Word Provided])
+    elseif () then ([Not Number and Word Provided])
         :ParseException: Invalid Command Format;
         stop
-    elseif (Parse Status) then ([Invalid DeliveryStatus])
+    elseif () then ([Invalid DeliveryStatus])
         :ParseException: Invalid Delivery Status;
         stop
-    elseif (Parse ID) then ([Valid ID])
+    elseif () then ([Invalid ID])
         :ParseException: Invalid Delivery ID;
          stop
     else ([Valid ID and Status Provided])
@@ -25,10 +25,10 @@ partition DeliveryStatusCommandParser {
 }
 
 partition DeliveryStatusCommand {
-    if (User Logged in?) then ([Not Logged In])
+    if () then ([User Not Logged In])
         :CommandException: User Not Authenticated;
         stop
-    elseif (Delivery ID Exists) then ([Delivery not Found)
+    elseif () then ([Delivery ID Not Found])
         :CommandException: Invalid Delivery;
         stop
     else ()
