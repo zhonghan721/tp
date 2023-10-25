@@ -101,7 +101,8 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**
+API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -142,7 +143,8 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**
+API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -170,7 +172,8 @@ each `Person` needing their own `Tag` objects.<br>
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**
+API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -193,20 +196,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### User Login Command
 
 **Overview:**
@@ -223,9 +212,9 @@ The format for the `login` command can be found [here](UserGuide.md#login).
 3. If invalid command parameters are provided, an error message with the correct parameter format will be shown.
 4. If the user is currently logged in, an error message will be shown.
 5. The `User` is then cross-referenced with the stored user in `Model` to check if the credentials match.
-If incorrect credentials are provided, an error message regarding wrong credentials will be shown.
-6. If all the previous steps are completed without exceptions, the user will be logged in and the 
-`isLoggedIn` status in `Model` will be updated to `true`.
+   If incorrect credentials are provided, an error message regarding wrong credentials will be shown.
+6. If all the previous steps are completed without exceptions, the user will be logged in and the
+   `isLoggedIn` status in `Model` will be updated to `true`.
 
 The following activity diagram shows the logic of a user logging in:
 
@@ -233,15 +222,15 @@ The following activity diagram shows the logic of a user logging in:
 
 The sequence of the `login` command is as follows:
 
-1. Upon launching the application, the `ModelManager` will be initialized with 
-the `User` constructed with details from the authentication.json file.
+1. Upon launching the application, the `ModelManager` will be initialized with
+   the `User` constructed with details from the authentication.json file.
 2. The user inputs the `login` command with the username and password.
 3. The `userLoginCommandParser` checks whether all the required fields are present.
-If all fields are present, it creates a new `userLoginCommand`.
-4. The `userLoginCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`. 
+   If all fields are present, it creates a new `userLoginCommand`.
+4. The `userLoginCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`.
 5. The `userLoginCommand` then checks if the user credentials match the stored user by calling `Model#userMatches()`.
 6. If the user is not logged in and the credentials match, the `userLoginCommand` calls `Model#setLoginSuccess()`,
-changing the login status to true and enabling the user access to all commands.
+   changing the login status to true and enabling the user access to all commands.
 7. The `userLoginCommand` also calls `Model#updateFilteredPersonList()` to display the list of customers.
 
 The following sequence diagram shows how the `login` command works:
@@ -253,7 +242,7 @@ The following sequence diagram shows how the `login` command works:
 **Overview:**
 
 The `logout` command is used to log out from the user's account.
-Once logged out, the user will have no access to all the commands available, except for `help`, `exit`, 
+Once logged out, the user will have no access to all the commands available, except for `help`, `exit`,
 `register`, `login` and `delete account`.
 
 The format for the `logout` command can be found [here](UserGuide.md#logout).
@@ -263,8 +252,8 @@ The format for the `logout` command can be found [here](UserGuide.md#logout).
 1. The user executes the `logout` command.
 2. If extra command parameters are provided after specifying `logout`, the logout command will still be executed.
 3. If the user is currently logged out, an error message will be shown.
-4. If all the previous steps are completed without exceptions, the user will be logged out and the 
-`isLoggedIn` status in `Model` will be updated to `false`.
+4. If all the previous steps are completed without exceptions, the user will be logged out and the
+   `isLoggedIn` status in `Model` will be updated to `false`.
 
 The following activity diagram shows the logic of a user logging out:
 
@@ -274,7 +263,7 @@ The sequence of the `logout` command is as follows:
 
 1. The user inputs the `logout` command.
 2. A new `userLogoutCommand` is created and checks whether the user is currently logged out
-by calling `Model#getUserLoginStatus()`.
+   by calling `Model#getUserLoginStatus()`.
 3. If the user is currently logged in, the `userLogoutCommand` calls `Model#setLogoutSuccess()`,
    changing the login status to false and restricting the user access to most commands.
 4. The `userLoginCommand` also calls `Model#updateFilteredPersonList()` to hide the list of customers.
@@ -282,7 +271,6 @@ by calling `Model#getUserLoginStatus()`.
 The following sequence diagram shows how the `login` command works:
 
 <puml src="diagrams/UserLogoutSequenceDiagram.puml" alt="UserLogoutSequenceDiagram" />
-
 
 ### \[Proposed\] Undo/redo feature
 
@@ -1032,7 +1020,7 @@ otherwise)
 **MSS:**
 
 1. Logged-in Owner types command to view a list of deliveries.
-2. DMS displays a list of all deliveries sorted by delivery date.
+2. DMS displays a list of all deliveries sorted in descending delivery date.
 
    Use Case Ends.
 
@@ -1043,17 +1031,41 @@ otherwise)
 
       Use Case Ends.
 
-* 1b. User specifies sort field in command.
+* 1b. User specifies customer field in command.
+    * 1b1. DMS displays a list of deliveries filtered by the specified customer.
+
+      Use Case Ends.
+
+* 1c. User specifies delivery date field in command.
+    * 1c1. DMS displays a list of deliveries filtered by the specified delivery date.
+
+      Use Case Ends.
+
+* 1d. User specifies both status and customer fields.
+    * 1c1. DMS displays a list of deliveries filtered by the specified status and customer.
+
+      Use Case Ends.
+
+* 1e. User specifies both status and delivery date fields.
+    * 1e1. DMS displays a list of deliveries filtered by the specified status and delivery date.
+
+      Use Case Ends.
+
+* 1f. User specifies both customer and delivery date fields.
+    * 1f1. DMS displays a list of deliveries filtered by the specified customer and delivery date.
+
+      Use Case Ends.
+
+* 1g. User specifies sort field in command.
     * 1b1. DMS displays a list of all deliveries sorted by the specified sort order.
 
       Use Case Ends.
 
-* 1c. User Specifies both status and sort fields.
-    * 1c1. DMS displays a list of deliveries filtered by the specified status and sorted by the specified sort order.
+* 1h. User Specifies both filter fields and sort fields.
+    * 1c1. DMS displays a list of deliveries filtered by the specified filters and then delivery date sorted by the
+      specified sort order.
 
-      Use Case Ends.
-
----
+      Use Case Ends.---
 
 #### **Use case:** UC18 - Delivery List for the Day
 
