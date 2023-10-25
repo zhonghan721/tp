@@ -36,7 +36,8 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class CustomerEditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
+    private Model model = new ModelManager(getTypicalAddressBook(),
+            getTypicalDeliveryBook(), new UserPrefs(), true);
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -64,8 +65,9 @@ public class CustomerEditCommandTest {
         Customer editedCustomer = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withTags(VALID_TAG_HUSBAND).build();
 
-        CustomerEditCommand.CustomerEditDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-            .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        CustomerEditCommand.CustomerEditDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         CustomerEditCommand editCommand = new CustomerEditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
@@ -185,7 +187,8 @@ public class CustomerEditCommandTest {
         // customerId = 1
         Index indexLastPerson = Index.fromOneBased(1);
 
-        CustomerEditCommand.CustomerEditDescriptor descriptor = new EditPersonDescriptorBuilder().withCustomerId(1).withName(VALID_NAME_BOB)
+        CustomerEditCommand.CustomerEditDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withCustomerId(1).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).build();
         CustomerEditCommand editCommand = new CustomerEditCommand(indexLastPerson, descriptor);
 
@@ -207,7 +210,7 @@ public class CustomerEditCommandTest {
         final CustomerEditCommand standardCommand = new CustomerEditCommand(INDEX_FIRST_PERSON, DESC_AMY);
 
         // same values -> returns true
-        CustomerEditCommand.CustomerEditDescriptor copyDescriptor = new CustomerEditCommand.CustomerEditDescriptor(DESC_AMY);
+        CustomerEditDescriptor copyDescriptor = new CustomerEditDescriptor(DESC_AMY);
         CustomerEditCommand commandWithSameValues = new CustomerEditCommand(INDEX_FIRST_PERSON, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -230,7 +233,7 @@ public class CustomerEditCommandTest {
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        CustomerEditCommand.CustomerEditDescriptor customerEditDescriptor = new CustomerEditCommand.CustomerEditDescriptor();
+        CustomerEditDescriptor customerEditDescriptor = new CustomerEditDescriptor();
         CustomerEditCommand editCommand = new CustomerEditCommand(index, customerEditDescriptor);
         String expected = CustomerEditCommand.class.getCanonicalName() + "{index=" + index + ", customerEditDescriptor="
             + customerEditDescriptor + "}";

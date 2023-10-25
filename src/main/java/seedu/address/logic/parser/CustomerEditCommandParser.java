@@ -15,6 +15,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
+import seedu.address.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
@@ -44,7 +45,7 @@ public class CustomerEditCommandParser implements Parser<CustomerEditCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
-        CustomerEditCommand.CustomerEditDescriptor customerEditDescriptor = new CustomerEditCommand.CustomerEditDescriptor();
+        CustomerEditDescriptor customerEditDescriptor = new CustomerEditDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             customerEditDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
