@@ -6,10 +6,12 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DATE_3;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VIEW_CUSTOMER_ID_1;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SECRET_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.GABRIELS_MILK;
@@ -25,7 +27,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.customer.AddCommand;
+import seedu.address.logic.commands.customer.CustomerAddCommand;
 import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
@@ -36,6 +38,8 @@ import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
 import seedu.address.logic.commands.delivery.DeliveryDeleteCommand;
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
 import seedu.address.logic.commands.delivery.DeliveryViewCommand;
+import seedu.address.logic.commands.user.UserLoginCommand;
+import seedu.address.logic.commands.user.UserLogoutCommand;
 import seedu.address.logic.commands.user.UserRegisterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Delivery;
@@ -55,10 +59,10 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_customerAdd() throws Exception {
         Customer customer = new PersonBuilder().withCustomerId(Customer.getCustomerCount()).build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(customer));
-        assertEquals(new AddCommand(customer), command);
+        CustomerAddCommand command = (CustomerAddCommand) parser.parseCommand(PersonUtil.getAddCommand(customer));
+        assertEquals(new CustomerAddCommand(customer), command);
     }
 
     @Test
@@ -75,7 +79,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
+    public void parseCommand_customerDelete() throws Exception {
         CustomerDeleteCommand command = (CustomerDeleteCommand) parser.parseCommand(
                 CustomerDeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new CustomerDeleteCommand(INDEX_FIRST_PERSON), command);
@@ -85,7 +89,7 @@ public class AddressBookParserTest {
     public void parseCommand_deliveryStatus() throws Exception {
         DeliveryStatusCommand command = (DeliveryStatusCommand) parser.parseCommand(
                 DeliveryStatusCommand.COMMAND_WORD + " "
-                        + DeliveryStatus.COMPLETED + " " + GABRIELS_MILK.getDeliveryId());
+                        + GABRIELS_MILK.getDeliveryId() + " " + DeliveryStatus.COMPLETED);
         assertEquals(new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(), DeliveryStatus.COMPLETED), command);
     }
 
@@ -97,7 +101,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_customerEdit() throws Exception {
         Customer customer = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(customer).build();
         CustomerEditCommand command = (CustomerEditCommand) parser.parseCommand(CustomerEditCommand.COMMAND_WORD + " "
@@ -129,6 +133,7 @@ public class AddressBookParserTest {
 
 
     }
+
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
@@ -179,7 +184,21 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(UserRegisterCommand.COMMAND_WORD + " "
                 + PREFIX_USER + " username "
                 + PREFIX_PASSWORD + " password "
-                + PREFIX_PASSWORD_CONFIRM + " password") instanceof UserRegisterCommand);
+                + PREFIX_PASSWORD_CONFIRM + " password "
+                + PREFIX_SECRET_QUESTION + " secret question "
+                + PREFIX_ANSWER + " answer") instanceof UserRegisterCommand);
     }
 
+    @Test
+    public void parseCommand_userLogin() throws Exception {
+        assertTrue(parser.parseCommand(UserLoginCommand.COMMAND_WORD + " "
+                + PREFIX_USER + " username "
+                + PREFIX_PASSWORD + " password ") instanceof UserLoginCommand);
+    }
+
+    @Test
+    public void parseCommand_userLogout() throws Exception {
+        assertTrue(parser.parseCommand(UserLogoutCommand.COMMAND_WORD) instanceof UserLogoutCommand);
+        assertTrue(parser.parseCommand(UserLogoutCommand.COMMAND_WORD + " abc") instanceof UserLogoutCommand);
+    }
 }

@@ -1,8 +1,10 @@
 package seedu.address.logic.commands.user;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SECRET_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
@@ -21,11 +23,14 @@ public class UserRegisterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Register an account for HomeBoss.\n"
             + "Parameters: "
-            + PREFIX_USER + " " + PREFIX_PASSWORD + " " + PREFIX_PASSWORD_CONFIRM + "\n"
+            + PREFIX_USER + " " + PREFIX_PASSWORD + " " + PREFIX_PASSWORD_CONFIRM
+            + " " + PREFIX_SECRET_QUESTION + " " + PREFIX_ANSWER + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USER + " yourUsername "
             + PREFIX_PASSWORD + " yourPassword "
-            + PREFIX_PASSWORD_CONFIRM + " yourPassword";
+            + PREFIX_PASSWORD_CONFIRM + " yourPassword"
+            + PREFIX_SECRET_QUESTION + " yourSecretQuestion "
+            + PREFIX_ANSWER + " yourAnswer";
     public static final String MESSAGE_SUCCESS = "Registration successful. Welcome to HomeBoss!";
     public static final String MESSAGE_PASSWORD_MISMATCH = "Passwords do not match. Please try again.";
     public static final String MESSAGE_ALREADY_HAVE_ACCOUNT = "You have an account already with username %s. ";
