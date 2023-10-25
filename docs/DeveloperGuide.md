@@ -213,7 +213,7 @@ The format of the `delivery note` command can be found
 4. If the user is not logged in during command execution, a `CommandException` will be thrown.
 5. The number provided is used to fetch the associated `Delivery` from `Model` if it exists. If the provided
    number does not match any of the IDs of the `Delivery`s stored in `Model`, a `CommandException` is thrown.
-6. If the command completed successfully, the selected `Delivery` will be replaced by an identical `Delivery`
+6. If the command completes successfully, the selected `Delivery` will be replaced by an identical `Delivery`
    (i.e. all field are the same) except for a modified `Note`.
 
 The following activity diagram illustrates the logic of creating a `Note` for a `Delivery`
@@ -232,8 +232,8 @@ The sequence of the `delivery note` command is as follows:
    with the parsed `DELIVERY_ID` and `Note`
 5. `LogicManager` calls `DeliveryCreateNoteCommand#execute()`, first checking if the user is logged in by calling
    `Model#getUserLoginStatus()`
-6. It thens attempt to fetch the `Delivery` with the specified `DELIVERY_ID`, and replaces that `Delivery` using
-   `Model#setDelivery()` with a newly created `Delivery` with identical fields except for its status which is
+6. It then attempts to fetch the `Delivery` with the specified `DELIVERY_ID`, and replaces that `Delivery` using
+   `Model#setDelivery()` with a newly created `Delivery` with identical fields except for its note which is
    the updated `Note`
 7. It creates and returns a new `CommandResult` with the result of the execution
 
