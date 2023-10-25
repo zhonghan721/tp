@@ -180,13 +180,9 @@ _NIL_
 
 **Command succeeds (>0 customers):**
 
-_Here is the list of customers:_
+![](images/customer/customer_list.png)
 
-1. _Benjamin, Phone: 9898 2323, Email: benjaminCSGod@gmail.com, Address: Carnegie Mellon University, South Block._
-2. _Gambe, Phone: 9797 1313, Email: gambeRizzLord@gmail.com, Address: Kent Ridge Hall_
-3. _Gabriel, Phone: 9090 9241, Email: gabrielSoCool@gmail.com, Address: RVRC Tower Block_
-
-**Command succeeds (0 customer):** _There are no customers added yet!_
+**Command succeeds (0 customer):** _There are currently no customers!_
 
 ### Sort the list of customers `[Coming Soon in v1.3]`
 
