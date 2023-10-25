@@ -19,6 +19,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_NOTE = new Prefix("--note");
     public static final Prefix PREFIX_SORT = new Prefix("--sort");
     public static final Prefix PREFIX_STATUS = new Prefix("--status");
+    public static final Prefix PREFIX_SECRET_QUESTION = new Prefix("--secretQn");
+    public static final Prefix PREFIX_ANSWER = new Prefix("--answer");
 
     @Deprecated
     public static final Prefix PREFIX_TAG = new Prefix("--tag");
