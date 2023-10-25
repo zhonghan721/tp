@@ -14,6 +14,9 @@ public class User {
     // Identity fields
     private final Username username;
     private final Password hashedPassword;
+    // only stored user will have secret question and answer
+    private String secretQuestion;
+    private String answer;
 
 
     /**
@@ -28,6 +31,7 @@ public class User {
 
     /**
      * Overloaded constructor for creating a new user with a hashed password
+     *
      * @param isHashed indicates whether the password is hashed
      */
     public User(Username username, Password password, boolean isHashed) {
@@ -37,8 +41,23 @@ public class User {
     }
 
     /**
+     * Constructor used for initialising a user with a secret question and answer
+     *
+     * @param secretQuestion String representing the secret question
+     * @param answer         String representing the answer to the secret question
+     */
+    public User(Username username, Password password, boolean isHashed, String secretQuestion, String answer) {
+        requireAllNonNull(username, password);
+        this.username = username;
+        this.hashedPassword = isHashed ? password : new Password(password.toString());
+        this.secretQuestion = secretQuestion;
+        this.answer = answer;
+    }
+
+    /**
      * Returns the username of the user.
-     * @return username
+     *
+     * @return username Username object
      */
     public Username getUsername() {
         return username;
@@ -46,10 +65,29 @@ public class User {
 
     /**
      * Returns the password of the user.
-     * @return
+     *
+     * @return password Password object
      */
     public Password getPassword() {
         return hashedPassword;
+    }
+
+    /**
+     * Returns the secret question of the user.
+     *
+     * @return String representing the secret question
+     */
+    public String getSecretQuestion() {
+        return secretQuestion;
+    }
+
+    /**
+     * Returns the answer to the secret question of the user.
+     *
+     * @return String representing the answer to the secret question
+     */
+    public String getAnswer() {
+        return answer;
     }
 
     /**
@@ -61,7 +99,7 @@ public class User {
         }
 
         return otherUser != null
-            && otherUser.getUsername().equals(getUsername());
+                && otherUser.getUsername().equals(getUsername());
     }
 
     /**
@@ -78,9 +116,10 @@ public class User {
             return false;
         }
 
+        // ignore secret question and answer
         User otherUser = (User) other;
         return username.equals(otherUser.username)
-            && hashedPassword.equals(otherUser.hashedPassword);
+                && hashedPassword.equals(otherUser.hashedPassword);
     }
 
     @Override
@@ -93,8 +132,8 @@ public class User {
     public String toString() {
         // does not show password for security reason
         return new ToStringBuilder(this)
-            .add("userName", username)
-            .toString();
+                .add("userName", username)
+                .toString();
     }
 
 }
