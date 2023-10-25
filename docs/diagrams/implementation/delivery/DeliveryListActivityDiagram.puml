@@ -28,12 +28,14 @@ partition DeliveryListCommand {
 
     if (Check status present) then ([Status Provided])
         :Filter deliveries by status;
-    elseif (Check customer id present) then ([Customer ID Provided])
+    endif
+
+    if (Check customer id present) then ([Customer ID Provided])
         :Filter deliveries by customer id;
-    elseif (Check data present) then ([Data Provided])
+    endif
+    if (Check date present) then ([date Provided])
         :Filter deliveries by date;
     endif
-        : List deliveries filtered ;
         : Sort by delivery date according to sort order;
         : Refresh Displayed Delivery List;
         : Return CommandResult;
