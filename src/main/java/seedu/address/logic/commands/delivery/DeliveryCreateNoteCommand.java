@@ -63,7 +63,7 @@ public class DeliveryCreateNoteCommand extends Command {
         }
 
         // Find Delivery
-        Optional<Delivery> targetDelivery = model.getDeliveryBook().getById(targetId);
+        Optional<Delivery> targetDelivery = model.getDelivery(targetId);
 
         if (targetDelivery.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
