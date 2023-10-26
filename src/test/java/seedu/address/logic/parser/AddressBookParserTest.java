@@ -31,10 +31,12 @@ import seedu.address.logic.commands.customer.CustomerAddCommand;
 import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.customer.CustomerListCommand;
+import seedu.address.logic.commands.customer.CustomerViewCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
 import seedu.address.logic.commands.delivery.DeliveryDeleteCommand;
+import seedu.address.logic.commands.delivery.DeliveryFindCommand;
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
 import seedu.address.logic.commands.delivery.DeliveryViewCommand;
 import seedu.address.logic.commands.user.UserLoginCommand;
@@ -42,6 +44,7 @@ import seedu.address.logic.commands.user.UserLogoutCommand;
 import seedu.address.logic.commands.user.UserRegisterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.person.Customer;
@@ -83,6 +86,14 @@ public class AddressBookParserTest {
                 CustomerDeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new CustomerDeleteCommand(INDEX_FIRST_PERSON), command);
     }
+
+    @Test
+    public void parseCommand_customerView() throws Exception {
+        CustomerViewCommand command = (CustomerViewCommand) parser.parseCommand(
+            CustomerViewCommand.COMMAND_WORD + " " + VALID_VIEW_CUSTOMER_ID_1);
+        assertEquals(new CustomerViewCommand(Integer.parseInt(VALID_VIEW_CUSTOMER_ID_1)), command);
+    }
+
 
     @Test
     public void parseCommand_deliveryStatus() throws Exception {
@@ -131,6 +142,15 @@ public class AddressBookParserTest {
         assertEquals(new DeliveryAddCommand(validDeliveryAddDescriptor), command);
 
 
+    }
+
+    @Test
+    public void parseCommand_deliveryFind() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        DeliveryFindCommand command = (DeliveryFindCommand) parser.parseCommand(
+            DeliveryFindCommand.COMMAND_WORD
+                + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new DeliveryFindCommand(new DeliveryNameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
