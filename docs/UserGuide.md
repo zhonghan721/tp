@@ -9,11 +9,10 @@ your operations. Within these pages, you'll find detailed coverage of the follow
     - User
         - Register
         - Login
-        - Forget password [Coming Soon]
+        - Update details
         - Logout
-        - Change password [Coming Soon]
-        - Update user details [Coming Soon]
-        - Delete account [Coming Soon]
+        - Account recovery
+        - Account deletion
     - Customer
         - Add customer
         - Search for a customer [Coming Soon]
@@ -27,7 +26,7 @@ your operations. Within these pages, you'll find detailed coverage of the follow
         - View details of deliveries
         - Update delivery status and date
         - Delete delivery
-        - Create a note for a delivery [Coming Soon]
+        - Create a note for a delivery
         - View deliveries for the day [Coming Soon]
         - Add customer data to delivery [Coming Soon]
         - Remove customer from delivery [Coming Soon]
@@ -47,23 +46,30 @@ the instructions in the Getting Started Guide to start using the software.
 
 ### Register
 
-**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD`
+**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
 
-**Example:** `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat`
+**Example:** `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko`
 
 **Accepted Values:**
 
-_USERNAME:_ String
+_USERNAME:_ String, consisting of only alphanumeric characters
 
-_PASSWORD:_ String
+_PASSWORD:_ String, consisting of at least 8 alphanumeric characters
 
-_CONFIRM PASSWORD:_ String that is the same as _PASSWORD_.
+_CONFIRM\_PASSWORD:_ String that is the same as _PASSWORD_
 
-**Command succeeds:** _Register successful._
+_SECRET\_QUESTION:_ String
+
+_ANSWER:_ String, not case sensitive
+
+**Command succeeds:** _Registration successful._
 
 **Command fails (missing fields):** _Please fill up all the required fields._
 
 **Command fails (password does not match):** _Passwords do not match. Try again._
+
+**Command fails (missing secret question and answer):** _Please key in a secret question and answer for account
+recovery. Try again._
 
 ### Login
 
@@ -73,9 +79,9 @@ _CONFIRM PASSWORD:_ String that is the same as _PASSWORD_.
 
 **Accepted Values:**
 
-_USERNAME:_ String
+_USERNAME:_ String, consisting of only alphanumeric characters
 
-_PASSWORD:_ String
+_PASSWORD:_ String, consisting of at least 8 alphanumeric characters
 
 **Command succeeds:** _Log in successful._
 
@@ -83,9 +89,42 @@ _PASSWORD:_ String
 
 **Command fails (wrong login credentials):** _Wrong username and/or password. Try again._
 
-### Forget Password `[Coming Soon in v1.3]`
+### Update details
 
-_Details coming soon..._
+**Format:** `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD]
+[--secretQn SECRET_QUESTION --answer ANSWER]`
+
+**Example:** `login --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest
+--secretQn Favourite Pet --answer BoBo`
+
+**Accepted Values:**
+
+_USERNAME:_ String, consisting of only alphanumeric characters
+
+_PASSWORD:_ String, consisting of at least 8 alphanumeric characters
+
+_CONFIRM\_PASSWORD:_ String that is the same as _PASSWORD_
+
+_SECRET\_QUESTION:_ String
+
+_ANSWER:_ String
+
+*At least one of the optional fields must be provided.
+If PASSWORD is provided, CONFIRM_PASSWORD must also be provided, vice versa.
+If SECRET_QUESTION is provided, ANSWER must also be provided, vice versa.
+The details will be updated without checking against the current details.
+
+**Command succeeds:** _Update successful._
+
+**Command fails (missing fields):** _Please provide at least one field to update!_
+
+**Command fails (passwords do not match):** _Passwords do not match. Try again._
+
+**Command fails (only one of password/confirm password is provided):**
+_Password and Confirm Password have to be either all present or all absent. Try again._
+
+**Command fails (only one of secret question/answer is provided):**
+_Secret Question and Answer have to be either all present or all absent. Try again._
 
 ### Logout
 
@@ -93,19 +132,43 @@ _Details coming soon..._
 
 **Example:** `logout`
 
-**Command succeeds:** _Logout successful._
+### Account Recovery
 
-### Change Password `[Coming Soon in v1.3]`
+**Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`
 
-_Details coming soon..._
+**Example 1:** `recover account`</br>
+**Example 2:** `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`</br>
 
-### Update details `[Coming Soon in v1.3]`
+**Accepted Values:**
 
-_Details coming soon..._
+_ANSWER:_ String, not case sensitive
 
-### Delete Account `[Coming Soon in v1.3]`
+_NEW\_PASSWORD:_ String
 
-_Details coming soon..._
+_CONFIRM\_PASSWORD:_ String that is the same as _NEW\_PASSWORD_
+
+*`--answer`, `--password`, and `--confirmPass` flags have to be either all present or all absent.
+
+**Command succeeds (without flags):** _Your secret question is: \<previously stored secret qn\>._
+
+**Command succeeds (with flags):** _Your account has been recovered successfully. Welcome back to HomeBoss._
+
+**Command fails (missing fields):** _Please fill up all the required fields._
+
+**Command fails (wrong answer to secret question):** _Wrong answer to secret question. Either try again or
+call `delete account` (permanent loss of stored data)._
+
+**Command fails (password does not match):** _Passwords do not match. Try again._
+
+### Account Deletion
+
+**Format:** `delete account`
+
+**Example:** `delete account`
+
+**Command succeeds:** _User deleted successfully._
+
+**Command fails (no user registered):** _No accounts found. Please register an account first._
 
 ## <span style="text-decoration:underline;">Customer</span>
 
@@ -115,7 +178,7 @@ Adds a customer to the address book.
 
 **Format:** `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`
 
-**Example:** `customer add --name Gabriel --phone 8765 4321 --email gabrielrocks@gmail.com --address RVRC Block B`
+**Example:** `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`
 
 **Accepted Values:**
 
@@ -129,7 +192,7 @@ _ADDRESS_: String
 
 **Command succeeds:** _Customer 1, Gabriel added._
 
-**Command fails (missing field):** _Please fill up all the required fields (--name NAME --phone PHONE_NUMBER --email 
+**Command fails (missing field):** _Please fill up all the required fields (--name NAME --phone PHONE_NUMBER --email
 EMAIL --address ADDRESS)._
 
 ### Search for a customer `[Coming Soon in v1.3]`
@@ -148,9 +211,10 @@ Lists all the customers added in the address book.
 
 _NIL_
 
-**Command succeeds (>0 customers):** 
+**Command succeeds (>0 customers):**
 
 _Here is the list of customers:_
+
 1. _Benjamin, Phone: 9898 2323, Email: benjaminCSGod@gmail.com, Address: Carnegie Mellon University, South Block._
 2. _Gambe, Phone: 9797 1313, Email: gambeRizzLord@gmail.com, Address: Kent Ridge Hall_
 3. _Gabriel, Phone: 9090 9241, Email: gabrielSoCool@gmail.com, Address: RVRC Tower Block_
@@ -231,42 +295,35 @@ _DATE:_ String in YYYY-MM-DD format
 
 **Command succeeds:** _Delivery [1001] furniture created successfully for Customer 1, Gabriel!_
 
-**Command fails (missing_fields):** _Please fill up all the required fields (DELIVERY_NAME --customer CUSTOMER_ID --date DATE)!_
+**Command fails (missing_fields):** _Please fill up all the required fields (DELIVERY_NAME --customer CUSTOMER_ID --date
+DATE)!_
 
 **Command fails (invalid_date):** _Invalid date provided!_
 
 **Command fails (invalid_date_format):** _Please provide the date in the format: YYYY-MM-DD._
 
-### Create a note for a delivery `[Coming Soon in v1.3]`
-
-_Details coming soon..._
-
 ### View all deliveries
 
 Shows a list of all deliveries.
 
-**Format:** `delivery list [STATUS] [--sort SORT]`
+**Format:** `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE]  [--sort SORT]`
 
-**Example:** `delivery list pending --sort desc`
+**Example:** `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`
 
 **Accepted Values:**
 
-_STATUS_: String of either `pending` or `complete` or defaults to show all deliveries
+_STATUS_: CREATED/SHIPPED/COMPLETED/CANCELLED. If unspecified, defaults to show all deliveries.
 
-_SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by delivery date
+_CUSTOMER_ID_: Integer
 
-**Command succeeds (>0 deliveries):** 
+_DATE_: String in YYYY-MM-DD format or `today` for today’s date
 
-1. _[1001] Gabriel’s Milk - Completed - Ordered 20th Sept 2023: Delivered on 30th Sept 2023_
-2. _[1002] Gambe’s Meat - Completed - Ordered 22th Sept 2023: Delivered on 29th Sept 2023_
-3. _[1003] Ben’s Coffee - Pending - Ordered 25th Sept 2023: Delivery on 1st October 2023_
+_SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by delivery date.
+
+**Command succeeds (>0 deliveries):**
+![](images/delivery/delivery_list.png)
 
 **Command failed (0 deliveries):** _There are currently no deliveries!_
-
-### View deliveries for the day `[Coming Soon in v1.3]`
-
-_Details coming soon..._
-
 
 ### View details of deliveries
 
@@ -282,13 +339,7 @@ _DELIVERY_ID_: Integer
 
 **Command succeeds:**
 
-_[1001] Gabriel’s Milk_
-
-_Customer ID: 1_<br />
-_Customer: Gabriel_<br />
-_Ordered on: 23rd September 2023_<br />
-_Delivery Status: Pending_<br />
-_Delivery on: 1st October 2023_
+![](images/delivery/delivery_view.png)
 
 **Command failed (0 deliveries):** _There are currently no deliveries._
 
@@ -296,49 +347,43 @@ _Delivery on: 1st October 2023_
 
 _Details coming soon..._
 
-### Update delivery status and date
+### Update delivery status
 
-- Mark delivery as complete
-- Mark delivery as pending
-- Change date of delivery
+Changes the status of a specified delivery
 
-#### Mark delivery as complete
+**Format:** `delivery status STATUS CUSTOMER_ID`
 
-**Format**: `delivery complete DELIVERY_ID`
-
-**Example**: `delivery complete 1001`
+**Example:** `delivery status completed 2`
 
 **Accepted Values:**
 
-_DELIVERY_ID:_ Integer
+_STATUS:_ Either `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`
 
-**Command succeeds:** _Delivery [1001] Gabriel’s Milk marked as complete!_
+_CUSTOMER_ID:_ Integer
 
-**Command failed (delivery_id missing):** _Please specify a delivery id!_
+**Command succeeds:**
 
-**Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
+_Edited Delivery: [2] milk_
+_COMPLETED_<br />
+_Customer: Alex Yeoh_<br />
+_Customer Id: 1_<br />
+_Ordered On: 2023-10-21_<br />
+_Delivered On: 2023-12-03_
 
-**Command failed (delivery already complete):** _This delivery is already marked as complete._
+**Command fails (invalid_status):** _Delivery Status should be one of CREATED, SHIPPED, COMPLETED, CANCELLED_
 
-#### Mark delivery as pending
+**Command fails (invalid_index):** _The delivery index provided is invalid_
 
-**Format:** `delivery pending DELIVERY_ID`
+**Command fails (missing_fields):**
 
-**Example:** `delivery pending 1001`
-
-**Accepted Values:**
-
-_DELIVERY_ID_: Integer
-
-**Command succeeds:** _Delivery [1001] Gabriel’s Milk marked as pending!_
-
-**Command failed (delivery_id missing):** _Please specify a delivery id!_
-
-**Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
-
-**Command failed (delivery already pending):** _This delivery is already marked as pending._
+_Invalid command format!_<br />
+_delivery status: Edits the status of the delivery identified by the ID of the delivery. Existing status will be overwritten by the input status._<br />
+_Parameters: STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) ID (must be a integer representing a valid ID)_<br />
+_Example: delivery status COMPLETED 1_<br />
 
 #### Change date of delivery
+
+Changes the date of a specified delivery
 
 **Format:** `delivery edit date DELIVERY_ID --date DATE`
 
@@ -357,6 +402,41 @@ _DATE:_ String of format YYYY-MM-DD
 **Command failed (invalid date format):** _Please format date as YYYY-MM-DD._
 
 **Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
+
+### Create a note for a delivery
+
+Creates a note for a specified delivery
+
+**Format:** `delivery note DELIVERY_ID --note NOTE`
+
+**Example:** `delivery note 1 --note By FedEx`
+
+**Accepted Values:**
+
+_DELIVERY_ID_: Integer
+
+_NOTE_: Nonempty alphanumeric string
+
+**Command succeeds:**
+
+_Added Note to Delivery: [2] milk_</br>
+_COMPLETED_</br>
+_Customer: Alex Yeoh_</br>
+_Customer Id: 1_</br>
+_Ordered On: 2023-10-21_</br>
+_Delivered On: 2023-12-03_</br>
+_Note: By FedEx_
+
+**Command failed (invalid_index):** _The delivery index provided is invalid_
+
+**Command failed (invalid_note):** _Note should not be empty_
+
+**Command failed (missing_fields):**
+
+_Invalid command format!_</br>
+_delivery note: Adds a note to the delivery identified by the ID of the delivery. Existing note if any will be replaced with the input note._</br>
+_Parameters: DELIVERY_ID (must be a integer representing a valid ID) --note Note_</br>
+_Example: delivery note 1 --note This is a note_</br>
 
 ### Add customer data to delivery `[Coming Soon in v1.3]`
 
@@ -381,9 +461,5 @@ _DELIVERY_ID_: Integer
 **Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
 
 ### Remove customer from delivery `[Coming Soon in v1.3]`
-
-_Details coming soon..._
-
-### Create a note for a delivery `[Coming Soon in v1.3]`
 
 _Details coming soon..._
