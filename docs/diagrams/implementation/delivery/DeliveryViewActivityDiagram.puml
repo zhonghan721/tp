@@ -7,13 +7,13 @@ skinparam ArrowFontSize 12
 start
 :User enters <i>delivery view 1 </i> command;
 partition DeliveryListParser {
-    if (Check Arguments Present) then ([Empty arguments provided])
+    if () then ([Empty arguments provided])
         :ParseException: Invalid Command Format;
         stop
-    elseif (Regex Match) then ([Not Number and Word Provided])
+    elseif () then ([Not Number and Word Provided])
         :ParseException: Invalid Command Format;
         stop
-    elseif (Parse Id) then ([Invalid Id Provided])
+    elseif () then ([Invalid Id Provided])
         :ParseException: Invalid Id Provided;
         stop
     endif
@@ -21,11 +21,11 @@ partition DeliveryListParser {
 }
 
 partition DeliveryViewCommand {
-    if (User Logged in?) then ([Not Logged In])
+    if () then ([Not Logged In])
         :CommandException: User Not Authenticated;
         stop
     endif
-    if (Check delivery is empty) then ([Delivery empty])
+    if () then ([Delivery empty])
         :CommandException: Delivery ID is invalid;
         stop
     else ([Status Not Provided])
