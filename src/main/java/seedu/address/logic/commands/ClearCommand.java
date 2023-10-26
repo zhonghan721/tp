@@ -5,7 +5,9 @@ import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.*;
+import seedu.address.model.AddressBook;
+import seedu.address.model.DeliveryBook;
+import seedu.address.model.Model;
 
 /**
  * Clears the address book.
