@@ -49,7 +49,7 @@ public class UserDeleteCommandTest {
                 new UserPrefs(), false);
         expectedModel.deleteUser();
 
-        assertCommandSuccess(userDeleteCommand, model, UserDeleteCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(userDeleteCommand, model, UserDeleteCommand.MESSAGE_SUCCESS, expectedModel, true);
     }
 
 }
