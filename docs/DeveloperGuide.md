@@ -37,8 +37,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** (consisting of
-classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is
+classes [`Main`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is
 in charge of the app launch and shut down.
 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
@@ -78,7 +78,7 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified
-in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -88,9 +88,9 @@ the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
-in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -101,7 +101,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -142,35 +142,56 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
-  this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Customer` objects (which are contained in a `UniqueCustomerList` object). The
+  address book is exposed to the outside as a `ReadOnlyBook` objects.
+* stores the delivery book data i.e., all `Delivery` objects (which are contained in a `UniqueDeliveryList` object). The
+  delivery book is exposed to the outside as a `ReadOnlyBook` objects.
+* stores the currently filtered `Customer` objects (e.g., results of a search query) as a separate _filteredCustomers_
+  list
+* stores the currently filtered `Delivery` objects (e.g., results of a status filter query) as a separate
+  _filteredDeliveries_ list
+* stores the currently sorted `Delivery` objects (e.g., results of a sort query) as a separate _sortedDeliveries_
+  list
+* stores an unmodifiable `ObservableList<ListItem>` that can be 'observed' e.g. the UI can be bound
+  to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
-  should make sense on their own without depending on other components)
 
-<box type="info" seamless>
+#### User Model
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`,
-which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of
-each `Person` needing their own `Tag` objects.<br>
+<puml src="diagrams/UserClassDiagram.puml" width="450" />
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+The `User` model,
 
-</box>
+* stores the user data i.e, the username and password of the user.
+
+#### Delivery Model
+
+<puml src="diagrams/DeliveryClassDiagram.puml" width="450" />
+
+The `Delivery` model,
+
+* stores the delivery data i.e, the delivery name, customer, delivery status, order date, delivery date and note for the
+  delivery.
+
+#### Customer Model
+
+<puml src="diagrams/CustomerClassDiagram.puml" width="450" />
+
+The `Customer` model,
+
+* stores the customer data i.e, the customer address, phone, email and address.
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -193,18 +214,57 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+- [User Register Account Command](#user-register-account-command)
+- [User Login Command](#user-login-command)
+- User Update Details Command
+- [User Logout Command](#user-logout-command)
+- User Account Recovery
+- User Account Deletion
 
+### User Register Account Command
 
+**Overview:**
+The `register` command is used to register a new user account.
+Once registered, the user will be able to log in to the account and access all the commands available.
 
+The format for the `register` command can be found [here](UserGuide.md#register).
 
+**Feature details:**
 
+1. The user specifies the `Username`, `Password`, `Confirm Password`, `Forget Password Question`
+   and `Forget Password Answer` in the `register` command.
+2. If any of the fields is not provided, an error message with the correct command usage will be shown.
+3. If invalid command parameters are provided, an error message with the correct parameter format will be shown.
+4. If the `Password` and `Confirm Password` fields do not match, an error message will be shown.
+5. If the user is currently logged in, an error message will be shown.
+6. The `User` is then cross-referenced with the stored user in `Model` to check if there's already a user stored. If
+   there's already a user stored, an error message will be shown.
+7. If all the previous steps are completed without exceptions, the user will be registered and the `User` will be stored
+   in `Model`. The `isLoggedIn` status in `Model` will be updated to `true`.
 
+The following activity diagram shows the logic of a user registering an account:
 
+<puml src="diagrams/UserRegisterActivityDiagram.puml" alt="UserRegisterActivityDiagram" />
 
+The sequence of the `register` command is as follows:
 
+1. The command `register INPUT` is entered by the user (e.g., register --user gab --password pass1234 --confirmPass
+   pass1234 --secretQn First Pet? --answer Koko).
+2. Logic Manager calls the `AddressBookParser#parseCommand` with the `INPUT`.
+3. The `AddressBookParser` parses the command word, creating an instance of `UserRegisterCommandParser` to parse the
+   rest of the command.
+4. If all fields are present, it checks if password and confirm password match.
+5. If password and confirm password match, it creates an instance of `UserRegisterCommand`.
+6. `Logic Manager` executes `UserRegisterCommand` by calling `UserRegisterCommand#execute()`.
+7. `UserRegisterCommand` checks if a user is already registered by calling `Model#getStoredUser`.
+8. If no user is registered, `UserRegisterCommand` calls `Model#registerUser` to store the user. Login status is set to
+   true.
+9. `UserRegisterCommand` calls `Model#updateFilteredPersonList` to display the list of customers.
+10. `UserRegisterCommand` returns a `CommandResult` with a success message.
 
+The following sequence diagram shows how the `register` command works:
 
-
+<puml src="diagrams/UserRegisterSequenceDiagram.puml" alt="UserRegisterSequenceDiagram" />
 
 
 ### User Login Command
@@ -223,9 +283,9 @@ The format for the `login` command can be found [here](UserGuide.md#login).
 3. If invalid command parameters are provided, an error message with the correct parameter format will be shown.
 4. If the user is currently logged in, an error message will be shown.
 5. The `User` is then cross-referenced with the stored user in `Model` to check if the credentials match.
-If incorrect credentials are provided, an error message regarding wrong credentials will be shown.
-6. If all the previous steps are completed without exceptions, the user will be logged in and the 
-`isLoggedIn` status in `Model` will be updated to `true`.
+   If incorrect credentials are provided, an error message regarding wrong credentials will be shown.
+6. If all the previous steps are completed without exceptions, the user will be logged in and the
+   `isLoggedIn` status in `Model` will be updated to `true`.
 
 The following activity diagram shows the logic of a user logging in:
 
@@ -233,15 +293,15 @@ The following activity diagram shows the logic of a user logging in:
 
 The sequence of the `login` command is as follows:
 
-1. Upon launching the application, the `ModelManager` will be initialized with 
-the `User` constructed with details from the authentication.json file.
+1. Upon launching the application, the `ModelManager` will be initialized with
+   the `User` constructed with details from the authentication.json file.
 2. The user inputs the `login` command with the username and password.
 3. The `userLoginCommandParser` checks whether all the required fields are present.
-If all fields are present, it creates a new `userLoginCommand`.
+   If all fields are present, it creates a new `userLoginCommand`.
 4. The `userLoginCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`.
 5. The `userLoginCommand` then checks if the user credentials match the stored user by calling `Model#userMatches()`.
 6. If the user is not logged in and the credentials match, the `userLoginCommand` calls `Model#setLoginSuccess()`,
-changing the login status to true and enabling the user access to all commands.
+   changing the login status to true and enabling the user access to all commands.
 7. The `userLoginCommand` also calls `Model#updateFilteredPersonList()` to display the list of customers.
 
 The following sequence diagram shows how the `login` command works:
@@ -253,7 +313,7 @@ The following sequence diagram shows how the `login` command works:
 **Overview:**
 
 The `logout` command is used to log out from the user's account.
-Once logged out, the user will have no access to all the commands available, except for `help`, `exit`, 
+Once logged out, the user will have no access to all the commands available, except for `help`, `exit`,
 `register`, `login` and `delete account`.
 
 The format for the `logout` command can be found [here](UserGuide.md#logout).
@@ -263,8 +323,8 @@ The format for the `logout` command can be found [here](UserGuide.md#logout).
 1. The user executes the `logout` command.
 2. If extra command parameters are provided after specifying `logout`, the logout command will still be executed.
 3. If the user is currently logged out, an error message will be shown.
-4. If all the previous steps are completed without exceptions, the user will be logged out and the 
-`isLoggedIn` status in `Model` will be updated to `false`.
+4. If all the previous steps are completed without exceptions, the user will be logged out and the
+   `isLoggedIn` status in `Model` will be updated to `false`.
 
 The following activity diagram shows the logic of a user logging out:
 
@@ -274,7 +334,7 @@ The sequence of the `logout` command is as follows:
 
 1. The user inputs the `logout` command.
 2. A new `userLogoutCommand` is created and checks whether the user is currently logged out
-by calling `Model#getUserLoginStatus()`.
+   by calling `Model#getUserLoginStatus()`.
 3. If the user is currently logged in, the `userLogoutCommand` calls `Model#setLogoutSuccess()`,
    changing the login status to false and restricting the user access to most commands.
 4. The `userLoginCommand` also calls `Model#updateFilteredPersonList()` to hide the list of customers.
@@ -282,7 +342,6 @@ by calling `Model#getUserLoginStatus()`.
 The following sequence diagram shows how the `login` command works:
 
 <puml src="diagrams/UserLogoutSequenceDiagram.puml" alt="UserLogoutSequenceDiagram" />
-
 
 ### Customer Add Command
 
@@ -311,16 +370,16 @@ The following activity diagram shows the logic of adding a `Customer` into the d
 The sequence of the `customer add` command is as follows:
 
 1. The user inputs the `customer add ARG` command (e.g. `customer add --name Gabriel --phone 87654321
---email gabrielrocks@gmail.com --address RVRC Block B`).
+   --email gabrielrocks@gmail.com --address RVRC Block B`).
 2. The `LogicManager` calls the `AddressBookParser#parseCommand` with `ARG` to parse the command.
 3. The `AddressBookParser` then creates a new `CustomerAddCommandParser` to parse the fields provided by the user.
 4. A corresponding `Customer` is created by the `CustomerAddCommandParser`, which is used to
-create a new `CustomerAddCommand`. 
+   create a new `CustomerAddCommand`. 
 5. The `CustomerAddCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`.
 6. The `CustomerAddCommand` then checks if the `Model` contains a customer with the same `Name`
-by calling `Model#hasPerson`.
+   by calling `Model#hasPerson`.
 7. If the user is logged in and the `Model` does not contain a customer with the same `Name`, the `CustomerAddCommand`
-calls `Model#addPerson` to add the new `Customer` to the database.
+   calls `Model#addPerson` to add the new `Customer` to the database.
 
 The following sequence diagram shows how the `login` command works:
 
@@ -478,39 +537,39 @@ thereby improving efficiency for business owners.
 
 Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikely to have) - `*`
 
-| Priority | As a …​            | I want to …​           | So that I can…​                                                                                                                                                                         |
-|-------|--------------------|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `***` | an owner           | create a local account | I can personalise and secure my account.                                                                                                                                                |
-| `***` | a registered owner | log in to my local account | I can access my data.                                                                                                                                                                   |
-| `***` | a forgetful owner  | retrieve my account | I can still recover my data.                                                                                                                                                            |
-| `***` | a logged-in owner  | log out of my account | I can keep my data secure.                                                                                                                                                              |
-| `***` | a registered owner | update my password | I can constantly keep my data secure.                                                                                                                                                   |
-| `***` | a registered owner | delete my account | I can have greater control over my data and account removal for privacy reasons.                                                                                                        |
-| `***` | a registered owner | update my details | I can change my personalisation.                                                                                                                                                        |
-| `***` | a registered owner | create a customer | I can tie deliveries to customers’ information.                                                                                                                                         |
-| `***` | a registered owner | view a customer | I can see their detailed information.                                                                                                                                                   |
-| `***` | a registered owner | update a customer | I can change details if keyed in wrongly.                                                                                                                                               |
-| `***` | a registered owner | delete a customer | I can remove redundant or incorrect customer records, especially when unforeseen errors occur.                                                                                          |
-| `***` | a registered owner | view a list of customers | I can have a comprehensive overview of my customer base.                                                                                                                                |
-| `***` | a registered owner | see a list of deliveries sorted by status for the customer | I can easily see if products are delivered or not.                                                                                                                                      |
-| `***` | a registered owner | quickly search for the details of a client | I can monitor the progress of an order efficiently and effectively.                                                                                                                     |
-| `***` | a registered owner | create a delivery | I can efficiently organise and access delivery information.                                                                                                                             |
-| `***` | a registered owner | create notes about deliveries | I can add additional information about deliveries.                                                                                                                                      |
-| `***` | a registered owner | view a list of deliveries | I can plan the optimal route.                                                                                                                                                           |
-| `***` | a registered owner | see the list of deliveries that would be delivered for the day | I can prioritise particular orders.                                                                                                                                                     |
-| `***` | a registered owner | add a customer to a delivery | I know who the delivery is for.                                                                                                                                                         |
-| `***` | a registered owner | remove a customer from a delivery | The delivery details are updated.                                                                                                                                                       |
-| `***` | a registered owner | specify the method of delivery | I know how to send the orders over.                                                                                                                                                     |
-| `***` | a registered owner | quickly search for the details of a delivery | I can monitor the progress of a                                                                 delivery.                                                                               |
-| `***` | a registered owner | see a list of deliveries sorted by their delivery status and date of delivery | It is                                                                                                     more organised and easier for me to get and overview of all orders.           |
-| `***` | a registered owner | see the location of the delivery | I know where to deliver the order to.                                                                                                                                                   |
-| `***` | a registered owner | view the details of a delivery | I know what the order is and where to deliver it to.                                                                                                                                    |
-| `***` | a registered owner | update the status of the delivery | I can keep track of the delivery progress and notify my client.                                                                                                                         |
-| `***` | a registered owner | update delivery details | I can change any information if there was an error from                                                                                                                        user/me. |
-| `***` | a registered owner | delete a delivery | I can get rid of deliveries that are redundant.                                                                                                                                         |
-| `*`   | a registered owner | relate my inventory to my orders | I can keep track of my inventory.                                                                                                                                                       |
-| `*`   | a registered owner | know the sum of all the materials required for a fixed delivery schedule | I can plan my                                                                                             inventory. |
-| `*`   | a registered owner | have different user authorisation levels | I can control who has access to what.                                                                                                                                                   |
+| Priority | As a …​            | I want to …​                                                                  | So that I can…​                                                                                                                                                                         |
+|----------|--------------------|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `***`    | an owner           | create a local account                                                        | I can personalise and secure my account.                                                                                                                                                |
+| `***`    | a registered owner | log in to my local account                                                    | I can access my data.                                                                                                                                                                   |
+| `***`    | a forgetful owner  | retrieve my account                                                           | I can still recover my data.                                                                                                                                                            |
+| `***`    | a logged-in owner  | log out of my account                                                         | I can keep my data secure.                                                                                                                                                              |
+| `***`    | a registered owner | update my password                                                            | I can constantly keep my data secure.                                                                                                                                                   |
+| `***`    | a registered owner | delete my account                                                             | I can have greater control over my data and account removal for privacy reasons.                                                                                                        |
+| `***`    | a registered owner | update my details                                                             | I can change my personalisation.                                                                                                                                                        |
+| `***`    | a registered owner | create a customer                                                             | I can tie deliveries to customers’ information.                                                                                                                                         |
+| `***`    | a registered owner | view a customer                                                               | I can see their detailed information.                                                                                                                                                   |
+| `***`    | a registered owner | update a customer                                                             | I can change details if keyed in wrongly.                                                                                                                                               |
+| `***`    | a registered owner | delete a customer                                                             | I can remove redundant or incorrect customer records, especially when unforeseen errors occur.                                                                                          |
+| `***`    | a registered owner | view a list of customers                                                      | I can have a comprehensive overview of my customer base.                                                                                                                                |
+| `***`    | a registered owner | see a list of deliveries sorted by status for the customer                    | I can easily see if products are delivered or not.                                                                                                                                      |
+| `***`    | a registered owner | quickly search for the details of a client                                    | I can monitor the progress of an order efficiently and effectively.                                                                                                                     |
+| `***`    | a registered owner | create a delivery                                                             | I can efficiently organise and access delivery information.                                                                                                                             |
+| `***`    | a registered owner | create notes about deliveries                                                 | I can add additional information about deliveries.                                                                                                                                      |
+| `***`    | a registered owner | view a list of deliveries                                                     | I can plan the optimal route.                                                                                                                                                           |
+| `***`    | a registered owner | see the list of deliveries that would be delivered for the day                | I can prioritise particular orders.                                                                                                                                                     |
+| `***`    | a registered owner | add a customer to a delivery                                                  | I know who the delivery is for.                                                                                                                                                         |
+| `***`    | a registered owner | remove a customer from a delivery                                             | The delivery details are updated.                                                                                                                                                       |
+| `***`    | a registered owner | specify the method of delivery                                                | I know how to send the orders over.                                                                                                                                                     |
+| `***`    | a registered owner | quickly search for the details of a delivery                                  | I can monitor the progress of a                                                                 delivery.                                                                               |
+| `***`    | a registered owner | see a list of deliveries sorted by their delivery status and date of delivery | It is                                                                                                     more organised and easier for me to get and overview of all orders.           |
+| `***`    | a registered owner | see the location of the delivery                                              | I know where to deliver the order to.                                                                                                                                                   |
+| `***`    | a registered owner | view the details of a delivery                                                | I know what the order is and where to deliver it to.                                                                                                                                    |
+| `***`    | a registered owner | update the status of the delivery                                             | I can keep track of the delivery progress and notify my client.                                                                                                                         |
+| `***`    | a registered owner | update delivery details                                                       | I can change any information if there was an error from                                                                                                                        user/me. |
+| `***`    | a registered owner | delete a delivery                                                             | I can get rid of deliveries that are redundant.                                                                                                                                         |
+| `*`      | a registered owner | relate my inventory to my orders                                              | I can keep track of my inventory.                                                                                                                                                       |
+| `*`      | a registered owner | know the sum of all the materials required for a fixed delivery schedule      | I can plan my                                                                                             inventory.                                                                    |
+| `*`      | a registered owner | have different user authorisation levels                                      | I can control who has access to what.                                                                                                                                                   |
 
 *{More to be added}*
 
@@ -519,7 +578,7 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 (For all use cases below, the **System** is the `HomeBoss` and the **Actor** is the `user`, unless specified
 otherwise)
 
-#### Use Case: UC01 - Create Accoumt
+#### Use Case: UC01 - Register an Account
 
 **System:** User System (US)
 
@@ -535,23 +594,22 @@ otherwise)
 **MSS:**
 
 1. Unregistered owner opens HomeBoss application.
-2. US asks unregistered owner to either login, forget password or register.
-3. Unregistered owner enters register command with his username, password, confirm password, a forget password question
-   and answer.
-4. US creates an account and shows a welcome message with the newly created username.
+2. Unregistered owner enters register command with his username, password, confirm password, a "forget password"
+   question and answer.
+3. US creates an account and shows a welcome message with the newly created username.
    Use case ends.
 
 **Extensions:**
 
-* 3a. Unregistered owner does not enter one of the fields.
+* 2a. Unregistered owner does not enter one of the fields.
 
-    * 3a1. US requests unregistered owner to fill up all the required fields.
+    * 2a1. US requests unregistered owner to fill up all the required fields.
 
       Use case ends.
 
-* 3b. Unregistered owner types incorrect confirm password.
+* 2b. Unregistered owner types incorrect confirm password.
 
-    * 3b1. US requests unregistered owner to retype their confirm password.
+    * 2b1. US requests unregistered owner to retype their confirm password.
 
       Use case ends.
 
@@ -572,26 +630,25 @@ otherwise)
 **MSS:**
 
 1. Registered owner opens the HomeBoss application.
-2. US asks the registered owner to either login, forget password or register.
-3. Registered owner enters the login command with his username, password.
-4. US logs in and shows a welcome message.
+2. Registered owner enters the login command with his username, password.
+3. US logs in and shows a welcome message.
    Use case ends.
 
 **Extensions:**
 
-* 3a. Registered owner does not enter one of the fields
-    * 3a1. US requests registered owner to fill up all the required fields
+* 2a. Registered owner does not enter one of the fields
+    * 2a1. US requests registered owner to fill up all the required fields
 
       Use case ends.
 
-* 3b. Registered owner types incorrect password or username
-    * 3b1. US requests registered owner to retype their username or password
+* 2b. Registered owner types incorrect password or username
+    * 2b1. US requests registered owner to retype their username or password
 
       Use case ends.
 
 ---
 
-#### Use Case: UC03 - Forget Password
+#### Use Case: UC03 - Account Recovery
 
 **System:** User System (US)
 
@@ -606,51 +663,32 @@ otherwise)
 **MSS:**
 
 1. Registered owner opens the HomeBoss application.
-2. US asks the registered owner to either login, forget password or register.
-3. Registered owner enters the forgot password command with his username.
-4. US asks the forget password question of the user.
-5. Registered owner answers the question correctly.
-6. US asks the registered owner to change password and confirm change password.
-7. Registered owner types password and confirms password.
-8. US logins and shows a success message.
+2. Registered owner enters the account recovery command without any command flags (i.e., `--answer`).
+3. US displays the forget password question that the user set during account registration.
+4. Registered owner enters the account recovery command, this time with the answer, new password and confirm password
+   fields.
+5. US logins and shows a success message.
    Use case ends.
 
 **Extensions:**
 
-* 3a. Registered owner does not enter the username field.
-    * 3a1. US requests registered owner to fill up the username field.
+* 4a. Registered owner does not enter the answer field.
+    * 4a1. US requests registered owner to fill up the answer field.
 
       Use case ends.
 
-* 3b. Registered owner types incorrect username
-    * 3b1. US requests registered owner to retype their username
+* 4b. Registered owner types incorrect answer
+    * 4b1. US requests registered owner to retype their answer.
 
       Use case ends.
 
-* 5a. Registered owner does not enter the answer field.
-    * 5a1. US requests registered owner to fill up the answer field.
+* 4c. Registered owner does not enter one of the password or confirm password fields.
+    * 4c1. US requests registered owner to fill up all the required fields
 
       Use case ends.
 
-* 5b. Registered owner types incorrect answer
-    * 5b1. US requests registered owner to retype their answer.
-
-      Use case ends.
-
-* 7a. Registered owner does not enter one of the password or confirm password fields.
-    * 7a1. US requests registered owner to fill up all the required fields
-
-      Use case ends.
-
-* 7b. Registered owner types incorrect confirm password.
-    * 7b1. US requests registered owner to retype their confirm password.
-
-      Use case ends.
-
-
-* *a. At any time, registered owner can choose to cancel the forget password.
-    * *a1. Registered owner types cancel.
-    * *a2. US asks the registered owner to either login, forget password or register.
+* 4d. Registered owner types incorrect confirm password.
+    * 4d1. US requests registered owner to retype their confirm password.
 
       Use case ends.
 
@@ -676,74 +714,35 @@ otherwise)
 
 ---
 
-#### Use Case: UC05 - Update Password
+#### Use Case: UC05 - Delete Account
 
 **System:** User System (US)
 
 **Actor:** Logged-in owner.
 
-**Preconditions:** Owner is logged in.
+**Preconditions:** Account is present.
 
 **Guarantees:**
 
-* Password of logged-in owner is updated.
-
-**MSS:**
-
-1. Logged-in owner types command to update password with password and confirm password.
-2. User system shows a success message.
-   Use case ends.
-
-**Extensions:**
-
-* 1a. Logged-in owner does not enter one of the fields
-    * 1a1. US requests logged-in owner to fill up all the required fields
-
-      Use case ends.
-
-* 1b. Logged-in owner types incorrect confirm password
-    * 1b1. US requests logged-in owner to retype their confirm password
-
-      Use case ends.
-
----
-
-#### Use Case: UC06 - Delete Account
-
-**System:** User System (US)
-
-**Actor:** Logged-in owner.
-
-**Preconditions:** Owner is logged-in.
-
-**Guarantees:**
-
-* Logged-in owner’s account is deleted.
+* User account is deleted.
 
 **MSS:**
 
 1. Logged-in owner types command to delete his account.
-2. User system shows a confirmation message.
-3. Logged-in owner confirms.
-4. User system shows a success message.
+2. User system shows a success message.
 
    Use case ends.
 
-**Extensions**
-
-* 3a. Logged-in owner cancels.
-    * 3a1. Logged-in owner cancels.
-    * 3a2. User system shows a cancellation message.
-
-      Use case ends.
-
 ---
 
-#### **Use Case: UC07 - Update Details**
+#### Use Case: UC06 - Update Details
 
 **System:** User System (US)
+
 **Actor:** Logged-in owner
+
 **Preconditions:** Owner is logged in
+
 **Guarantees:**
 
 * Old details will be changed to the new details keyed in only if the command is executed successfully
@@ -763,9 +762,39 @@ otherwise)
 
       Use Case ends.
 
+* 1b. Logged-in Owner specifies Password field and not Confirm Password field.
+
+    * 1b1. US requests Logged-in Owner to specify both Password and Confirm Password field.
+
+      Use Case ends.
+
+* 1c. Logged-in Owner specifies Confirm Password field and not Password field.
+
+    * 1c1. US requests Logged-in Owner to specify both Password and Confirm Password field.
+
+      Use Case ends.
+
+* 1d. Logged-in Owner types incorrect confirm password.
+
+    * 1d1. US requests Logged-in Owner to retype their confirm password.
+
+      Use Case ends.
+
+* 1e. Logged-in Owner specifies Secret Question field and not Answer field.
+
+    * 1e1. US requests Logged-in Owner to specify both Secret Question and Answer field.
+
+      Use Case ends.
+
+* 1f. Logged-in Owner specifies Answer field and not Secret Question field.
+
+    * 1f1. US requests Logged-in Owner to specify both Secret Question and Answer field.
+
+      Use Case ends.
+
 ---
 
-#### **Use Case: UC08 - Create Customer**
+#### **Use Case: UC07 - Create Customer**
 
 **System:** Customer Management System (CMS)
 
@@ -795,7 +824,7 @@ otherwise)
 
 ---
 
-#### **Use Case: UC09 - View customer’s details**
+#### **Use Case: UC08 - View customer’s details**
 
 **System:** Customer Management System (CMS)
 
@@ -830,7 +859,7 @@ otherwise)
 
 --- 
 
-#### **Use Case: UC10 - Sort customers**
+#### **Use Case: UC09 - Sort customers**
 
 **System:** Customer Management System (CMS)
 
@@ -849,7 +878,7 @@ otherwise)
 
 --- 
 
-#### **Use Case: UC11 - Search for a Customer**
+#### **Use Case: UC10 - Search for a Customer**
 
 **System:** Customer Management System (CMS)
 
@@ -890,7 +919,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC12 - Customer Detail Update
+#### **Use case:** UC11 - Customer Detail Update
 
 **System:** Customer Management System (CMS)
 
@@ -928,7 +957,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC13 - Customer Deletion
+#### **Use case:** UC12 - Customer Deletion
 
 **System:** Customer Management System (CMS)
 
@@ -961,7 +990,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC14 - List Customers
+#### **Use case:** UC13 - List Customers
 
 **System:** Customer Management System (CMS)
 
@@ -994,7 +1023,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC15 - Delivery Creation
+#### **Use case:** UC14 - Delivery Creation
 
 **System:** Delivery Management System (DMS)
 
@@ -1032,7 +1061,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC16 - Delivery Notes Creation
+#### **Use case:** UC15 - Delivery Notes Creation
 
 **System:** Delivery Management System (DMS)
 
@@ -1060,7 +1089,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC17 - Delivery List
+#### **Use case:** UC16 - Delivery List
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1097,7 +1126,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC18 - Delivery List for the Day
+#### **Use case:** UC17 - Delivery List for the Day
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1124,7 +1153,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC19 - Add Customer to Delivery
+#### **Use case:** UC18 - Add Customer to Delivery
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1156,7 +1185,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC20 - Remove Customer from Delivery
+#### **Use case:** UC19 - Remove Customer from Delivery
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1188,7 +1217,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC21 - Specify Delivery Method
+#### **Use case:** UC20 - Specify Delivery Method
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1220,7 +1249,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC22 - Search for Delivery
+#### **Use case:** UC21 - Search for Delivery
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1247,7 +1276,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC23 - View location of delivery
+#### Use Case: UC22 - View location of delivery
 
 **System:** Delivery Management System (DMS)
 
@@ -1280,7 +1309,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC24 - View details of delivery
+#### Use Case: UC23 - View details of delivery
 
 **System:** Delivery Management System (DMS)
 
@@ -1313,7 +1342,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC25 - Update delivery status
+#### Use Case: UC24 - Update delivery status
 
 **System:** Delivery Management System (DMS)
 
@@ -1351,7 +1380,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC26 - Update delivery details
+#### Use Case: UC25 - Update delivery details
 
 **System:** Delivery Management System (DMS)
 
@@ -1389,7 +1418,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC27 - Delete delivery
+#### Use Case: UC26 - Delete delivery
 
 **System:** Delivery Management System (DMS)
 

@@ -1,8 +1,10 @@
 package seedu.address.logic.parser.user;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SECRET_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 
 import java.util.stream.Stream;
@@ -30,23 +32,28 @@ public class UserRegisterCommandParser implements Parser<UserRegisterCommand> {
      */
     public UserRegisterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM);
+                ArgumentTokenizer.tokenize(args, PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM,
+                        PREFIX_SECRET_QUESTION, PREFIX_ANSWER);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM)
+        if (!arePrefixesPresent(argMultimap, PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM,
+                PREFIX_SECRET_QUESTION, PREFIX_ANSWER)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UserRegisterCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM,
+                PREFIX_SECRET_QUESTION, PREFIX_ANSWER);
         Username username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USER).get());
         Password password = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD).get());
         Password confirmPassword = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD_CONFIRM).get());
+        String secretQuestion = ParserUtil.parseSecretQuestion(argMultimap.getValue(PREFIX_SECRET_QUESTION).get());
+        String answer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
 
         if (!password.equals(confirmPassword)) {
             throw new ParseException(UserRegisterCommand.MESSAGE_PASSWORD_MISMATCH);
         }
 
-        User user = new User(username, password, true);
+        User user = new User(username, password, true, secretQuestion, answer);
 
         return new UserRegisterCommand(user);
     }
