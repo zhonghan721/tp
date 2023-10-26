@@ -270,6 +270,7 @@ public class ModelManager implements Model {
         this.setLoggedInUser(null);
         setLogoutSuccess();
         setAddressBook(new AddressBook());
+        setDeliveryBook(new DeliveryBook());
         setUiListCustomer();
     }
 
