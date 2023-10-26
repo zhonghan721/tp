@@ -38,9 +38,33 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
         if (argMultimap.getValue(PREFIX_USER).isPresent()) {
             userUpdateDescriptor.setUsername(ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USER).get()));
         }
+
+        userUpdateDescriptor = parsePasswords(argMultimap, userUpdateDescriptor);
+
+        userUpdateDescriptor = parseSecretQuestionAndAnswer(argMultimap, userUpdateDescriptor);
+
+        if (!userUpdateDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(
+                    String.format(UserUpdateCommand.MESSAGE_MISSING_FIELDS, UserUpdateCommand.MESSAGE_USAGE));
+        }
+
+        return new UserUpdateCommand(userUpdateDescriptor);
+    }
+
+    /**
+     * Parses the password and confirm password fields, and checks if are either both present or both absent.
+     *
+     * @param argMultimap          the argument multimap that stores the user input with the respective prefixes
+     * @param userUpdateDescriptor the {@code UserUpdateDescriptor} to be updated
+     * @return the updated {@code UserUpdateDescriptor}
+     * @throws ParseException if the password and confirm password fields are not both present or both absent,
+     *                        and if they are both present but does not match each other
+     */
+    public UserUpdateDescriptor parsePasswords(ArgumentMultimap argMultimap, UserUpdateDescriptor userUpdateDescriptor)
+            throws ParseException {
         // Either one of password or confirm password is missing.
         if (argMultimap.getValue(PREFIX_PASSWORD).isPresent()
-            && argMultimap.getValue(PREFIX_PASSWORD_CONFIRM).isEmpty()) {
+                && argMultimap.getValue(PREFIX_PASSWORD_CONFIRM).isEmpty()) {
             throw new ParseException(UserUpdateCommand.MESSAGE_PASSWORD_OR_CONFIRM_PASSWORD_MISSING);
         }
         if (argMultimap.getValue(PREFIX_PASSWORD_CONFIRM).isPresent()
@@ -58,6 +82,20 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
             }
             userUpdateDescriptor.setPassword(password);
         }
+        return userUpdateDescriptor;
+    }
+
+    /**
+     * Parses the secret question and answer fields, and checks if are either both present or both absent.
+     *
+     * @param argMultimap          the argument multimap that stores the user input with the respective prefixes
+     * @param userUpdateDescriptor the {@code UserUpdateDescriptor} to be updated
+     * @return the updated {@code UserUpdateDescriptor}
+     * @throws ParseException if the secret question and answer fields are not both present or both absent.
+     */
+    public UserUpdateDescriptor parseSecretQuestionAndAnswer(ArgumentMultimap argMultimap,
+                                                             UserUpdateDescriptor userUpdateDescriptor)
+            throws ParseException {
         // Either one of secret question or answer is missing.
         if (argMultimap.getValue(PREFIX_SECRET_QUESTION).isPresent()
                 && argMultimap.getValue(PREFIX_ANSWER).isEmpty()) {
@@ -74,12 +112,6 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
                     argMultimap.getValue(PREFIX_SECRET_QUESTION).get()));
             userUpdateDescriptor.setAnswer(ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get()));
         }
-
-        if (!userUpdateDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(
-                    String.format(UserUpdateCommand.MESSAGE_MISSING_FIELDS, UserUpdateCommand.MESSAGE_USAGE));
-        }
-
-        return new UserUpdateCommand(userUpdateDescriptor);
+        return userUpdateDescriptor;
     }
 }
