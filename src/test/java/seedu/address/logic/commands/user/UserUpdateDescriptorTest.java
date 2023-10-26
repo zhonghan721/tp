@@ -12,15 +12,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_FOODBE
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.user.UserUpdateCommand.UpdateUserDescriptor;
+import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
 import seedu.address.testutil.UpdateUserDescriptorBuilder;
 
-public class UpdateUserDescriptorTest {
+public class UserUpdateDescriptorTest {
 
     @Test
     public void equals() {
         // same values -> returns true
-        UpdateUserDescriptor descriptorWithSameValues = new UpdateUserDescriptor(DESC_AARON);
+        UserUpdateDescriptor descriptorWithSameValues = new UserUpdateDescriptor(DESC_AARON);
         assertTrue(DESC_AARON.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -36,7 +36,7 @@ public class UpdateUserDescriptorTest {
         assertFalse(DESC_AARON.equals(DESC_FOODBEAR));
 
         // different username -> returns false
-        UpdateUserDescriptor editedAaron = new UpdateUserDescriptorBuilder(DESC_AARON)
+        UserUpdateDescriptor editedAaron = new UpdateUserDescriptorBuilder(DESC_AARON)
                 .withUsername(VALID_USERNAME_FOODBEAR).build();
         assertFalse(DESC_AARON.equals(editedAaron));
 
@@ -56,11 +56,11 @@ public class UpdateUserDescriptorTest {
 
     @Test
     public void toStringMethod() {
-        UpdateUserDescriptor updateUserDescriptor = new UpdateUserDescriptor();
-        String expected = UpdateUserDescriptor.class.getCanonicalName() + "{username="
-                + updateUserDescriptor.getUsername().orElse(null) + ", secretQuestion="
-                + updateUserDescriptor.getSecretQuestion().orElse(null) + ", answer="
-                + updateUserDescriptor.getAnswer().orElse(null) + "}";
-        assertEquals(expected, updateUserDescriptor.toString());
+        UserUpdateDescriptor userUpdateDescriptor = new UserUpdateDescriptor();
+        String expected = UserUpdateDescriptor.class.getCanonicalName() + "{username="
+                + userUpdateDescriptor.getUsername().orElse(null) + ", secretQuestion="
+                + userUpdateDescriptor.getSecretQuestion().orElse(null) + ", answer="
+                + userUpdateDescriptor.getAnswer().orElse(null) + "}";
+        assertEquals(expected, userUpdateDescriptor.toString());
     }
 }

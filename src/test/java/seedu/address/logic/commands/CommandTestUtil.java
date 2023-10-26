@@ -26,7 +26,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.user.UserUpdateCommand.UpdateUserDescriptor;
+import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
@@ -167,8 +167,8 @@ public class CommandTestUtil {
 
     public static final DeliveryAddDescriptor DESC_RICE;
 
-    public static final UpdateUserDescriptor DESC_AARON;
-    public static final UpdateUserDescriptor DESC_FOODBEAR;
+    public static final UserUpdateDescriptor DESC_AARON;
+    public static final UserUpdateDescriptor DESC_FOODBEAR;
 
 
     static {

@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.user.UserUpdateCommand.UpdateUserDescriptor;
+import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -10,21 +10,21 @@ import seedu.address.model.user.Username;
  */
 public class UpdateUserDescriptorBuilder {
 
-    private UpdateUserDescriptor descriptor;
+    private UserUpdateDescriptor descriptor;
 
     public UpdateUserDescriptorBuilder() {
-        descriptor = new UpdateUserDescriptor();
+        descriptor = new UserUpdateDescriptor();
     }
 
-    public UpdateUserDescriptorBuilder(UpdateUserDescriptor descriptor) {
-        this.descriptor = new UpdateUserDescriptor(descriptor);
+    public UpdateUserDescriptorBuilder(UserUpdateDescriptor descriptor) {
+        this.descriptor = new UserUpdateDescriptor(descriptor);
     }
 
     /**
      * Returns a {@code UpdateUserDescriptor} with fields containing {@code User}'s details
      */
     public UpdateUserDescriptorBuilder(User user) {
-        descriptor = new UpdateUserDescriptor();
+        descriptor = new UserUpdateDescriptor();
         descriptor.setUsername(user.getUsername());
         descriptor.setPassword(user.getPassword());
         descriptor.setSecretQuestion(user.getSecretQuestion());
@@ -63,7 +63,7 @@ public class UpdateUserDescriptorBuilder {
         return this;
     }
 
-    public UpdateUserDescriptor build() {
+    public UserUpdateDescriptor build() {
         return descriptor;
     }
 }

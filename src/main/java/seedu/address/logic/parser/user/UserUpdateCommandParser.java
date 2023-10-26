@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SECRET_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 
 import seedu.address.logic.commands.user.UserUpdateCommand;
-import seedu.address.logic.commands.user.UserUpdateCommand.UpdateUserDescriptor;
+import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -33,10 +33,10 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM,
                 PREFIX_SECRET_QUESTION, PREFIX_ANSWER);
 
-        UpdateUserDescriptor updateUserDescriptor = new UpdateUserDescriptor();
+        UserUpdateDescriptor userUpdateDescriptor = new UserUpdateDescriptor();
 
         if (argMultimap.getValue(PREFIX_USER).isPresent()) {
-            updateUserDescriptor.setUsername(ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USER).get()));
+            userUpdateDescriptor.setUsername(ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USER).get()));
         }
         // Either one of password or confirm password is missing.
         if (argMultimap.getValue(PREFIX_PASSWORD).isPresent()
@@ -56,7 +56,7 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
             if (!password.equals(confirmPassword)) {
                 throw new ParseException(UserUpdateCommand.MESSAGE_PASSWORD_MISMATCH);
             }
-            updateUserDescriptor.setPassword(password);
+            userUpdateDescriptor.setPassword(password);
         }
         // Either one of secret question or answer is missing.
         if (argMultimap.getValue(PREFIX_SECRET_QUESTION).isPresent()
@@ -70,16 +70,16 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
         // Both secret question and answer are present.
         if (argMultimap.getValue(PREFIX_SECRET_QUESTION).isPresent()
                 && argMultimap.getValue(PREFIX_ANSWER).isPresent()) {
-            updateUserDescriptor.setSecretQuestion(ParserUtil.parseSecretQuestion(
+            userUpdateDescriptor.setSecretQuestion(ParserUtil.parseSecretQuestion(
                     argMultimap.getValue(PREFIX_SECRET_QUESTION).get()));
-            updateUserDescriptor.setAnswer(ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get()));
+            userUpdateDescriptor.setAnswer(ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get()));
         }
 
-        if (!updateUserDescriptor.isAnyFieldEdited()) {
+        if (!userUpdateDescriptor.isAnyFieldEdited()) {
             throw new ParseException(
                     String.format(UserUpdateCommand.MESSAGE_MISSING_FIELDS, UserUpdateCommand.MESSAGE_USAGE));
         }
 
-        return new UserUpdateCommand(updateUserDescriptor);
+        return new UserUpdateCommand(userUpdateDescriptor);
     }
 }

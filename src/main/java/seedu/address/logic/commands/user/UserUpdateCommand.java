@@ -45,14 +45,14 @@ public class UserUpdateCommand extends Command {
     public static final String MESSAGE_PASSWORD_MISMATCH = "Passwords do not match. Please try again.";
     public static final String MESSAGE_QUESTION_OR_ANSWER_MISSING = "Secret Question and Answer have to be "
             + "either all present or all absent. Try again.";
-    private final UpdateUserDescriptor updateUserDescriptor;
+    private final UserUpdateDescriptor userUpdateDescriptor;
 
     /**
      * Creates a UserLoginCommand to log in the specified {@code User}
      */
-    public UserUpdateCommand(UpdateUserDescriptor updateUserDescriptor) {
-        requireNonNull(updateUserDescriptor);
-        this.updateUserDescriptor = updateUserDescriptor;
+    public UserUpdateCommand(UserUpdateDescriptor userUpdateDescriptor) {
+        requireNonNull(userUpdateDescriptor);
+        this.userUpdateDescriptor = userUpdateDescriptor;
     }
 
     /**
@@ -75,7 +75,7 @@ public class UserUpdateCommand extends Command {
         // there should always be a stored user after registering/to be able to log in
         assert storedUser != null;
 
-        User updatedUser = createUpdatedUser(storedUser, updateUserDescriptor);
+        User updatedUser = createUpdatedUser(storedUser, userUpdateDescriptor);
 
         model.updateUser(updatedUser);
         return new CommandResult(MESSAGE_SUCCESS, true);
@@ -85,13 +85,13 @@ public class UserUpdateCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static User createUpdatedUser(User storedUser, UpdateUserDescriptor updateUserDescriptor) {
+    private static User createUpdatedUser(User storedUser, UserUpdateDescriptor userUpdateDescriptor) {
         assert storedUser != null;
 
-        Username updatedUsername = updateUserDescriptor.getUsername().orElse(storedUser.getUsername());
-        Password updatedPassword = updateUserDescriptor.getPassword().orElse(storedUser.getPassword());
-        String updatedSecretQuestion = updateUserDescriptor.getSecretQuestion().orElse(storedUser.getSecretQuestion());
-        String updatedAnswer = updateUserDescriptor.getAnswer().orElse(storedUser.getAnswer());
+        Username updatedUsername = userUpdateDescriptor.getUsername().orElse(storedUser.getUsername());
+        Password updatedPassword = userUpdateDescriptor.getPassword().orElse(storedUser.getPassword());
+        String updatedSecretQuestion = userUpdateDescriptor.getSecretQuestion().orElse(storedUser.getSecretQuestion());
+        String updatedAnswer = userUpdateDescriptor.getAnswer().orElse(storedUser.getAnswer());
 
         return new User(updatedUsername, updatedPassword, true, updatedSecretQuestion, updatedAnswer);
     }
@@ -111,13 +111,13 @@ public class UserUpdateCommand extends Command {
         }
 
         UserUpdateCommand otherUserUpdateCommand = (UserUpdateCommand) other;
-        return updateUserDescriptor.equals(otherUserUpdateCommand.updateUserDescriptor);
+        return userUpdateDescriptor.equals(otherUserUpdateCommand.userUpdateDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("updateUserDescriptor", updateUserDescriptor)
+                .add("updateUserDescriptor", userUpdateDescriptor)
                 .toString();
     }
 
@@ -125,20 +125,20 @@ public class UserUpdateCommand extends Command {
      * Stores the details to update the user with. Each non-empty field value will replace the
      * corresponding field value of the user.
      */
-    public static class UpdateUserDescriptor {
+    public static class UserUpdateDescriptor {
         private Username username;
         private Password password;
         private String secretQuestion;
         private String answer;
 
-        public UpdateUserDescriptor() {
+        public UserUpdateDescriptor() {
         }
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public UpdateUserDescriptor(UpdateUserDescriptor toCopy) {
+        public UserUpdateDescriptor(UserUpdateDescriptor toCopy) {
             setUsername(toCopy.username);
             setPassword(toCopy.password);
             setSecretQuestion(toCopy.secretQuestion);
@@ -191,15 +191,15 @@ public class UserUpdateCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof UpdateUserDescriptor)) {
+            if (!(other instanceof UserUpdateDescriptor)) {
                 return false;
             }
 
-            UpdateUserDescriptor otherUpdateUserDescriptor = (UpdateUserDescriptor) other;
-            return Objects.equals(username, otherUpdateUserDescriptor.username)
-                    && Objects.equals(password , otherUpdateUserDescriptor.password)
-                    && Objects.equals(secretQuestion, otherUpdateUserDescriptor.secretQuestion)
-                    && Objects.equals(answer, otherUpdateUserDescriptor.answer);
+            UserUpdateDescriptor otherUserUpdateDescriptor = (UserUpdateDescriptor) other;
+            return Objects.equals(username, otherUserUpdateDescriptor.username)
+                    && Objects.equals(password , otherUserUpdateDescriptor.password)
+                    && Objects.equals(secretQuestion, otherUserUpdateDescriptor.secretQuestion)
+                    && Objects.equals(answer, otherUserUpdateDescriptor.answer);
         }
 
         @Override

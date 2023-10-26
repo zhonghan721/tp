@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.user.UserUpdateCommand;
-import seedu.address.logic.commands.user.UserUpdateCommand.UpdateUserDescriptor;
+import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Username;
 import seedu.address.testutil.UpdateUserDescriptorBuilder;
@@ -102,7 +102,7 @@ public class UserUpdateCommandParserTest {
         String userInput = USERNAME_DESC_AARON + PASSWORD_DESC_AARON + PASSWORD_CONFIRM_DESC_AARON
                 + SECRET_QUESTION_DESC_AARON + ANSWER_DESC_AARON;
 
-        UpdateUserDescriptor descriptor = new UpdateUserDescriptorBuilder().withUsername(VALID_USERNAME_AARON)
+        UserUpdateDescriptor descriptor = new UpdateUserDescriptorBuilder().withUsername(VALID_USERNAME_AARON)
                 .withPassword(VALID_PASSWORD_AARON).withSecretQuestion(VALID_SECRET_QUESTION_AARON)
                 .withAnswer(VALID_ANSWER_AARON).build();
         UserUpdateCommand expectedCommand = new UserUpdateCommand(descriptor);
@@ -114,7 +114,7 @@ public class UserUpdateCommandParserTest {
     public void parse_someFieldsSpecified_success() {
         String userInput = USERNAME_DESC_AARON + SECRET_QUESTION_DESC_AARON + ANSWER_DESC_AARON;
 
-        UpdateUserDescriptor descriptor = new UpdateUserDescriptorBuilder().withUsername(VALID_USERNAME_AARON)
+        UserUpdateDescriptor descriptor = new UpdateUserDescriptorBuilder().withUsername(VALID_USERNAME_AARON)
                 .withSecretQuestion(VALID_SECRET_QUESTION_AARON).withAnswer(VALID_ANSWER_AARON).build();
         UserUpdateCommand expectedCommand = new UserUpdateCommand(descriptor);
 
@@ -125,7 +125,7 @@ public class UserUpdateCommandParserTest {
     public void parse_oneFieldSpecified_success() {
         // username
         String userInput = USERNAME_DESC_AARON;
-        UpdateUserDescriptor descriptor = new UpdateUserDescriptorBuilder().withUsername(VALID_USERNAME_AARON).build();
+        UserUpdateDescriptor descriptor = new UpdateUserDescriptorBuilder().withUsername(VALID_USERNAME_AARON).build();
         UserUpdateCommand expectedCommand = new UserUpdateCommand(descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

@@ -42,7 +42,7 @@ import seedu.address.logic.commands.user.UserLoginCommand;
 import seedu.address.logic.commands.user.UserLogoutCommand;
 import seedu.address.logic.commands.user.UserRegisterCommand;
 import seedu.address.logic.commands.user.UserUpdateCommand;
-import seedu.address.logic.commands.user.UserUpdateCommand.UpdateUserDescriptor;
+import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryStatus;
@@ -210,7 +210,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_userUpdate() throws Exception {
         User user = new UserBuilder().build();
-        UpdateUserDescriptor descriptor = new UpdateUserDescriptorBuilder(user).build();
+        UserUpdateDescriptor descriptor = new UpdateUserDescriptorBuilder(user).build();
         UserUpdateCommand command = (UserUpdateCommand) parser.parseCommand(UserUpdateCommand.COMMAND_WORD + " "
                 + PREFIX_USER + " " + UserBuilder.DEFAULT_USERNAME + " "
                 + PREFIX_PASSWORD + " " + UserBuilder.DEFAULT_PASSWORD + " "

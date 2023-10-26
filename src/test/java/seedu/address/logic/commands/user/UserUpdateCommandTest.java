@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
-import seedu.address.logic.commands.user.UserUpdateCommand.UpdateUserDescriptor;
+import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.DeliveryBook;
 import seedu.address.model.Model;
@@ -44,7 +44,7 @@ public class UserUpdateCommandTest {
     @Test
     public void execute_allFieldsSpecified_success() {
         User updatedUser = new UserBuilder().build();
-        UpdateUserDescriptor descriptor = new UpdateUserDescriptorBuilder(updatedUser).build();
+        UserUpdateDescriptor descriptor = new UpdateUserDescriptorBuilder(updatedUser).build();
         UserUpdateCommand updateCommand = new UserUpdateCommand(descriptor);
 
         String expectedMessage = UserUpdateCommand.MESSAGE_SUCCESS;
@@ -61,7 +61,7 @@ public class UserUpdateCommandTest {
     public void execute_someFieldsSpecified_success() {
         User updatedUser = new UserBuilder().withUsername(VALID_USERNAME_FOODBEAR)
                 .withSecretQuestion(VALID_SECRET_QUESTION_FOODBEAR).withAnswer(VALID_ANSWER_FOODBEAR).build();
-        UpdateUserDescriptor descriptor = new UpdateUserDescriptorBuilder(updatedUser).build();
+        UserUpdateDescriptor descriptor = new UpdateUserDescriptorBuilder(updatedUser).build();
         UserUpdateCommand updateCommand = new UserUpdateCommand(descriptor);
 
         String expectedMessage = UserUpdateCommand.MESSAGE_SUCCESS;
@@ -78,7 +78,7 @@ public class UserUpdateCommandTest {
     public void execute_noFieldSpecified_success() {
         // succeed because the check is done by the parser in the previous step
         User updatedUser = new UserBuilder().build();
-        UpdateUserDescriptor descriptor = new UpdateUserDescriptorBuilder().build();
+        UserUpdateDescriptor descriptor = new UpdateUserDescriptorBuilder().build();
         UserUpdateCommand updateCommand = new UserUpdateCommand(descriptor);
 
         String expectedMessage = UserUpdateCommand.MESSAGE_SUCCESS;
@@ -108,7 +108,7 @@ public class UserUpdateCommandTest {
         // set state of model to be logged out
         model.setLogoutSuccess();
         User updatedUser = new UserBuilder().build();
-        UpdateUserDescriptor descriptor = new UpdateUserDescriptorBuilder(updatedUser).build();
+        UserUpdateDescriptor descriptor = new UpdateUserDescriptorBuilder(updatedUser).build();
         UserUpdateCommand updateCommand = new UserUpdateCommand(descriptor);
 
         assertCommandFailure(updateCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
@@ -119,7 +119,7 @@ public class UserUpdateCommandTest {
         final UserUpdateCommand standardCommand = new UserUpdateCommand(DESC_AARON);
 
         // same values -> returns true
-        UpdateUserDescriptor copyDescriptor = new UpdateUserDescriptor(DESC_AARON);
+        UserUpdateDescriptor copyDescriptor = new UserUpdateDescriptor(DESC_AARON);
         UserUpdateCommand commandWithSameValues = new UserUpdateCommand(copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -138,10 +138,10 @@ public class UserUpdateCommandTest {
 
     @Test
     public void toStringMethod() {
-        UpdateUserDescriptor updateUserDescriptor = new UpdateUserDescriptor();
-        UserUpdateCommand updateCommand = new UserUpdateCommand(updateUserDescriptor);
+        UserUpdateDescriptor userUpdateDescriptor = new UserUpdateDescriptor();
+        UserUpdateCommand updateCommand = new UserUpdateCommand(userUpdateDescriptor);
         String expected = UserUpdateCommand.class.getCanonicalName() + "{updateUserDescriptor="
-                + updateUserDescriptor + "}";
+                + userUpdateDescriptor + "}";
         assertEquals(expected, updateCommand.toString());
     }
 }
