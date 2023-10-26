@@ -66,7 +66,7 @@ Customer *--> "1" Address
 DeliveryBook *--> "1" UniqueDeliveryList
 UniqueDeliveryList -down-> "~* all" Delivery
 Delivery *--> "1" DeliveryName
-Delivery --> "1" Customer
+Delivery *--> "1" Customer
 Delivery *--> "1" OrderDate
 Delivery *--> "1" DeliveryDate
 Delivery *--> "1" DeliveryStatus
