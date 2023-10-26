@@ -1268,20 +1268,20 @@ otherwise)
 
 **Extensions**
 
-* 1a. Logged-in owner did not specify the delivery id.
+* 1a. Logged-in owner did not specify the delivery id or delivery status.
     * 1a1. DMS informs the logged-in owner of the missing field.
 
       Use case ends.
 
 * 1b. Logged-in owner specified a delivery id that does not exist.
-    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+    * 1b1. DMS informs the logged-in owner of an invalid delivery id being entered.
 
       Use case ends.
 
-* 1c. DMS detects that the specified delivery id is already marked as completed/pending.
-    * 1c1. DMS informs the logged-in owner that the delivery is already marked as completed/pending.
+* 1c. Logged-in owner specified an invalid delivery status.
+    * 1c1. DMS informs the logged-in owner of an invalid delivery status being entered.
 
-      Use case ends
+      Use case ends.
 
 ---
 
