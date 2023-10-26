@@ -7,38 +7,45 @@ skinparam ArrowFontSize 12
 start
 :User enters <i>delivery list --status completed \n <i> --sort asc </i> command;
 partition DeliveryListParser {
-    if () then ([Empty arguments provided])
+    if () then ([else])
         :ParseException: Invalid Command Format;
         stop
-    elseif () then ([Invalid Status])
+    ([none-empty arguments provided]) elseif () then ([else])
         :ParseException: Invalid Delivery Status;
         stop
-    elseif () then ([Invalid Sort])
+    ([sort provided]) elseif () then ([else])
         :ParseException: Invalid Sort;
         stop
-    endif
-    :Create and Execute DeliveryListCommand;
+    else ([valid Sort])
+        :Create and Execute DeliveryListCommand;
+        endif
 }
 
 partition DeliveryListCommand {
-    if () then ([Not Logged In])
+    if () then ([else])
         :CommandException: User Not Authenticated;
         stop
-    endif
+    else ([user logged in])
 
     if () then ([Status Provided])
         :Filter deliveries by status;
+    else ([else])
     endif
 
     if () then ([Customer ID Provided])
         :Filter deliveries by customer id;
+    else ([else])
     endif
+
     if () then ([date Provided])
         :Filter deliveries by date;
+    else ([else])
     endif
         : Sort by delivery date according to sort order;
         : Refresh Displayed Delivery List;
         : Return CommandResult;
+    endif
+
 }
 
 stop
