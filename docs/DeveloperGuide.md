@@ -339,7 +339,7 @@ The format for the `customer edit` command can be found [here](UserGuide.md#logi
 
 1. The user specifies the customer id of the `Customer` to be edited, followed by at least one of the information
 fields to be edited,`Name`, `Phone`, `Email` or/and `Address`.
-e.g.(`customer edit 1 --name John --phone 92149601)
+e.g.(`customer edit 1 --name John --phone 92149601`)
 2. If no fields are provided, an error message will prompt the user to key in at least one of the fields.
 3. If the customer id provided is negative or zero, an error message will prompt the user to key in an unsigned
 positive integer.
@@ -405,7 +405,7 @@ The sequence of the `delivery add` command is as follows:
 
 1. The user inputs the `delivery add` command with `input` as the `DeliveryName`, customer id of a `Customer` and
 `DeliveryDate`.
-e.g.(`delivery add --name Chocolate Cake --customer 1 --date 2024-10-10)
+e.g.(`delivery add --name Chocolate Cake --customer 1 --date 2024-10-10`)
 2. The `LogicManager` calls `AddressBookParser#parseCommand` to create its corresponding CommandParser.
 3. In this case, the `AddressBookParser` creates an instance of `DeliveryAddCommandParser` and calls
    `DeliveryAddCommandParser#parse` to parse the given `input` using various parse methods from `ParserUtil` and
