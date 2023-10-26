@@ -20,10 +20,10 @@ import seedu.address.model.user.Password;
  */
 public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the UserRegisterCommand
-     * and returns an UserRegisterCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the UserUpdateCommand
+     * and returns a UserUpdateCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public UserUpdateCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

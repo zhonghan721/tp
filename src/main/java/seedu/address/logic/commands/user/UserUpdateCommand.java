@@ -48,7 +48,7 @@ public class UserUpdateCommand extends Command {
     private final UserUpdateDescriptor userUpdateDescriptor;
 
     /**
-     * Creates a UserLoginCommand to log in the specified {@code User}
+     * Creates a UserUpdateCommand to update the details of the {@code User}
      */
     public UserUpdateCommand(UserUpdateDescriptor userUpdateDescriptor) {
         requireNonNull(userUpdateDescriptor);
@@ -56,11 +56,11 @@ public class UserUpdateCommand extends Command {
     }
 
     /**
-     * Executes the register user command.
+     * Executes the update user command.
      *
      * @param model {@code Model} which the command should operate on.
      * @return {@code CommandResult} that indicates success.
-     * @throws CommandException if the user is already logged in or the user credentials are wrong.
+     * @throws CommandException if the user is not logged in.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -82,8 +82,7 @@ public class UserUpdateCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code User} with the details of in {@code userUpdateDescriptor}.
      */
     private static User createUpdatedUser(User storedUser, UserUpdateDescriptor userUpdateDescriptor) {
         assert storedUser != null;
@@ -97,7 +96,7 @@ public class UserUpdateCommand extends Command {
     }
 
     /**
-     * Returns true if both users have the same identity and data fields.
+     * Returns true if both {@code UserUpdateCommand} have the same {@code UserUpdateDescriptor}.
      */
     @Override
     public boolean equals(Object other) {
@@ -136,7 +135,6 @@ public class UserUpdateCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public UserUpdateDescriptor(UserUpdateDescriptor toCopy) {
             setUsername(toCopy.username);
