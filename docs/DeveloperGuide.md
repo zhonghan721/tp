@@ -198,12 +198,15 @@ The `Customer` model,
 
 The `Storage` component,
 
-- can save both address book data and user preference data in JSON format, and read them back into corresponding
-  objects.
-- inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
-  the functionality of only one is needed).
-- depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
+* can save user preference data, address book data and delivery book data  in JSON format, 
+* and read them back into corresponding objects.
+* inherits from  `UserPrefStorage`
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
+
+The concrete implementation of storage is done through `StorageManger`, which holds an instance of `UserPrefsStorage`,
+`BookStorage` and `BookStorageWithReference`. Which represents the User Preference Data, Address Book and Delivery Book 
+respectively.
 
 ### Common classes
 
