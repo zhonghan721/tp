@@ -17,9 +17,11 @@ import seedu.address.logic.commands.customer.CustomerAddCommand;
 import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.customer.CustomerListCommand;
+import seedu.address.logic.commands.customer.CustomerViewCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand;
 import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
 import seedu.address.logic.commands.delivery.DeliveryDeleteCommand;
+import seedu.address.logic.commands.delivery.DeliveryFindCommand;
 import seedu.address.logic.commands.delivery.DeliveryListCommand;
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
 import seedu.address.logic.commands.delivery.DeliveryViewCommand;
@@ -28,7 +30,9 @@ import seedu.address.logic.commands.user.UserLoginCommand;
 import seedu.address.logic.commands.user.UserLogoutCommand;
 import seedu.address.logic.commands.user.UserRegisterCommand;
 import seedu.address.logic.commands.user.UserUpdateCommand;
+import seedu.address.logic.parser.customer.CustomerViewCommandParser;
 import seedu.address.logic.parser.delivery.DeliveryCreateNoteCommandParser;
+import seedu.address.logic.parser.delivery.DeliveryFindCommandParser;
 import seedu.address.logic.parser.delivery.DeliveryStatusCommandParser;
 import seedu.address.logic.parser.delivery.DeliveryViewCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -82,14 +86,11 @@ public class AddressBookParser {
         case CustomerDeleteCommand.COMMAND_WORD:
             return new CustomerDeleteCommandParser().parse(arguments);
 
+        case CustomerViewCommand.COMMAND_WORD:
+            return new CustomerViewCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-
-        case DeliveryAddCommand.COMMAND_WORD:
-            return new DeliveryAddCommandParser().parse(arguments);
-
-        case DeliveryDeleteCommand.COMMAND_WORD:
-            return new DeliveryDeleteCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -107,6 +108,18 @@ public class AddressBookParser {
         case DeliveryViewCommand.COMMAND_WORD:
             return new DeliveryViewCommandParser().parse(arguments);
 
+        case DeliveryListCommand.COMMAND_WORD:
+            return new DeliveryListParser().parse(arguments);
+
+        case DeliveryAddCommand.COMMAND_WORD:
+            return new DeliveryAddCommandParser().parse(arguments);
+
+        case DeliveryDeleteCommand.COMMAND_WORD:
+            return new DeliveryDeleteCommandParser().parse(arguments);
+
+        case DeliveryFindCommand.COMMAND_WORD:
+            return new DeliveryFindCommandParser().parse(arguments);
+
         // ================ System Commands ======================================
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -114,8 +127,7 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case DeliveryListCommand.COMMAND_WORD:
-            return new DeliveryListParser().parse(arguments);
+        // ================ User Commands ========================================
 
         case UserLoginCommand.COMMAND_WORD:
             return new UserLoginCommandParser().parse(arguments);

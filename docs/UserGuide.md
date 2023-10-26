@@ -9,7 +9,7 @@ your operations. Within these pages, you'll find detailed coverage of the follow
     - User
         - Register
         - Login
-        - Update details [Coming Soon]
+        - Update details
         - Logout
         - Account recovery
         - Account deletion
@@ -52,9 +52,9 @@ the instructions in the Getting Started Guide to start using the software.
 
 **Accepted Values:**
 
-_USERNAME:_ String
+_USERNAME:_ String, consisting of only alphanumeric characters
 
-_PASSWORD:_ String
+_PASSWORD:_ String, consisting of at least 8 alphanumeric characters
 
 _CONFIRM\_PASSWORD:_ String that is the same as _PASSWORD_
 
@@ -79,9 +79,9 @@ recovery. Try again._
 
 **Accepted Values:**
 
-_USERNAME:_ String
+_USERNAME:_ String, consisting of only alphanumeric characters
 
-_PASSWORD:_ String
+_PASSWORD:_ String, consisting of at least 8 alphanumeric characters
 
 **Command succeeds:** _Log in successful._
 
@@ -89,9 +89,42 @@ _PASSWORD:_ String
 
 **Command fails (wrong login credentials):** _Wrong username and/or password. Try again._
 
-### Update details `[Coming Soon in v1.3]`
+### Update details
 
-_Details coming soon..._
+**Format:** `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD]
+[--secretQn SECRET_QUESTION --answer ANSWER]`
+
+**Example:** `login --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest
+--secretQn Favourite Pet --answer BoBo`
+
+**Accepted Values:**
+
+_USERNAME:_ String, consisting of only alphanumeric characters
+
+_PASSWORD:_ String, consisting of at least 8 alphanumeric characters
+
+_CONFIRM\_PASSWORD:_ String that is the same as _PASSWORD_
+
+_SECRET\_QUESTION:_ String
+
+_ANSWER:_ String
+
+*At least one of the optional fields must be provided.
+If PASSWORD is provided, CONFIRM_PASSWORD must also be provided, vice versa.
+If SECRET_QUESTION is provided, ANSWER must also be provided, vice versa.
+The details will be updated without checking against the current details.
+
+**Command succeeds:** _Update successful._
+
+**Command fails (missing fields):** _Please provide at least one field to update!_
+
+**Command fails (passwords do not match):** _Passwords do not match. Try again._
+
+**Command fails (only one of password/confirm password is provided):**
+_Password and Confirm Password have to be either all present or all absent. Try again._
+
+**Command fails (only one of secret question/answer is provided):**
+_Secret Question and Answer have to be either all present or all absent. Try again._
 
 ### Logout
 
