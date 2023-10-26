@@ -17,7 +17,6 @@ your operations. Within these pages, you'll find detailed coverage of the follow
         - Add customer
         - Search for a customer [Coming Soon]
         - List customers
-        - Sort the list of customers [Coming Soon]
         - Update customer details
         - Delete customer
     - Delivery
@@ -220,8 +219,6 @@ _Here is the list of customers:_
 3. _Gabriel, Phone: 9090 9241, Email: gabrielSoCool@gmail.com, Address: RVRC Tower Block_
 
 **Command succeeds (0 customer):** _There are no customers added yet!_
-
-### Sort the list of customers `[Coming Soon in v1.3]`
 
 _Details coming soon..._
 
