@@ -21,13 +21,13 @@ public class UserRecoverAccountCommand extends Command {
     public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD
             + ": Recover your account for HomeBoss.\n"
             + "Parameters: ["
-            + PREFIX_ANSWER + " " + PREFIX_PASSWORD + " " + PREFIX_PASSWORD_CONFIRM
-            + "]\n"
+            + PREFIX_ANSWER + " ANSWER " + PREFIX_PASSWORD + " NEW_PASSWORD " + PREFIX_PASSWORD_CONFIRM
+            + " NEW_PASSWORD]\n"
             + "Example 1: " + COMMAND_WORD + "\n"
             + "Example 2: " + COMMAND_WORD + " "
-            + PREFIX_ANSWER + " ANSWER "
-            + PREFIX_PASSWORD + " NEW_PASSWORD "
-            + PREFIX_PASSWORD_CONFIRM + " CONFIRM_PASSWORD";
+            + PREFIX_ANSWER + " yourAnswer "
+            + PREFIX_PASSWORD + " yourNewPassword "
+            + PREFIX_PASSWORD_CONFIRM + " yourNewPassword";
     public static final String MESSAGE_SUCCESS_WITHOUT_FLAGS = "Your secret question is: %s";
     public static final String MESSAGE_SUCCESS_WITH_FLAGS = "Your account has been recovered successfully."
             + " Welcome back to HomeBoss.";

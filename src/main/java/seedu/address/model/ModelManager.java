@@ -288,7 +288,6 @@ public class ModelManager implements Model {
         // overrides the stored user
         userPrefs.registerUser(user);
         setLoggedInUser(user);
-        this.setLoggedInUser(user);
         this.setLoginSuccess();
     }
 

@@ -68,4 +68,14 @@ public class UserRecoverAccountCommandParserTest {
 
     }
 
+    // test password mismatch
+    @Test
+    public void parse_passwordMismatch_failure() {
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + ANSWER_DESC_AARON
+                        + PASSWORD_DESC_AARON
+                        // second password is for confirmation
+                        + PASSWORD_CONFIRM_DESC_FOODBEAR,
+                UserRecoverAccountCommand.MESSAGE_PASSWORD_MISMATCH);
+    }
+
 }
