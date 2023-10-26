@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
+import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
@@ -84,6 +85,20 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getCustomer_validId_returnsOptionalCustomer() {
+        modelManager.addPerson(ALICE);
+        Optional<Customer> customer = modelManager.getCustomer(1);
+        assertEquals(customer.get(), ALICE);
+    }
+
+    @Test
+    public void getCustomer_invalidId_returnsEmptyOptional() {
+        modelManager.addPerson(ALICE);
+        Optional<Customer> customer = modelManager.getCustomer(0);
+        assertTrue(customer.isEmpty());
+    }
+
+    @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
     }
@@ -115,6 +130,19 @@ public class ModelManagerTest {
         Path path = Paths.get("delivery/book/file/path");
         modelManager.setDeliveryBookFilePath(path);
         assertEquals(path, modelManager.getDeliveryBookFilePath());
+    }
+
+    @Test
+    public void getDelivery_validId_returnsOptionalDelivery() {
+        modelManager.addDelivery(GABRIELS_MILK);
+        Optional<Delivery> delivery = modelManager.getDelivery(1);
+        assertEquals(delivery.get(), GABRIELS_MILK);
+    }
+
+    @Test
+    public void getDelivery_invalidId_returnsEmptyOptional() {
+        Optional<Delivery> delivery = modelManager.getDelivery(0);
+        assertTrue(delivery.isEmpty());
     }
 
     @Test
