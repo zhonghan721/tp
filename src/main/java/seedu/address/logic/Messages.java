@@ -48,14 +48,12 @@ public class Messages {
      */
     public static String format(Customer customer) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(customer.getName())
-            .append("; Phone: ")
-            .append(customer.getPhone())
-            .append("; Email: ")
-            .append(customer.getEmail())
-            .append("; Address: ")
-            .append(customer.getAddress())
-            .append("; Tags: ");
+        builder.append(String.format("[%d]", customer.getCustomerId()))
+            .append(String.format(" %s", customer.getName()))
+            .append(String.format("\n Phone: %s", customer.getPhone().toString()))
+            .append(String.format("\n Email: %s", customer.getEmail().toString()))
+            .append(String.format("\n Address: %s", customer.getAddress().toString()))
+            .append("\n Tags: ");
         customer.getTags().forEach(builder::append);
         return builder.toString();
     }

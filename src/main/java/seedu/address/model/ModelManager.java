@@ -151,6 +151,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Optional<Customer> getCustomer(int id) {
+        return this.addressBook.getById(id);
+    }
+
+    @Override
     public boolean hasPerson(Customer customer) {
         requireNonNull(customer);
         return addressBook.hasPerson(customer);
