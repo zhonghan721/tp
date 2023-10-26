@@ -33,7 +33,7 @@ public class DeliveryEditDescriptorTest {
         assertFalse(DESC_EDIT_CHIPS.equals(DESC_EDIT_MILK));
 
         // different name -> returns false
-       DeliveryEditDescriptor editedChips =
+        DeliveryEditDescriptor editedChips =
                 new DeliveryEditDescriptorBuilder(DESC_EDIT_CHIPS).build();
         assertFalse(DESC_EDIT_MILK.equals(editedChips));
 

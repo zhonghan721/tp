@@ -149,7 +149,9 @@ public class Delivery {
         return customer;
     }
 
-    public int getCustomerId() {return customer.getCustomerId();}
+    public int getCustomerId() {
+        return customer.getCustomerId();
+    }
 
     public OrderDate getOrderDate() {
         return orderDate;

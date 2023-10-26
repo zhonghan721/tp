@@ -31,9 +31,9 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
 import seedu.address.model.user.User;
+import seedu.address.testutil.CustomerBuilder;
 import seedu.address.testutil.DeliveryAddDescriptorBuilder;
 import seedu.address.testutil.DeliveryBuilder;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.ui.ListItem;
 
 public class DeliveryAddCommandTest {
@@ -45,7 +45,7 @@ public class DeliveryAddCommandTest {
 
     @Test
     public void execute_deliveryAcceptedByModel_addSuccessful() {
-        PersonBuilder personBuilder = new PersonBuilder();
+        CustomerBuilder personBuilder = new CustomerBuilder();
         Customer validCustomer = personBuilder.build();
 
         ModelStubStoringDeliveries modelStub = new ModelStubStoringDeliveries();
@@ -69,7 +69,7 @@ public class DeliveryAddCommandTest {
 
     @Test
     public void execute_invalidPerson_throwsCommandException() {
-        PersonBuilder personBuilder = new PersonBuilder();
+        CustomerBuilder personBuilder = new CustomerBuilder();
         Customer invalidCustomer = personBuilder.withCustomerId(TOO_LARGE_CUSTOMER_ID).build();
 
         ModelStub modelStub = new ModelStubAcceptingDeliveryAdded();
@@ -84,7 +84,7 @@ public class DeliveryAddCommandTest {
 
     @Test
     public void execute_invalidDeliveryDate_throwsCommandException() {
-        PersonBuilder personBuilder = new PersonBuilder();
+        CustomerBuilder personBuilder = new CustomerBuilder();
         Customer validCustomer = personBuilder.build();
 
         ModelStub modelStub = new ModelStubAcceptingDeliveryAdded();
@@ -101,7 +101,7 @@ public class DeliveryAddCommandTest {
 
     @Test
     public void execute_deliveryAcceptedByModelLoggedOut_addFailure() {
-        PersonBuilder personBuilder = new PersonBuilder();
+        CustomerBuilder personBuilder = new CustomerBuilder();
         Customer validCustomer = personBuilder.build();
 
         ModelStubAcceptingDeliveryAddedLoggedOut modelStub = new ModelStubAcceptingDeliveryAddedLoggedOut();
@@ -402,7 +402,7 @@ public class DeliveryAddCommandTest {
 
         @Override
         public ReadOnlyBook<Customer> getAddressBook() {
-            PersonBuilder personBuilder = new PersonBuilder();
+            CustomerBuilder personBuilder = new CustomerBuilder();
             Customer validCustomer = personBuilder.build();
             AddressBook addressBook = new AddressBook();
             addressBook.addPerson(validCustomer);
@@ -440,7 +440,7 @@ public class DeliveryAddCommandTest {
 
         @Override
         public ReadOnlyBook<Customer> getAddressBook() {
-            PersonBuilder personBuilder = new PersonBuilder();
+            CustomerBuilder personBuilder = new CustomerBuilder();
             Customer validCustomer = personBuilder.build();
             AddressBook addressBook = new AddressBook();
             addressBook.addPerson(validCustomer);
@@ -473,7 +473,7 @@ public class DeliveryAddCommandTest {
 
         @Override
         public ReadOnlyBook<Customer> getAddressBook() {
-            PersonBuilder personBuilder = new PersonBuilder();
+            CustomerBuilder personBuilder = new CustomerBuilder();
             Customer validCustomer = personBuilder.build();
             AddressBook addressBook = new AddressBook();
             addressBook.addPerson(validCustomer);

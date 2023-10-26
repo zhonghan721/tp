@@ -1,18 +1,6 @@
 package seedu.address.logic.parser.delivery;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.delivery.DeliveryEditCommand;
-import seedu.address.logic.commands.delivery.DeliveryEditCommand.DeliveryEditDescriptor;
-import seedu.address.model.delivery.DeliveryDate;
-import seedu.address.model.delivery.DeliveryStatus;
-import seedu.address.model.delivery.Note;
-import seedu.address.model.person.Name;
-import seedu.address.testutil.DeliveryEditDescriptorBuilder;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import static seedu.address.logic.commands.CommandTestUtil.CUSTOMER_ID_DESC_MILK;
 import static seedu.address.logic.commands.CommandTestUtil.CUSTOMER_ID_DESC_RICE;
 import static seedu.address.logic.commands.CommandTestUtil.DELIVERY_DATE_DESC_MILK;
@@ -20,9 +8,9 @@ import static seedu.address.logic.commands.CommandTestUtil.DELIVERY_DATE_DESC_RI
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CUSTOMER_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NOTE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_JAMES_MILK;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_MILK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CUSTOMER_ID_1;
@@ -34,18 +22,28 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_CREATED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_DESC;
-
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
-
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.delivery.DeliveryEditCommand;
+import seedu.address.logic.commands.delivery.DeliveryEditCommand.DeliveryEditDescriptor;
+import seedu.address.model.delivery.DeliveryDate;
+import seedu.address.model.delivery.DeliveryStatus;
+import seedu.address.model.delivery.Note;
+import seedu.address.model.person.Name;
+import seedu.address.testutil.DeliveryEditDescriptorBuilder;
+
 
 public class DeliveryEditCommandParserTest {
 
@@ -99,7 +97,7 @@ public class DeliveryEditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + CUSTOMER_ID_DESC_MILK, Name.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-       assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_CUSTOMER_ID_DESC + INVALID_NOTE_DESC,
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_CUSTOMER_ID_DESC + INVALID_NOTE_DESC,
                Name.MESSAGE_CONSTRAINTS);
     }
 
@@ -188,8 +186,8 @@ public class DeliveryEditCommandParserTest {
 
         // mulltiple valid fields repeated
         userInput =
-                targetIndex.getOneBased() + NAME_DESC_MILK + CUSTOMER_ID_DESC_MILK + NAME_DESC_JAMES_MILK +
-                        DELIVERY_DATE_DESC_MILK + CUSTOMER_ID_DESC_RICE + DELIVERY_DATE_DESC_RICE;
+                targetIndex.getOneBased() + NAME_DESC_MILK + CUSTOMER_ID_DESC_MILK + NAME_DESC_JAMES_MILK
+                        + DELIVERY_DATE_DESC_MILK + CUSTOMER_ID_DESC_RICE + DELIVERY_DATE_DESC_RICE;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_CUSTOMER_ID, PREFIX_DATE));

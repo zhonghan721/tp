@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Customer;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.CustomerBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -29,7 +29,7 @@ public class CustomerAddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Customer validCustomer = new PersonBuilder().build();
+        Customer validCustomer = new CustomerBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
                 new UserPrefs(), model.getUserLoginStatus());
@@ -52,7 +52,7 @@ public class CustomerAddCommandIntegrationTest {
     @Test
     public void execute_newPersonLoggedOut_failure() {
         model.setLogoutSuccess();
-        Customer validCustomer = new PersonBuilder().build();
+        Customer validCustomer = new CustomerBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
                 new UserPrefs(), model.getUserLoginStatus());

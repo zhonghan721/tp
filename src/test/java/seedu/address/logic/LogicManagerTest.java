@@ -37,7 +37,7 @@ import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonDeliveryBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.CustomerBuilder;
 import seedu.address.ui.ListItem;
 
 public class LogicManagerTest {
@@ -184,7 +184,7 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = CustomerAddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
             + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Customer expectedCustomer = new PersonBuilder(AMY)
+        Customer expectedCustomer = new CustomerBuilder(AMY)
             .withCustomerId(Customer.getCustomerCount()).withTags().build();
         ModelManager expectedModel = new ModelManager();
         // sets the expected model to be in logged in state

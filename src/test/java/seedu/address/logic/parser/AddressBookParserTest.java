@@ -30,7 +30,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.customer.CustomerAddCommand;
 import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
-import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
 import seedu.address.logic.commands.customer.CustomerListCommand;
 import seedu.address.logic.commands.customer.CustomerViewCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand;
@@ -52,8 +52,13 @@ import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.testutil.*;
-
+import seedu.address.testutil.CustomerBuilder;
+import seedu.address.testutil.CustomerEditDescriptorBuilder;
+import seedu.address.testutil.CustomerUtil;
+import seedu.address.testutil.DeliveryAddDescriptorBuilder;
+import seedu.address.testutil.DeliveryBuilder;
+import seedu.address.testutil.DeliveryEditDescriptorBuilder;
+import seedu.address.testutil.DeliveryUtil;
 
 public class AddressBookParserTest {
 
@@ -61,8 +66,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_customerAdd() throws Exception {
-        Customer customer = new PersonBuilder().withCustomerId(Customer.getCustomerCount()).build();
-        CustomerAddCommand command = (CustomerAddCommand) parser.parseCommand(PersonUtil.getAddCommand(customer));
+        Customer customer = new CustomerBuilder().withCustomerId(Customer.getCustomerCount()).build();
+        CustomerAddCommand command = (CustomerAddCommand) parser.parseCommand(CustomerUtil.getAddCommand(customer));
         assertEquals(new CustomerAddCommand(customer), command);
     }
 
@@ -111,10 +116,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_customerEdit() throws Exception {
-        Customer customer = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(customer).build();
-        CustomerEditCommand command = (CustomerEditCommand) parser.parseCommand(CustomerEditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        Customer customer = new CustomerBuilder().build();
+        CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder(customer).build();
+        CustomerEditCommand command = (CustomerEditCommand) parser
+                .parseCommand(CustomerEditCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + CustomerUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new CustomerEditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
@@ -183,7 +190,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_customerList() throws Exception {
         assertTrue(parser.parseCommand(CustomerListCommand.COMMAND_WORD) instanceof CustomerListCommand);
-        assertTrue(parser.parseCommand(CustomerListCommand.COMMAND_WORD + " 3") instanceof CustomerListCommand);
+        assertTrue(parser.parseCommand(CustomerListCommand.COMMAND_WORD + " 3")
+                instanceof CustomerListCommand);
     }
 
     @Test
@@ -194,14 +202,16 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser
+                .parseCommand("unknownCommand"));
     }
 
     @Test
     public void parseCommand_invalidPrefix_throwsParseException() {
         // Cannot wrap lines due to Separator Wrap not allowing lambda on newline
         assertThrows(
-                ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("invalidPrefix list"));
+                ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser
+                         .parseCommand("invalidPrefix list"));
     }
 
     @Test

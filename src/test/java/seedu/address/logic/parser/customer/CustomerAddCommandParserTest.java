@@ -46,14 +46,14 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.CustomerBuilder;
 
 public class CustomerAddCommandParserTest {
     private CustomerAddCommandParser parser = new CustomerAddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Customer expectedCustomer = new PersonBuilder(BOB)
+        Customer expectedCustomer = new CustomerBuilder(BOB)
                 .withCustomerId(Customer.getCustomerCount()).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
@@ -62,7 +62,7 @@ public class CustomerAddCommandParserTest {
 
 
         // multiple tags - all accepted
-        Customer expectedCustomerMultipleTags = new PersonBuilder(BOB).withCustomerId(Customer.getCustomerCount())
+        Customer expectedCustomerMultipleTags = new CustomerBuilder(BOB).withCustomerId(Customer.getCustomerCount())
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         assertParseSuccess(parser,
             NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
@@ -144,7 +144,7 @@ public class CustomerAddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Customer expectedCustomer = new PersonBuilder(AMY)
+        Customer expectedCustomer = new CustomerBuilder(AMY)
                 .withCustomerId(Customer.getCustomerCount()).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
             new CustomerAddCommand(expectedCustomer));

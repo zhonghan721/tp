@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_MILK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CUSTOMER_ID_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DATE_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_GABRIELS_MILK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -29,8 +30,7 @@ public class DeliveryAddCommandParserTest {
     public void parse_allFieldsPresent_success() {
         DeliveryAddDescriptor expectedDescriptor = new DeliveryAddDescriptor(DESC_MILK);
 
-        // whitespace only preamble
-        assertParseSuccess(parser, NAME_DESC_MILK + CUSTOMER_ID_DESC_MILK
+        assertParseSuccess(parser, VALID_NAME_GABRIELS_MILK + CUSTOMER_ID_DESC_MILK
                 + DELIVERY_DATE_DESC_MILK, new DeliveryAddCommand(expectedDescriptor));
     }
 
@@ -78,12 +78,12 @@ public class DeliveryAddCommandParserTest {
                 + DELIVERY_DATE_DESC_MILK, DeliveryName.MESSAGE_CONSTRAINTS);
 
         // invalid delivery date
-        assertParseFailure(parser, NAME_DESC_MILK + CUSTOMER_ID_DESC_MILK
+        assertParseFailure(parser, VALID_NAME_GABRIELS_MILK + CUSTOMER_ID_DESC_MILK
                 + INVALID_DELIVERY_DATE_DESC, DeliveryDate.MESSAGE_CONSTRAINTS);
 
         // invalid customer id
-        assertParseFailure(parser, NAME_DESC_MILK + INVALID_CUSTOMER_ID_DESC
-                + DELIVERY_DATE_DESC_MILK, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, VALID_NAME_GABRIELS_MILK + INVALID_CUSTOMER_ID_DESC
+               + DELIVERY_DATE_DESC_MILK, MESSAGE_INVALID_INDEX);
 
     }
 }

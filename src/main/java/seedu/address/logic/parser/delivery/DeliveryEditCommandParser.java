@@ -1,7 +1,14 @@
 package seedu.address.logic.parser.delivery;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.delivery.DeliveryEditCommand;
 import seedu.address.logic.commands.delivery.DeliveryEditCommand.DeliveryEditDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -9,10 +16,6 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * Parses input arguments and creates a new DeliveryEditCommand object
@@ -29,8 +32,8 @@ public class DeliveryEditCommandParser implements Parser<DeliveryEditCommand> {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CUSTOMER_ID
-                        , PREFIX_DATE, PREFIX_STATUS, PREFIX_NOTE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CUSTOMER_ID,
+                        PREFIX_DATE, PREFIX_STATUS, PREFIX_NOTE);
 
         Index index;
 
@@ -41,8 +44,8 @@ public class DeliveryEditCommandParser implements Parser<DeliveryEditCommand> {
                     DeliveryEditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_CUSTOMER_ID
-                , PREFIX_DATE, PREFIX_STATUS, PREFIX_NOTE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_CUSTOMER_ID,
+                PREFIX_DATE, PREFIX_STATUS, PREFIX_NOTE);
 
         DeliveryEditDescriptor deliveryEditDescriptor =
                 new DeliveryEditDescriptor();

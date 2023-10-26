@@ -1,16 +1,21 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.customer.CustomerEditCommand;
-import seedu.address.logic.commands.delivery.DeliveryEditCommand;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+
 import seedu.address.logic.commands.delivery.DeliveryEditCommand.DeliveryEditDescriptor;
-import seedu.address.model.tag.Tag;
 
-import java.util.Set;
-
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
+/**
+ * A utility class for a Delivery.
+ */
 public class DeliveryUtil {
+
+    /**
+     * Returns the part of command string for the given {@code DeliveryEditDescriptor}'s details.
+     */
     public static String getEditDeliveryDescriptorDetails(DeliveryEditDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getDeliveryName().ifPresent(name -> sb.append(PREFIX_NAME).append(name).append(" "));
