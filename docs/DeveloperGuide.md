@@ -1080,26 +1080,7 @@ otherwise)
 
 ---
 
-#### **Use Case: UC09 - Sort customers**
-
-**System:** Customer Management System (CMS)
-
-**Actor:** Logged-in owner
-
-**Preconditions:** Owner is logged in
-
-**Guarantees**
-
-- A list of deliveries of a customer is shown if the command is executed successfully.
-
-**MSS:**
-
-1. Logged-in Owner types in command to view what deliveries a particular customer has.
-2. CMS shows the list of deliveries of that specific customer.
-
----
-
-#### **Use Case: UC10 - Search for a Customer**
+#### **Use Case: UC09 - Search for a Customer**
 
 **System:** Customer Management System (CMS)
 
@@ -1140,7 +1121,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC11 - Customer Detail Update
+#### **Use case:** UC10 - Customer Detail Update
 
 **System:** Customer Management System (CMS)
 
@@ -1181,7 +1162,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC12 - Customer Deletion
+#### **Use case:** UC11 - Customer Deletion
 
 **System:** Customer Management System (CMS)
 
@@ -1216,7 +1197,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC13 - List Customers
+#### **Use case:** UC12 - List Customers
 
 **System:** Customer Management System (CMS)
 
@@ -1231,27 +1212,13 @@ otherwise)
 **MSS:**
 
 1. Logged-in Owner types command to list all customers.
-2. CMS shows list of all customers sorted by ascending alphanumeric order.
+2. CMS shows list of all customers.
 
    Use Case Ends.
-
-**Extensions:**
-
-- 1a. Logged -in Owner specifies optional sort field.
-
-    - 1a1. CMS shows list of all customers sorted by the specified sort order.
-
-      Use Case Ends.
-
-- 1b. Logged-in Owner specifies invalid sort field.
-
-    - 1b1. CMS displays an error to Logged-in Owner to specify a valid sort option.
-
-      Use Case Ends.
-
+   
 ---
 
-#### **Use case:** UC14 - Delivery Creation
+#### **Use case:** UC13 - Delivery Creation
 
 **System:** Delivery Management System (DMS)
 
@@ -1292,7 +1259,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC15 - Delivery Notes Creation
+#### **Use case:** UC14 - Delivery Notes Creation
 
 **System:** Delivery Management System (DMS)
 
@@ -1321,7 +1288,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC16 - Delivery List
+#### **Use case:** UC15 - Delivery List
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1361,7 +1328,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC17 - Delivery List for the Day
+#### **Use case:** UC16 - Delivery List for the Day
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1389,7 +1356,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC18 - Add Customer to Delivery
+#### **Use case:** UC17 - Add Customer to Delivery
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1423,7 +1390,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC19 - Remove Customer from Delivery
+#### **Use case:** UC18 - Remove Customer from Delivery
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1457,7 +1424,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC20 - Specify Delivery Method
+#### **Use case:** UC19 - Specify Delivery Method
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1491,7 +1458,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC21 - Search for Delivery
+#### **Use case:** UC20 - Search for Delivery
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1519,7 +1486,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC22 - View location of delivery
+#### Use Case: UC21 - View location of delivery
 
 **System:** Delivery Management System (DMS)
 
@@ -1554,7 +1521,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC23 - View details of delivery
+#### Use Case: UC22 - View details of delivery
 
 **System:** Delivery Management System (DMS)
 
@@ -1589,7 +1556,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC24 - Update delivery status
+#### Use Case: UC23 - Update delivery status
 
 **System:** Delivery Management System (DMS)
 
@@ -1610,7 +1577,7 @@ otherwise)
 
 **Extensions**
 
-- 1a. Logged-in owner did not specify the delivery id.
+- 1a. Logged-in owner did not specify the delivery id or delivery status.
 
     - 1a1. DMS informs the logged-in owner of the missing field.
 
@@ -1618,19 +1585,20 @@ otherwise)
 
 - 1b. Logged-in owner specified a delivery id that does not exist.
 
-    - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+    - 1b1. DMS informs the logged-in owner of an invalid delivery id being entered.
 
       Use case ends.
 
-- 1c. DMS detects that the specified delivery id is already marked as completed/pending.
+- 1c. Logged-in owner specified an invalid delivery status.
 
-    - 1c1. DMS informs the logged-in owner that the delivery is already marked as completed/pending.
+    - 1c1. DMS informs the logged-in owner of an invalid delivery status being entered.
 
-      Use case ends
+
+      Use case ends.
 
 ---
 
-#### Use Case: UC25 - Update delivery details
+#### Use Case: UC24 - Update delivery details
 
 **System:** Delivery Management System (DMS)
 
@@ -1671,7 +1639,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC26 - Delete delivery
+#### Use Case: UC25 - Delete delivery
 
 **System:** Delivery Management System (DMS)
 
