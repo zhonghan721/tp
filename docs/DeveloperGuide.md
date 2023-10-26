@@ -212,6 +212,18 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
+This section describes some noteworthy details on how certain features are implemented.
+
+- [Update Delivery Status](#update-delivery-status-feature)
+- [Create Delivery Note](#create-note-for-delivery-feature)
+- [User Register Account Command](#user-register-account-command)
+- [User Login](#user-login-command)
+- User Update Details
+- [User Logout](#user-logout-command)
+- User Account Recovery
+- User Account Deletion
+- [Add Customer](#add-customer-command)
+
 ### Update Delivery Status Feature
 
 #### Overview
@@ -258,17 +270,6 @@ The sequence of the `delivery status` command is as follows:
 The following sequence diagram illustrates the `delivery status` command sequence:
 
 <puml src="diagrams/DeliveryStatusCommandSequenceDiagram.puml" width="450" />
-
-This section describes some noteworthy details on how certain features are implemented.
-
-- [Create Delivery Note](#create-note-for-delivery-feature)
-- [User Register Account Command](#user-register-account-command)
-- [User Login](#user-login-command)
-- User Update Details
-- [User Logout](#user-logout-command)
-- User Account Recovery
-- User Account Deletion
-- [Add Customer](#add-customer-command)
 
 ### Create Note for Delivery Feature
 
