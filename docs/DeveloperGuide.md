@@ -37,8 +37,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** (consisting of
-classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is
+classes [`Main`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is
 in charge of the app launch and shut down.
 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
@@ -78,7 +78,7 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified
-in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -88,9 +88,9 @@ the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
-in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -102,7 +102,7 @@ The `UI` component,
 ### Logic component
 
 **
-API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -144,7 +144,7 @@ How the parsing works:
 ### Model component
 
 **
-API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -166,10 +166,35 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
 
+#### User Model
+
+<puml src="diagrams/UserClassDiagram.puml" width="450" />
+
+The `User` model,
+
+* stores the user data i.e, the username and password of the user.
+
+#### Delivery Model
+
+<puml src="diagrams/DeliveryClassDiagram.puml" width="450" />
+
+The `Delivery` model,
+
+* stores the delivery data i.e, the delivery name, customer, delivery status, order date, delivery date and note for the
+  delivery.
+
+#### Customer Model
+
+<puml src="diagrams/CustomerClassDiagram.puml" width="450" />
+
+The `Customer` model,
+
+* stores the customer data i.e, the customer address, phone, email and address.
+
 ### Storage component
 
 **
-API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -192,20 +217,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### User Login Command
 
 **Overview:**
@@ -222,9 +233,9 @@ The format for the `login` command can be found [here](UserGuide.md#login).
 3. If invalid command parameters are provided, an error message with the correct parameter format will be shown.
 4. If the user is currently logged in, an error message will be shown.
 5. The `User` is then cross-referenced with the stored user in `Model` to check if the credentials match.
-If incorrect credentials are provided, an error message regarding wrong credentials will be shown.
-6. If all the previous steps are completed without exceptions, the user will be logged in and the 
-`isLoggedIn` status in `Model` will be updated to `true`.
+   If incorrect credentials are provided, an error message regarding wrong credentials will be shown.
+6. If all the previous steps are completed without exceptions, the user will be logged in and the
+   `isLoggedIn` status in `Model` will be updated to `true`.
 
 The following activity diagram shows the logic of a user logging in:
 
@@ -232,15 +243,15 @@ The following activity diagram shows the logic of a user logging in:
 
 The sequence of the `login` command is as follows:
 
-1. Upon launching the application, the `ModelManager` will be initialized with 
-the `User` constructed with details from the authentication.json file.
+1. Upon launching the application, the `ModelManager` will be initialized with
+   the `User` constructed with details from the authentication.json file.
 2. The user inputs the `login` command with the username and password.
 3. The `userLoginCommandParser` checks whether all the required fields are present.
-If all fields are present, it creates a new `userLoginCommand`.
-4. The `userLoginCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`. 
+   If all fields are present, it creates a new `userLoginCommand`.
+4. The `userLoginCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`.
 5. The `userLoginCommand` then checks if the user credentials match the stored user by calling `Model#userMatches()`.
 6. If the user is not logged in and the credentials match, the `userLoginCommand` calls `Model#setLoginSuccess()`,
-changing the login status to true and enabling the user access to all commands.
+   changing the login status to true and enabling the user access to all commands.
 7. The `userLoginCommand` also calls `Model#updateFilteredPersonList()` to display the list of customers.
 
 The following sequence diagram shows how the `login` command works:
@@ -252,7 +263,7 @@ The following sequence diagram shows how the `login` command works:
 **Overview:**
 
 The `logout` command is used to log out from the user's account.
-Once logged out, the user will have no access to all the commands available, except for `help`, `exit`, 
+Once logged out, the user will have no access to all the commands available, except for `help`, `exit`,
 `register`, `login` and `delete account`.
 
 The format for the `logout` command can be found [here](UserGuide.md#logout).
@@ -262,8 +273,8 @@ The format for the `logout` command can be found [here](UserGuide.md#logout).
 1. The user executes the `logout` command.
 2. If extra command parameters are provided after specifying `logout`, the logout command will still be executed.
 3. If the user is currently logged out, an error message will be shown.
-4. If all the previous steps are completed without exceptions, the user will be logged out and the 
-`isLoggedIn` status in `Model` will be updated to `false`.
+4. If all the previous steps are completed without exceptions, the user will be logged out and the
+   `isLoggedIn` status in `Model` will be updated to `false`.
 
 The following activity diagram shows the logic of a user logging out:
 
@@ -273,7 +284,7 @@ The sequence of the `logout` command is as follows:
 
 1. The user inputs the `logout` command.
 2. A new `userLogoutCommand` is created and checks whether the user is currently logged out
-by calling `Model#getUserLoginStatus()`.
+   by calling `Model#getUserLoginStatus()`.
 3. If the user is currently logged in, the `userLogoutCommand` calls `Model#setLogoutSuccess()`,
    changing the login status to false and restricting the user access to most commands.
 4. The `userLoginCommand` also calls `Model#updateFilteredPersonList()` to hide the list of customers.
@@ -281,7 +292,6 @@ by calling `Model#getUserLoginStatus()`.
 The following sequence diagram shows how the `login` command works:
 
 <puml src="diagrams/UserLogoutSequenceDiagram.puml" alt="UserLogoutSequenceDiagram" />
-
 
 ### \[Proposed\] Undo/redo feature
 

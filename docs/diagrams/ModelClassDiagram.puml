@@ -15,23 +15,12 @@ Class UserPrefs
 
 Class UniqueCustomerList
 Class Customer
-Class Address
-Class Email
-Class Name
-Class Phone
+
 
 Class UniqueDeliveryList
 Class Delivery
-Class DeliveryName
-Class Customer
-Class OrderDate
-Class DeliveryDate
-Class DeliveryStatus
-Class Note
 
 Class User
-Class Username
-Class Password
 
 Class ListItem
 
@@ -40,46 +29,34 @@ Class I #FFFFFF
 
 Class HiddenOutside #FFFFFF
 HiddenOutside .down.> Model
-ModelManager .up.|> Model
 
-Model -left-> ReadOnlyUserPrefs
-UserPrefs .down.|> ReadOnlyUserPrefs
-Model -right-> ReadOnlyBook
+Model -right-> ReadOnlyUserPrefs
+Model -left-> ReadOnlyBook
+ModelManager .up.|> Model
+ModelManager -left-> "1" DeliveryBook
+ModelManager -right-> "1" AddressBook
+'
+UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook .up.|> ReadOnlyBook
 DeliveryBook .up.|> ReadOnlyBook
 ModelManager --> "~* uiList" ListItem
-ModelManager --> "1" AddressBook
-ModelManager --> "1" DeliveryBook
 ModelManager --> "1" UserPrefs
 ModelManager --> "1" User
-User --> "1" Username
-User --> "1" Password
-
+'
 AddressBook *--> "1" UniqueCustomerList
 UniqueCustomerList --> "~* all" Customer
-Customer *--> "1" Name
-Customer *--> "1" Phone
-Customer *--> "1" Email
-Customer *--> "1" Address
-
-
+'
+'
+'
 DeliveryBook *--> "1" UniqueDeliveryList
 UniqueDeliveryList -down-> "~* all" Delivery
-Delivery *--> "1" DeliveryName
-Delivery *--> "1" Customer
-Delivery *--> "1" OrderDate
-Delivery *--> "1" DeliveryDate
-Delivery *--> "1" DeliveryStatus
-Delivery *--> "0..1" Note
-
+'
+'
 Customer -[hidden]down--> I
-
+'
 UniqueCustomerList -[hidden]right-> I
-
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
-
+'
+'
 ModelManager --> "~* filteredCustomers" Customer
 ModelManager --> "~* filteredDeliveries" Delivery
 ModelManager --> "~* sortedDeliveries" Delivery
