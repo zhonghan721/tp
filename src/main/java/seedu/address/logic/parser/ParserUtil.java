@@ -212,7 +212,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String sort} into a {@code String}.
+     * Parses a {@code String sort} into a {@code Sort}.
      *
      * @param sort the sort to be parsed.
      * @return the parsed sort.
@@ -262,6 +262,30 @@ public class ParserUtil {
         }
 
         return new Password(trimmedPassword);
+    }
+
+    /**
+     * Parses a {@code String tag} into a {@code String}.
+     *
+     * @param secretQuestion The user input secret question.
+     * @return String of trimmed secret question.
+     */
+    public static String parseSecretQuestion(String secretQuestion) {
+        requireNonNull(secretQuestion);
+        // assume whatever user inputs is valid
+        return secretQuestion.trim();
+    }
+
+    /**
+     * Parses a {@code String tag} into a {@code String}.
+     *
+     * @param answer The user input answer.
+     * @return String of trimmed answer.
+     */
+    public static String parseAnswer(String answer) {
+        requireNonNull(answer);
+        // assume whatever user inputs is valid
+        return answer.trim();
     }
 
 }
