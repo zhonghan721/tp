@@ -42,9 +42,9 @@ Class HiddenOutside #FFFFFF
 HiddenOutside .down.> Model
 ModelManager .up.|> Model
 
-Model .left.> ReadOnlyUserPrefs
+Model -left-> ReadOnlyUserPrefs
 UserPrefs .down.|> ReadOnlyUserPrefs
-Model .right.> ReadOnlyBook
+Model -right-> ReadOnlyBook
 AddressBook .up.|> ReadOnlyBook
 DeliveryBook .up.|> ReadOnlyBook
 ModelManager --> "~* uiList" ListItem
