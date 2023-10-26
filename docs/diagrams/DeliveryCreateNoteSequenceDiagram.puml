@@ -46,9 +46,6 @@ destroy DeliveryCreateNoteCommandParser
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
-
 LogicManager -> DeliveryCreateNoteCommand : execute()
 activate DeliveryCreateNoteCommand
 
