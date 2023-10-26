@@ -46,9 +46,13 @@ the instructions in the Getting Started Guide to start using the software.
 
 ### Register
 
-**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
+You can register for an account to use HomeBoss. Only one account can be registered at a time.
 
-**Example:** `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko`
+**Format:
+** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
+
+**Example:
+** `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko`
 
 **Accepted Values:**
 
@@ -231,7 +235,8 @@ Updates the personal details of an existing customer in the address book.
 
 **Format:** `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`
 
-**Example:** `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
+**Example:
+** `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
 
 **Accepted Values:**
 
@@ -377,8 +382,10 @@ _Delivered On: 2023-12-03_
 **Command fails (missing_fields):**
 
 _Invalid command format!_<br />
-_delivery status: Edits the status of the delivery identified by the ID of the delivery. Existing status will be overwritten by the input status._<br />
-_Parameters: STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) ID (must be a integer representing a valid ID)_<br />
+_delivery status: Edits the status of the delivery identified by the ID of the delivery. Existing status will be
+overwritten by the input status._<br />
+_Parameters: STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) ID (must be a integer representing a valid
+ID)_<br />
 _Example: delivery status COMPLETED 1_<br />
 
 #### Change date of delivery
@@ -434,7 +441,8 @@ _Note: By FedEx_
 **Command failed (missing_fields):**
 
 _Invalid command format!_</br>
-_delivery note: Adds a note to the delivery identified by the ID of the delivery. Existing note if any will be replaced with the input note._</br>
+_delivery note: Adds a note to the delivery identified by the ID of the delivery. Existing note if any will be replaced
+with the input note._</br>
 _Parameters: DELIVERY_ID (must be a integer representing a valid ID) --note Note_</br>
 _Example: delivery note 1 --note This is a note_</br>
 
