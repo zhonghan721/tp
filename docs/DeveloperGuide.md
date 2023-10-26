@@ -215,11 +215,12 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 - [User Register Account Command](#user-register-account-command)
-- [User Login Command](#user-login-command)
-- User Update Details Command
-- [User Logout Command](#user-logout-command)
+- [User Login](#user-login-command)
+- User Update Details
+- [User Logout](#user-logout-command)
 - User Account Recovery
 - User Account Deletion
+- [Add Customer](#add-customer-command)
 
 ### User Register Account Command
 
@@ -343,7 +344,7 @@ The following sequence diagram shows how the `login` command works:
 
 <puml src="diagrams/UserLogoutSequenceDiagram.puml" alt="UserLogoutSequenceDiagram" />
 
-### Customer Add Command
+### Add Customer Command
 
 **Overview:**
 
@@ -359,9 +360,9 @@ The format for the `customer add` command can be found [here](UserGuide.md#add-a
 3. If invalid command parameters are provided, an error message with the correct parameter format will be shown.
 4. If the user is currently not logged in, an error message will be shown.
 5. The `Customer` is then cross-referenced in the `Model` to check if a customer with the same `Name` already exists.
-If a customer with the same `Name` exists, an error message will be shown.
+   If a customer with the same `Name` exists, an error message will be shown.
 6. If all the previous steps are completed without exceptions, the new `Customer` will be successfully added to the
-database.
+   database.
 
 The following activity diagram shows the logic of adding a `Customer` into the database:
 
