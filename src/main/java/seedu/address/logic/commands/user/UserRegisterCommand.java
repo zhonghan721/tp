@@ -28,7 +28,7 @@ public class UserRegisterCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USER + " yourUsername "
             + PREFIX_PASSWORD + " yourPassword "
-            + PREFIX_PASSWORD_CONFIRM + " yourPassword"
+            + PREFIX_PASSWORD_CONFIRM + " yourPassword "
             + PREFIX_SECRET_QUESTION + " yourSecretQuestion "
             + PREFIX_ANSWER + " yourAnswer";
     public static final String MESSAGE_SUCCESS = "Registration successful. Welcome to HomeBoss!";
