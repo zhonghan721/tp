@@ -650,39 +650,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC05 - Update Password
-
-**System:** User System (US)
-
-**Actor:** Logged-in owner.
-
-**Preconditions:** Owner is logged in.
-
-**Guarantees:**
-
-* Password of logged-in owner is updated.
-
-**MSS:**
-
-1. Logged-in owner types command to update password with password and confirm password.
-2. User system shows a success message.
-   Use case ends.
-
-**Extensions:**
-
-* 1a. Logged-in owner does not enter one of the fields
-    * 1a1. US requests logged-in owner to fill up all the required fields
-
-      Use case ends.
-
-* 1b. Logged-in owner types incorrect confirm password
-    * 1b1. US requests logged-in owner to retype their confirm password
-
-      Use case ends.
-
----
-
-#### Use Case: UC06 - Delete Account
+#### Use Case: UC05 - Delete Account
 
 **System:** User System (US)
 
@@ -703,11 +671,14 @@ otherwise)
 
 ---
 
-#### **Use Case: UC07 - Update Details**
+#### Use Case: UC06 - Update Details
 
 **System:** User System (US)
+
 **Actor:** Logged-in owner
+
 **Preconditions:** Owner is logged in
+
 **Guarantees:**
 
 * Old details will be changed to the new details keyed in only if the command is executed successfully
@@ -727,9 +698,39 @@ otherwise)
 
       Use Case ends.
 
+* 1b. Logged-in Owner specifies Password field and not Confirm Password field.
+
+    * 1b1. US requests Logged-in Owner to specify both Password and Confirm Password field.
+
+      Use Case ends.
+
+* 1c. Logged-in Owner specifies Confirm Password field and not Password field.
+
+    * 1c1. US requests Logged-in Owner to specify both Password and Confirm Password field.
+
+      Use Case ends.
+
+* 1d. Logged-in Owner types incorrect confirm password.
+
+    * 1d1. US requests Logged-in Owner to retype their confirm password.
+
+      Use Case ends.
+
+* 1e. Logged-in Owner specifies Secret Question field and not Answer field.
+
+    * 1e1. US requests Logged-in Owner to specify both Secret Question and Answer field.
+
+      Use Case ends.
+
+* 1f. Logged-in Owner specifies Answer field and not Secret Question field.
+
+    * 1f1. US requests Logged-in Owner to specify both Secret Question and Answer field.
+
+      Use Case ends.
+
 ---
 
-#### **Use Case: UC08 - Create Customer**
+#### **Use Case: UC07 - Create Customer**
 
 **System:** Customer Management System (CMS)
 
@@ -759,7 +760,7 @@ otherwise)
 
 ---
 
-#### **Use Case: UC09 - View customer’s details**
+#### **Use Case: UC08 - View customer’s details**
 
 **System:** Customer Management System (CMS)
 
@@ -794,7 +795,7 @@ otherwise)
 
 --- 
 
-#### **Use Case: UC10 - Sort customers**
+#### **Use Case: UC09 - Sort customers**
 
 **System:** Customer Management System (CMS)
 
@@ -813,7 +814,7 @@ otherwise)
 
 --- 
 
-#### **Use Case: UC11 - Search for a Customer**
+#### **Use Case: UC10 - Search for a Customer**
 
 **System:** Customer Management System (CMS)
 
@@ -854,7 +855,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC12 - Customer Detail Update
+#### **Use case:** UC11 - Customer Detail Update
 
 **System:** Customer Management System (CMS)
 
@@ -892,7 +893,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC13 - Customer Deletion
+#### **Use case:** UC12 - Customer Deletion
 
 **System:** Customer Management System (CMS)
 
@@ -925,7 +926,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC14 - List Customers
+#### **Use case:** UC13 - List Customers
 
 **System:** Customer Management System (CMS)
 
@@ -958,7 +959,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC15 - Delivery Creation
+#### **Use case:** UC14 - Delivery Creation
 
 **System:** Delivery Management System (DMS)
 
@@ -996,7 +997,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC16 - Delivery Notes Creation
+#### **Use case:** UC15 - Delivery Notes Creation
 
 **System:** Delivery Management System (DMS)
 
@@ -1024,7 +1025,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC17 - Delivery List
+#### **Use case:** UC16 - Delivery List
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1061,7 +1062,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC18 - Delivery List for the Day
+#### **Use case:** UC17 - Delivery List for the Day
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1088,7 +1089,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC19 - Add Customer to Delivery
+#### **Use case:** UC18 - Add Customer to Delivery
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1120,7 +1121,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC20 - Remove Customer from Delivery
+#### **Use case:** UC19 - Remove Customer from Delivery
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1152,7 +1153,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC21 - Specify Delivery Method
+#### **Use case:** UC20 - Specify Delivery Method
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1184,7 +1185,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC22 - Search for Delivery
+#### **Use case:** UC21 - Search for Delivery
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1211,7 +1212,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC23 - View location of delivery
+#### Use Case: UC22 - View location of delivery
 
 **System:** Delivery Management System (DMS)
 
@@ -1244,7 +1245,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC24 - View details of delivery
+#### Use Case: UC23 - View details of delivery
 
 **System:** Delivery Management System (DMS)
 
@@ -1277,7 +1278,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC25 - Update delivery status
+#### Use Case: UC24 - Update delivery status
 
 **System:** Delivery Management System (DMS)
 
@@ -1315,7 +1316,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC26 - Update delivery details
+#### Use Case: UC25 - Update delivery details
 
 **System:** Delivery Management System (DMS)
 
@@ -1353,7 +1354,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC27 - Delete delivery
+#### Use Case: UC26 - Delete delivery
 
 **System:** Delivery Management System (DMS)
 
