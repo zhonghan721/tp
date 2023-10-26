@@ -2,10 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
+import seedu.address.model.*;
 
 /**
  * Clears the address book.
@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Database has been cleared!";
 
 
     @Override
@@ -26,6 +26,8 @@ public class ClearCommand extends Command {
         }
 
         model.setAddressBook(new AddressBook());
-        return new CommandResult(MESSAGE_SUCCESS);
+        model.setDeliveryBook(new DeliveryBook());
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        return new CommandResult(MESSAGE_SUCCESS, true);
     }
 }
