@@ -2,7 +2,22 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.*;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SECRET_QUESTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -12,7 +27,6 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
-import seedu.address.logic.commands.delivery.DeliveryEditCommand;
 import seedu.address.logic.commands.delivery.DeliveryEditCommand.DeliveryEditDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -112,6 +126,10 @@ public class CommandTestUtil {
     public static final String VALID_PASSWORD_FOODBEAR = "BEARYf00d";
     public static final String VALID_HASHED_PASSWORD_FOODBEAR =
             "26CC1E3D7988F3AE6FB06859123B5046A5A84D47611092037E059F66E1C0E461";
+    public static final String VALID_SECRET_QUESTION_AARON = "What is my name?";
+    public static final String VALID_SECRET_QUESTION_FOODBEAR = "What is my favourite food?";
+    public static final String VALID_ANSWER_AARON = "Aaron";
+    public static final String VALID_ANSWER_FOODBEAR = "Food";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -129,15 +147,21 @@ public class CommandTestUtil {
     public static final String PASSWORD_CONFIRM_DESC_AARON = " " + PREFIX_PASSWORD_CONFIRM + VALID_PASSWORD_AARON;
     public static final String PASSWORD_DESC_FOODBEAR = " " + PREFIX_PASSWORD + VALID_PASSWORD_FOODBEAR;
     public static final String PASSWORD_CONFIRM_DESC_FOODBEAR = " " + PREFIX_PASSWORD_CONFIRM + VALID_PASSWORD_FOODBEAR;
-
+    public static final String SECRET_QUESTION_DESC_AARON = " " + PREFIX_SECRET_QUESTION + "What is my name?";
+    public static final String SECRET_QUESTION_DESC_FOODBEAR = " "
+            + PREFIX_SECRET_QUESTION + "What is my favourite food?";
+    public static final String ANSWER_DESC_AARON = " " + PREFIX_ANSWER + "Aaron";
+    public static final String ANSWER_DESC_FOODBEAR = " " + PREFIX_ANSWER + "Food";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_PHONE_DESC_2 = " " + PREFIX_PHONE + "1234567"; // less than 8 digits
+    public static final String INVALID_PHONE_DESC_3 = " " + PREFIX_PHONE + "123456789"; // more than 8 digits
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String INVALID_USERNAME_DESC = " " + PREFIX_USER
-        + "thisIs^myName"; // '^' not allowed in username
+            + "thisIs^myName"; // '^' not allowed in username
     public static final String INVALID_PASSWORD_DESC = " " + PREFIX_PASSWORD + "qwerty"; // lesser than 8 characters
     public static final String INVALID_PASSWORD_CONFIRM_DESC = " " + PREFIX_PASSWORD_CONFIRM + "qwerty";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -166,11 +190,11 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
         DESC_MILK = new DeliveryAddDescriptorBuilder().withCustomerId(VALID_CUSTOMER_ID_1)
                 .withDeliveryDate(VALID_DELIVERY_DATE_1).withDeliveryName(VALID_NAME_GABRIELS_MILK).build();
@@ -264,6 +288,7 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the delivery at the given {@code targetIndex} in the
      * {@code model}'s address book.

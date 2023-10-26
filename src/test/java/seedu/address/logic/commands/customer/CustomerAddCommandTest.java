@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.customer.AddCommand;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -31,11 +31,11 @@ import seedu.address.model.user.User;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.ui.ListItem;
 
-public class AddCommandTest {
+public class CustomerAddCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new CustomerAddCommand(null));
     }
 
     @Test
@@ -43,9 +43,9 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Customer validCustomer = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validCustomer).execute(modelStub);
+        CommandResult commandResult = new CustomerAddCommand(validCustomer).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
+        assertEquals(String.format(CustomerAddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validCustomer), modelStub.personsAdded);
     }
@@ -53,10 +53,13 @@ public class AddCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Customer validCustomer = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validCustomer);
+        CustomerAddCommand customerAddCommand = new CustomerAddCommand(validCustomer);
         ModelStub modelStub = new ModelStubWithPerson(validCustomer);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_CUSTOMER, () -> addCommand.execute(modelStub));
+
+        assertThrows(CommandException.class,
+                CustomerAddCommand.MESSAGE_DUPLICATE_CUSTOMER, () -> customerAddCommand.execute(modelStub));
+
     }
 
     @Test
@@ -64,24 +67,24 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAddedLoggedOut modelStub = new ModelStubAcceptingPersonAddedLoggedOut();
         Customer validCustomer = new PersonBuilder().build();
 
-        AddCommand addCommand = new AddCommand(validCustomer);
+        CustomerAddCommand customerAddCommand = new CustomerAddCommand(validCustomer);
 
         assertThrows(CommandException.class,
-            Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> addCommand.execute(modelStub));
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> customerAddCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Customer alice = new PersonBuilder().withName("Alice").build();
         Customer bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        CustomerAddCommand addAliceCommand = new CustomerAddCommand(alice);
+        CustomerAddCommand addBobCommand = new CustomerAddCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        CustomerAddCommand addAliceCommandCopy = new CustomerAddCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -96,9 +99,9 @@ public class AddCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        CustomerAddCommand customerAddCommand = new CustomerAddCommand(ALICE);
+        String expected = CustomerAddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        assertEquals(expected, customerAddCommand.toString());
     }
 
     /**
@@ -163,6 +166,11 @@ public class AddCommandTest {
         @Override
         public ReadOnlyBook<Customer> getAddressBook() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Customer> getCustomer(int id) {
+            return Optional.empty();
         }
 
         @Override

@@ -19,7 +19,12 @@ public class Messages {
     public static final String MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX = "The customer index provided is invalid";
     public static final String MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX = "The delivery index provided is invalid";
     public static final String MESSAGE_INVALID_DELIVERY_ID = "The delivery ID provided is invalid";
+
     public static final String MESSAGE_CUSTOMER_LISTED_OVERVIEW = "%1$d customers listed!";
+
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_DELIVERY_LISTED_OVERVIEW = "%1$d deliveries listed!";
+
     public static final String MESSAGE_DUPLICATE_FIELDS = "Multiple values specified for the following"
         + "single-valued field(s): ";
 
@@ -28,6 +33,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_DELIVERY_DATE =
             "Delivery Date cannot be before today.";
 
+    public static final String MESSAGE_INVALID_ORDER_DATE =
+            "Order Date cannot be after today.";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -45,14 +52,12 @@ public class Messages {
      */
     public static String format(Customer customer) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(customer.getName())
-            .append("; Phone: ")
-            .append(customer.getPhone())
-            .append("; Email: ")
-            .append(customer.getEmail())
-            .append("; Address: ")
-            .append(customer.getAddress())
-            .append("; Tags: ");
+        builder.append(String.format("[%d]", customer.getCustomerId()))
+            .append(String.format(" %s", customer.getName()))
+            .append(String.format("\n Phone: %s", customer.getPhone().toString()))
+            .append(String.format("\n Email: %s", customer.getEmail().toString()))
+            .append(String.format("\n Address: %s", customer.getAddress().toString()))
+            .append("\n Tags: ");
         customer.getTags().forEach(builder::append);
         return builder.toString();
     }

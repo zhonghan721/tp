@@ -31,21 +31,21 @@
   }, {
     "customerId" : "5",
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94822246",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ]
   }, {
     "customerId" : "6",
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94824276",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ]
   }, {
     "customerId" : "7",
     "name" : "George Best",
-    "phone" : "9482442",
+    "phone" : "94824426",
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ]

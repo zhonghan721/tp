@@ -21,10 +21,11 @@ public class DeliveryStatusCommandParserTest {
     public void parse_allFields_success() {
         // CREATED
         DeliveryStatusCommand deliveryStatusCommand = new DeliveryStatusCommand(1, DeliveryStatus.CREATED);
-        assertParseSuccess(parser, VALID_STATUS_CREATED + " 1", deliveryStatusCommand);
+        assertParseSuccess(parser, "1 " + VALID_STATUS_CREATED, deliveryStatusCommand);
 
         // SHIPPED
         deliveryStatusCommand = new DeliveryStatusCommand(1, DeliveryStatus.SHIPPED);
+
         assertParseSuccess(parser, VALID_STATUS_SHIPPED_VIEW + " 1", deliveryStatusCommand);
 
         // COMPLETED
@@ -34,46 +35,51 @@ public class DeliveryStatusCommandParserTest {
         // CANCELLED
         deliveryStatusCommand = new DeliveryStatusCommand(1, DeliveryStatus.CANCELLED);
         assertParseSuccess(parser, VALID_STATUS_CANCELLED_VIEW + " 1", deliveryStatusCommand);
+
     }
 
     @Test
     public void parse_allFieldsExtraSpaceBetween_success() {
         DeliveryStatusCommand deliveryStatusCommand = new DeliveryStatusCommand(1, DeliveryStatus.CREATED);
-        assertParseSuccess(parser, VALID_STATUS_CREATED + "   1", deliveryStatusCommand);
+        assertParseSuccess(parser, "1    " + VALID_STATUS_CREATED, deliveryStatusCommand);
     }
 
     @Test
     public void parse_allFieldsExtraSpaceBefore_success() {
         DeliveryStatusCommand deliveryStatusCommand = new DeliveryStatusCommand(1, DeliveryStatus.CREATED);
-        assertParseSuccess(parser, " " + VALID_STATUS_CREATED + " 1", deliveryStatusCommand);
+        assertParseSuccess(parser, " 1 " + VALID_STATUS_CREATED, deliveryStatusCommand);
     }
 
     @Test
     public void parse_allFieldsExtraSpaceAfter_success() {
         DeliveryStatusCommand deliveryStatusCommand = new DeliveryStatusCommand(1, DeliveryStatus.CREATED);
-        assertParseSuccess(parser, " " + VALID_STATUS_CREATED + " 1 ", deliveryStatusCommand);
+        assertParseSuccess(parser, "1 " + VALID_STATUS_CREATED + " ", deliveryStatusCommand);
     }
 
     @Test
     public void parse_statusLowerCase_success() {
         DeliveryStatusCommand deliveryStatusCommand = new DeliveryStatusCommand(1, DeliveryStatus.CREATED);
+
         assertParseSuccess(parser, VALID_STATUS_CREATED_VIEW.toLowerCase() + " 1", deliveryStatusCommand);
+
     }
 
     @Test
     public void parse_statusUpperCase_success() {
         DeliveryStatusCommand deliveryStatusCommand = new DeliveryStatusCommand(1, DeliveryStatus.CREATED);
+
         assertParseSuccess(parser, VALID_STATUS_CREATED_VIEW.toUpperCase() + " 1", deliveryStatusCommand);
+
     }
 
     @Test
     public void parse_invalidStatus_failure() {
-        assertParseFailure(parser, INVALID_STATUS + " 1", DeliveryStatus.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 " + INVALID_STATUS, DeliveryStatus.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_invalidAllStatus_failure() {
-        assertParseFailure(parser, "ALL 1", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 ALL", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -83,24 +89,24 @@ public class DeliveryStatusCommandParserTest {
 
     @Test
     public void parse_extraWordBeforeStatus_failure() {
-        assertParseFailure(parser, "word " + INVALID_STATUS + " 1", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 word " + INVALID_STATUS, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_negativeId_failure() {
         assertParseFailure(parser,
-            INVALID_STATUS + " " + INVALID_ID_NEGATIVE, MESSAGE_INVALID_FORMAT);
+            INVALID_ID_NEGATIVE + " " + INVALID_STATUS, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_nanId_failure() {
         assertParseFailure(parser,
-            INVALID_STATUS + " " + INVALID_ID_NAN, MESSAGE_INVALID_FORMAT);
+            INVALID_ID_NAN + " " + INVALID_STATUS, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_extraNumberAfterId_failure() {
         assertParseFailure(parser,
-            INVALID_STATUS + " 1 1", MESSAGE_INVALID_FORMAT);
+            "1 1 " + INVALID_STATUS, MESSAGE_INVALID_FORMAT);
     }
 }

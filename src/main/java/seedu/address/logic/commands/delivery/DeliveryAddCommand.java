@@ -22,6 +22,7 @@ import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.OrderDate;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 
 /**
@@ -41,8 +42,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
             + PREFIX_CUSTOMER_ID + " 5 "
             + PREFIX_DATE + " 2023-12-03 ";
 
-    // public static final String MESSAGE_SUCCESS = "New delivery added: %1$s";
-    public static final String MESSAGE_SUCCESS = "New delivery added: ";
+    public static final String MESSAGE_SUCCESS = "New delivery added: %1$s";
     public static final String MESSAGE_DUPLICATE_DELIVERY = "This delivery already exists in HomeBoss";
 
     private final DeliveryAddDescriptor deliveryAddDescriptor;
@@ -64,7 +64,6 @@ public class DeliveryAddCommand extends DeliveryCommand {
         if (!model.getUserLoginStatus()) {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
-
         Delivery toAdd = createDelivery(model, deliveryAddDescriptor);
 
         model.addDelivery(toAdd);
@@ -101,6 +100,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
         int customerId = deliveryAddDescriptor.getCustomerId().get();
         Customer customer = null;
         DeliveryDate deliveryDate = null;
+        Address address = null;
 
         LocalDate now = LocalDate.now();
         OrderDate orderDate = new OrderDate(now.toString());
@@ -111,6 +111,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
 
         if (checkValidCustomer(model, deliveryAddDescriptor)) {
             customer = customerReadOnlyBook.getById(customerId).get();
+
         } else {
             throw new CommandException(MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
@@ -119,7 +120,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
         } else {
             throw new CommandException(MESSAGE_INVALID_DELIVERY_DATE);
         }
-        return new Delivery(deliveryName, customer, orderDate, deliveryDate, newDeliveryStatus, null);
+        return new Delivery(deliveryName, customer, orderDate, deliveryDate, newDeliveryStatus);
 
     }
 
@@ -213,3 +214,4 @@ public class DeliveryAddCommand extends DeliveryCommand {
         }
     }
 }
+
