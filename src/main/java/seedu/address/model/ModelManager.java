@@ -267,11 +267,11 @@ public class ModelManager implements Model {
     public void deleteUser() {
         userPrefs.deleteUser();
         // set the logged in user to null
-        setAddressBook(new AddressBook());
         this.setLoggedInUser(null);
         setLogoutSuccess();
-        updateFilteredPersonList(PREDICATE_SHOW_NO_CUSTOMERS);
-        updateFilteredDeliveryList(PREDICATE_SHOW_NO_DELIVERIES);
+        setAddressBook(new AddressBook());
+        setDeliveryBook(new DeliveryBook());
+        setUiListCustomer();
     }
 
     /**
