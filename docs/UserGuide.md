@@ -417,13 +417,7 @@ _NOTE_: Nonempty alphanumeric string
 
 **Command succeeds:**
 
-_Added Note to Delivery: [2] milk_</br>
-_COMPLETED_</br>
-_Customer: Alex Yeoh_</br>
-_Customer Id: 1_</br>
-_Ordered On: 2023-10-21_</br>
-_Delivered On: 2023-12-03_</br>
-_Note: By FedEx_
+![Delivery Note](images/delivery/delivery_note.png)
 
 **Command failed (invalid_index):** _The delivery index provided is invalid_
 
