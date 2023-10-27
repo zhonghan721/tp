@@ -68,7 +68,7 @@ public class CustomerAddCommandTest {
         CustomerAddCommand customerAddCommand = new CustomerAddCommand(validCustomer);
 
         assertThrows(CommandException.class,
-            Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> customerAddCommand.execute(modelStub));
+                Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> customerAddCommand.execute(modelStub));
     }
 
     @Test
@@ -272,7 +272,6 @@ public class CustomerAddCommandTest {
 
         @Override
         public void setLogoutSuccess() {
-
             throw new AssertionError("This method should not be called.");
         }
 
@@ -298,6 +297,11 @@ public class CustomerAddCommandTest {
 
         @Override
         public void deleteUser() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetPassword(User user) {
             throw new AssertionError("This method should not be called.");
         }
 

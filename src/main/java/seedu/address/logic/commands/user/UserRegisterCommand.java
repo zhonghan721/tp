@@ -23,11 +23,9 @@ public class UserRegisterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Register an account for HomeBoss.\n"
             + "Parameters: "
-            + PREFIX_USER + " USERNAME "
-            + PREFIX_PASSWORD + " PASSWORD "
-            + PREFIX_PASSWORD_CONFIRM + " CONFIRM_PASSWORD "
-            + PREFIX_SECRET_QUESTION + " SECRET_PASSWORD "
-            + PREFIX_ANSWER + " ANSWER\n"
+            + PREFIX_USER + " USERNAME " + PREFIX_PASSWORD + " PASSWORD " + PREFIX_PASSWORD_CONFIRM
+            + " CONFIRM_PASSWORD " + PREFIX_SECRET_QUESTION + " SECRET_QUESTION " + PREFIX_ANSWER
+            + " ANSWER\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USER + " yourUsername "
             + PREFIX_PASSWORD + " yourPassword "
@@ -41,7 +39,7 @@ public class UserRegisterCommand extends Command {
     private final User user;
 
     /**
-     * Creates a UserLoginCommand to log in the specified {@code User}
+     * Creates a UserRegisterCommand to log in the specified {@code User}
      */
     public UserRegisterCommand(User user) {
         requireNonNull(user);

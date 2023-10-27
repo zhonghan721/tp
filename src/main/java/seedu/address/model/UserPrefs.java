@@ -124,7 +124,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
             AuthenticationData authenticationData =
                     objectMapper.readValue(authenticationPath.toFile(), AuthenticationData.class);
 
-            // if either field in the authentication file is empty, return null
+            // if username in the authentication file is empty, return null
             if ((!Username.isValidUsername(authenticationData.getUsername()))) {
                 return null;
             }

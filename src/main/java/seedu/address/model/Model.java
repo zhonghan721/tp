@@ -231,7 +231,10 @@ public interface Model {
 
     void deleteUser();
 
+    void resetPassword(User user);
+
     void updateUser(User user);
+
 }
 
 
