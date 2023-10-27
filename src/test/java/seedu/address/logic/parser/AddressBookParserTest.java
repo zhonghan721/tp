@@ -54,9 +54,9 @@ import seedu.address.model.delivery.Note;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.user.User;
+import seedu.address.testutil.CustomerEditDescriptorBuilder;
 import seedu.address.testutil.DeliveryAddDescriptorBuilder;
 import seedu.address.testutil.DeliveryBuilder;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.UpdateUserDescriptorBuilder;
@@ -120,7 +120,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_customerEdit() throws Exception {
         Customer customer = new PersonBuilder().build();
-        CustomerEditCommand.CustomerEditDescriptor descriptor = new EditPersonDescriptorBuilder(customer).build();
+        CustomerEditCommand.CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder(customer).build();
         CustomerEditCommand command = (CustomerEditCommand) parser.parseCommand(CustomerEditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new CustomerEditCommand(INDEX_FIRST_PERSON, descriptor), command);
