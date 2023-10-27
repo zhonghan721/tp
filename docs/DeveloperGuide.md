@@ -1080,6 +1080,25 @@ otherwise)
 
 ---
 
+#### **Use Case: UC09 - Sort customers**
+
+**System:** Customer Management System (CMS)
+
+**Actor:** Logged-in owner
+
+**Preconditions:** Owner is logged in
+
+**Guarantees**
+
+* A list of deliveries of a customer is shown if the command is executed successfully.
+
+**MSS:**
+
+1. Logged-in Owner types in command to view what deliveries a particular customer has.
+2. CMS shows the list of deliveries of that specific customer.
+
+---
+
 #### **Use Case: UC09 - Search for a Customer**
 
 **System:** Customer Management System (CMS)

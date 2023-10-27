@@ -301,6 +301,11 @@ public class CustomerAddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void updateUser(User user) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

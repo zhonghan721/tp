@@ -43,6 +43,8 @@ import seedu.address.logic.commands.delivery.DeliveryViewCommand;
 import seedu.address.logic.commands.user.UserLoginCommand;
 import seedu.address.logic.commands.user.UserLogoutCommand;
 import seedu.address.logic.commands.user.UserRegisterCommand;
+import seedu.address.logic.commands.user.UserUpdateCommand;
+import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
@@ -50,11 +52,14 @@ import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.user.User;
 import seedu.address.testutil.DeliveryAddDescriptorBuilder;
 import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.UpdateUserDescriptorBuilder;
+import seedu.address.testutil.UserBuilder;
 
 
 public class AddressBookParserTest {
@@ -220,5 +225,18 @@ public class AddressBookParserTest {
     public void parseCommand_userLogout() throws Exception {
         assertTrue(parser.parseCommand(UserLogoutCommand.COMMAND_WORD) instanceof UserLogoutCommand);
         assertTrue(parser.parseCommand(UserLogoutCommand.COMMAND_WORD + " abc") instanceof UserLogoutCommand);
+    }
+
+    @Test
+    public void parseCommand_userUpdate() throws Exception {
+        User user = new UserBuilder().build();
+        UserUpdateDescriptor descriptor = new UpdateUserDescriptorBuilder(user).build();
+        UserUpdateCommand command = (UserUpdateCommand) parser.parseCommand(UserUpdateCommand.COMMAND_WORD + " "
+                + PREFIX_USER + " " + UserBuilder.DEFAULT_USERNAME + " "
+                + PREFIX_PASSWORD + " " + UserBuilder.DEFAULT_PASSWORD + " "
+                + PREFIX_PASSWORD_CONFIRM + " " + UserBuilder.DEFAULT_PASSWORD + " "
+                + PREFIX_SECRET_QUESTION + " " + UserBuilder.SECRET_QUESTION + " "
+                + PREFIX_ANSWER + " " + UserBuilder.ANSWER);
+        assertEquals(new UserUpdateCommand(descriptor), command);
     }
 }

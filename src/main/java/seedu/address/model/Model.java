@@ -230,6 +230,8 @@ public interface Model {
     void setLoggedInUser(User user);
 
     void deleteUser();
+
+    void updateUser(User user);
 }
 
 
