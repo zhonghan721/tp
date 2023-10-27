@@ -286,6 +286,17 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Resets the password of the given {@code user}.
+     */
+    @Override
+    public void resetPassword(User user) {
+        // overrides the stored user
+        userPrefs.registerUser(user);
+        setLoggedInUser(user);
+        this.setLoginSuccess();
+    }
+
+    /**
      * Updates the stored {@code user} to the given {@code user} by re-registering the {@code user}.
      */
     @Override
