@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all customers in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class CustomerFindCommand extends Command {
@@ -41,8 +41,8 @@ public class CustomerFindCommand extends Command {
 
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-            String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
-                    model.getFilteredPersonList().size()), true);
+            String.format(Messages.MESSAGE_CUSTOMERS_MATCHED_LISTED,
+                    model.getFilteredPersonList().size(), predicate.getKeywordsAsString()), true);
     }
 
     @Override

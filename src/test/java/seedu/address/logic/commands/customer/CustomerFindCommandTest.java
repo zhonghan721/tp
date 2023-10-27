@@ -1,9 +1,10 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.customer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_CUSTOMERS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_CUSTOMERS_MATCHED_LISTED;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
@@ -62,7 +63,7 @@ public class CustomerFindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_CUSTOMERS_MATCHED_LISTED, 0, "");
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         CustomerFindCommand command = new CustomerFindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -72,7 +73,7 @@ public class CustomerFindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_CUSTOMERS_MATCHED_LISTED, 3, "Kurz Elle Kunz");
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         CustomerFindCommand command = new CustomerFindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
