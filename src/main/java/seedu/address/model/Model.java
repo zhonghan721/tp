@@ -83,6 +83,14 @@ public interface Model {
     ReadOnlyBook<Customer> getAddressBook();
 
     /**
+     * Returns an optional containing a customer with the given id.
+     *
+     * @param id the id of the customer
+     * @return the optional containing customer with the given id
+     */
+    Optional<Customer> getCustomer(int id);
+
+    /**
      * Returns true if a customer with the same identity as {@code customer} exists in the address book.
      */
     boolean hasPerson(Customer customer);
@@ -222,6 +230,11 @@ public interface Model {
     void setLoggedInUser(User user);
 
     void deleteUser();
+
+    void resetPassword(User user);
+
+    void updateUser(User user);
+
 }
 
 

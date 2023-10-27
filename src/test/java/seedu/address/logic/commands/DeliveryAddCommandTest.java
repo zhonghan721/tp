@@ -220,6 +220,11 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
+        public Optional<Customer> getCustomer(int id) {
+            return Optional.empty();
+        }
+
+        @Override
         public boolean hasPerson(Customer customer) {
             throw new AssertionError("This method should not be called.");
         }
@@ -340,17 +345,27 @@ public class DeliveryAddCommandTest {
 
         @Override
         public void registerUser(User user) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setLoggedInUser(User user) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deleteUser() {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void resetPassword(User user) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateUser(User user) {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

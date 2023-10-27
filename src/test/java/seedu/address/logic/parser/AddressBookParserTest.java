@@ -32,26 +32,36 @@ import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.customer.CustomerListCommand;
+import seedu.address.logic.commands.customer.CustomerViewCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.delivery.DeliveryCreateNoteCommand;
 import seedu.address.logic.commands.delivery.DeliveryDeleteCommand;
+import seedu.address.logic.commands.delivery.DeliveryFindCommand;
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
 import seedu.address.logic.commands.delivery.DeliveryViewCommand;
+import seedu.address.logic.commands.user.UserDeleteCommand;
 import seedu.address.logic.commands.user.UserLoginCommand;
 import seedu.address.logic.commands.user.UserLogoutCommand;
+import seedu.address.logic.commands.user.UserRecoverAccountCommand;
 import seedu.address.logic.commands.user.UserRegisterCommand;
+import seedu.address.logic.commands.user.UserUpdateCommand;
+import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.user.User;
 import seedu.address.testutil.DeliveryAddDescriptorBuilder;
 import seedu.address.testutil.DeliveryBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.UpdateUserDescriptorBuilder;
+import seedu.address.testutil.UserBuilder;
 
 
 public class AddressBookParserTest {
@@ -84,6 +94,14 @@ public class AddressBookParserTest {
                 CustomerDeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new CustomerDeleteCommand(INDEX_FIRST_PERSON), command);
     }
+
+    @Test
+    public void parseCommand_customerView() throws Exception {
+        CustomerViewCommand command = (CustomerViewCommand) parser.parseCommand(
+                CustomerViewCommand.COMMAND_WORD + " " + VALID_VIEW_CUSTOMER_ID_1);
+        assertEquals(new CustomerViewCommand(Integer.parseInt(VALID_VIEW_CUSTOMER_ID_1)), command);
+    }
+
 
     @Test
     public void parseCommand_deliveryStatus() throws Exception {
@@ -132,6 +150,15 @@ public class AddressBookParserTest {
         assertEquals(new DeliveryAddCommand(validDeliveryAddDescriptor), command);
 
 
+    }
+
+    @Test
+    public void parseCommand_deliveryFind() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        DeliveryFindCommand command = (DeliveryFindCommand) parser.parseCommand(
+                DeliveryFindCommand.COMMAND_WORD
+                        + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new DeliveryFindCommand(new DeliveryNameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -200,5 +227,35 @@ public class AddressBookParserTest {
     public void parseCommand_userLogout() throws Exception {
         assertTrue(parser.parseCommand(UserLogoutCommand.COMMAND_WORD) instanceof UserLogoutCommand);
         assertTrue(parser.parseCommand(UserLogoutCommand.COMMAND_WORD + " abc") instanceof UserLogoutCommand);
+    }
+
+    @Test
+    public void parseCommand_userDelete() throws Exception {
+        assertTrue(parser.parseCommand(UserDeleteCommand.COMMAND_WORD) instanceof UserDeleteCommand);
+        assertTrue(parser.parseCommand(UserDeleteCommand.COMMAND_WORD + " abc") instanceof UserDeleteCommand);
+    }
+
+    @Test
+    public void parseCommand_userRecoverAccount() throws Exception {
+        assertTrue(parser.parseCommand(UserRecoverAccountCommand.COMMAND_WORD) instanceof UserRecoverAccountCommand);
+        assertTrue(parser.parseCommand(UserRecoverAccountCommand.COMMAND_WORD + " abc")
+                instanceof UserRecoverAccountCommand);
+        assertTrue(parser.parseCommand(UserRecoverAccountCommand.COMMAND_WORD + " "
+                + PREFIX_ANSWER + " answer "
+                + PREFIX_PASSWORD + " password "
+                + PREFIX_PASSWORD_CONFIRM + " password") instanceof UserRecoverAccountCommand);
+    }
+
+    @Test
+    public void parseCommand_userUpdate() throws Exception {
+        User user = new UserBuilder().build();
+        UserUpdateDescriptor descriptor = new UpdateUserDescriptorBuilder(user).build();
+        UserUpdateCommand command = (UserUpdateCommand) parser.parseCommand(UserUpdateCommand.COMMAND_WORD + " "
+                + PREFIX_USER + " " + UserBuilder.DEFAULT_USERNAME + " "
+                + PREFIX_PASSWORD + " " + UserBuilder.DEFAULT_PASSWORD + " "
+                + PREFIX_PASSWORD_CONFIRM + " " + UserBuilder.DEFAULT_PASSWORD + " "
+                + PREFIX_SECRET_QUESTION + " " + UserBuilder.SECRET_QUESTION + " "
+                + PREFIX_ANSWER + " " + UserBuilder.ANSWER);
+        assertEquals(new UserUpdateCommand(descriptor), command);
     }
 }
