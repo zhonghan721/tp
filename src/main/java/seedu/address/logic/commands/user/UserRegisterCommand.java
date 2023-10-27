@@ -23,13 +23,13 @@ public class UserRegisterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Register an account for HomeBoss.\n"
             + "Parameters: "
-            + PREFIX_USER + " USER " + PREFIX_PASSWORD + " PASSWORD " + PREFIX_PASSWORD_CONFIRM
+            + PREFIX_USER + " USERNAME " + PREFIX_PASSWORD + " PASSWORD " + PREFIX_PASSWORD_CONFIRM
             + " CONFIRM_PASSWORD " + PREFIX_SECRET_QUESTION + " SECRET_QUESTION " + PREFIX_ANSWER
             + " ANSWER\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USER + " yourUsername "
             + PREFIX_PASSWORD + " yourPassword "
-            + PREFIX_PASSWORD_CONFIRM + " yourPassword"
+            + PREFIX_PASSWORD_CONFIRM + " yourPassword "
             + PREFIX_SECRET_QUESTION + " yourSecretQuestion "
             + PREFIX_ANSWER + " yourAnswer";
     public static final String MESSAGE_SUCCESS = "Registration successful. Welcome to HomeBoss!";

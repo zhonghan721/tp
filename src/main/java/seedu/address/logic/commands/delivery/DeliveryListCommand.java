@@ -5,7 +5,6 @@ import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
 import java.util.Comparator;
-import java.util.List;
 
 import seedu.address.logic.Sort;
 import seedu.address.logic.commands.CommandResult;
@@ -20,8 +19,13 @@ import seedu.address.model.delivery.DeliveryStatus;
 public class DeliveryListCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "list";
     public static final String MESSAGE_SUCCESS = "Listed all Deliveries";
-
-    private DeliveryStatus status;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all deliveries in the delivery list.\n"
+        + "Parameters: "
+        + "STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) "
+        + "SORT (must be one of ASC/DESC)\n"
+        + "Example: " + COMMAND_WORD + " "
+        + "CREATED ASC";
+    private final DeliveryStatus status;
     private Sort sortType = Sort.ASC;
 
     /**
@@ -64,8 +68,6 @@ public class DeliveryListCommand extends DeliveryCommand {
             sortType.equals(Sort.ASC) ? Comparator.comparing(Delivery::getName) : Comparator.comparing(
                     Delivery::getName)
                 .reversed());
-
-        List<Delivery> deliveryList = model.getSortedDeliveryList();
 
         //TODO: UI
         return new CommandResult(MESSAGE_SUCCESS, true);
