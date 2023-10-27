@@ -15,6 +15,7 @@ public class CustomerListCommand extends CustomerCommand {
 
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " " + "list";
     public static final String MESSAGE_SUCCESS = "Listed all Customers";
+    public static final String MESSAGE_EMPTY = "There are currently no customers!";
 
 
     @Override
@@ -27,6 +28,11 @@ public class CustomerListCommand extends CustomerCommand {
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
+
+        if (model.getFilteredPersonList().size() == 0) {
+            return new CommandResult(MESSAGE_EMPTY, true);
+        }
+
         return new CommandResult(MESSAGE_SUCCESS, true);
     }
 }
