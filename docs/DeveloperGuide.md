@@ -613,7 +613,7 @@ The following sequence diagram shows how the `login` command works:
 The `customer edit` command is used to edit an existing Customer with at least one of the information fields
 specified by the user, namely the customer's `Name`, `Phone`, `Email` or/and `Address`.
 
-The format for the `customer edit` command can be found [here](UserGuide.md#login).
+The format for the `customer edit` command can be found [here](UserGuide.md#update-customer-details).
 
 **Feature details:**
 
@@ -662,7 +662,7 @@ The `delivery add` command is used to add a new Delivery with all the given info
 specified by the user, namely the delivery's `DeliveryName`, customer id of a `Customer` and `DeliveryDate`. All 
 fields are compulsory.
 
-The format for the `delivery add` command can be found [here](UserGuide.md#login).
+The format for the `delivery add` command can be found [here](UserGuide.md#create-delivery).
 
 **Feature details:**
 
