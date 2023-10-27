@@ -68,6 +68,13 @@ public class DeliveryTest {
     }
 
     @Test
+    public void correctAddress() {
+        Delivery delivery = new DeliveryBuilder().withCustomer(TypicalPersons.ALICE).build();
+
+        assertTrue(delivery.getAddress().equals(TypicalPersons.ALICE.getAddress()));
+    }
+
+    @Test
     public void isSameDelivery() {
         // same object -> returns true
         assertTrue(GABRIELS_MILK.isSameDelivery(GABRIELS_MILK));

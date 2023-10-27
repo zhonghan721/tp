@@ -1,5 +1,6 @@
 package seedu.address.logic.parser.delivery;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_CUSTOMER_ID;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_DELIVERY_DATE;
@@ -26,6 +27,7 @@ import seedu.address.model.delivery.DeliveryStatus;
 
 public class DeliveryListParserTest {
     private DeliveryListParser parser = new DeliveryListParser();
+
 
     @Test
     public void parse_validArgs_returnsDeliveryListCommand() {
@@ -88,9 +90,11 @@ public class DeliveryListParserTest {
     }
 
     @Test
-    public void parse_emptyArgs_returnsDeliveryListCommand() {
-        CommandParserTestUtil.assertParseSuccess(parser, DeliveryListCommand.COMMAND_WORD,
-            new DeliveryListCommand(null, null, null, null));
+    public void parse_emptyArgs_throwsParseException() {
+        CommandParserTestUtil.assertParseFailure(parser, "",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeliveryListCommand.MESSAGE_USAGE));
+
     }
 
     @Test

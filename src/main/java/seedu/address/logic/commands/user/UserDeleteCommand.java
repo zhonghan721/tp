@@ -31,8 +31,7 @@ public class UserDeleteCommand extends Command {
         }
 
         model.deleteUser();
-        model.updateFilteredPersonList(x -> false);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, true);
     }
 
 }

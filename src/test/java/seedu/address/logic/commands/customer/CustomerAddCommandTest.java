@@ -167,6 +167,11 @@ public class CustomerAddCommandTest {
         }
 
         @Override
+        public Optional<Customer> getCustomer(int id) {
+            return Optional.empty();
+        }
+
+        @Override
         public boolean hasPerson(Customer customer) {
             throw new AssertionError("This method should not be called.");
         }
@@ -293,6 +298,11 @@ public class CustomerAddCommandTest {
 
         @Override
         public void deleteUser() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateUser(User user) {
             throw new AssertionError("This method should not be called.");
         }
 

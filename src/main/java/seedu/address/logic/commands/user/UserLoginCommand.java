@@ -19,7 +19,9 @@ public class UserLoginCommand extends Command {
     public static final String COMMAND_WORD = "login";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Login to HomeBoss.\n"
-            + "Parameters: " + PREFIX_USER + " " + PREFIX_PASSWORD + "\n"
+            + "Parameters: "
+            + PREFIX_USER + " USERNAME "
+            + PREFIX_PASSWORD + " PASSWORD\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USER + " yourUsername "
             + PREFIX_PASSWORD + " yourPassword ";
