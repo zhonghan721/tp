@@ -356,13 +356,7 @@ _CUSTOMER_ID:_ Integer
 
 **Command succeeds:**
 
-_Edited Delivery: [2] milk_
-_COMPLETED_<br />
-_Customer: Alex Yeoh_<br />
-_Customer Id: 1_<br />
-_Ordered On: 2023-10-21_<br />
-_Delivered On: 2023-12-03_
-
+![Delivery Status](images/delivery/delivery_status.png)
 **Command fails (invalid_status):** _Delivery Status should be one of CREATED, SHIPPED, COMPLETED, CANCELLED_
 
 **Command fails (invalid_index):** _The delivery index provided is invalid_
