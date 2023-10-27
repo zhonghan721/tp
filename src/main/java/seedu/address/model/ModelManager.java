@@ -267,11 +267,11 @@ public class ModelManager implements Model {
     public void deleteUser() {
         userPrefs.deleteUser();
         // set the logged in user to null
-        setAddressBook(new AddressBook());
         this.setLoggedInUser(null);
         setLogoutSuccess();
-        updateFilteredPersonList(PREDICATE_SHOW_NO_CUSTOMERS);
-        updateFilteredDeliveryList(PREDICATE_SHOW_NO_DELIVERIES);
+        setAddressBook(new AddressBook());
+        setDeliveryBook(new DeliveryBook());
+        setUiListCustomer();
     }
 
     /**
@@ -283,6 +283,27 @@ public class ModelManager implements Model {
         this.setLoggedInUser(user);
         this.setLoginSuccess();
         updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
+    }
+
+    /**
+     * Resets the password of the given {@code user}.
+     */
+    @Override
+    public void resetPassword(User user) {
+        // overrides the stored user
+        userPrefs.registerUser(user);
+        setLoggedInUser(user);
+        this.setLoginSuccess();
+    }
+
+    /**
+     * Updates the stored {@code user} to the given {@code user} by re-registering the {@code user}.
+     */
+    @Override
+    public void updateUser(User user) {
+        // re-register the user with updated details
+        userPrefs.registerUser(user);
+        this.setLoggedInUser(user);
     }
 
     //=========== DeliveryBook ================================================================================

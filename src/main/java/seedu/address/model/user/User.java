@@ -132,7 +132,7 @@ public class User {
     public String toString() {
         // does not show password for security reason
         return new ToStringBuilder(this)
-                .add("userName", username)
+                .add("username", username)
                 .toString();
     }
 

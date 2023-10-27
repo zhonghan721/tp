@@ -28,6 +28,7 @@ import seedu.address.logic.commands.customer.CustomerEditCommand.CustomerEditDes
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.delivery.DeliveryEditCommand.DeliveryEditDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
@@ -38,7 +39,8 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.CustomerEditDescriptorBuilder;
 import seedu.address.testutil.DeliveryAddDescriptorBuilder;
 import seedu.address.testutil.DeliveryEditDescriptorBuilder;
-
+import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.UpdateUserDescriptorBuilder;
 
 
 /**
@@ -179,13 +181,12 @@ public class CommandTestUtil {
     public static final String INVALID_DELIVERY_LIST_SORT = " " + PREFIX_SORT + "invalid";
     public static final CustomerEditDescriptor DESC_AMY;
     public static final CustomerEditDescriptor DESC_BOB;
-
     public static final DeliveryAddDescriptor DESC_MILK;
-
     public static final DeliveryAddDescriptor DESC_RICE;
-
     public static final DeliveryEditDescriptor DESC_EDIT_MILK;
     public static final DeliveryEditDescriptor DESC_EDIT_CHIPS;
+    public static final UserUpdateDescriptor DESC_AARON;
+    public static final UserUpdateDescriptor DESC_FOODBEAR;
 
 
     static {
@@ -210,6 +211,13 @@ public class CommandTestUtil {
                 .withDeliveryName(VALID_NAME_CHIPS).withStatus(VALID_STATUS_SHIPPED)
                 .withCustomerId(VALID_CUSTOMER_ID_1).withNote(VALID_NOTE).build();
 
+        DESC_AARON = new UpdateUserDescriptorBuilder().withUsername(VALID_USERNAME_AARON)
+                .withPassword(VALID_PASSWORD_AARON).withSecretQuestion(VALID_SECRET_QUESTION_AARON)
+                .withAnswer(VALID_ANSWER_AARON).build();
+
+        DESC_FOODBEAR = new UpdateUserDescriptorBuilder().withUsername(VALID_USERNAME_FOODBEAR)
+                .withPassword(VALID_PASSWORD_FOODBEAR).withSecretQuestion(VALID_SECRET_QUESTION_FOODBEAR)
+                .withAnswer(VALID_ANSWER_FOODBEAR).build();
     }
 
     /**
