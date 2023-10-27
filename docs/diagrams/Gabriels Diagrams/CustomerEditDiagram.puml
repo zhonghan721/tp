@@ -46,7 +46,10 @@ deactivate CustomerEditCommand
 
 CustomerEditCommandParser --> AddressBookParser : customerEditCommand
 CustomerEditCommandParser -[hidden]-> AddressBookParser
+deactivate CustomerEditCommandParser
+CustomerEditCommandParser -[hidden]-> CustomerEditDescriptor
 destroy CustomerEditCommandParser
+
 
 AddressBookParser --> LogicManager : customerEditCommand
 deactivate AddressBookParser

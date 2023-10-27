@@ -46,6 +46,8 @@ deactivate DeliveryAddCommand
 
 DeliveryAddCommandParser --> AddressBookParser : deliveryAddCommand
 DeliveryAddCommand -[hidden]-> DeliveryAddCommandParser
+deactivate DeliveryAddCommandParser
+DeliveryAddCommandParser -[hidden]-> DeliveryAddDescriptor
 destroy DeliveryAddCommandParser
 
 AddressBookParser --> LogicManager : deliveryAddCommand
