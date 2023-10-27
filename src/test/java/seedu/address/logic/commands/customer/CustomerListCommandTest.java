@@ -1,5 +1,6 @@
 package seedu.address.logic.commands.customer;
 
+import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandListSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandTestUtil;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -27,6 +29,25 @@ public class CustomerListCommandTest {
         model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
         expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
             new UserPrefs(), model.getUserLoginStatus());
+    }
+
+    @Test
+    public void execute_notLoggedIn_throwsCommandException() {
+        Model emptyModel =
+            new ModelManager(new AddressBook(), getTypicalDeliveryBook(), new UserPrefs(), false);
+        CommandTestUtil.assertCommandFailure(
+            new CustomerListCommand(),
+            emptyModel,
+            MESSAGE_USER_NOT_AUTHENTICATED);
+    }
+    @Test
+    public void execute_customerListIsEmpty_showsEmpty() {
+        Model emptyModel =
+            new ModelManager(new AddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
+        CommandTestUtil.assertCommandListSuccess(
+            new CustomerListCommand(),
+            emptyModel,
+            CustomerListCommand.MESSAGE_EMPTY, emptyModel);
     }
 
     @Test
