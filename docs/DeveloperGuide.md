@@ -101,7 +101,8 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**
+API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -142,7 +143,8 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
+**
+API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
@@ -163,7 +165,6 @@ The `Model` component,
   to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
-
 
 #### User Model
 
@@ -191,20 +192,22 @@ The `Customer` model,
 * stores the customer data i.e, the customer address, phone, email and address.
 
 ### Storage component
-**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
+
+**
+API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 
-* can save user preference data, address book data and delivery book data  in JSON format, 
+* can save user preference data, address book data and delivery book data in JSON format,
 * and read them back into corresponding objects.
 * inherits from  `UserPrefStorage`
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
 The concrete implementation of storage is done through `StorageManger`, which holds an instance of `UserPrefsStorage`,
-`BookStorage` and `BookStorageWithReference`. Which represents the User Preference Data, Address Book and Delivery Book 
+`BookStorage` and `BookStorageWithReference`. Which represents the User Preference Data, Address Book and Delivery Book
 respectively.
 
 ### Common classes
@@ -216,7 +219,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
 
 - [Update Delivery Status](#update-delivery-status-feature)
 - [Create Delivery Note](#create-note-for-delivery-feature)
@@ -233,23 +235,23 @@ This section describes some noteworthy details on how certain features are imple
 #### Overview
 
 The `delivery status` command is used to update the `DeliveryStatus` of a selected delivery with the new status
-specified by the user. 
+specified by the user.
 
-The format of the `delivery status` command can be found 
+The format of the `delivery status` command can be found
 [here](./UserGuide.md#update-delivery-status)
 
 #### Feature Details
 
-1. The user will specify a `Delivery` through its `id`. The user must specify a `DeliveryStatus` to replace the 
-current status of the selected delivery
+1. The user will specify a `Delivery` through its `id`. The user must specify a `DeliveryStatus` to replace the
+   current status of the selected delivery
 2. If a number followed by a string representing a status is not specified, or is in the incorrect format,
-an `ParseException` will be thrown.
+   an `ParseException` will be thrown.
 3. If the command is parsed successfully, a new `DeliveryStatusCommand` is created, and executed
 4. If the user is not logged in during command execution, a `CommandException` will be thrown.
 5. The number provided is used to fetch the associated `Delivery` from `Model` if it exists. If the provided number
-does not match any of the IDs of the `Delivery` stored in `Model`, a `CommandException` is thrown.
+   does not match any of the IDs of the `Delivery` stored in `Model`, a `CommandException` is thrown.
 6. If the command completes successfully, the selected `Delivery` will be replaced by an identical `Delivery` except
-for an updated `DeliveryStatus`.
+   for an updated `DeliveryStatus`.
 
 The following activity diagram illustrates the logic of updating the `DeliveryStatus` of a `Delivery`.
 
@@ -258,16 +260,16 @@ The following activity diagram illustrates the logic of updating the `DeliverySt
 The sequence of the `delivery status` command is as follows:
 
 1. The command `delivery status DELIVERY_ID STATUS` is entered by the user (e.g. `delivery status 1 completed`)
-2. `LogicManager` calls the `AddressBookParser#parseCommand()` with `delivery status DELIVERY_ID STATUS` 
+2. `LogicManager` calls the `AddressBookParser#parseCommand()` with `delivery status DELIVERY_ID STATUS`
 3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryStatusCommandParser` calling
-   `DeliveryStatusCommandParser#parse()` to parse the remaining input after the command word has been removed 
+   `DeliveryStatusCommandParser#parse()` to parse the remaining input after the command word has been removed
    (i.e. the command arguments)
 4. `DeliveryStatusCommandParser` will parse the arguments, and return a new instance of `DeliveryStatusCommand` with
    the parsed `DELIVERY_ID` and `STATUS` fields
-5. `LogicManager` calls `DeliveryStatusCommand#execute()`, first checking if the user is logged in by calling 
+5. `LogicManager` calls `DeliveryStatusCommand#execute()`, first checking if the user is logged in by calling
    `Model#getUserLoginStatus()`
-6. It then attempts to fetch the `Delivery` with the specified `DELIVERY_ID`, and replaces that `Delivery` 
-   using `Model#setDelivery()` with a newly created `Delivery` with identical fields except for its status which is 
+6. It then attempts to fetch the `Delivery` with the specified `DELIVERY_ID`, and replaces that `Delivery`
+   using `Model#setDelivery()` with a newly created `Delivery` with identical fields except for its status which is
    the updated `DeliveryStatus`
 7. It creates and returns a new `CommandResult` with the result of the execution
 
@@ -277,7 +279,6 @@ The following sequence diagram illustrates the `delivery status` command sequenc
 
 This section describes some noteworthy details on how certain features are implemented.
 
-
 - [Create Delivery Note](#create-note-for-delivery-feature)
 - [User Register Account Command](#user-register-account-command)
 - [User Login Command](#user-login-command)
@@ -285,12 +286,13 @@ This section describes some noteworthy details on how certain features are imple
 - [User Logout Command](#user-logout-command)
 - User Account Recovery
 - User Account Deletion
-- 
+-
+
 ### Create Note for Delivery Feature
 
 #### Overview
 
-The `delivery note` command is used to create a new `Note` a selected delivery with the new note 
+The `delivery note` command is used to create a new `Note` a selected delivery with the new note
 specified by the user
 
 The format of the `delivery note` command can be found
@@ -315,7 +317,7 @@ The following activity diagram illustrates the logic of creating a `Note` for a 
 
 The sequence of the `delivery note` command is as follows:
 
-1. The command `delivery note DELIVERY_ID --note NOTE` is entered by the user 
+1. The command `delivery note DELIVERY_ID --note NOTE` is entered by the user
    (e.g. `delivery note 1 --note This is a note`)
 2. The `LogicManager` calls the `AdressBookParser#parseCommand()` with `delivery note DELIVERY_ID --note NOTE`
 3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryCreateNoteCommandParser` calling
@@ -485,7 +487,6 @@ The following sequence diagram illustrates the `delivery view` command sequence:
 
 <puml src="diagrams/implementations/DeliveryViewCommandSequenceDiagram.puml" width="450" />
 
-
 ### User Login Command
 
 **Overview:**
@@ -533,7 +534,7 @@ The following sequence diagram shows how the `login` command works:
 
 The `logout` command is used to log out from the user's account.
 Once logged out, the user will have no access to all the commands available, except for `help`, `exit`,
-`register`, `login` and `delete account`.
+`register`, `login`, `recover` and `delete account`.
 
 The format for the `logout` command can be found [here](UserGuide.md#logout).
 
@@ -593,7 +594,7 @@ The sequence of the `customer add` command is as follows:
 2. The `LogicManager` calls the `AddressBookParser#parseCommand` with `ARG` to parse the command.
 3. The `AddressBookParser` then creates a new `CustomerAddCommandParser` to parse the fields provided by the user.
 4. A corresponding `Customer` is created by the `CustomerAddCommandParser`, which is used to
-   create a new `CustomerAddCommand`. 
+   create a new `CustomerAddCommand`.
 5. The `CustomerAddCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`.
 6. The `CustomerAddCommand` then checks if the `Model` contains a customer with the same `Name`
    by calling `Model#hasPerson`.
@@ -755,7 +756,6 @@ thereby improving efficiency for business owners.
 
 Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikely to have) - `*`
 
-
 | Priority | As a …​            | I want to …​                                                                  | So that I can…​                                                                                                                                                                         |
 |----------|--------------------|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `***`    | an owner           | create a local account                                                        | I can personalise and secure my account.                                                                                                                                                |
@@ -791,7 +791,6 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | `*`      | a registered owner | have different user authorisation levels                                      | I can control who has access to what.                                                                                                                                                   |
 
 *{More to be added}*
-
 
 ### Use cases
 
@@ -831,7 +830,6 @@ otherwise)
 
     * 2b1. US requests unregistered owner to retype their confirm password.
 
-
       Use case ends.
 
 ---
@@ -856,6 +854,7 @@ otherwise)
    Use case ends.
 
 **Extensions:**
+
 * 2a. Registered owner does not enter one of the fields
     * 2a1. US requests registered owner to fill up all the required fields
 
@@ -955,7 +954,6 @@ otherwise)
 
 ---
 
-
 #### Use Case: UC06 - Update Details
 
 **System:** User System (US)
@@ -978,7 +976,6 @@ otherwise)
 **Extensions:**
 
 * 1a. Logged-in Owner does not specify at least one updated field(s).
-
 
     * 1a1. US requests Logged-in Owner to specify at least one updated field.
 
@@ -1235,7 +1232,7 @@ otherwise)
 2. CMS shows list of all customers.
 
    Use Case Ends.
-   
+
 ---
 
 #### **Use case:** UC13 - Delivery Creation
@@ -1355,6 +1352,10 @@ otherwise)
 
 * 1f. User specifies both customer and delivery date fields.
     * 1f1. DMS displays a list of deliveries filtered by the specified customer and delivery date.
+
+      Use Case Ends.
+* 1g. User specifies customer, delivery date and status fields.
+    * 1g1. DMS displays a list of deliveries filtered by the specified customer, delivery date and status.
 
       Use Case Ends.
 
@@ -1633,7 +1634,6 @@ otherwise)
 - 1c. Logged-in owner specified an invalid delivery status.
 
     - 1c1. DMS informs the logged-in owner of an invalid delivery status being entered.
-
 
       Use case ends.
 
