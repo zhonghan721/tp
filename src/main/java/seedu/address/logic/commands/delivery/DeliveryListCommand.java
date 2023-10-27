@@ -22,26 +22,17 @@ import seedu.address.model.delivery.DeliveryStatus;
 public class DeliveryListCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "list";
     public static final String MESSAGE_SUCCESS = "Listed all Deliveries";
-    private DeliveryStatus status;
-    private final Integer customerId;
-    private final Date deliveryDate;
-    private Sort sortType = Sort.DESC;
-  
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all deliveries in the delivery list.\n"
         + "Parameters: "
         + "STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) "
         + "SORT (must be one of ASC/DESC)\n"
         + "Example: " + COMMAND_WORD + " "
         + "CREATED ASC";
+    private DeliveryStatus status;
+    private final Integer customerId;
+    private final Date deliveryDate;
+    private Sort sortType = Sort.DESC;
 
-    /**
-     * Default constructor for a DeliveryList Command with status filter and ascending sort.
-     *
-     * @param status status to filter by.
-     */
-    public DeliveryListCommand(DeliveryStatus status) {
-        this.status = status;
-    }
 
     /**
      * Constructor for a DeliveryList Command with status filter and sort type.
