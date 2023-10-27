@@ -274,13 +274,13 @@ _CUSTOMER_ID:_ Integer
 
 ## <span style="text-decoration:underline;">Delivery</span>
 
-### Create delivery
+### Add delivery
 
-Creates a delivery.
+Adds a delivery to the delivery book.
 
-**Format:** `delivery create DELIVERY_NAME --customer CUSTOMER_ID --date DATE`
+**Format:** `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE`
 
-**Example:** `delivery create furniture --customer 5 --date 2023-12-03`
+**Example:** `delivery add furniture --customer 5 --date 2023-12-03`
 
 **Accepted Values:**
 
@@ -288,14 +288,14 @@ _DELIVERY_NAME:_ String of 50 characters
 
 _CUSTOMER_ID:_ Integer
 
-_DATE:_ String in YYYY-MM-DD format
+_DELIVERY_DATE:_ Delivery Date String in YYYY-MM-DD format or `today` for today’s date
 
 **Command succeeds:** _Delivery [1001] furniture created successfully for Customer 1, Gabriel!_
 
 **Command fails (missing_fields):** _Please fill up all the required fields (DELIVERY_NAME --customer CUSTOMER_ID --date
-DATE)!_
+DELIVERY_DATE)!_
 
-**Command fails (invalid_date):** _Invalid date provided!_
+**Command fails (invalid_date):** _Delivery Date cannot be before today!_
 
 **Command fails (invalid_date_format):** _Please provide the date in the format: YYYY-MM-DD._
 
@@ -313,7 +313,7 @@ _STATUS_: CREATED/SHIPPED/COMPLETED/CANCELLED. If unspecified, defaults to show 
 
 _CUSTOMER_ID_: Integer
 
-_DATE_: String in YYYY-MM-DD format or `today` for today’s date
+_DELIVERY_DATE_: Delivery Date String in YYYY-MM-DD format or `today` for today’s date
 
 _SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by delivery date.
 
@@ -378,27 +378,38 @@ _delivery status: Edits the status of the delivery identified by the ID of the d
 _Parameters: STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) ID (must be a integer representing a valid ID)_<br />
 _Example: delivery status COMPLETED 1_<br />
 
-#### Change date of delivery
+#### Update delivery details
 
-Changes the date of a specified delivery
+Updates the delivery details of an existing delivery in the delivery book.
 
-**Format:** `delivery edit date DELIVERY_ID --date DATE`
+**Format:** `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date DELIVERY_DATE]
+[--status STATUS] [--note NOTE]`
 
-**Example:** `delivery edit date 1001 --date 2023-12-12`
+**Example:** `delivery edit 1001 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note 
+Customer changed his mind.`
 
 **Accepted Values:**
 
 _DELIVERY_ID:_ Integer
 
-_DATE:_ String of format YYYY-MM-DD
+_DELIVERY_NAME:_ String
 
-**Command succeeds:** _Delivery [1001] Gabriel’s Milk changed delivery date to 1st Oct 2023!_
+_CUSTOMER_ID:_ Integer
 
-**Command failed (one field missing):** _Please specify a delivery id and date!_
+_DELIVERY_DATE:_ Delivery Date String in YYYY-MM-DD format or `today` for today’s date
 
-**Command failed (invalid date format):** _Please format date as YYYY-MM-DD._
+_STATUS:_ Either `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`
 
-**Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
+_NOTE:_ String
+
+**Command succeeds:** 
+//TODO: Add image
+
+**Command fails (missing_index):** _Invalid command format!_
+
+**Command fails (invalid_index):** _The delivery index provided is invalid_
+
+**Command fails (missing_fields):** _Please provide at least one field to update!_
 
 ### Create a note for a delivery
 
