@@ -98,7 +98,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_customerView() throws Exception {
         CustomerViewCommand command = (CustomerViewCommand) parser.parseCommand(
-            CustomerViewCommand.COMMAND_WORD + " " + VALID_VIEW_CUSTOMER_ID_1);
+                CustomerViewCommand.COMMAND_WORD + " " + VALID_VIEW_CUSTOMER_ID_1);
         assertEquals(new CustomerViewCommand(Integer.parseInt(VALID_VIEW_CUSTOMER_ID_1)), command);
     }
 
@@ -156,8 +156,8 @@ public class AddressBookParserTest {
     public void parseCommand_deliveryFind() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         DeliveryFindCommand command = (DeliveryFindCommand) parser.parseCommand(
-            DeliveryFindCommand.COMMAND_WORD
-                + " " + keywords.stream().collect(Collectors.joining(" ")));
+                DeliveryFindCommand.COMMAND_WORD
+                        + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new DeliveryFindCommand(new DeliveryNameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -245,7 +245,7 @@ public class AddressBookParserTest {
                 + PREFIX_PASSWORD + " password "
                 + PREFIX_PASSWORD_CONFIRM + " password") instanceof UserRecoverAccountCommand);
     }
-  
+
     @Test
     public void parseCommand_userUpdate() throws Exception {
         User user = new UserBuilder().build();
