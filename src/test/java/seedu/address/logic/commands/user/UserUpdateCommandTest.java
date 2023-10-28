@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
+import seedu.address.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
 import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.DeliveryBook;
@@ -27,7 +28,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Customer;
 import seedu.address.model.user.User;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.CustomerEditDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.UpdateUserDescriptorBuilder;
 import seedu.address.testutil.UserBuilder;
@@ -97,7 +98,7 @@ public class UserUpdateCommandTest {
         model.setLogoutSuccess();
 
         Customer editedCustomer = new PersonBuilder().build();
-        CustomerEditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedCustomer).build();
+        CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder(editedCustomer).build();
         CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_FIRST_PERSON, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);

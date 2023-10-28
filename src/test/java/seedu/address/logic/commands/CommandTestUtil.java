@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
@@ -33,8 +33,8 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.testutil.CustomerEditDescriptorBuilder;
 import seedu.address.testutil.DeliveryAddDescriptorBuilder;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.UpdateUserDescriptorBuilder;
 
 
@@ -160,8 +160,8 @@ public class CommandTestUtil {
     public static final String VALID_DELIVERY_LIST_SORT_ASC = " " + PREFIX_SORT + "asc";
     public static final String VALID_DELIVERY_LIST_SORT_DESC = " " + PREFIX_SORT + "desc";
     public static final String INVALID_DELIVERY_LIST_SORT = " " + PREFIX_SORT + "invalid";
-    public static final EditPersonDescriptor DESC_AMY;
-    public static final EditPersonDescriptor DESC_BOB;
+    public static final CustomerEditDescriptor DESC_AMY;
+    public static final CustomerEditDescriptor DESC_BOB;
 
     public static final DeliveryAddDescriptor DESC_MILK;
 
@@ -172,10 +172,10 @@ public class CommandTestUtil {
 
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new CustomerEditDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new CustomerEditDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
