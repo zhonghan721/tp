@@ -46,6 +46,7 @@ public class PersonCard extends UiPart<Region> {
 
         this.title.setText(item.getTitle());
         this.description.setText(item.getDescription());
-        this.accessory.setText(item.getMainAccessory());
+        this.mainAccessory.setText(item.getMainAccessory());
+        this.accessory.setText(item.getAccessory());
     }
 }

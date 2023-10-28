@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Sort;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.delivery.DeliveryStatus;
@@ -173,6 +174,21 @@ public class ParserUtil {
             throw new ParseException(seedu.address.model.delivery.Date.MESSAGE_CONSTRAINTS);
         }
         return new DeliveryDate(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String date} into an {@code DeliveryDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code DeliveryDate} is invalid.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(date)) {
+            throw new ParseException(seedu.address.model.delivery.Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(trimmedDate);
     }
 
     /**
