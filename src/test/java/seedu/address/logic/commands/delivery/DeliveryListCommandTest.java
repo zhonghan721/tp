@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DATE_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DATE_2;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandListSuccess;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
@@ -42,6 +43,8 @@ public class DeliveryListCommandTest {
             DeliveryListCommand.MESSAGE_SUCCESS, model);
         // customer id
         assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.COMPLETED, 1, null, null), model,
+            DeliveryListCommand.MESSAGE_SUCCESS, model);
+        assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.COMPLETED, 2, null, null), model,
             DeliveryListCommand.MESSAGE_SUCCESS, model);
 
         // delivery date
@@ -139,7 +142,13 @@ public class DeliveryListCommandTest {
             Sort.ASC);
         DeliveryListCommand deliveryListCommand5 = new DeliveryListCommand(DeliveryStatus.COMPLETED, 1, null,
             Sort.ASC);
-        DeliveryListCommand deliveryListCommand6 = new DeliveryListCommand(DeliveryStatus.COMPLETED, 1, null,
+        DeliveryListCommand deliveryListCommand6 = new DeliveryListCommand(DeliveryStatus.COMPLETED, 2, null,
+            Sort.ASC);
+        DeliveryListCommand deliveryListCommand7 = new DeliveryListCommand(DeliveryStatus.COMPLETED, 1,
+            new DeliveryDate(VALID_DELIVERY_DATE_1),
+            Sort.ASC);
+        DeliveryListCommand deliveryListCommand8 = new DeliveryListCommand(DeliveryStatus.COMPLETED, 1,
+            new DeliveryDate(VALID_DELIVERY_DATE_2),
             Sort.ASC);
         // same object -> returns true
         assertTrue(deliveryListCommand.equals(deliveryListCommand));
@@ -161,5 +170,11 @@ public class DeliveryListCommandTest {
         assertNotEquals(deliveryListCommand1, deliveryListCommand2);
         assertEquals(deliveryListCommand1, deliveryListCommand3);
         assertNotEquals(deliveryListCommand1, deliveryListCommand4);
+
+        // different customer id -> returns false
+        assertNotEquals(deliveryListCommand6, deliveryListCommand5);
+
+        // different delivery date -> returns false
+        assertNotEquals(deliveryListCommand7, deliveryListCommand8);
     }
 }
