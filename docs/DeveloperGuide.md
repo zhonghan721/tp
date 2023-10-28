@@ -1319,7 +1319,7 @@ otherwise)
 **MSS:**
 
 1. Logged-in Owner types command to view a list of deliveries.
-2. DMS displays a list of all deliveries sorted in descending delivery date.
+2. DMS displays a list of all deliveries sorted in descending delivery date (newest to oldest).
 
    Use Case Ends.
 
