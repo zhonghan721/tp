@@ -28,6 +28,7 @@ import seedu.address.logic.commands.delivery.DeliveryViewCommand;
 import seedu.address.logic.commands.user.UserDeleteCommand;
 import seedu.address.logic.commands.user.UserLoginCommand;
 import seedu.address.logic.commands.user.UserLogoutCommand;
+import seedu.address.logic.commands.user.UserRecoverAccountCommand;
 import seedu.address.logic.commands.user.UserRegisterCommand;
 import seedu.address.logic.commands.user.UserUpdateCommand;
 import seedu.address.logic.parser.customer.CustomerViewCommandParser;
@@ -37,6 +38,7 @@ import seedu.address.logic.parser.delivery.DeliveryStatusCommandParser;
 import seedu.address.logic.parser.delivery.DeliveryViewCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.UserLoginCommandParser;
+import seedu.address.logic.parser.user.UserRecoverAccountCommandParser;
 import seedu.address.logic.parser.user.UserRegisterCommandParser;
 import seedu.address.logic.parser.user.UserUpdateCommandParser;
 
@@ -49,7 +51,7 @@ public class AddressBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
-            "(?<commandWord>customer \\S+|delivery \\S+|delete \\S+|\\S+)(?<arguments>.*)"
+            "(?<commandWord>customer \\S+|delivery \\S+|delete \\S+|recover \\S+|\\S+)(?<arguments>.*)"
     );
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
@@ -140,6 +142,9 @@ public class AddressBookParser {
 
         case UserDeleteCommand.COMMAND_WORD:
             return new UserDeleteCommand();
+
+        case UserRecoverAccountCommand.COMMAND_WORD:
+            return new UserRecoverAccountCommandParser().parse(arguments);
 
         case UserUpdateCommand.COMMAND_WORD:
             return new UserUpdateCommandParser().parse(arguments);

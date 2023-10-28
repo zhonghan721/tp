@@ -265,7 +265,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code String}.
+     * Parses a {@code String secretQuestion} into a {@code String}.
      *
      * @param secretQuestion The user input secret question.
      * @return String of trimmed secret question.
@@ -277,7 +277,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code String}.
+     * Parses a {@code String answer} into a {@code String}.
      *
      * @param answer The user input answer.
      * @return String of trimmed answer.
