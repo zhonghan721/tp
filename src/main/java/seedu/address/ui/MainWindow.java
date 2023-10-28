@@ -181,7 +181,6 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isRefreshListCommand()) {
                 listPanel.setListItems(logic.getUiList());
-                logger.info("Refresh UI List");
             }
             if (commandResult.isShowHelp()) {
                 handleHelp();
