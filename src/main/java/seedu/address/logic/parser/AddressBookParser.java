@@ -11,11 +11,11 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.customer.CustomerAddCommand;
 import seedu.address.logic.commands.customer.CustomerDeleteCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
+import seedu.address.logic.commands.customer.CustomerFindCommand;
 import seedu.address.logic.commands.customer.CustomerListCommand;
 import seedu.address.logic.commands.customer.CustomerViewCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand;
@@ -31,6 +31,10 @@ import seedu.address.logic.commands.user.UserLogoutCommand;
 import seedu.address.logic.commands.user.UserRecoverAccountCommand;
 import seedu.address.logic.commands.user.UserRegisterCommand;
 import seedu.address.logic.commands.user.UserUpdateCommand;
+import seedu.address.logic.parser.customer.CustomerAddCommandParser;
+import seedu.address.logic.parser.customer.CustomerDeleteCommandParser;
+import seedu.address.logic.parser.customer.CustomerEditCommandParser;
+import seedu.address.logic.parser.customer.CustomerFindCommandParser;
 import seedu.address.logic.parser.customer.CustomerViewCommandParser;
 import seedu.address.logic.parser.delivery.DeliveryCreateNoteCommandParser;
 import seedu.address.logic.parser.delivery.DeliveryFindCommandParser;
@@ -94,8 +98,8 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case CustomerFindCommand.COMMAND_WORD:
+            return new CustomerFindCommandParser().parse(arguments);
 
         case CustomerListCommand.COMMAND_WORD:
             return new CustomerListCommand();
