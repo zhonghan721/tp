@@ -57,7 +57,7 @@ public class DeliveryListParserTest {
     }
 
     @Test
-    public void parse_emptyArgs_throwsParseException() {
+    public void parse_emptyArgs_returnsDeliveryListCommand() {
         CommandParserTestUtil.assertParseSuccess(parser, "",
             new DeliveryListCommand(null));
     }
