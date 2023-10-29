@@ -186,11 +186,8 @@ public class CommandTestUtil {
 
     public static final CustomerEditDescriptor DESC_AMY;
     public static final CustomerEditDescriptor DESC_BOB;
-
     public static final DeliveryAddDescriptor DESC_MILK;
-
     public static final DeliveryAddDescriptor DESC_RICE;
-
 
     public static final DeliveryEditDescriptor DESC_EDIT_MILK;
     public static final DeliveryEditDescriptor DESC_EDIT_CHIPS;

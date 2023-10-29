@@ -56,6 +56,7 @@ import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.user.User;
 import seedu.address.testutil.CustomerBuilder;
 import seedu.address.testutil.CustomerEditDescriptorBuilder;
 import seedu.address.testutil.CustomerUtil;
