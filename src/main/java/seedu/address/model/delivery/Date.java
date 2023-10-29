@@ -4,11 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 
 /**
  * Represents a Date in the address book.
  */
-public class Date {
+public class Date implements Comparable<Date> {
     public static final String MESSAGE_CONSTRAINTS =
         "Order dates should be in the format YYYY-MM-DD";
 
@@ -42,6 +43,10 @@ public class Date {
         return date.toString();
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -61,5 +66,10 @@ public class Date {
     @Override
     public int hashCode() {
         return date.hashCode();
+    }
+
+    @Override
+    public int compareTo(Date o) {
+        return Comparator.comparing(Date::getDate).compare(this, o);
     }
 }

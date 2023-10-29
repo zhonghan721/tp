@@ -87,7 +87,8 @@ public class CustomerEditCommand extends CustomerCommand {
             if (customer.getCustomerId() == targetIndex.getOneBased()) {
                 found = true;
                 customerToEdit = customer;
-                editedCustomer = createEditedPerson(customerToEdit, customerEditDescriptor);
+                editedCustomer = createEditedCustomer(customerToEdit, customerEditDescriptor);
+
                 break;
             }
         }
@@ -110,7 +111,10 @@ public class CustomerEditCommand extends CustomerCommand {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code customerEditDescriptor}.
      */
-    private static Customer createEditedPerson(Customer customerToEdit, CustomerEditDescriptor customerEditDescriptor) {
+
+    private static Customer createEditedCustomer(Customer customerToEdit,
+                                                 CustomerEditDescriptor customerEditDescriptor) {
+
         assert customerToEdit != null;
 
         Name updatedName = customerEditDescriptor.getName().orElse(customerToEdit.getName());

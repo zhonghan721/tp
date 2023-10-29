@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.customer.CustomerEditCommand;
+import seedu.address.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.Email;
@@ -26,7 +27,9 @@ public class CustomerEditDescriptorBuilder {
 
     public CustomerEditDescriptorBuilder(CustomerEditCommand.CustomerEditDescriptor descriptor) {
         this.descriptor = new CustomerEditCommand.CustomerEditDescriptor(descriptor);
+
     }
+
 
     /**
      * Returns an {@code CustomerEditDescriptor} with fields containing {@code person}'s details
@@ -91,7 +94,9 @@ public class CustomerEditDescriptorBuilder {
         return this;
     }
 
-    public CustomerEditCommand.CustomerEditDescriptor build() {
+
+    public CustomerEditDescriptor build() {
+
         return descriptor;
     }
 }

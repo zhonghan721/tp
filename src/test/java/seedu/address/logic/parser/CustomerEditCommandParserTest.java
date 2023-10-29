@@ -38,6 +38,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
 import seedu.address.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
+import seedu.address.logic.parser.customer.CustomerEditCommandParser;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -114,10 +115,9 @@ public class CustomerEditCommandParserTest {
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
-        CustomerEditCommand.CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder()
-                .withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
         CustomerEditCommand expectedCommand = new CustomerEditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -140,8 +140,9 @@ public class CustomerEditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        CustomerEditCommand.CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder()
-                .withName(VALID_NAME_AMY).build();
+
+        CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder().withName(VALID_NAME_AMY).build();
+
         CustomerEditCommand expectedCommand = new CustomerEditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

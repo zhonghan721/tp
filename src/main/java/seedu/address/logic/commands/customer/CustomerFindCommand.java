@@ -1,21 +1,23 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all customers in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends Command {
+public class CustomerFindCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -24,7 +26,7 @@ public class FindCommand extends Command {
 
     private final NameContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public CustomerFindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -39,8 +41,9 @@ public class FindCommand extends Command {
 
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_CUSTOMER_LISTED_OVERVIEW,
-                        model.getFilteredPersonList().size()), true);
+            String.format(Messages.MESSAGE_CUSTOMERS_MATCHED_LISTED,
+                    model.getFilteredPersonList().size(), predicate.getKeywordsAsString()), true);
+
     }
 
     @Override
@@ -50,18 +53,18 @@ public class FindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof CustomerFindCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        CustomerFindCommand otherCustomerFindCommand = (CustomerFindCommand) other;
+        return predicate.equals(otherCustomerFindCommand.predicate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
-                .toString();
+            .add("predicate", predicate)
+            .toString();
     }
 }

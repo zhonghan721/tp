@@ -31,18 +31,22 @@ import seedu.address.model.person.Customer;
 import seedu.address.testutil.CustomerBuilder;
 import seedu.address.testutil.CustomerEditDescriptorBuilder;
 
+
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class CustomerEditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
+    private Model model = new ModelManager(getTypicalAddressBook(),
+            getTypicalDeliveryBook(), new UserPrefs(), true);
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
+
         Customer editedCustomer = new CustomerBuilder().build();
         CustomerEditCommand.CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder(editedCustomer)
                 .build();
+
         CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS,
@@ -68,6 +72,7 @@ public class CustomerEditCommandTest {
         CustomerEditCommand.CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder()
                 .withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+
         CustomerEditCommand editCommand = new CustomerEditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS,
@@ -83,7 +88,9 @@ public class CustomerEditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
+
         CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_FIRST_PERSON, new CustomerEditDescriptor());
+
         Customer editedCustomer = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS,
@@ -173,7 +180,9 @@ public class CustomerEditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredListLoggedOut_failure() {
         // set state of model to be logged out
         model.setLogoutSuccess();
+
         Customer editedCustomer = new CustomerBuilder().build();
+
         CustomerEditCommand.CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder(editedCustomer)
                 .build();
         CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_FIRST_PERSON, descriptor);
@@ -200,7 +209,9 @@ public class CustomerEditCommandTest {
     public void execute_noFieldSpecifiedUnfilteredListLoggedOut_failure() {
         // set state of model to be logged out
         model.setLogoutSuccess();
+
         CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_SECOND_PERSON, new CustomerEditDescriptor());
+
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
@@ -233,11 +244,12 @@ public class CustomerEditCommandTest {
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        CustomerEditCommand.CustomerEditDescriptor customerEditDescriptor = new CustomerEditCommand
-                .CustomerEditDescriptor();
+
+        CustomerEditDescriptor customerEditDescriptor = new CustomerEditDescriptor();
         CustomerEditCommand editCommand = new CustomerEditCommand(index, customerEditDescriptor);
-        String expected = CustomerEditCommand.class.getCanonicalName() + "{index=" + index + ", customerEditDescriptor="
-            + customerEditDescriptor + "}";
+        String expected = CustomerEditCommand.class.getCanonicalName() + "{index=" + index
+                + ", customerEditDescriptor=" + customerEditDescriptor + "}";
+
         assertEquals(expected, editCommand.toString());
     }
 
