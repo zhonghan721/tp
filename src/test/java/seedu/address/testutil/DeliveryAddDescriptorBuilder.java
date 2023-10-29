@@ -20,11 +20,7 @@ public class DeliveryAddDescriptorBuilder {
     }
 
     /**
-<<<<<<< HEAD
      * Returns an {@code DeliveryAddDescriptor} with fields containing {@code delivery}'s details
-=======
-     * Returns an {@code CustomerEditDescriptor} with fields containing {@code person}'s details
->>>>>>> 0c6857649c6d1262a90ba82f836141e6d84e1f19
      */
     public DeliveryAddDescriptorBuilder(Delivery delivery) {
         descriptor = new DeliveryAddDescriptor();
@@ -34,11 +30,7 @@ public class DeliveryAddDescriptorBuilder {
     }
 
     /**
-<<<<<<< HEAD
      * Sets the {@code DeliveryName} of the {@code DeliveryAddDescriptor} that we are building.
-=======
-     * Sets the customerId of the {@code CustomerEditDescriptor} that we are building.
->>>>>>> 0c6857649c6d1262a90ba82f836141e6d84e1f19
      */
     public DeliveryAddDescriptorBuilder withDeliveryName(String deliveryName) {
         descriptor.setDeliveryName(new DeliveryName(deliveryName));
@@ -46,11 +38,7 @@ public class DeliveryAddDescriptorBuilder {
     }
 
     /**
-<<<<<<< HEAD
      * Sets the customer id of the {@code DeliveryAddDescriptor} that we are building.
-=======
-     * Sets the {@code Phone} of the {@code CustomerEditDescriptor} that we are building.
->>>>>>> 0c6857649c6d1262a90ba82f836141e6d84e1f19
      */
     public DeliveryAddDescriptorBuilder withCustomerId(int customerId) {
         descriptor.setCustomerId(customerId);
@@ -58,11 +46,7 @@ public class DeliveryAddDescriptorBuilder {
     }
 
     /**
-<<<<<<< HEAD
      * Sets the {@code DeliveryDate} of the {@code DeliveryAddDescriptor} that we are building.
-=======
-     * Sets the {@code Email} of the {@code CustomerEditDescriptor} that we are building.
->>>>>>> 0c6857649c6d1262a90ba82f836141e6d84e1f19
      */
     public DeliveryAddDescriptorBuilder withDeliveryDate(String deliveryDate) {
         descriptor.setDeliveryDate(new DeliveryDate(deliveryDate));

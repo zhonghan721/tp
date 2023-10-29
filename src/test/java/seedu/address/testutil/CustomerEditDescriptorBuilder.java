@@ -25,6 +25,9 @@ public class CustomerEditDescriptorBuilder {
         descriptor = new CustomerEditCommand.CustomerEditDescriptor();
     }
 
+    /**
+     * Returns a {@code CustomerEditDescriptor} with the passed in descriptor details
+     */
     public CustomerEditDescriptorBuilder(CustomerEditCommand.CustomerEditDescriptor descriptor) {
         this.descriptor = new CustomerEditCommand.CustomerEditDescriptor(descriptor);
 
@@ -32,7 +35,7 @@ public class CustomerEditDescriptorBuilder {
 
 
     /**
-     * Returns an {@code CustomerEditDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code CustomerEditDescriptor} with fields containing {@code customer}'s details
      */
     public CustomerEditDescriptorBuilder(Customer customer) {
         descriptor = new CustomerEditCommand.CustomerEditDescriptor();
@@ -94,7 +97,10 @@ public class CustomerEditDescriptorBuilder {
         return this;
     }
 
-
+    /**
+     * Builds the CustomerEditDescriptor
+     * @return CustomerEditDescriptor
+     */
     public CustomerEditDescriptor build() {
 
         return descriptor;

@@ -20,9 +20,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX = "The delivery index provided is invalid";
     public static final String MESSAGE_INVALID_DELIVERY_ID = "The delivery ID provided is invalid";
 
-
-    public static final String MESSAGE_CUSTOMER_LISTED_OVERVIEW = "%1$d customers listed!";
-;
     public static final String MESSAGE_CUSTOMERS_MATCHED_LISTED = "%1$d customers matching %2$s are listed!";
 
     public static final String MESSAGE_DELIVERY_LISTED_OVERVIEW = "%1$d deliveries listed!";

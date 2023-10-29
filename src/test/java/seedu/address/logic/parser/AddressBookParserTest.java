@@ -66,7 +66,6 @@ import seedu.address.testutil.DeliveryEditDescriptorBuilder;
 import seedu.address.testutil.DeliveryUtil;
 import seedu.address.testutil.UpdateUserDescriptorBuilder;
 import seedu.address.testutil.UserBuilder;
-import seedu.address.model.user.User;
 
 
 

@@ -3,7 +3,6 @@ package seedu.address.logic.commands.customer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_CUSTOMER_LISTED_OVERVIEW;
 import static seedu.address.logic.Messages.MESSAGE_CUSTOMERS_MATCHED_LISTED;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -62,11 +61,9 @@ public class CustomerFindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/FindCommandTest.java
-        String expectedMessage = String.format(MESSAGE_CUSTOMER_LISTED_OVERVIEW, 0);
-=======
+
         String expectedMessage = String.format(MESSAGE_CUSTOMERS_MATCHED_LISTED, 0, "");
->>>>>>> 0c6857649c6d1262a90ba82f836141e6d84e1f19:src/test/java/seedu/address/logic/commands/customer/CustomerFindCommandTest.java
+
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         CustomerFindCommand command = new CustomerFindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -76,11 +73,9 @@ public class CustomerFindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/FindCommandTest.java
-        String expectedMessage = String.format(MESSAGE_CUSTOMER_LISTED_OVERVIEW, 3);
-=======
+
         String expectedMessage = String.format(MESSAGE_CUSTOMERS_MATCHED_LISTED, 3, "Kurz Elle Kunz");
->>>>>>> 0c6857649c6d1262a90ba82f836141e6d84e1f19:src/test/java/seedu/address/logic/commands/customer/CustomerFindCommandTest.java
+
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         CustomerFindCommand command = new CustomerFindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
