@@ -2,13 +2,9 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Customer in the address book.
@@ -28,20 +24,16 @@ public class Customer {
     // Data fields
     private final Address address;
 
-    @Deprecated
-    private final Set<Tag> tags = new HashSet<>();
-
     /**
      * Every field must be present and not null.
      */
-    public Customer(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Customer(Name name, Phone phone, Email email, Address address) {
+        requireAllNonNull(name, phone, email, address);
         this.customerId = customerCount++;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
     }
 
     /**
@@ -53,16 +45,14 @@ public class Customer {
      * @param phone Phone number of the customer.
      * @param email Email of the customer.
      * @param address Address of the customer.
-     * @param tags Tags associated with the customer.
      */
-    public Customer(int customerId, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Customer(int customerId, Name name, Phone phone, Email email, Address address) {
+        requireAllNonNull(name, phone, email, address);
         this.customerId = customerId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -83,14 +73,6 @@ public class Customer {
 
     public Address getAddress() {
         return address;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
     }
 
     public static void setCustomerCount(int count) {
@@ -140,14 +122,13 @@ public class Customer {
             && name.equals(otherCustomer.name)
             && phone.equals(otherCustomer.phone)
             && email.equals(otherCustomer.email)
-            && address.equals(otherCustomer.address)
-            && tags.equals(otherCustomer.tags);
+            && address.equals(otherCustomer.address);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(customerId, name, phone, email, address, tags);
+        return Objects.hash(customerId, name, phone, email, address);
     }
 
     @Override
@@ -158,7 +139,6 @@ public class Customer {
             .add("phone", phone)
             .add("email", email)
             .add("address", address)
-            .add("tags", tags)
             .toString();
     }
 
