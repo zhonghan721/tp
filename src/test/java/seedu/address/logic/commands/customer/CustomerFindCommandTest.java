@@ -3,11 +3,8 @@ package seedu.address.logic.commands.customer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/FindCommandTest.java
 import static seedu.address.logic.Messages.MESSAGE_CUSTOMER_LISTED_OVERVIEW;
-=======
 import static seedu.address.logic.Messages.MESSAGE_CUSTOMERS_MATCHED_LISTED;
->>>>>>> 0c6857649c6d1262a90ba82f836141e6d84e1f19:src/test/java/seedu/address/logic/commands/customer/CustomerFindCommandTest.java
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
