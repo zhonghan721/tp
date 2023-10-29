@@ -96,7 +96,7 @@ public class DeliveryBook implements ReadOnlyBook<Delivery> {
         // get id of customer, delete deliveries with matching customer id
         int key = customer.getCustomerId();
         // concurrent modification exception
-        deliveries.removeIf(delivery -> delivery.getCustomer().getCustomerId() == key);
+        deliveries.removeIf(delivery -> delivery.getCustomerId() == key);
     }
 
     //// util methods
