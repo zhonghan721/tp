@@ -67,6 +67,7 @@ public class Messages {
             .append(String.format("\n %s", delivery.getStatus().toString()))
             .append(String.format("\n Customer: %s", delivery.getCustomer().getName()))
             .append(String.format("\n Customer Id: %d", delivery.getCustomer().getCustomerId()))
+            .append(String.format("\n Address: %s", delivery.getAddress().toString()))
             .append(String.format("\n Ordered On: %s", delivery.getOrderDate().toString()))
             .append(String.format("\n Delivered On: %s", delivery.getDeliveryDate().toString()))
             .append(Optional.ofNullable(delivery.getNote())
