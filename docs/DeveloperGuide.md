@@ -9,20 +9,20 @@ pageNav: 3
 <!-- * Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Acknowledgements**
 
 _{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
 original source as well }_
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Design**
 
@@ -30,40 +30,40 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The **_Architecture Diagram_** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
 **`Main`** (consisting of
-classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is
+classes [`Main`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is
 in charge of the app launch and shut down.
 
-* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
-* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+- At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
+- At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+- [**`UI`**](#ui-component): The UI of the App.
+- [**`Logic`**](#logic-component): The command executor.
+- [**`Model`**](#model-component): Holds the data of the App in memory.
+- [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues
 the command `delete 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class which follows the corresponding
+- defines its _API_ in an `interface` with the same name as the Component.
+- implements its functionality using a concrete `{Component Name}Manager` class which follows the corresponding
   API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
@@ -78,7 +78,7 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified
-in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -88,20 +88,20 @@ the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+the [`MainWindow`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
-in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+- executes user commands using the `Logic` component.
+- listens for changes to `Model` data so that the UI can be updated with the modified data.
+- keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -133,72 +133,209 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
+- When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
   placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
   the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
   a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
+- All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
+
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
-
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
-  this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Customer` objects (which are contained in a `UniqueCustomerList` object). The
+  address book is exposed to the outside as a `ReadOnlyBook` objects.
+* stores the delivery book data i.e., all `Delivery` objects (which are contained in a `UniqueDeliveryList` object). The
+  delivery book is exposed to the outside as a `ReadOnlyBook` objects.
+* stores the currently filtered `Customer` objects (e.g., results of a search query) as a separate _filteredCustomers_
+  list
+* stores the currently filtered `Delivery` objects (e.g., results of a status filter query) as a separate
+  _filteredDeliveries_ list
+* stores the currently sorted `Delivery` objects (e.g., results of a sort query) as a separate _sortedDeliveries_
+  list
+* stores an unmodifiable `ObservableList<ListItem>` that can be 'observed' e.g. the UI can be bound
+  to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
-  should make sense on their own without depending on other components)
 
-<box type="info" seamless>
+#### User Model
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`,
-which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of
-each `Person` needing their own `Tag` objects.<br>
+<puml src="diagrams/UserClassDiagram.puml" width="450" />
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+The `User` model,
 
-</box>
+* stores the user data i.e, the username and password of the user.
+
+#### Delivery Model
+
+<puml src="diagrams/DeliveryClassDiagram.puml" width="450" />
+
+The `Delivery` model,
+
+* stores the delivery data i.e, the delivery name, customer, delivery status, order date, delivery date and note for the
+  delivery.
+
+#### Customer Model
+
+<puml src="diagrams/CustomerClassDiagram.puml" width="450" />
+
+The `Customer` model,
+
+* stores the customer data i.e, the customer address, phone, email and address.
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 
-* can save both address book data and user preference data in JSON format, and read them back into corresponding
-  objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only
-  the functionality of only one is needed).
+* can save user preference data, address book data and delivery book data in JSON format,
+* and read them back into corresponding objects.
+* inherits from  `UserPrefStorage`
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
+
+The concrete implementation of storage is done through `StorageManger`, which holds an instance of `UserPrefsStorage`,
+`BookStorage` and `BookStorageWithReference`. Which represents the User Preference Data, Address Book and Delivery Book
+respectively.
 
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
+- [Update Delivery Status](#update-delivery-status-feature)
+- [Create Delivery Note](#create-note-for-delivery-feature)
+- [User Register Account Command](#user-register-account-command)
+- [User Login](#user-login-command)
+- User Update Details
+- [User Logout](#user-logout-command)
+- User Account Recovery
+- User Account Deletion
+- [Add Customer](#add-customer-command)
+
+### Update Delivery Status Feature
+
+#### Overview
+
+The `delivery status` command is used to update the `DeliveryStatus` of a selected delivery with the new status
+specified by the user.
+
+The format of the `delivery status` command can be found
+[here](./UserGuide.md#update-delivery-status)
+
+#### Feature Details
+
+1. The user will specify a `Delivery` through its `id`. The user must specify a `DeliveryStatus` to replace the
+   current status of the selected delivery
+2. If a number followed by a string representing a status is not specified, or is in the incorrect format,
+   an `ParseException` will be thrown.
+3. If the command is parsed successfully, a new `DeliveryStatusCommand` is created, and executed
+4. If the user is not logged in during command execution, a `CommandException` will be thrown.
+5. The number provided is used to fetch the associated `Delivery` from `Model` if it exists. If the provided number
+   does not match any of the IDs of the `Delivery` stored in `Model`, a `CommandException` is thrown.
+6. If the command completes successfully, the selected `Delivery` will be replaced by an identical `Delivery` except
+   for an updated `DeliveryStatus`.
+
+The following activity diagram illustrates the logic of updating the `DeliveryStatus` of a `Delivery`.
+
+<puml src="diagrams/DeliveryStatusCommandActivityDiagram.puml" width="450" />
+
+The sequence of the `delivery status` command is as follows:
+
+1. The command `delivery status DELIVERY_ID STATUS` is entered by the user (e.g. `delivery status 1 completed`)
+2. `LogicManager` calls the `AddressBookParser#parseCommand()` with `delivery status DELIVERY_ID STATUS`
+3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryStatusCommandParser` calling
+   `DeliveryStatusCommandParser#parse()` to parse the remaining input after the command word has been removed
+   (i.e. the command arguments)
+4. `DeliveryStatusCommandParser` will parse the arguments, and return a new instance of `DeliveryStatusCommand` with
+   the parsed `DELIVERY_ID` and `STATUS` fields
+5. `LogicManager` calls `DeliveryStatusCommand#execute()`, first checking if the user is logged in by calling
+   `Model#getUserLoginStatus()`
+6. It then attempts to fetch the `Delivery` with the specified `DELIVERY_ID`, and replaces that `Delivery`
+   using `Model#setDelivery()` with a newly created `Delivery` with identical fields except for its status which is
+   the updated `DeliveryStatus`
+7. It creates and returns a new `CommandResult` with the result of the execution
+
+The following sequence diagram illustrates the `delivery status` command sequence:
+
+<puml src="diagrams/DeliveryStatusCommandSequenceDiagram.puml" width="450" />
+
+This section describes some noteworthy details on how certain features are implemented.
+
+- [Create Delivery Note](#create-note-for-delivery-feature)
 - [User Register Account Command](#user-register-account-command)
 - [User Login Command](#user-login-command)
 - User Update Details Command
 - [User Logout Command](#user-logout-command)
 - User Account Recovery
 - User Account Deletion
+- Customer Edit Command
+- Delivery Add Command
+
+### Create Note for Delivery Feature
+
+#### Overview
+
+The `delivery note` command is used to create a new `Note` a selected delivery with the new note
+specified by the user
+
+The format of the `delivery note` command can be found
+[here](./UserGuide.md#create-a-note-for-a-delivery)
+
+#### Feature Details
+
+1. The user will specify a `Delivery` through its `id`. The user must specify a non-empty `Note` to replace the
+   current status of the selected delivery.
+2. If a number followed by the `Note` prefix followed by a non-empty string is not specified, or is in the incorrect
+   format, a `ParseException` will be thrown.
+3. If the command is parsed successfully, a new `DeliveryCreateNoteCommand` is created, and executed.
+4. If the user is not logged in during command execution, a `CommandException` will be thrown.
+5. The number provided is used to fetch the associated `Delivery` from `Model` if it exists. If the provided
+   number does not match any of the IDs of the `Delivery`s stored in `Model`, a `CommandException` is thrown.
+6. If the command completes successfully, the selected `Delivery` will be replaced by an identical `Delivery`
+   (i.e. all field are the same) except for a modified `Note`.
+
+The following activity diagram illustrates the logic of creating a `Note` for a `Delivery`
+
+<puml src="diagrams/DeliveryCreateNoteActivityDiagram.puml" width="450" />
+
+The sequence of the `delivery note` command is as follows:
+
+1. The command `delivery note DELIVERY_ID --note NOTE` is entered by the user
+   (e.g. `delivery note 1 --note This is a note`)
+2. The `LogicManager` calls the `AdressBookParser#parseCommand()` with `delivery note DELIVERY_ID --note NOTE`
+3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryCreateNoteCommandParser` calling
+   `DeliveryCreateNoteCommandParser#parse()` to parse the remaining input after the command word has been removed
+   (i.e. the command arguments)
+4. `DeliveryCreateNoteCommandParser` will parse the arguments, and return a new instance of `DeliveryCreateNoteCommand`
+   with the parsed `DELIVERY_ID` and `Note`
+5. `LogicManager` calls `DeliveryCreateNoteCommand#execute()`, first checking if the user is logged in by calling
+   `Model#getUserLoginStatus()`
+6. It then attempts to fetch the `Delivery` with the specified `DELIVERY_ID`, and replaces that `Delivery` using
+   `Model#setDelivery()` with a newly created `Delivery` with identical fields except for its note which is
+   the updated `Note`
+7. It creates and returns a new `CommandResult` with the result of the execution
+
+If the specified `Delivery` already has an existing `Note`, it will be overridden by the new `Note` supplied if the
+command executes successfully
+
+The following diagram illustrates the `delivery note` command sequence:
+
+<puml src="diagrams/DeliveryCreateNoteSequenceDiagram.puml" width="450" />
 
 ### User Register Account Command
 
@@ -244,6 +381,109 @@ The sequence of the `register` command is as follows:
 The following sequence diagram shows how the `register` command works:
 
 <puml src="diagrams/UserRegisterSequenceDiagram.puml" alt="UserRegisterSequenceDiagram" />
+
+### List Delivery Feature
+
+### Overview
+
+The `delivery list` command is used to list all deliveries in the delivery book.
+
+The format of the `delivery list` command can be found
+[here](./UserGuide.md#view-all-deliveries)
+
+### Feature Details
+
+1. The user enters the `delivery list` command.
+2. If the user enters no arguments, the `delivery list` command will list all
+   deliveries in the delivery book.
+3. If the user enters an invalid or empty status that is prefixed by `--status`, a `ParseException` will be thrown.
+4. If the user enters an invalid or empty sort that is prefixed by `--sort`, a `ParseException` will be thrown.
+5. If the command is parsed successfully, a `DeliveryListCommand` object will be created, and executed.
+6. If the user is not logged in, a `CommandException` will be thrown.
+7. If the status was provided, the status is used to filter the current delivery list with the specified status.
+8. If the customer id was provided, the customer id is used to filter the current delivery list with the specified
+   customer id.
+9. If the delivery date was provided, the delivery date is used to filter the current delivery list with the specified
+   delivery date.
+10. If the sort was provided, the sort is used to sort the current delivery list. By default, the deliveries will be
+    sorted in descending order of their delivery date.
+11. The list on the ui will be updated with the filtered and sorted deliveries.
+12. If the command completed successfully, a `CommandResult` object will be created, and returned.
+
+The following activity diagram illustrates the logic for listing `Delivery`
+
+<puml src="diagrams/implementation/delivery/DeliveryListActivityDiagram.puml" width="450"> </puml>
+
+The sequence of the `delivery list` command is as follows:
+
+1. The command `delivery list --status STATUS --sort SORT` is entered by the user
+   (e.g. `delivery list --status created --sort ASC`)
+2. The `LogicManager` calls the `AdressBookParser#parseCommand()` with `delivery list --status STATUS --sort SORT`
+3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryListCommandParser` calling
+   `DeliveryListCommandParser#parse()` to parse the remaining input after the command word has been removed
+   (i.e. the command arguments)
+4. `DeliveryListCommandParser` will parse the arguments, and return a new instance of `DeliveryListCommand`
+   with the parsed `STATUS` and `SORT`
+5. `LogicManager` calls `DeliveryListCommand#execute()`, first checking if the user is logged in by calling
+   `Model#getUserLoginStatus()`
+6. If status is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)` to
+   filter the
+   delivery list by the specified status.
+7. If delivery date is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)`
+   to filter the delivery list by the specified date.
+8. If customer id is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)`
+   to filter the delivery list by the specified customer id.
+9. If the sort is `asc`, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList(Comparator)` to sort the
+   delivery list by delivery date in descending order.
+10. Else, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList()` to sort the delivery list by delivery
+    date in descending order.
+11. It creates a new "CommandResult" with the result of the execution.
+
+The default delivery sort is `asc`.
+
+The following sequence diagram illustrates the `delivery list` command sequence:
+
+### View Delivery Feature
+
+#### Overview
+
+The `delivery view` command is used to view a selected delivery with the id specified by the user.
+
+The format of the `delivery view` command can be found
+[here](./UserGuide.md#view-details-of-deliveries)
+
+#### Feature Details
+
+1. The user will specify a `Delivery` through its `id`.
+2. If a number is not specified, or is in the incorrect format, an `ParseException` will be thrown.
+3. If the command is parsed successfully, a new `DeliveryViewCommand` is created, and executed
+4. If the user is not logged in during command execution, a `CommandException` will be thrown.
+5. The number provided is used to fetch the associated `Delivery` from `Model` if it exists. If the provided number does
+   not match any of the IDs of the `Delivery` stored in `Model`, a `CommandException` is thrown.
+6. It creates and returns a new `CommandResult` with the result of the execution.
+
+The following activity diagram illustrates the logic of viewing a `Delivery`.
+
+<puml src="diagrams/implementations/DeliveryViewActivityDiagram.puml" width="450" />
+
+The sequence of the `delivery view` command is as follows:
+
+1. The command `delivery view DELIVERY_ID` is entered by the user (e.g. `delivery view 1`)
+2. `LogicManager` calls the `AddressBookParser#parseCommand()` with `delivery view 1`
+3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryViewCommandParser` calling
+   `DeliveryViewCommandParser#parse()` to parse the remaining input after the command word has been removed
+   (i.e. the command arguments)
+4. `DeliveryViewCommandParser` will parse the arguments, and return a new instance of `DeliveryViewCommand` with
+   the parsed `DELIVERY_ID`
+5. `LogicManager` calls `Delivery#execute()`, first checking if the user is logged in by calling
+   `Model#getUserLoginStatus()`
+6. It then attempts to fetch the `Delivery` with the specified `DELIVERY_ID`, using `Model#getDelivery(DELIVERY_ID)`
+   and returns the delivery.
+7. It creates and returns a new `CommandResult` with the result of the execution
+
+The following sequence diagram illustrates the `delivery view` command sequence:
+
+<puml src="diagrams/implementations/DeliveryViewCommandSequenceDiagram.puml" width="450" />
 
 ### User Login Command
 
@@ -292,7 +532,7 @@ The following sequence diagram shows how the `login` command works:
 
 The `logout` command is used to log out from the user's account.
 Once logged out, the user will have no access to all the commands available, except for `help`, `exit`,
-`register`, `login` and `delete account`.
+`register`, `login`, `recover` and `delete account`.
 
 The format for the `logout` command can be found [here](UserGuide.md#logout).
 
@@ -321,6 +561,143 @@ The following sequence diagram shows how the `login` command works:
 
 <puml src="diagrams/UserLogoutSequenceDiagram.puml" alt="UserLogoutSequenceDiagram" />
 
+### Add Customer Command
+
+**Overview:**
+
+The `customer add` command is used to create a new customer with information fields `Name`, `Phone`, `Email` and
+`Address`. A unique `ID` will be assigned to the customer upon creation.
+
+The format for the `customer add` command can be found [here](UserGuide.md#add-a-customer).
+
+**Feature details:**
+
+1. The user executes the `customer add` command.
+2. If any of the fields is not provided, an error message with the correct command usage will be shown.
+3. If invalid command parameters are provided, an error message with the correct parameter format will be shown.
+4. If the user is currently not logged in, an error message will be shown.
+5. The `Customer` is then cross-referenced in the `Model` to check if a customer with the same `Name` already exists.
+   If a customer with the same `Name` exists, an error message will be shown.
+6. If all the previous steps are completed without exceptions, the new `Customer` will be successfully added to the
+   database.
+
+The following activity diagram shows the logic of adding a `Customer` into the database:
+
+<puml src="diagrams/CustomerAddActivityDiagram.puml" alt="CustomerAddActivityDiagram" />
+
+The sequence of the `customer add` command is as follows:
+
+1. The user inputs the `customer add ARG` command (e.g. `customer add --name Gabriel --phone 87654321
+   --email gabrielrocks@gmail.com --address RVRC Block B`).
+2. The `LogicManager` calls the `AddressBookParser#parseCommand` with `ARG` to parse the command.
+3. The `AddressBookParser` then creates a new `CustomerAddCommandParser` to parse the fields provided by the user.
+4. A corresponding `Customer` is created by the `CustomerAddCommandParser`, which is used to
+   create a new `CustomerAddCommand`.
+5. The `CustomerAddCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`.
+6. The `CustomerAddCommand` then checks if the `Model` contains a customer with the same `Name`
+   by calling `Model#hasPerson`.
+7. If the user is logged in and the `Model` does not contain a customer with the same `Name`, the `CustomerAddCommand`
+   calls `Model#addPerson` to add the new `Customer` to the database.
+
+The following sequence diagram shows how the `login` command works:
+
+<puml src="diagrams/CustomerAddSequenceDiagram.puml" alt="CustomerAddSequenceDiagram" />
+
+### Customer Edit Command
+
+**Overview:**
+
+The `customer edit` command is used to edit an existing Customer with at least one of the information fields
+specified by the user, namely the customer's `Name`, `Phone`, `Email` or/and `Address`.
+
+The format for the `customer edit` command can be found [here](UserGuide.md#update-customer-details).
+
+**Feature details:**
+
+1. The user specifies the customer id of the `Customer` to be edited, followed by at least one of the information
+fields to be edited,`Name`, `Phone`, `Email` or/and `Address`.
+e.g.(`customer edit 1 --name John --phone 92149601`)
+2. If no fields are provided, an error message will prompt the user to key in at least one of the fields.
+3. If the customer id provided is negative or zero, an error message will prompt the user to key in an unsigned
+positive integer.
+4. The customer id provided is then cross-referenced with the stored customer list in `Model` to ensure that
+it corresponds to an existing `Customer`. If the customer id is not tied to any `Customer`, an error message will
+inform the user that that is the case.
+5. If the details provided exactly match the details of the `Customer` that was specified, an error message will inform
+   the user that the customer already exists in the address book.
+6. If all the previous steps are completed without exceptions, the fields of the `Customer` that was specified will
+be updated with the new information provided by the user.
+
+The following activity diagram shows the logic of a user editing a customer's information:
+
+<puml src="diagrams/CustomerEditActivityDiagram.puml" alt="CustomerEditActivityDiagram" />
+
+The sequence of the `customer edit` command is as follows:
+
+1. The user inputs the `customer edit` command with `input` as the customer id and `Name`, `Phone`, `Email` and/or
+`Address` as the fields to be edited. e.g.(`customer edit 1 --name John --phone 92149601)
+2. The `LogicManager` calls `AddressBookParser#parseCommand` to create its corresponding CommandParser.
+3. In this case, the `AddressBookParser` creates an instance of `CustomerEditCommandParser` and calls
+`CustomerEditCommandParser#parse` to parse the given `input` using various parse methods from `ParserUtil` and
+   creates a `CustomerEditDescriptor` object.
+4. The `CustomerEditCommandParser` then creates a `CustomerEditCommand` object. The `CustomerEditCommand` object
+takes in the `CustomerEditDescriptor` instance and the customer id from Step 1 as a parameter.
+5. The `CustomerEditCommand` is then returned to the `LogicManager` where its execute method is called. This creates
+a `Customer` object by calling `CustomerEditCommand#createEditedCustomer`. Also, it edits the `Customer` with the
+   customer id input in Step 1. This is done by calling `Model#setCustomer`.
+6. With the `Customer` specified edited, a `CommandResult` with a success message is then returned.
+
+The following sequence diagram shows how the `customer edit` command works:
+
+<puml src="diagrams/CustomerEditSequenceDiagram.puml" alt="CustomerEditSequenceDiagram" />
+
+### Delivery Add Command
+
+**Overview:**
+
+The `delivery add` command is used to add a new Delivery with all the given information fields
+specified by the user, namely the delivery's `DeliveryName`, customer id of a `Customer` and `DeliveryDate`. All 
+fields are compulsory.
+
+The format for the `delivery add` command can be found [here](UserGuide.md#create-delivery).
+
+**Feature details:**
+
+1. The user inputs `delivery add`, followed by the `DeliveryName`, customer id of a `Customer` and `DeliveryDate`.
+e.g.(delivery add --name Chocolate Cake --customer 1 --date 2024-10-10)
+2. If no fields or incorrect fields are provided, an error message will inform the user of the correct command usage.
+3. If the delivery date provided is before today's date, an error message will prompt the user to key in a date that
+   is today or after today.
+4. The customer id provided is then cross-referenced with the stored customer list in `Model` to ensure that
+   it corresponds to an existing `Customer`. If the customer id is not tied to any `Customer`, an error message will
+   inform the user that that is the case.
+5. If all the previous steps are completed without exceptions, a new `Delivery` will be added with the
+   information provided by the user and added to the `Model`.
+
+The following activity diagram shows the logic of a user adding a delivery:
+
+<puml src="diagrams/DeliveryAddActivityDiagram.puml" alt="DeliveryAddActivityDiagram" />
+
+The sequence of the `delivery add` command is as follows:
+
+1. The user inputs the `delivery add` command with `input` as the `DeliveryName`, customer id of a `Customer` and
+`DeliveryDate`.
+e.g.(`delivery add --name Chocolate Cake --customer 1 --date 2024-10-10`)
+2. The `LogicManager` calls `AddressBookParser#parseCommand` to create its corresponding CommandParser.
+3. In this case, the `AddressBookParser` creates an instance of `DeliveryAddCommandParser` and calls
+   `DeliveryAddCommandParser#parse` to parse the given `input` using various parse methods from `ParserUtil` and
+   creates a `DeliveryAddCommand` object.
+4. The `DeliveryAddCommandParser` then creates a `DeliveryAddCommand` object.
+   The `DeliveryAddCommand` object takes in the `DeliveryAddDescriptor` instance as a parameter.
+5. The `DeliveryAddCommand` is then returned to the `LogicManager` where its execute method is called. This creates
+   a `Delivery` object by calling `DeliveryAddCommand#createDelivery`. Also, it adds this new `Delivery` with the
+   details input by the user in Step 1 to the `Model`. This is done by calling `Model#addDelivery`.
+6. With the `Delivery` created with the details specified, a `CommandResult` with a success message is then returned.
+
+The following sequence diagram shows how the `delivery add` command works:
+
+<puml src="diagrams/DeliveryAddSequenceDiagram.puml" alt="DeliveryAddSequenceDiagram" />
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -329,9 +706,9 @@ The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It ex
 history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
 following operations:
 
-* `VersionedAddressBook#commit()`— Saves the current address book state in its history.
-* `VersionedAddressBook#undo()`— Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()`— Restores a previously undone address book state from its history.
+- `VersionedAddressBook#commit()`— Saves the current address book state in its history.
+- `VersionedAddressBook#undo()`— Restores the previous address book state from its history.
+- `VersionedAddressBook#redo()`— Restores a previously undone address book state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
 and `Model#redoAddressBook()` respectively.
@@ -368,7 +745,6 @@ the `undo` command. The `undo` command will call `Model#undoAddressBook()`, whic
 once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
 
 <box type="info" seamless>
 
@@ -422,14 +798,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
+- **Alternative 1 (current choice):** Saves the entire address book.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+    - Pros: Easy to implement.
+    - Cons: May have performance issues in terms of memory usage.
+
+- **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the customer being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
+    - Pros: Will use less memory (e.g. for `delete`, just save the customer being deleted).
+    - Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -437,18 +814,17 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+- [Documentation guide](Documentation.md)
+- [Testing guide](Testing.md)
+- [Logging guide](Logging.md)
+- [Configuration guide](Configuration.md)
+- [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Appendix: Requirements**
 
@@ -456,13 +832,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a home business
-* want to oversee customers in an organised manner
-* want to manage deliveries efficiently and effectively
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+- has a home business
+- want to oversee customers in an organised manner
+- want to manage deliveries efficiently and effectively
+- prefer desktop apps over other types
+- can type fast
+- prefers typing to mouse interactions
+- is reasonably comfortable using CLI apps
 
 **Value proposition**:
 Home-based business owners can have a huge base of customers.
@@ -524,8 +900,8 @@ otherwise)
 
 **Guarantees:**
 
-* Account is created if the command is executed successfully.
-* Unregistered owner is registered and logged in if the command is executed successfully.
+- Account is created if the command is executed successfully.
+- Unregistered owner is registered and logged in if the command is executed successfully.
 
 **MSS:**
 
@@ -561,7 +937,7 @@ otherwise)
 
 **Guarantees:**
 
-* Registered owner is logged in.
+- Registered owner is logged in.
 
 **MSS:**
 
@@ -594,7 +970,7 @@ otherwise)
 
 **Guarantees:**
 
-* Password would be changed.
+- Password would be changed.
 
 **MSS:**
 
@@ -640,7 +1016,7 @@ otherwise)
 
 **Guarantees:**
 
-* Logged-in owner would be logged out.
+- Logged-in owner would be logged out.
 
 **MSS:**
 
@@ -740,8 +1116,8 @@ otherwise)
 
 **Guarantees**
 
-* Customer is created only if the command is executed successfully.
-* The total number of customers will increase or remain the same.
+- Customer is created only if the command is executed successfully.
+- The total number of customers will increase or remain the same.
 
 **MSS:**
 
@@ -752,9 +1128,9 @@ otherwise)
 
 **Extensions:**
 
-* 1a. Logged-in Owner does not specify the required field(s)
+- 1a. Logged-in Owner does not specify the required field(s)
 
-    * 1a1. CMS requests Logged-in Owner to key in all the fields required to create a customer.
+    - 1a1. CMS requests Logged-in Owner to key in all the fields required to create a customer.
 
       Use Case ends.
 
@@ -770,7 +1146,7 @@ otherwise)
 
 **Guarantees**
 
-* Shows customer’s details if the command is executed successfully.
+- Shows customer’s details if the command is executed successfully.
 
 **MSS:**
 
@@ -781,19 +1157,19 @@ otherwise)
 
 **Extensions:**
 
-* 1a. Logged-in Owner does not specify the id.
+- 1a. Logged-in Owner does not specify the id.
 
-    * 1a1. CMS requests Logged-in Owner to key in an id.
-
-      Use Case ends.
-
-* 1b. Logged-in Owner specifies a customer id that does not exist.
-
-    * 1b1. CMS displays a message that customer id does not exist.
+    - 1a1. CMS requests Logged-in Owner to key in an id.
 
       Use Case ends.
 
---- 
+- 1b. Logged-in Owner specifies a customer id that does not exist.
+
+    - 1b1. CMS displays a message that customer id does not exist.
+
+      Use Case ends.
+
+---
 
 #### **Use Case: UC09 - Sort customers**
 
@@ -812,9 +1188,9 @@ otherwise)
 1. Logged-in Owner types in command to view what deliveries a particular customer has.
 2. CMS shows the list of deliveries of that specific customer.
 
---- 
+---
 
-#### **Use Case: UC10 - Search for a Customer**
+#### **Use Case: UC09 - Search for a Customer**
 
 **System:** Customer Management System (CMS)
 
@@ -824,7 +1200,7 @@ otherwise)
 
 **Guarantees**
 
-* List of customers with the specified keyword will be shown only if the command is executed successfully.
+- List of customers with the specified keyword will be shown only if the command is executed successfully.
 
 **MSS:**
 
@@ -835,27 +1211,27 @@ otherwise)
 
 **Extensions**
 
-* 1a. Logged-in Owner does not include any keyword.
+- 1a. Logged-in Owner does not include any keyword.
 
-    * 1a1. CMS requests Logged-in Owner to specify a keyword.
-
-      Use Case ends.
-
-* 1b. No customer with specified keyword is found.
-
-    * 1b1. CMS displays a message where no customers with the specified keyword is found.
+    - 1a1. CMS requests Logged-in Owner to specify a keyword.
 
       Use Case ends.
 
-* 1c. There are no customers.
+- 1b. No customer with specified keyword is found.
 
-    * 1c1. CMS displays a message where there are no customers at all.
+    - 1b1. CMS displays a message where no customers with the specified keyword is found.
+
+      Use Case ends.
+
+- 1c. There are no customers.
+
+    - 1c1. CMS displays a message where there are no customers at all.
 
       Use Case ends.
 
 ---
 
-#### **Use case:** UC11 - Customer Detail Update
+#### **Use case:** UC10 - Customer Detail Update
 
 **System:** Customer Management System (CMS)
 
@@ -865,7 +1241,7 @@ otherwise)
 
 **Guarantees:**
 
-* Selected customer’s details are updated only if the command is executed successfully.
+- Selected customer’s details are updated only if the command is executed successfully.
 
 **MSS:**
 
@@ -876,24 +1252,27 @@ otherwise)
 
 **Extensions:**
 
-* 1a. Logged-in Owner does not specify at least one updated field(s).
-    * 1a1. CMS displays an error to Logged-in Owner to specify at least one field to update.
+- 1a. Logged-in Owner does not specify at least one updated field(s).
+
+    - 1a1. CMS displays an error to Logged-in Owner to specify at least one field to update.
 
       Use Case Ends.
 
-* 1b. Logged-in Owner specifies invalid customer.
-    * 1b1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
+- 1b. Logged-in Owner specifies invalid customer.
+
+    - 1b1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
 
       Use Case Ends.
 
-* 1c. Logged-in Owner does not specify customer.
-    * 1c1. CMS displays an error to Logged-in Owner to specify a customer to update.
+- 1c. Logged-in Owner does not specify customer.
+
+    - 1c1. CMS displays an error to Logged-in Owner to specify a customer to update.
 
       Use Case Ends.
 
 ---
 
-#### **Use case:** UC12 - Customer Deletion
+#### **Use case:** UC11 - Customer Deletion
 
 **System:** Customer Management System (CMS)
 
@@ -903,7 +1282,7 @@ otherwise)
 
 **Guarantees:**
 
-* Selected customer is deleted only if the command is executed successfully.
+- Selected customer is deleted only if the command is executed successfully.
 
 **MSS:**
 
@@ -914,19 +1293,21 @@ otherwise)
 
 **Extensions:**
 
-* 1a. Logged-in Owner specifies invalid customer.
-    * 1a1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
+- 1a. Logged-in Owner specifies invalid customer.
+
+    - 1a1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
 
       Use Case Ends.
 
-* 1b. Logged-in Owner does not specify customer.
-    * 1b1. CMS displays an error to Logged-in Owner to specify a customer to update.
+- 1b. Logged-in Owner does not specify customer.
+
+    - 1b1. CMS displays an error to Logged-in Owner to specify a customer to update.
 
       Use Case Ends.
 
 ---
 
-#### **Use case:** UC13 - List Customers
+#### **Use case:** UC12 - List Customers
 
 **System:** Customer Management System (CMS)
 
@@ -936,30 +1317,18 @@ otherwise)
 
 **Guarantees:**
 
-* All Customers are listed only if the command is executed successfully.
+- All Customers are listed only if the command is executed successfully.
 
 **MSS:**
 
 1. Logged-in Owner types command to list all customers.
-2. CMS shows list of all customers sorted by ascending alphanumeric order.
+2. CMS shows list of all customers.
 
    Use Case Ends.
 
-**Extensions:**
-
-* 1a. Logged -in Owner specifies optional sort field.
-    * 1a1. CMS shows list of all customers sorted by the specified sort order.
-
-      Use Case Ends.
-
-* 1b. Logged-in Owner specifies invalid sort field.
-    * 1b1. CMS displays an error to Logged-in Owner to specify a valid sort option.
-
-      Use Case Ends.
-
 ---
 
-#### **Use case:** UC14 - Delivery Creation
+#### **Use case:** UC13 - Delivery Creation
 
 **System:** Delivery Management System (DMS)
 
@@ -969,7 +1338,7 @@ otherwise)
 
 **Guarantees:**
 
-* A new delivery is created only if the command is executed successfully.
+- A new delivery is created only if the command is executed successfully.
 
 **MSS:**
 
@@ -980,24 +1349,27 @@ otherwise)
 
 **Extensions:**
 
-* 1a. Command has missing fields.
-    * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+- 1a. Command has missing fields.
+
+    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
       Use Case Ends.
 
-* 1b. Command has invalid date.
-    * 1b1. DMS displays an error to Logged-in Owner that an invalid date was given.
+- 1b. Command has invalid date.
+
+    - 1b1. DMS displays an error to Logged-in Owner that an invalid date was given.
 
       Use Case Ends.
 
-* 1c. Command has invalid date format.
-    * 1c1. DMS displays an error to Logged-in Owner to specify the date in a valid format.
+- 1c. Command has invalid date format.
+
+    - 1c1. DMS displays an error to Logged-in Owner to specify the date in a valid format.
 
       Use Case Ends.
 
 ---
 
-#### **Use case:** UC15 - Delivery Notes Creation
+#### **Use case:** UC14 - Delivery Notes Creation
 
 **System:** Delivery Management System (DMS)
 
@@ -1007,7 +1379,7 @@ otherwise)
 
 **Guarantees:**
 
-* A new note is added to a delivery only if the command is executed successfully.
+- A new note is added to a delivery only if the command is executed successfully.
 
 **MSS:**
 
@@ -1018,14 +1390,15 @@ otherwise)
 
 **Extensions:**
 
-* 1a. Command has missing fields.
-    * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+- 1a. Command has missing fields.
+
+    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
       Use Case Ends.
 
 ---
 
-#### **Use case:** UC16 - Delivery List
+#### **Use case:** UC15 - Delivery List
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1034,12 +1407,12 @@ otherwise)
 
 **Guarantees:**
 
-* A list of deliveries is displayed only if the command is executed successfully.
+- A list of deliveries is displayed only if the command is executed successfully.
 
 **MSS:**
 
 1. Logged-in Owner types command to view a list of deliveries.
-2. DMS displays a list of all deliveries sorted by delivery date.
+2. DMS displays a list of all deliveries sorted in descending delivery date (newest to oldest).
 
    Use Case Ends.
 
@@ -1050,19 +1423,47 @@ otherwise)
 
       Use Case Ends.
 
-* 1b. User specifies sort field in command.
+* 1b. User specifies customer field in command.
+    * 1b1. DMS displays a list of deliveries filtered by the specified customer.
+
+      Use Case Ends.
+
+* 1c. User specifies delivery date field in command.
+    * 1c1. DMS displays a list of deliveries filtered by the specified delivery date.
+
+      Use Case Ends.
+
+* 1d. User specifies both status and customer fields.
+    * 1c1. DMS displays a list of deliveries filtered by the specified status and customer.
+
+      Use Case Ends.
+
+* 1e. User specifies both status and delivery date fields.
+    * 1e1. DMS displays a list of deliveries filtered by the specified status and delivery date.
+
+      Use Case Ends.
+
+* 1f. User specifies both customer and delivery date fields.
+    * 1f1. DMS displays a list of deliveries filtered by the specified customer and delivery date.
+
+      Use Case Ends.
+* 1g. User specifies customer, delivery date and status fields.
+    * 1g1. DMS displays a list of deliveries filtered by the specified customer, delivery date and status.
+
+      Use Case Ends.
+
+* 1g. User specifies sort field in command.
     * 1b1. DMS displays a list of all deliveries sorted by the specified sort order.
 
       Use Case Ends.
 
-* 1c. User Specifies both status and sort fields.
-    * 1c1. DMS displays a list of deliveries filtered by the specified status and sorted by the specified sort order.
+* 1h. User Specifies both filter fields and sort fields.
+    * 1c1. DMS displays a list of deliveries filtered by the specified filters and then delivery date sorted by the
+      specified sort order.
 
-      Use Case Ends.
+      Use Case Ends.---
 
----
-
-#### **Use case:** UC17 - Delivery List for the Day
+#### **Use case:** UC16 - Delivery List for the Day
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1071,7 +1472,7 @@ otherwise)
 
 **Guarantees:**
 
-* A list of deliveries for the day is displayed only if the command is executed successfully.
+- A list of deliveries for the day is displayed only if the command is executed successfully.
 
 **MSS:**
 
@@ -1082,14 +1483,15 @@ otherwise)
 
 **Extensions:**
 
-* 1a. Command has missing fields.
-    * 1a1. DMS displays an error to Logged-in Owner.
+- 1a. Command has missing fields.
+
+    - 1a1. DMS displays an error to Logged-in Owner.
 
       Use Case Ends.
 
 ---
 
-#### **Use case:** UC18 - Add Customer to Delivery
+#### **Use case:** UC17 - Add Customer to Delivery
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1098,7 +1500,7 @@ otherwise)
 
 **Guarantees:**
 
-* A customer is added to a delivery only if the command is executed successfully.
+- A customer is added to a delivery only if the command is executed successfully.
 
 **MSS:**
 
@@ -1109,19 +1511,21 @@ otherwise)
 
 **Extensions:**
 
-* 1a. Command has missing fields.
-    * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+- 1a. Command has missing fields.
+
+    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
       Use Case Ends.
 
-* 1b. Command has invalid customer details.
-    * 1b1. DMS displays an error to Logged-in Owner that the specified customer details is invalid.
+- 1b. Command has invalid customer details.
+
+    - 1b1. DMS displays an error to Logged-in Owner that the specified customer details is invalid.
 
       Use Case Ends.
 
 ---
 
-#### **Use case:** UC19 - Remove Customer from Delivery
+#### **Use case:** UC18 - Remove Customer from Delivery
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1130,7 +1534,7 @@ otherwise)
 
 **Guarantees:**
 
-* A customer is removed from a delivery only if the command is executed successfully.
+- A customer is removed from a delivery only if the command is executed successfully.
 
 **MSS:**
 
@@ -1141,19 +1545,21 @@ otherwise)
 
 **Extensions:**
 
-* 1a. Command has missing fields.
-    * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+- 1a. Command has missing fields.
+
+    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
       Use Case Ends.
 
-* 1b. Command has invalid customer details.
-    * 1b1. DMS displays an error to Logged-in Owner that the specified customer cannot be found.
+- 1b. Command has invalid customer details.
+
+    - 1b1. DMS displays an error to Logged-in Owner that the specified customer cannot be found.
 
       Use Case Ends.
 
 ---
 
-#### **Use case:** UC20 - Specify Delivery Method
+#### **Use case:** UC19 - Specify Delivery Method
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1162,7 +1568,7 @@ otherwise)
 
 **Guarantees:**
 
-* A delivery method is specified only if the command is executed successfully.
+- A delivery method is specified only if the command is executed successfully.
 
 **MSS:**
 
@@ -1173,19 +1579,21 @@ otherwise)
 
 **Extensions:**
 
-* 1a. Command has missing fields.
-    * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+- 1a. Command has missing fields.
+
+    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
       Use Case Ends.
 
-* 1b. Command has invalid delivery options.
-    * 1b1. DMS displays an error to Logged-in Owner that the specified delivery method is invalid.
+- 1b. Command has invalid delivery options.
+
+    - 1b1. DMS displays an error to Logged-in Owner that the specified delivery method is invalid.
 
       Use Case Ends.
 
 ---
 
-#### **Use case:** UC21 - Search for Delivery
+#### **Use case:** UC20 - Search for Delivery
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1194,7 +1602,7 @@ otherwise)
 
 **Guarantees:**
 
-* A delivery is searched for only if the command is executed successfully.
+- A delivery is searched for only if the command is executed successfully.
 
 **MSS:**
 
@@ -1205,14 +1613,15 @@ otherwise)
 
 **Extensions:**
 
-* 1a. Command has missing fields.
-    * 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
+- 1a. Command has missing fields.
+
+    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
       Use Case Ends.
 
 ---
 
-#### Use Case: UC22 - View location of delivery
+#### Use Case: UC21 - View location of delivery
 
 **System:** Delivery Management System (DMS)
 
@@ -1222,7 +1631,7 @@ otherwise)
 
 **Guarantees:**
 
-* Delivery location is shown only if the command is executed successfully.
+- Delivery location is shown only if the command is executed successfully.
 
 **MSS:**
 
@@ -1233,19 +1642,21 @@ otherwise)
 
 **Extensions**
 
-* 1a. Logged-in owner did not specify the delivery id.
-    * 1a1. DMS informs the logged-in owner of the missing field.
+- 1a. Logged-in owner did not specify the delivery id.
+
+    - 1a1. DMS informs the logged-in owner of the missing field.
 
       Use case ends.
 
-* 1b. Logged-in owner specified a delivery id that does not exist.
-    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+- 1b. Logged-in owner specified a delivery id that does not exist.
+
+    - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
 
       Use case ends.
 
 ---
 
-#### Use Case: UC23 - View details of delivery
+#### Use Case: UC22 - View details of delivery
 
 **System:** Delivery Management System (DMS)
 
@@ -1255,7 +1666,7 @@ otherwise)
 
 **Guarantees:**
 
-* Details of the delivery are displayed only if the command is executed successfully.
+- Details of the delivery are displayed only if the command is executed successfully.
 
 **MSS:**
 
@@ -1266,19 +1677,21 @@ otherwise)
 
 **Extensions**
 
-* 1a. Logged-in owner did not specify the delivery id.
-    * 1a1. DMS informs the logged-in owner of the missing field.
+- 1a. Logged-in owner did not specify the delivery id.
+
+    - 1a1. DMS informs the logged-in owner of the missing field.
 
       Use case ends.
 
-* 1b. Logged-in owner specified a delivery id that does not exist.
-    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+- 1b. Logged-in owner specified a delivery id that does not exist.
+
+    - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
 
       Use case ends.
 
 ---
 
-#### Use Case: UC24 - Update delivery status
+#### Use Case: UC23 - Update delivery status
 
 **System:** Delivery Management System (DMS)
 
@@ -1288,7 +1701,7 @@ otherwise)
 
 **Guarantees:**
 
-* The status of the delivery is updated only if the command is executed successfully.
+- The status of the delivery is updated only if the command is executed successfully.
 
 **MSS:**
 
@@ -1299,24 +1712,27 @@ otherwise)
 
 **Extensions**
 
-* 1a. Logged-in owner did not specify the delivery id.
-    * 1a1. DMS informs the logged-in owner of the missing field.
+- 1a. Logged-in owner did not specify the delivery id or delivery status.
+
+    - 1a1. DMS informs the logged-in owner of the missing field.
 
       Use case ends.
 
-* 1b. Logged-in owner specified a delivery id that does not exist.
-    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+- 1b. Logged-in owner specified a delivery id that does not exist.
+
+    - 1b1. DMS informs the logged-in owner of an invalid delivery id being entered.
 
       Use case ends.
 
-* 1c. DMS detects that the specified delivery id is already marked as completed/pending.
-    * 1c1. DMS informs the logged-in owner that the delivery is already marked as completed/pending.
+- 1c. Logged-in owner specified an invalid delivery status.
 
-      Use case ends
+    - 1c1. DMS informs the logged-in owner of an invalid delivery status being entered.
+
+      Use case ends.
 
 ---
 
-#### Use Case: UC25 - Update delivery details
+#### Use Case: UC24 - Update delivery details
 
 **System:** Delivery Management System (DMS)
 
@@ -1326,7 +1742,7 @@ otherwise)
 
 **Guarantees:**
 
-* The details of the delivery is updated only if the command is executed successfully.
+- The details of the delivery is updated only if the command is executed successfully.
 
 **MSS:**
 
@@ -1337,24 +1753,27 @@ otherwise)
 
 **Extensions**
 
-* 1a. Logged-in owner did not specify all the fields.
-    * 1a1. DMS informs the logged-in owner to specify all the fields.
+- 1a. Logged-in owner did not specify all the fields.
+
+    - 1a1. DMS informs the logged-in owner to specify all the fields.
 
       Use case ends.
 
-* 1b. Logged-in owner specified a delivery id that does not exist.
-    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+- 1b. Logged-in owner specified a delivery id that does not exist.
+
+    - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
 
       Use case ends.
 
-* 1c. Logged-in owner entered date in the wrong format.
-    * 1c1. DMS informs the logged-in owner of invalid format and shows the correct format.
+- 1c. Logged-in owner entered date in the wrong format.
+
+    - 1c1. DMS informs the logged-in owner of invalid format and shows the correct format.
 
       Use case ends
 
 ---
 
-#### Use Case: UC26 - Delete delivery
+#### Use Case: UC25 - Delete delivery
 
 **System:** Delivery Management System (DMS)
 
@@ -1364,7 +1783,7 @@ otherwise)
 
 **Guarantees:**
 
-* The delivery is deleted only if the command is executed successfully.
+- The delivery is deleted only if the command is executed successfully.
 
 **MSS:**
 
@@ -1375,18 +1794,21 @@ otherwise)
 
 **Extensions**
 
-* 1a. Logged-in owner did not specify the delivery id.
-    * 1a1. DMS informs the logged-in owner of the missing field.
+- 1a. Logged-in owner did not specify the delivery id.
+
+    - 1a1. DMS informs the logged-in owner of the missing field.
 
       Use case ends.
 
-* 1b. Logged-in owner specified a delivery id that does not exist.
-    * 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+- 1b. Logged-in owner specified a delivery id that does not exist.
+
+    - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
 
       Use case ends.
 
-* 1c. Logged-in owner specified a delivery that is in-progress.
-    * 1c1. DMS informs the logged-in owner of the status of the delivery and does not delete it.
+- 1c. Logged-in owner specified a delivery that is in-progress.
+
+    - 1c1. DMS informs the logged-in owner of the status of the delivery and does not delete it.
 
       Use case ends
 
@@ -1407,16 +1829,16 @@ otherwise)
     1. Perform Inventory Management
     2. Perform Route Planning
 
-*{More to be added}*
+_{More to be added}_
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private Contact Detail**: A contact detail that is not meant to be shared with others
-* **CLI**: Command Line Interface
-* **Owner**: The customer who owns the home-based business and who uses the app
+- **Mainstream OS**: Windows, Linux, Unix, OS-X
+- **Private Contact Detail**: A contact detail that is not meant to be shared with others
+- **CLI**: Command Line Interface
+- **Owner**: The customer who owns the home-based business and who uses the app
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Appendix: Instructions for manual testing**
 
@@ -1425,7 +1847,7 @@ Given below are instructions to test the app manually.
 <box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+testers are expected to do more _exploratory_ testing.
 
 </box>
 

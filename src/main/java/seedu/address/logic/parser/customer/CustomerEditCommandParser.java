@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.customer;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -15,7 +15,11 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.customer.CustomerEditCommand;
-import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
@@ -45,27 +49,27 @@ public class CustomerEditCommandParser implements Parser<CustomerEditCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        CustomerEditDescriptor customerEditDescriptor = new CustomerEditDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            customerEditDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            customerEditDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            customerEditDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            customerEditDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(customerEditDescriptor::setTags);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!customerEditDescriptor.isAnyFieldEdited()) {
             throw new ParseException(CustomerEditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new CustomerEditCommand(index, editPersonDescriptor);
+        return new CustomerEditCommand(index, customerEditDescriptor);
     }
 
     /**

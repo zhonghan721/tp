@@ -25,7 +25,7 @@ import seedu.address.model.delivery.DeliveryStatus;
 public class DeliveryDeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(),
-            new UserPrefs(), true);
+        new UserPrefs(), true);
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -33,20 +33,21 @@ public class DeliveryDeleteCommandTest {
         DeliveryDeleteCommand deleteCommand = new DeliveryDeleteCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeliveryDeleteCommand.MESSAGE_DELETE_DELIVERY_SUCCESS,
-                Messages.format(deliveryToDelete));
+            Messages.format(deliveryToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
-                new UserPrefs(), true);
+            new UserPrefs(), true);
         expectedModel.deleteDelivery(deliveryToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
     }
+
     @Test
     public void execute_equals() {
 
         DeliveryDeleteCommand deleteCommand = new DeliveryDeleteCommand(INDEX_FIRST_PERSON);
         DeliveryDeleteCommand otherDeleteCommand = new DeliveryDeleteCommand(INDEX_SECOND_PERSON);
-        DeliveryListCommand deliveryListCommand = new DeliveryListCommand(DeliveryStatus.CREATED);
+        DeliveryListCommand deliveryListCommand = new DeliveryListCommand(DeliveryStatus.CREATED, null, null, null);
 
         assertTrue(deleteCommand.equals(deleteCommand));
         assertFalse(deleteCommand.equals(deliveryListCommand));
@@ -69,10 +70,10 @@ public class DeliveryDeleteCommandTest {
         DeliveryDeleteCommand deleteCommand = new DeliveryDeleteCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeliveryDeleteCommand.MESSAGE_DELETE_DELIVERY_SUCCESS,
-                Messages.format(deliveryToDelete));
+            Messages.format(deliveryToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
-                new UserPrefs(), true);
+            new UserPrefs(), true);
         expectedModel.deleteDelivery(deliveryToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
