@@ -57,6 +57,7 @@ public class CustomerDeleteCommand extends CustomerCommand {
 
         if (found && customerToDelete != null) {
             model.deletePerson(customerToDelete);
+            model.deleteDeliveryByCustomer(customerToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
                     Messages.format(customerToDelete)), true);
         } else {

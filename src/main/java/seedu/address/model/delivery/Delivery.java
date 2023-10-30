@@ -47,6 +47,7 @@ public class Delivery {
         this.deliveryDate = deliveryDate;
         this.status = status;
         this.note = note;
+        this.address = customer.getAddress();
     }
 
 
@@ -212,13 +213,13 @@ public class Delivery {
         Delivery otherDelivery = (Delivery) other;
 
         return otherDelivery.deliveryId == deliveryId
-            && otherDelivery.deliveryDate.equals(deliveryDate)
-            && otherDelivery.name.equals(name)
-            && otherDelivery.customer.equals(customer)
-            && Objects.equals(otherDelivery.note, note)
-            && otherDelivery.orderDate.equals(orderDate)
-            && otherDelivery.status.equals(status)
-            && otherDelivery.address.equals(address);
+                && otherDelivery.deliveryDate.equals(deliveryDate)
+                && otherDelivery.name.equals(name)
+                && otherDelivery.customer.equals(customer)
+                && Objects.equals(otherDelivery.note, note)
+                && otherDelivery.orderDate.equals(orderDate)
+                && otherDelivery.status.equals(status)
+                && otherDelivery.address.equals(address);
     }
 
     @Override

@@ -19,8 +19,7 @@ public class DeliveryBuilder {
     public static final DeliveryName DEFAULT_NAME = new DeliveryName("Gabriels");
     public static final Customer DEFAULT_CUSTOMER = new CustomerBuilder().withName("Gabriel Seethor")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253")
-            .withTags("friends").build();
+            .withPhone("94351253").build();
 
     public static final DeliveryDate DEFAULT_DELIVERED_AT = new DeliveryDate("2023-12-12");
     public static final DeliveryStatus DEFAULT_STATUS = DeliveryStatus.CREATED;

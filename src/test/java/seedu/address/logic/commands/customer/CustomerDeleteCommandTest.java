@@ -39,6 +39,7 @@ public class CustomerDeleteCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.deletePerson(customerToDelete);
+        expectedModel.deleteDeliveryByCustomer(customerToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
     }
@@ -64,6 +65,7 @@ public class CustomerDeleteCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.deletePerson(customerToDelete);
+        expectedModel.deleteDeliveryByCustomer(customerToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
     }
