@@ -656,7 +656,7 @@ The following sequence diagram shows how the `customer edit` command works:
 **Overview:**
 
 The `delivery add` command is used to add a new Delivery with all the given information fields
-specified by the user, namely the delivery's `DeliveryName`, customer id of a `Customer` and `DeliveryDate`. All 
+specified by the user, namely the delivery's `DeliveryName`, customer id of a `Customer` and `DeliveryDate`. All
 fields are compulsory.
 
 The format for the `delivery add` command can be found [here](UserGuide.md#create-delivery).
