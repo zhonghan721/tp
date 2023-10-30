@@ -172,6 +172,13 @@ public interface Model {
     void deleteDelivery(Delivery target);
 
     /**
+     * Deletes all deliveries associated with the given customer.
+     *
+     * @param target
+     */
+    void deleteDeliveryByCustomer(Customer target);
+
+    /**
      * Adds the given delivery.
      * {@code delivery} must not already exist in the address book.
      */

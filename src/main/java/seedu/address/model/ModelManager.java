@@ -419,6 +419,12 @@ public class ModelManager implements Model {
         setUiListDelivery();
     }
 
+    @Override
+    public void deleteDeliveryByCustomer(Customer target) {
+        deliveryBook.removeDeliveryByCustomer(target);
+        updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+    }
+
 
     @Override
     public boolean equals(Object other) {

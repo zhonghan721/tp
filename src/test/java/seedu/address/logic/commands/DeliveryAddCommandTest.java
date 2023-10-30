@@ -291,6 +291,11 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
+        public void deleteDeliveryByCustomer(Customer target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addDelivery(Delivery customer) {
             throw new AssertionError("This method should not be called.");
         }
@@ -372,6 +377,7 @@ public class DeliveryAddCommandTest {
         public void updateUser(User user) {
             throw new AssertionError("This method should not be called.");
         }
+
     }
 
     /**
