@@ -47,6 +47,7 @@ public class Delivery {
         this.deliveryDate = deliveryDate;
         this.status = status;
         this.note = note;
+        this.address = customer.getAddress();
     }
 
 
