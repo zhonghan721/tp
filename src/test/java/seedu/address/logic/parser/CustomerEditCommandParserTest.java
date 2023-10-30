@@ -98,6 +98,7 @@ public class CustomerEditCommandParserTest {
         CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).build();
 
+
         CustomerEditCommand expectedCommand = new CustomerEditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

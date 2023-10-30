@@ -81,8 +81,10 @@ public class CustomerEditDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Returns an {@code CustomerEditDescriptor} with fields given
+     */
     public CustomerEditDescriptor build() {
-
         return descriptor;
     }
 }

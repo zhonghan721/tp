@@ -16,10 +16,7 @@ import seedu.address.testutil.CustomerBuilder;
 
 public class CustomerTest {
 
-
-
     @Test
-
     public void isSamePerson() {
         // same object -> returns true
         assertTrue(ALICE.isSamePerson(ALICE));
@@ -31,6 +28,7 @@ public class CustomerTest {
 
         Customer editedAlice = new CustomerBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).build();
+
 
         assertTrue(ALICE.isSamePerson(editedAlice));
 

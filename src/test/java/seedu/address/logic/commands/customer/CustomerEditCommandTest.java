@@ -71,6 +71,7 @@ public class CustomerEditCommandTest {
         CustomerEditCommand.CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder()
                 .withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
 
+
         CustomerEditCommand editCommand = new CustomerEditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_CUSTOMER_SUCCESS,

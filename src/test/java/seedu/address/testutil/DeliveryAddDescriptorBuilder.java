@@ -53,7 +53,9 @@ public class DeliveryAddDescriptorBuilder {
         return this;
     }
 
-
+    /**
+     * Returns a {@code DeliveryAddDescriptor} with the fields given
+     */
     public DeliveryAddDescriptor build() {
         return descriptor;
     }

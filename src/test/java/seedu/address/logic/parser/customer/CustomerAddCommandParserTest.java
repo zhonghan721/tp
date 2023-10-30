@@ -51,6 +51,7 @@ public class CustomerAddCommandParserTest {
                 .withCustomerId(Customer.getCustomerCount()).build();
 
 
+
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
             + ADDRESS_DESC_BOB, new CustomerAddCommand(expectedCustomer));
@@ -60,6 +61,7 @@ public class CustomerAddCommandParserTest {
 
         Customer expectedCustomerMultipleTags = new CustomerBuilder(BOB).withCustomerId(Customer.getCustomerCount())
                 .build();
+
 
         assertParseSuccess(parser,
             NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
@@ -139,7 +141,6 @@ public class CustomerAddCommandParserTest {
     }
 
     @Test
-
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, CustomerAddCommand.MESSAGE_USAGE);
 

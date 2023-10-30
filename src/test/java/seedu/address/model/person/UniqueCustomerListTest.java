@@ -45,6 +45,7 @@ public class UniqueCustomerListTest {
 
         Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
 
+
         assertTrue(uniquePersonList.contains(editedAlice));
     }
 
