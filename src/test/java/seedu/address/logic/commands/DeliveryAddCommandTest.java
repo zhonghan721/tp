@@ -373,6 +373,12 @@ public class DeliveryAddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public String getLoginStatus() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
     }
 
     /**
