@@ -1,6 +1,8 @@
 package seedu.address;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -80,7 +82,15 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getAddressBookFilePath().getParent());
+
+        // Create Data Directory if needed
+        try {
+            Files.createDirectories(storage.getAddressBookFilePath().getParent());
+        } catch (IOException e) {
+            logger.info("Data Folder failed to be created at " + storage.getAddressBookFilePath().getParent()
+                    + " " + e);
+        }
 
         Optional<ReadOnlyBook<Customer>> addressBookOptional;
         ReadOnlyBook<Customer> initialAddressData;
