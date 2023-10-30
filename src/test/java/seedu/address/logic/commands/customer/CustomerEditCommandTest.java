@@ -47,6 +47,9 @@ public class CustomerEditCommandTest {
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
             Messages.format(editedCustomer));
 
+        System.out.println(editedCustomer);
+        System.out.println(editCommand);
+
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
                 new UserPrefs(), model.getUserLoginStatus());
@@ -81,7 +84,7 @@ public class CustomerEditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_FIRST_PERSON,
-                new CustomerEditCommand.CustomerEditDescriptor());
+                new CustomerEditDescriptor());
         Customer editedCustomer = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
@@ -121,7 +124,7 @@ public class CustomerEditCommandTest {
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
         Customer firstCustomer = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        CustomerEditCommand.CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder(firstCustomer)
+        CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder(firstCustomer)
                 .build();
         CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_SECOND_PERSON, descriptor);
 
@@ -143,7 +146,7 @@ public class CustomerEditCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        CustomerEditCommand.CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder()
+        CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder()
                 .withName(VALID_NAME_BOB).build();
         CustomerEditCommand editCommand = new CustomerEditCommand(outOfBoundIndex, descriptor);
 
@@ -172,7 +175,7 @@ public class CustomerEditCommandTest {
         // set state of model to be logged out
         model.setLogoutSuccess();
         Customer editedCustomer = new PersonBuilder().build();
-        CustomerEditCommand.CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder(editedCustomer)
+        CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder(editedCustomer)
                 .build();
         CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_FIRST_PERSON, descriptor);
 
@@ -186,7 +189,7 @@ public class CustomerEditCommandTest {
         // customerId = 1
         Index indexLastPerson = Index.fromOneBased(1);
 
-        CustomerEditCommand.CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder()
+        CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder()
                 .withCustomerId(1).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).build();
         CustomerEditCommand editCommand = new CustomerEditCommand(indexLastPerson, descriptor);

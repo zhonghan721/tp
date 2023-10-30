@@ -96,6 +96,11 @@ public interface Model {
     boolean hasPerson(Customer customer);
 
     /**
+     * Returns true if a customer with the same {@code Phone} as {@code customer} exists in the address book.
+     */
+    boolean hasCustomerWithSamePhone(Customer customer);
+
+    /**
      * Deletes the given customer.
      * The customer must exist in the address book.
      */

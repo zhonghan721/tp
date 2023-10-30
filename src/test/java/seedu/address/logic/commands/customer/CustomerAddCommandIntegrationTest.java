@@ -29,7 +29,7 @@ public class CustomerAddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Customer validCustomer = new PersonBuilder().build();
+        Customer validCustomer = new PersonBuilder().withCustomerId(50).build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
                 new UserPrefs(), model.getUserLoginStatus());
@@ -48,9 +48,19 @@ public class CustomerAddCommandIntegrationTest {
     }
 
     @Test
+    public void execute_duplicatePersonWithSamePhone_throwsCommandException() {
+        // same phone, different name and customerId
+        Customer customerInList = model.getAddressBook().getList().get(0);
+        Customer customerWithSamePhone = new PersonBuilder(customerInList).withName("Different Name")
+                .withCustomerId(51).build();
+        assertCommandFailure(new CustomerAddCommand(customerWithSamePhone), model,
+                CustomerAddCommand.MESSAGE_DUPLICATE_PERSON);
+    }
+
+    @Test
     public void execute_newPersonLoggedOut_failure() {
         model.setLogoutSuccess();
-        Customer validCustomer = new PersonBuilder().build();
+        Customer validCustomer = new PersonBuilder().withCustomerId(50).build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
                 new UserPrefs(), model.getUserLoginStatus());
