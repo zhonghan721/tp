@@ -198,9 +198,25 @@ _ADDRESS_: String
 **Command fails (missing field):** _Please fill up all the required fields (--name NAME --phone PHONE_NUMBER --email
 EMAIL --address ADDRESS)._
 
-### Search for a customer `[Coming Soon in v1.3]`
+### Find customers
 
-_Details coming soon..._
+You can find customers whose names have a word that matches _ANY_ of the given keywords.
+
+**Format:** `customer find KEYWORD [MORE_KEYWORDS]`
+
+**Example:** `customer find Ibrahim Yu`
+
+**Accepted Values:**
+
+_KEYWORD_: One word
+
+_MORE\_KEYWORDS_: More _KEYWORDs_ separated by spaces
+
+**Command succeeds:**
+
+//TODO: Add image
+
+**Command fails (missing_keyword):** _Please provide at least one keyword to search for!_
 
 ### List customers
 

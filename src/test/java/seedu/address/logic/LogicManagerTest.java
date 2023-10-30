@@ -185,7 +185,7 @@ public class LogicManagerTest {
         String addCommand = CustomerAddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
             + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
         Customer expectedCustomer = new PersonBuilder(AMY)
-            .withCustomerId(Customer.getCustomerCount()).withTags().build();
+            .withCustomerId(Customer.getCustomerCount()).build();
         ModelManager expectedModel = new ModelManager();
         // sets the expected model to be in logged in state
         expectedModel.setLoginSuccess();

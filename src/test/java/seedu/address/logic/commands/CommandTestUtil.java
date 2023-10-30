@@ -14,7 +14,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SECRET_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -23,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.customer.CustomerEditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
@@ -33,8 +32,8 @@ import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.testutil.CustomerEditDescriptorBuilder;
 import seedu.address.testutil.DeliveryAddDescriptorBuilder;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.UpdateUserDescriptorBuilder;
 
 
@@ -104,11 +103,11 @@ public class CommandTestUtil {
     // password string is qwerty1234
     public static final String VALID_PASSWORD_AARON = "qwerty1234";
     public static final String VALID_HASHED_PASSWORD_AARON =
-            "17F80754644D33AC685B0842A402229ADBB43FC9312F7BDF36BA24237A1F1FFB";
+        "17F80754644D33AC685B0842A402229ADBB43FC9312F7BDF36BA24237A1F1FFB";
     // password string is BEARYf00d
     public static final String VALID_PASSWORD_FOODBEAR = "BEARYf00d";
     public static final String VALID_HASHED_PASSWORD_FOODBEAR =
-            "26CC1E3D7988F3AE6FB06859123B5046A5A84D47611092037E059F66E1C0E461";
+        "26CC1E3D7988F3AE6FB06859123B5046A5A84D47611092037E059F66E1C0E461";
     public static final String VALID_SECRET_QUESTION_AARON = "What is my name?";
     public static final String VALID_SECRET_QUESTION_FOODBEAR = "What is my favourite food?";
     public static final String VALID_ANSWER_AARON = "Aaron";
@@ -122,8 +121,6 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String USERNAME_DESC_AARON = " " + PREFIX_USER + VALID_USERNAME_AARON;
     public static final String USERNAME_DESC_FOODBEAR = " " + PREFIX_USER + VALID_USERNAME_FOODBEAR;
     public static final String PASSWORD_DESC_AARON = " " + PREFIX_PASSWORD + VALID_PASSWORD_AARON;
@@ -132,7 +129,7 @@ public class CommandTestUtil {
     public static final String PASSWORD_CONFIRM_DESC_FOODBEAR = " " + PREFIX_PASSWORD_CONFIRM + VALID_PASSWORD_FOODBEAR;
     public static final String SECRET_QUESTION_DESC_AARON = " " + PREFIX_SECRET_QUESTION + "What is my name?";
     public static final String SECRET_QUESTION_DESC_FOODBEAR = " "
-            + PREFIX_SECRET_QUESTION + "What is my favourite food?";
+        + PREFIX_SECRET_QUESTION + "What is my favourite food?";
     public static final String ANSWER_DESC_AARON = " " + PREFIX_ANSWER + "Aaron";
     public static final String ANSWER_DESC_FOODBEAR = " " + PREFIX_ANSWER + "Food";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -141,16 +138,18 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC_3 = " " + PREFIX_PHONE + "123456789"; // more than 8 digits
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-
     public static final String INVALID_USERNAME_DESC = " " + PREFIX_USER
-            + "thisIs^myName"; // '^' not allowed in username
+        + "thisIs^myName"; // '^' not allowed in username
     public static final String INVALID_PASSWORD_DESC = " " + PREFIX_PASSWORD + "qwerty"; // lesser than 8 characters
     public static final String INVALID_PASSWORD_CONFIRM_DESC = " " + PREFIX_PASSWORD_CONFIRM + "qwerty";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final String VALID_DELIVERY_LIST_ALL = " " + PREFIX_STATUS + "all";
+    public static final String VALID_DELIVERY_LIST_CUSTOMER_ID = " " + PREFIX_CUSTOMER_ID + "1";
+    public static final String INVALID_DELIVERY_LIST_CUSTOMER_ID = " " + PREFIX_CUSTOMER_ID + "x";
+    public static final String VALID_DELIVERY_LIST_DELIVERY_DATE = " " + PREFIX_DATE + "2023-12-12";
+    public static final String INVALID_DELIVERY_LIST_DELIVERY_DATE = " " + PREFIX_DATE + "13-13-2023";
     public static final String VALID_DELIVERY_LIST_CREATED = " " + PREFIX_STATUS + "created";
     public static final String VALID_DELIVERY_LIST_SHIPPED = " " + PREFIX_STATUS + "SHIPPED";
     public static final String VALID_DELIVERY_LIST_COMPLETED = " " + PREFIX_STATUS + "completed";
@@ -160,8 +159,8 @@ public class CommandTestUtil {
     public static final String VALID_DELIVERY_LIST_SORT_ASC = " " + PREFIX_SORT + "asc";
     public static final String VALID_DELIVERY_LIST_SORT_DESC = " " + PREFIX_SORT + "desc";
     public static final String INVALID_DELIVERY_LIST_SORT = " " + PREFIX_SORT + "invalid";
-    public static final EditPersonDescriptor DESC_AMY;
-    public static final EditPersonDescriptor DESC_BOB;
+    public static final CustomerEditDescriptor DESC_AMY;
+    public static final CustomerEditDescriptor DESC_BOB;
 
     public static final DeliveryAddDescriptor DESC_MILK;
 
@@ -172,18 +171,15 @@ public class CommandTestUtil {
 
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-
+        DESC_AMY = new CustomerEditDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).build();
+        DESC_BOB = new CustomerEditDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).build();
         DESC_MILK = new DeliveryAddDescriptorBuilder().withCustomerId(VALID_CUSTOMER_ID_1)
-                .withDeliveryDate(VALID_DELIVERY_DATE_1).withDeliveryName(VALID_NAME_GABRIELS_MILK).build();
+            .withDeliveryDate(VALID_DELIVERY_DATE_1).withDeliveryName(VALID_NAME_GABRIELS_MILK).build();
 
         DESC_RICE = new DeliveryAddDescriptorBuilder().withCustomerId(VALID_CUSTOMER_ID_2)
-                .withDeliveryDate(VALID_DELIVERY_DATE_2).withDeliveryName(VALID_NAME_JAMES_MILK).build();
+            .withDeliveryDate(VALID_DELIVERY_DATE_2).withDeliveryName(VALID_NAME_JAMES_MILK).build();
 
         DESC_AARON = new UpdateUserDescriptorBuilder().withUsername(VALID_USERNAME_AARON)
                 .withPassword(VALID_PASSWORD_AARON).withSecretQuestion(VALID_SECRET_QUESTION_AARON)

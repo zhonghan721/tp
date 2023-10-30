@@ -32,12 +32,17 @@
           </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-              <Label fx:id="accessory" styleClass="cell_big_label" text="accessory">
+              <Label fx:id="mainAccessory" styleClass="cell_big_label" text="accessory">
                 <minWidth>
                   <!-- Ensures that the label text is never truncated -->
                   <Region fx:constant="USE_PREF_SIZE" />
                 </minWidth>
               </Label>
+                  <Label fx:id="accessory" styleClass="cell_big_label" text="accessory">
+                     <minWidth>
+                        <Region fx:constant="USE_PREF_SIZE" />
+                     </minWidth>
+                  </Label>
                </children>
                <HBox.margin>
                   <Insets top="25.0" />

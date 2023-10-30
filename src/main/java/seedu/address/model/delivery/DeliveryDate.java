@@ -40,6 +40,7 @@ public class DeliveryDate extends Date {
 
     /**
      * Returns a string in the application's format
+     *
      * @return A string representing the date
      */
     @Override

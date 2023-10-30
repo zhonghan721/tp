@@ -19,7 +19,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX = "The delivery index provided is invalid";
     public static final String MESSAGE_INVALID_DELIVERY_ID = "The delivery ID provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_CUSTOMERS_LISTED_OVERVIEW = "%1$d customers listed!";
+    public static final String MESSAGE_CUSTOMERS_MATCHED_LISTED = "%1$d customers matching %2$s are listed!";
     public static final String MESSAGE_DELIVERY_LISTED_OVERVIEW = "%1$d deliveries listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS = "Multiple values specified for the following"
         + "single-valued field(s): ";
@@ -52,9 +53,7 @@ public class Messages {
             .append(String.format(" %s", customer.getName()))
             .append(String.format("\n Phone: %s", customer.getPhone().toString()))
             .append(String.format("\n Email: %s", customer.getEmail().toString()))
-            .append(String.format("\n Address: %s", customer.getAddress().toString()))
-            .append("\n Tags: ");
-        customer.getTags().forEach(builder::append);
+            .append(String.format("\n Address: %s", customer.getAddress().toString()));
         return builder.toString();
     }
 
@@ -68,6 +67,7 @@ public class Messages {
             .append(String.format("\n %s", delivery.getStatus().toString()))
             .append(String.format("\n Customer: %s", delivery.getCustomer().getName()))
             .append(String.format("\n Customer Id: %d", delivery.getCustomer().getCustomerId()))
+            .append(String.format("\n Address: %s", delivery.getAddress().toString()))
             .append(String.format("\n Ordered On: %s", delivery.getOrderDate().toString()))
             .append(String.format("\n Delivered On: %s", delivery.getDeliveryDate().toString()))
             .append(Optional.ofNullable(delivery.getNote())
