@@ -46,7 +46,7 @@ public class DeliveryListParser implements Parser<DeliveryListCommand> {
 
         if (inputDate.isPresent()) {
 
-            if (inputDate.get().equals("today")) {
+            if (inputDate.get().equalsIgnoreCase("today")) {
                 deliveryDate = new Date(LocalDate.now().format(DateTimeFormatter.ofPattern(Date.FORMAT)));
             } else {
                 deliveryDate = ParserUtil.parseDate(inputDate.get());
