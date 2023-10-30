@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -101,12 +102,13 @@ public class UniqueDeliveryList implements Iterable<Delivery> {
 
     /**
      * Retrieves delivery by its id
+     *
      * @param id The id of the delivery to be retrieved
      * @return Optional containing the delivery if it exists
      */
     public Optional<Delivery> getById(int id) {
 
-        for (Delivery d: internalList) {
+        for (Delivery d : internalList) {
             if (d.getDeliveryId() == id) {
                 return Optional.of(d);
             }
@@ -119,6 +121,10 @@ public class UniqueDeliveryList implements Iterable<Delivery> {
      */
     public ObservableList<Delivery> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    public void removeIf(Predicate<Delivery> predicate) {
+        internalList.removeIf(predicate);
     }
 
     @Override
