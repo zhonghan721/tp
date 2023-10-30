@@ -26,6 +26,8 @@ public class Messages {
         + "single-valued field(s): ";
 
     public static final String MESSAGE_USER_NOT_AUTHENTICATED = "Access denied! You are currently not logged in.";
+    public static final String MESSAGE_WELCOME = "Welcome to HomeBoss!\n" + "You are currently logged out.\n"
+            + "Login or register to start using HomeBoss.";
 
     public static final String MESSAGE_INVALID_DELIVERY_DATE =
             "Delivery Date cannot be before today.";
