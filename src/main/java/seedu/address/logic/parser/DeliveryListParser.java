@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
@@ -25,6 +26,10 @@ public class DeliveryListParser implements Parser<DeliveryListCommand> {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(userInput, PREFIX_STATUS, PREFIX_SORT, PREFIX_CUSTOMER_ID, PREFIX_DATE);
 
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeliveryListCommand.MESSAGE_USAGE));
+        }
         Optional<String> sort = argMultimap.getValue(PREFIX_SORT);
         Optional<String> inputStatus = argMultimap.getValue(PREFIX_STATUS);
         Optional<String> inputCustomerId = argMultimap.getValue(PREFIX_CUSTOMER_ID);
