@@ -7,14 +7,17 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_SORT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_ALL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_CANCELLED;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_CREATED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_COMPLETED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_CREATED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_CUSTOMER_ID;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_DELIVERY_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_DELIVERY_DATE_TODAY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_SHIPPED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_SORT_ASC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_SORT_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_SHIPPED;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,9 +28,6 @@ import seedu.address.logic.parser.DeliveryListParser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.DeliveryStatus;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 
 public class DeliveryListParserTest {
