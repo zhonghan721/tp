@@ -81,13 +81,13 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath().getParent());
+        logger.info("Using data file : " + storage.getAddressBookParentPath());
 
         // Create Data Directory if needed
         try {
-            Files.createDirectories(storage.getAddressBookFilePath().getParent());
+            Files.createDirectories(storage.getAddressBookParentPath());
         } catch (IOException e) {
-            logger.info("Data Folder failed to be created at " + storage.getAddressBookFilePath().getParent()
+            logger.info("Data Folder failed to be created at " + storage.getAddressBookParentPath()
                     + " " + e);
         }
 
