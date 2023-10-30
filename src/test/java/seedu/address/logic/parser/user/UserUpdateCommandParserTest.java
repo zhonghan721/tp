@@ -21,7 +21,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SECRET_QUESTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -36,8 +35,6 @@ import seedu.address.model.user.Username;
 import seedu.address.testutil.UpdateUserDescriptorBuilder;
 
 public class UserUpdateCommandParserTest {
-
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_MISSING_FIELDS, UserUpdateCommand.MESSAGE_USAGE);

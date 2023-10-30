@@ -1,15 +1,10 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -27,7 +22,6 @@ public class CustomerBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
 
     /**
      * Creates a {@code CustomerBuilder} with the default details.
@@ -38,7 +32,6 @@ public class CustomerBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
     }
 
     /**
@@ -50,7 +43,6 @@ public class CustomerBuilder {
         phone = customerToCopy.getPhone();
         email = customerToCopy.getEmail();
         address = customerToCopy.getAddress();
-        tags = new HashSet<>(customerToCopy.getTags());
     }
 
     /**
@@ -70,6 +62,7 @@ public class CustomerBuilder {
     }
 
     /**
+<<<<<<< HEAD:src/test/java/seedu/address/testutil/CustomerBuilder.java
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Customer} that we are building.
      */
     public CustomerBuilder withTags(String... tags) {
@@ -78,6 +71,8 @@ public class CustomerBuilder {
     }
 
     /**
+=======
+>>>>>>> master:src/test/java/seedu/address/testutil/PersonBuilder.java
      * Sets the {@code Address} of the {@code Customer} that we are building.
      */
     public CustomerBuilder withAddress(String address) {
@@ -102,7 +97,7 @@ public class CustomerBuilder {
     }
 
     public Customer build() {
-        return new Customer(customerId, name, phone, email, address, tags);
+        return new Customer(customerId, name, phone, email, address);
     }
 
 }

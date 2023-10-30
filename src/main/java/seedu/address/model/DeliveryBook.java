@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.UniqueDeliveryList;
+import seedu.address.model.person.Customer;
 
 /**
  * Wraps all data at the book level
@@ -86,13 +87,25 @@ public class DeliveryBook implements ReadOnlyBook<Delivery> {
         deliveries.remove(key);
     }
 
+    /**
+     * Removes all deliveries associated with the given customer
+     *
+     * @param customer The customer whose deliveries are to be removed
+     */
+    public void removeDeliveryByCustomer(Customer customer) {
+        // get id of customer, delete deliveries with matching customer id
+        int key = customer.getCustomerId();
+        // concurrent modification exception
+        deliveries.removeIf(delivery -> delivery.getCustomerId() == key);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("deliveries", deliveries)
-            .toString();
+                .add("deliveries", deliveries)
+                .toString();
     }
 
     @Override

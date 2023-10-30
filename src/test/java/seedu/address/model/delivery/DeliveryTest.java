@@ -100,9 +100,15 @@ public class DeliveryTest {
 
         // different id, all other attributes different -> returns false
         editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withName("Gabriel Milk Updated")
-            .withStatus(DeliveryStatus.COMPLETED).withCustomer(TypicalPersons.BOB).withOrderDate("2019-12-12")
-            .withDeliveryDate("2024-12-12").autoBuild();
+                .withStatus(DeliveryStatus.COMPLETED).withCustomer(TypicalPersons.BOB).withOrderDate("2019-12-12")
+                .withDeliveryDate("2024-12-12").autoBuild();
         assertFalse(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
+    }
+
+    @Test
+    public void getCustomerId_success() {
+        Delivery delivery = new DeliveryBuilder().autoBuild();
+        assertTrue(delivery.getCustomerId() == delivery.getCustomer().getCustomerId());
     }
 
     @Test
@@ -139,13 +145,30 @@ public class DeliveryTest {
 
         // same id, different attributes -> returns false
         editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withName("Gabriel Milk Updated")
-            .withStatus(DeliveryStatus.COMPLETED).withCustomer(TypicalPersons.BOB).build();
+                .withStatus(DeliveryStatus.COMPLETED).withCustomer(TypicalPersons.BOB).build();
         assertFalse(GABRIELS_MILK.equals(editedGabrielsMilk));
 
         // different id, all other attributes different -> returns false
         editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withName("Gabriel Milk Updated")
-            .withStatus(DeliveryStatus.COMPLETED).withCustomer(TypicalPersons.BOB).withOrderDate("2019-12-12")
-            .withDeliveryDate("2024-12-12").autoBuild();
+                .withStatus(DeliveryStatus.COMPLETED).withCustomer(TypicalPersons.BOB).withOrderDate("2019-12-12")
+                .withDeliveryDate("2024-12-12").autoBuild();
         assertFalse(GABRIELS_MILK.isSameDelivery(editedGabrielsMilk));
+
+        // different delivery address, all other attributes same -> returns false
+        editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withCustomer(TypicalPersons.BOB).build();
+        assertFalse(GABRIELS_MILK.equals(editedGabrielsMilk));
+
+        // different delivery date, all other attributes same -> returns false
+        editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withDeliveryDate("2024-12-12").build();
+        assertFalse(GABRIELS_MILK.equals(editedGabrielsMilk));
+
+        // different order date, all other attributes same -> returns false
+        editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withOrderDate("2019-12-12").build();
+        assertFalse(GABRIELS_MILK.equals(editedGabrielsMilk));
+
+        // different delivery note, all other attributes same -> returns false
+        editedGabrielsMilk = new DeliveryBuilder(GABRIELS_MILK).withNote(
+                "Different note").build();
+        assertFalse(GABRIELS_MILK.equals(editedGabrielsMilk));
     }
 }

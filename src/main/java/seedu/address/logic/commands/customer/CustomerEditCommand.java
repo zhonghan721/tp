@@ -8,12 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -27,7 +24,6 @@ import seedu.address.model.person.Customer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing customer in the address book.
@@ -121,10 +117,9 @@ public class CustomerEditCommand extends CustomerCommand {
         Phone updatedPhone = customerEditDescriptor.getPhone().orElse(customerToEdit.getPhone());
         Email updatedEmail = customerEditDescriptor.getEmail().orElse(customerToEdit.getEmail());
         Address updatedAddress = customerEditDescriptor.getAddress().orElse(customerToEdit.getAddress());
-        Set<Tag> updatedTags = customerEditDescriptor.getTags().orElse(customerToEdit.getTags());
 
         return new Customer(customerToEdit.getCustomerId(), updatedName, updatedPhone,
-                updatedEmail, updatedAddress, updatedTags);
+                updatedEmail, updatedAddress);
     }
 
     @Override
@@ -162,7 +157,6 @@ public class CustomerEditCommand extends CustomerCommand {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<Tag> tags;
 
         public CustomerEditDescriptor() {
         }
@@ -177,14 +171,13 @@ public class CustomerEditCommand extends CustomerCommand {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address);
         }
 
         public void setCustomerId(int customerId) {
@@ -223,23 +216,6 @@ public class CustomerEditCommand extends CustomerCommand {
             return Optional.ofNullable(address);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -255,8 +231,7 @@ public class CustomerEditCommand extends CustomerCommand {
             return Objects.equals(name, otherCustomerEditDescriptor.name)
                 && Objects.equals(phone, otherCustomerEditDescriptor.phone)
                 && Objects.equals(email, otherCustomerEditDescriptor.email)
-                && Objects.equals(address, otherCustomerEditDescriptor.address)
-                && Objects.equals(tags, otherCustomerEditDescriptor.tags);
+                && Objects.equals(address, otherCustomerEditDescriptor.address);
         }
 
         @Override
@@ -266,7 +241,6 @@ public class CustomerEditCommand extends CustomerCommand {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
                 .toString();
         }
     }

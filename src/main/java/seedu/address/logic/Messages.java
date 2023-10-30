@@ -55,9 +55,7 @@ public class Messages {
             .append(String.format(" %s", customer.getName()))
             .append(String.format("\n Phone: %s", customer.getPhone().toString()))
             .append(String.format("\n Email: %s", customer.getEmail().toString()))
-            .append(String.format("\n Address: %s", customer.getAddress().toString()))
-            .append("\n Tags: ");
-        customer.getTags().forEach(builder::append);
+            .append(String.format("\n Address: %s", customer.getAddress().toString()));
         return builder.toString();
     }
 
@@ -71,6 +69,7 @@ public class Messages {
             .append(String.format("\n %s", delivery.getStatus().toString()))
             .append(String.format("\n Customer: %s", delivery.getCustomer().getName()))
             .append(String.format("\n Customer Id: %d", delivery.getCustomer().getCustomerId()))
+            .append(String.format("\n Address: %s", delivery.getAddress().toString()))
             .append(String.format("\n Ordered On: %s", delivery.getOrderDate().toString()))
             .append(String.format("\n Delivered On: %s", delivery.getDeliveryDate().toString()))
             .append(Optional.ofNullable(delivery.getNote())

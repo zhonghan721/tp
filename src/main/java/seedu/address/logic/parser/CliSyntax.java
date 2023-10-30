@@ -22,6 +22,4 @@ public class CliSyntax {
     public static final Prefix PREFIX_SECRET_QUESTION = new Prefix("--secretQn");
     public static final Prefix PREFIX_ANSWER = new Prefix("--answer");
 
-    @Deprecated
-    public static final Prefix PREFIX_TAG = new Prefix("--tag");
 }
