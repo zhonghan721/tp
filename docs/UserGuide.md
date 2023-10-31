@@ -415,7 +415,7 @@ _STATUS:_ Either `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`
 
 _NOTE:_ String
 
-**Command succeeds:** 
+**Command succeeds:**
 //TODO: Add image
 
 **Command fails (missing_index):** _Invalid command format!_
@@ -479,3 +479,45 @@ _DELIVERY_ID_: Integer
 ### Remove customer from delivery `[Coming Soon in v1.3]`
 
 _Details coming soon..._
+
+## Command Summary
+
+#### User
+
+| Command  | Format                                                                                                                       | Examples                                                                                                                    |
+|----------|------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Register | `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`     | `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko` |
+| Login    | `login --user USERNAME --password PASSWORD`                                                                                  | `login --user gabriel --password gabrielIsGreat`                                                                            |
+| Update   | `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD] [--secretQn SECRET_QUESTION --answer ANSWER]` | `login --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest --secretQn Favourite Pet --answer BoBo`        |
+| Recover  | `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`                                   | `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`                                      |
+| Logout   | `logout`                                                                                                                     | `logout`                                                                                                                    |
+
+#### Customer
+
+| Command | Format                                                                                   | Examples                                                                                          |
+|---------|------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| Add     | `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`           | `customer add --name Gabriel --phone 87654321 --email` |
+| Find    | `customer find KEYWORD [MORE_KEYWORDS]`                                                  | `customer find Ibrahim Yu`                                                                         |
+| List    | `customer list`                                                                          | `customer list`                                                                                    |
+| Edit    | `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]` | `customer edit 1001 --name Gabriel -–phone 1234 5678 --email` |
+| Delete  | `customer delete CUSTOMER_ID`                                                            | `customer delete 1001`                                                                             |
+
+#### Delivery
+
+| Command | Format                                                                                   | Examples                                                                                          |
+|---------|------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| Add     | `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE`                  | `delivery add furniture --customer 5 --date 2023-12-03`                                           |
+| List    | `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--sort SORT]` | `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`                        |
+| View    | `delivery view DELIVERY_ID`                                                               | `delivery view 1001`                                                                               |
+| Status  | `delivery status STATUS CUSTOMER_ID`                                                      | `delivery status completed 2`                                                                      |
+| Edit    | `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--status STATUS] [--note NOTE]` | `delivery edit 1001 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note Customer changed his mind.` |
+| Note    | `delivery note DELIVERY_ID --note NOTE`                                                   | `delivery note 1 --note By FedEx`                                                                  |
+| Delete  | `delivery delete DELIVERY_ID`                                                             | `delivery delete 1001`                                                                             |
+
+#### Other
+
+| Command | Format                                                                                   | Examples                                                                                          |
+|---------|------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| Exit    | `exit`                                                                                   | `exit`                                                                                            |
+| Help    | `help`                                                                                   | `help`                                                                                            |
+| Clear   | `clear`                                                                                  | `clear`                                                                                           |
