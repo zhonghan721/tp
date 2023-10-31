@@ -172,6 +172,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Customer getCustomerUsingFilteredList(int id) {
+        for (Customer c : filteredCustomers) {
+            if (c.getCustomerId() == id) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public boolean hasPerson(Customer customer) {
         requireNonNull(customer);
         return addressBook.hasPerson(customer);
