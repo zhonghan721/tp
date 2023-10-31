@@ -387,7 +387,7 @@ _Want to delete a customer? Call this command to delete a customer from the cust
 
 Adds a delivery to the delivery book.
 
-**Format:** `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE`
+**Format:** `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE`
 
 **Example:** `delivery add furniture --customer 5 --date 2023-12-03`
 
@@ -397,14 +397,14 @@ _DELIVERY_NAME:_ String of 50 characters
 
 _CUSTOMER_ID:_ Integer
 
-_DELIVERY_DATE:_ Delivery Date String in yyyy-MM-dd format or `today` for today’s date
+_EXPECTED_DELIVERY_DATE:_ Expected Delivery Date String in YYYY-MM-DD format or `today` for today’s date
 
 **Command succeeds:** _Delivery [1001] furniture created successfully for Customer 1, Gabriel!_
 
 **Command fails (missing_fields):** _Please fill up all the required fields (DELIVERY_NAME --customer CUSTOMER_ID --date
 DELIVERY_DATE)!_
 
-**Command fails (invalid_date):** _Delivery Date cannot be before today!_
+**Command fails (invalid_date):** _Expected Delivery Date cannot be before today!_
 
 **Command fails (invalid_date_format):** _Please provide the date in the format: yyyy-MM-dd._
 
@@ -412,7 +412,7 @@ DELIVERY_DATE)!_
 
 Shows a list of all deliveries.
 
-**Format:** `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE]  [--sort SORT]`
+**Format:** `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]  [--sort SORT]`
 
 **Example:** `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`
 
@@ -422,9 +422,9 @@ _STATUS_: CREATED/SHIPPED/COMPLETED/CANCELLED. If unspecified, defaults to show 
 
 _CUSTOMER_ID_: Integer
 
-_DELIVERY_DATE_: Delivery Date String in yyyy-MM-dd format or `today` for today’s date
+_EXPECTED_DELIVERY_DATE_: Expected Delivery Date String in YYYY-MM-DD format or `today` for today’s date
 
-_SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by delivery date.
+_SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by expected delivery date.
 
 **Command succeeds (>0 deliveries):**
 ![](images/delivery/delivery_list.png)
@@ -487,7 +487,7 @@ _Example: delivery status COMPLETED 1_<br />
 
 Updates the delivery details of an existing delivery in the delivery book.
 
-**Format:** `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date DELIVERY_DATE]
+**Format:** `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]
 [--status STATUS] [--note NOTE]`
 
 **Example:** `delivery edit 1001 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note
@@ -501,7 +501,7 @@ _DELIVERY_NAME:_ String
 
 _CUSTOMER_ID:_ Integer
 
-_DELIVERY_DATE:_ Delivery Date String in yyyy-MM-dd format or `today` for today’s date
+_EXPECTED_DELIVERY_DATE:_ Expected Delivery Date String in YYYY-MM-DD format or `today` for today’s date
 
 _STATUS:_ Either `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`
 
