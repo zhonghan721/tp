@@ -94,7 +94,7 @@ public class DeliveryListParserTest {
                 + INVALID_DELIVERY_LIST_CUSTOMER_ID,
             String.format(ParserUtil.MESSAGE_INVALID_INDEX));
 
-        // invalid delivery date
+        // invalid expected delivery date
         CommandParserTestUtil.assertParseFailure(parser, DeliveryListCommand.COMMAND_WORD
                 + INVALID_DELIVERY_LIST_DELIVERY_DATE,
             String.format(Date.MESSAGE_CONSTRAINTS));
