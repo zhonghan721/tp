@@ -188,6 +188,12 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
+        public Delivery getDeliveryUsingFilteredList(int id) {
+
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<ListItem> getUiList() {
             return null;
         }

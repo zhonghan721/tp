@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -19,7 +18,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.Email;
@@ -76,14 +74,15 @@ public class CustomerEditCommand extends CustomerCommand {
         }
 
         boolean found = false;
-        Customer customerToEdit = null;
         Customer editedCustomer = null;
 
-        if (!model.getCustomer(targetIndex.getOneBased()).equals(Optional.empty())) {
+        Customer customerToEdit = model.getCustomerUsingFilteredList(targetIndex.getOneBased());
+
+        if (customerToEdit != null) {
             found = true;
-            customerToEdit = model.getCustomer(targetIndex.getOneBased()).get();
             editedCustomer = createEditedCustomer(customerToEdit, customerEditDescriptor);
         }
+
         boolean isNull = customerToEdit == null || editedCustomer == null || !found;
 
         if (isNull) {

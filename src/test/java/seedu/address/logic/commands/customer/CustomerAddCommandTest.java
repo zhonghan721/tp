@@ -262,6 +262,10 @@ public class CustomerAddCommandTest {
         public ObservableList<Delivery> getSortedDeliveryList() {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public Delivery getDeliveryUsingFilteredList(int id) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {

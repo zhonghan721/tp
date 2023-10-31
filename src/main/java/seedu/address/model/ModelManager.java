@@ -133,6 +133,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Delivery getDeliveryUsingFilteredList(int id) {
+        for (Delivery d : filteredDeliveries) {
+            if (d.getCustomerId() == id) {
+                return d;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public void setDeliveryBookFilePath(Path deliveryBookFilePath) {
         requireNonNull(deliveryBookFilePath);
         userPrefs.setDeliveryBookFilePath(deliveryBookFilePath);

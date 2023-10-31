@@ -11,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -77,12 +76,12 @@ public class DeliveryEditCommand extends DeliveryCommand {
         }
 
         boolean found = false;
-        Delivery deliveryToEdit = null;
         Delivery editedDelivery = null;
 
-        if (!model.getDelivery(targetIndex.getOneBased()).equals(Optional.empty())) {
+        Delivery deliveryToEdit = model.getDeliveryUsingFilteredList(targetIndex.getOneBased());
+
+        if (deliveryToEdit != null) {
             found = true;
-            deliveryToEdit = model.getDelivery(targetIndex.getOneBased()).get();
             editedDelivery = createEditedDelivery(model, deliveryToEdit, deliveryEditDescriptor);
         }
         boolean isNull = deliveryToEdit == null || editedDelivery == null || !found;
@@ -141,9 +140,7 @@ public class DeliveryEditCommand extends DeliveryCommand {
     }
 
     private static boolean checkValidCustomer(Model model, int customerId) {
-
-        return !model.getCustomer(customerId).equals(Optional.empty());
-
+        return model.getCustomerUsingFilteredList(customerId) != null;
     }
 
     @Override
