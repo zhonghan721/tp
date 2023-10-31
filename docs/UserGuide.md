@@ -398,7 +398,7 @@ Updates the delivery details of an existing delivery in the delivery book.
 **Format:** `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date DELIVERY_DATE]
 [--status STATUS] [--note NOTE]`
 
-**Example:** `delivery edit 1001 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note 
+**Example:** `delivery edit 1001 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note
 Customer changed his mind.`
 
 **Accepted Values:**
@@ -415,7 +415,7 @@ _STATUS:_ Either `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`
 
 _NOTE:_ String
 
-**Command succeeds:** 
+**Command succeeds:**
 //TODO: Add image
 
 **Command fails (missing_index):** _Invalid command format!_
@@ -479,3 +479,26 @@ _DELIVERY_ID_: Integer
 ### Remove customer from delivery `[Coming Soon in v1.3]`
 
 _Details coming soon..._
+
+### FAQ
+
+**Q: Where do I get support for HomeBoss?**
+
+A: You can raise an issue on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-3/tp/issues)
+
+**Q: How do I report a bug?**
+
+A: You can raise a bug repoort on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-3/tp/issues)
+
+**Q: How do I import my data from another software?**
+
+A: You can import your data by converting your data into .json in the format of the customer and delivery data in the
+data folder.
+
+**Q: How do I export my data to another software?**
+
+A: It is currently not possible to export your data to another software.
+
+**Q: Why is there an error when I input non-English characters?**
+
+A: HomeBoss only supports English characters. 
