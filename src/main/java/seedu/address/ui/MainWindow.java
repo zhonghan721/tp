@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private ListPanel listPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private StatusBarFooter statusBarFooter;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -120,7 +121,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
         resultDisplay.setFeedbackToUser(MESSAGE_WELCOME);
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusBarFooter = new StatusBarFooter(logic.getLoginStatus());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -180,6 +181,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
+            statusBarFooter.setStatusBarText(logic.getLoginStatus());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isRefreshListCommand()) {
