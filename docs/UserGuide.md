@@ -20,7 +20,7 @@ data in a neater and more organised manner.
 
 Essentially, with HomeBoss, you can **focus on what matters most: running your business**.
 
-
+---
 
 # Table of Contents
 
@@ -33,15 +33,15 @@ Essentially, with HomeBoss, you can **focus on what matters most: running your b
   * 2.1 Installation 
 * 4\. Features
   * 4.1 User
-    * 4.1.1 Register 
-    * 4.1.2 Login
-    * 4.1.3 Update details
-    * 4.1.4 Logout
-    * 4.1.5 Account recovery
-    * 4.1.6 Account deletion
+    * 4.1.1 [Register](#register)
+    * 4.1.2 [Login](#login)
+    * 4.1.3 [Update details](#update-details)
+    * 4.1.4 [Logout](#logout)
+    * 4.1.5 [Account recovery](#account-recovery)
+    * 4.1.6 [Account deletion](#account-deletion)
   * 4.2 Customer 
-    * 4.2.1 Add customer
-    * 4.2.2 Search for a customer 
+    * 4.2.1 [Add customer](#add-a-customer)
+    * 4.2.2 [Find customers](#find-customers)
     * 4.2.3 List customers
     * 4.2.4 Update customer details
     * 4.2.5 Delete customer
@@ -52,15 +52,111 @@ Essentially, with HomeBoss, you can **focus on what matters most: running your b
     * 4.3.4 Update details of delivery
     * 4.3.5 Create a note for a delivery 
     * 4.3.6 Delete delivery
+  * 4.4 Miscellaneous 
+      * [Help](#help)
+      * [Exit](#exit)
+      * [Clear](#clear)
 * 5\. FAQ
 * 6\. Command Summary
 * 7\. Glossary
 
+--- 
+
+## About this User Guide
+
+This user guide provides you with everything that you need to know when using HomeBoss.
+
+If you are new to HomeBoss, head over to the [Quick Start Guide](#quick-start-guide) section for a quick overview
+on how to get started.
+
+Additionally, this user guide provides you with detailed explanations of all the features available
+in the [Features](#features) section.
+
+For experienced users, you may refer to the [Command Summary](#command-summary) section for a quick summary of all the
+commands available in HomeBoss.
+
+If you would like to learn about the technical aspects of HomeBoss,
+you may refer to the [Developer Guide](./DeveloperGuide.md).
+
+### Navigating the User Guide
+
+**Note Box**
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+    Provides you with information that is useful to know.
+</box>
+
+**Tip Box**
+<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
+    Provides you with information that can help enhance your user experience but is not necessary to know.
+</box>
+
+**Warning Box**
+<box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
+    Important information for you to take note of to avoid any unintended effects!
+</box>
+
+**Links**
+
+* Words in blue are [links](#navigating-the-user-guide) that you can click on to navigate to the relevant section.
+
+* A [&uarr; Back to Table of Contents](#table-of-contents) link is available at the end of every section
+for you to return to the Table of Contents, so that you can access another section from there easily.
+
+---
 
 # Getting Started
 
 To get started, you will need to create an account and download the software. Once you have done that, you can follow
 the instructions in the Getting Started Guide to start using the software.
+
+---
+
+# Command Summary
+
+Here is a brief introduction to the commands that you will be using in HomeBoss. For more detailed information, please
+refer to the [Features](#features) section.
+
+### User
+
+_These are commands for managing your user account in HomeBoss._
+
+- `register` - Registers a new user account to use HomeBoss.
+- `login` - Logs in to your user account.
+- `update` - Updates your user account details.
+- `logout` - Logs out of your user account.
+- `recover account` - Recovers your user account.
+- `delete account` - Deletes your user account.
+
+### Customer
+
+_These are commands for managing your customers in HomeBoss._
+
+- `customer add` - Adds a customer to the address book.
+- `customer find` - Finds customers whose names contain any of the given keywords.
+- `customer list` - Lists all customers in the address book.
+- `customer edit` - Updates the details of an existing customer in the address book.
+- `customer delete` - Deletes the specified customer from the address book.
+
+### Delivery
+
+_These are commands for managing your deliveries in HomeBoss._
+
+- `delivery add` - Adds a delivery to the delivery book.
+- `delivery list` - Lists all deliveries in the delivery book.
+- `delivery view` - Shows the details of the specified delivery.
+- `delivery status` - Changes the status of a specified delivery.
+- `delivery note` - Creates a note for a specified delivery.
+- `delivery delete` - Deletes the specified delivery from the delivery book.
+
+### Miscellaneous
+
+_These are general commands for using HomeBoss._
+
+- `help` - Shows a list of commands and their usage.
+- `exit` - Exits the program.
+- `clear` - Clears both customer and delivery database. **Warning:** This action is irreversible.
+
+---
 
 # Features
 
@@ -70,7 +166,10 @@ the instructions in the Getting Started Guide to start using the software.
 
 ### Register
 
-You can register for an account to use HomeBoss. Only one account can be registered at a time.
+> Registers a new user account to use HomeBoss.
+
+_Want to get started? Start by registering for an account to use HomeBoss! Note that only one account can be registered
+at a time._
 
 **Format:
 ** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
@@ -78,170 +177,161 @@ You can register for an account to use HomeBoss. Only one account can be registe
 **Example:
 ** `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko`
 
-**Accepted Values:**
+<div markdown="span" class="alert alert-info">:information_source: **Note:** All fields are required.
+</div>
 
-_USERNAME:_ String, consisting of only alphanumeric characters
-
-_PASSWORD:_ String, consisting of at least 8 alphanumeric characters
-
-_CONFIRM\_PASSWORD:_ String that is the same as _PASSWORD_
-
-_SECRET\_QUESTION:_ String
-
-_ANSWER:_ String, not case sensitive
-
-**Command succeeds:** _Registration successful._
-
-**Command fails (missing fields):** _Please fill up all the required fields._
-
-**Command fails (password does not match):** _Passwords do not match. Try again._
-
-**Command fails (missing secret question and answer):** _Please key in a secret question and answer for account
-recovery. Try again._
+**Before:**
+![](images/user/user_freshStart.png)
+**After:**
+![](images/user/userRegister_after.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Login
 
+> Logs in to your user account.
+
+_Want to access your data in HomeBoss? You can log in to your account by calling this command.
+Note that you need to have an account registered with HomeBoss._
+
 **Format:** `login --user USERNAME --password PASSWORD`
 
-**Example:** `login --user gabriel --password gabrielIsGreat`
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+    All fields are required.
+</box>
 
-**Accepted Values:**
+**Example:** 
 
-_USERNAME:_ String, consisting of only alphanumeric characters
+* `login --user gabriel --password gabrielIsGreat`
 
-_PASSWORD:_ String, consisting of at least 8 alphanumeric characters
-
-**Command succeeds:** _Log in successful._
-
-**Command fails (missing fields):** _Please fill up all the required fields._
-
-**Command fails (wrong login credentials):** _Wrong username and/or password. Try again._
+**Before:**
+![](images/user/userLogin_before.png)
+**After:**
+![](images/customer/customerList.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Update details
+
+> Updates your user account details.
+
+Want to keep your account secure? You can update your account details by calling this command.
 
 **Format:** `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD]
 [--secretQn SECRET_QUESTION --answer ANSWER]`
 
-**Example:** `login --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest
---secretQn Favourite Pet --answer BoBo`
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+    * [] around a group of parameters indicates that it is optional, but all parameters within the group must be provided.
+    * At least one of the optional fields must be provided.
+    * If PASSWORD is provided, CONFIRM_PASSWORD must also be provided, vice versa.
+    * If SECRET_QUESTION is provided, ANSWER must also be provided, vice versa.
+    * The details will be updated without checking against the current details.
+</box>
 
-**Accepted Values:**
+**Example:**
+* `update --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest
+  --secretQn Favourite Pet --answer BoBo`
 
-_USERNAME:_ String, consisting of only alphanumeric characters
-
-_PASSWORD:_ String, consisting of at least 8 alphanumeric characters
-
-_CONFIRM\_PASSWORD:_ String that is the same as _PASSWORD_
-
-_SECRET\_QUESTION:_ String
-
-_ANSWER:_ String
-
-*At least one of the optional fields must be provided.
-If PASSWORD is provided, CONFIRM_PASSWORD must also be provided, vice versa.
-If SECRET_QUESTION is provided, ANSWER must also be provided, vice versa.
-The details will be updated without checking against the current details.
-
-**Command succeeds:** _Update successful._
-
-**Command fails (missing fields):** _Please provide at least one field to update!_
-
-**Command fails (passwords do not match):** _Passwords do not match. Try again._
-
-**Command fails (only one of password/confirm password is provided):**
-_Password and Confirm Password have to be either all present or all absent. Try again._
-
-**Command fails (only one of secret question/answer is provided):**
-_Secret Question and Answer have to be either all present or all absent. Try again._
+**Before:**
+![](images/customer/customerList.png)
+**After:**
+![](images/user/userUpdate_after.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Logout
 
+> Logs out of your user account.
+
+_Want to keep your data secure at the end of the day? You can log out of your account by calling this command._
+
 **Format:** `logout`
 
-**Example:** `logout`
+**Before:**
+![](images/customer/customerList.png)
+**After:**
+![](images/user/userLogout_after.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Account Recovery
 
+> Recovers the user account.
+
+_Forgot your password? Use this command to recover your account!_
+
 **Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`
 
-**Example 1:** `recover account`</br>
-**Example 2:** `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`</br>
+**Examples:**
 
-**Accepted Values:**
+- `recover account`</br>
+- `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`</br>
 
-_ANSWER:_ String, not case sensitive
+<div markdown="span" class="alert alert-info">:information_source: **Note:** [] around a group of parameters indicates that it is optional, but all parameters within the group must be provided.
+</div>
 
-_NEW\_PASSWORD:_ String
-
-_CONFIRM\_PASSWORD:_ String that is the same as _NEW\_PASSWORD_
-
-*`--answer`, `--password`, and `--confirmPass` flags have to be either all present or all absent.
-
-**Command succeeds (without flags):** _Your secret question is: \<previously stored secret qn\>._
-
-**Command succeeds (with flags):** _Your account has been recovered successfully. Welcome back to HomeBoss._
-
-**Command fails (missing fields):** _Please fill up all the required fields._
-
-**Command fails (wrong answer to secret question):** _Wrong answer to secret question. Either try again or
-call `delete account` (permanent loss of stored data)._
-
-**Command fails (password does not match):** _Passwords do not match. Try again._
+<ins>After (without optional fields)
+![](images/user/userRecoverAccount_after_secretQn.png)
+<ins>After (with optional fields)
+![](images/user/userRecoverAccount_after.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Account Deletion
 
+> Deletes the user account.
+
+_Want to delete your account? Call this command to delete your account and clear all your data._
+
+<div markdown="span" class="alert alert-success">:bulb: **Tip:** This command is useful only as a last resort, should you forget your password and secret answer. However, if you forgot your password but remember the answer to your secret question, you can call `recover account` [here](#account-recovery) instead.
+</div>
+
 **Format:** `delete account`
 
-**Example:** `delete account`
-
-**Command succeeds:** _User deleted successfully._
-
-**Command fails (no user registered):** _No accounts found. Please register an account first._
+**Before:** 
+![](images/customer/customerList.png)
+**After:** 
+![](images/user/userDelete_after.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ## <span style="text-decoration:underline;">Customer</span>
 
 ### Add a customer
 
-Adds a customer to the address book.
+> Adds a customer to the address book.
+
+_Did you just receive a new customer? You can add the customer's details into HomeBoss with this command._
 
 **Format:** `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`
 
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+    * All fields are required.
+    * HomeBoss does not allow you to add customers with the same phone number.
+</box>
+
 **Example:** `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`
 
-**Accepted Values:**
-
-_NAME_: String
-
-_PHONE_NUMBER_: 8 digit Integer
-
-_EMAIL_: String with @ and . in valid email format
-
-_ADDRESS_: String
-
-**Command succeeds:** _Customer 1, Gabriel added._
-
-**Command fails (missing field):** _Please fill up all the required fields (--name NAME --phone PHONE_NUMBER --email
-EMAIL --address ADDRESS)._
+**Before:**
+![](images/customer/customerList.png)
+**After:**
+![](images/customer/customerAdd_after.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Find customers
 
-You can find customers whose names have a word that matches _ANY_ of the given keywords.
+> Finds customers whose names contain _ANY_ of the given keywords.
+
+_Want to find details of a customer, but you do not remember the customer's full name?
+You can search for the customer using keywords by calling this command._
 
 **Format:** `customer find KEYWORD [MORE_KEYWORDS]`
 
-**Example:** `customer find Ibrahim Yu`
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+    You must provide at least one keyword to search for the customer.
+</box>
 
-**Accepted Values:**
+**Example:** `customer find Gabriel Spencer`
 
-_KEYWORD_: One word
-
-_MORE\_KEYWORDS_: More _KEYWORDs_ separated by spaces
-
-**Command succeeds:**
-
-//TODO: Add image
-
-**Command fails (missing_keyword):** _Please provide at least one keyword to search for!_
+**Before:**
+![](images/customer/customerList.png)
+**After:**
+![](images/customer/customerFind_after.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### List customers
 
@@ -251,6 +341,10 @@ Want to get an overview of all your customers in ONE list? Then, just use this f
 once.
 
 **Format:** `customer list`
+  
+<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
+    You can frequently use this command together with `delivery list` to switch between the two lists.
+</box>
 
 [&uarr; Back to Table of Contents](#top)
 
@@ -262,9 +356,13 @@ worries! You can  edit the details of a customer simply by calling this command.
 
 **Format:** `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`
 
-<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;">
-[!Note] [ ] around a parameter indicates that it is optional.
-</div>
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+    [!Note] [ ] around a parameter indicates that it is optional.
+</box>
+
+<box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
+    Be careful! You won't be able to undo this edit action! 
+</box>
 
 **Examples:**
 - `customer edit 1 --name Gabriel -–phone 9813 1051` </br>
@@ -279,23 +377,20 @@ worries! You can  edit the details of a customer simply by calling this command.
 
 ### Delete customer
 
-Deletes the specified customer from the address book.
+> Deletes the specified customer from the customer database. All deliveries associated with the customer will also be
+> deleted.
+
+_Want to delete a customer? Call this command to delete a customer from the customer database._
 
 **Format:** `customer delete CUSTOMER_ID`
 
-**Example:** `customer delete 1001`
+**Example:** `customer delete 1`
 
-**Accepted Values:**
-
-_CUSTOMER_ID:_ Integer
-
-**Command succeeds:** _Customer 1, Gabriel has been deleted!_
-
-**Command fails (missing_index):** _Please specify the customer to delete._
-
-**Command fails (invalid_index):** _The customer does not exist!_
-
-**Command fails (pending_delivery_customer_index):** _Delivery for Customer 1, Gabriel is not completed yet!_
+<ins>Before
+![](images/customer/customerList.png)
+<ins>After
+![](images/customer/customerDelete_after.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ## <span style="text-decoration:underline;">Delivery</span>
 
@@ -305,23 +400,22 @@ _CUSTOMER_ID:_ Integer
 
 HomeBoss' most essential feature. The whole premise of our application is so that you can easily track your 
 deliveries/orders. With this feature, you can do just that by adding a delivery to the delivery book.
-
-<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;">
-[!Note] Deliveries consist of a Delivery Name, a Customer ID, an Order Date, a Delivery Date, a Delivery Status and 
-an Address to ship to. </br> </br>
-You don't have to fill in Order Date, Delivery Status and Address. Instead they will be initialised with these values: 
-
+  
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+    Deliveries consist of a Delivery Name, a Customer ID, an Order Date, a Delivery Date, a Delivery Status and 
+  an Address to ship to. </br> </br>
+  You don't have to fill in Order Date, Delivery Status and Address. Instead they will be initialised with these values: 
+  
 - Order Date: Today's date
 - Delivery Status: CREATED
 - Address: Customer's Address
 
 Cool huh! We try to help you speed up the process as much as possible.
- 
-</div>
-
-<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
-[!Tip] Delivery Status can be one of CREATED, SHIPPED, COMPLETED, CANCELLED. 
-</div>
+</box>
+  
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+    Delivery Status can be one of CREATED, SHIPPED, COMPLETED, CANCELLED.
+</box>
  
 **Format:** `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE`
 
@@ -386,9 +480,9 @@ _DELIVERY_ID_: Integer
 I see that you've just shipped out an order. Nice! Now you can update the status of that particular delivery 
 to SHIPPED! Using this feature, you can update the status of a delivery accordingly.
 
-<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;">
-[!Note] Delivery Status typed in need not be in uppercase.
-</div>
+<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
+    Delivery Status typed in need not be in uppercase.
+</box>
 
 **Format:** `delivery status CUSTOMER_ID STATUS`
 
@@ -410,6 +504,14 @@ delivery? No worries! Just edit the details of a delivery simply by using this f
 
 **Format:** `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date DELIVERY_DATE]
 [--status STATUS] [--note NOTE]`
+
+<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
+    If you only want to update the delivery's status, simply use `delivery status` instead.
+</box>
+
+<box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
+    Be careful! You won't be able to undo this edit action! 
+</box>
 
 **Examples:**
 - `delivery edit 1 --status CANCELLED --note Sudden overseas business trip to attend to.` </br>
@@ -464,9 +566,9 @@ been cancelled or completed. If that's the case, simply use this feature to dele
 
 **Format:** `delivery delete DELIVERY_ID`
 
-<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #a94442; background-color: #f2dede; border-color: #ebccd1;">
-[!Warning] Be careful! This action is irreversible. Once deleted, the delivery cannot be recovered.
-</div>
+<box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
+    Be careful! This action is irreversible. Once deleted, the delivery cannot be recovered.
+</box>
 
 **Example:**
 - `delivery delete 1` </br>
@@ -477,4 +579,61 @@ Deletes delivery 1 from the delivery book.
 ![Screenshot 2023-10-31 at 4.07.02 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%204.07.02%20PM.png)
 [&uarr; Back to Table of Contents](#top)
 
+
+
+_Details coming soon..._
+
+## <span style="text-decoration:underline;">Miscellaneous</span>
+
+### Help
+
+> Shows a list of commands and their usage.
+
+_Want to know what commands are available in HomeBoss? You can view a summary of the commands available, the format
+of the commands, and a link to this user guide by calling this command._
+
+**Format:** `help`
+
+<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
+    You can access this command anytime when using the application, even when you are not logged in.
+</box>
+
+**Before:**
+![](images/customer/customerList.png)
+**After:**
+![](images/help_after.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
+
+### Exit
+
+> Exits the program.
+
+_Want to exit HomeBoss? You can exit the program by calling this command._
+
+**Format:** `exit`
+
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+    If you are logged in, this command will automatically log you out of your account and close the application.
+</box>
+
+[&uarr; Back to Table of Contents](#table-of-contents)
+
+### Clear
+
+> Clears both customer and delivery database.
+
+_Need to clear your customer and delivery data?
+You can delete all your customer and delivery data by calling this command._
+
+**Format:** `clear`
+
+<box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
+    This action is irreversible! All your customer and delivery data will be deleted permanently. Proceed with caution.
+</box>
+
+**Before:**
+![](images/customer/customerList.png)
+**After:**
+![](images/clear_after.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
