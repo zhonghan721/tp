@@ -19,6 +19,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.Email;
@@ -74,20 +75,14 @@ public class CustomerEditCommand extends CustomerCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        List<Customer> lastShownList = model.getFilteredPersonList();
-
         boolean found = false;
         Customer customerToEdit = null;
         Customer editedCustomer = null;
 
-        for (Customer customer : lastShownList) {
-            if (customer.getCustomerId() == targetIndex.getOneBased()) {
-                found = true;
-                customerToEdit = customer;
-                editedCustomer = createEditedCustomer(customerToEdit, customerEditDescriptor);
-
-                break;
-            }
+        if (!model.getCustomer(targetIndex.getOneBased()).equals(Optional.empty())) {
+            found = true;
+            customerToEdit = model.getCustomer(targetIndex.getOneBased()).get();
+            editedCustomer = createEditedCustomer(customerToEdit, customerEditDescriptor);
         }
         boolean isNull = customerToEdit == null || editedCustomer == null || !found;
 

@@ -58,7 +58,7 @@ public class DeliveryEditCommand extends DeliveryCommand {
     private final DeliveryEditDescriptor deliveryEditDescriptor;
 
     /**
-     * @param targetIndex            of the delivery in the delivery list to edit
+     * @param targetIndex of the delivery in the delivery list to edit
      * @param deliveryEditDescriptor details to edit the delivery with
      */
     public DeliveryEditCommand(Index targetIndex, DeliveryEditDescriptor deliveryEditDescriptor) {
@@ -75,17 +75,15 @@ public class DeliveryEditCommand extends DeliveryCommand {
         if (!model.getUserLoginStatus()) {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
-        List<Delivery> lastShownList = model.getFilteredDeliveryList();
+
         boolean found = false;
         Delivery deliveryToEdit = null;
         Delivery editedDelivery = null;
-        for (Delivery delivery : lastShownList) {
-            if (delivery.getDeliveryId() == targetIndex.getOneBased()) {
-                found = true;
-                deliveryToEdit = delivery;
-                editedDelivery = createEditedDelivery(model, deliveryToEdit, deliveryEditDescriptor);
-                break;
-            }
+
+        if (!model.getDelivery(targetIndex.getOneBased()).equals(Optional.empty())) {
+            found = true;
+            deliveryToEdit = model.getDelivery(targetIndex.getOneBased()).get();
+            editedDelivery = createEditedDelivery(model, deliveryToEdit, deliveryEditDescriptor);
         }
         boolean isNull = deliveryToEdit == null || editedDelivery == null || !found;
 
@@ -100,8 +98,10 @@ public class DeliveryEditCommand extends DeliveryCommand {
     }
 
     /**
-     * Creates and returns a {@code Delivery} with the details of {@code deliveryToEdit}
-     * edited with {@code editDeliveryDescriptor}.
+     * Creates and returns a {@code Delivery} with the details of edited with {@code editDeliveryDescriptor}.
+     * @param model {@code Model} which the delivery is edited in.
+     * @param deliveryToEdit {@code Delivery} which the command edits.
+     * @param deliveryEditDescriptor {@code editDeliveryDescriptor} details to edit the delivery with.
      */
     private static Delivery createEditedDelivery(Model model, Delivery deliveryToEdit, DeliveryEditDescriptor
             deliveryEditDescriptor) throws CommandException {
@@ -142,15 +142,8 @@ public class DeliveryEditCommand extends DeliveryCommand {
 
     private static boolean checkValidCustomer(Model model, int customerId) {
 
-        ReadOnlyBook<Customer> customerReadOnlyBook = model.getAddressBook();
-        boolean found = false;
+        return !model.getCustomer(customerId).equals(Optional.empty());
 
-        for (Customer customer : customerReadOnlyBook.getList()) {
-            if (customerId == customer.getCustomerId()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
