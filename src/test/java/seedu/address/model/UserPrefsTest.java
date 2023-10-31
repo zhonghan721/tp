@@ -89,6 +89,9 @@ public class UserPrefsTest {
         String secretQuestion = "Question?";
         String answer = "answer";
         User user = new User(username, password, true, secretQuestion, answer);
+        Path authTestPath = tempDir.resolve("TempAuthentication.json");
+        userPrefs.setAuthenticationPath(authTestPath);
+
         assertTrue(userPrefs.registerUser(user));
         assertEquals(userPrefs.getStoredUser(), user);
     }
