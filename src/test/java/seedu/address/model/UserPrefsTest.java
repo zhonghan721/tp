@@ -81,7 +81,6 @@ public class UserPrefsTest {
     @Test
     public void registerUser_validUser_success() {
         Path authTestPath = tempDir.resolve("authTest.json");
-
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAuthenticationFilePath(authTestPath);
         Username username = new Username("username");
@@ -89,8 +88,6 @@ public class UserPrefsTest {
         String secretQuestion = "Question?";
         String answer = "answer";
         User user = new User(username, password, true, secretQuestion, answer);
-        Path authTestPath = tempDir.resolve("TempAuthentication.json");
-        userPrefs.setAuthenticationPath(authTestPath);
 
         assertTrue(userPrefs.registerUser(user));
         assertEquals(userPrefs.getStoredUser(), user);
