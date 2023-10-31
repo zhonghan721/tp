@@ -314,7 +314,7 @@ DELIVERY_DATE)!_
 
 **Command fails (invalid_date):** _Expected Delivery Date cannot be before today!_
 
-**Command fails (invalid_date_format):** _Please provide the date in the format: YYYY-MM-DD._
+**Command fails (invalid_date_format):** _Please provide the date in the format: yyyy-MM-dd._
 
 ### View all deliveries
 
@@ -398,7 +398,7 @@ Updates the delivery details of an existing delivery in the delivery book.
 **Format:** `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]
 [--status STATUS] [--note NOTE]`
 
-**Example:** `delivery edit 1001 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note 
+**Example:** `delivery edit 1001 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note
 Customer changed his mind.`
 
 **Accepted Values:**
@@ -415,7 +415,7 @@ _STATUS:_ Either `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`
 
 _NOTE:_ String
 
-**Command succeeds:** 
+**Command succeeds:**
 //TODO: Add image
 
 **Command fails (missing_index):** _Invalid command format!_
