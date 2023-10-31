@@ -26,17 +26,17 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 
 **Note Box**
 <box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
-    Provides you with information that is useful to know.
+Provides you with information that is useful to know.
 </box>
 
 **Tip Box**
 <box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
-    Provides you with information that can help enhance your user experience but is not necessary to know.
+Provides you with information that can help enhance your user experience but is not necessary to know.
 </box>
 
 **Warning Box**
 <box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
-    Important information for you to take note of to avoid any unintended effects!
+Important information for you to take note of to avoid any unintended effects!
 </box>
 
 **Links**
@@ -44,7 +44,7 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 * Words in blue are [links](#navigating-the-user-guide) that you can click on to navigate to the relevant section.
 
 * A [&uarr; Back to Table of Contents](#table-of-contents) link is available at the end of every section
-for you to return to the Table of Contents, so that you can access another section from there easily.
+  for you to return to the Table of Contents, so that you can access another section from there easily.
 
 ---
 
@@ -154,15 +154,20 @@ at a time._
 **Format:
 ** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
 
-**Example:
-** `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko`
+**Example:**
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** All fields are required.
-</div>
+* `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko`
 
-<ins>Before
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+    * All fields are required.
+    * The username must be unique.
+    * The password must be at least 8 characters long.
+    * The secret question and answer will be used for account recovery.
+</box>
+
+**Before:**
 ![](images/user/user_freshStart.png)
-<ins>After
+**After:**
 ![](images/user/userRegister_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -179,7 +184,7 @@ Note that you need to have an account registered with HomeBoss._
     All fields are required.
 </box>
 
-**Example:** 
+**Example:**
 
 * `login --user gabriel --password gabrielIsGreat`
 
@@ -207,6 +212,7 @@ Want to keep your account secure? You can update your account details by calling
 </box>
 
 **Example:**
+
 * `update --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest
   --secretQn Favourite Pet --answer BoBo`
 
@@ -240,15 +246,17 @@ _Forgot your password? Use this command to recover your account!_
 
 **Examples:**
 
-- `recover account`</br>
-- `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`</br>
+* `recover account`</br>
+* `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`</br>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** [] around a group of parameters indicates that it is optional, but all parameters within the group must be provided.
-</div>
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+    * If ANSWER is provided, NEW_PASSWORD and CONFIRM_PASSWORD must also be provided, vice versa.
+    * The passwords must be at least 8 characters long.
+</box>
 
-<ins>After (without optional fields)
+**After (without optional fields):**
 ![](images/user/userRecoverAccount_after_secretQn.png)
-<ins>After (with optional fields)
+**After (with optional fields):**
 ![](images/user/userRecoverAccount_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -258,14 +266,17 @@ _Forgot your password? Use this command to recover your account!_
 
 _Want to delete your account? Call this command to delete your account and clear all your data._
 
-<div markdown="span" class="alert alert-success">:bulb: **Tip:** This command is useful only as a last resort, should you forget your password and secret answer. However, if you forgot your password but remember the answer to your secret question, you can call `recover account` [here](#account-recovery) instead.
-</div>
+<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
+    This command is useful only as a last resort, should you forget your password and secret answer. However, if you
+    forgot your password but remember the answer to your secret question, you can call `recover account` [here](#account-recovery)
+    instead.
+</box>
 
 **Format:** `delete account`
 
-<ins>Before
+**Before:**
 ![](images/customer/customerList.png)
-<ins>After
+**After:**
 ![](images/user/userDelete_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -284,7 +295,9 @@ _Did you just receive a new customer? You can add the customer's details into Ho
     * HomeBoss does not allow you to add customers with the same phone number.
 </box>
 
-**Example:** `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`
+**Example:**
+
+* `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -305,7 +318,9 @@ You can search for the customer using keywords by calling this command._
     You must provide at least one keyword to search for the customer.
 </box>
 
-**Example:** `customer find Gabriel Spencer`
+**Example:**
+
+* `customer find Gabriel Spencer`
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -319,7 +334,9 @@ Lists all the customers added in the address book.
 
 **Format:** `customer list`
 
-**Example:** `customer list`
+**Example:**
+
+* `customer list`
 
 **Accepted Values:**
 
@@ -339,8 +356,9 @@ Updates the personal details of an existing customer in the address book.
 
 **Format:** `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`
 
-**Example:
-** `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
+**Example:**
+
+* `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
 
 **Accepted Values:**
 
@@ -373,11 +391,13 @@ _Want to delete a customer? Call this command to delete a customer from the cust
 
 **Format:** `customer delete CUSTOMER_ID`
 
-**Example:** `customer delete 1`
+**Example:**
 
-<ins>Before
+* `customer delete 1`
+
+**Before:**
 ![](images/customer/customerList.png)
-<ins>After
+**After:**
 ![](images/customer/customerDelete_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -389,7 +409,9 @@ Adds a delivery to the delivery book.
 
 **Format:** `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE`
 
-**Example:** `delivery add furniture --customer 5 --date 2023-12-03`
+**Example:**
+
+* `delivery add furniture --customer 5 --date 2023-12-03`
 
 **Accepted Values:**
 
@@ -414,7 +436,9 @@ Shows a list of all deliveries.
 
 **Format:** `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE]  [--sort SORT]`
 
-**Example:** `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`
+**Example:**
+
+* `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`
 
 **Accepted Values:**
 
@@ -437,7 +461,9 @@ Shows the details of the specified delivery.
 
 **Format:** `delivery view DELIVERY_ID`
 
-**Example:** `delivery view 1001`
+**Example:**
+
+* `delivery view 1001`
 
 **Accepted Values:**
 
@@ -459,7 +485,9 @@ Changes the status of a specified delivery
 
 **Format:** `delivery status STATUS CUSTOMER_ID`
 
-**Example:** `delivery status completed 2`
+**Example:**
+
+* `delivery status completed 2`
 
 **Accepted Values:**
 
@@ -490,8 +518,10 @@ Updates the delivery details of an existing delivery in the delivery book.
 **Format:** `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date DELIVERY_DATE]
 [--status STATUS] [--note NOTE]`
 
-**Example:** `delivery edit 1001 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note
-Customer changed his mind.`
+**Example:**
+
+* `delivery edit 1001 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note
+  Customer changed his mind.`
 
 **Accepted Values:**
 
@@ -522,7 +552,9 @@ Creates a note for a specified delivery
 
 **Format:** `delivery note DELIVERY_ID --note NOTE`
 
-**Example:** `delivery note 1 --note By FedEx`
+**Example:**
+
+* `delivery note 1 --note By FedEx`
 
 **Accepted Values:**
 
@@ -556,7 +588,9 @@ Deletes the specified delivery.
 
 **Format:** `delivery delete DELIVERY_ID`
 
-**Example:** `delivery delete 1001`
+**Example:**
+
+* `delivery delete 1001`
 
 **Accepted Values:**
 
