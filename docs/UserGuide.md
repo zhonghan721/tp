@@ -245,23 +245,14 @@ _MORE\_KEYWORDS_: More _KEYWORDs_ separated by spaces
 
 ### List customers
 
-Lists all the customers added in the address book.
+>Lists all the customers added in the address book.
+
+Want to get an overview of all your customers in ONE list? Then, just use this feature to list all your customers at 
+once.
 
 **Format:** `customer list`
 
-**Example:** `customer list`
-
-**Accepted Values:**
-
-_NIL_
-
-**Command succeeds (>0 customers):**
-
-![](images/customer/customer_list.png)
-
-**Command succeeds (0 customer):** _There are currently no customers!_
-
-_Details coming soon..._
+[&uarr; Back to Table of Contents](#top)
 
 ### Update customer details
 >Updates the personal details of an existing customer in the address book.
@@ -285,7 +276,6 @@ worries! You can  edit the details of a customer simply by calling this command.
 **After:**
   ![Screenshot 2023-10-31 at 2.38.29 AM.png](..%2F..%2FScreenshot%202023-10-31%20at%202.38.29%20AM.png)
   [&uarr; Back to Table of Contents](#top)
-
 
 ### Delete customer
 
@@ -391,33 +381,25 @@ _DELIVERY_ID_: Integer
 
 ### Update delivery status
 
-Changes the status of a specified delivery
+>Changes the status of a specified delivery to CREATED, SHIPPED, COMPLETED or CANCELLED
 
-**Format:** `delivery status STATUS CUSTOMER_ID`
+I see that you've just shipped out an order. Nice! Now you can update the status of that particular delivery 
+to SHIPPED! Using this feature, you can update the status of a delivery accordingly.
 
-**Example:** `delivery status completed 2`
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;">
+[!Note] Delivery Status typed in need not be in uppercase.
+</div>
 
-**Accepted Values:**
+**Format:** `delivery status CUSTOMER_ID STATUS`
 
-_STATUS:_ Either `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`
-
-_CUSTOMER_ID:_ Integer
-
-**Command succeeds:**
-
-![Delivery Status](images/delivery/delivery_status.png)
-**Command fails (invalid_status):** _Delivery Status should be one of CREATED, SHIPPED, COMPLETED, CANCELLED_
-
-**Command fails (invalid_index):** _The delivery index provided is invalid_
-
-**Command fails (missing_fields):**
-
-_Invalid command format!_<br />
-_delivery status: Edits the status of the delivery identified by the ID of the delivery. Existing status will be
-overwritten by the input status._<br />
-_Parameters: STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) ID (must be a integer representing a valid
-ID)_<br />
-_Example: delivery status COMPLETED 1_<br />
+**Examples:** 
+- `delivery status 1 CANCELLED`
+- `delivery status 2 SHIPPED`\
+**Before:** 
+![Screenshot 2023-10-31 at 9.11.38 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%209.11.38%20PM.png)
+**After:**
+![Screenshot 2023-10-31 at 9.12.20 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%209.12.20%20PM.png)
+  
 
 #### Update delivery details
 
