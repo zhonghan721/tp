@@ -138,12 +138,19 @@ public class ModelManager implements Model {
         userPrefs.setDeliveryBookFilePath(deliveryBookFilePath);
     }
 
+    /**
+     * Returns the status of the login as a string.
+     *
+     * @return the status of the login as a string
+     */
     @Override
     public String getLoginStatus() {
-        if (isLoggedIn) {
+        if (getStoredUser() == null) {
+            return "No account found. Please register an account.";
+        } else if (isLoggedIn) {
             return "Hello " + loggedInUser.getUsername() + ".";
         } else {
-            return "Logged out. Please register or login to continue.";
+            return "Logged out. Please login to continue.";
         }
     }
 
