@@ -4,6 +4,19 @@ This comprehensive user guide is your key to a seamless start with our cutting-e
 home-based businesses. Our solution is tailored to enhance the efficiency of managing delivery addresses, simplifying
 your operations. Within these pages, you'll find detailed coverage of the following essential topics:
 
+## About this User Guide
+
+This user guide provides you with everything that you need to know when using HomeBoss.
+
+If you are new to HomeBoss, head over to the [Quick Start Guide](#quick-start-guide) section for a quick overview
+on how to get started.
+
+Additionally, this user guide provides you with detailed explanations of all the features available
+in the [Features](#features) section.
+
+For experienced users, you may refer to the [Command Summary](#command-summary) section for a quick summary of all the
+commands available in HomeBoss.
+
 - Getting Started
 - Features
     - User
@@ -76,21 +89,28 @@ recovery. Try again._
 
 ### Login
 
+> Login to the existing user account.
+
+_Want to access your data in HomeBoss? Call this command to login to your account!
+Note that you need to have an account registered with HomeBoss._
+
 **Format:** `login --user USERNAME --password PASSWORD`
 
-**Example:** `login --user gabriel --password gabrielIsGreat`
+<div style="padding: 15px; border: 1px solid transparent; border-color: transparent; margin-bottom: 20px; border-radius: 4px; color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;">
+[!Note] All fields are required.
+</div>
 
-**Accepted Values:**
+**Example:** 
 
-_USERNAME:_ String, consisting of only alphanumeric characters
+* `login --user gabriel --password gabrielIsGreat`
 
-_PASSWORD:_ String, consisting of at least 8 alphanumeric characters
+<ins>Before:
+![](images/user/userLogin_before.png)
 
-**Command succeeds:** _Log in successful._
+<ins>After:
+![](images/user/userLogin_after.png)
 
-**Command fails (missing fields):** _Please fill up all the required fields._
-
-**Command fails (wrong login credentials):** _Wrong username and/or password. Try again._
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Update details
 
