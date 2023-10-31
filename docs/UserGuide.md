@@ -21,47 +21,6 @@ data in a neater and more organised manner.
 Essentially, with HomeBoss, you can **focus on what matters most: running your business**.
 
 ---
-
-# Table of Contents
-
-* 1\. Introduction 
-  * 1.1 About HomeBoss
-  * 1.2 About this User Guide
-  * 1.3 Navigating the User Guide
-* 2\. Table of Contents 
-* 3\. Quick Start Guide 
-  * 2.1 Installation 
-* 4\. Features
-  * 4.1 User
-    * 4.1.1 [Register](#register)
-    * 4.1.2 [Login](#login)
-    * 4.1.3 [Update details](#update-details)
-    * 4.1.4 [Logout](#logout)
-    * 4.1.5 [Account recovery](#account-recovery)
-    * 4.1.6 [Account deletion](#account-deletion)
-  * 4.2 Customer 
-    * 4.2.1 [Add customer](#add-a-customer)
-    * 4.2.2 [Find customers](#find-customers)
-    * 4.2.3 List customers
-    * 4.2.4 Update customer details
-    * 4.2.5 Delete customer
-  * 4.3 Delivery
-    * 4.3.1 Add delivery
-    * 4.3.2 View all deliveries
-    * 4.3.3 View details of deliveries
-    * 4.3.4 Update details of delivery
-    * 4.3.5 Create a note for a delivery 
-    * 4.3.6 Delete delivery
-  * 4.4 Miscellaneous 
-      * [Help](#help)
-      * [Exit](#exit)
-      * [Clear](#clear)
-* 5\. FAQ
-* 6\. Command Summary
-* 7\. Glossary
-
---- 
-
 ## About this User Guide
 
 This user guide provides you with everything that you need to know when using HomeBoss.
@@ -101,9 +60,46 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 
 * A [&uarr; Back to Table of Contents](#table-of-contents) link is available at the end of every section
 for you to return to the Table of Contents, so that you can access another section from there easily.
+---
+# Table of Contents
+
+* 1\. Introduction
+  * 1.1 About HomeBoss
+  * 1.2 About this User Guide
+  * 1.3 Navigating the User Guide
+* 2\. Table of Contents
+* 3\. Quick Start Guide
+  * 3.1 Installation
+* 4\. Features
+  * 4.1 User
+    * 4.1.1 [Register](#register)
+    * 4.1.2 [Login](#login)
+    * 4.1.3 [Update details](#update-details)
+    * 4.1.4 [Logout](#logout)
+    * 4.1.5 [Account recovery](#account-recovery)
+    * 4.1.6 [Account deletion](#account-deletion)
+  * 4.2 Customer
+    * 4.2.1 [Add customer](#add-a-customer)
+    * 4.2.2 [Find customers](#find-customers)
+    * 4.2.3 List customers
+    * 4.2.4 Update customer details
+    * 4.2.5 Delete customer
+  * 4.3 Delivery
+    * 4.3.1 Add delivery
+    * 4.3.2 View all deliveries
+    * 4.3.3 View details of deliveries
+    * 4.3.4 Update details of delivery
+    * 4.3.5 Create a note for a delivery
+    * 4.3.6 Delete delivery
+  * 4.4 Miscellaneous
+    * 4.4.1 [Help](#help)
+    * 4.4.2 [Exit](#exit)
+    * 4.4.3 [Clear](#clear)
+* 5\. FAQ
+* 6\. Command Summary
+* 7\. Glossary
 
 ---
-
 # Getting Started
 
 To get started, you will need to create an account and download the software. Once you have done that, you can follow
