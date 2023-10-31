@@ -34,8 +34,209 @@ your operations. Within these pages, you'll find detailed coverage of the follow
 
 # Getting Started
 
-To get started, you will need to create an account and download the software. Once you have done that, you can follow
-the instructions in the Getting Started Guide to start using the software.
+## Prerequisites
+Ensure that you have `Java 11`{.swift} or above installed on your computer. If you are unsure how to do so you may view this
+helpful [guide](https://www.java.com/en/download/help/version_manual.html).
+
+<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
+
+**Tip**: You may find the following links helpful should you need to install `Java 11`{.swift}
+1. [Java 11 Release](https://www.oracle.com/java/technologies/downloads/#java11).
+2. [Java 11 Installation Guide](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A).
+
+</box>
+
+## Installing HomeBoss
+1. You may download the latest release of **HomeBoss** from [here](https://github.com/AY2324S1-CS2103T-T13-3/tp/releases/latest). 
+   (Please download the file named `HomeBoss.jar`{.swift})
+2. Move the downloaded file `HomeBoss.jar`{.swift} into the folder that you want to use as the home folder for your application.
+
+<box type="warning" background-color="#f2dede" border-color="#ebccd1" icon=":exclamation:">
+
+**Warning**: Ensure that the folder that you would like to use as the home folder is empty and 
+does not contain any other files/folders
+
+</box>
+
+3. Run `HomeBoss.jar`{.swift}. If you are unsure how to run a `.jar` file, you may refer to this helpful
+   [guide](https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Run-JAR-file-example-windows-linux-ubuntu).
+4. If everything went well, you should be greeted by a window similar to the one below.
+5. We recommend reading how to [understand the layout](#understanding-the-layout) 
+   and familiarizing yourself with [HomeBoss's command format](#homebosss-command-format) 
+   before learning how to [add your first delivery](#adding-your-first-delivery)
+
+![HomeBoss Start Page](images/getting-started/StartPage.png)
+
+## Understanding the Layout
+Don't worry if you don't understand what you're looking at. Let's go through a quick run down of HomeBoss's layout
+so that you can familiarise yourself with our various components.
+
+![HomeBoss Home Page](images/getting-started/HomePage.png)
+
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note**: The above image is an example with sample data and may not be what you see when you launch
+the application for the first time. 
+
+</box>
+
+### Command Box
+
+![HomeBoss Command Box](images/getting-started/CommandBox.png){style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
+
+The Command Box is where you will be interacting with HomeBoss, it is the place where all commands
+will be entered. Try typing the `help`{.swift} command and hitting enter!
+
+### Command Result/FeedBack
+
+![Command Result FeedBack](images/getting-started/CommandResultFeedback.png){ width="200" height="150" style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
+
+The Command Result/Feedback Box is where HomeBoss will provide you the results or feedback about 
+the commands you entered. For example, if you tried typing the `help`{.swift} command earlier, you should see
+the above feedback in your application window, together with a Help window popup. 
+You can use the scroll bar on the right to scroll through a long result or feedback!
+
+### Customer/Delivery List
+
+<table class="images" style="border:0px solid white; width:100%; text-align: center">
+    <tr style="border: 0;">
+        <td>
+            <img src="images/getting-started/CustomerList.png" width="300" height="225" style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;">
+        </td>
+        <td>
+            <img src="images/getting-started/DeliveryList.png" width="300" height="225" style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;">
+        </td>
+    </tr>
+    <tr >
+        <td style="padding-top: 10px; padding-bottom: 20px">List of Customers</td>
+        <td style="padding-top: 10px; padding-bottom: 20px">List of Deliveries</td>
+    </tr>
+</table>
+
+The Customer/Delivery List Box is where you will be able to find the customers and deliveries that you have added to
+HomeBoss. You can use the scroll bar on the right to scroll through your customers or deliveries.
+
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note**: The `ID`{.swift} that appears next to each name is a unique identifier given to all added customers and 
+deliveries separately, and is required to perform many of HomeBoss's commands. 
+More details of these commands can be found in [Features](#features)
+
+![Command Result FeedBack](images/getting-started/DeliveryID.png){style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
+
+
+</box>
+
+
+## HomeBoss's Command Format
+
+Commands are your main form of interaction with HomeBoss, and is the way to carry out various operations in HomeBoss.
+Don't worry if the commands seem daunting, the HomeBoss team has carefully crafted the commands to be as intuitive 
+and simple as possible. After learning the commands, you'll be faster than ever!
+
+Every command has a **Command Phrase** and possibly one or more **Parameters** 
+(Inputs to customise the command to your needs) which is typically preceded by a **Prefix** 
+(Special markers for HomeBoss to understand your inputs) 
+
+Take the [Update Details Command](#update-details) for example:
+
+```swift
+update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD] [--secretQn SECRET_QUESTION --answer ANSWER]```
+```
+
+* The **Command Phrase** is `update`{.swift}
+* The **Parameters** are the words in `UPPER_CASE`{.swift}, for example `USERNAME`{.swift} or `PASSWORD`{.swift}
+* The **Prefixes** are special keywords that a preceded by `--`{.SWIFT}, such as `--user`{.swift} or
+  `--password`{.swift}
+  
+<br />
+
+However not all commands have **Prefixes**, take the 
+[Update Delivery Status Command](#update-delivery-status) for example:
+
+```swift
+delivery status STATUS CUSTOMER_ID
+```
+
+* The **Command Phrase** is `delivery status`{.swift}
+* The **Parameters** are `STATUS`{.swift} and `CUSTOMER_ID`{.swift}
+* It has no **Prefixes**
+
+<br />
+
+Not all commands have **Parameters** as well, take the
+[Logout Command](#logout) for example:
+
+```swift
+logout
+```
+
+* The **Command Phrase** is `logout`{.swift}
+* It has no **Parameters**
+
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note**:
+* Command Phrase are keywords or short phrases that are unique to each Command.
+* Words that are in `UPPER_CASE`{.swift} are parameters that are to be supplied by you.
+* Parameters that are preceded by a prefix must be supplied after that prefix, e.g. `--name DELIVERY_NAME`{.swift}
+  must be given as `--name deliveryName`{.swift} and not `deliveryName`{.swift} or `--name`{.swift}
+* Items that are placed in square brackets are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`{.swift} can either be
+  `1`{.swift} or `1 --name deliveryName`{.swift}.
+* However, items that are grouped together in square brackets must all be provided together, 
+  e,g, for `[--password PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift} both `PASSWORD`{.swift} and 
+  `CONFIRM_PASSWORD`{.swift} must be provided.
+* Extraneous parameters for commands that do not have parameters (e.g. `customer list`{.swift} or `clear`{.swift}) will
+  be ignored, e.g. `customer list 123`{.swift}.
+* **Command Phrase** and **Prefixes** are **case-sensitive**! e.g. `clear`{.swift} is a valid command word but
+  `customer LIST`{.swift} is not a valid command word. 
+
+</box>
+
+## Adding your first Delivery
+
+Hopefully at this point, you have a good understanding of the basics of HomeBoss. Let's get you started on HomeBoss 
+by adding your first Delivery
+
+1. First register for HomeBoss using the `register`{.swift} command, more details on the command can be found
+   [here](#register)
+
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note**: Only 1 account can be registered to HomeBoss at any one time.
+
+</box>
+
+2. After registering for an account, you should be greeted by some sample Customers 
+   that have been generated by HomeBoss.
+3. Let's assume that a new customer, Gabriel, is to be added, using the `customer add`{.swift} command.
+
+> `NAME`: Gabriel
+> `PHONE`: 87654321
+> `EMAIL`: gabrielrocks@gmail.com
+> `ADDRESS`: RVRC Block B
+
+4. Type `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`{.swift} 
+   into the Command Box and hit enter.
+5. A new Customer called Gabriel should be added, you should see a new Customer similar to the image below.
+
+![CustomerAdded](images/getting-started/CustomerAdded.png){style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
+
+6. Now, let's add a new delivery for Gabriel into HomeBoss, suppose Gabriel ordered some furniture.
+
+> `DELIVERY_NAME`: furniture
+> `DELIVERY_DATE`: 2023-12-03
+
+8. Type `delivery add furniture --customer CUSTOMER_ID --date 2023-12-03`{.swift}, replacing `CUSTOMER_ID`{.swift} with 
+   Gabriel's ID, and hit enter.
+9. new Delivery should have been added for Gabriel, you should see a new Delivery similar to the image below.
+
+![DeliveryAdded](images/getting-started/DeliveryAdded.png){style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
+
+Congratulations! You have just successfully added your first Customer and Delivery!
+
+HomeBoss has many other features for you to try to streamline your delivery workflow. Take a look at our
+[Features](#features) below for even more commands and their details!
 
 # Features
 
