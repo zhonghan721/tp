@@ -180,7 +180,7 @@ The `User` model,
 
 The `Delivery` model,
 
-* stores the delivery data i.e, the delivery name, customer, delivery status, order date, delivery date and note for the
+* stores the delivery data i.e, the delivery name, customer, delivery status, order date, expected delivery date and note for the
   delivery.
 
 #### Customer Model
@@ -406,10 +406,10 @@ The format of the `delivery list` command can be found
 7. If the status was provided, the status is used to filter the current delivery list with the specified status.
 8. If the customer id was provided, the customer id is used to filter the current delivery list with the specified
    customer id.
-9. If the delivery date was provided, the delivery date is used to filter the current delivery list with the specified
-   delivery date.
+9. If the expected delivery date was provided, the expected delivery date is used to filter the current delivery list 
+   with the specified expected delivery date.
 10. If the sort was provided, the sort is used to sort the current delivery list. By default, the deliveries will be
-    sorted in descending order of their delivery date.
+    sorted in descending order of their expected delivery date.
 11. The list on the ui will be updated with the filtered and sorted deliveries.
 12. If the command completed successfully, a `CommandResult` object will be created, and returned.
 
@@ -432,14 +432,14 @@ The sequence of the `delivery list` command is as follows:
 6. If status is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)` to
    filter the
    delivery list by the specified status.
-7. If delivery date is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)`
-   to filter the delivery list by the specified date.
+7. If expected delivery date is not null, `DeliveryListCommand` will call 
+   `Model#updateFilteredDeliveryListByStatus(Predicate)` to filter the delivery list by the specified date.
 8. If customer id is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)`
    to filter the delivery list by the specified customer id.
 9. If the sort is `asc`, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList(Comparator)` to sort the
-   delivery list by delivery date in descending order.
-10. Else, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList()` to sort the delivery list by delivery
-    date in descending order.
+   delivery list by expected delivery date in descending order.
+10. Else, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList()` to sort the delivery list by the 
+    expected delivery date in descending order.
 11. It creates a new "CommandResult" with the result of the execution.
 
 The default delivery sort is `asc`.
@@ -669,8 +669,8 @@ The format for the `delivery add` command can be found [here](UserGuide.md#creat
 1. The user inputs `delivery add`, followed by the `DeliveryName`, customer id of a `Customer` and `DeliveryDate`.
    e.g.(delivery add --name Chocolate Cake --customer 1 --date 2024-10-10)
 2. If no fields or incorrect fields are provided, an error message will inform the user of the correct command usage.
-3. If the delivery date provided is before today's date, an error message will prompt the user to key in a date that
-   is today or after today.
+3. If the expected delivery date provided is before today's date, an error message will prompt the user to key in a 
+   date that is today or after today.
 4. The customer id provided is then cross-referenced with the stored customer list in `Model` to ensure that
    it corresponds to an existing `Customer`. If the customer id is not tied to any `Customer`, an error message will
    inform the user that that is the case.
@@ -1413,7 +1413,7 @@ otherwise)
 **MSS:**
 
 1. Logged-in Owner types command to view a list of deliveries.
-2. DMS displays a list of all deliveries sorted in descending delivery date (newest to oldest).
+2. DMS displays a list of all deliveries sorted in descending expected delivery date (newest to oldest).
 
    Use Case Ends.
 
@@ -1429,8 +1429,8 @@ otherwise)
 
       Use Case Ends.
 
-* 1c. User specifies delivery date field in command.
-    * 1c1. DMS displays a list of deliveries filtered by the specified delivery date.
+* 1c. User specifies expected delivery date field in command.
+    * 1c1. DMS displays a list of deliveries filtered by the specified expected delivery date.
 
       Use Case Ends.
 
@@ -1439,17 +1439,17 @@ otherwise)
 
       Use Case Ends.
 
-* 1e. User specifies both status and delivery date fields.
-    * 1e1. DMS displays a list of deliveries filtered by the specified status and delivery date.
+* 1e. User specifies both status and expected delivery date fields.
+    * 1e1. DMS displays a list of deliveries filtered by the specified status and expected delivery date.
 
       Use Case Ends.
 
-* 1f. User specifies both customer and delivery date fields.
-    * 1f1. DMS displays a list of deliveries filtered by the specified customer and delivery date.
+* 1f. User specifies both customer and expected delivery date fields.
+    * 1f1. DMS displays a list of deliveries filtered by the specified customer and expected delivery date.
 
       Use Case Ends.
-* 1g. User specifies customer, delivery date and status fields.
-    * 1g1. DMS displays a list of deliveries filtered by the specified customer, delivery date and status.
+* 1g. User specifies customer, expected delivery date and status fields.
+    * 1g1. DMS displays a list of deliveries filtered by the specified customer, expected delivery date and status.
 
       Use Case Ends.
 
@@ -1459,10 +1459,10 @@ otherwise)
       Use Case Ends.
 
 * 1h. User Specifies both filter fields and sort fields.
-    * 1c1. DMS displays a list of deliveries filtered by the specified filters and then delivery date sorted by the
-      specified sort order.
-
-      Use Case Ends.---
+    * 1c1. DMS displays a list of deliveries filtered by the specified filters and then expected delivery date sorted 
+           by the specified sort order.
+  
+       Use Case Ends.
 
 #### **Use case:** UC16 - Delivery List for the Day
 

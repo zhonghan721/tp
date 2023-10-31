@@ -41,7 +41,7 @@ public class DeliveryAddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_MILK + VALID_CUSTOMER_ID_1
                 + DELIVERY_DATE_DESC_MILK, expectedMessage);
 
-        // missing delivery date prefix
+        // missing expected delivery date prefix
         assertParseFailure(parser, NAME_DESC_MILK + CUSTOMER_ID_DESC_MILK
                 + VALID_DELIVERY_DATE_1, expectedMessage);
     }
@@ -71,13 +71,13 @@ public class DeliveryAddCommandParserTest {
     }
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        // delivery add <name> --customer <customer id> --date <delivery date>
+        // delivery add <name> --customer <customer id> --date <expected delivery date>
 
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + CUSTOMER_ID_DESC_MILK
                 + DELIVERY_DATE_DESC_MILK, DeliveryName.MESSAGE_CONSTRAINTS);
 
-        // invalid delivery date
+        // invalid expected delivery date
         assertParseFailure(parser, NAME_DESC_MILK + CUSTOMER_ID_DESC_MILK
                 + INVALID_DELIVERY_DATE_DESC, DeliveryDate.MESSAGE_CONSTRAINTS);
 

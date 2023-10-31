@@ -26,9 +26,11 @@ public class Messages {
         + "single-valued field(s): ";
 
     public static final String MESSAGE_USER_NOT_AUTHENTICATED = "Access denied! You are currently not logged in.";
+    public static final String MESSAGE_WELCOME = "Welcome to HomeBoss!\n" + "You are currently logged out.\n"
+            + "Login or register to start using HomeBoss.";
 
     public static final String MESSAGE_INVALID_DELIVERY_DATE =
-            "Delivery Date cannot be before today.";
+            "Expected Delivery Date cannot be before today.";
 
     public static final String MESSAGE_INVALID_ORDER_DATE =
             "Order Date cannot be after today.";
@@ -69,7 +71,7 @@ public class Messages {
             .append(String.format("\n Customer Id: %d", delivery.getCustomer().getCustomerId()))
             .append(String.format("\n Address: %s", delivery.getAddress().toString()))
             .append(String.format("\n Ordered On: %s", delivery.getOrderDate().toString()))
-            .append(String.format("\n Delivered On: %s", delivery.getDeliveryDate().toString()))
+            .append(String.format("\n Expected Delivery Date: %s", delivery.getDeliveryDate().toString()))
             .append(Optional.ofNullable(delivery.getNote())
                 .map(n -> String.format("\n Note:%s", n)).orElse(""));
 
