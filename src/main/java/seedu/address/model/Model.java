@@ -242,6 +242,8 @@ public interface Model {
 
     void updateUser(User user);
 
+    String getLoginStatus();
+
 }
 
 

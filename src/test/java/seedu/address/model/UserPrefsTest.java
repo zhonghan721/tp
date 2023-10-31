@@ -5,15 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
 public class UserPrefsTest {
+
+    @TempDir
+    public Path tempDir;
 
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
@@ -63,6 +68,7 @@ public class UserPrefsTest {
             System.out.println(e.getMessage());
         }
         assertTrue(userPrefs.getStoredUser() != null);
+        assertEquals(userPrefs.getStoredUser(), user);
     }
 
     @Test
@@ -79,7 +85,9 @@ public class UserPrefsTest {
         String secretQuestion = "Your first pet's name?";
         String answer = "koko";
         User user = new User(username, password, true, secretQuestion, answer);
-        userPrefs.setAuthenticationPath(Paths.get("src/test/data/Authentication", "authentication.json"));
+        Path authTestPath = tempDir.resolve("TempAuthentication.json");
+        userPrefs.setAuthenticationPath(authTestPath);
+
         assertTrue(userPrefs.registerUser(user));
         assertEquals(userPrefs.getStoredUser(), user);
     }
