@@ -394,6 +394,7 @@ _Want to delete a customer? Call this command to delete a customer from the cust
 
 >Adds a delivery to the delivery book.
 
+
 HomeBoss' most essential feature. The whole premise of our application is so that you can easily track your 
 deliveries/orders. With this feature, you can do just that by adding a delivery to the delivery book.
   
@@ -428,11 +429,12 @@ Cool huh! We try to help you speed up the process as much as possible.
 [&uarr; Back to Table of Contents](#top)
 
 
+
 ### View all deliveries
 
 Shows a list of all deliveries.
 
-**Format:** `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE]  [--sort SORT]`
+**Format:** `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]  [--sort SORT]`
 
 **Example:** `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`
 
@@ -442,9 +444,9 @@ _STATUS_: CREATED/SHIPPED/COMPLETED/CANCELLED. If unspecified, defaults to show 
 
 _CUSTOMER_ID_: Integer
 
-_DELIVERY_DATE_: Delivery Date String in yyyy-MM-dd format or `today` for today’s date
+_EXPECTED_DELIVERY_DATE_: Expected Delivery Date String in YYYY-MM-DD format or `today` for today’s date
 
-_SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by delivery date.
+_SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by expected delivery date.
 
 **Command succeeds (>0 deliveries):**
 ![](images/delivery/delivery_list.png)
@@ -498,12 +500,13 @@ to SHIPPED! Using this feature, you can update the status of a delivery accordin
 Oh no! Did you key in the wrong details for a delivery? Or did your customer change some details to his 
 delivery? No worries! Just edit the details of a delivery simply by using this feature.
 
-**Format:** `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date DELIVERY_DATE]
+**Format:** `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]
 [--status STATUS] [--note NOTE]`
 
 <box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
     If you only want to update the delivery's status, simply use `delivery status` instead.
 </box>
+
 
 <box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
     Be careful! You won't be able to undo this edit action! 

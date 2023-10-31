@@ -172,6 +172,11 @@ public class CustomerAddCommandTest {
         }
 
         @Override
+        public Customer getCustomerUsingFilteredList(int id) {
+            return null;
+        }
+
+        @Override
         public boolean hasPerson(Customer customer) {
             throw new AssertionError("This method should not be called.");
         }
