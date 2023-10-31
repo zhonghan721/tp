@@ -101,7 +101,8 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**
+API** : [`Logic.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -142,7 +143,8 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
+**
+API** : [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
@@ -191,7 +193,8 @@ The `Customer` model,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**
+API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -615,18 +618,18 @@ The format for the `customer edit` command can be found [here](UserGuide.md#upda
 **Feature details:**
 
 1. The user specifies the customer id of the `Customer` to be edited, followed by at least one of the information
-fields to be edited,`Name`, `Phone`, `Email` or/and `Address`.
-e.g.(`customer edit 1 --name John --phone 92149601`)
+   fields to be edited,`Name`, `Phone`, `Email` or/and `Address`.
+   e.g.(`customer edit 1 --name John --phone 92149601`)
 2. If no fields are provided, an error message will prompt the user to key in at least one of the fields.
 3. If the customer id provided is negative or zero, an error message will prompt the user to key in an unsigned
-positive integer.
+   positive integer.
 4. The customer id provided is then cross-referenced with the stored customer list in `Model` to ensure that
-it corresponds to an existing `Customer`. If the customer id is not tied to any `Customer`, an error message will
-inform the user that that is the case.
+   it corresponds to an existing `Customer`. If the customer id is not tied to any `Customer`, an error message will
+   inform the user that that is the case.
 5. If the details provided exactly match the details of the `Customer` that was specified, an error message will inform
    the user that the customer already exists in the address book.
 6. If all the previous steps are completed without exceptions, the fields of the `Customer` that was specified will
-be updated with the new information provided by the user.
+   be updated with the new information provided by the user.
 
 The following activity diagram shows the logic of a user editing a customer's information:
 
@@ -635,15 +638,15 @@ The following activity diagram shows the logic of a user editing a customer's in
 The sequence of the `customer edit` command is as follows:
 
 1. The user inputs the `customer edit` command with `input` as the customer id and `Name`, `Phone`, `Email` and/or
-`Address` as the fields to be edited. e.g.(`customer edit 1 --name John --phone 92149601)
+   `Address` as the fields to be edited. e.g.(`customer edit 1 --name John --phone 92149601)
 2. The `LogicManager` calls `AddressBookParser#parseCommand` to create its corresponding CommandParser.
 3. In this case, the `AddressBookParser` creates an instance of `CustomerEditCommandParser` and calls
-`CustomerEditCommandParser#parse` to parse the given `input` using various parse methods from `ParserUtil` and
+   `CustomerEditCommandParser#parse` to parse the given `input` using various parse methods from `ParserUtil` and
    creates a `CustomerEditDescriptor` object.
 4. The `CustomerEditCommandParser` then creates a `CustomerEditCommand` object. The `CustomerEditCommand` object
-takes in the `CustomerEditDescriptor` instance and the customer id from Step 1 as a parameter.
+   takes in the `CustomerEditDescriptor` instance and the customer id from Step 1 as a parameter.
 5. The `CustomerEditCommand` is then returned to the `LogicManager` where its execute method is called. This creates
-a `Customer` object by calling `CustomerEditCommand#createEditedCustomer`. Also, it edits the `Customer` with the
+   a `Customer` object by calling `CustomerEditCommand#createEditedCustomer`. Also, it edits the `Customer` with the
    customer id input in Step 1. This is done by calling `Model#setCustomer`.
 6. With the `Customer` specified edited, a `CommandResult` with a success message is then returned.
 
@@ -656,7 +659,7 @@ The following sequence diagram shows how the `customer edit` command works:
 **Overview:**
 
 The `delivery add` command is used to add a new Delivery with all the given information fields
-specified by the user, namely the delivery's `DeliveryName`, customer id of a `Customer` and `DeliveryDate`. All 
+specified by the user, namely the delivery's `DeliveryName`, customer id of a `Customer` and `DeliveryDate`. All
 fields are compulsory.
 
 The format for the `delivery add` command can be found [here](UserGuide.md#create-delivery).
@@ -664,7 +667,7 @@ The format for the `delivery add` command can be found [here](UserGuide.md#creat
 **Feature details:**
 
 1. The user inputs `delivery add`, followed by the `DeliveryName`, customer id of a `Customer` and `DeliveryDate`.
-e.g.(delivery add --name Chocolate Cake --customer 1 --date 2024-10-10)
+   e.g.(delivery add --name Chocolate Cake --customer 1 --date 2024-10-10)
 2. If no fields or incorrect fields are provided, an error message will inform the user of the correct command usage.
 3. If the delivery date provided is before today's date, an error message will prompt the user to key in a date that
    is today or after today.
@@ -681,8 +684,8 @@ The following activity diagram shows the logic of a user adding a delivery:
 The sequence of the `delivery add` command is as follows:
 
 1. The user inputs the `delivery add` command with `input` as the `DeliveryName`, customer id of a `Customer` and
-`DeliveryDate`.
-e.g.(`delivery add --name Chocolate Cake --customer 1 --date 2024-10-10`)
+   `DeliveryDate`.
+   e.g.(`delivery add --name Chocolate Cake --customer 1 --date 2024-10-10`)
 2. The `LogicManager` calls `AddressBookParser#parseCommand` to create its corresponding CommandParser.
 3. In this case, the `AddressBookParser` creates an instance of `DeliveryAddCommandParser` and calls
    `DeliveryAddCommandParser#parse` to parse the given `input` using various parse methods from `ParserUtil` and
@@ -882,8 +885,6 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | `*`      | a registered owner | relate my inventory to my orders                                              | I can keep track of my inventory.                                                                                                                                                       |
 | `*`      | a registered owner | know the sum of all the materials required for a fixed delivery schedule      | I can plan my                                                                                             inventory.                                                                    |
 | `*`      | a registered owner | have different user authorisation levels                                      | I can control who has access to what.                                                                                                                                                   |
-
-*{More to be added}*
 
 ### Use cases
 
