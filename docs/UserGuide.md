@@ -2,7 +2,27 @@
 
 This comprehensive user guide is your key to a seamless start with our cutting-edge software designed specifically for
 home-based businesses. Our solution is tailored to enhance the efficiency of managing delivery addresses, simplifying
-your operations. Within these pages, you'll find detailed coverage of the following essential topics:
+your operations.
+
+---
+
+### Navigating the User Guide
+
+**Note Box**
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Provides information that is useful to know.
+</div>
+
+**Tip Box**
+<div markdown="span" class="alert alert-success">:bulb: **Tip:** Provides information that can help enhance the user experience but is not necessary to know.
+</div>
+
+**Warning Box**
+<div markdown="span" class="alert alert-danger">:exclamation: **Warning:** Important information to take note of to avoid any unintended effects!
+</div>
+
+---
+
+# Table of Contents
 
 ## About this User Guide
 
@@ -20,18 +40,18 @@ commands available in HomeBoss.
 - Getting Started
 - Features
     - User
-        - Register
-        - Login
+        - [Register](#register)
+        - [Login](#login)
         - Update details
         - Logout
-        - Account recovery
-        - Account deletion
+        - [Account recovery](#account-recovery)
+        - [Account deletion](#account-deletion)
     - Customer
         - Add customer
         - Search for a customer [Coming Soon]
         - List customers
         - Update customer details
-        - Delete customer
+        - [Delete customer](#delete-customer)
     - Delivery
         - Create delivery
         - View all deliveries
@@ -45,10 +65,61 @@ commands available in HomeBoss.
         - Look up delivery details [Coming Soon]
 - Troubleshooting / FAQ
 
+---
+
 # Getting Started
 
 To get started, you will need to create an account and download the software. Once you have done that, you can follow
 the instructions in the Getting Started Guide to start using the software.
+
+---
+
+# Command Summary
+
+Here is a brief introduction to the commands that you will be using in HomeBoss. For more detailed information, please
+refer to the [Features](#features) section.
+
+### User
+
+_These are commands for managing your user account in HomeBoss._
+
+- `register` - Registers a new user account to use HomeBoss.
+- `login` - Logs in to your user account.
+- `update` - Updates your user account details.
+- `logout` - Logs out of your user account.
+- `recover account` - Recovers your user account.
+- `delete account` - Deletes your user account.
+
+### Customer
+
+_These are commands for managing your customers in HomeBoss._
+
+- `customer add` - Adds a customer to the address book.
+- `customer find` - Finds customers whose names contain any of the given keywords.
+- `customer list` - Lists all customers in the address book.
+- `customer edit` - Updates the details of an existing customer in the address book.
+- `customer delete` - Deletes the specified customer from the address book.
+
+### Delivery
+
+_These are commands for managing your deliveries in HomeBoss._
+
+- `delivery add` - Adds a delivery to the delivery book.
+- `delivery list` - Lists all deliveries in the delivery book.
+- `delivery view` - Shows the details of the specified delivery.
+- `delivery status` - Changes the status of a specified delivery.
+- `delivery note` - Creates a note for a specified delivery.
+- `delivery delete` - Deletes the specified delivery from the delivery book.
+
+### Miscellaneous
+
+_These are general commands for using HomeBoss._
+
+- `help` - Shows a list of commands and their usage.
+- `exit` - Exits the program.
+- `clear` - Clears both customer and delivery database. **Warning:** This action is irreversible.
+
+---
 
 # Features
 
@@ -58,7 +129,10 @@ the instructions in the Getting Started Guide to start using the software.
 
 ### Register
 
-You can register for an account to use HomeBoss. Only one account can be registered at a time.
+> Registers a new user account to use HomeBoss.
+
+_Want to get started? Start by registering for an account to use HomeBoss! Note that only one account can be registered
+at a time._
 
 **Format:
 ** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
@@ -66,26 +140,14 @@ You can register for an account to use HomeBoss. Only one account can be registe
 **Example:
 ** `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko`
 
-**Accepted Values:**
+<div markdown="span" class="alert alert-info">:information_source: **Note:** All fields are required.
+</div>
 
-_USERNAME:_ String, consisting of only alphanumeric characters
-
-_PASSWORD:_ String, consisting of at least 8 alphanumeric characters
-
-_CONFIRM\_PASSWORD:_ String that is the same as _PASSWORD_
-
-_SECRET\_QUESTION:_ String
-
-_ANSWER:_ String, not case sensitive
-
-**Command succeeds:** _Registration successful._
-
-**Command fails (missing fields):** _Please fill up all the required fields._
-
-**Command fails (password does not match):** _Passwords do not match. Try again._
-
-**Command fails (missing secret question and answer):** _Please key in a secret question and answer for account
-recovery. Try again._
+<ins>Before
+![](images/user/user_freshStart.png)
+<ins>After
+![](images/user/userRegister_after.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Login
 
@@ -157,41 +219,42 @@ _Secret Question and Answer have to be either all present or all absent. Try aga
 
 ### Account Recovery
 
+> Recovers the user account.
+
+_Forgot your password? Use this command to recover your account!_
+
 **Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`
 
-**Example 1:** `recover account`</br>
-**Example 2:** `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`</br>
+**Examples:**
 
-**Accepted Values:**
+- `recover account`</br>
+- `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`</br>
 
-_ANSWER:_ String, not case sensitive
+<div markdown="span" class="alert alert-info">:information_source: **Note:** [] around a group of parameters indicates that it is optional, but all parameters within the group must be provided.
+</div>
 
-_NEW\_PASSWORD:_ String
-
-_CONFIRM\_PASSWORD:_ String that is the same as _NEW\_PASSWORD_
-
-*`--answer`, `--password`, and `--confirmPass` flags have to be either all present or all absent.
-
-**Command succeeds (without flags):** _Your secret question is: \<previously stored secret qn\>._
-
-**Command succeeds (with flags):** _Your account has been recovered successfully. Welcome back to HomeBoss._
-
-**Command fails (missing fields):** _Please fill up all the required fields._
-
-**Command fails (wrong answer to secret question):** _Wrong answer to secret question. Either try again or
-call `delete account` (permanent loss of stored data)._
-
-**Command fails (password does not match):** _Passwords do not match. Try again._
+<ins>After (without optional fields)
+![](images/user/userRecoverAccount_after_secretQn.png)
+<ins>After (with optional fields)
+![](images/user/userRecoverAccount_after.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Account Deletion
 
+> Deletes the user account.
+
+_Want to delete your account? Call this command to delete your account and clear all your data._
+
+<div markdown="span" class="alert alert-success">:bulb: **Tip:** This command is useful only as a last resort, should you forget your password and secret answer. However, if you forgot your password but remember the answer to your secret question, you can call `recover account` [here](#account-recovery) instead.
+</div>
+
 **Format:** `delete account`
 
-**Example:** `delete account`
-
-**Command succeeds:** _User deleted successfully._
-
-**Command fails (no user registered):** _No accounts found. Please register an account first._
+<ins>Before
+![](images/customer/customerList.png)
+<ins>After
+![](images/user/userDelete_after.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ## <span style="text-decoration:underline;">Customer</span>
 
@@ -252,7 +315,7 @@ _NIL_
 
 **Command succeeds (>0 customers):**
 
-![](images/customer/customer_list.png)
+![](images/customer/customerList.png)
 
 **Command succeeds (0 customer):** _There are currently no customers!_
 
@@ -291,23 +354,20 @@ _CUSTOMER_ID_: Integer
 
 ### Delete customer
 
-Deletes the specified customer from the address book.
+> Deletes the specified customer from the customer database. All deliveries associated with the customer will also be
+> deleted.
+
+_Want to delete a customer? Call this command to delete a customer from the customer database._
 
 **Format:** `customer delete CUSTOMER_ID`
 
-**Example:** `customer delete 1001`
+**Example:** `customer delete 1`
 
-**Accepted Values:**
-
-_CUSTOMER_ID:_ Integer
-
-**Command succeeds:** _Customer 1, Gabriel has been deleted!_
-
-**Command fails (missing_index):** _Please specify the customer to delete._
-
-**Command fails (invalid_index):** _The customer does not exist!_
-
-**Command fails (pending_delivery_customer_index):** _Delivery for Customer 1, Gabriel is not completed yet!_
+<ins>Before
+![](images/customer/customerList.png)
+<ins>After
+![](images/customer/customerDelete_after.png)
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ## <span style="text-decoration:underline;">Delivery</span>
 
