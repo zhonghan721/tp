@@ -156,7 +156,9 @@ at a time._
 
 **Example:**
 
-* `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko`
+* `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko` -
+  Registers a new user account with the username `gabriel`, password `gabrielIsGreat`, secret
+  question `First pet's name?` and answer `Koko`.
 
 <box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
     * All fields are required.
@@ -186,7 +188,8 @@ Note that you need to have an account registered with HomeBoss._
 
 **Example:**
 
-* `login --user gabriel --password gabrielIsGreat`
+* `login --user gabriel --password gabrielIsGreat` - Logs in to the user account with the username `gabriel` and
+  password `gabrielIsGreat`.
 
 **Before:**
 ![](images/user/userLogin_before.png)
@@ -214,7 +217,8 @@ Want to keep your account secure? You can update your account details by calling
 **Example:**
 
 * `update --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest
-  --secretQn Favourite Pet --answer BoBo`
+  --secretQn Favourite Pet --answer BoBo` - Updates the username to `gabrielV2`, password to `gabrielIsBest`, secret
+  question to `Favourite Pet` and answer to `BoBo`.
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -246,8 +250,9 @@ _Forgot your password? Use this command to recover your account!_
 
 **Examples:**
 
-* `recover account`</br>
-* `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`</br>
+* `recover account` - Displays your account's secret question for account recovery.
+* `recover account --answer Koko --password newPassword123 --confirmPass newPassword123` - Recovers the account with the
+  answer `Koko` and sets the new password to `newPassword123`.
 
 <box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
     * If ANSWER is provided, NEW_PASSWORD and CONFIRM_PASSWORD must also be provided, vice versa.
@@ -297,7 +302,8 @@ _Did you just receive a new customer? You can add the customer's details into Ho
 
 **Example:**
 
-* `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`
+* `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B` - Adds a customer
+  with the name `Gabriel`, phone number `87654321`, email `gabrielrocks@gmail.com` and address `RVRC Block B`.
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -320,7 +326,8 @@ You can search for the customer using keywords by calling this command._
 
 **Example:**
 
-* `customer find Gabriel Spencer`
+* `customer find Gabriel Spencer` - Finds customers whose names contain _ANY_ of the given keywords `Gabriel`
+  and `Spencer`.
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -393,7 +400,7 @@ _Want to delete a customer? Call this command to delete a customer from the cust
 
 **Example:**
 
-* `customer delete 1`
+* `customer delete 1` - Deletes the customer with ID 1.
 
 **Before:**
 ![](images/customer/customerList.png)
