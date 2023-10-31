@@ -188,7 +188,7 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         DeliveryBook deliveryBook =
-            new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+                new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         AddressBook differentAddressBook = new AddressBook();
         DeliveryBook differentDeliveryBook = new DeliveryBook();
         UserPrefs userPrefs = new UserPrefs();
@@ -249,5 +249,53 @@ public class ModelManagerTest {
         modelManager.setLoggedInUser(user);
         assertTrue(modelManager.userMatches(user));
         assertFalse(modelManager.userMatches(wrongUser));
+    }
+
+    @Test
+    public void getLoginStatus_storedUserAndLoggedIn_success() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        DeliveryBook deliveryBook =
+                new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+        UserPrefs userPrefs = new UserPrefs();
+        userPrefs.setAuthenticationPath(Paths.get("src/test/data/Authentication", "authentication.json"));
+        Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, true);
+        User loggedInUser = modelManager.getStoredUser();
+
+        String expectedMessage = "Hello " + loggedInUser.getUsername() + ".";
+        String actualMessage = modelManager.getLoginStatus();
+
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void getLoginStatus_storedUserAndLoggedOut_success() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        DeliveryBook deliveryBook =
+                new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+        UserPrefs userPrefs = new UserPrefs();
+        userPrefs.setAuthenticationPath(Paths.get("src/test/data/Authentication", "authentication.json"));
+        Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, false);
+        User loggedInUser = modelManager.getStoredUser();
+
+        String expectedMessage = "Logged out. Please login to continue.";
+        String actualMessage = modelManager.getLoginStatus();
+
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void getLoginStatus_noStoredUser_success() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        DeliveryBook deliveryBook =
+                new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+        UserPrefs userPrefs = new UserPrefs();
+        userPrefs.setAuthenticationPath(Paths.get("src/test/data/Authentication", "authentication.json"));
+        Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, false);
+        modelManager.setLoggedInUser(null);
+
+        String expectedMessage = "No account found. Please register an account.";
+        String actualMessage = modelManager.getLoginStatus();
+
+        assertEquals(expectedMessage, actualMessage);
     }
 }
