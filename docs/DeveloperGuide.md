@@ -83,7 +83,8 @@ in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ListPanel`
-, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
+, `StatusBarFooter`, `HelpWindow` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class
+which captures
 the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
@@ -94,10 +95,13 @@ in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/
 
 The `UI` component,
 
-- executes user commands using the `Logic` component.
-- listens for changes to `Model` data so that the UI can be updated with the modified data.
+- executes user commands through the `Logic` component.
+- listens for changes to `Model` data through the `Logic` component so that the UI can be updated with the modified
+  data.
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+- depends on some classes in the `Model` component, referenced through the `Logic` component as it displays `Customer`
+  and `Delivery` objects residing in the
+  `Model`.
 
 ### Logic component
 
@@ -1852,7 +1856,7 @@ Given below are instructions to test the app manually.
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more _exploratory_ testing.
 
-</box>
+</box> 
 
 ### Launch and shutdown
 
