@@ -23,7 +23,7 @@ public class CustomerDeleteCommand extends CustomerCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the customer identified by the index number used in the displayed customer list.\n"
             + "Parameters: CUSTOMER_ID (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 0001";
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
