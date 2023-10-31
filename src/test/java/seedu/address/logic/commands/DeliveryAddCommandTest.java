@@ -225,6 +225,11 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
+        public Customer getCustomerUsingFilteredList(int id) {
+            return null;
+        }
+
+        @Override
         public boolean hasPerson(Customer customer) {
             throw new AssertionError("This method should not be called.");
         }
@@ -372,6 +377,12 @@ public class DeliveryAddCommandTest {
         public void updateUser(User user) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public String getLoginStatus() {
+            throw new AssertionError("This method should not be called.");
+        }
+
 
     }
 

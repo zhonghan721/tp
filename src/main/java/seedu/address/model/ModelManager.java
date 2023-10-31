@@ -48,8 +48,8 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
-            + ", delivery book" + deliveryBook
-            + " and user prefs " + userPrefs);
+                + ", delivery book" + deliveryBook
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.deliveryBook = new DeliveryBook(deliveryBook);
@@ -95,20 +95,20 @@ public class ModelManager implements Model {
     public void setUiListDelivery() {
 
         this.uiList = this.getSortedDeliveryList().stream().map(
-                delivery -> new ListItem(String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName()),
-                    delivery.getOrderDate().toString(), delivery.getStatus().toString(),
-                    delivery.getDeliveryDate().toString()))
-            .collect(Collectors.toCollection(
-                FXCollections::observableArrayList));
+                        delivery -> new ListItem(String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName()),
+                                delivery.getOrderDate().toString(), delivery.getStatus().toString(),
+                                delivery.getDeliveryDate().toString()))
+                .collect(Collectors.toCollection(
+                        FXCollections::observableArrayList));
     }
 
 
     @Override
     public void setUiListCustomer() {
         this.uiList = this.getFilteredPersonList().stream().map(
-                person -> new ListItem(String.format("[%d] %s", person.getCustomerId(), person.getName()),
-                    person.getEmail().toString(), person.getPhone().toString()))
-            .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                        person -> new ListItem(String.format("[%d] %s", person.getCustomerId(), person.getName()),
+                                person.getEmail().toString(), person.getPhone().toString()))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     @Override
@@ -138,6 +138,22 @@ public class ModelManager implements Model {
         userPrefs.setDeliveryBookFilePath(deliveryBookFilePath);
     }
 
+    /**
+     * Returns the status of the login as a string.
+     *
+     * @return the status of the login as a string
+     */
+    @Override
+    public String getLoginStatus() {
+        if (getStoredUser() == null) {
+            return "No account found. Please register an account.";
+        } else if (isLoggedIn) {
+            return "Hello " + loggedInUser.getUsername() + ".";
+        } else {
+            return "Logged out. Please login to continue.";
+        }
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -153,6 +169,16 @@ public class ModelManager implements Model {
     @Override
     public Optional<Customer> getCustomer(int id) {
         return this.addressBook.getById(id);
+    }
+
+    @Override
+    public Customer getCustomerUsingFilteredList(int id) {
+        for (Customer c : filteredCustomers) {
+            if (c.getCustomerId() == id) {
+                return c;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -433,11 +459,11 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-            && deliveryBook.equals(otherModelManager.deliveryBook)
-            && userPrefs.equals(otherModelManager.userPrefs)
-            && filteredCustomers.equals(otherModelManager.filteredCustomers)
-            && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
-            && isLoggedIn == otherModelManager.isLoggedIn;
+                && deliveryBook.equals(otherModelManager.deliveryBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredCustomers.equals(otherModelManager.filteredCustomers)
+                && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
+                && isLoggedIn == otherModelManager.isLoggedIn;
     }
 
 }
