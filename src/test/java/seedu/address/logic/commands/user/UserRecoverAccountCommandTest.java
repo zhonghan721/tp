@@ -8,9 +8,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
 import org.junit.jupiter.api.Test;
@@ -61,7 +61,6 @@ public class UserRecoverAccountCommandTest {
         String answer = "answer"; // refer to authentication.json
         Password newPassword = new Password("newPassword");
         UserPrefs userPrefs = new UserPrefs();
-//        userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
         userPrefs.setAuthenticationFilePath(target);
 
         // set up model with user stored
@@ -72,7 +71,8 @@ public class UserRecoverAccountCommandTest {
 
         // copy of model with user updated to new password
         UserPrefs newUserPrefs = new UserPrefs();
-        newUserPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication_newPassword.json"));
+        newUserPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication",
+                "authentication_newPassword.json"));
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
                 newUserPrefs, model.getUserLoginStatus());
 

@@ -6,24 +6,32 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.nio.file.*;
-import java.util.logging.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.*;
-import seedu.address.commons.core.*;
-import seedu.address.model.*;
+import org.junit.jupiter.api.io.TempDir;
+
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.AddressBook;
+import seedu.address.model.DeliveryBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
-import seedu.address.storage.*;
+import seedu.address.storage.StorageManager;
 
 public class UserDeleteCommandTest {
 
     @TempDir
     public Path tempDir;
 
-    Logger logger = LogsCenter.getLogger(StorageManager.class);
+    private Logger logger = LogsCenter.getLogger(StorageManager.class);
 
     @Test
     public void execute_nullModel_throwsNullPointerException() {

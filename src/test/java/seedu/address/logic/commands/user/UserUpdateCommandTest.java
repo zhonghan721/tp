@@ -14,8 +14,11 @@ import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.nio.file.*;
-import java.util.logging.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.logging.Logger;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,8 +41,11 @@ import seedu.address.testutil.UpdateUserDescriptorBuilder;
 import seedu.address.testutil.UserBuilder;
 
 public class UserUpdateCommandTest {
+
+    @TempDir
+    public Path tempDir;
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalDeliveryBook(), new UserPrefs(), true);
-    public static final Logger logger = Logger.getLogger(UserUpdateCommandTest.class.getName());
+    private final Logger logger = Logger.getLogger(UserUpdateCommandTest.class.getName());
 
     @BeforeEach
     public void setUp() {
@@ -58,9 +64,6 @@ public class UserUpdateCommandTest {
         model.setUserPrefs(tempPrefs); // should store user based on the authentication file in tempDir
 
     }
-
-    @TempDir
-    public Path tempDir;
 
     @Test
     public void execute_allFieldsSpecified_success() {

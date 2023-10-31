@@ -47,7 +47,8 @@ public class UserPrefsTest {
     public void getStoredUser_noUserStored_returnsNull() {
         // assume authentication file is empty
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication_noStoredUser.json"));
+        userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication",
+                "authentication_noStoredUser.json"));
         assertTrue(userPrefs.getStoredUser() == null);
     }
 
