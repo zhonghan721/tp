@@ -108,11 +108,10 @@ public class DeliveryListParserTest {
 
     @Test
     public void execute_listIsFilteredByWrongDate_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, DeliveryListCommand.COMMAND_WORD
-                + VALID_DELIVERY_LIST_ALL + INVALID_DELIVERY_LIST_DELIVERY_DATE,
+        CommandParserTestUtil.assertParseFailure(parser, VALID_DELIVERY_LIST_ALL + INVALID_DELIVERY_LIST_DELIVERY_DATE,
             String.format(Date.MESSAGE_CONSTRAINTS));
-        CommandParserTestUtil.assertParseFailure(parser, DeliveryListCommand.COMMAND_WORD
-                + VALID_DELIVERY_LIST_ALL + INVALID_DELIVERY_LIST_DELIVERY_DATE_MONTH,
+        CommandParserTestUtil.assertParseFailure(parser,
+            VALID_DELIVERY_LIST_ALL + INVALID_DELIVERY_LIST_DELIVERY_DATE_MONTH,
             String.format(Date.MESSAGE_CONSTRAINTS));
     }
 
