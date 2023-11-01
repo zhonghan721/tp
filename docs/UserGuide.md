@@ -41,17 +41,17 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 
 **Note Box**
 <box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
-    Provides you with information that is useful to know.
+Provides you with information that is useful to know.
 </box>
 
 **Tip Box**
 <box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
-    Provides you with information that can help enhance your user experience but is not necessary to know.
+Provides you with information that can help enhance your user experience but is not necessary to know.
 </box>
 
 **Warning Box**
 <box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
-    Important information for you to take note of to avoid any unintended effects!
+Important information for you to take note of to avoid any unintended effects!
 </box>
 
 **Links**
@@ -60,6 +60,7 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 
 * A [&uarr; Back to Table of Contents](#table-of-contents) link is available at the end of every section
 for you to return to the Table of Contents, so that you can access another section from there easily.
+
 ---
 # Table of Contents
 
@@ -195,7 +196,7 @@ Note that you need to have an account registered with HomeBoss._
     All fields are required.
 </box>
 
-**Example:** 
+**Example:**
 
 * `login --user gabriel --password gabrielIsGreat`
 
@@ -223,6 +224,7 @@ Want to keep your account secure? You can update your account details by calling
 </box>
 
 **Example:**
+
 * `update --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest
   --secretQn Favourite Pet --answer BoBo`
 
@@ -265,7 +267,7 @@ _Forgot your password? Use this command to recover your account!_
 <ins>After (without optional fields)
 ![](images/user/userRecoverAccount_after_secretQn.png)
 <ins>After (with optional fields)
-![](images/user/userRecoverAccount_after.png)
+![](images/user/userRecoverAccount_after_answer.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Account Deletion
