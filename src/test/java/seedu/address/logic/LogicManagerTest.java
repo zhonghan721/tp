@@ -225,7 +225,7 @@ public class LogicManagerTest {
     @Test
     public void getLoginStatus() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAuthenticationPath(temporaryFolder.resolve("authentication.json"));
+        userPrefs.setAuthenticationFilePath(temporaryFolder.resolve("authentication.json"));
         model.setUserPrefs(userPrefs);
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
