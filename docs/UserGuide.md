@@ -418,12 +418,6 @@ deliveries at once. You can also filter the list of deliveries by status, custom
 You can also sort the list of deliveries by expected delivery date in ascending or descending order. By default, the
 list of deliveries will be sorted by expected delivery date in descending order (latest first).
 
-<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
-
-**Tip:**
-You combine any of the filters and sort options to get the list of deliveries that you want.
-</box>
-
 **Format:**
 `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]  [--sort SORT]`{.swift}
 
@@ -432,22 +426,28 @@ You combine any of the filters and sort options to get the list of deliveries th
 **Note:**
 
 * All fields are optional.
-* The delivery status accepts the following values: `CREATED`{.swift}/`SHIPPED`{.swift}/`COMPLETED`{.swift}/
+* The delivery `STATUS`{.swift} accepts the following values: `CREATED`{.swift}/`SHIPPED`{.swift}/`COMPLETED`{.swift}/
   `CANCELLED`{.swift}.
-* The customer ID must be an integer.
-* The expected delivery date must be in YYYY-MM-DD format or `TODAY`{.swift} for today’s date.
-* The sort option accepts the following values: `ASC`{.swift}/`DESC`{.swift}.
+* The `CUSTOMER_ID`{.swift} must be an integer.
+* The `EXPECTED_DELIVERY_DATE`{.swift} must be in yyyy-MM-dd format or `TODAY`{.swift} for today’s date.
+* The `SORT`{.swift} accepts the following values: `ASC`{.swift}/`DESC`{.swift}.
   </box>
 
 **Examples:**
 
-* `delivery list --status CREATED --customer 1 --date 2023-12-12 --sort DESC`{.swift} - Lists all deliveries with
-  status `CREATED`{.swift} for customer with ID `1`{.swift} and expected delivery date of 12
+* `delivery list --status CREATED --customer 1 --date 2023-12-12 --sort DESC`{.swift} </br>
+  Lists all deliveries with status `CREATED`{.swift} for customer with ID `1`{.swift} and expected delivery date of 12
   Dec 2023 in descending order.
 
 * `delivery list --status SHIPPED --date TODAY`{.swift} </br>
   Lists all deliveries with status `SHIPPED`{.swift} for all customers and expected delivery date of today in ascending
   order.
+
+<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
+
+**Tip:**
+You combine any of the filters and sort options to get the list of deliveries that you want.
+</box>
 
 **Before:**
 
@@ -460,21 +460,26 @@ You combine any of the filters and sort options to get the list of deliveries th
 
 ### View details of a delivery
 
+> Shows the details of the specified delivery.
+
 If you would like to get the details of a specific delivery, you can use `delivery view`{.swift} to view the details of
 the delivery. You can see the delivery id, delivery name, delivery status, address, customer name customer ID, ordered
 date, expected delivery date, and notes (if any).
 
 **Format:** `delivery view DELIVERY_ID`{.swift}
 
-**Example:** `delivery view 1001`{.swift}
-
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note:**
 
 * All fields are required.
-* The delivery ID must be an integer.
+* The `DELIVERY_ID`{.swift} must be an integer.
   </box>
+
+**Example:**
+
+* `delivery view 1001`{.swift} </br>
+  Displays the details of delivery with ID `1001`{.swift}.
 
 **Before:**
 ![](images/delivery/DeliveryListSuccess.png)
@@ -482,6 +487,8 @@ date, expected delivery date, and notes (if any).
 **After:**
 
 ![](images/delivery/DeliveryViewSuccess.png)
+
+[&uarr; Back to Table of Contents](#top)
 
 ### Look up delivery details `[Coming Soon in v1.3]`
 
