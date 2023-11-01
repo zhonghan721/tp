@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SECRET_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 
-import seedu.address.logic.commands.customer.CustomerAddCommand;
 import seedu.address.logic.commands.user.UserUpdateCommand;
 import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
