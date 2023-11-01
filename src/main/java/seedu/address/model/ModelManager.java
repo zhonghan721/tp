@@ -73,6 +73,7 @@ public class ModelManager implements Model {
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
+        this.loggedInUser = userPrefs.getStoredUser();
     }
 
     @Override
@@ -133,6 +134,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Delivery getDeliveryUsingFilteredList(int id) {
+        for (Delivery d : filteredDeliveries) {
+            if (d.getCustomerId() == id) {
+                return d;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public void setDeliveryBookFilePath(Path deliveryBookFilePath) {
         requireNonNull(deliveryBookFilePath);
         userPrefs.setDeliveryBookFilePath(deliveryBookFilePath);
@@ -169,6 +180,16 @@ public class ModelManager implements Model {
     @Override
     public Optional<Customer> getCustomer(int id) {
         return this.addressBook.getById(id);
+    }
+
+    @Override
+    public Customer getCustomerUsingFilteredList(int id) {
+        for (Customer c : filteredCustomers) {
+            if (c.getCustomerId() == id) {
+                return c;
+            }
+        }
+        return null;
     }
 
     @Override
