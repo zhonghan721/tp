@@ -89,7 +89,7 @@ will be entered. Try typing the `help`{.swift} command and hitting enter!
 
 ### Command Result/FeedBack
 
-![Command Result FeedBack](images/getting-started/CommandResultFeedback.png){ width="200" height="150" style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
+![Command Result FeedBack](images/getting-started/CommandResultFeedback.png){style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
 
 The Command Result/Feedback Box is where HomeBoss will provide you the results or feedback about 
 the commands you entered. For example, if you tried typing the `help`{.swift} command earlier, you should see
@@ -99,12 +99,12 @@ You can use the scroll bar on the right to scroll through a long result or feedb
 ### Customer/Delivery List
 
 <table class="images" style="border:0px solid white; width:100%; text-align: center">
-    <tr style="border: 0;">
+    <tr style="width:100%;border: 0;">
         <td>
-            <img src="images/getting-started/CustomerList.png" width="300" height="225" style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;">
+            <img src="images/getting-started/CustomerList.png" style="width: 80%;display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;">
         </td>
         <td>
-            <img src="images/getting-started/DeliveryList.png" width="300" height="225" style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;">
+            <img src="images/getting-started/DeliveryList.png" style="width: 80%;display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;">
         </td>
     </tr>
     <tr >

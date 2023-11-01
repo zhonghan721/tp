@@ -156,3 +156,8 @@ h6 {
 .hljs.inline.no-lang {
   color: #000000;
 }
+
+.hljs-meta {
+  color: #000000;
+  font-weight: var(--bs-body-font-weight);
+}
