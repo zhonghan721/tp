@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -24,16 +25,19 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.customer.CustomerEditCommand.CustomerEditDescriptor;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
+import seedu.address.logic.commands.delivery.DeliveryEditCommand.DeliveryEditDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
+import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.CustomerEditDescriptorBuilder;
 import seedu.address.testutil.DeliveryAddDescriptorBuilder;
+import seedu.address.testutil.DeliveryEditDescriptorBuilder;
 import seedu.address.testutil.UpdateUserDescriptorBuilder;
 
 
@@ -44,16 +48,28 @@ public class CommandTestUtil {
 
     // Delivery
     public static final String VALID_VIEW_DELIVERY_ID = "1";
+
+    public static final int VALID_DELIVERY_ID = 1;
     public static final String INVALID_VIEW_DELIVERY_ID = "11";
     public static final String VALID_NAME_GABRIELS_MILK = "Gabriel Milk";
     public static final String VALID_NAME_JAMES_MILK = "Jame Milk";
+
+    public static final String VALID_NAME_CHIPS = "Chips";
     public static final String INVALID_NOTE = "";
+    public static final String INVALID_NOTE_DESC = " " + PREFIX_NOTE + INVALID_NOTE;
     public static final String VALID_NOTE = "VALID NOTE";
+    public static final String VALID_NOTE_DESC = " " + PREFIX_NOTE + VALID_NOTE;
     public static final String INVALID_STATUS = "INVALID";
-    public static final String VALID_STATUS_CREATED = "CREATED";
-    public static final String VALID_STATUS_SHIPPED = "SHIPPED";
-    public static final String VALID_STATUS_COMPLETED = "COMPLETED";
-    public static final String VALID_STATUS_CANCELLED = "CANCELLED";
+    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + INVALID_STATUS;
+    public static final DeliveryStatus VALID_STATUS_CREATED = DeliveryStatus.CREATED;
+    public static final DeliveryStatus VALID_STATUS_SHIPPED = DeliveryStatus.SHIPPED;
+    public static final DeliveryStatus VALID_STATUS_COMPLETED = DeliveryStatus.COMPLETED;
+    public static final DeliveryStatus VALID_STATUS_CANCELLED = DeliveryStatus.CANCELLED;
+    public static final String VALID_STATUS_CREATED_VIEW = "CREATED";
+    public static final String VALID_STATUS_SHIPPED_VIEW = "SHIPPED";
+    public static final String VALID_STATUS_COMPLETED_VIEW = "COMPLETED";
+    public static final String VALID_STATUS_CANCELLED_VIEW = "CANCELLED";
+    public static final String VALID_STATUS_DESC = " " + PREFIX_STATUS + VALID_STATUS_CREATED;
     public static final String INVALID_ID_NEGATIVE = "-1";
     public static final String INVALID_ID_NAN = "NaN";
 
@@ -66,9 +82,11 @@ public class CommandTestUtil {
     public static final String INVALID_DELIVERY_NAME = "Gabriel&";
     public static final String INVALID_DELIVERY_DATE_DESC = " " + PREFIX_DATE + INVALID_DELIVERY_DATE;
 
-    public static final String NAME_DESC_MILK = VALID_NAME_GABRIELS_MILK;
+    public static final String NAME_DESC_MILK = " " + PREFIX_NAME + " " + VALID_NAME_GABRIELS_MILK;
 
-    public static final String NAME_DESC_RICE = VALID_NAME_JAMES_MILK;
+    public static final String NAME_DESC_JAMES_MILK = " " + PREFIX_NAME + " " + VALID_NAME_JAMES_MILK;
+
+    public static final String INVALID_DELIVERY_NAME_DESC = " " + PREFIX_NAME + INVALID_DELIVERY_NAME;
 
 
     public static final String DELIVERY_DATE_DESC_MILK = " " + PREFIX_DATE + VALID_DELIVERY_DATE_1;
@@ -146,6 +164,7 @@ public class CommandTestUtil {
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final String VALID_DELIVERY_LIST_ALL = " " + PREFIX_STATUS + "all";
+    public static final String INVALID_DELIVERY_LIST_ALL = " " + "sadasdasdasdasdasdas";
     public static final String VALID_DELIVERY_LIST_CUSTOMER_ID = " " + PREFIX_CUSTOMER_ID + "1";
     public static final String INVALID_DELIVERY_LIST_CUSTOMER_ID = " " + PREFIX_CUSTOMER_ID + "x";
     public static final String VALID_DELIVERY_LIST_DELIVERY_DATE = " " + PREFIX_DATE + "2023-12-12";
@@ -161,12 +180,14 @@ public class CommandTestUtil {
     public static final String VALID_DELIVERY_LIST_SORT_ASC = " " + PREFIX_SORT + "asc";
     public static final String VALID_DELIVERY_LIST_SORT_DESC = " " + PREFIX_SORT + "desc";
     public static final String INVALID_DELIVERY_LIST_SORT = " " + PREFIX_SORT + "invalid";
+
     public static final CustomerEditDescriptor DESC_AMY;
     public static final CustomerEditDescriptor DESC_BOB;
-
     public static final DeliveryAddDescriptor DESC_MILK;
-
     public static final DeliveryAddDescriptor DESC_RICE;
+
+    public static final DeliveryEditDescriptor DESC_EDIT_MILK;
+    public static final DeliveryEditDescriptor DESC_EDIT_CHIPS;
 
     public static final UserUpdateDescriptor DESC_AARON;
     public static final UserUpdateDescriptor DESC_FOODBEAR;
@@ -182,6 +203,14 @@ public class CommandTestUtil {
 
         DESC_RICE = new DeliveryAddDescriptorBuilder().withCustomerId(VALID_CUSTOMER_ID_2)
             .withDeliveryDate(VALID_DELIVERY_DATE_2).withDeliveryName(VALID_NAME_JAMES_MILK).build();
+
+        DESC_EDIT_MILK = new DeliveryEditDescriptorBuilder().withDeliveryDate(VALID_DELIVERY_DATE_3)
+            .withDeliveryName(VALID_NAME_JAMES_MILK).withStatus(VALID_STATUS_SHIPPED)
+            .withCustomerId(VALID_CUSTOMER_ID_2).withNote(VALID_NOTE).build();
+
+        DESC_EDIT_CHIPS = new DeliveryEditDescriptorBuilder().withDeliveryDate(VALID_DELIVERY_DATE_1)
+            .withDeliveryName(VALID_NAME_CHIPS).withStatus(VALID_STATUS_SHIPPED)
+            .withCustomerId(VALID_CUSTOMER_ID_1).withNote(VALID_NOTE).build();
 
         DESC_AARON = new UpdateUserDescriptorBuilder().withUsername(VALID_USERNAME_AARON)
             .withPassword(VALID_PASSWORD_AARON).withSecretQuestion(VALID_SECRET_QUESTION_AARON)

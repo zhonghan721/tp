@@ -99,6 +99,21 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getCustomerUsingFilteredList_invalidId_retunsNull() {
+        Customer customer = modelManager.getCustomerUsingFilteredList(1);
+        assertEquals(null, customer);
+    }
+
+    @Test
+    public void getCustomerUsingFilteredList_validId_returnsCustomer() {
+        modelManager.setLoginSuccess();
+        modelManager.addPerson(ALICE);
+        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        Customer customer = modelManager.getCustomerUsingFilteredList(1);
+        assertEquals(ALICE, customer);
+    }
+
+    @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
     }
@@ -257,7 +272,7 @@ public class ModelManagerTest {
         DeliveryBook deliveryBook =
                 new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAuthenticationPath(Paths.get("src/test/data/Authentication", "authentication.json"));
+        userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, true);
         User loggedInUser = modelManager.getStoredUser();
 
@@ -273,7 +288,7 @@ public class ModelManagerTest {
         DeliveryBook deliveryBook =
                 new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAuthenticationPath(Paths.get("src/test/data/Authentication", "authentication.json"));
+        userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, false);
         User loggedInUser = modelManager.getStoredUser();
 
@@ -289,7 +304,7 @@ public class ModelManagerTest {
         DeliveryBook deliveryBook =
                 new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAuthenticationPath(Paths.get("src/test/data/Authentication", "authentication.json"));
+        userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, false);
         modelManager.setLoggedInUser(null);
 
