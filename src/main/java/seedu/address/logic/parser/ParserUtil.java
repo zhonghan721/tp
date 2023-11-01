@@ -25,7 +25,7 @@ import seedu.address.model.user.Username;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "ID must be an integer more than 0.";
 
 
     /**
