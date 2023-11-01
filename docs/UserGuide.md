@@ -72,6 +72,7 @@ for you to return to the Table of Contents, so that you can access another secti
         - Update delivery status and date
         - Delete delivery
         - Create a note for a delivery
+        - [Find deliveries](#find-deliveries)
         - View deliveries for the day [Coming Soon]
         - Add customer data to delivery [Coming Soon]
         - Remove customer from delivery [Coming Soon]
@@ -545,6 +546,38 @@ _delivery note: Adds a note to the delivery identified by the ID of the delivery
 with the input note._</br>
 _Parameters: DELIVERY_ID (must be a integer representing a valid ID) --note Note_</br>
 _Example: delivery note 1 --note This is a note_</br>
+
+### Find deliveries
+> Finds deliveries whose names has words that exactly match _ANY_ of the given keywords.
+
+_Want to find details of a delivery, but you do not remember the delivery's full name?
+You can search for the delivery using keywords by calling this command._
+
+**Format:** `delivery find KEYWORD [MORE_KEYWORDS]`{.swift}
+
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+
+* You must provide at least one non-empty alphanumeric `KEYWORD`{.swift} to search for the delivery.
+* You can optionally provide additional keywords, a delivery that matches any of the given keywords will be displayed.
+  For example, the keywords `Chocolate Bun`{.swift} will display `Chocolate Cake`{.swift}, `Chocolate Bun`{.swift}, 
+  and `Strawberry Cake`{.swift}.
+* The keyword must exactly match any word in the delivery name. For example the keyword `Straw`{.swift} will match 
+  `Straw`{.swift} but not `Strawberry`{.swift}.
+* The search for keyword(s) given are case-insensitive
+
+</box>
+
+**Example:** 
+`delivery find Chocolate Strawberry`{.swift} </br>
+Find all deliveries whose name has words that exactly match `Chocolate`{.swift} or `Strawberry`{.swift}
+
+**Before:**
+![Delivery Find Before](images/delivery/delivery_find_before.png)
+
+**After:**
+![Delivery Find After](images/delivery/delivery_find.png)
+
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Add customer data to delivery `[Coming Soon in v1.3]`
 
