@@ -1,11 +1,13 @@
 package seedu.address.logic.parser.user;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SECRET_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 
+import seedu.address.logic.commands.customer.CustomerAddCommand;
 import seedu.address.logic.commands.user.UserUpdateCommand;
 import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -34,6 +36,10 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
                 PREFIX_SECRET_QUESTION, PREFIX_ANSWER);
 
         UserUpdateDescriptor userUpdateDescriptor = new UserUpdateDescriptor();
+
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UserUpdateCommand.MESSAGE_USAGE));
+        }
 
         if (argMultimap.getValue(PREFIX_USER).isPresent()) {
             userUpdateDescriptor.setUsername(ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USER).get()));
