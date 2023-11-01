@@ -90,16 +90,25 @@ public class Customer {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same customerId or {@code Phone}.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Customer otherCustomer) {
+    public boolean isSameCustomer(Customer otherCustomer) {
         if (otherCustomer == this) {
             return true;
         }
 
         return otherCustomer != null
-            && otherCustomer.getName().equals(getName());
+            && (customerId == otherCustomer.customerId
+            || phone.equals(otherCustomer.getPhone()));
+    }
+
+    /**
+     * Returns true if both persons have the same {@code Phone}.
+     */
+    public boolean hasSamePhone(Customer otherCustomer) {
+        return otherCustomer != null
+                && phone.equals(otherCustomer.getPhone());
     }
 
     /**
