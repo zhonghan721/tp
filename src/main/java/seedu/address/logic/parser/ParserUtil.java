@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Sort;
@@ -23,7 +25,7 @@ import seedu.address.model.user.Username;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "ID must be an integer more than 0.";
 
 
     /**
@@ -154,9 +156,15 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!Date.isValidDate(date)) {
-            throw new ParseException(seedu.address.model.delivery.Date.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new Date(trimmedDate);
+
+
+        try {
+            return new Date(trimmedDate);
+        } catch (DateTimeException e) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**
@@ -168,7 +176,7 @@ public class ParserUtil {
     public static Note parseNote(String note) throws ParseException {
         requireNonNull(note);
         String trimmedNote = note.trim();
-        if (!Note.isNotEmpty(trimmedNote)) {
+        if (!Note.isValid(trimmedNote)) {
             throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
         return new Note(trimmedNote);

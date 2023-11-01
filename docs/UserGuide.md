@@ -41,17 +41,17 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 
 **Note Box**
 <box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
-    Provides you with information that is useful to know.
+Provides you with information that is useful to know.
 </box>
 
 **Tip Box**
 <box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
-    Provides you with information that can help enhance your user experience but is not necessary to know.
+Provides you with information that can help enhance your user experience but is not necessary to know.
 </box>
 
 **Warning Box**
 <box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
-    Important information for you to take note of to avoid any unintended effects!
+Important information for you to take note of to avoid any unintended effects!
 </box>
 
 **Links**
@@ -60,6 +60,7 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 
 * A [&uarr; Back to Table of Contents](#table-of-contents) link is available at the end of every section
 for you to return to the Table of Contents, so that you can access another section from there easily.
+
 ---
 # Table of Contents
 
@@ -68,8 +69,8 @@ for you to return to the Table of Contents, so that you can access another secti
   * 1.2 About this User Guide
   * 1.3 Navigating the User Guide
 * 2\. Table of Contents
-* 3\. Quick Start Guide
-  * 3.1 Installation
+* 3\. [Getting Started](#getting-started)
+  * 3.1 [Prerequisites](#prerequisites)
 * 4\. Features
   * 4.1 User
     * 4.1.1 [Register](#register)
@@ -83,14 +84,16 @@ for you to return to the Table of Contents, so that you can access another secti
     * 4.2.2 [Find customers](#find-customers)
     * 4.2.3 List customers
     * 4.2.4 Update customer details
-    * 4.2.5 Delete customer
+    * 4.2.5 [Delete customer](#delete-customer)
   * 4.3 Delivery
     * 4.3.1 Add delivery
     * 4.3.2 View all deliveries
     * 4.3.3 View details of deliveries
     * 4.3.4 Update details of delivery
-    * 4.3.5 Create a note for a delivery
-    * 4.3.6 Delete delivery
+    * 4.3.5 Update delivery status
+    * 4.3.6 Create a note for a delivery
+    * 4.3.7 Delete delivery
+    * 4.3.8 [Find deliveries](#find-deliveries)
   * 4.4 Miscellaneous
     * 4.4.1 [Help](#help)
     * 4.4.2 [Exit](#exit)
@@ -195,7 +198,7 @@ Note that you need to have an account registered with HomeBoss._
     All fields are required.
 </box>
 
-**Example:** 
+**Example:**
 
 * `login --user gabriel --password gabrielIsGreat`
 
@@ -223,6 +226,7 @@ Want to keep your account secure? You can update your account details by calling
 </box>
 
 **Example:**
+
 * `update --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest
   --secretQn Favourite Pet --answer BoBo`
 
@@ -265,7 +269,7 @@ _Forgot your password? Use this command to recover your account!_
 <ins>After (without optional fields)
 ![](images/user/userRecoverAccount_after_secretQn.png)
 <ins>After (with optional fields)
-![](images/user/userRecoverAccount_after.png)
+![](images/user/userRecoverAccount_after_answer.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Account Deletion
@@ -556,6 +560,40 @@ with the input note._</br>
 _Parameters: DELIVERY_ID (must be a integer representing a valid ID) --note Note_</br>
 _Example: delivery note 1 --note This is a note_</br>
 
+
+
+### Find deliveries
+> Finds deliveries whose names has words that exactly match _ANY_ of the given keywords.
+
+_Want to find details of a delivery, but you do not remember the delivery's full name?
+You can search for the delivery using keywords by calling this command._
+
+**Format:** `delivery find KEYWORD [MORE_KEYWORDS...]`{.swift}
+
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+
+* You must provide at least one non-empty alphanumeric `KEYWORD`{.swift} to search for the delivery.
+* You can optionally provide additional keywords, a delivery that matches any of the given keywords will be displayed.
+  For example, the keywords `Chocolate Bun`{.swift} will display `Chocolate Cake`{.swift}, `Chocolate Bun`{.swift}, 
+  and `Strawberry Cake`{.swift}.
+* The keyword must exactly match any word in the delivery name. For example the keyword `Straw`{.swift} will match 
+  `Straw`{.swift} but not `Strawberry`{.swift}.
+* The search for keyword(s) given are case-insensitive
+
+</box>
+
+**Example:** 
+`delivery find Chocolate Strawberry`{.swift} </br>
+Find all deliveries whose name has words that exactly match `Chocolate`{.swift} or `Strawberry`{.swift}
+
+**Before:**
+![Delivery Find Before](images/delivery/delivery_find_before.png)
+
+**After:**
+![Delivery Find After](images/delivery/delivery_find.png)
+
+[&uarr; Back to Table of Contents](#table-of-contents)
+
 ### Delete delivery
 
 >Deletes the specified delivery.
@@ -636,3 +674,25 @@ You can delete all your customer and delivery data by calling this command._
 ![](images/clear_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
+### FAQ
+
+**Q: Where do I get support for HomeBoss?**
+
+A: You can raise an issue on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-3/tp/issues)
+
+**Q: How do I report a bug?**
+
+A: You can raise a bug repoort on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-3/tp/issues)
+
+**Q: How do I import my data from another software?**
+
+A: You can import your data by converting your data into .json in the format of the customer and delivery data in the
+data folder.
+
+**Q: How do I export my data to another software?**
+
+A: It is currently not possible to export your data to another software.
+
+**Q: Why is there an error when I input non-English characters?**
+
+A: HomeBoss only supports English characters. 
