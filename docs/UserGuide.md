@@ -146,7 +146,7 @@ update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD] [-
 
 * The **Command Phrase** is `update`{.swift}
 * The **Parameters** are the words in `UPPER_CASE`{.swift}, for example `USERNAME`{.swift} or `PASSWORD`{.swift}
-* The **Prefixes** are special keywords that a preceded by `--`{.SWIFT}, such as `--user`{.swift} or
+* The **Prefixes** are special keywords that are preceded by `--`{.SWIFT}, such as `--user`{.swift} and
   `--password`{.swift}
   
 <br />
@@ -229,7 +229,7 @@ by adding your first Delivery
 
 8. Type `delivery add furniture --customer CUSTOMER_ID --date 2023-12-03`{.swift}, replacing `CUSTOMER_ID`{.swift} with 
    Gabriel's ID, and hit enter.
-9. new Delivery should have been added for Gabriel, you should see a new Delivery similar to the image below.
+9. A new Delivery should have been added for Gabriel, you should see a new Delivery similar to the image below.
 
 ![DeliveryAdded](images/getting-started/DeliveryAdded.png){style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
 
