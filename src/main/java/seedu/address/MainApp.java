@@ -25,7 +25,6 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Customer;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.BookStorage;
 import seedu.address.storage.BookStorageWithReference;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -81,13 +80,13 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath().getParent());
+        logger.info("Using data file : " + storage.getAddressBookParentPath());
 
         // Create Data Directory if needed
         try {
-            Files.createDirectories(storage.getAddressBookFilePath().getParent());
+            Files.createDirectories(storage.getAddressBookParentPath());
         } catch (IOException e) {
-            logger.info("Data Folder failed to be created at " + storage.getAddressBookFilePath().getParent()
+            logger.info("Data Folder failed to be created at " + storage.getAddressBookParentPath()
                     + " " + e);
         }
 
@@ -98,10 +97,9 @@ public class MainApp extends Application {
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+                logger.info("Creating a new data file " + storage.getAddressBookFilePath());
             }
-            initialAddressData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialAddressData = addressBookOptional.orElseGet(AddressBook::new);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
@@ -112,17 +110,15 @@ public class MainApp extends Application {
             storage.setDeliveryBookReference(initialAddressData);
             deliveryBookOptional = storage.readDeliveryBook();
             if (!deliveryBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getDeliveryBookFilePath()
-                        + " populated with a sample DeliveryBook.");
+                logger.info("Creating a new data file " + storage.getDeliveryBookFilePath());
             }
-            final ReadOnlyBook<Customer> addressData = initialAddressData;
-            initialDeliveryData = deliveryBookOptional
-                    .orElseGet(() -> SampleDataUtil.getSampleDeliveryBook(addressData));
+            initialDeliveryData = deliveryBookOptional.orElseGet(DeliveryBook::new);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialDeliveryData = new DeliveryBook();
         }
+
 
         return new ModelManager(initialAddressData, initialDeliveryData, userPrefs, false);
     }

@@ -22,6 +22,7 @@ import seedu.address.model.delivery.DeliveryStatus;
 public class DeliveryListCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "list";
     public static final String MESSAGE_SUCCESS = "Listed all Deliveries";
+    public static final String MESSAGE_EMPTY = "There are no deliveries to be listed.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all deliveries in the delivery list.\n"
         + "Parameters: "
         + "STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) "
@@ -74,13 +75,17 @@ public class DeliveryListCommand extends DeliveryCommand {
         }
 
         if (deliveryDate != null) {
-            // filter by delivery date
+            // filter by expected delivery date
             filters = filters.and(delivery -> delivery.getDeliveryDate().equals(deliveryDate));
         }
 
         model.updateFilteredDeliveryList(filters);
 
-        // sort by delivery date
+        if (model.getFilteredDeliveryList().size() == 0) {
+            return new CommandResult(MESSAGE_EMPTY, true);
+        }
+
+        // sort by expected delivery date
         model.sortFilteredDeliveryList(
             sortType.equals(Sort.ASC) ? Comparator.comparing(Delivery::getDeliveryDate) : Comparator.comparing(
                     Delivery::getDeliveryDate)
