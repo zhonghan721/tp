@@ -566,7 +566,7 @@ _Example: delivery note 1 --note This is a note_</br>
 _Want to find details of a delivery, but you do not remember the delivery's full name?
 You can search for the delivery using keywords by calling this command._
 
-**Format:** `delivery find KEYWORD [MORE_KEYWORDS]`{.swift}
+**Format:** `delivery find KEYWORD [MORE_KEYWORDS...]`{.swift}
 
 <box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
 
