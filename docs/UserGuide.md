@@ -113,7 +113,7 @@ You can use the scroll bar on the right to scroll through a long result or feedb
     </tr>
 </table>
 
-The Customer/Delivery List Box is where you will be able to find the customers and deliveries that you have added to
+The Customer/Delivery List Panel is where you will be able to find the customers and deliveries that you have added to
 HomeBoss. You can use the scroll bar on the right to scroll through your customers or deliveries.
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
