@@ -168,7 +168,7 @@ public class ParserUtil {
     public static Note parseNote(String note) throws ParseException {
         requireNonNull(note);
         String trimmedNote = note.trim();
-        if (!Note.isNotEmpty(trimmedNote)) {
+        if (!Note.isValid(trimmedNote)) {
             throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
         return new Note(trimmedNote);
