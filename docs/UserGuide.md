@@ -653,26 +653,28 @@ You can delete all your customer and delivery data by calling this command._
 #### Customer
 
 | Command | Format                                                                                   | Examples                                                                                          |
-|---------|------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
 | Add     | `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`           | `customer add --name Gabriel --phone 87654321 --email` |
-| Find    | `customer find KEYWORD [MORE_KEYWORDS]`                                                  | `customer find Ibrahim Yu`                                                                         |
-| List    | `customer list`                                                                          | `customer list`                                                                                    |
-| View    | `customer view CUSTOMER_ID`                                                               | `customer view 1001`                                                                               |
-| Edit    | `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]` | `customer edit 1001 --name Gabriel -–phone 1234 5678 --email` |
-| Delete  | `customer delete CUSTOMER_ID`                                                            | `customer delete 1001`                                                                             |
+| Command | Format                                                                                               | Examples                                                                                                    |
+|---------|------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| Add     | `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`                      | `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`        |
+| Find    | `customer find KEYWORD [MORE_KEYWORDS]`                                                              | `customer find Ibrahim Yu`                                                                                  |
+| List    | `customer list`                                                                                      | `customer list`                                                                                             |
+| View    | `customer view CUSTOMER_ID`                                                                          | `customer view 1001`                                                                                        |
+| Edit    | `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]` | `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielrocks@gmail.com --address RVRC Block B` |
+| Delete  | `customer delete CUSTOMER_ID`                                                                        | `customer delete 1001`                                                                                      |
 
 #### Delivery
 
-| Command | Format                                                                                   | Examples                                                                                          |
-|---------|------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| Add     | `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE`                  | `delivery add furniture --customer 5 --date 2023-12-03`                                           |
-| Find    | `delivery find KEYWORD [MORE_KEYWORDS]`                                                  | `delivery find Ibrahim Yu`                                                                         |
-| List    | `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--sort SORT]` | `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`                        |
-| View    | `delivery view DELIVERY_ID`                                                               | `delivery view 1001`                                                                               |
-| Status  | `delivery status STATUS CUSTOMER_ID`                                                      | `delivery status completed 2`                                                                      |
-| Edit    | `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--status STATUS] [--note NOTE]` | `delivery edit 1001 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note Customer changed his mind.` |
-| Note    | `delivery note DELIVERY_ID --note NOTE`                                                   | `delivery note 1 --note By FedEx`                                                                  |
-| Delete  | `delivery delete DELIVERY_ID`                                                             | `delivery delete 1001`                                                                             |
+| Command | Format                                                                                                                             | Examples                                                                                                                      |
+|---------|------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Add     | `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE`                                                           | `delivery add furniture --customer 5 --date 2023-12-03`                                                                       |
+| Find    | `delivery find KEYWORD [MORE_KEYWORDS]`                                                                                            | `delivery find Ibrahim Yu`                                                                                                    |
+| List    | `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--sort SORT]`                                    | `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`                                                   |
+| View    | `delivery view DELIVERY_ID`                                                                                                        | `delivery view 1001`                                                                                                          |
+| Edit    | `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--status STATUS] [--note NOTE]` | `delivery edit 1001 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note Customer changed his mind` |
+| Status  | `delivery status DELIVERY_ID STATUS`                                                                                               | `delivery status 2 completed`                                                                                                 |
+| Note    | `delivery note DELIVERY_ID --note NOTE`                                                                                            | `delivery note 1 --note By FedEx`                                                                                             |
+| Delete  | `delivery delete DELIVERY_ID`                                                                                                      | `delivery delete 1001`                                                                                                        |
 
 #### Other
 
