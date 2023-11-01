@@ -241,6 +241,11 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
+        public boolean hasCustomerWithSamePhone(Customer customer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Customer target) {
 
             throw new AssertionError("This method should not be called.");

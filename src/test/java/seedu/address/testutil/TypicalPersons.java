@@ -46,19 +46,16 @@ public class TypicalPersons {
             .withEmail("anna@example.com").withAddress("4th street").build();
 
     // Manually added
-    public static final Customer HOON = new CustomerBuilder().withName("Hoon Meier").withPhone("84824246")
-        .withEmail("stefan@example.com").withAddress("little india").build();
-    public static final Customer IDA = new CustomerBuilder().withName("Ida Mueller").withPhone("84821316")
-        .withEmail("hans@example.com").withAddress("chicago ave").build();
+    public static final Customer HOON = new CustomerBuilder().withCustomerId(8).withName("Hoon Meier")
+        .withPhone("84824246").withEmail("stefan@example.com").withAddress("little india").build();
+    public static final Customer IDA = new CustomerBuilder().withCustomerId(9).withName("Ida Mueller")
+        .withPhone("84821316").withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-
-
-    public static final Customer AMY = new CustomerBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-        .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).build();
-    public static final Customer BOB = new CustomerBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-        .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).build();
-
+    public static final Customer AMY = new CustomerBuilder().withCustomerId(10).withName(VALID_NAME_AMY)
+        .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).build();
+    public static final Customer BOB = new CustomerBuilder().withCustomerId(11).withName(VALID_NAME_BOB)
+        .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

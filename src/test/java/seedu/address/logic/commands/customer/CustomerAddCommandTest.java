@@ -184,6 +184,11 @@ public class CustomerAddCommandTest {
         }
 
         @Override
+        public boolean hasCustomerWithSamePhone(Customer customer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Customer target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -347,7 +352,13 @@ public class CustomerAddCommandTest {
         @Override
         public boolean hasPerson(Customer customer) {
             requireNonNull(customer);
-            return this.customer.isSamePerson(customer);
+            return this.customer.isSameCustomer(customer);
+        }
+
+        @Override
+        public boolean hasCustomerWithSamePhone(Customer customer) {
+            requireNonNull(customer);
+            return this.customer.hasSamePhone(customer);
         }
 
         @Override
@@ -365,7 +376,7 @@ public class CustomerAddCommandTest {
         @Override
         public boolean hasPerson(Customer customer) {
             requireNonNull(customer);
-            return personsAdded.stream().anyMatch(customer::isSamePerson);
+            return personsAdded.stream().anyMatch(customer::isSameCustomer);
         }
 
         @Override
@@ -391,7 +402,7 @@ public class CustomerAddCommandTest {
         @Override
         public boolean hasPerson(Customer customer) {
             requireNonNull(customer);
-            return personsAdded.stream().anyMatch(customer::isSamePerson);
+            return personsAdded.stream().anyMatch(customer::isSameCustomer);
         }
 
         @Override
