@@ -651,7 +651,8 @@ You can delete all your customer and delivery data by calling this command._
 <box type="warning" background-color="#f2dede" border-color="#ebccd1" icon=":exclamation:">
     
 **Warning:**
-* This action is irreversible! All your customer and delivery data will be deleted permanently. Proceed with caution.
+* Be careful, this action is irreversible! All your customer and delivery data will be deleted permanently.
+  Proceed with caution!
 </box>
 
 **Before:**
