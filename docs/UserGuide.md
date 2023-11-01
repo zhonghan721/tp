@@ -67,7 +67,7 @@ Important information for you to take note of to avoid any unintended effects!
         - [Delete customer](#delete-customer)
     - Delivery
         - Create delivery
-        - [View all deliveries](#view-all-deliveries)
+        - [View all deliveries](#view-a-list-of-deliveries)
         - [View details of delivery](#view-details-of-a-delivery)
         - Update delivery status and date
         - Delete delivery
@@ -409,45 +409,49 @@ DELIVERY_DATE)!_
 
 **Command fails (invalid_date_format):** _Please provide the date in the format: yyyy-MM-dd._
 
-### View all deliveries
+### View a list of deliveries
 
-> Lists all deliveries in the delivery book.
+> Lists the deliveries in the delivery book.
 
 If you would like to get an overview of all your deliveries, you can use `delivery list`{.swift} to list all your
 deliveries at once. You can also filter the list of deliveries by status, customer ID and expected delivery date.
 You can also sort the list of deliveries by expected delivery date in ascending or descending order. By default, the
 list of deliveries will be sorted by expected delivery date in descending order (latest first).
 
-<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
-   **Tip:** You combine any of the filters and sort options to get the list of deliveries that you want.
+<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
+
+**Tip:**
+You combine any of the filters and sort options to get the list of deliveries that you want.
 </box>
 
-**Format:** `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]  [--sort SORT]`
-{.swift}
+**Format:**
+`delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]  [--sort SORT]`{.swift}
 
-<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
 **Note:**
+
 * All fields are optional.
-* The delivery status accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`.
+* The delivery status accepts the following values: `CREATED`{.swift}/`SHIPPED`{.swift}/`COMPLETED`{.swift}/
+  `CANCELLED`{.swift}.
 * The customer ID must be an integer.
-* The expected delivery date must be in YYYY-MM-DD format or `today` for today’s date.
-* The sort option accepts the following values: `asc`/`desc`.
-</box>
+* The expected delivery date must be in YYYY-MM-DD format or `TODAY`{.swift} for today’s date.
+* The sort option accepts the following values: `ASC`{.swift}/`DESC`{.swift}.
+  </box>
 
 **Examples:**
 
-* `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`{.swift} </br>
+* `delivery list --status CREATED --customer 1 --date 2023-12-12 --sort DESC`{.swift} - Lists all deliveries with
+  status `CREATED`{.swift} for customer with ID `1`{.swift} and expected delivery date of 12
+  Dec 2023 in descending order.
 
-- Lists all deliveries with status `CREATED`{.swift} for customer with ID 1 and expected delivery date of 12 Dec 2023 in
-  descending order.
-
-- `delivery list --status shipped --date today`{.swift} </br>
+* `delivery list --status SHIPPED --date TODAY`{.swift} </br>
   Lists all deliveries with status `SHIPPED`{.swift} for all customers and expected delivery date of today in ascending
   order.
 
 **Before:**
 
-[](images/customer/customerList.png)
+![](images/customer/customerList.png)
 
 **After:**
 ![](images/delivery/DeliveryListSuccess.png)
@@ -464,11 +468,13 @@ date, expected delivery date, and notes (if any).
 
 **Example:** `delivery view 1001`{.swift}
 
-<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
 **Note:**
+
 * All fields are required.
 * The delivery ID must be an integer.
-</box>
+  </box>
 
 **Before:**
 ![](images/delivery/DeliveryListSuccess.png)
@@ -476,8 +482,6 @@ date, expected delivery date, and notes (if any).
 **After:**
 
 ![](images/delivery/DeliveryViewSuccess.png)
-
-**Command failed (0 deliveries):** _There are currently no deliveries._
 
 ### Look up delivery details `[Coming Soon in v1.3]`
 
