@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Note {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Note should not be empty";
+        "Note should not be a non-empty alphanumeric string";
     public final String note;
 
     /**
@@ -19,7 +19,7 @@ public class Note {
      */
     public Note(String note) {
         requireNonNull(note);
-        checkArgument(isNotEmpty(note), MESSAGE_CONSTRAINTS);
+        checkArgument(isValid(note), MESSAGE_CONSTRAINTS);
         this.note = note;
     }
 
@@ -39,7 +39,7 @@ public class Note {
             && note.equals(((Note) other).note)); // state check
     }
 
-    public static boolean isNotEmpty(String test) {
-        return !test.isEmpty();
+    public static boolean isValid(String test) {
+        return !test.isEmpty() && test.matches("^[A-Za-z0-9\\s]+$");
     }
 }

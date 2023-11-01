@@ -135,7 +135,7 @@ class JsonAdaptedDelivery {
 
         final Note modelNote;
         if (note != null) {
-            if (!Note.isNotEmpty(note)) {
+            if (!Note.isValid(note)) {
                 throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
             }
             modelNote = new Note(note);
