@@ -184,7 +184,7 @@ logout
 * Items that are placed in square brackets are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`{.swift} can either be
   `1`{.swift} or `1 --name deliveryName`{.swift}.
 * However, items that are grouped together in square brackets must all be provided together, 
-  e,g, for `[--password PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift} both `PASSWORD`{.swift} and 
+  e.g. for `[--password PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift} both `PASSWORD`{.swift} and 
   `CONFIRM_PASSWORD`{.swift} must be provided.
 * Extraneous parameters for commands that do not have parameters (e.g. `customer list`{.swift} or `clear`{.swift}) will
   be ignored, e.g. `customer list 123`{.swift}.
