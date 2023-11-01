@@ -674,3 +674,25 @@ You can delete all your customer and delivery data by calling this command._
 ![](images/clear_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
+### FAQ
+
+**Q: Where do I get support for HomeBoss?**
+
+A: You can raise an issue on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-3/tp/issues)
+
+**Q: How do I report a bug?**
+
+A: You can raise a bug repoort on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-3/tp/issues)
+
+**Q: How do I import my data from another software?**
+
+A: You can import your data by converting your data into .json in the format of the customer and delivery data in the
+data folder.
+
+**Q: How do I export my data to another software?**
+
+A: It is currently not possible to export your data to another software.
+
+**Q: Why is there an error when I input non-English characters?**
+
+A: HomeBoss only supports English characters. 
