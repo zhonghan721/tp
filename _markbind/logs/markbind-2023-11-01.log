@@ -1,0 +1,19 @@
+2023-11-01T06:43:42.468Z - error: No config file found in parent directories of /Users/zhonghan/tp
+2023-11-01T06:43:42.469Z - error: uncaughtException: The "path" argument must be of type string. Received undefined date=Wed Nov 01 2023 14:43:42 GMT+0800 (Singapore Standard Time), pid=11388, uid=501, gid=20, cwd=/Users/zhonghan/tp, execPath=/opt/homebrew/Cellar/node/20.8.1/bin/node, version=v20.8.1, argv=[/opt/homebrew/Cellar/node/20.8.1/bin/node, /Users/zhonghan/.npm-global/bin/markbind, serve], rss=106332160, heapTotal=64110592, heapUsed=34149288, external=2227280, arrayBuffers=16867, loadavg=[1.85791015625, 2.12158203125, 2.11572265625], uptime=4634289
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at new NodeError (node:internal/errors:406:5)
+    at validateString (node:internal/validators:162:11)
+    at Object.join (node:path:1175:7)
+    at serve (/Users/zhonghan/.npm-global/lib/node_modules/markbind-cli/src/cmd/serve.js:39:27)
+    at Command.<anonymous> (/Users/zhonghan/.npm-global/lib/node_modules/markbind-cli/index.js:61:5)
+    at Command.listener [as _actionHandler] (/Users/zhonghan/.npm-global/lib/node_modules/markbind-cli/node_modules/commander/lib/command.js:488:17)
+    at /Users/zhonghan/.npm-global/lib/node_modules/markbind-cli/node_modules/commander/lib/command.js:1227:65
+    at Command._chainOrCall (/Users/zhonghan/.npm-global/lib/node_modules/markbind-cli/node_modules/commander/lib/command.js:1144:12)
+    at Command._parseCommand (/Users/zhonghan/.npm-global/lib/node_modules/markbind-cli/node_modules/commander/lib/command.js:1227:27)
+    at Command._dispatchSubcommand (/Users/zhonghan/.npm-global/lib/node_modules/markbind-cli/node_modules/commander/lib/command.js:1050:25)
+    at Command._parseCommand (/Users/zhonghan/.npm-global/lib/node_modules/markbind-cli/node_modules/commander/lib/command.js:1193:19)
+    at Command.parse (/Users/zhonghan/.npm-global/lib/node_modules/markbind-cli/node_modules/commander/lib/command.js:897:10)
+    at Object.<anonymous> (/Users/zhonghan/.npm-global/lib/node_modules/markbind-cli/index.js:86:9)
+    at Module._compile (node:internal/modules/cjs/loader:1241:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1295:10)
+    at Module.load (node:internal/modules/cjs/loader:1091:32)
