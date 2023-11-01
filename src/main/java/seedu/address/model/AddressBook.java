@@ -60,6 +60,14 @@ public class AddressBook implements ReadOnlyBook<Customer> {
     }
 
     /**
+     * Returns true if a customer with the same {@code Phone} as {@code customer} exists in the address book.
+     */
+    public boolean hasCustomerWithSamePhone(Customer customer) {
+        requireNonNull(customer);
+        return persons.containsPhone(customer);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
