@@ -167,17 +167,23 @@ _These are general commands for using HomeBoss._
 
 > Registers a new user account to use HomeBoss.
 
-_Want to get started? Start by registering for an account to use HomeBoss! Note that only one account can be registered
-at a time._
+_Register an account before you start using HomeBoss._
 
-**Format:
-** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
+**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`{.swift}
 
-**Example:
-** `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko`
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** All fields are required.
-</div>
+**Note:**
+
+* All fields are required.
+* The `PASSWORD`{.swift} must be at least 8 characters long.
+* The `SECRET_QUESTION`{.swift} and `ANSWER`{.swift} will be used for account recovery.
+  </box>
+
+**Example:**
+
+* `register --user Gabriel --password GabrielIsGreat --confirmPass GabrielIsGreat --secretQn First Pet Name? --answer Koko`{.swift} </br>
+  Registers a new user account with the username `Gabriel`{.swift}, password `GabrielIsGreat`{.swift}, secret question `First Pet Name?`{.swift} and answer `Koko`{.swift}.
 
 **Before:**
 ![](images/user/user_freshStart.png)
@@ -200,7 +206,8 @@ Note that you need to have an account registered with HomeBoss._
 
 **Example:**
 
-* `login --user gabriel --password gabrielIsGreat`
+* `login --user gabriel --password gabrielIsGreat` - Logs in to the user account with the username `gabriel` and
+  password `gabrielIsGreat`.
 
 **Before:**
 ![](images/user/userLogin_before.png)
@@ -228,7 +235,8 @@ Want to keep your account secure? You can update your account details by calling
 **Example:**
 
 * `update --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest
-  --secretQn Favourite Pet --answer BoBo`
+  --secretQn Favourite Pet --answer BoBo` - Updates the username to `gabrielV2`, password to `gabrielIsBest`, secret
+  question to `Favourite Pet` and answer to `BoBo`.
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -254,21 +262,29 @@ _Want to keep your data secure at the end of the day? You can log out of your ac
 
 > Recovers the user account.
 
-_Forgot your password? Use this command to recover your account!_
+_HomeBoss makes it easy for you to recover your account if you forget your password. You only need the answer to the secret question that was set during account registration._
 
-**Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`
+**Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift}
+
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* If `ANSWER`{.swift} is provided, `NEW_PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} must also be provided and vice versa.
+* `NEW_PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} must be at least 8 characters long.
+  </box>
 
 **Examples:**
 
-- `recover account`</br>
-- `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`</br>
+* `recover account`{.swift} </br> 
+Displays your account's secret question for account recovery.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** [] around a group of parameters indicates that it is optional, but all parameters within the group must be provided.
-</div>
+* `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`{.swift} </br> 
+Recovers the account with the answer `Koko`{.swift} and sets the new password to `NewPassword123`{.swift}.
 
-<ins>After (without optional fields)
+**Without optional fields (i.e., `recover account`{.swift}):**
 ![](images/user/userRecoverAccount_after_secretQn.png)
-<ins>After (with optional fields)
+**With optional fields (i.e., `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`{.swift}):**
 ![](images/user/userRecoverAccount_after_answer.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -276,16 +292,19 @@ _Forgot your password? Use this command to recover your account!_
 
 > Deletes the user account.
 
-_Want to delete your account? Call this command to delete your account and clear all your data._
+_If you simply want to erase all your data from HomeBoss, you can delete your account by calling this command._
 
-<div markdown="span" class="alert alert-success">:bulb: **Tip:** This command is useful only as a last resort, should you forget your password and secret answer. However, if you forgot your password but remember the answer to your secret question, you can call `recover account` [here](#account-recovery) instead.
-</div>
+**Format:** `delete account`{.swift}
 
-**Format:** `delete account`
+<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
-**Before:** 
+**Tip:**
+This command should be considered a last resort, to be used if you forget both your password and your secret answer. However, if you've forgotten your password but recall the answer to your secret question, you can initiate the account recovery process by clicking `recover account`{.swift} [here](#account-recovery).
+</box>
+
+**Before:**
 ![](images/customer/customerList.png)
-**After:** 
+**After:**
 ![](images/user/userDelete_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -304,7 +323,10 @@ _Did you just receive a new customer? You can add the customer's details into Ho
     * HomeBoss does not allow you to add customers with the same phone number.
 </box>
 
-**Example:** `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`
+**Example:**
+
+* `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B` - Adds a customer
+  with the name `Gabriel`, phone number `87654321`, email `gabrielrocks@gmail.com` and address `RVRC Block B`.
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -325,7 +347,10 @@ You can search for the customer using keywords by calling this command._
     You must provide at least one keyword to search for the customer.
 </box>
 
-**Example:** `customer find Gabriel Spencer`
+**Example:**
+
+* `customer find Gabriel Spencer` - Finds customers whose names contain _ANY_ of the given keywords `Gabriel`
+  and `Spencer`.
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -380,15 +405,18 @@ worries! You can  edit the details of a customer simply by calling this command.
 > Deletes the specified customer from the customer database. All deliveries associated with the customer will also be
 > deleted.
 
-_Want to delete a customer? Call this command to delete a customer from the customer database._
+_You can delete any customers who no longer require your services from HomeBoss by calling this command._
 
-**Format:** `customer delete CUSTOMER_ID`
+**Format:** `customer delete CUSTOMER_ID`{.swift}
 
-**Example:** `customer delete 1`
+**Example:**
 
-<ins>Before
+* `customer delete 1`{.swift} </br>
+Deletes the customer with ID 1.
+
+**Before:**
 ![](images/customer/customerList.png)
-<ins>After
+**After:**
 ![](images/customer/customerDelete_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -397,7 +425,6 @@ _Want to delete a customer? Call this command to delete a customer from the cust
 ### Add delivery
 
 >Adds a delivery to the delivery book.
-
 
 HomeBoss' most essential feature. The whole premise of our application is so that you can easily track your 
 deliveries/orders. With this feature, you can do just that by adding a delivery to the delivery book.
@@ -440,7 +467,9 @@ Shows a list of all deliveries.
 
 **Format:** `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]  [--sort SORT]`
 
-**Example:** `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`
+**Example:**
+
+* `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`
 
 **Accepted Values:**
 
@@ -463,7 +492,9 @@ Shows the details of the specified delivery.
 
 **Format:** `delivery view DELIVERY_ID`
 
-**Example:** `delivery view 1001`
+**Example:**
+
+* `delivery view 1001`
 
 **Accepted Values:**
 
@@ -511,7 +542,6 @@ delivery? No worries! Just edit the details of a delivery simply by using this f
     If you only want to update the delivery's status, simply use `delivery status` instead.
 </box>
 
-
 <box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
     Be careful! You won't be able to undo this edit action! 
 </box>
@@ -536,7 +566,9 @@ Creates a note for a specified delivery
 
 **Format:** `delivery note DELIVERY_ID --note NOTE`
 
-**Example:** `delivery note 1 --note By FedEx`
+**Example:**
+
+* `delivery note 1 --note By FedEx`
 
 **Accepted Values:**
 
