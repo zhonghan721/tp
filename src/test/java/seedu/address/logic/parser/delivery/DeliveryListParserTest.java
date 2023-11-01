@@ -60,7 +60,7 @@ public class DeliveryListParserTest {
 
         // Test delivery date if "today"
         CommandParserTestUtil.assertParseSuccess(parser,
-            DeliveryListCommand.COMMAND_WORD + VALID_DELIVERY_LIST_ALL + " "
+            VALID_DELIVERY_LIST_ALL + " "
                 + VALID_DELIVERY_LIST_DELIVERY_DATE_TODAY,
             new DeliveryListCommand(null, null,
                 new Date(LocalDate.now().format(DateTimeFormatter.ofPattern(Date.FORMAT))),
@@ -86,13 +86,11 @@ public class DeliveryListParserTest {
             String.format(ParserUtil.MESSAGE_INVALID_INDEX));
 
         // invalid expected delivery date
-        CommandParserTestUtil.assertParseFailure(parser, DeliveryListCommand.COMMAND_WORD
-                + INVALID_DELIVERY_LIST_DELIVERY_DATE,
+        CommandParserTestUtil.assertParseFailure(parser, INVALID_DELIVERY_LIST_DELIVERY_DATE,
             String.format(Date.MESSAGE_CONSTRAINTS));
 
         // invalid delivery date word
-        CommandParserTestUtil.assertParseFailure(parser, DeliveryListCommand.COMMAND_WORD
-                + INVALID_DELIVERY_LIST_DELIVERY_DATE_TODAY,
+        CommandParserTestUtil.assertParseFailure(parser, INVALID_DELIVERY_LIST_DELIVERY_DATE_TODAY,
             String.format(Date.MESSAGE_CONSTRAINTS));
     }
 
