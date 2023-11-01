@@ -551,7 +551,7 @@ note to a specific delivery.
 * `delivery note 1 --note By FedEx`{.swift} </br>
   Creates a new Note "By FedEx" for the Delivery with ID `1`{.swift}
 
-**After:**
+**Before:**
 
 ![Delivery Note Before](images/delivery/delivery_note_before.png)
 
