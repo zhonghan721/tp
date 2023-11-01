@@ -89,7 +89,7 @@ public class CustomerEditCommand extends CustomerCommand {
         boolean isNull = customerToEdit == null || editedCustomer == null || !found;
 
         if (isNull) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
 
             // checks if the customer to edit has the same phone as another customer,
             // else check if the new phone is not already in the list
