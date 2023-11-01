@@ -21,7 +21,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * <p>
  * Supports a minimal set of list operations.
  *
- * @see Customer#isSamePerson(Customer)
+ * @see Customer#isSameCustomer(Customer)
  */
 public class UniquePersonList implements Iterable<Customer> {
 
@@ -34,7 +34,16 @@ public class UniquePersonList implements Iterable<Customer> {
      */
     public boolean contains(Customer toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameCustomer);
+    }
+
+    /**
+     * Returns true if the list contains an equivalent {@code Customer}
+     * with the same {@code Phone} as the given argument.
+     */
+    public boolean containsPhone(Customer toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::hasSamePhone);
     }
 
     /**
@@ -62,7 +71,7 @@ public class UniquePersonList implements Iterable<Customer> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedCustomer) && contains(editedCustomer)) {
+        if (!target.isSameCustomer(editedCustomer) && contains(editedCustomer)) {
             throw new DuplicatePersonException();
         }
 
@@ -155,7 +164,7 @@ public class UniquePersonList implements Iterable<Customer> {
     private boolean personsAreUnique(List<Customer> customers) {
         for (int i = 0; i < customers.size() - 1; i++) {
             for (int j = i + 1; j < customers.size(); j++) {
-                if (customers.get(i).isSamePerson(customers.get(j))) {
+                if (customers.get(i).isSameCustomer(customers.get(j))) {
                     return false;
                 }
             }
