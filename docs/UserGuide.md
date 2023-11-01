@@ -652,8 +652,6 @@ You can delete all your customer and delivery data by calling this command._
 
 #### Customer
 
-| Command | Format                                                                                   | Examples                                                                                          |
-| Add     | `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`           | `customer add --name Gabriel --phone 87654321 --email` |
 | Command | Format                                                                                               | Examples                                                                                                    |
 |---------|------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
 | Add     | `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`                      | `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`        |
