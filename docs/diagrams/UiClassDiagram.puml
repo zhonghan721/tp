@@ -15,6 +15,7 @@ Class ListPanel
 Class PersonCard
 Class StatusBarFooter
 Class CommandBox
+Class ItemListViewCell
 }
 
 package Logic <<Rectangle>> {
@@ -42,6 +43,8 @@ ListPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+
+ListPanel .right.> ItemListViewCell
 
 UiManager -right-> Logic
 MainWindow -left-> Logic
