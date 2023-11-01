@@ -77,7 +77,6 @@ public class CommandTestUtil {
 
     public static final String VALID_DELIVERY_DATE_2 = "2025-11-11";
     public static final String VALID_DELIVERY_DATE_3 = "2023-12-12";
-    public static final String VALID_DELIVERY_DATE_4 = "2021-12-12";
     public static final String INVALID_DELIVERY_DATE = "2022-01-01";
 
     public static final String INVALID_DELIVERY_NAME = "Gabriel&";
