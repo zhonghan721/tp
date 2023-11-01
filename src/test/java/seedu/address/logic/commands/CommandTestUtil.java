@@ -171,6 +171,7 @@ public class CommandTestUtil {
     public static final String VALID_DELIVERY_LIST_DELIVERY_DATE_TODAY = " " + PREFIX_DATE + "today";
     public static final String INVALID_DELIVERY_LIST_DELIVERY_DATE_TODAY = " " + PREFIX_DATE + "tomorrow";
     public static final String INVALID_DELIVERY_LIST_DELIVERY_DATE = " " + PREFIX_DATE + "13-13-2023";
+    public static final String INVALID_DELIVERY_LIST_DELIVERY_DATE_MONTH = " " + PREFIX_DATE + "2023-13-12";
     public static final String VALID_DELIVERY_LIST_CREATED = " " + PREFIX_STATUS + "created";
     public static final String VALID_DELIVERY_LIST_SHIPPED = " " + PREFIX_STATUS + "SHIPPED";
     public static final String VALID_DELIVERY_LIST_COMPLETED = " " + PREFIX_STATUS + "completed";

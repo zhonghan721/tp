@@ -56,7 +56,7 @@ public class DeliveryDeleteCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredDeliveryList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredDeliveryList().size() + 1000);
         DeliveryDeleteCommand deleteCommand = new DeliveryDeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
