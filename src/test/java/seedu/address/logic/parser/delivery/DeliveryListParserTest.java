@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.delivery;
 
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_ALL;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_CUSTOMER_ID;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_DELIVERY_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_DELIVERY_DATE_TODAY;
@@ -21,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.Sort;
 import seedu.address.logic.commands.delivery.DeliveryListCommand;
 import seedu.address.logic.parser.CommandParserTestUtil;
@@ -98,6 +100,12 @@ public class DeliveryListParserTest {
     public void parse_emptyArgs_returnsDeliveryListCommand() {
         CommandParserTestUtil.assertParseSuccess(parser, "",
             new DeliveryListCommand(null, null, null, null));
+    }
+
+    @Test
+    public void parse_nonEmptyPreamble_throwsParseException() {
+        CommandParserTestUtil.assertParseFailure(parser, INVALID_DELIVERY_LIST_ALL,
+            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeliveryListCommand.MESSAGE_USAGE));
     }
 
     @Test
