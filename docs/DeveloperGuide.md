@@ -82,8 +82,9 @@ in [`Ui.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`
-, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ListPanel`
+, `StatusBarFooter`, `HelpWindow` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class
+which captures
 the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
@@ -94,10 +95,13 @@ in [`MainWindow.fxml`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/
 
 The `UI` component,
 
-- executes user commands using the `Logic` component.
-- listens for changes to `Model` data so that the UI can be updated with the modified data.
+- executes user commands through the `Logic` component.
+- listens for changes to `Model` data through the `Logic` component so that the UI can be updated with the modified
+  data.
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+- depends on some classes in the `Model` component, referenced through the `Logic` component as it displays `Customer`
+  and `Delivery` objects residing in the
+  `Model`.
 
 ### Logic component
 
@@ -371,13 +375,13 @@ The sequence of the `register` command is as follows:
    pass1234 --secretQn First Pet? --answer Koko).
 2. Logic Manager calls the `AddressBookParser#parseCommand` with the `INPUT`.
 3. The `AddressBookParser` parses the command word, creating an instance of `UserRegisterCommandParser` to parse the
-   rest of the command.
+rest of the command.
 4. If all fields are present, it checks if password and confirm password match.
 5. If password and confirm password match, it creates an instance of `UserRegisterCommand`.
 6. `Logic Manager` executes `UserRegisterCommand` by calling `UserRegisterCommand#execute()`.
 7. `UserRegisterCommand` checks if a user is already registered by calling `Model#getStoredUser`.
 8. If no user is registered, `UserRegisterCommand` calls `Model#registerUser` to store the user. Login status is set to
-   true.
+true.
 9. `UserRegisterCommand` calls `Model#updateFilteredPersonList` to display the list of customers.
 10. `UserRegisterCommand` returns a `CommandResult` with a success message.
 
@@ -504,9 +508,9 @@ The format for the `login` command can be found [here](UserGuide.md#login).
 3. If invalid command parameters are provided, an error message with the correct parameter format will be shown.
 4. If the user is currently logged in, an error message will be shown.
 5. The `User` is then cross-referenced with the stored user in `Model` to check if the credentials match.
-   If incorrect credentials are provided, an error message regarding wrong credentials will be shown.
+If incorrect credentials are provided, an error message regarding wrong credentials will be shown.
 6. If all the previous steps are completed without exceptions, the user will be logged in and the
-   `isLoggedIn` status in `Model` will be updated to `true`.
+`isLoggedIn` status in `Model` will be updated to `true`.
 
 The following activity diagram shows the logic of a user logging in:
 
@@ -515,14 +519,14 @@ The following activity diagram shows the logic of a user logging in:
 The sequence of the `login` command is as follows:
 
 1. Upon launching the application, the `ModelManager` will be initialized with
-   the `User` constructed with details from the authentication.json file.
+the `User` constructed with details from the authentication.json file.
 2. The user inputs the `login` command with the username and password.
 3. The `userLoginCommandParser` checks whether all the required fields are present.
-   If all fields are present, it creates a new `userLoginCommand`.
+If all fields are present, it creates a new `userLoginCommand`.
 4. The `userLoginCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`.
 5. The `userLoginCommand` then checks if the user credentials match the stored user by calling `Model#userMatches()`.
 6. If the user is not logged in and the credentials match, the `userLoginCommand` calls `Model#setLoginSuccess()`,
-   changing the login status to true and enabling the user access to all commands.
+changing the login status to true and enabling the user access to all commands.
 7. The `userLoginCommand` also calls `Model#updateFilteredPersonList()` to display the list of customers.
 
 The following sequence diagram shows how the `login` command works:
@@ -545,7 +549,7 @@ The format for the `logout` command can be found [here](UserGuide.md#logout).
 2. If extra command parameters are provided after specifying `logout`, the logout command will still be executed.
 3. If the user is currently logged out, an error message will be shown.
 4. If all the previous steps are completed without exceptions, the user will be logged out and the
-   `isLoggedIn` status in `Model` will be updated to `false`.
+`isLoggedIn` status in `Model` will be updated to `false`.
 
 The following activity diagram shows the logic of a user logging out:
 
@@ -555,9 +559,9 @@ The sequence of the `logout` command is as follows:
 
 1. The user inputs the `logout` command.
 2. A new `userLogoutCommand` is created and checks whether the user is currently logged out
-   by calling `Model#getUserLoginStatus()`.
+by calling `Model#getUserLoginStatus()`.
 3. If the user is currently logged in, the `userLogoutCommand` calls `Model#setLogoutSuccess()`,
-   changing the login status to false and restricting the user access to most commands.
+changing the login status to false and restricting the user access to most commands.
 4. The `userLoginCommand` also calls `Model#updateFilteredPersonList()` to hide the list of customers.
 
 The following sequence diagram shows how the `login` command works:
@@ -852,39 +856,35 @@ thereby improving efficiency for business owners.
 
 Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikely to have) - `*`
 
-| Priority | As a …​            | I want to …​                                                                  | So that I can…​                                                                                                                                                                         |
-|----------|--------------------|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `***`    | an owner           | create a local account                                                        | I can personalise and secure my account.                                                                                                                                                |
-| `***`    | a registered owner | log in to my local account                                                    | I can access my data.                                                                                                                                                                   |
-| `***`    | a forgetful owner  | retrieve my account                                                           | I can still recover my data.                                                                                                                                                            |
-| `***`    | a logged-in owner  | log out of my account                                                         | I can keep my data secure.                                                                                                                                                              |
-| `***`    | a registered owner | update my password                                                            | I can constantly keep my data secure.                                                                                                                                                   |
-| `***`    | a registered owner | delete my account                                                             | I can have greater control over my data and account removal for privacy reasons.                                                                                                        |
-| `***`    | a registered owner | update my details                                                             | I can change my personalisation.                                                                                                                                                        |
-| `***`    | a registered owner | create a customer                                                             | I can tie deliveries to customers’ information.                                                                                                                                         |
-| `***`    | a registered owner | view a customer                                                               | I can see their detailed information.                                                                                                                                                   |
-| `***`    | a registered owner | update a customer                                                             | I can change details if keyed in wrongly.                                                                                                                                               |
-| `***`    | a registered owner | delete a customer                                                             | I can remove redundant or incorrect customer records, especially when unforeseen errors occur.                                                                                          |
-| `***`    | a registered owner | view a list of customers                                                      | I can have a comprehensive overview of my customer base.                                                                                                                                |
-| `***`    | a registered owner | see a list of deliveries sorted by status for the customer                    | I can easily see if products are delivered or not.                                                                                                                                      |
-| `***`    | a registered owner | quickly search for the details of a client                                    | I can monitor the progress of an order efficiently and effectively.                                                                                                                     |
-| `***`    | a registered owner | create a delivery                                                             | I can efficiently organise and access delivery information.                                                                                                                             |
-| `***`    | a registered owner | create notes about deliveries                                                 | I can add additional information about deliveries.                                                                                                                                      |
-| `***`    | a registered owner | view a list of deliveries                                                     | I can plan the optimal route.                                                                                                                                                           |
-| `***`    | a registered owner | see the list of deliveries that would be delivered for the day                | I can prioritise particular orders.                                                                                                                                                     |
-| `***`    | a registered owner | add a customer to a delivery                                                  | I know who the delivery is for.                                                                                                                                                         |
-| `***`    | a registered owner | remove a customer from a delivery                                             | The delivery details are updated.                                                                                                                                                       |
-| `***`    | a registered owner | specify the method of delivery                                                | I know how to send the orders over.                                                                                                                                                     |
-| `***`    | a registered owner | quickly search for the details of a delivery                                  | I can monitor the progress of a                                                                 delivery.                                                                               |
-| `***`    | a registered owner | see a list of deliveries sorted by their delivery status and date of delivery | It is                                                                                                     more organised and easier for me to get and overview of all orders.           |
-| `***`    | a registered owner | see the location of the delivery                                              | I know where to deliver the order to.                                                                                                                                                   |
-| `***`    | a registered owner | view the details of a delivery                                                | I know what the order is and where to deliver it to.                                                                                                                                    |
-| `***`    | a registered owner | update the status of the delivery                                             | I can keep track of the delivery progress and notify my client.                                                                                                                         |
-| `***`    | a registered owner | update delivery details                                                       | I can change any information if there was an error from                                                                                                                        user/me. |
-| `***`    | a registered owner | delete a delivery                                                             | I can get rid of deliveries that are redundant.                                                                                                                                         |
-| `*`      | a registered owner | relate my inventory to my orders                                              | I can keep track of my inventory.                                                                                                                                                       |
-| `*`      | a registered owner | know the sum of all the materials required for a fixed delivery schedule      | I can plan my                                                                                             inventory.                                                                    |
-| `*`      | a registered owner | have different user authorisation levels                                      | I can control who has access to what.                                                                                                                                                   |
+| Priority | As a …​            | I want to …​                                                             | So that I can…​                                                                                                                                                                         |
+|----------|--------------------|--------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `***`    | an owner           | create a local account                                                   | I can personalise and secure my account.                                                                                                                                                |
+| `***`    | a registered owner | log in to my local account                                               | I can access my data.                                                                                                                                                                   |
+| `***`    | a forgetful owner  | retrieve my account                                                      | I can still recover my data.                                                                                                                                                            |
+| `***`    | a logged-in owner  | log out of my account                                                    | I can keep my data secure.                                                                                                                                                              |
+| `***`    | a registered owner | delete my account                                                        | I can have greater control over my data and account removal for privacy reasons.                                                                                                        |
+| `***`    | a registered owner | update my details                                                        | I can change my personalisation.                                                                                                                                                        |
+| `***`    | a registered owner | create a customer                                                        | I can tie deliveries to customers’ information.                                                                                                                                         |
+| `***`    | a registered owner | view a customer                                                          | I can see their detailed information.                                                                                                                                                   |
+| `***`    | a registered owner | see a customer's list of deliveries                                      | I can easily see all the deliveries of a certain customer.                                                                                                                              |
+| `***`    | a registered owner | quickly search for the details of a client                               | I can monitor the progress of an order efficiently and effectively.                                                                                                                     |
+| `***`    | a registered owner | update a customer                                                        | I can change details if keyed in wrongly.                                                                                                                                               |
+| `***`    | a registered owner | delete a customer                                                        | I can remove redundant or incorrect customer records, especially when unforeseen errors occur.                                                                                          |
+| `***`    | a registered owner | view a list of customers                                                 | I can have a comprehensive overview of my customer base.                                                                                                                                |
+| `***`    | a registered owner | create a delivery                                                        | I can efficiently organise and access delivery information.                                                                                                                             |
+| `***`    | a registered owner | create notes about deliveries                                            | I can add additional information about deliveries.                                                                                                                                      |
+| `***`    | a registered owner | view a list of deliveries                                                | I can see a comprehensive overview of my deliveries.                                                                                                                                    |
+| `***`    | a registered owner | see the list of deliveries that would be delivered for the day           | I can prioritise particular orders.                                                                                                                                                     |
+| `***`    | a registered owner | add a customer to a delivery                                             | I know who the delivery is for.                                                                                                                                                         |
+| `***`    | a registered owner | quickly search for the name of a delivery                                | I can monitor the progress of delivery.                                                                                                                                                 |
+| `***`    | a registered owner | see a list of deliveries sorted by their expected date of delivery       | It more organised and easier for me to get an overview of all orders.                                                                                                                   |
+| `***`    | a registered owner | view the details of a delivery                                           | I know what the order is and where to deliver it to.                                                                                                                                    |
+| `***`    | a registered owner | update the status of the delivery                                        | I can keep track of the delivery progress and notify my client.                                                                                                                         |
+| `***`    | a registered owner | update delivery details                                                  | I can change any information if there was an error from                                                                                                                        user/me. |
+| `***`    | a registered owner | delete a delivery                                                        | I can get rid of deliveries that are redundant.                                                                                                                                         |
+| `*`      | a registered owner | relate my inventory to my orders                                         | I can keep track of my inventory.                                                                                                                                                       |
+| `*`      | a registered owner | know the sum of all the materials required for a fixed delivery schedule | I can plan my inventory.                                                                                                                                                                |
+| `*`      | a registered owner | have different user authorisation levels                                 | I can control who has access to what.                                                                                                                                                   |
 
 ### Use cases
 
@@ -1850,7 +1850,7 @@ Given below are instructions to test the app manually.
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more _exploratory_ testing.
 
-</box>
+</box> 
 
 ### Launch and shutdown
 

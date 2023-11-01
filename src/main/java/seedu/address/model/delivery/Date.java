@@ -3,6 +3,7 @@ package seedu.address.model.delivery;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Comparator;
 
@@ -12,7 +13,7 @@ import java.util.Comparator;
 public class Date implements Comparable<Date> {
     public static final String FORMAT = "yyyy-MM-dd";
     public static final String MESSAGE_CONSTRAINTS =
-        "Order dates should be in the format " + FORMAT;
+        "Dates should be in the format " + FORMAT;
 
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}";
 
@@ -23,9 +24,10 @@ public class Date implements Comparable<Date> {
      *
      * @param date A valid date.
      */
-    public Date(String date) {
+    public Date(String date) throws DateTimeException {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
+
         this.date = LocalDate.parse(date);
     }
 

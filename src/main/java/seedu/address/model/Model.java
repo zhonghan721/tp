@@ -104,6 +104,11 @@ public interface Model {
     boolean hasPerson(Customer customer);
 
     /**
+     * Returns true if a customer with the same {@code Phone} as {@code customer} exists in the address book.
+     */
+    boolean hasCustomerWithSamePhone(Customer customer);
+
+    /**
      * Deletes the given customer.
      * The customer must exist in the address book.
      */
@@ -193,7 +198,7 @@ public interface Model {
      * The delivery identity of {@code editedDelivery} must not be the same
      * as another existing customer in the address book.
      */
-    void setDelivery(Delivery target, Delivery editedCustomer);
+    void setDelivery(Delivery target, Delivery editedDelivery);
 
     /**
      * Returns an unmodifiable view of the filtered delivery list
@@ -201,6 +206,8 @@ public interface Model {
     ObservableList<Delivery> getFilteredDeliveryList();
 
     ObservableList<Delivery> getSortedDeliveryList();
+
+    Delivery getDeliveryUsingFilteredList(int id);
 
     /**
      * Updates the filter of the filtered delivery list to filter by the given {@code predicate}.

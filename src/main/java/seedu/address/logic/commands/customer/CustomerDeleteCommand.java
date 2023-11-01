@@ -43,12 +43,11 @@ public class CustomerDeleteCommand extends CustomerCommand {
         Customer customerToDelete = model.getCustomerUsingFilteredList(targetIndex.getOneBased());
 
         if (customerToDelete != null) {
-            model.deleteDeliveryByCustomer(customerToDelete);
             model.deletePerson(customerToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
                     Messages.format(customerToDelete)), true);
         } else {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
     }
 

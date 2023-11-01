@@ -19,15 +19,40 @@ public class NoteTest {
     }
 
     @Test
-    public void isNotEmpty() {
+    public void isValid() {
         // null name
-        assertThrows(NullPointerException.class, () -> Note.isNotEmpty(null));
+        assertThrows(NullPointerException.class, () -> Note.isValid(null));
 
-        // invalid note
-        assertFalse(Note.isNotEmpty("")); // empty string
+        // invalid note -> returns false
+        assertFalse(Note.isValid("")); // empty string
 
-        // valid name
-        assertTrue(Note.isNotEmpty("peter jack")); // alphabets only
+        // valid note -> returns false
+        assertTrue(Note.isValid("peter jack")); // alphabets only
+
+        // valid note -> returns false
+        assertTrue(Note.isValid("az 09")); // alphanumeric
+
+        // valid note -> returns false
+        assertTrue(Note.isValid("AZ 123")); // alphanumeric with capital letters
+
+        // invalid note -> returns false
+        assertFalse(Note.isValid("@")); // includes special characters, boundary of ASCII A
+
+        // invalid note -> returns false
+        assertFalse(Note.isValid("[")); // includes special characters, boundary of ASCII Z
+
+        // invalid note -> returns false
+        assertFalse(Note.isValid("`")); // includes special characters, boundary of ASCII a
+
+        // invalid note -> returns false
+        assertFalse(Note.isValid("{")); // includes special characters, boundary of ASCII z
+
+        // invalid note -> returns false
+        assertFalse(Note.isValid("/")); // includes special characters, boundary of ASCII 0
+
+        // invalid note -> returns false
+        assertFalse(Note.isValid(":")); // includes special characters, boundary of ASCII 9
+
     }
 
     @Test

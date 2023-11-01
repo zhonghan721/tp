@@ -33,9 +33,9 @@ public class CustomerEditCommand extends CustomerCommand {
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " " + "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-        + "by the index number used in the displayed person list. "
+        + "by the CUSTOMER_ID used in the displayed person list. "
         + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: INDEX (must be a positive integer) "
+        + "Parameters: CUSTOMER_ID (must be a positive integer) "
         + "[" + PREFIX_NAME + " NAME] "
         + "[" + PREFIX_PHONE + " PHONE] "
         + "[" + PREFIX_EMAIL + " EMAIL] "
@@ -52,7 +52,7 @@ public class CustomerEditCommand extends CustomerCommand {
     private final CustomerEditDescriptor customerEditDescriptor;
 
     /**
-     * @param targetIndex of the person in the filtered person list to edit
+     * @param targetIndex            of the person in the filtered person list to edit
      * @param customerEditDescriptor details to edit the person with
      */
     public CustomerEditCommand(Index targetIndex, CustomerEditDescriptor customerEditDescriptor) {
@@ -89,14 +89,19 @@ public class CustomerEditCommand extends CustomerCommand {
         boolean isNull = customerToEdit == null || editedCustomer == null || !found;
 
         if (isNull) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        } else if (!customerToEdit.isSamePerson(editedCustomer) && model.hasPerson(editedCustomer)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+
+            // checks if the customer to edit has the same phone as another customer,
+            // else check if the new phone is not already in the list
+            // (because the list will always have a customer with the same customerId as the editedCustomer,
+            // so using model.hasPerson will always return true)
+        } else if (!customerToEdit.hasSamePhone(editedCustomer) && model.hasCustomerWithSamePhone(editedCustomer)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         } else {
             model.setPerson(customerToEdit, editedCustomer);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
-                    Messages.format(editedCustomer)), true);
+                Messages.format(editedCustomer)), true);
         }
 
     }
@@ -116,7 +121,7 @@ public class CustomerEditCommand extends CustomerCommand {
         Address updatedAddress = customerEditDescriptor.getAddress().orElse(customerToEdit.getAddress());
 
         return new Customer(customerToEdit.getCustomerId(), updatedName, updatedPhone,
-                updatedEmail, updatedAddress);
+            updatedEmail, updatedAddress);
     }
 
     @Override
@@ -138,7 +143,7 @@ public class CustomerEditCommand extends CustomerCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("index", targetIndex)
+            .add("id", targetIndex)
             .add("customerEditDescriptor", customerEditDescriptor)
             .toString();
     }
