@@ -181,13 +181,15 @@ logout
 * Words that are in `UPPER_CASE`{.swift} are parameters that are to be supplied by you.
 * Parameters that are preceded by a prefix must be supplied after that prefix, e.g. `--name DELIVERY_NAME`{.swift}
   must be given as `--name deliveryName`{.swift} and not `deliveryName`{.swift} or `--name`{.swift}
-* Items that are placed in square brackets are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`{.swift} can either be
+* Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`{.swift} can either be
   `1`{.swift} or `1 --name deliveryName`{.swift}.
-* However, items that are grouped together in square brackets must all be provided together, 
+* However, items that are grouped together in square brackets (`[]`{.swift}) must all be provided together, 
   e.g. for `[--password PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift} both `PASSWORD`{.swift} and 
   `CONFIRM_PASSWORD`{.swift} must be provided.
 * Extraneous parameters for commands that do not have parameters (e.g. `customer list`{.swift} or `clear`{.swift}) will
   be ignored, e.g. `customer list 123`{.swift}.
+* Parameters that have `...`{.swift} as a postfix can be given one or more times, e.g. `KEYWORDS...`{.swift} can be 
+  given as `Query`{.swift} or `Query AnotherQuery`{.swift}.
 * **Command Phrase** and **Prefixes** are **case-sensitive**! e.g. `clear`{.swift} is a valid command word but
   `customer LIST`{.swift} is not a valid command word. 
 
