@@ -26,17 +26,17 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 
 **Note Box**
 <box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
-    Provides you with information that is useful to know.
+Provides you with information that is useful to know.
 </box>
 
 **Tip Box**
 <box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
-    Provides you with information that can help enhance your user experience but is not necessary to know.
+Provides you with information that can help enhance your user experience but is not necessary to know.
 </box>
 
 **Warning Box**
 <box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
-    Important information for you to take note of to avoid any unintended effects!
+Important information for you to take note of to avoid any unintended effects!
 </box>
 
 **Links**
@@ -44,7 +44,7 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 * Words in blue are [links](#navigating-the-user-guide) that you can click on to navigate to the relevant section.
 
 * A [&uarr; Back to Table of Contents](#table-of-contents) link is available at the end of every section
-for you to return to the Table of Contents, so that you can access another section from there easily.
+  for you to return to the Table of Contents, so that you can access another section from there easily.
 
 ---
 
@@ -67,8 +67,8 @@ for you to return to the Table of Contents, so that you can access another secti
         - [Delete customer](#delete-customer)
     - Delivery
         - Create delivery
-        - View all deliveries
-        - View details of deliveries
+        - [View all deliveries](#view-all-deliveries)
+        - [View details of delivery](#view-details-of-a-delivery)
         - Update delivery status and date
         - Delete delivery
         - Create a note for a delivery
@@ -179,7 +179,7 @@ Note that you need to have an account registered with HomeBoss._
     All fields are required.
 </box>
 
-**Example:** 
+**Example:**
 
 * `login --user gabriel --password gabrielIsGreat`
 
@@ -207,6 +207,7 @@ Want to keep your account secure? You can update your account details by calling
 </box>
 
 **Example:**
+
 * `update --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest
   --secretQn Favourite Pet --answer BoBo`
 
@@ -410,42 +411,71 @@ DELIVERY_DATE)!_
 
 ### View all deliveries
 
-Shows a list of all deliveries.
+> Lists all deliveries in the delivery book.
+
+If you would like to get an overview of all your deliveries, you can use `delivery list`{.swift} to list all your
+deliveries at once. You can also filter the list of deliveries by status, customer ID and expected delivery date.
+You can also sort the list of deliveries by expected delivery date in ascending or descending order. By default, the
+list of deliveries will be sorted by expected delivery date in descending order (latest first).
+
+<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
+   **Tip:** You combine any of the filters and sort options to get the list of deliveries that you want.
+</box>
 
 **Format:** `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]  [--sort SORT]`
+{.swift}
 
-**Example:** `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+**Note:**
+* All fields are optional.
+* The delivery status accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`.
+* The customer ID must be an integer.
+* The expected delivery date must be in YYYY-MM-DD format or `today` for today’s date.
+* The sort option accepts the following values: `asc`/`desc`.
+</box>
 
-**Accepted Values:**
+**Examples:**
 
-_STATUS_: CREATED/SHIPPED/COMPLETED/CANCELLED. If unspecified, defaults to show all deliveries.
+* `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`{.swift} </br>
 
-_CUSTOMER_ID_: Integer
+- Lists all deliveries with status `CREATED`{.swift} for customer with ID 1 and expected delivery date of 12 Dec 2023 in
+  descending order.
 
-_EXPECTED_DELIVERY_DATE_: Expected Delivery Date String in YYYY-MM-DD format or `today` for today’s date
+- `delivery list --status shipped --date today`{.swift} </br>
+  Lists all deliveries with status `SHIPPED`{.swift} for all customers and expected delivery date of today in ascending
+  order.
 
-_SORT_: String of either `asc` for ascending or `desc` for descending or defaults to sort by expected delivery date.
+**Before:**
 
-**Command succeeds (>0 deliveries):**
-![](images/delivery/delivery_list.png)
+[](images/customer/customerList.png)
 
-**Command failed (0 deliveries):** _There are currently no deliveries!_
+**After:**
+![](images/delivery/DeliveryListSuccess.png)
 
-### View details of deliveries
+[&uarr; Back to Table of Contents](#top)
 
-Shows the details of the specified delivery.
+### View details of a delivery
 
-**Format:** `delivery view DELIVERY_ID`
+If you would like to get the details of a specific delivery, you can use `delivery view`{.swift} to view the details of
+the delivery. You can see the delivery id, delivery name, delivery status, address, customer name customer ID, ordered
+date, expected delivery date, and notes (if any).
 
-**Example:** `delivery view 1001`
+**Format:** `delivery view DELIVERY_ID`{.swift}
 
-**Accepted Values:**
+**Example:** `delivery view 1001`{.swift}
 
-_DELIVERY_ID_: Integer
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+**Note:**
+* All fields are required.
+* The delivery ID must be an integer.
+</box>
 
-**Command succeeds:**
+**Before:**
+![](images/delivery/DeliveryListSuccess.png)
 
-![](images/delivery/delivery_view.png)
+**After:**
+
+![](images/delivery/DeliveryViewSuccess.png)
 
 **Command failed (0 deliveries):** _There are currently no deliveries._
 
