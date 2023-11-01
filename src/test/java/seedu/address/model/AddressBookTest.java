@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -20,7 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.CustomerBuilder;
 
 public class AddressBookTest {
 
@@ -46,7 +47,9 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Customer editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+
+        Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+
         List<Customer> newCustomers = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newCustomers);
 
@@ -72,8 +75,42 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Customer editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+
+        Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+
         assertTrue(addressBook.hasPerson(editedAlice));
+    }
+
+    @Test
+    public void hasCustomerWithSamePhone_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasCustomerWithSamePhone(null));
+    }
+
+    @Test
+    public void hasCustomerWithSamePhone_personNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasCustomerWithSamePhone(ALICE));
+    }
+
+    @Test
+    public void hasCustomerWithSamePhone_personInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        assertTrue(addressBook.hasCustomerWithSamePhone(ALICE));
+    }
+
+    @Test
+    public void hasCustomerWithSamePhone_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        Customer editedAlice = new CustomerBuilder(ALICE).withName(VALID_NAME_BOB)
+                .withAddress(VALID_ADDRESS_BOB).build();
+        assertTrue(addressBook.hasCustomerWithSamePhone(editedAlice));
+    }
+
+    @Test
+    public void hasCustomerWithSamePhone_personWithSamePhoneFieldInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        Customer editedAlice = new CustomerBuilder(ALICE).withCustomerId(101).withName(VALID_NAME_BOB)
+                .withAddress(VALID_ADDRESS_BOB).build();
+        assertTrue(addressBook.hasCustomerWithSamePhone(editedAlice));
     }
 
     @Test

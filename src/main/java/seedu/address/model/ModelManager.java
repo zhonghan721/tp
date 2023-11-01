@@ -73,6 +73,7 @@ public class ModelManager implements Model {
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
+        this.loggedInUser = userPrefs.getStoredUser();
     }
 
     @Override
@@ -133,6 +134,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Delivery getDeliveryUsingFilteredList(int id) {
+        for (Delivery d : filteredDeliveries) {
+            if (d.getDeliveryId() == id) {
+                return d;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public void setDeliveryBookFilePath(Path deliveryBookFilePath) {
         requireNonNull(deliveryBookFilePath);
         userPrefs.setDeliveryBookFilePath(deliveryBookFilePath);
@@ -172,14 +183,31 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Customer getCustomerUsingFilteredList(int id) {
+        for (Customer c : filteredCustomers) {
+            if (c.getCustomerId() == id) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public boolean hasPerson(Customer customer) {
         requireNonNull(customer);
         return addressBook.hasPerson(customer);
     }
 
     @Override
+    public boolean hasCustomerWithSamePhone(Customer customer) {
+        requireNonNull(customer);
+        return addressBook.hasCustomerWithSamePhone(customer);
+    }
+
+    @Override
     public void deletePerson(Customer target) {
         addressBook.removePerson(target);
+        deleteDeliveryByCustomer(target);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
 

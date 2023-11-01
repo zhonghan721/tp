@@ -1,10 +1,11 @@
 package seedu.address.model.delivery;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a Delivery's delivery date in the delivery list.
+ * Represents a Delivery's expected delivery date in the delivery list.
  */
 public class DeliveryDate extends Date {
 
@@ -13,12 +14,12 @@ public class DeliveryDate extends Date {
      *
      * @param date A valid date.
      */
-    public DeliveryDate(String date) {
+    public DeliveryDate(String date) throws DateTimeException {
         super(date);
     }
 
     /**
-     * Returns true if a given string is a valid delivery date.
+     * Returns true if a given string is a valid expected delivery date.
      *
      * @param date A string representing a date.
      * @return True if the date is valid.

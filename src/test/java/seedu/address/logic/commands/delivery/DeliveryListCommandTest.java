@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DATE_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DATE_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DATE_3;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandListSuccess;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
@@ -42,26 +43,42 @@ public class DeliveryListCommandTest {
         assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.CANCELLED, null, null, null), model,
             DeliveryListCommand.MESSAGE_SUCCESS, model);
         // customer id
-        assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.COMPLETED, 1, null, null), model,
+        assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.COMPLETED, 2, null, null), model,
             DeliveryListCommand.MESSAGE_SUCCESS, model);
         assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.COMPLETED, 2, null, null), model,
             DeliveryListCommand.MESSAGE_SUCCESS, model);
 
-        // delivery date
+        // expected delivery date
         assertCommandListSuccess(
-            new DeliveryListCommand(DeliveryStatus.COMPLETED, null, new DeliveryDate(VALID_DELIVERY_DATE_1), null),
+            new DeliveryListCommand(DeliveryStatus.COMPLETED, null, new DeliveryDate(VALID_DELIVERY_DATE_3), null),
             model,
             DeliveryListCommand.MESSAGE_SUCCESS, model);
+    }
+
+    @Test
+    public void execute_listIsFiltered_empty() {
+        assertCommandListSuccess(
+            new DeliveryListCommand(DeliveryStatus.CREATED, 1, new DeliveryDate("2001-12-12"), null), model,
+            DeliveryListCommand.MESSAGE_EMPTY, model);
+        assertCommandListSuccess(
+            new DeliveryListCommand(DeliveryStatus.SHIPPED, 1, new DeliveryDate("2001-12-12"), null), model,
+            DeliveryListCommand.MESSAGE_EMPTY, model);
+        assertCommandListSuccess(
+            new DeliveryListCommand(DeliveryStatus.COMPLETED, 1, new DeliveryDate("2001-12-12"), null), model,
+            DeliveryListCommand.MESSAGE_EMPTY, model);
+        assertCommandListSuccess(
+            new DeliveryListCommand(DeliveryStatus.CANCELLED, 1, new DeliveryDate("2001-12-12"), null), model,
+            DeliveryListCommand.MESSAGE_EMPTY, model);
     }
 
     @Test
     public void execute_listIsFilteredAndSortedAscending_showsSameList() {
         assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.CREATED, null, null, Sort.ASC), model,
             DeliveryListCommand.MESSAGE_SUCCESS, model);
-        assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.SHIPPED, 1, null, Sort.ASC), model,
+        assertCommandListSuccess(new DeliveryListCommand(DeliveryStatus.SHIPPED, 2, null, Sort.ASC), model,
             DeliveryListCommand.MESSAGE_SUCCESS, model);
         assertCommandListSuccess(
-            new DeliveryListCommand(DeliveryStatus.COMPLETED, 1, new DeliveryDate(VALID_DELIVERY_DATE_1), Sort.ASC),
+            new DeliveryListCommand(DeliveryStatus.COMPLETED, 2, new DeliveryDate(VALID_DELIVERY_DATE_3), Sort.ASC),
             model,
             DeliveryListCommand.MESSAGE_SUCCESS,
             model);
@@ -130,6 +147,7 @@ public class DeliveryListCommandTest {
             Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
+
     @Test
     public void equals() {
         DeliveryListCommand deliveryListCommand = new DeliveryListCommand(null, null, null, null);
@@ -174,7 +192,7 @@ public class DeliveryListCommandTest {
         // different customer id -> returns false
         assertNotEquals(deliveryListCommand6, deliveryListCommand5);
 
-        // different delivery date -> returns false
+        // different expected delivery date -> returns false
         assertNotEquals(deliveryListCommand7, deliveryListCommand8);
     }
 }
