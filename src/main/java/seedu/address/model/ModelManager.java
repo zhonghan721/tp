@@ -73,6 +73,7 @@ public class ModelManager implements Model {
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
+        this.loggedInUser = userPrefs.getStoredUser();
     }
 
     @Override
