@@ -41,7 +41,6 @@ import seedu.address.testutil.DeliveryEditDescriptorBuilder;
 import seedu.address.testutil.UpdateUserDescriptorBuilder;
 
 
-
 /**
  * Contains helper methods for testing commands.
  */
@@ -78,6 +77,7 @@ public class CommandTestUtil {
 
     public static final String VALID_DELIVERY_DATE_2 = "2025-11-11";
     public static final String VALID_DELIVERY_DATE_3 = "2023-12-12";
+    public static final String VALID_DELIVERY_DATE_4 = "2021-12-12";
     public static final String INVALID_DELIVERY_DATE = "2022-01-01";
 
     public static final String INVALID_DELIVERY_NAME = "Gabriel&";
@@ -193,7 +193,6 @@ public class CommandTestUtil {
     public static final UserUpdateDescriptor DESC_FOODBEAR;
 
 
-
     static {
         DESC_AMY = new CustomerEditDescriptorBuilder().withName(VALID_NAME_AMY)
             .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).build();
@@ -206,12 +205,12 @@ public class CommandTestUtil {
             .withDeliveryDate(VALID_DELIVERY_DATE_2).withDeliveryName(VALID_NAME_JAMES_MILK).build();
 
         DESC_EDIT_MILK = new DeliveryEditDescriptorBuilder().withDeliveryDate(VALID_DELIVERY_DATE_3)
-                .withDeliveryName(VALID_NAME_JAMES_MILK).withStatus(VALID_STATUS_SHIPPED)
-                .withCustomerId(VALID_CUSTOMER_ID_2).withNote(VALID_NOTE).build();
+            .withDeliveryName(VALID_NAME_JAMES_MILK).withStatus(VALID_STATUS_SHIPPED)
+            .withCustomerId(VALID_CUSTOMER_ID_2).withNote(VALID_NOTE).build();
 
         DESC_EDIT_CHIPS = new DeliveryEditDescriptorBuilder().withDeliveryDate(VALID_DELIVERY_DATE_1)
-                .withDeliveryName(VALID_NAME_CHIPS).withStatus(VALID_STATUS_SHIPPED)
-                .withCustomerId(VALID_CUSTOMER_ID_1).withNote(VALID_NOTE).build();
+            .withDeliveryName(VALID_NAME_CHIPS).withStatus(VALID_STATUS_SHIPPED)
+            .withCustomerId(VALID_CUSTOMER_ID_1).withNote(VALID_NOTE).build();
 
         DESC_AARON = new UpdateUserDescriptorBuilder().withUsername(VALID_USERNAME_AARON)
             .withPassword(VALID_PASSWORD_AARON).withSecretQuestion(VALID_SECRET_QUESTION_AARON)
