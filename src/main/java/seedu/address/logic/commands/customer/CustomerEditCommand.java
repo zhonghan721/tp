@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -31,23 +32,21 @@ public class CustomerEditCommand extends CustomerCommand {
 
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " " + "edit";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+        + "by the index number used in the displayed person list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + "[" + PREFIX_NAME + " NAME] "
+        + "[" + PREFIX_PHONE + " PHONE] "
+        + "[" + PREFIX_EMAIL + " EMAIL] "
+        + "[" + PREFIX_ADDRESS + " ADDRESS]\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_PHONE + " 91234567 "
+        + PREFIX_EMAIL + " johndoe@example.com";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the customer identified "
-            + "by the index number used in the displayed customer list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer)\n "
-            + "At least one field must be specified."
-            + "[" + PREFIX_NAME + " NAME] "
-            + "[" + PREFIX_PHONE + " PHONE] "
-            + "[" + PREFIX_EMAIL + " EMAIL] "
-            + "[" + PREFIX_ADDRESS + " ADDRESS]\n "
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + " 91234567 "
-            + PREFIX_EMAIL + " johndoe@example.com";
-
-    public static final String MESSAGE_EDIT_CUSTOMER_SUCCESS = "Edited Customer: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index targetIndex;
     private final CustomerEditDescriptor customerEditDescriptor;
@@ -73,26 +72,35 @@ public class CustomerEditCommand extends CustomerCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
+        List<Customer> lastShownList = model.getFilteredPersonList();
+
         boolean found = false;
+        Customer customerToEdit = null;
         Customer editedCustomer = null;
 
-        Customer customerToEdit = model.getCustomerUsingFilteredList(targetIndex.getOneBased());
-
-        if (customerToEdit != null) {
-            found = true;
-            editedCustomer = createEditedCustomer(customerToEdit, customerEditDescriptor);
+        for (Customer customer : lastShownList) {
+            if (customer.getCustomerId() == targetIndex.getOneBased()) {
+                found = true;
+                customerToEdit = customer;
+                editedCustomer = createEditedCustomer(customerToEdit, customerEditDescriptor);
+                break;
+            }
         }
-
         boolean isNull = customerToEdit == null || editedCustomer == null || !found;
 
         if (isNull) {
             throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
-        } else if (!customerToEdit.isSamePerson(editedCustomer) && model.hasPerson(editedCustomer)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
+
+            // checks if the customer to edit has the same phone as another customer,
+            // else check if the new phone is not already in the list
+            // (because the list will always have a customer with the same customerId as the editedCustomer,
+            // so using model.hasPerson will always return true)
+        } else if (!customerToEdit.hasSamePhone(editedCustomer) && model.hasCustomerWithSamePhone(editedCustomer)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         } else {
             model.setPerson(customerToEdit, editedCustomer);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
-            return new CommandResult(String.format(MESSAGE_EDIT_CUSTOMER_SUCCESS,
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
                     Messages.format(editedCustomer)), true);
         }
 
@@ -102,7 +110,6 @@ public class CustomerEditCommand extends CustomerCommand {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code customerEditDescriptor}.
      */
-
     private static Customer createEditedCustomer(Customer customerToEdit,
                                                  CustomerEditDescriptor customerEditDescriptor) {
 
@@ -140,7 +147,6 @@ public class CustomerEditCommand extends CustomerCommand {
             .add("customerEditDescriptor", customerEditDescriptor)
             .toString();
     }
-
 
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
