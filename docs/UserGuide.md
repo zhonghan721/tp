@@ -1,11 +1,26 @@
-# User Guide for HomeBoss
+# User Guide 
 
-This comprehensive user guide is your key to a seamless start with our cutting-edge software designed specifically for
-home-based businesses. Our solution is tailored to enhance the efficiency of managing delivery addresses, simplifying
-your operations.
+# About HomeBoss
+
+HomeBoss is a desktop application for **home-based business owners** to **manage their customers and deliveries**. 
+HomeBoss streamlines the process of your operations, optimises your resources, and enhances your overall business 
+experience. 
+
+With our application, you will be able to: 
+* Keep track of the details of your customers and deliveries
+* Search for a particular customer/delivery easily
+* Organise your data in a neat and tidy manner by filtering and sorting to your needs </br>
+</br>
+and much more!
+
+All these are done to improve your efficiency and productivity all while being incredibly simple to use.
+HomeBoss is also **optimised for fast typist with the use of a Command Line Interface (CLI)**, allowing you to 
+execute commands quickly. On top of that, we utilise a *Graphical User Interface (GUI)* to let you view your 
+data in a neater and more organised manner. 
+
+Essentially, with HomeBoss, you can **focus on what matters most: running your business**.
 
 ---
-
 ## About this User Guide
 
 This user guide provides you with everything that you need to know when using HomeBoss.
@@ -45,45 +60,46 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 
 * A [&uarr; Back to Table of Contents](#table-of-contents) link is available at the end of every section
 for you to return to the Table of Contents, so that you can access another section from there easily.
-
 ---
-
 # Table of Contents
 
-- Getting Started
-- Features
-    - User
-        - [Register](#register)
-        - [Login](#login)
-        - [Update details](#update-details)
-        - [Logout](#logout)
-        - [Account recovery](#account-recovery)
-        - [Account deletion](#account-deletion)
-    - Customer
-        - [Add customer](#add-a-customer)
-        - [Find customers](#find-customers)
-        - List customers
-        - Update customer details
-        - [Delete customer](#delete-customer)
-    - Delivery
-        - Create delivery
-        - View all deliveries
-        - [View details of deliveries](#view-details-of-deliveries)
-        - Update delivery status and date
-        - Delete delivery
-        - [Create a note for a delivery](#create-a-note-for-a-delivery)
-        - View deliveries for the day [Coming Soon]
-        - Add customer data to delivery [Coming Soon]
-        - Remove customer from delivery [Coming Soon]
-        - Look up delivery details [Coming Soon]
-    - Miscellaneous
-        - [Help](#help)
-        - [Exit](#exit)
-        - [Clear](#clear)
-- Troubleshooting / FAQ
+* 1\. Introduction
+  * 1.1 About HomeBoss
+  * 1.2 About this User Guide
+  * 1.3 Navigating the User Guide
+* 2\. Table of Contents
+* 3\. Quick Start Guide
+  * 3.1 Installation
+* 4\. Features
+  * 4.1 User
+    * 4.1.1 [Register](#register)
+    * 4.1.2 [Login](#login)
+    * 4.1.3 [Update details](#update-details)
+    * 4.1.4 [Logout](#logout)
+    * 4.1.5 [Account recovery](#account-recovery)
+    * 4.1.6 [Account deletion](#account-deletion)
+  * 4.2 Customer
+    * 4.2.1 [Add customer](#add-a-customer)
+    * 4.2.2 [Find customers](#find-customers)
+    * 4.2.3 List customers
+    * 4.2.4 Update customer details
+    * 4.2.5 [Delete customer](#delete-customer)
+  * 4.3 Delivery
+    * 4.3.1 Add delivery
+    * 4.3.2 View all deliveries
+    * 4.3.3 View details of deliveries
+    * 4.3.4 Update details of delivery
+    * 4.3.5 [Create a note for a delivery](#create-a-note-for-a-delivery)
+    * 4.3.6 Delete delivery
+  * 4.4 Miscellaneous
+    * 4.4.1 [Help](#help)
+    * 4.4.2 [Exit](#exit)
+    * 4.4.3 [Clear](#clear)
+* 5\. FAQ
+* 6\. Command Summary
+* 7\. Glossary
 
 ---
-
 # Getting Started
 
 To get started, you will need to create an account and download the software. Once you have done that, you can follow
@@ -160,9 +176,9 @@ at a time._
 <div markdown="span" class="alert alert-info">:information_source: **Note:** All fields are required.
 </div>
 
-<ins>Before
+**Before:**
 ![](images/user/user_freshStart.png)
-<ins>After
+**After:**
 ![](images/user/userRegister_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -263,9 +279,9 @@ _Want to delete your account? Call this command to delete your account and clear
 
 **Format:** `delete account`
 
-<ins>Before
+**Before:** 
 ![](images/customer/customerList.png)
-<ins>After
+**After:** 
 ![](images/user/userDelete_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -315,54 +331,45 @@ You can search for the customer using keywords by calling this command._
 
 ### List customers
 
-Lists all the customers added in the address book.
+>Lists all the customers added in the address book.
+
+Want to get an overview of all your customers in ONE list? Then, just use this feature to list all your customers at 
+once.
 
 **Format:** `customer list`
+  
+<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
+    You can frequently use this command together with `delivery list` to switch between the two lists.
+</box>
 
-**Example:** `customer list`
-
-**Accepted Values:**
-
-_NIL_
-
-**Command succeeds (>0 customers):**
-
-![](images/customer/customerList.png)
-
-**Command succeeds (0 customer):** _There are currently no customers!_
-
-_Details coming soon..._
+[&uarr; Back to Table of Contents](#top)
 
 ### Update customer details
+>Updates the personal details of an existing customer in the address book.
 
-Updates the personal details of an existing customer in the address book.
+Did you accidentally key in the wrong details for a customer? Or perhaps your customer has changed his particulars? No
+worries! You can  edit the details of a customer simply by calling this command.
 
 **Format:** `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`
 
-**Example:
-** `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielSoCool@gmail.com --address RVRC Block B Ben's Room`
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+    [!Note] [ ] around a parameter indicates that it is optional.
+</box>
 
-**Accepted Values:**
+<box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
+    Be careful! You won't be able to undo this edit action! 
+</box>
 
-_NAME_: String
-
-_PHONE_NUMBER_: 8 digit Integer
-
-_EMAIL_: String with @ and . in valid email format
-
-_ADDRESS_: String
-
-_CUSTOMER_ID_: Integer
-
-*At least one of the optional fields must be provided.
-
-**Command succeeds:** _Customer 1, Gabriel has been updated!_
-
-**Command fails (missing_index):** _Please specify the customer to update._
-
-**Command fails (invalid_index):** _The customer does not exist!_
-
-**Command fails (missing_fields):** _Please provide at least one field to update!_
+**Examples:**
+- `customer edit 1 --name Gabriel -–phone 9813 1051` </br>
+  Edits customer 1's name to Gabriel and phone to 9813 1051.
+- `customer edit 2 --name Joe --email yangyang@gmail.com -–address Block 10 Tampines Road` </br>
+  Edits customer 2's name to Joe, email to yangyang@gmail.com and address to Block 10 Tampines Road.\
+  **Before:**
+  ![Screenshot 2023-10-31 at 2.31.41 AM.png](..%2F..%2FScreenshot%202023-10-31%20at%202.31.41%20AM.png)
+**After:**
+  ![Screenshot 2023-10-31 at 2.38.29 AM.png](..%2F..%2FScreenshot%202023-10-31%20at%202.38.29%20AM.png)
+  [&uarr; Back to Table of Contents](#top)
 
 ### Delete customer
 
@@ -385,28 +392,43 @@ _Want to delete a customer? Call this command to delete a customer from the cust
 
 ### Add delivery
 
-Adds a delivery to the delivery book.
+>Adds a delivery to the delivery book.
 
-**Format:** `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE`
 
-**Example:** `delivery add furniture --customer 5 --date 2023-12-03`
+HomeBoss' most essential feature. The whole premise of our application is so that you can easily track your 
+deliveries/orders. With this feature, you can do just that by adding a delivery to the delivery book.
+  
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+    Deliveries consist of a Delivery Name, a Customer ID, an Order Date, a Delivery Date, a Delivery Status and 
+  an Address to ship to. </br> </br>
+  You don't have to fill in Order Date, Delivery Status and Address. Instead they will be initialised with these values: 
+  
+- Order Date: Today's date
+- Delivery Status: CREATED
+- Address: Customer's Address
 
-**Accepted Values:**
+Cool huh! We try to help you speed up the process as much as possible.
+</box>
+  
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+    Delivery Status can be one of CREATED, SHIPPED, COMPLETED, CANCELLED.
+</box>
+ 
+**Format:** `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE`
 
-_DELIVERY_NAME:_ String of 50 characters
+**Example:**
+- `delivery add Chocolate Cake --customer 1 --date 2023-12-12` </br>
+  Adds a delivery with Delivery Name Chocolate Cake, with the Customer who has Customer ID 1, with Delivery Date 
+  of 2023-12-12, Order Date will be today's date, Delivery Status will be CREATED and Address will be the Customer's 
+  Address. \
+  **Before:**
+![Screenshot 2023-10-31 at 3.31.43 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%203.31.43%20PM.png)
+  **After:**
+![Screenshot 2023-10-31 at 3.48.30 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%203.48.30%20PM.png)
 
-_CUSTOMER_ID:_ Integer
+[&uarr; Back to Table of Contents](#top)
 
-_EXPECTED_DELIVERY_DATE:_ Expected Delivery Date String in YYYY-MM-DD format or `today` for today’s date
 
-**Command succeeds:** _Delivery [1001] furniture created successfully for Customer 1, Gabriel!_
-
-**Command fails (missing_fields):** _Please fill up all the required fields (DELIVERY_NAME --customer CUSTOMER_ID --date
-DELIVERY_DATE)!_
-
-**Command fails (invalid_date):** _Expected Delivery Date cannot be before today!_
-
-**Command fails (invalid_date_format):** _Please provide the date in the format: yyyy-MM-dd._
 
 ### View all deliveries
 
@@ -466,66 +488,58 @@ view a more in-depth description of the delivery.
 
 ### Update delivery status
 
-Changes the status of a specified delivery
+>Changes the status of a specified delivery to CREATED, SHIPPED, COMPLETED or CANCELLED
 
-**Format:** `delivery status STATUS CUSTOMER_ID`
+I see that you've just shipped out an order. Nice! Now you can update the status of that particular delivery 
+to SHIPPED! Using this feature, you can update the status of a delivery accordingly.
 
-**Example:** `delivery status completed 2`
+<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
+    Delivery Status typed in need not be in uppercase.
+</box>
 
-**Accepted Values:**
+**Format:** `delivery status CUSTOMER_ID STATUS`
 
-_STATUS:_ Either `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`
-
-_CUSTOMER_ID:_ Integer
-
-**Command succeeds:**
-
-![Delivery Status](images/delivery/delivery_status.png)
-**Command fails (invalid_status):** _Delivery Status should be one of CREATED, SHIPPED, COMPLETED, CANCELLED_
-
-**Command fails (invalid_index):** _The delivery index provided is invalid_
-
-**Command fails (missing_fields):**
-
-_Invalid command format!_<br />
-_delivery status: Edits the status of the delivery identified by the ID of the delivery. Existing status will be
-overwritten by the input status._<br />
-_Parameters: STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) ID (must be a integer representing a valid
-ID)_<br />
-_Example: delivery status COMPLETED 1_<br />
+**Examples:** 
+- `delivery status 1 CANCELLED`
+- `delivery status 2 SHIPPED`\
+**Before:** 
+![Screenshot 2023-10-31 at 9.11.38 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%209.11.38%20PM.png)
+**After:**
+![Screenshot 2023-10-31 at 9.12.20 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%209.12.20%20PM.png)
+  
 
 #### Update delivery details
 
-Updates the delivery details of an existing delivery in the delivery book.
+>Updates the delivery details of an existing delivery in the delivery book.
+
+Oh no! Did you key in the wrong details for a delivery? Or did your customer change some details to his 
+delivery? No worries! Just edit the details of a delivery simply by using this feature.
 
 **Format:** `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]
 [--status STATUS] [--note NOTE]`
 
-**Example:** `delivery edit 1001 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note
-Customer changed his mind.`
+<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
+    If you only want to update the delivery's status, simply use `delivery status` instead.
+</box>
 
-**Accepted Values:**
 
-_DELIVERY_ID:_ Integer
+<box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
+    Be careful! You won't be able to undo this edit action! 
+</box>
 
-_DELIVERY_NAME:_ String
+**Examples:**
+- `delivery edit 1 --status CANCELLED --note Sudden overseas business trip to attend to.` </br>
+  Edits Delivery 1's Delivery Status to CANCELLED and edits the delivery's note. (If delivery previously did not 
+  have a note, a note will be created to the delivery) 
+- `delivery edit 2 --name Vanilla Cake --customer 3` </br>
+Edits Delivery 2's name to Vanilla Cake as it was misspelled and edits the customer to Customer 3 as User 
+  accidentally typed in 2 instead. \
+  **Before:**
+![Screenshot 2023-10-31 at 4.07.02 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%204.07.02%20PM.png)
+  **After:**
+[Haven't merged yet] \
+[&uarr; Back to Table of Contents](#top)
 
-_CUSTOMER_ID:_ Integer
-
-_EXPECTED_DELIVERY_DATE:_ Expected Delivery Date String in YYYY-MM-DD format or `today` for today’s date
-
-_STATUS:_ Either `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`
-
-_NOTE:_ String
-
-**Command succeeds:**
-//TODO: Add image
-
-**Command fails (missing_index):** _Invalid command format!_
-
-**Command fails (invalid_index):** _The delivery index provided is invalid_
-
-**Command fails (missing_fields):** _Please provide at least one field to update!_
 
 ### Create a note for a delivery
 
@@ -561,29 +575,29 @@ note to a specific delivery.
 
 [&uarr; Back to Table of Contents](#top)
 
-### Add customer data to delivery `[Coming Soon in v1.3]`
-
-_Details coming soon..._
-
 ### Delete delivery
 
-Deletes the specified delivery.
+>Deletes the specified delivery.
+
+Feel like your delivery book is getting cluttered up? Maybe you just want to get rid of a few deliveries that have 
+been cancelled or completed. If that's the case, simply use this feature to delete the delivery.
 
 **Format:** `delivery delete DELIVERY_ID`
 
-**Example:** `delivery delete 1001`
+<box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
+    Be careful! This action is irreversible. Once deleted, the delivery cannot be recovered.
+</box>
 
-**Accepted Values:**
+**Example:**
+- `delivery delete 1` </br>
+Deletes delivery 1 from the delivery book.
+  **Before:**
+![Screenshot 2023-10-31 at 4.06.05 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%204.06.05%20PM.png)
+  **After:** 
+![Screenshot 2023-10-31 at 4.07.02 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%204.07.02%20PM.png)
+[&uarr; Back to Table of Contents](#top)
 
-_DELIVERY_ID_: Integer
 
-**Command succeeds:** _Delivery [1001] Gabriel’s Milk deleted!_
-
-**Command failed (delivery_id missing):** _Please specify a delivery id to delete!_
-
-**Command failed (delivery_id not in database):** _This delivery does not seem to exist!_
-
-### Remove customer from delivery `[Coming Soon in v1.3]`
 
 _Details coming soon..._
 
@@ -640,3 +654,4 @@ You can delete all your customer and delivery data by calling this command._
 **After:**
 ![](images/clear_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
+
