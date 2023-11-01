@@ -130,6 +130,22 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasCustomerWithSamePhone_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasCustomerWithSamePhone(null));
+    }
+
+    @Test
+    public void hasCustomerWithSamePhone_personNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasCustomerWithSamePhone(ALICE));
+    }
+
+    @Test
+    public void hasCustomerWithSamePhone_personInAddressBook_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.hasCustomerWithSamePhone(ALICE));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
@@ -272,7 +288,7 @@ public class ModelManagerTest {
         DeliveryBook deliveryBook =
                 new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAuthenticationPath(Paths.get("src/test/data/Authentication", "authentication.json"));
+        userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, true);
         User loggedInUser = modelManager.getStoredUser();
 
@@ -288,7 +304,7 @@ public class ModelManagerTest {
         DeliveryBook deliveryBook =
                 new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAuthenticationPath(Paths.get("src/test/data/Authentication", "authentication.json"));
+        userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, false);
         User loggedInUser = modelManager.getStoredUser();
 
@@ -304,7 +320,7 @@ public class ModelManagerTest {
         DeliveryBook deliveryBook =
                 new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAuthenticationPath(Paths.get("src/test/data/Authentication", "authentication.json"));
+        userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, false);
         modelManager.setLoggedInUser(null);
 

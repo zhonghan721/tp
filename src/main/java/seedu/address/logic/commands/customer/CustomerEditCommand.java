@@ -89,8 +89,13 @@ public class CustomerEditCommand extends CustomerCommand {
         boolean isNull = customerToEdit == null || editedCustomer == null || !found;
 
         if (isNull) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        } else if (!customerToEdit.isSamePerson(editedCustomer) && model.hasPerson(editedCustomer)) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
+
+            // checks if the customer to edit has the same phone as another customer,
+            // else check if the new phone is not already in the list
+            // (because the list will always have a customer with the same customerId as the editedCustomer,
+            // so using model.hasPerson will always return true)
+        } else if (!customerToEdit.hasSamePhone(editedCustomer) && model.hasCustomerWithSamePhone(editedCustomer)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         } else {
             model.setPerson(customerToEdit, editedCustomer);
