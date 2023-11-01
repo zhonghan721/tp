@@ -307,6 +307,7 @@ _You can add a new customer's details into HomeBoss with this command._
 **Note:**
 * All fields are required.
 * HomeBoss does not allow you to add customers with the same phone number.
+* A unique customer ID will be assigned to each customer.
 </box>
 
 **Example:** 
