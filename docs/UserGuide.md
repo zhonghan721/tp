@@ -26,17 +26,17 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 
 **Note Box**
 <box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
-    Provides you with information that is useful to know.
+Provides you with information that is useful to know.
 </box>
 
 **Tip Box**
 <box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
-    Provides you with information that can help enhance your user experience but is not necessary to know.
+Provides you with information that can help enhance your user experience but is not necessary to know.
 </box>
 
 **Warning Box**
 <box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
-    Important information for you to take note of to avoid any unintended effects!
+Important information for you to take note of to avoid any unintended effects!
 </box>
 
 **Links**
@@ -44,7 +44,7 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 * Words in blue are [links](#navigating-the-user-guide) that you can click on to navigate to the relevant section.
 
 * A [&uarr; Back to Table of Contents](#table-of-contents) link is available at the end of every section
-for you to return to the Table of Contents, so that you can access another section from there easily.
+  for you to return to the Table of Contents, so that you can access another section from there easily.
 
 ---
 
@@ -179,7 +179,7 @@ Note that you need to have an account registered with HomeBoss._
     All fields are required.
 </box>
 
-**Example:** 
+**Example:**
 
 * `login --user gabriel --password gabrielIsGreat`
 
@@ -207,6 +207,7 @@ Want to keep your account secure? You can update your account details by calling
 </box>
 
 **Example:**
+
 * `update --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest
   --secretQn Favourite Pet --answer BoBo`
 
@@ -637,6 +638,7 @@ You can delete all your customer and delivery data by calling this command._
 | Update   | `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD] [--secretQn SECRET_QUESTION --answer ANSWER]` | `login --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest --secretQn Favourite Pet --answer BoBo`        |
 | Recover  | `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`                                   | `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`                                      |
 | Logout   | `logout`                                                                                                                     | `logout`                                                                                                                    |
+| Delete   | `delete account`                                                                                                             | `delete account`                                                                                                            |
 
 #### Customer
 
@@ -645,6 +647,7 @@ You can delete all your customer and delivery data by calling this command._
 | Add     | `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`           | `customer add --name Gabriel --phone 87654321 --email` |
 | Find    | `customer find KEYWORD [MORE_KEYWORDS]`                                                  | `customer find Ibrahim Yu`                                                                         |
 | List    | `customer list`                                                                          | `customer list`                                                                                    |
+| View    | `customer view CUSTOMER_ID`                                                               | `customer view 1001`                                                                               |
 | Edit    | `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]` | `customer edit 1001 --name Gabriel -–phone 1234 5678 --email` |
 | Delete  | `customer delete CUSTOMER_ID`                                                            | `customer delete 1001`                                                                             |
 
@@ -653,6 +656,7 @@ You can delete all your customer and delivery data by calling this command._
 | Command | Format                                                                                   | Examples                                                                                          |
 |---------|------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
 | Add     | `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE`                  | `delivery add furniture --customer 5 --date 2023-12-03`                                           |
+| Find    | `delivery find KEYWORD [MORE_KEYWORDS]`                                                  | `delivery find Ibrahim Yu`                                                                         |
 | List    | `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--sort SORT]` | `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`                        |
 | View    | `delivery view DELIVERY_ID`                                                               | `delivery view 1001`                                                                               |
 | Status  | `delivery status STATUS CUSTOMER_ID`                                                      | `delivery status completed 2`                                                                      |
