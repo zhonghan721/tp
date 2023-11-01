@@ -69,8 +69,8 @@ for you to return to the Table of Contents, so that you can access another secti
   * 1.2 About this User Guide
   * 1.3 Navigating the User Guide
 * 2\. Table of Contents
-* 3\. Quick Start Guide
-  * 3.1 Installation
+* 3\. [Getting Started](#getting-started)
+  * 3.1 [Prerequisites](#prerequisites)
 * 4\. Features
   * 4.1 User
     * 4.1.1 [Register](#register)
@@ -84,14 +84,16 @@ for you to return to the Table of Contents, so that you can access another secti
     * 4.2.2 [Find customers](#find-customers)
     * 4.2.3 List customers
     * 4.2.4 Update customer details
-    * 4.2.5 Delete customer
+    * 4.2.5 [Delete customer](#delete-customer)
   * 4.3 Delivery
     * 4.3.1 Add delivery
     * 4.3.2 View all deliveries
     * 4.3.3 View details of deliveries
     * 4.3.4 Update details of delivery
-    * 4.3.5 Create a note for a delivery
-    * 4.3.6 Delete delivery
+    * 4.3.5 Update delivery status
+    * 4.3.6 Create a note for a delivery
+    * 4.3.7 Delete delivery
+    * 4.3.8 [Find deliveries](#find-deliveries)
   * 4.4 Miscellaneous
     * 4.4.1 [Help](#help)
     * 4.4.2 [Exit](#exit)
@@ -557,6 +559,40 @@ _delivery note: Adds a note to the delivery identified by the ID of the delivery
 with the input note._</br>
 _Parameters: DELIVERY_ID (must be a integer representing a valid ID) --note Note_</br>
 _Example: delivery note 1 --note This is a note_</br>
+
+
+
+### Find deliveries
+> Finds deliveries whose names has words that exactly match _ANY_ of the given keywords.
+
+_Want to find details of a delivery, but you do not remember the delivery's full name?
+You can search for the delivery using keywords by calling this command._
+
+**Format:** `delivery find KEYWORD [MORE_KEYWORDS...]`{.swift}
+
+<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+
+* You must provide at least one non-empty alphanumeric `KEYWORD`{.swift} to search for the delivery.
+* You can optionally provide additional keywords, a delivery that matches any of the given keywords will be displayed.
+  For example, the keywords `Chocolate Bun`{.swift} will display `Chocolate Cake`{.swift}, `Chocolate Bun`{.swift}, 
+  and `Strawberry Cake`{.swift}.
+* The keyword must exactly match any word in the delivery name. For example the keyword `Straw`{.swift} will match 
+  `Straw`{.swift} but not `Strawberry`{.swift}.
+* The search for keyword(s) given are case-insensitive
+
+</box>
+
+**Example:** 
+`delivery find Chocolate Strawberry`{.swift} </br>
+Find all deliveries whose name has words that exactly match `Chocolate`{.swift} or `Strawberry`{.swift}
+
+**Before:**
+![Delivery Find Before](images/delivery/delivery_find_before.png)
+
+**After:**
+![Delivery Find After](images/delivery/delivery_find.png)
+
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Delete delivery
 
