@@ -1,5 +1,6 @@
 package seedu.address.model.delivery;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -13,7 +14,7 @@ public class DeliveryDate extends Date {
      *
      * @param date A valid date.
      */
-    public DeliveryDate(String date) {
+    public DeliveryDate(String date) throws DateTimeException {
         super(date);
     }
 

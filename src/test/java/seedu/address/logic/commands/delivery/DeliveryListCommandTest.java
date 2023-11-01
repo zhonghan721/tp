@@ -130,6 +130,7 @@ public class DeliveryListCommandTest {
             Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
+
     @Test
     public void equals() {
         DeliveryListCommand deliveryListCommand = new DeliveryListCommand(null, null, null, null);

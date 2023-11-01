@@ -3,6 +3,7 @@ package seedu.address.logic.parser.delivery;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_CUSTOMER_ID;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_DELIVERY_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_DELIVERY_DATE_MONTH;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_DELIVERY_DATE_TODAY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_SORT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_ALL;
@@ -102,6 +103,16 @@ public class DeliveryListParserTest {
         // invalid delivery date word
         CommandParserTestUtil.assertParseFailure(parser, DeliveryListCommand.COMMAND_WORD
                 + INVALID_DELIVERY_LIST_DELIVERY_DATE_TODAY,
+            String.format(Date.MESSAGE_CONSTRAINTS));
+    }
+
+    @Test
+    public void execute_listIsFilteredByWrongDate_throwsParseException() {
+        CommandParserTestUtil.assertParseFailure(parser, DeliveryListCommand.COMMAND_WORD
+                + VALID_DELIVERY_LIST_ALL + INVALID_DELIVERY_LIST_DELIVERY_DATE,
+            String.format(Date.MESSAGE_CONSTRAINTS));
+        CommandParserTestUtil.assertParseFailure(parser, DeliveryListCommand.COMMAND_WORD
+                + VALID_DELIVERY_LIST_ALL + INVALID_DELIVERY_LIST_DELIVERY_DATE_MONTH,
             String.format(Date.MESSAGE_CONSTRAINTS));
     }
 
