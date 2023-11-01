@@ -68,10 +68,10 @@ for you to return to the Table of Contents, so that you can access another secti
     - Delivery
         - Create delivery
         - View all deliveries
-        - View details of deliveries
+        - [View details of deliveries](#view-details-of-deliveries)
         - Update delivery status and date
         - Delete delivery
-        - Create a note for a delivery
+        - [Create a note for a delivery](#create-a-note-for-a-delivery)
         - View deliveries for the day [Coming Soon]
         - Add customer data to delivery [Coming Soon]
         - Remove customer from delivery [Coming Soon]
@@ -433,25 +433,36 @@ _SORT_: String of either `asc` for ascending or `desc` for descending or default
 
 ### View details of deliveries
 
-Shows the details of the specified delivery.
+> Shows the details of the specified delivery.
 
-**Format:** `delivery view DELIVERY_ID`
+If you would to see more details about a specific delivery, you can use the `delivery view`{.swift} command to 
+view a more in-depth description of the delivery.
 
-**Example:** `delivery view 1001`
+**Format:** `delivery view DELIVERY_ID`{.swift}
 
-**Accepted Values:**
 
-_DELIVERY_ID_: Integer
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
-**Command succeeds:**
+**Note:**
 
-![](images/delivery/delivery_view.png)
+* The `DELIVERY_ID`{.swift} must be an integer.
+  
+</box>
 
-**Command failed (0 deliveries):** _There are currently no deliveries._
+**Example:**
 
-### Look up delivery details `[Coming Soon in v1.3]`
+* `delivery view 1`{.swift} </br>
+  Views the delivery with ID of `1`{.swift}
 
-_Details coming soon..._
+**Before:**
+
+![Delivery View Before](images/delivery/delivery_view_before.png)
+
+**After:**
+
+![Delivery View](images/delivery/delivery_view.png)
+
+[&uarr; Back to Table of Contents](#top)
 
 ### Update delivery status
 
@@ -518,33 +529,37 @@ _NOTE:_ String
 
 ### Create a note for a delivery
 
-Creates a note for a specified delivery
+> Creates a note for a specified delivery
 
-**Format:** `delivery note DELIVERY_ID --note NOTE`
+If you would like create a note about a specific delivery, you can use `delivery note`{.swift} to add a quick
+note to a specific delivery.
 
-**Example:** `delivery note 1 --note By FedEx`
+**Format:** `delivery note DELIVERY_ID --note NOTE`{.swift}
 
-**Accepted Values:**
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
-_DELIVERY_ID_: Integer
+**Note:**
 
-_NOTE_: Nonempty alphanumeric string
+* If the delivery already has a Note it will be overwritten by the new Note given.
+* The `DELIVERY_ID`{.swift} must be an Integer.
+* The `NOTE`{.swift} must a Non-empty Alphanumeric String.
+  </box>
 
-**Command succeeds:**
 
-![Delivery Note](images/delivery/delivery_note.png)
+**Example:** 
 
-**Command failed (invalid_index):** _The delivery index provided is invalid_
+* `delivery note 1 --note By FedEx`{.swift} </br>
+  Creates a new Note "By FedEx" for the Delivery with ID `1`{.swift}
 
-**Command failed (invalid_note):** _Note should not be empty_
+**After:**
 
-**Command failed (missing_fields):**
+![Delivery Note Before](images/delivery/delivery_note_before.png)
 
-_Invalid command format!_</br>
-_delivery note: Adds a note to the delivery identified by the ID of the delivery. Existing note if any will be replaced
-with the input note._</br>
-_Parameters: DELIVERY_ID (must be a integer representing a valid ID) --note Note_</br>
-_Example: delivery note 1 --note This is a note_</br>
+**After:**
+
+![Delivery Note After](images/delivery/delivery_note.png)
+
+[&uarr; Back to Table of Contents](#top)
 
 ### Add customer data to delivery `[Coming Soon in v1.3]`
 
