@@ -310,13 +310,13 @@ email `Gabrielrocks@gmail.com`{.swift} and address `RVRC Block B`{.swift}.
 _If you want to find details of a customer, but you do not remember the customer's full name,
 you can search for the customer using keywords by calling this command._
 
-**Format:** `customer find KEYWORD [MORE_KEYWORDS]`{.swift}
+**Format:** `customer find KEYWORD [MORE_KEYWORDS...]`{.swift}
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note:**
 * `[]`{.swift} around a parameter indicates that it is optional.
-* You must provide at least one keyword to search for the customer.
+* You must provide at least one keyword to search for the customer. Multiple keywords can be provided.
 </box>
 
 **Example:** `customer find Gabriel Spencer`{.swift} </br>
