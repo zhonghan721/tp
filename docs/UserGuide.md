@@ -148,24 +148,23 @@ _These are general commands for using HomeBoss._
 
 > Registers a new user account to use HomeBoss.
 
-_Want to get started? Start by registering for an account to use HomeBoss! Note that only one account can be registered
-at a time._
+_Register an account before you start using HomeBoss._
 
-**Format:
-** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
+**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`{.swift}
+
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* All fields are required.
+* The `PASSWORD`{.swift} must be at least 8 characters long.
+* The `SECRET_QUESTION`{.swift} and `ANSWER`{.swift} will be used for account recovery.
+  </box>
 
 **Example:**
 
-* `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko` -
-  Registers a new user account with the username `gabriel`, password `gabrielIsGreat`, secret
-  question `First pet's name?` and answer `Koko`.
-
-<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
-    * All fields are required.
-    * The username must be unique.
-    * The password must be at least 8 characters long.
-    * The secret question and answer will be used for account recovery.
-</box>
+* `register --user Gabriel --password GabrielIsGreat --confirmPass GabrielIsGreat --secretQn First Pet Name? --answer Koko`{.swift} </br>
+  Registers a new user account with the username `Gabriel`{.swift}, password `GabrielIsGreat`{.swift}, secret question `First Pet Name?`{.swift} and answer `Koko`{.swift}.
 
 **Before:**
 ![](images/user/user_freshStart.png)
@@ -244,24 +243,29 @@ _Want to keep your data secure at the end of the day? You can log out of your ac
 
 > Recovers the user account.
 
-_Forgot your password? Use this command to recover your account!_
+_HomeBoss makes it easy for you to recover your account if you forget your password. You only need the answer to the secret question that was set during account registration._
 
-**Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`
+**Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift}
+
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* If `ANSWER`{.swift} is provided, `NEW_PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} must also be provided and vice versa.
+* `NEW_PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} must be at least 8 characters long.
+  </box>
 
 **Examples:**
 
-* `recover account` - Displays your account's secret question for account recovery.
-* `recover account --answer Koko --password newPassword123 --confirmPass newPassword123` - Recovers the account with the
-  answer `Koko` and sets the new password to `newPassword123`.
+* `recover account`{.swift} </br> 
+Displays your account's secret question for account recovery.
 
-<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
-    * If ANSWER is provided, NEW_PASSWORD and CONFIRM_PASSWORD must also be provided, vice versa.
-    * The passwords must be at least 8 characters long.
-</box>
+* `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`{.swift} </br> 
+Recovers the account with the answer `Koko`{.swift} and sets the new password to `NewPassword123`{.swift}.
 
-**After (without optional fields):**
+**Without optional fields (i.e., `recover account`{.swift}):**
 ![](images/user/userRecoverAccount_after_secretQn.png)
-**After (with optional fields):**
+**With optional fields (i.e., `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`{.swift}):**
 ![](images/user/userRecoverAccount_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -269,15 +273,15 @@ _Forgot your password? Use this command to recover your account!_
 
 > Deletes the user account.
 
-_Want to delete your account? Call this command to delete your account and clear all your data._
+_If you simply want to erase all your data from HomeBoss, you can delete your account by calling this command._
 
-<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
-    This command is useful only as a last resort, should you forget your password and secret answer. However, if you
-    forgot your password but remember the answer to your secret question, you can call `recover account` [here](#account-recovery)
-    instead.
+**Format:** `delete account`{.swift}
+
+<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
+
+**Tip:**
+This command should be considered a last resort, to be used if you forget both your password and your secret answer. However, if you've forgotten your password but recall the answer to your secret question, you can initiate the account recovery process by clicking `recover account`{.swift} [here](#account-recovery).
 </box>
-
-**Format:** `delete account`
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -394,13 +398,14 @@ _CUSTOMER_ID_: Integer
 > Deletes the specified customer from the customer database. All deliveries associated with the customer will also be
 > deleted.
 
-_Want to delete a customer? Call this command to delete a customer from the customer database._
+_You can delete any customers who no longer require your services from HomeBoss by calling this command._
 
-**Format:** `customer delete CUSTOMER_ID`
+**Format:** `customer delete CUSTOMER_ID`{.swift}
 
 **Example:**
 
-* `customer delete 1` - Deletes the customer with ID 1.
+* `customer delete 1`{.swift} </br>
+Deletes the customer with ID 1.
 
 **Before:**
 ![](images/customer/customerList.png)
