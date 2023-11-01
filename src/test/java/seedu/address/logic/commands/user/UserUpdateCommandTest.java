@@ -28,8 +28,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Customer;
 import seedu.address.model.user.User;
+import seedu.address.testutil.CustomerBuilder;
 import seedu.address.testutil.CustomerEditDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.UpdateUserDescriptorBuilder;
 import seedu.address.testutil.UserBuilder;
 
@@ -97,7 +97,7 @@ public class UserUpdateCommandTest {
         // set state of model to be logged out
         model.setLogoutSuccess();
 
-        Customer editedCustomer = new PersonBuilder().build();
+        Customer editedCustomer = new CustomerBuilder().build();
         CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder(editedCustomer).build();
         CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_FIRST_PERSON, descriptor);
 
