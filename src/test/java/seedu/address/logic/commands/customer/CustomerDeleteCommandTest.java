@@ -33,7 +33,7 @@ public class CustomerDeleteCommandTest {
         Customer customerToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         CustomerDeleteCommand deleteCommand = new CustomerDeleteCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(CustomerDeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(CustomerDeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS,
                 Messages.format(customerToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
@@ -59,7 +59,7 @@ public class CustomerDeleteCommandTest {
         Customer customerToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         CustomerDeleteCommand deleteCommand = new CustomerDeleteCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(CustomerDeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(CustomerDeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS,
                 Messages.format(customerToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),

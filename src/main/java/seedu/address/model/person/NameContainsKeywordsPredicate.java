@@ -12,8 +12,13 @@ import seedu.address.commons.util.ToStringBuilder;
 public class NameContainsKeywordsPredicate implements Predicate<Customer> {
     private final List<String> keywords;
 
+    /**
+     * Creates a NameContainsKeywordsPredicate.
+     * @param keywords the list of keywords to search for.
+     */
     public NameContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+        // Create Defensive Copy to prevent modification
+        this.keywords = List.copyOf(keywords);
     }
 
     @Override

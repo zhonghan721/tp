@@ -42,7 +42,7 @@ public class CustomerFindCommand extends Command {
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
             String.format(Messages.MESSAGE_CUSTOMERS_MATCHED_LISTED,
-                    model.getFilteredPersonList().size(), predicate.getKeywordsAsString()), true);
+                    model.getFilteredPersonList().size()), true);
 
     }
 

@@ -37,7 +37,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -139,5 +139,39 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseSecretQuestion_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSecretQuestion((String) null));
+    }
+
+    @Test
+    public void parseSecretQuestion_emptyString_throwsParseException() {
+        String testString = "";
+        assertThrows(ParseException.class, () -> ParserUtil.parseSecretQuestion(testString));
+    }
+
+    @Test
+    public void parseSecretQuestion_validValueWithoutWhitespace_returnsSecretQuestion() throws Exception {
+        String testString = "What is your favourite colour?";
+        assertEquals(testString, ParserUtil.parseSecretQuestion(testString));
+    }
+
+    @Test
+    public void parseAnswer_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAnswer((String) null));
+    }
+
+    @Test
+    public void parseAnswer_emptyString_throwsParseException() {
+        String testString = "";
+        assertThrows(ParseException.class, () -> ParserUtil.parseAnswer(testString));
+    }
+
+    @Test
+    public void parseAnswer_validValueWithoutWhitespace_returnsAnswer() throws Exception {
+        String testString = "Blue";
+        assertEquals(testString, ParserUtil.parseAnswer(testString));
     }
 }
