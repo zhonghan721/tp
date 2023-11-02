@@ -131,7 +131,7 @@ public class DeliveryEditCommand extends DeliveryCommand {
         } else {
             throw new CommandException(MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
-        if (!DeliveryDate.isValidDeliveryDate(updatedDeliveryDate.toString())) {
+        if (!DeliveryDate.isFutureDate(updatedDeliveryDate.toString())) {
             throw new CommandException(MESSAGE_INVALID_DELIVERY_DATE);
         }
         return new Delivery(deliveryToEdit.getDeliveryId(), updatedDeliveryName, updatedCustomer, orderDate,

@@ -79,7 +79,6 @@ public class DeliveryAddCommandParserTest {
 
         // invalid format expected delivery date
         assertParseFailure(parser, VALID_NAME_GABRIELS_MILK + CUSTOMER_ID_DESC_MILK
-
                 + INVALID_FORMAT_DELIVERY_DATE_DESC, DeliveryDate.MESSAGE_CONSTRAINTS);
 
         // invalid customer id
