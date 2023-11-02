@@ -750,12 +750,6 @@ view a more in-depth description of the delivery.
 
 **Format:** `delivery view DELIVERY_ID`{.swift}
 
-If you would like to get the details of a specific delivery, you can use `delivery view`{.swift} to view the details of
-the delivery. You can see the delivery id, delivery name, delivery status, address, customer name, customer ID, ordered
-date, expected delivery date, and notes (if any).
-
-**Format:** `delivery view DELIVERY_ID`{.swift}
-
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note:**
