@@ -41,7 +41,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
             + PREFIX_CUSTOMER_ID + " 5 "
             + PREFIX_DATE + " 2023-12-03 ";
 
-    public static final String MESSAGE_SUCCESS = "New delivery added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New delivery added:\n\n%1$s";
     public static final String MESSAGE_DUPLICATE_DELIVERY = "This delivery already exists in HomeBoss";
 
     private final DeliveryAddDescriptor deliveryAddDescriptor;

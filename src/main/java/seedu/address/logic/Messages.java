@@ -51,9 +51,9 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(String.format("[%d]", customer.getCustomerId()))
             .append(String.format(" %s", customer.getName()))
-            .append(String.format("\n Phone: %s", customer.getPhone().toString()))
-            .append(String.format("\n Email: %s", customer.getEmail().toString()))
-            .append(String.format("\n Address: %s", customer.getAddress().toString()));
+            .append(String.format("\n\nPhone: %s", customer.getPhone().toString()))
+            .append(String.format("\n\nEmail: %s", customer.getEmail().toString()))
+            .append(String.format("\n\nAddress: %s", customer.getAddress().toString()));
         return builder.toString();
     }
 
@@ -64,14 +64,14 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(String.format("[%d]", delivery.getDeliveryId()))
             .append(String.format(" %s", delivery.getName()))
-            .append(String.format("\n %s", delivery.getStatus().toString()))
-            .append(String.format("\n Customer: %s", delivery.getCustomer().getName()))
-            .append(String.format("\n Customer Id: %d", delivery.getCustomer().getCustomerId()))
-            .append(String.format("\n Address: %s", delivery.getAddress().toString()))
-            .append(String.format("\n Ordered On: %s", delivery.getOrderDate().toString()))
-            .append(String.format("\n Expected Delivery Date: %s", delivery.getDeliveryDate().toString()))
+            .append(String.format("\n\nStatus: %s", delivery.getStatus().toString()))
+            .append(String.format("\n\nCustomer: %s", delivery.getCustomer().getName()))
+            .append(String.format("\n\nCustomer ID: %d", delivery.getCustomer().getCustomerId()))
+            .append(String.format("\n\nAddress: %s", delivery.getAddress().toString()))
+            .append(String.format("\n\nOrdered On: %s", delivery.getOrderDate().toString()))
+            .append(String.format("\n\nExpected Delivery Date: %s", delivery.getDeliveryDate().toString()))
             .append(Optional.ofNullable(delivery.getNote())
-                .map(n -> String.format("\n Note: %s", n)).orElse(""));
+                .map(n -> String.format("\n\nNote: %s", n)).orElse(""));
 
         return builder.toString();
     }
