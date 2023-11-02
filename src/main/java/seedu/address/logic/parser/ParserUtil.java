@@ -142,9 +142,13 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!DeliveryDate.isValidDate(date)) {
-            throw new ParseException(seedu.address.model.delivery.Date.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new DeliveryDate(trimmedDate);
+        try {
+            return new DeliveryDate(trimmedDate);
+        } catch (DateTimeException e) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**
@@ -159,7 +163,6 @@ public class ParserUtil {
         if (!Date.isValidDate(date)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-
 
         try {
             return new Date(trimmedDate);
