@@ -77,8 +77,7 @@ public class UserLoginCommand extends Command {
      * Checks if the user login command is equal to another object.
      *
      * @param other The other object to compare to.
-     * @return True if the other object is a user login command with the same user.
-     * False otherwise.
+     * @return True if the other object is a user login command with the same user. False otherwise.
      */
     @Override
     public boolean equals(Object other) {
