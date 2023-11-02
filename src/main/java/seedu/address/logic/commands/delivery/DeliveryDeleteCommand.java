@@ -19,7 +19,7 @@ public class DeliveryDeleteCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the delivery identified by the index number used in the displayed delivery list.\n"
+            + ": Deletes the delivery identified by the delivery ID used in the displayed delivery list.\n"
             + "Parameters: DELIVERY_ID (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
