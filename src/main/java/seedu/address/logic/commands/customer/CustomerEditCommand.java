@@ -72,6 +72,7 @@ public class CustomerEditCommand extends CustomerCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
         List<Customer> lastShownList = model.getFilteredPersonList();
 
         boolean found = false;
