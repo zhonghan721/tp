@@ -67,7 +67,7 @@ Provides you with important information to take note of to avoid any unintended 
 
 # Table of Contents
 
-* 1\. Introduction
+* 1\. [Introduction](#user-guide)
     * 1.1 [About HomeBoss](#about-homeboss)
     * 1.2 [About this User Guide](#about-this-user-guide)
     * 1.3 [Navigating the User Guide](#navigating-the-user-guide)
@@ -106,8 +106,8 @@ Provides you with important information to take note of to avoid any unintended 
         * 4.4.1 [Help](#help)
         * 4.4.2 [Exit](#exit)
         * 4.4.3 [Clear](#clear)
-* 5\. FAQ
-* 6\. Command Summary
+* 5\. [FAQ](#faq)
+* 6\. [Command Summary](#command-summary)
 * 7\. Glossary
 
 ---
@@ -140,7 +140,7 @@ helpful [guide](https://www.java.com/en/download/help/version_manual.html).
 
 <box type="warning" background-color="#f2dede" border-color="#ebccd1" icon=":exclamation:">
 
-**Warning**: The folder that you would like to use as the home folder must be empty and not contain any other 
+**Warning**: The folder that you would like to use as the home folder must be empty and should not contain any other 
 files/folder before the application is launched for the first time.
 
 </box>
