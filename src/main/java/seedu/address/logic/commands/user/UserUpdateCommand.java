@@ -28,13 +28,13 @@ public class UserUpdateCommand extends Command {
 
     public static final String COMMAND_WORD = "update";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Update your account details.\n"
+            + ": Update your account details.\n\n"
             + "Parameters: "
             + "[" + PREFIX_USER + " USERNAME] "
             + "[" + PREFIX_PASSWORD + " PASSWORD "
             + PREFIX_PASSWORD_CONFIRM + " CONFIRM_PASSWORD] "
             + "[" + PREFIX_SECRET_QUESTION + " SECRET_QUESTION "
-            + PREFIX_ANSWER + " ANSWER]\n"
+            + PREFIX_ANSWER + " ANSWER]\n\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PASSWORD + " yourNewPassword "
             + PREFIX_PASSWORD_CONFIRM + " yourNewPassword ";
@@ -195,7 +195,7 @@ public class UserUpdateCommand extends Command {
 
             UserUpdateDescriptor otherUserUpdateDescriptor = (UserUpdateDescriptor) other;
             return Objects.equals(username, otherUserUpdateDescriptor.username)
-                    && Objects.equals(password , otherUserUpdateDescriptor.password)
+                    && Objects.equals(password, otherUserUpdateDescriptor.password)
                     && Objects.equals(secretQuestion, otherUserUpdateDescriptor.secretQuestion)
                     && Objects.equals(answer, otherUserUpdateDescriptor.answer);
         }

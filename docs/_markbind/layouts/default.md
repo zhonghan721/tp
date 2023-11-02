@@ -27,6 +27,7 @@
       <site-nav>
 * [Home]({{ baseUrl }}/index.html)
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
+  * [Table of Contents]({{ baseUrl }}/UserGuide.html#table-of-contents)
   * [Getting Started]({{ baseUrl }}/UserGuide.html#getting-started)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)

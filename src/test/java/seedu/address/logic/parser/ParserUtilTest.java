@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -173,5 +174,27 @@ public class ParserUtilTest {
     public void parseAnswer_validValueWithoutWhitespace_returnsAnswer() throws Exception {
         String testString = "Blue";
         assertEquals(testString, ParserUtil.parseAnswer(testString));
+    }
+
+    @Test
+    public void parseDeliveryDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDeliveryDate((String) null));
+    }
+
+    @Test
+    public void parseDeliveryDate_beforeToday_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryDate("0000-13-01"));
+    }
+
+    @Test
+    public void parseDeliveryDate_invalidMonth_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryDate("9999-13-01"));
+    }
+
+    @Test
+    public void parseDeliveryDate_validValueWithoutWhitespace_returnsDeliveryDate() throws Exception {
+        String testString = "9999-12-15";
+        DeliveryDate expectedDeliveryDate = new DeliveryDate(testString);
+        assertEquals(expectedDeliveryDate, ParserUtil.parseDeliveryDate(testString));
     }
 }

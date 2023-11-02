@@ -118,7 +118,7 @@ public class UserRecoverAccountCommandTest {
         UserRecoverAccountCommand userRecoverAccountCommand = new UserRecoverAccountCommand();
         String desiredOutput =
                 String.format(UserRecoverAccountCommand.MESSAGE_SUCCESS_WITHOUT_FLAGS, user.getSecretQuestion());
-        desiredOutput += "\n" + "Please answer the question using the following command: "
+        desiredOutput += "\n\n" + "Please answer the question using the following command:\n"
                 + UserRecoverAccountCommand.MESSAGE_USAGE;
 
         assertCommandSuccess(userRecoverAccountCommand, model,

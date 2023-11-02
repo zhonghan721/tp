@@ -20,8 +20,8 @@ public class CustomerFindCommand extends Command {
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
@@ -41,8 +41,8 @@ public class CustomerFindCommand extends Command {
 
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-            String.format(Messages.MESSAGE_CUSTOMERS_MATCHED_LISTED,
-                    model.getFilteredPersonList().size()), true);
+                String.format(Messages.MESSAGE_CUSTOMERS_MATCHED_LISTED,
+                        model.getFilteredPersonList().size()), true);
 
     }
 
@@ -64,7 +64,7 @@ public class CustomerFindCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("predicate", predicate)
-            .toString();
+                .add("predicate", predicate)
+                .toString();
     }
 }

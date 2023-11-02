@@ -19,11 +19,11 @@ public class CustomerDeleteCommand extends CustomerCommand {
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " " + "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the customer identified by the customer ID used in the displayed customer list.\n"
-            + "Parameters: CUSTOMER_ID (must be a positive integer)\n"
+            + ": Deletes the customer identified by the customer ID used in the displayed customer list.\n\n"
+            + "Parameters: CUSTOMER_ID (must be a positive integer)\n\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_CUSTOMER_SUCCESS = "Deleted Customer: %1$s";
+    public static final String MESSAGE_DELETE_CUSTOMER_SUCCESS = "Deleted Customer:\n\n%1$s";
 
     private final Index targetIndex;
 

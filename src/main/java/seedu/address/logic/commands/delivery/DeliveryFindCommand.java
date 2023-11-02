@@ -19,9 +19,9 @@ public class DeliveryFindCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all deliveries whose names contain any of "
-        + "the specified keywords (case-insensitive) and displays them as a list with ID numbers.\n"
-        + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-        + "Example: " + COMMAND_WORD + " chocolate vanilla";
+            + "the specified keywords (case-insensitive) and displays them as a list with ID numbers.\n\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n\n"
+            + "Example: " + COMMAND_WORD + " chocolate vanilla";
 
     private final DeliveryNameContainsKeywordsPredicate predicate;
 
@@ -40,8 +40,8 @@ public class DeliveryFindCommand extends DeliveryCommand {
 
         model.updateFilteredDeliveryList(predicate);
         return new CommandResult(
-            String.format(Messages.MESSAGE_DELIVERY_LISTED_OVERVIEW,
-                model.getFilteredDeliveryList().size()), true);
+                String.format(Messages.MESSAGE_DELIVERY_LISTED_OVERVIEW,
+                        model.getFilteredDeliveryList().size()), true);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class DeliveryFindCommand extends DeliveryCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("predicate", predicate)
-            .toString();
+                .add("predicate", predicate)
+                .toString();
     }
 }
