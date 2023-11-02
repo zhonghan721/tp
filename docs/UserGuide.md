@@ -94,7 +94,7 @@ Provides you with important information to take note of to avoid any unintended 
         * 4.3.3 [View details of delivery](#view-details-of-a-delivery)
         * 4.3.4 Update details of delivery
         * 4.3.5 Update delivery status
-        * 4.3.6 Create a note for a delivery
+        * 4.3.6 [Create a note for a delivery](#create-a-note-for-a-delivery)
         * 4.3.7 Delete delivery
         * 4.3.8 [Find deliveries](#find-deliveries)
     * 4.4 Miscellaneous
@@ -760,9 +760,8 @@ You may combine any of the filters and sort options to get the list of deliverie
 
 > Shows the details of the specified delivery.
 
-If you would like to get the details of a specific delivery, you can use `delivery view`{.swift} to view the details of
-the delivery. You can see the delivery id, delivery name, delivery status, address, customer name, customer ID, ordered
-date, expected delivery date, and notes (if any).
+If you would to see more details about a specific delivery, you can use the `delivery view`{.swift} command to 
+view a more in-depth description of the delivery.
 
 **Format:** `delivery view DELIVERY_ID`{.swift}
 
@@ -787,6 +786,12 @@ date, expected delivery date, and notes (if any).
 ![](images/delivery/DeliveryViewSuccess.png)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+
+**After:**
+
+![Delivery View](images/delivery/delivery_view.png)
+
+[&uarr; Back to Table of Contents](#top)
 
 ### Update delivery status
 
@@ -844,35 +849,37 @@ delivery? No worries! Just edit the details of a delivery simply by using this f
 
 ### Create a note for a delivery
 
-Creates a note for a specified delivery
+> Creates a note for a specified delivery
 
-**Format:** `delivery note DELIVERY_ID --note NOTE`
+If you would like create a note about a specific delivery, you can use `delivery note`{.swift} to add a quick
+note to a specific delivery.
 
-**Example:**
+**Format:** `delivery note DELIVERY_ID --note NOTE`{.swift}
 
-* `delivery note 1 --note By FedEx`
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
-**Accepted Values:**
+**Note:**
 
-_DELIVERY_ID_: Integer
+* If the delivery already has a Note it will be overwritten by the new Note given.
+* The `DELIVERY_ID`{.swift} must be an Integer.
+* The `NOTE`{.swift} must a Non-empty Alphanumeric String.
+  </box>
 
-_NOTE_: Nonempty alphanumeric string
 
-**Command succeeds:**
+**Example:** 
 
-![Delivery Note](images/delivery/delivery_note.png)
+* `delivery note 1 --note By FedEx`{.swift} </br>
+  Creates a new Note "By FedEx" for the Delivery with ID `1`{.swift}
 
-**Command failed (invalid_index):** _The delivery index provided is invalid_
+**Before:**
 
-**Command failed (invalid_note):** _Note should not be empty_
+![Delivery Note Before](images/delivery/delivery_note_before.png)
 
-**Command failed (missing_fields):**
+**After:**
 
-_Invalid command format!_</br>
-_delivery note: Adds a note to the delivery identified by the ID of the delivery. Existing note if any will be replaced
-with the input note._</br>
-_Parameters: DELIVERY_ID (must be a integer representing a valid ID) --note Note_</br>
-_Example: delivery note 1 --note This is a note_</br>
+![Delivery Note After](images/delivery/delivery_note.png)
+
+[&uarr; Back to Table of Contents](#top)
 
 ### Find deliveries
 
