@@ -25,7 +25,7 @@ import seedu.address.model.delivery.DeliveryStatus;
  */
 public class DeliveryListCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "list";
-    public static final String MESSAGE_SUCCESS = "Listed all Deliveries";
+    public static final String MESSAGE_SUCCESS = "Listed Deliveries";
     public static final String MESSAGE_EMPTY = "There are currently no deliveries to be listed.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all deliveries or the deliveries filtered and "
         + "sorted by the specified filters or sort.\n\n"
@@ -96,9 +96,9 @@ public class DeliveryListCommand extends DeliveryCommand {
 
         // sort by expected delivery date
         model.sortFilteredDeliveryList(
-                sortType.equals(Sort.ASC) ? Comparator.comparing(Delivery::getDeliveryDate) : Comparator.comparing(
-                                Delivery::getDeliveryDate)
-                        .reversed());
+            sortType.equals(Sort.ASC) ? Comparator.comparing(Delivery::getDeliveryDate) : Comparator.comparing(
+                    Delivery::getDeliveryDate)
+                .reversed());
 
         //TODO: UI
         return new CommandResult(MESSAGE_SUCCESS, true);
@@ -126,7 +126,7 @@ public class DeliveryListCommand extends DeliveryCommand {
         }
 
         if (this.deliveryDate != null && otherDeliveryListCommand.deliveryDate != null
-                && !this.deliveryDate.equals(otherDeliveryListCommand.deliveryDate)) {
+            && !this.deliveryDate.equals(otherDeliveryListCommand.deliveryDate)) {
             return false;
         }
 

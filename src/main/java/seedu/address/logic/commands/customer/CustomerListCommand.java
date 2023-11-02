@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 public class CustomerListCommand extends CustomerCommand {
 
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " " + "list";
-    public static final String MESSAGE_SUCCESS = "Listed all Customers";
+    public static final String MESSAGE_SUCCESS = "Listed Customers";
     public static final String MESSAGE_EMPTY = "There are currently no customers to be listed.";
 
 
