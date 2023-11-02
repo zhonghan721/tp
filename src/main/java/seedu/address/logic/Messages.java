@@ -71,7 +71,7 @@ public class Messages {
             .append(String.format("\n Ordered On: %s", delivery.getOrderDate().toString()))
             .append(String.format("\n Expected Delivery Date: %s", delivery.getDeliveryDate().toString()))
             .append(Optional.ofNullable(delivery.getNote())
-                .map(n -> String.format("\n Note:%s", n)).orElse(""));
+                .map(n -> String.format("\n Note: %s", n)).orElse(""));
 
         return builder.toString();
     }
