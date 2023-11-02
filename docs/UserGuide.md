@@ -402,9 +402,12 @@ Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PA
 
 **Note:**
 
-* All fields are required.
-* The `PASSWORD`{.swift} must be at least 8 characters long.
-* The `SECRET_QUESTION`{.swift} and `ANSWER`{.swift} will be used for account recovery.
+* `USERNAME`{.swift} must be alphanumeric.
+* `PASSWORD`{.swift} must be at least 8 alphanumeric characters long.
+* `CONFIRM_PASSWORD`{.swift} must be the same as `PASSWORD`{.swift}.
+* `SECRET_QUESTION`{.swift} can take any characters.
+* `ANSWER`{.swift} can take any characters. 
+* `SECRET_QUESTION`{.swift} and `ANSWER`{.swift} will be used for account recovery.
   </box>
 
 **Example:**
@@ -433,8 +436,9 @@ Note that you need to have an account registered with HomeBoss._
 
 **Note:**
 
-* All fields are required.
-  </box>
+* `USERNAME`{.swift} must be alphanumeric.
+* `PASSWORD`{.swift} must be at least 8 alphanumeric characters long.
+</box>
 
 **Example:**
 
@@ -461,8 +465,13 @@ _You can update your account details to keep your account secure by calling this
 **Note:**
 
 * At least one of the optional fields must be provided.
-* The `PASSWORD`{.swift} must be at least 8 characters long.
 * The details will be updated without checking against the current details.
+* `USERNAME`{.swift} must be alphanumeric.
+* `PASSWORD`{.swift} must be at least 8 characters long.
+* `CONFIRM_PASSWORD`{.swift} must be the same as `PASSWORD`{.swift}.
+* `SECRET_QUESTION`{.swift} can take any characters.
+* `ANSWER`{.swift} can take any characters.
+
   </box>
 
 **Example:**
@@ -507,7 +516,9 @@ secret question that was set during account registration._
 
 * If `ANSWER`{.swift} is provided, `NEW_PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} must also be provided and vice
   versa.
-* `NEW_PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} must be at least 8 characters long.
+* `ANSWER`{.swift} can take any characters.
+* `NEW_PASSWORD`{.swift} must be at least 8 characters long.
+* `CONFIRM_PASSWORD`{.swift} must be the same as `NEW_PASSWORD`{.swift}.
   </box>
 
 **Examples:**
@@ -536,6 +547,7 @@ _If you simply want to erase all your data from HomeBoss, you can delete your ac
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
 **Tip:**
+
 This command should be considered a last resort, to be used if you forget both your password and your secret answer.
 However, if you've forgotten your password but recall the answer to your secret question, you can initiate the account
 recovery process by clicking `recover account`{.swift} [here](#account-recovery).
@@ -561,13 +573,12 @@ _You can add a new customer's details into HomeBoss with this command._
 
 **Note:**
 
-* All fields are required.
 * HomeBoss does not allow you to add customers with the same phone number.
 * A unique customer ID (may not be consecutive) will be assigned to the customer.
-* The `NAME`{.swift} must be alphanumeric and can contain spaces.
-* The `PHONE_NUMBER`{.swift} must be exactly 8 digits.
-* The `EMAIL`{.swift} must follow the `local@domain`{.swift} format.
-* The `ADDRESS`{.swift} can take any values.
+* `NAME`{.swift} must be alphanumeric and can contain spaces.
+* `PHONE_NUMBER`{.swift} must be exactly 8 digits.
+* `EMAIL`{.swift} must follow the `local@domain`{.swift} format.
+* `ADDRESS`{.swift} can take any characters.
   </box>
 
 **Example:**
@@ -586,8 +597,8 @@ _You can add a new customer's details into HomeBoss with this command._
 
 > Shows the details of the specified customer.
 
-If you would to see more details about a specific delivery, you can use the delivery view command to view a more
-in-depth description of the delivery.
+If you want to see more details about a specific customer, you can use the customer view command to view a more
+in-depth description of the customer.
 
 **Format:** `customer view CUSTOMER_ID`{.swift}
 
@@ -595,14 +606,13 @@ in-depth description of the delivery.
 
 **Note:**
 
-* All fields are required.
-* The `DELIVERY_ID`{.swfit} must be an integer.
+* `CUSTOMER_ID`{.swfit} must be an integer greater than 0.
   </box>
 
 **Example:**
 
 * `customer view 1`{.swift} </br>
-  Displays the details of delivery with ID `1`{.swift}.
+  Displays the details of customer with ID `1`{.swift}.
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -638,8 +648,15 @@ you can search for the customer using keywords by calling this command._
 
 **Note:**
 
-* You must provide at least one keyword to search for the customer.
-* You can choose to provide multiple keywords.
+* You must provide at least one non-empty alphanumeric `KEYWORD`{.swift} to search for the Customer.
+* You can optionally provide additional keywords, a Customer name that matches any of the given keywords will be 
+  displayed.
+  For example, the keywords `Alex Tan`{.swift} will display `Alex Wong`{.swift}, `Alex Tan`{.swift},
+  and `Tan Ah Meng`{.swift}.
+* The keyword must exactly match any word in the Customer name. For example the keyword `Alex`{.swift} will match
+  `Alex`{.swift} but not `Alexander`{.swift}.
+* The search for keyword(s) given are case-insensitive
+
   </box>
 
 **Example:**
@@ -662,12 +679,24 @@ worries! You can edit the details of a customer simply by calling this command.
 
 **Format:** `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`
 
-<box background-color="#dff0d8" border-color="#d6e9c6" type="info" icon=":information_source:">
-    **Note:** [ ] around a parameter indicates that it is optional.
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* At least one of the optional fields must be provided.
+* `CUSTOMER_ID`{.swfit} must be an integer greater than 0.
+* `NAME`{.swift} must be alphanumeric and can contain spaces.
+* `PHONE_NUMBER`{.swift} must be exactly 8 digits.
+* `EMAIL`{.swift} must follow the `local@domain`{.swift} format.
+* `ADDRESS`{.swift} can take any characters.
+
 </box>
 
 <box background-color="#f2dede" border-color="#ebccd1" type="warning" icon=":exclamation:">
-    **Warning:** Be careful! You won't be able to undo this edit action! 
+
+**Warning:**
+
+Be careful! You won't be able to undo this edit action! 
 </box>
 
 **Examples:**
@@ -691,6 +720,15 @@ _You can delete any customers who no longer require your services from HomeBoss 
 
 **Format:** `customer delete CUSTOMER_ID`{.swift}
 
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* `CUSTOMER_ID`{.swfit} must be an integer greater than 0.
+
+</box>
+
+<box background-color="#f2dede" border-color="#ebccd1" type="warning" icon=":exclamation:">
 **Example:**
 
 * `customer delete 1`{.swift} </br>
@@ -727,7 +765,18 @@ Cool huh! We try to help you speed up the process as much as possible.
     Delivery Status can be one of CREATED, SHIPPED, COMPLETED, CANCELLED.
 </box>
 
-**Format:** `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE`
+**Format:** `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE`
+
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* `DELIVERY_NAME`{.swift} must be alphanumeric and can contain spaces.
+* `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer in the address book.
+* `EXPECTED_DELIVERY_DATE`{.swift} must be in yyyy-MM-dd format and be after today's date OR `TODAY`{.swift} for
+  today’s date.
+
+</box>
 
 **Example:**
 
@@ -755,9 +804,8 @@ view a more in-depth description of the delivery.
 
 **Note:**
 
-* All fields are required.
-* The `DELIVERY_ID`{.swift} must be an integer.
-  </box>
+* `DELIVERY_ID`{.swift} must be an integer greater than 0.
+</box>
 
 **Example:**
 
@@ -789,12 +837,12 @@ list of deliveries will be sorted by expected delivery date in descending order 
 
 **Note:**
 
-* All fields are optional.
-* The delivery `STATUS`{.swift} accepts the following values: `CREATED`{.swift}/`SHIPPED`{.swift}/`COMPLETED`{.swift}/
+* `STATUS`{.swift} accepts the following values: `CREATED`{.swift}/`SHIPPED`{.swift}/`COMPLETED`{.swift}/
   `CANCELLED`{.swift}.
-* The `CUSTOMER_ID`{.swift} must be an integer.
-* The `EXPECTED_DELIVERY_DATE`{.swift} must be in yyyy-MM-dd format or `TODAY`{.swift} for today’s date.
-* The `SORT`{.swift} accepts the following values: `ASC`{.swift}/`DESC`{.swift}.
+* `CUSTOMER_ID`{.swift} must be an integer.
+* `EXPECTED_DELIVERY_DATE`{.swift} must be in yyyy-MM-dd format and be after today's date OR `TODAY`{.swift} for 
+  today’s date.
+* `SORT`{.swift} accepts the following values: `ASC`{.swift}/`DESC`{.swift}.
   </box>
 
 **Examples:**
@@ -864,6 +912,19 @@ delivery? No worries! Just edit the details of a delivery simply by using this f
 **Format:** `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]
 [--status STATUS] [--note NOTE]`
 
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* At least one of the optional fields must be provided.
+* `DELIVERY_ID`{.swfit} must be an integer greater than 0.
+* `DELIVERY_NAME`{.swift} must be alphanumeric and can contain spaces.
+* `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer in the address book.
+* `EXPECTED_DELIVERY_DATE`{.swift} must be in yyyy-MM-dd format and be after today's date OR `TODAY`{.swift} for 
+today’s date.
+
+  </box>
+
 <box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
     If you only want to update the delivery's status, simply use `delivery status` instead.
 </box>
@@ -875,11 +936,11 @@ delivery? No worries! Just edit the details of a delivery simply by using this f
 **Examples:**
 
 - `delivery edit 1 --status CANCELLED --note Sudden overseas business trip to attend to.` </br>
-  Edits Delivery 1's Delivery Status to CANCELLED and edits the delivery's note. (If delivery previously did not
-  have a note, a note will be created to the delivery)
+  Edits Delivery Status of the delivery ,with Delivery ID of 1, to CANCELLED and edits the note of the Delivery.
+  (If delivery does not have a note, a note will be created to the delivery)
 - `delivery edit 2 --name Vanilla Cake --customer 3` </br>
-  Edits Delivery 2's name to Vanilla Cake as it was misspelled and edits the customer to Customer 3 as User
-  accidentally typed in 2 instead. \
+  Edits Delivery with the ID of 2's Delivery Name to Vanilla Cake as it was misspelled and edits the customer to 
+  Customer 3 as User accidentally typed in 2 instead. \
   **Before:**
   ![Screenshot 2023-10-31 at 4.07.02 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%204.07.02%20PM.png)
   **After:**
@@ -893,11 +954,22 @@ delivery? No worries! Just edit the details of a delivery simply by using this f
 I see that you've just shipped out an order. Nice! Now you can update the status of that particular delivery
 to SHIPPED! Using this feature, you can update the status of a delivery accordingly.
 
+
 <box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
     Delivery Status typed in need not be in uppercase.
 </box>
 
-**Format:** `delivery status CUSTOMER_ID STATUS`
+**Format:** `delivery status DELIVERY_ID STATUS`
+
+
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* `DELIVERY_ID`{.swfit} must be an integer greater than 0.
+* `STATUS`{.swift} accepts the following values: `CREATED`{.swift}/`SHIPPED`{.swift}/`COMPLETED`{.swift}/
+
+  </box>
 
 **Examples:**
 
@@ -922,8 +994,8 @@ note to a specific delivery.
 **Note:**
 
 * If the delivery already has a Note it will be overwritten by the new Note given.
-* The `DELIVERY_ID`{.swift} must be an Integer.
-* The `NOTE`{.swift} must a Non-empty Alphanumeric String.
+* `DELIVERY_ID`{.swift} must be an integer greater than 0.
+* `NOTE`{.swift} can take any characters.
   </box>
 
 **Example:**
@@ -949,6 +1021,13 @@ Feel like your delivery book is getting cluttered up? Maybe you just want to get
 been cancelled or completed. If that's the case, simply use this feature to delete the delivery.
 
 **Format:** `delivery delete DELIVERY_ID`
+
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* `DELIVERY_ID`{.swift} must be an integer greater than 0.
+</box>
 
 <box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
     Be careful! This action is irreversible. Once deleted, the delivery cannot be recovered.
