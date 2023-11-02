@@ -21,17 +21,17 @@ public class CustomerAddCommand extends CustomerCommand {
 
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " " + "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the HomeBoss."
-            + "\n\nParameters: "
-            + PREFIX_NAME + " NAME "
-            + PREFIX_PHONE + " PHONE "
-            + PREFIX_EMAIL + " EMAIL "
-            + PREFIX_ADDRESS + " ADDRESS\n\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " John Doe "
-            + PREFIX_PHONE + " 98765432 "
-            + PREFIX_EMAIL + " johnd@example.com "
-            + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the HomeBoss database."
+        + "\n\nParameters: "
+        + PREFIX_NAME + " NAME "
+        + PREFIX_PHONE + " PHONE "
+        + PREFIX_EMAIL + " EMAIL "
+        + PREFIX_ADDRESS + " ADDRESS\n\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_NAME + " John Doe "
+        + PREFIX_PHONE + " 98765432 "
+        + PREFIX_EMAIL + " johnd@example.com "
+        + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25";
 
     public static final String MESSAGE_SUCCESS = "New customer added:\n\n%1$s";
     public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in HomeBoss";
@@ -85,7 +85,7 @@ public class CustomerAddCommand extends CustomerCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+            .add("toAdd", toAdd)
+            .toString();
     }
 }

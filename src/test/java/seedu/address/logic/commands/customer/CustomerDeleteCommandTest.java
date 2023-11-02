@@ -34,10 +34,10 @@ public class CustomerDeleteCommandTest {
         CustomerDeleteCommand deleteCommand = new CustomerDeleteCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(CustomerDeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS,
-                Messages.format(customerToDelete));
+            Messages.format(customerToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
-                new UserPrefs(), model.getUserLoginStatus());
+            new UserPrefs(), model.getUserLoginStatus());
         expectedModel.deletePerson(customerToDelete);
         expectedModel.deleteDeliveryByCustomer(customerToDelete);
 
@@ -60,28 +60,16 @@ public class CustomerDeleteCommandTest {
         CustomerDeleteCommand deleteCommand = new CustomerDeleteCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(CustomerDeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS,
-                Messages.format(customerToDelete));
+            Messages.format(customerToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getDeliveryBook(),
-                new UserPrefs(), model.getUserLoginStatus());
+            new UserPrefs(), model.getUserLoginStatus());
         expectedModel.deletePerson(customerToDelete);
         expectedModel.deleteDeliveryByCustomer(customerToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
     }
 
-    @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getList().size());
-
-        CustomerDeleteCommand deleteCommand = new CustomerDeleteCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
-    }
 
     @Test
     public void equals() {

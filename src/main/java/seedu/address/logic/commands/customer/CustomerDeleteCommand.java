@@ -40,6 +40,8 @@ public class CustomerDeleteCommand extends CustomerCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
+
         Customer customerToDelete = model.getCustomerUsingFilteredList(targetIndex.getOneBased());
 
         if (customerToDelete != null) {
