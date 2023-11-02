@@ -153,14 +153,14 @@ files/folder before the application is launched for the first time.
    and familiarizing yourself with [HomeBoss's command format](#homebosss-command-format)
    before learning how to [add your first delivery](#adding-your-first-delivery)
 
-![HomeBoss Start Page](images/getting-started/StartPage.png)
+![HomeBoss Start Page](images/getting-started/register.png)
 
 ## Understanding our layout
 
 Don't worry if you don't understand what you're looking at. Let's go through a quick run down of HomeBoss's layout
 so that you can familiarise yourself with our various components.
 
-![HomeBoss Home Page](images/getting-started/HomePage.png)
+![HomeBoss Home Page](images/getting-started/homepage_annotated.png)
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -171,16 +171,14 @@ the application for the first time.
 
 ### Command Box
 
-![HomeBoss Command Box](images/getting-started/CommandBox.png){style="display: block; margin: 0 auto; box-shadow: 0 4px
-8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
+![HomeBoss Command Box](images/getting-started/command_box.png){style="display: block; margin: 0 auto;"}
 
 The Command Box is where you will be interacting with HomeBoss, it is the place where all commands
 will be entered. Try typing the `help`{.swift} command and hitting enter!
 
 ### Command Result/FeedBack
 
-![Command Result FeedBack](images/getting-started/CommandResultFeedback.png){style="display: block; margin: 0 auto;
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
+![Command Result FeedBack](images/getting-started/help_feedback.png){style="display: block; margin: 0 auto;"}
 
 The Command Result/Feedback Box is where HomeBoss will provide you the results or feedback about
 the commands you entered. For example, if you tried typing the `help`{.swift} command earlier, you should see
@@ -192,10 +190,10 @@ You can use the scroll bar on the right to scroll through a long result or feedb
 <table class="images" style="border:0px solid white; width:100%; text-align: center">
     <tr style="width:100%;border: 0;">
         <td>
-            <img src="images/getting-started/CustomerList.png" style="width: 80%;display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;">
+            <img src="images/getting-started/customer_list_cropped.png" style="width: 80%;display: block; margin: 0 auto;">
         </td>
         <td>
-            <img src="images/getting-started/DeliveryList.png" style="width: 80%;display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;">
+            <img src="images/getting-started/delivery_list_cropped.png" style="width: 80%;display: block; margin: 0 auto;">
         </td>
     </tr>
     <tr >
@@ -212,10 +210,8 @@ HomeBoss. You can use the scroll bar on the right to scroll through your custome
 **Note**: The `ID`{.swift} that appears next to each name is a unique identifier given to all added customers and
 deliveries separately, and is required to perform many of HomeBoss's commands.
 More details of these commands can be found in [Features](#features)
-
-![Command Result FeedBack](images/getting-started/DeliveryID.png){style="display: block; margin: 0 auto; box-shadow: 0
-4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
-
+  
+![Command Result FeedBack](images/getting-started/delivery_card.png){style="display: block; margin: 0 auto;"}
 
 </box>
 
@@ -315,20 +311,18 @@ by adding your first Delivery
    into the Command Box and hit enter.
 5. A new Customer called Gabriel should be added, you should see a new Customer similar to the image below.
 
-![CustomerAdded](images/getting-started/CustomerAdded.png){style="display: block; margin: 0 auto; box-shadow: 0 4px 8px
-0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
+![CustomerAdded](images/getting-started/customer_add.png){style="display: block; margin: 0 auto;"}
 
 6. Now, let's add a new delivery for Gabriel into HomeBoss, suppose Gabriel ordered some furniture.
 
-> `DELIVERY_NAME`: furniture
+> `DELIVERY_NAME`: Macbook Pro
 > `DELIVERY_DATE`: 2023-12-03
 
-8. Type `delivery add furniture --customer CUSTOMER_ID --date 2023-12-03`{.swift}, replacing `CUSTOMER_ID`{.swift} with
+8. Type `delivery add Macbook Pro --customer CUSTOMER_ID --date 2023-12-03`{.swift}, replacing `CUSTOMER_ID`{.swift} with
    Gabriel's ID, and hit enter.
 9. A new Delivery should have been added for Gabriel, you should see a new Delivery similar to the image below.
 
-![DeliveryAdded](images/getting-started/DeliveryAdded.png){style="display: block; margin: 0 auto; box-shadow: 0 4px 8px
-0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
+![DeliveryAdded](images/getting-started/delivery_add.png){style="display: block; margin: 0 auto;"}
 
 Congratulations! You have just successfully added your first Customer and Delivery!
 
