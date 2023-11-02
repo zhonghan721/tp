@@ -2,10 +2,10 @@ package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
 import java.util.Comparator;
@@ -28,8 +28,7 @@ public class DeliveryListCommand extends DeliveryCommand {
     public static final String MESSAGE_SUCCESS = "Listed all Deliveries";
     public static final String MESSAGE_EMPTY = "There are currently no deliveries to be listed.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all deliveries in the delivery list.\n"
-        + "Parameters: \n" +
-        ""
+        + "Parameters: \n"
         + "Any of the fields can be specified.\n"
         + "[" + PREFIX_STATUS + " STATUS] "
         + "[" + PREFIX_CUSTOMER_ID + " CUSTOMER_ID] "
