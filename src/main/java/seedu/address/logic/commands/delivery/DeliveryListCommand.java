@@ -2,6 +2,10 @@ package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
 import java.util.Comparator;
@@ -22,12 +26,17 @@ import seedu.address.model.delivery.DeliveryStatus;
 public class DeliveryListCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "list";
     public static final String MESSAGE_SUCCESS = "Listed all Deliveries";
+    public static final String MESSAGE_EMPTY = "There are currently no deliveries to be listed.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all deliveries in the delivery list.\n"
-        + "Parameters: "
-        + "STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED) "
-        + "SORT (must be one of ASC/DESC)\n"
+        + "Parameters: \n"
+        + "Any of the fields can be specified.\n"
+        + "[" + PREFIX_STATUS + " STATUS] "
+        + "[" + PREFIX_CUSTOMER_ID + " CUSTOMER_ID] "
+        + "[" + PREFIX_DATE + " DATE] "
+        + "[" + PREFIX_SORT + " SORT]\n"
         + "Example: " + COMMAND_WORD + " "
-        + "CREATED ASC";
+        + PREFIX_STATUS + " CREATED " + PREFIX_SORT + " ASC "
+        + PREFIX_CUSTOMER_ID + " 1 " + PREFIX_DATE + " 2020-10-10";
     private DeliveryStatus status;
     private final Integer customerId;
     private final Date deliveryDate;
@@ -79,6 +88,10 @@ public class DeliveryListCommand extends DeliveryCommand {
         }
 
         model.updateFilteredDeliveryList(filters);
+
+        if (model.getFilteredDeliveryList().size() == 0) {
+            return new CommandResult(MESSAGE_EMPTY, true);
+        }
 
         // sort by expected delivery date
         model.sortFilteredDeliveryList(

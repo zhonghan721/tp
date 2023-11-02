@@ -883,8 +883,6 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | `*`      | a registered owner | know the sum of all the materials required for a fixed delivery schedule | I can plan my inventory.                                                                                                                                                                |
 | `*`      | a registered owner | have different user authorisation levels                                 | I can control who has access to what.                                                                                                                                                   |
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `HomeBoss` and the **Actor** is the `user`, unless specified

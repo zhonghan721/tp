@@ -29,7 +29,7 @@ public class DeliveryCreateNoteCommand extends Command {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "note";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to the delivery identified "
-        + "by the ID of the delivery. Existing note if any will be replaced with the input note.\n"
+        + "by the DELIVERY_ID of the delivery. Existing note if any will be replaced with the input note.\n"
         + "Parameters: DELIVERY_ID (must be a integer representing a valid ID) "
         + PREFIX_NOTE + " Note\n"
         + "Example: " + COMMAND_WORD + " 1 --note This is a note";
@@ -44,7 +44,7 @@ public class DeliveryCreateNoteCommand extends Command {
      * {@code targetId}.
      *
      * @param targetId the delivery to create a note for.
-     * @param newNote the note to be added.
+     * @param newNote  the note to be added.
      */
     public DeliveryCreateNoteCommand(int targetId, Note newNote) {
         requireNonNull(newNote);
