@@ -51,7 +51,7 @@ public class DeliveryEditCommand extends DeliveryCommand {
         + PREFIX_NAME + " 10 Chocolate Cakes "
         + PREFIX_DATE + " 2025-12-12";
 
-    public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery: %1$s";
+    public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field must be provided!";
     private final Index targetIndex;
     private final DeliveryEditDescriptor deliveryEditDescriptor;

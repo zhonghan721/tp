@@ -33,7 +33,7 @@ public class CustomerAddCommand extends CustomerCommand {
             + PREFIX_EMAIL + " johnd@example.com "
             + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25";
 
-    public static final String MESSAGE_SUCCESS = "New customer added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New customer added:\n%1$s";
     public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in HomeBoss";
 
     private final Customer toAdd;

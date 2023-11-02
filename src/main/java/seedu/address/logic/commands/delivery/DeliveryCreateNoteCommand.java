@@ -34,7 +34,7 @@ public class DeliveryCreateNoteCommand extends Command {
         + PREFIX_NOTE + " Note\n"
         + "Example: " + COMMAND_WORD + " 1 --note This is a note";
 
-    public static final String MESSAGE_NOTE_SUCCESS = "Added Note to Delivery: %1$s";
+    public static final String MESSAGE_NOTE_SUCCESS = "Added Note to Delivery:\n%1$s";
 
     private final int targetId;
     private final Note newNote;
