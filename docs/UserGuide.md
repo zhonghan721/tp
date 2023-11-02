@@ -64,9 +64,9 @@ for you to return to the Table of Contents, so that you can access another secti
 # Table of Contents
 
 * 1\. Introduction
-  * 1.1 About HomeBoss
-  * 1.2 About this User Guide
-  * 1.3 Navigating the User Guide
+  * 1.1 [About HomeBoss](#about-homeboss)
+  * 1.2 [About this User Guide](#about-this-user-guide)
+  * 1.3 [Navigating the User Guide](#navigating-the-user-guide)
 * 2\. Table of Contents
 * 3\. [Getting Started](#getting-started)
   * 3.1 [Prerequisites](#prerequisites)
@@ -432,8 +432,8 @@ _You can update your account details to keep your account secure by calling this
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note:**
-* `[]`{.swift} around a group of parameters indicates that it is optional, but all parameters within the group must be provided.
 * At least one of the optional fields must be provided.
+* The `PASSWORD`{.swift} must be at least 8 characters long.
 * The details will be updated without checking against the current details.
 </box>
 
@@ -529,10 +529,18 @@ _You can add a new customer's details into HomeBoss with this command._
 **Note:**
 * All fields are required.
 * HomeBoss does not allow you to add customers with the same phone number.
-* A unique customer ID will be assigned to each customer.
+* A unique customer ID (may not be consecutive) will be assigned to the customer.
+* The `NAME`{.swift} must be alphanumeric and can contain spaces.
+* The `PHONE_NUMBER`{.swift} must be exactly 8 digits.
+* The `EMAIL`{.swift} must follow the `local@domain`{.swift} format.
+* The `ADDRESS`{.swift} can take any values.
 </box>
 
-**Example:** `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`
+**Example:** 
+
+* `customer add --name Gabriel --phone 87654321 --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift} </br>
+Adds a customer with the name `Gabriel`{.swift}, phone number `87654321`{.swift},
+email `Gabrielrocks@gmail.com`{.swift} and address `RVRC Block B`{.swift}.
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -542,7 +550,7 @@ _You can add a new customer's details into HomeBoss with this command._
 
 ### Find customers
 
-> Finds customers whose names contain _ANY_ of the given keywords.
+> Finds customers whose names have words that exactly match _ANY_ of the given keywords.
 
 _If you want to find details of a customer, but you do not remember the customer's full name,
 you can search for the customer using keywords by calling this command._
@@ -552,14 +560,14 @@ you can search for the customer using keywords by calling this command._
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note:**
-* `[]`{.swift} around a parameter indicates that it is optional.
-* You must provide at least one keyword to search for the customer. Multiple keywords can be provided.
+* You must provide at least one keyword to search for the customer.
+* You can choose to provide multiple keywords.
 </box>
 
 **Example:** 
 
 * `customer find Gabriel Spencer`{.swift} </br>
-Finds customers whose names contain _ANY_ of the given keywords `Gabriel`{.swift} and `Spencer`{.swift}.
+Finds customers whose names have words that exactly match either `Gabriel`{.swift} or `Spencer`{.swift}.
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -667,7 +675,6 @@ Cool huh! We try to help you speed up the process as much as possible.
 ![Screenshot 2023-10-31 at 3.48.30 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%203.48.30%20PM.png)
 
 [&uarr; Back to Table of Contents](#top)
-
 
 
 ### View all deliveries
@@ -954,7 +961,7 @@ A: HomeBoss only supports English characters.
 |----------|------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | Register | `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`     | `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko` |
 | Login    | `login --user USERNAME --password PASSWORD`                                                                                  | `login --user gabriel --password gabrielIsGreat`                                                                            |
-| Update   | `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD] [--secretQn SECRET_QUESTION --answer ANSWER]` | `login --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest --secretQn Favourite Pet --answer BoBo`        |
+| Update   | `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD] [--secretQn SECRET_QUESTION --answer ANSWER]` | `update --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest --secretQn Favourite Pet --answer BoBo`       |
 | Recover  | `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`                                   | `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`                                      |
 | Logout   | `logout`                                                                                                                     | `logout`                                                                                                                    |
 | Delete   | `delete account`                                                                                                             | `delete account`                                                                                                            |
