@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -13,6 +14,17 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.CustomerBuilder;
 
 public class NameContainsKeywordsPredicateTest {
+
+    @Test
+    public void constructor_createsImmutableList() {
+        ArrayList<String> predicateKeywordList = new ArrayList<>();
+        predicateKeywordList.add("shouldBeHere");
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+            new NameContainsKeywordsPredicate(predicateKeywordList);
+        predicateKeywordList.clear();
+        assertEquals(nameContainsKeywordsPredicate.toString(),
+            NameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=[shouldBeHere]}");
+    }
 
     @Test
     public void equals() {
