@@ -140,7 +140,7 @@ helpful [guide](https://www.java.com/en/download/help/version_manual.html).
 
 <box type="warning" background-color="#f2dede" border-color="#ebccd1" icon=":exclamation:">
 
-**Warning**: The folder that you would like to use as the home folder must be empty and should not contain any other 
+**Warning**: The folder that you would like to use as the home folder must be empty and should not contain any other
 files/folder before the application is launched for the first time.
 
 </box>
@@ -153,14 +153,14 @@ files/folder before the application is launched for the first time.
    and familiarizing yourself with [HomeBoss's command format](#homebosss-command-format)
    before learning how to [add your first delivery](#adding-your-first-delivery)
 
-![HomeBoss Start Page](images/getting-started/StartPage.png)
+![HomeBoss Start Page](images/getting-started/register.png)
 
 ## Understanding our layout
 
 Don't worry if you don't understand what you're looking at. Let's go through a quick run down of HomeBoss's layout
 so that you can familiarise yourself with our various components.
 
-![HomeBoss Home Page](images/getting-started/HomePage.png)
+![HomeBoss Home Page](images/getting-started/homepage_annotated.png)
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -171,14 +171,14 @@ the application for the first time.
 
 ### Command Box
 
-![HomeBoss Command Box](images/getting-started/CommandBox.png){style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
+![HomeBoss Command Box](images/getting-started/command_box.png){style="display: block; margin: 0 auto;"}
 
 The Command Box is where you will be interacting with HomeBoss, it is the place where all commands
 will be entered. Try typing the `help`{.swift} command and hitting enter!
 
 ### Command Result/FeedBack
 
-![Command Result FeedBack](images/getting-started/CommandResultFeedback.png){style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
+![Command Result FeedBack](images/getting-started/help_feedback.png){style="display: block; margin: 0 auto;"}
 
 The Command Result/Feedback Box is where HomeBoss will provide you the results or feedback about
 the commands you entered. For example, if you tried typing the `help`{.swift} command earlier, you should see
@@ -190,10 +190,10 @@ You can use the scroll bar on the right to scroll through a long result or feedb
 <table class="images" style="border:0px solid white; width:100%; text-align: center">
     <tr style="width:100%;border: 0;">
         <td>
-            <img src="images/getting-started/CustomerList.png" style="width: 80%;display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;">
+            <img src="images/getting-started/customer_list_cropped.png" style="width: 80%;display: block; margin: 0 auto;">
         </td>
         <td>
-            <img src="images/getting-started/DeliveryList.png" style="width: 80%;display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;">
+            <img src="images/getting-started/delivery_list_cropped.png" style="width: 80%;display: block; margin: 0 auto;">
         </td>
     </tr>
     <tr >
@@ -210,9 +210,8 @@ HomeBoss. You can use the scroll bar on the right to scroll through your custome
 **Note**: The `ID`{.swift} that appears next to each name is a unique identifier given to all added customers and
 deliveries separately, and is required to perform many of HomeBoss's commands.
 More details of these commands can be found in [Features](#features)
-
-![Command Result FeedBack](images/getting-started/DeliveryID.png){style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
-
+  
+![Command Result FeedBack](images/getting-started/delivery_card.png){style="display: block; margin: 0 auto;"}
 
 </box>
 
@@ -312,18 +311,18 @@ by adding your first Delivery
    into the Command Box and hit enter.
 5. A new Customer called Gabriel should be added, you should see a new Customer similar to the image below.
 
-![CustomerAdded](images/getting-started/CustomerAdded.png){style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
+![CustomerAdded](images/getting-started/customer_add.png){style="display: block; margin: 0 auto;"}
 
 6. Now, let's add a new delivery for Gabriel into HomeBoss, suppose Gabriel ordered some furniture.
 
-> `DELIVERY_NAME`: furniture
+> `DELIVERY_NAME`: Macbook Pro
 > `DELIVERY_DATE`: 2023-12-03
 
-8. Type `delivery add furniture --customer CUSTOMER_ID --date 2023-12-03`{.swift}, replacing `CUSTOMER_ID`{.swift} with
+8. Type `delivery add Macbook Pro --customer CUSTOMER_ID --date 2023-12-03`{.swift}, replacing `CUSTOMER_ID`{.swift} with
    Gabriel's ID, and hit enter.
 9. A new Delivery should have been added for Gabriel, you should see a new Delivery similar to the image below.
 
-![DeliveryAdded](images/getting-started/DeliveryAdded.png){style="display: block; margin: 0 auto; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-radius: 5px;"}
+![DeliveryAdded](images/getting-started/delivery_add.png){style="display: block; margin: 0 auto;"}
 
 Congratulations! You have just successfully added your first Customer and Delivery!
 
@@ -417,10 +416,6 @@ Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PA
   Registers a new user account with the username `Gabriel`{.swift}, password `GabrielIsGreat`{.swift}, secret
   question `First Pet Name?`{.swift} and answer `Koko`{.swift}.
 
-**Before:**
-![](images/user/user_freshStart.png)
-**After:**
-![](images/user/userRegister_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Login
@@ -445,10 +440,7 @@ Note that you need to have an account registered with HomeBoss._
 * `login --user Gabriel --password GabrielIsGreat`{.swift} </br>
   Logs in to the user account with the username `Gabriel`{.swift} and password `GabrielIsGreat`{.swift}.
 
-**Before:**
-![](images/user/userLogin_before.png)
-**After:**
-![](images/customer/customerList.png)
+![](images/ug/login.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Update Account details
@@ -481,10 +473,6 @@ _You can update your account details to keep your account secure by calling this
   Updates the username to `GabrielV2`{.swift}, password to `GabrielIsBest`{.swift},
   secret question to `Favourite Pet`{.swift} and answer to `BoBo`{.swift}.
 
-**Before:**
-![](images/customer/customerList.png)
-**After:**
-![](images/user/userUpdate_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Logout
@@ -495,10 +483,6 @@ _You can log out of your account to keep your data secure at the end of the day 
 
 **Format:** `logout`{.swift}
 
-**Before:**
-![](images/customer/customerList.png)
-**After:**
-![](images/user/userLogout_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Recover Account
@@ -529,11 +513,13 @@ secret question that was set during account registration._
 * `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`{.swift} </br>
   Recovers the account with the answer `Koko`{.swift} and sets the new password to `NewPassword123`{.swift}.
 
-**Without optional fields (i.e., `recover account`{.swift}):**
+**Without optional fields (i.e., `recover account`{.swift} ):**
 ![](images/user/userRecoverAccount_after_secretQn.png)
-**With optional fields (i.e., `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`
-{.swift}):**
+
+**With optional fields (i.e.,
+`recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`{.swift}):**
 ![](images/user/userRecoverAccount_after_answer.png)
+
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Delete Account
@@ -553,10 +539,6 @@ However, if you've forgotten your password but recall the answer to your secret 
 recovery process by clicking `recover account`{.swift} [here](#account-recovery).
 </box>
 
-**Before:**
-![](images/customer/customerList.png)
-**After:**
-![](images/user/userDelete_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 ## <span style="text-decoration:underline;">Customer</span>
@@ -587,10 +569,8 @@ _You can add a new customer's details into HomeBoss with this command._
   Adds a customer with the name `Gabriel`{.swift}, phone number `87654321`{.swift},
   email `Gabrielrocks@gmail.com`{.swift} and address `RVRC Block B`{.swift}.
 
-**Before:**
-![](images/customer/customerList.png)
-**After:**
-![](images/customer/customerAdd_after.png)
+![](images/ug/customer_add.png)
+
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 ### View details of a Customer
@@ -614,10 +594,8 @@ in-depth description of the customer.
 * `customer view 1`{.swift} </br>
   Displays the details of customer with ID `1`{.swift}.
 
-**Before:**
-![](images/customer/customerList.png)
-**After:**
-![](images/customer/customerFind_after.png)
+![](images/ug/customer_view.png)
+
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 ### List customers
@@ -661,13 +639,11 @@ you can search for the customer using keywords by calling this command._
 
 **Example:**
 
-* `customer find Gabriel Spencer`{.swift} </br>
-  Finds customers whose names have words that exactly match either `Gabriel`{.swift} or `Spencer`{.swift}.
+* `customer find Julius Yang`{.swift} </br>
+  Finds customers whose names have words that exactly match either `Julius`{.swift} or `Yang`{.swift}.
 
-**Before:**
-![](images/customer/customerList.png)
-**After:**
-![](images/customer/customerFind_after.png)
+![](images/ug/find.png)
+
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Update customer details
@@ -705,10 +681,7 @@ Be careful! You won't be able to undo this edit action!
   Edits customer 1's name to Gabriel and phone to 9813 1051.
 - `customer edit 2 --name Joe --email yangyang@gmail.com -–address Block 10 Tampines Road`{.swift} </br>
   Edits customer 2's name to Joe, email to yangyang@gmail.com and address to Block 10 Tampines Road.\
-  **Before:**
-  ![Screenshot 2023-10-31 at 2.31.41 AM.png](..%2F..%2FScreenshot%202023-10-31%20at%202.31.41%20AM.png)
-  **After:**
-  ![Screenshot 2023-10-31 at 2.38.29 AM.png](..%2F..%2FScreenshot%202023-10-31%20at%202.38.29%20AM.png)
+
   [&uarr; Back to Table of Contents](#top)
 
 ### Delete customer
@@ -734,10 +707,6 @@ _You can delete any customers who no longer require your services from HomeBoss 
 * `customer delete 1`{.swift} </br>
   Deletes the customer with ID 1.
 
-**Before:**
-![](images/customer/customerList.png)
-**After:**
-![](images/customer/customerDelete_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 ## <span style="text-decoration:underline;">Delivery</span>
@@ -784,10 +753,8 @@ Cool huh! We try to help you speed up the process as much as possible.
   Adds a delivery with Delivery Name Chocolate Cake, with the Customer who has Customer ID 1, with Delivery Date
   of 2023-12-12, Order Date will be today's date, Delivery Status will be CREATED and Address will be the Customer's
   Address. \
-  **Before:**
-  ![Screenshot 2023-10-31 at 3.31.43 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%203.31.43%20PM.png)
-  **After:**
-  ![Screenshot 2023-10-31 at 3.48.30 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%203.48.30%20PM.png)
+
+![](images/ug/delivery_add.png)
 
 [&uarr; Back to Table of Contents](#top)
 
@@ -812,12 +779,7 @@ view a more in-depth description of the delivery.
 * `delivery view 1`{.swift} </br>
   Displays the details of delivery with ID `1001`{.swift}.
 
-**Before:**
-![](images/delivery/DeliveryListSuccess.png)
-
-**After:**
-
-![](images/delivery/DeliveryViewSuccess.png)
+![](images/ug/delivery_view.png)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -860,12 +822,7 @@ list of deliveries will be sorted by expected delivery date in descending order 
 You may combine any of the filters and sort options to get the list of deliveries that you want.
 </box>
 
-**Before:**
-
-![](images/customer/customerList.png)
-
-**After:**
-![](images/delivery/DeliveryListSuccess.png)
+![](images/ug/delivery_list.png)
 
 [&uarr; Back to Table of Contents](#top)
 
@@ -891,14 +848,10 @@ You can search for the delivery using keywords by calling this command._
 </box>
 
 **Example:**
-`delivery find Chocolate Strawberry`{.swift} </br>
-Find all deliveries whose name has words that exactly match `Chocolate`{.swift} or `Strawberry`{.swift}
+`delivery find Gambes Banana`{.swift} </br>
+Find all deliveries whose name has words that exactly match `Gambes`{.swift} or `Banana`{.swift}
 
-**Before:**
-![Delivery Find Before](images/delivery/delivery_find_before.png)
-
-**After:**
-![Delivery Find After](images/delivery/delivery_find.png)
+![](images/ug/delivery_find.png)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -941,10 +894,7 @@ delivery? No worries! Just edit the details of a delivery simply by using this f
 - `delivery edit 2 --name Vanilla Cake --customer 3`{.swift} </br>
   Edits Delivery with the ID of 2's Delivery Name to Vanilla Cake as it was misspelled and edits the customer to 
   Customer 3 as User accidentally typed in 2 instead. \
-  **Before:**
-  ![Screenshot 2023-10-31 at 4.07.02 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%204.07.02%20PM.png)
-  **After:**
-  [Haven't merged yet] \
+
   [&uarr; Back to Table of Contents](#top)
 
 ### Update delivery status
@@ -975,11 +925,9 @@ to SHIPPED! Using this feature, you can update the status of a delivery accordin
 **Examples:**
 
 - `delivery status 1 CANCELLED`{.swift}
-- `delivery status 2 SHIPPED`{.swift}\
-  **Before:**
-  ![Screenshot 2023-10-31 at 9.11.38 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%209.11.38%20PM.png)
-  **After:**
-  ![Screenshot 2023-10-31 at 9.12.20 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%209.12.20%20PM.png)
+- `delivery status 2 SHIPPED`{.swift}
+
+[&uarr; Back to Table of Contents](#top)
 
 ### Create a note for a delivery
 
@@ -1003,14 +951,6 @@ note to a specific delivery.
 
 * `delivery note 1 --note By FedEx`{.swift} </br>
   Creates a new Note "By FedEx" for the Delivery with ID `1`{.swift}
-
-**Before:**
-
-![Delivery Note Before](images/delivery/delivery_note_before.png)
-
-**After:**
-
-![Delivery Note After](images/delivery/delivery_note.png)
 
 [&uarr; Back to Table of Contents](#top)
 
@@ -1039,10 +979,7 @@ been cancelled or completed. If that's the case, simply use this feature to dele
 
 - `delivery delete 1`{.swift} </br>
   Deletes delivery 1 from the delivery book.
-  **Before:**
-  ![Screenshot 2023-10-31 at 4.06.05 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%204.06.05%20PM.png)
-  **After:**
-  ![Screenshot 2023-10-31 at 4.07.02 PM.png](..%2F..%2FScreenshot%202023-10-31%20at%204.07.02%20PM.png)
+
   [&uarr; Back to Table of Contents](#top)
 
 _Details coming soon..._
@@ -1065,10 +1002,8 @@ by calling this command._
 * You can access this command anytime when using the application, even when you are not logged in.
   </box>
 
-**Before:**
-![](images/customer/customerList.png)
-**After:**
-![](images/help_after.png)
+![](images/ug/help.png)
+
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 ### Exit
@@ -1105,10 +1040,6 @@ You can delete all your customer and delivery data by calling this command._
   Proceed with caution!
   </box>
 
-**Before:**
-![](images/customer/customerList.png)
-**After:**
-![](images/clear_after.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
 # FAQ

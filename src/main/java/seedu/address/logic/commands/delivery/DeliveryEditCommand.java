@@ -78,6 +78,8 @@ public class DeliveryEditCommand extends DeliveryCommand {
         boolean found = false;
         Delivery editedDelivery = null;
 
+        model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+
         Delivery deliveryToEdit = model.getDeliveryUsingFilteredList(targetIndex.getOneBased());
 
         if (deliveryToEdit != null) {
