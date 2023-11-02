@@ -18,10 +18,10 @@ public class UserLoginCommand extends Command {
 
     public static final String COMMAND_WORD = "login";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Login to HomeBoss.\n"
+            + ": Login to HomeBoss.\n\n"
             + "Parameters: "
             + PREFIX_USER + " USERNAME "
-            + PREFIX_PASSWORD + " PASSWORD\n"
+            + PREFIX_PASSWORD + " PASSWORD\n\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USER + " yourUsername "
             + PREFIX_PASSWORD + " yourPassword ";
@@ -29,8 +29,8 @@ public class UserLoginCommand extends Command {
     public static final String MESSAGE_WRONG_CREDENTIALS = "Wrong username/password";
     public static final String MESSAGE_ALREADY_LOGGED_IN = "You are already logged in!";
 
-    public static final String MESSAGE_NO_REGISTERED_ACCOUNT_FOUND = "No registered account found. "
-            + "Please register an account first.\n" + UserRegisterCommand.MESSAGE_USAGE;
+    public static final String MESSAGE_NO_REGISTERED_ACCOUNT_FOUND = "No registered account found.\n\n"
+            + "Please register an account first.\n\n" + UserRegisterCommand.MESSAGE_USAGE;
 
     private final User user;
 
@@ -44,6 +44,7 @@ public class UserLoginCommand extends Command {
 
     /**
      * Executes the user login command.
+     *
      * @param model {@code Model} which the command should operate on.
      * @return {@code CommandResult} that indicates success.
      * @throws CommandException if the user is already logged in or the user credentials are wrong.
@@ -74,9 +75,10 @@ public class UserLoginCommand extends Command {
 
     /**
      * Checks if the user login command is equal to another object.
+     *
      * @param other The other object to compare to.
      * @return True if the other object is a user login command with the same user.
-     *        False otherwise.
+     * False otherwise.
      */
     @Override
     public boolean equals(Object other) {

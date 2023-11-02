@@ -17,11 +17,11 @@ import seedu.address.model.person.Customer;
 public class CustomerViewCommand extends CustomerCommand {
 
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " view";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays a single customer.\n"
-        + "Parameters: "
-        + "CUSTOMER_ID\n"
-        + "Example: " + COMMAND_WORD + " "
-        + "1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays a single customer.\n\n"
+            + "Parameters: "
+            + "CUSTOMER_ID\n\n"
+            + "Example: " + COMMAND_WORD + " "
+            + "1";
 
     public static final String MESSAGE_SUCCESS = "Customer displayed: %1$s";
 
@@ -53,7 +53,7 @@ public class CustomerViewCommand extends CustomerCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof CustomerViewCommand // instanceof handles nulls
-            && customerId == ((CustomerViewCommand) other).customerId); // state check
+                || (other instanceof CustomerViewCommand // instanceof handles nulls
+                && customerId == ((CustomerViewCommand) other).customerId); // state check
     }
 }

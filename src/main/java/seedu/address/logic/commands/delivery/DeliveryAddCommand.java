@@ -31,11 +31,11 @@ public class DeliveryAddCommand extends DeliveryCommand {
 
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Delivery to the HomeBoss database. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Delivery to the HomeBoss database.\n\n"
             + "Parameters: "
             + "DELIVERY_NAME "
             + PREFIX_CUSTOMER_ID + " CUSTOMER_ID "
-            + PREFIX_DATE + " DELIVERY_DATE\n "
+            + PREFIX_DATE + " DELIVERY_DATE\n\n"
             + "Example: " + COMMAND_WORD + " "
             + "furniture "
             + PREFIX_CUSTOMER_ID + " 5 "
@@ -128,11 +128,12 @@ public class DeliveryAddCommand extends DeliveryCommand {
         ReadOnlyBook<Customer> customerReadOnlyBook = model.getAddressBook();
         boolean found = false;
 
-        for (Customer customer: customerReadOnlyBook.getList()) {
+        for (Customer customer : customerReadOnlyBook.getList()) {
             if (customerId == customer.getCustomerId()) {
                 return true;
             }
-        } return false;
+        }
+        return false;
     }
 
     /**
@@ -167,6 +168,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
         public Optional<DeliveryName> getDeliveryName() {
             return Optional.of(deliveryName);
         }
+
         public void setCustomerId(int customerId) {
             this.customerId = customerId;
         }

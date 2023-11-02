@@ -27,16 +27,16 @@ public class DeliveryListCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "list";
     public static final String MESSAGE_SUCCESS = "Listed all Deliveries";
     public static final String MESSAGE_EMPTY = "There are currently no deliveries to be listed.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all deliveries in the delivery list.\n"
-        + "Parameters: \n"
-        + "Any of the fields can be specified.\n"
-        + "[" + PREFIX_STATUS + " STATUS] "
-        + "[" + PREFIX_CUSTOMER_ID + " CUSTOMER_ID] "
-        + "[" + PREFIX_DATE + " DATE] "
-        + "[" + PREFIX_SORT + " SORT]\n"
-        + "Example: " + COMMAND_WORD + " "
-        + PREFIX_STATUS + " CREATED " + PREFIX_SORT + " ASC "
-        + PREFIX_CUSTOMER_ID + " 1 " + PREFIX_DATE + " 2020-10-10";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all deliveries in the delivery list.\n\n"
+            + "Parameters: \n"
+            + "Any of the fields can be specified.\n"
+            + "[" + PREFIX_STATUS + " STATUS] "
+            + "[" + PREFIX_CUSTOMER_ID + " CUSTOMER_ID] "
+            + "[" + PREFIX_DATE + " DATE] "
+            + "[" + PREFIX_SORT + " SORT]\n\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_STATUS + " CREATED " + PREFIX_SORT + " ASC "
+            + PREFIX_CUSTOMER_ID + " 1 " + PREFIX_DATE + " 2020-10-10";
     private DeliveryStatus status;
     private final Integer customerId;
     private final Date deliveryDate;
@@ -95,9 +95,9 @@ public class DeliveryListCommand extends DeliveryCommand {
 
         // sort by expected delivery date
         model.sortFilteredDeliveryList(
-            sortType.equals(Sort.ASC) ? Comparator.comparing(Delivery::getDeliveryDate) : Comparator.comparing(
-                    Delivery::getDeliveryDate)
-                .reversed());
+                sortType.equals(Sort.ASC) ? Comparator.comparing(Delivery::getDeliveryDate) : Comparator.comparing(
+                                Delivery::getDeliveryDate)
+                        .reversed());
 
         //TODO: UI
         return new CommandResult(MESSAGE_SUCCESS, true);
@@ -125,7 +125,7 @@ public class DeliveryListCommand extends DeliveryCommand {
         }
 
         if (this.deliveryDate != null && otherDeliveryListCommand.deliveryDate != null
-            && !this.deliveryDate.equals(otherDeliveryListCommand.deliveryDate)) {
+                && !this.deliveryDate.equals(otherDeliveryListCommand.deliveryDate)) {
             return false;
         }
 
