@@ -164,7 +164,6 @@ public class ParserUtil {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
 
-
         try {
             return new Date(trimmedDate);
         } catch (DateTimeException e) {
