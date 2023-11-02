@@ -136,7 +136,7 @@ public class ModelManager implements Model {
     @Override
     public Delivery getDeliveryUsingFilteredList(int id) {
         for (Delivery d : filteredDeliveries) {
-            if (d.getCustomerId() == id) {
+            if (d.getDeliveryId() == id) {
                 return d;
             }
         }
@@ -199,8 +199,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasCustomerWithSamePhone(Customer customer) {
+        requireNonNull(customer);
+        return addressBook.hasCustomerWithSamePhone(customer);
+    }
+
+    @Override
     public void deletePerson(Customer target) {
         addressBook.removePerson(target);
+        deleteDeliveryByCustomer(target);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
 
