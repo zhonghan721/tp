@@ -37,6 +37,7 @@ public class DeliveryFindCommand extends DeliveryCommand {
         if (!model.getUserLoginStatus()) {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
+        model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
 
         model.updateFilteredDeliveryList(predicate);
         return new CommandResult(
