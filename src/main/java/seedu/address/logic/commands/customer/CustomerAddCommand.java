@@ -52,10 +52,14 @@ public class CustomerAddCommand extends CustomerCommand {
 
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
+            // reset the customer count to the previous value
+            Customer.setCustomerCount(toAdd.getCustomerId() - 1);
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
         if (model.hasPerson(toAdd)) {
+            // reset the customer count to the previous value
+            Customer.setCustomerCount(toAdd.getCustomerId() - 1);
             throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
         }
 
