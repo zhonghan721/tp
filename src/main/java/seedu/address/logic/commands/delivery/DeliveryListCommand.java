@@ -27,8 +27,8 @@ public class DeliveryListCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "list";
     public static final String MESSAGE_SUCCESS = "Listed all Deliveries";
     public static final String MESSAGE_EMPTY = "There are currently no deliveries to be listed.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all deliveries or the deliveries filtered and " +
-        "sorted by the specified filters or sort.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all deliveries or the deliveries filtered and "
+        + "sorted by the specified filters or sort.\n"
         + "Parameters: \n"
         + "Any of the fields can be specified.\n"
         + "[" + PREFIX_STATUS + " STATUS] "
