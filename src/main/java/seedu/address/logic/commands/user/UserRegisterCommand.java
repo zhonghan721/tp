@@ -35,6 +35,8 @@ public class UserRegisterCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Registration successful. Welcome to HomeBoss!";
     public static final String MESSAGE_PASSWORD_MISMATCH = "Passwords do not match. Please try again.";
     public static final String MESSAGE_ALREADY_HAVE_ACCOUNT = "You have an account already with username %s. ";
+    public static final String MESSAGE_EMPTY_SECRET_QUESTION = "Secret question cannot be empty.";
+    public static final String MESSAGE_EMPTY_ANSWER = "Answer cannot be empty.";
 
     private final User user;
 

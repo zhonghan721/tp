@@ -31,6 +31,7 @@ public class UserRegisterCommandParser implements Parser<UserRegisterCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public UserRegisterCommand parse(String args) throws ParseException {
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM,
                         PREFIX_SECRET_QUESTION, PREFIX_ANSWER);

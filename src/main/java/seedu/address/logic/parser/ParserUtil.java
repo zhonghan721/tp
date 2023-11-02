@@ -7,6 +7,7 @@ import java.time.DateTimeException;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Sort;
+import seedu.address.logic.commands.user.UserRegisterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.DeliveryDate;
@@ -262,10 +263,14 @@ public class ParserUtil {
      * @param secretQuestion The user input secret question.
      * @return String of trimmed secret question.
      */
-    public static String parseSecretQuestion(String secretQuestion) {
+    public static String parseSecretQuestion(String secretQuestion) throws ParseException {
         requireNonNull(secretQuestion);
-        // assume whatever user inputs is valid
-        return secretQuestion.trim();
+        secretQuestion = secretQuestion.trim();
+        // reject if empty string
+        if (secretQuestion.isEmpty()) {
+            throw new ParseException(UserRegisterCommand.MESSAGE_EMPTY_SECRET_QUESTION);
+        }
+        return secretQuestion;
     }
 
     /**
@@ -274,10 +279,14 @@ public class ParserUtil {
      * @param answer The user input answer.
      * @return String of trimmed answer.
      */
-    public static String parseAnswer(String answer) {
+    public static String parseAnswer(String answer) throws ParseException {
         requireNonNull(answer);
-        // assume whatever user inputs is valid
-        return answer.trim();
+        answer = answer.trim();
+        // reject if empty string
+        if (answer.isEmpty()) {
+            throw new ParseException(UserRegisterCommand.MESSAGE_EMPTY_ANSWER);
+        }
+        return answer;
     }
 
 }
