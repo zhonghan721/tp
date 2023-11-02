@@ -94,11 +94,12 @@ public class ModelManager implements Model {
 
     @Override
     public void setUiListDelivery() {
-
+        String orderDateFormat = "Ordered on: %s";
+        String deliveryDateFormat = "Deliver by: %s";
         this.uiList = this.getSortedDeliveryList().stream().map(
                         delivery -> new ListItem(String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName()),
-                                delivery.getOrderDate().toString(), delivery.getStatus().toString(),
-                                delivery.getDeliveryDate().toString()))
+                                String.format(orderDateFormat, delivery.getOrderDate().toString()), delivery.getStatus().toString(),
+                                String.format(deliveryDateFormat, delivery.getDeliveryDate().toString())))
                 .collect(Collectors.toCollection(
                         FXCollections::observableArrayList));
     }
@@ -106,9 +107,10 @@ public class ModelManager implements Model {
 
     @Override
     public void setUiListCustomer() {
+        String descriptionFormat = "Email: %s\nAddress: %s";
         this.uiList = this.getFilteredPersonList().stream().map(
                         person -> new ListItem(String.format("[%d] %s", person.getCustomerId(), person.getName()),
-                                person.getEmail().toString(), person.getPhone().toString()))
+                                String.format(descriptionFormat, person.getEmail().toString(), person.getAddress().toString()), person.getPhone().toString()))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
