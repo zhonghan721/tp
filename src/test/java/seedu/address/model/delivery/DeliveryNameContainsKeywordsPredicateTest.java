@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -14,6 +15,17 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.DeliveryBuilder;
 
 public class DeliveryNameContainsKeywordsPredicateTest {
+
+    @Test
+    public void constructor_createsImmutableList() {
+        ArrayList<String> predicateKeywordList = new ArrayList<>();
+        predicateKeywordList.add("shouldBeHere");
+        DeliveryNameContainsKeywordsPredicate deliveryNameContainsKeywordsPredicate =
+            new DeliveryNameContainsKeywordsPredicate(predicateKeywordList);
+        predicateKeywordList.clear();
+        assertEquals(deliveryNameContainsKeywordsPredicate.toString(),
+            DeliveryNameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=[shouldBeHere]}");
+    }
 
     @Test
     public void equals() {
