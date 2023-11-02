@@ -44,7 +44,7 @@ public class DeliveryViewCommand extends DeliveryCommand {
         Optional<Delivery> delivery = model.getDelivery(deliveryId);
 
         if (delivery.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_INVALID_DELIVERY_ID, deliveryId));
+            throw new CommandException(MESSAGE_INVALID_DELIVERY_ID);
         }
 
         return new CommandResult(Messages.format(delivery.get()));
