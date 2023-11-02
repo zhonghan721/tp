@@ -141,7 +141,7 @@ public class ParserUtil {
     public static DeliveryDate parseDeliveryDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!DeliveryDate.isValidDeliveryDate(date)) {
+        if (!DeliveryDate.isValidDate(date)) {
             throw new ParseException(seedu.address.model.delivery.Date.MESSAGE_CONSTRAINTS);
         }
         return new DeliveryDate(trimmedDate);

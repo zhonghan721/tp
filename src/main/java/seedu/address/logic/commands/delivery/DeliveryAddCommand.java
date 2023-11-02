@@ -113,7 +113,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
         } else {
             throw new CommandException(MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
-        if (DeliveryDate.isValidDeliveryDate(deliveryAddDescriptor.getDate().get().toString())) {
+        if (DeliveryDate.isFutureDate(deliveryAddDescriptor.getDate().get().toString())) {
             deliveryDate = deliveryAddDescriptor.getDate().get();
         } else {
             throw new CommandException(MESSAGE_INVALID_DELIVERY_DATE);

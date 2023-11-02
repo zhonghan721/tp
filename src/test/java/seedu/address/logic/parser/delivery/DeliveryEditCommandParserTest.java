@@ -6,8 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.CUSTOMER_ID_DESC_RICE
 import static seedu.address.logic.commands.CommandTestUtil.DELIVERY_DATE_DESC_MILK;
 import static seedu.address.logic.commands.CommandTestUtil.DELIVERY_DATE_DESC_RICE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CUSTOMER_ID_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_FORMAT_DELIVERY_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NOTE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
@@ -85,7 +85,7 @@ public class DeliveryEditCommandParserTest {
         //invalid customer id
         assertParseFailure(parser, "1" + INVALID_CUSTOMER_ID_DESC, MESSAGE_INVALID_INDEX);
         //invalid delivery date
-        assertParseFailure(parser, "1" + INVALID_DELIVERY_DATE_DESC, DeliveryDate.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_FORMAT_DELIVERY_DATE_DESC, DeliveryDate.MESSAGE_CONSTRAINTS);
 
         //invalid status
         assertParseFailure(parser, "1" + INVALID_STATUS_DESC, DeliveryStatus.MESSAGE_CONSTRAINTS);
