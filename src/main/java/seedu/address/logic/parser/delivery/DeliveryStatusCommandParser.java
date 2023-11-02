@@ -41,10 +41,7 @@ public class DeliveryStatusCommandParser implements Parser<DeliveryStatusCommand
         final String id = matcher.group("id");
 
         DeliveryStatus deliveryStatus = ParserUtil.parseDeliveryStatus(status);
-        if (deliveryStatus == null) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeliveryStatusCommand.MESSAGE_USAGE));
-        }
+
         int deliveryId = ParserUtil.parseId(id);
 
         return new DeliveryStatusCommand(deliveryId, deliveryStatus);

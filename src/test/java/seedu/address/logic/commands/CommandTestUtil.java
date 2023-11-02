@@ -163,7 +163,6 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final String VALID_DELIVERY_LIST_ALL = " " + PREFIX_STATUS + "all";
     public static final String INVALID_DELIVERY_LIST_ALL = " " + "sadasdasdasdasdasdas";
     public static final String VALID_DELIVERY_LIST_CUSTOMER_ID = " " + PREFIX_CUSTOMER_ID + "1";
     public static final String INVALID_DELIVERY_LIST_CUSTOMER_ID = " " + PREFIX_CUSTOMER_ID + "x";
