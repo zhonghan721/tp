@@ -33,20 +33,20 @@ public class CustomerEditCommand extends CustomerCommand {
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " " + "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-        + "by the CUSTOMER_ID used in the displayed person list. "
-        + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: CUSTOMER_ID (must be a positive integer) "
-        + "[" + PREFIX_NAME + " NAME] "
-        + "[" + PREFIX_PHONE + " PHONE] "
-        + "[" + PREFIX_EMAIL + " EMAIL] "
-        + "[" + PREFIX_ADDRESS + " ADDRESS]\n"
-        + "Example: " + COMMAND_WORD + " 1 "
-        + PREFIX_PHONE + " 91234567 "
-        + PREFIX_EMAIL + " johndoe@example.com";
+            + "by the customer ID used in the displayed person list. "
+            + "Existing values will be overwritten by the input values.\n\n"
+            + "Parameters: CUSTOMER_ID (must be a positive integer) "
+            + "[" + PREFIX_NAME + " NAME] "
+            + "[" + PREFIX_PHONE + " PHONE] "
+            + "[" + PREFIX_EMAIL + " EMAIL] "
+            + "[" + PREFIX_ADDRESS + " ADDRESS]\n\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_PHONE + " 91234567 "
+            + PREFIX_EMAIL + " johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person:\n\n%1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Customer:\n\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This customer already exists in the customer database.";
 
     private final Index targetIndex;
     private final CustomerEditDescriptor customerEditDescriptor;
@@ -101,7 +101,7 @@ public class CustomerEditCommand extends CustomerCommand {
             model.setPerson(customerToEdit, editedCustomer);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
-                Messages.format(editedCustomer)), true);
+                    Messages.format(editedCustomer)), true);
         }
 
     }
@@ -121,7 +121,7 @@ public class CustomerEditCommand extends CustomerCommand {
         Address updatedAddress = customerEditDescriptor.getAddress().orElse(customerToEdit.getAddress());
 
         return new Customer(customerToEdit.getCustomerId(), updatedName, updatedPhone,
-            updatedEmail, updatedAddress);
+                updatedEmail, updatedAddress);
     }
 
     @Override
@@ -137,15 +137,15 @@ public class CustomerEditCommand extends CustomerCommand {
 
         CustomerEditCommand otherEditCommand = (CustomerEditCommand) other;
         return targetIndex.equals(otherEditCommand.targetIndex)
-            && customerEditDescriptor.equals(otherEditCommand.customerEditDescriptor);
+                && customerEditDescriptor.equals(otherEditCommand.customerEditDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("id", targetIndex)
-            .add("customerEditDescriptor", customerEditDescriptor)
-            .toString();
+                .add("id", targetIndex)
+                .add("customerEditDescriptor", customerEditDescriptor)
+                .toString();
     }
 
     /**
@@ -230,19 +230,19 @@ public class CustomerEditCommand extends CustomerCommand {
 
             CustomerEditDescriptor otherCustomerEditDescriptor = (CustomerEditDescriptor) other;
             return Objects.equals(name, otherCustomerEditDescriptor.name)
-                && Objects.equals(phone, otherCustomerEditDescriptor.phone)
-                && Objects.equals(email, otherCustomerEditDescriptor.email)
-                && Objects.equals(address, otherCustomerEditDescriptor.address);
+                    && Objects.equals(phone, otherCustomerEditDescriptor.phone)
+                    && Objects.equals(email, otherCustomerEditDescriptor.email)
+                    && Objects.equals(address, otherCustomerEditDescriptor.address);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .toString();
+                    .add("name", name)
+                    .add("phone", phone)
+                    .add("email", email)
+                    .add("address", address)
+                    .toString();
         }
     }
 }

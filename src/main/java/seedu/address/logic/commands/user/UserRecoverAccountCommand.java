@@ -19,12 +19,12 @@ import seedu.address.model.user.User;
 public class UserRecoverAccountCommand extends Command {
 
     public static final String COMMAND_WORD = "recover account";
-    public static final String MESSAGE_USAGE = "\n" + COMMAND_WORD
-            + ": Recover your account for HomeBoss.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Recover your account for HomeBoss.\n\n"
             + "Parameters: ["
             + PREFIX_ANSWER + " ANSWER " + PREFIX_PASSWORD + " NEW_PASSWORD " + PREFIX_PASSWORD_CONFIRM
-            + " NEW_PASSWORD]\n"
-            + "Example 1: " + COMMAND_WORD + "\n"
+            + " NEW_PASSWORD]\n\n"
+            + "Example 1: " + COMMAND_WORD + "\n\n"
             + "Example 2: " + COMMAND_WORD + " "
             + PREFIX_ANSWER + " yourAnswer "
             + PREFIX_PASSWORD + " yourNewPassword "
@@ -76,7 +76,7 @@ public class UserRecoverAccountCommand extends Command {
 
         if (isShowSecretQuestion) {
             String output = String.format(MESSAGE_SUCCESS_WITHOUT_FLAGS, storedUser.getSecretQuestion());
-            output += "\n" + "Please answer the question using the following command: "
+            output += "\n\n" + "Please answer the question using the following command:\n"
                     + UserRecoverAccountCommand.MESSAGE_USAGE;
             return new CommandResult(output);
         }

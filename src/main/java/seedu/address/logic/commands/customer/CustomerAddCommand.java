@@ -22,11 +22,11 @@ public class CustomerAddCommand extends CustomerCommand {
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " " + "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the HomeBoss."
-            + "\nParameters: "
+            + "\n\nParameters: "
             + PREFIX_NAME + " NAME "
             + PREFIX_PHONE + " PHONE "
             + PREFIX_EMAIL + " EMAIL "
-            + PREFIX_ADDRESS + " ADDRESS\n"
+            + PREFIX_ADDRESS + " ADDRESS\n\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " John Doe "
             + PREFIX_PHONE + " 98765432 "
