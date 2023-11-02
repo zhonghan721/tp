@@ -192,10 +192,6 @@ public class ParserUtil {
         requireNonNull(status);
         String trimmedStatus = status.trim().toUpperCase();
 
-        if (trimmedStatus.equals("ALL")) {
-            return null;
-        }
-
         if (!DeliveryStatus.isValidStatus(trimmedStatus)) {
             throw new ParseException(DeliveryStatus.MESSAGE_CONSTRAINTS);
         }
