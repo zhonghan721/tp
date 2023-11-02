@@ -62,7 +62,7 @@ public class DeliveryTest {
     @Test
     public void setNote() {
         Delivery delivery = new DeliveryBuilder().autoBuild();
-        Note note = new Note("Hi!");
+        Note note = new Note("Hi");
         delivery.setNote(note);
         assertTrue(delivery.getNote().equals(note));
     }
