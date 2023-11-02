@@ -32,7 +32,7 @@ public class DeliveryStatusCommand extends DeliveryCommand {
             + "STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED)\n"
             + "Example: " + COMMAND_WORD + " 1 COMPLETED";
 
-    public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery:\n%1$s";
+    public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery:\n\n%1$s";
 
     private final int targetId;
     private final DeliveryStatus updatedStatus;
