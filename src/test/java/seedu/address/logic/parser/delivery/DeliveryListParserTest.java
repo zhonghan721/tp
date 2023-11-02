@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_DELIVERY_DATE_MONTH;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_DELIVERY_DATE_TODAY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_SORT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_ALL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_CANCELLED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_COMPLETED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_CREATED;
@@ -40,8 +39,6 @@ public class DeliveryListParserTest {
     @Test
     public void parse_validArgs_returnsDeliveryListCommand() {
 
-        CommandParserTestUtil.assertParseSuccess(parser, VALID_DELIVERY_LIST_ALL,
-            new DeliveryListCommand(null, null, null, Sort.DESC));
         CommandParserTestUtil.assertParseSuccess(parser, VALID_DELIVERY_LIST_SHIPPED,
             new DeliveryListCommand(DeliveryStatus.SHIPPED, null, null, Sort.DESC));
         CommandParserTestUtil.assertParseSuccess(parser, VALID_DELIVERY_LIST_CREATED,
@@ -53,26 +50,25 @@ public class DeliveryListParserTest {
             new DeliveryListCommand(DeliveryStatus.CANCELLED, null, null, Sort.DESC));
 
         // Test customerId
-        CommandParserTestUtil.assertParseSuccess(parser, VALID_DELIVERY_LIST_ALL + VALID_DELIVERY_LIST_CUSTOMER_ID,
+        CommandParserTestUtil.assertParseSuccess(parser, VALID_DELIVERY_LIST_CUSTOMER_ID,
             new DeliveryListCommand(null, 1, null, Sort.DESC));
 
         // Test deliveryDate
-        CommandParserTestUtil.assertParseSuccess(parser, VALID_DELIVERY_LIST_ALL + VALID_DELIVERY_LIST_DELIVERY_DATE,
+        CommandParserTestUtil.assertParseSuccess(parser, VALID_DELIVERY_LIST_DELIVERY_DATE,
             new DeliveryListCommand(null, null, new Date("2023-12-12"),
                 Sort.DESC));
 
         // Test delivery date if "today"
         CommandParserTestUtil.assertParseSuccess(parser,
-            VALID_DELIVERY_LIST_ALL + " "
-                + VALID_DELIVERY_LIST_DELIVERY_DATE_TODAY,
+            VALID_DELIVERY_LIST_DELIVERY_DATE_TODAY,
             new DeliveryListCommand(null, null,
                 new Date(LocalDate.now().format(DateTimeFormatter.ofPattern(Date.FORMAT))),
                 Sort.DESC));
 
-        CommandParserTestUtil.assertParseSuccess(parser, VALID_DELIVERY_LIST_ALL + VALID_DELIVERY_LIST_SORT_ASC,
+        CommandParserTestUtil.assertParseSuccess(parser, VALID_DELIVERY_LIST_SORT_ASC,
             new DeliveryListCommand(null, null, null, Sort.ASC));
 
-        CommandParserTestUtil.assertParseSuccess(parser, VALID_DELIVERY_LIST_ALL + VALID_DELIVERY_LIST_SORT_DESC,
+        CommandParserTestUtil.assertParseSuccess(parser, VALID_DELIVERY_LIST_SORT_DESC,
             new DeliveryListCommand(null, null, null, Sort.DESC));
 
 
@@ -99,10 +95,10 @@ public class DeliveryListParserTest {
 
     @Test
     public void execute_listIsFilteredByWrongDate_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, VALID_DELIVERY_LIST_ALL + INVALID_DELIVERY_LIST_DELIVERY_DATE,
+        CommandParserTestUtil.assertParseFailure(parser, INVALID_DELIVERY_LIST_DELIVERY_DATE,
             String.format(Date.MESSAGE_CONSTRAINTS));
         CommandParserTestUtil.assertParseFailure(parser,
-            VALID_DELIVERY_LIST_ALL + INVALID_DELIVERY_LIST_DELIVERY_DATE_MONTH,
+            INVALID_DELIVERY_LIST_DELIVERY_DATE_MONTH,
             String.format(Date.MESSAGE_CONSTRAINTS));
     }
 

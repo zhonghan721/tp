@@ -23,11 +23,11 @@ Essentially, with HomeBoss, you can **focus on what matters most: running your b
 
 ---
 
-## About this User Guide
+# About this User Guide
 
 This user guide provides you with everything that you need to know when using HomeBoss.
 
-If you are new to HomeBoss, head over to the [Quick Start Guide](#quick-start-guide) section for a quick overview
+If you are new to HomeBoss, head over to the [Getting Started](#getting-started) section for a quick overview
 on how to get started.
 
 Additionally, this user guide provides you with detailed explanations of all the features available
@@ -39,21 +39,21 @@ commands available in HomeBoss.
 If you would like to learn about the technical aspects of HomeBoss,
 you may refer to the [Developer Guide](./DeveloperGuide.md).
 
-### Navigating the User Guide
+# Navigating the User Guide
 
 **Note Box**
-<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 Provides you with information that is useful to know.
 </box>
 
 **Tip Box**
-<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
+<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 Provides you with information that can help enhance your user experience but is not necessary to know.
 </box>
 
 **Warning Box**
-<box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
-Important information for you to take note of to avoid any unintended effects!
+<box type="warning" background-color="#f2dede" border-color="#ebccd1" icon=":exclamation:">
+Provides you with important information to take note of to avoid any unintended effects!
 </box>
 
 **Links**
@@ -68,9 +68,9 @@ Important information for you to take note of to avoid any unintended effects!
 # Table of Contents
 
 * 1\. Introduction
-    * 1.1 About HomeBoss
-    * 1.2 About this User Guide
-    * 1.3 Navigating the User Guide
+    * 1.1 [About HomeBoss](#about-homeboss)
+    * 1.2 [About this User Guide](#about-this-user-guide)
+    * 1.3 [Navigating the User Guide](#navigating-the-user-guide)
 * 2\. Table of Contents
 * 3\. [Getting Started](#getting-started)
     * 3.1 [Prerequisites](#prerequisites)
@@ -94,7 +94,7 @@ Important information for you to take note of to avoid any unintended effects!
         * 4.3.3 [View details of delivery](#view-details-of-a-delivery)
         * 4.3.4 Update details of delivery
         * 4.3.5 Update delivery status
-        * 4.3.6 Create a note for a delivery
+        * 4.3.6 [Create a note for a delivery](#create-a-note-for-a-delivery)
         * 4.3.7 Delete delivery
         * 4.3.8 [Find deliveries](#find-deliveries)
     * 4.4 Miscellaneous
@@ -332,49 +332,52 @@ HomeBoss has many other features for you to try to streamline your delivery work
 
 ---
 
-# Command Summary
+# Feature Summary
 
-Here is a brief introduction to the commands that you will be using in HomeBoss. For more detailed information, please
+Here is a brief introduction to all the features in HomeBoss. For more detailed information, please
 refer to the [Features](#features) section.
 
 ### User
 
-_These are commands for managing your user account in HomeBoss._
+_These are features for managing your user account in HomeBoss._
 
 - `register` - Registers a new user account to use HomeBoss.
 - `login` - Logs in to your user account.
 - `update` - Updates your user account details.
-- `logout` - Logs out of your user account.
 - `recover account` - Recovers your user account.
+- `logout` - Logs out of your user account.
 - `delete account` - Deletes your user account.
 
 ### Customer
 
-_These are commands for managing your customers in HomeBoss._
+_These are features for managing your customers in HomeBoss._
 
 - `customer add` - Adds a customer to the address book.
 - `customer find` - Finds customers whose names contain any of the given keywords.
 - `customer list` - Lists all customers in the address book.
+- `customer view` - Shows the details of the specified customer.
 - `customer edit` - Updates the details of an existing customer in the address book.
 - `customer delete` - Deletes the specified customer from the address book.
 
 ### Delivery
 
-_These are commands for managing your deliveries in HomeBoss._
+_These are features for managing your deliveries in HomeBoss._
 
 - `delivery add` - Adds a delivery to the delivery book.
+- `delivery find` - Finds deliveries whose names contain any of the given keywords.
 - `delivery list` - Lists all deliveries in the delivery book.
 - `delivery view` - Shows the details of the specified delivery.
+- `delivery edit` - Updates the details of an existing delivery in the delivery book.
 - `delivery status` - Changes the status of a specified delivery.
 - `delivery note` - Creates a note for a specified delivery.
 - `delivery delete` - Deletes the specified delivery from the delivery book.
 
 ### Miscellaneous
 
-_These are general commands for using HomeBoss._
+_These are general features in HomeBoss._
 
-- `help` - Shows a list of commands and their usage.
 - `exit` - Exits the program.
+- `help` - Shows a list of commands and their usage.
 - `clear` - Clears both customer and delivery database. **Warning:** This action is irreversible.
 
 ---
@@ -421,19 +424,22 @@ Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PA
 
 > Logs in to your user account.
 
-_Want to access your data in HomeBoss? You can log in to your account by calling this command.
+_You can log in to your account to access your customer and delivery data by calling this command.
 Note that you need to have an account registered with HomeBoss._
 
-**Format:** `login --user USERNAME --password PASSWORD`
+**Format:** `login --user USERNAME --password PASSWORD`{.swift}
 
-<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
-    All fields are required.
-</box>
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* All fields are required.
+  </box>
 
 **Example:**
 
-* `login --user gabriel --password gabrielIsGreat` - Logs in to the user account with the username `gabriel` and
-  password `gabrielIsGreat`.
+* `login --user Gabriel --password GabrielIsGreat`{.swift} </br>
+  Logs in to the user account with the username `Gabriel`{.swift} and password `GabrielIsGreat`{.swift}.
 
 **Before:**
 ![](images/user/userLogin_before.png)
@@ -445,24 +451,26 @@ Note that you need to have an account registered with HomeBoss._
 
 > Updates your user account details.
 
-Want to keep your account secure? You can update your account details by calling this command.
+_You can update your account details to keep your account secure by calling this command._
 
 **Format:** `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD]
-[--secretQn SECRET_QUESTION --answer ANSWER]`
+[--secretQn SECRET_QUESTION --answer ANSWER]`{.swift}
 
-<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
-    * [] around a group of parameters indicates that it is optional, but all parameters within the group must be provided.
-    * At least one of the optional fields must be provided.
-    * If PASSWORD is provided, CONFIRM_PASSWORD must also be provided, vice versa.
-    * If SECRET_QUESTION is provided, ANSWER must also be provided, vice versa.
-    * The details will be updated without checking against the current details.
-</box>
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* At least one of the optional fields must be provided.
+* The `PASSWORD`{.swift} must be at least 8 characters long.
+* The details will be updated without checking against the current details.
+  </box>
 
 **Example:**
 
-* `update --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest
-  --secretQn Favourite Pet --answer BoBo` - Updates the username to `gabrielV2`, password to `gabrielIsBest`, secret
-  question to `Favourite Pet` and answer to `BoBo`.
+* `update --user GabrielV2 --password GabrielIsBest --confirmPass GabrielIsBest
+  --secretQn Favourite Pet --answer BoBo`{.swift} </br>
+  Updates the username to `GabrielV2`{.swift}, password to `GabrielIsBest`{.swift},
+  secret question to `Favourite Pet`{.swift} and answer to `BoBo`{.swift}.
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -474,9 +482,9 @@ Want to keep your account secure? You can update your account details by calling
 
 > Logs out of your user account.
 
-_Want to keep your data secure at the end of the day? You can log out of your account by calling this command._
+_You can log out of your account to keep your data secure at the end of the day by calling this command._
 
-**Format:** `logout`
+**Format:** `logout`{.swift}
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -545,19 +553,28 @@ recovery process by clicking `recover account`{.swift} [here](#account-recovery)
 
 > Adds a customer to the address book.
 
-_Did you just receive a new customer? You can add the customer's details into HomeBoss with this command._
+_You can add a new customer's details into HomeBoss with this command._
 
-**Format:** `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`
+**Format:** `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`{.swift}
 
-<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
-    * All fields are required.
-    * HomeBoss does not allow you to add customers with the same phone number.
-</box>
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* All fields are required.
+* HomeBoss does not allow you to add customers with the same phone number.
+* A unique customer ID (may not be consecutive) will be assigned to the customer.
+* The `NAME`{.swift} must be alphanumeric and can contain spaces.
+* The `PHONE_NUMBER`{.swift} must be exactly 8 digits.
+* The `EMAIL`{.swift} must follow the `local@domain`{.swift} format.
+* The `ADDRESS`{.swift} can take any values.
+  </box>
 
 **Example:**
 
-* `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B` - Adds a customer
-  with the name `Gabriel`, phone number `87654321`, email `gabrielrocks@gmail.com` and address `RVRC Block B`.
+* `customer add --name Gabriel --phone 87654321 --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift} </br>
+  Adds a customer with the name `Gabriel`{.swift}, phone number `87654321`{.swift},
+  email `Gabrielrocks@gmail.com`{.swift} and address `RVRC Block B`{.swift}.
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -567,21 +584,25 @@ _Did you just receive a new customer? You can add the customer's details into Ho
 
 ### Find customers
 
-> Finds customers whose names contain _ANY_ of the given keywords.
+> Finds customers whose names have words that exactly match _ANY_ of the given keywords.
 
-_Want to find details of a customer, but you do not remember the customer's full name?
-You can search for the customer using keywords by calling this command._
+_If you want to find details of a customer, but you do not remember the customer's full name,
+you can search for the customer using keywords by calling this command._
 
-**Format:** `customer find KEYWORD [MORE_KEYWORDS]`
+**Format:** `customer find KEYWORD [MORE_KEYWORDS...]`{.swift}
 
-<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
-    You must provide at least one keyword to search for the customer.
-</box>
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* You must provide at least one keyword to search for the customer.
+* You can choose to provide multiple keywords.
+  </box>
 
 **Example:**
 
-* `customer find Gabriel Spencer` - Finds customers whose names contain _ANY_ of the given keywords `Gabriel`
-  and `Spencer`.
+* `customer find Gabriel Spencer`{.swift} </br>
+  Finds customers whose names have words that exactly match either `Gabriel`{.swift} or `Spencer`{.swift}.
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -745,9 +766,8 @@ You may combine any of the filters and sort options to get the list of deliverie
 
 > Shows the details of the specified delivery.
 
-If you would like to get the details of a specific delivery, you can use `delivery view`{.swift} to view the details of
-the delivery. You can see the delivery id, delivery name, delivery status, address, customer name, customer ID, ordered
-date, expected delivery date, and notes (if any).
+If you would to see more details about a specific delivery, you can use the `delivery view`{.swift} command to
+view a more in-depth description of the delivery.
 
 **Format:** `delivery view DELIVERY_ID`{.swift}
 
@@ -772,6 +792,12 @@ date, expected delivery date, and notes (if any).
 ![](images/delivery/DeliveryViewSuccess.png)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+
+**After:**
+
+![Delivery View](images/delivery/delivery_view.png)
+
+[&uarr; Back to Table of Contents](#top)
 
 ### Update delivery status
 
@@ -829,35 +855,36 @@ delivery? No worries! Just edit the details of a delivery simply by using this f
 
 ### Create a note for a delivery
 
-Creates a note for a specified delivery
+> Creates a note for a specified delivery
 
-**Format:** `delivery note DELIVERY_ID --note NOTE`
+If you would like create a note about a specific delivery, you can use `delivery note`{.swift} to add a quick
+note to a specific delivery.
+
+**Format:** `delivery note DELIVERY_ID --note NOTE`{.swift}
+
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* If the delivery already has a Note it will be overwritten by the new Note given.
+* The `DELIVERY_ID`{.swift} must be an Integer.
+* The `NOTE`{.swift} must a Non-empty Alphanumeric String.
+  </box>
 
 **Example:**
 
-* `delivery note 1 --note By FedEx`
+* `delivery note 1 --note By FedEx`{.swift} </br>
+  Creates a new Note "By FedEx" for the Delivery with ID `1`{.swift}
 
-**Accepted Values:**
+**Before:**
 
-_DELIVERY_ID_: Integer
+![Delivery Note Before](images/delivery/delivery_note_before.png)
 
-_NOTE_: Nonempty alphanumeric string
+**After:**
 
-**Command succeeds:**
+![Delivery Note After](images/delivery/delivery_note.png)
 
-![Delivery Note](images/delivery/delivery_note.png)
-
-**Command failed (invalid_index):** _The delivery index provided is invalid_
-
-**Command failed (invalid_note):** _Note should not be empty_
-
-**Command failed (missing_fields):**
-
-_Invalid command format!_</br>
-_delivery note: Adds a note to the delivery identified by the ID of the delivery. Existing note if any will be replaced
-with the input note._</br>
-_Parameters: DELIVERY_ID (must be a integer representing a valid ID) --note Note_</br>
-_Example: delivery note 1 --note This is a note_</br>
+[&uarr; Back to Table of Contents](#top)
 
 ### Find deliveries
 
@@ -923,14 +950,17 @@ _Details coming soon..._
 
 > Shows a list of commands and their usage.
 
-_Want to know what commands are available in HomeBoss? You can view a summary of the commands available, the format
-of the commands, and a link to this user guide by calling this command._
+_You can view a summary of the commands available, the format of the commands, and a link to this user guide
+by calling this command._
 
-**Format:** `help`
+**Format:** `help`{.swift}
 
-<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
-    You can access this command anytime when using the application, even when you are not logged in.
-</box>
+<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
+
+**Tip:**
+
+* You can access this command anytime when using the application, even when you are not logged in.
+  </box>
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -942,13 +972,16 @@ of the commands, and a link to this user guide by calling this command._
 
 > Exits the program.
 
-_Want to exit HomeBoss? You can exit the program by calling this command._
+_You can exit the program by calling this command._
 
-**Format:** `exit`
+**Format:** `exit`{.swift}
 
-<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
-    If you are logged in, this command will automatically log you out of your account and close the application.
-</box>
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* If you are logged in, this command will automatically log you out of your account and close the application.
+  </box>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
@@ -959,11 +992,15 @@ _Want to exit HomeBoss? You can exit the program by calling this command._
 _Need to clear your customer and delivery data?
 You can delete all your customer and delivery data by calling this command._
 
-**Format:** `clear`
+**Format:** `clear`{.swift}
 
-<box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
-    This action is irreversible! All your customer and delivery data will be deleted permanently. Proceed with caution.
-</box>
+<box type="warning" background-color="#f2dede" border-color="#ebccd1" icon=":exclamation:">
+
+**Warning:**
+
+* Be careful, this action is irreversible! All your customer and delivery data will be deleted permanently.
+  Proceed with caution!
+  </box>
 
 **Before:**
 ![](images/customer/customerList.png)
@@ -1002,7 +1039,7 @@ A: HomeBoss only supports English characters.
 |----------|------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | Register | `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`     | `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko` |
 | Login    | `login --user USERNAME --password PASSWORD`                                                                                  | `login --user gabriel --password gabrielIsGreat`                                                                            |
-| Update   | `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD] [--secretQn SECRET_QUESTION --answer ANSWER]` | `login --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest --secretQn Favourite Pet --answer BoBo`        |
+| Update   | `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD] [--secretQn SECRET_QUESTION --answer ANSWER]` | `update --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest --secretQn Favourite Pet --answer BoBo`       |
 | Recover  | `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`                                   | `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`                                      |
 | Logout   | `logout`                                                                                                                     | `logout`                                                                                                                    |
 | Delete   | `delete account`                                                                                                             | `delete account`                                                                                                            |
@@ -1033,9 +1070,9 @@ A: HomeBoss only supports English characters.
 
 #### Other
 
-| Command | Format                                                                                   | Examples                                                                                          |
-|---------|------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| Exit    | `exit`                                                                                   | `exit`                                                                                            |
-| Help    | `help`                                                                                   | `help`                                                                                            |
-| Clear   | `clear`                                                                                  | `clear`                                                                                           |
+| Command | Format  | Examples |
+|---------|---------|----------|
+| Exit    | `exit`  | `exit`   |
+| Help    | `help`  | `help`   |
+| Clear   | `clear` | `clear`  |
 
