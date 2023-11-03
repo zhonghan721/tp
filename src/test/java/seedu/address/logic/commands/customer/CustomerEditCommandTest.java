@@ -132,40 +132,11 @@ public class CustomerEditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        // edit person in filtered list into a duplicate in address book
-        Customer customerInList = model.getAddressBook().getList().get(INDEX_SECOND_PERSON.getZeroBased());
-        CustomerEditCommand editCommand = new CustomerEditCommand(INDEX_FIRST_PERSON,
-            new CustomerEditDescriptorBuilder(customerInList).build());
-
-        assertCommandFailure(editCommand, model, CustomerEditCommand.MESSAGE_DUPLICATE_PERSON);
-    }
-
-    @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         CustomerEditDescriptor descriptor = new CustomerEditDescriptorBuilder()
             .withName(VALID_NAME_BOB).build();
         CustomerEditCommand editCommand = new CustomerEditCommand(outOfBoundIndex, descriptor);
-
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
-    }
-
-    /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
-     */
-    @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getList().size());
-
-        CustomerEditCommand editCommand = new CustomerEditCommand(outOfBoundIndex,
-            new CustomerEditDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }

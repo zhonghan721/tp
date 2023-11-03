@@ -40,6 +40,8 @@ public class DeliveryDeleteCommand extends DeliveryCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
+        model.updateFilteredDeliveryList(Model.PREDICATE_SHOW_ALL_DELIVERIES);
+
         Delivery deliveryToDelete = model.getDeliveryUsingFilteredList(targetIndex.getOneBased());
 
         if (deliveryToDelete != null) {
