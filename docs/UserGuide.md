@@ -543,7 +543,7 @@ recovery process by clicking `recover account`{.swift} [here](#account-recovery)
 
 ## <span style="text-decoration:underline;">Customer</span>
 
-### Add a customer
+### Add a Customer
 
 > Adds a customer to the address book.
 
@@ -598,7 +598,7 @@ in-depth description of the customer.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### List customers
+### List Customers
 
 > Lists all the customers added in the address book.
 
@@ -613,7 +613,7 @@ once.
 
 [&uarr; Back to Table of Contents](#top)
 
-### Find customers
+### Find Customers
 
 > Finds customers whose names have words that exactly match _ANY_ of the given keywords.
 
@@ -646,7 +646,7 @@ you can search for the customer using keywords by calling this command._
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### Update customer details
+### Update a Customer's details
 
 > Updates the personal details of an existing customer in the address book.
 
@@ -668,13 +668,6 @@ worries! You can edit the details of a customer simply by calling this command.
 
 </box>
 
-<box background-color="#f2dede" border-color="#ebccd1" type="warning" icon=":exclamation:">
-
-**Warning:**
-
-Be careful! You won't be able to undo this edit action! 
-</box>
-
 **Examples:**
 
 - `customer edit 1 --name Gabriel -–phone 9813 1051`{.swift} </br>
@@ -684,7 +677,7 @@ Be careful! You won't be able to undo this edit action!
 
   [&uarr; Back to Table of Contents](#top)
 
-### Delete customer
+### Delete a Customer
 
 > Deletes the specified customer from the customer database. All deliveries associated with the customer will also be
 > deleted.
@@ -702,6 +695,12 @@ _You can delete any customers who no longer require your services from HomeBoss 
 </box>
 
 <box background-color="#f2dede" border-color="#ebccd1" type="warning" icon=":exclamation:">
+
+**Warning:**
+
+Be careful! You won't be able to undo this edit action!
+</box>
+
 **Example:**
 
 * `customer delete 1`{.swift} </br>
@@ -711,7 +710,7 @@ _You can delete any customers who no longer require your services from HomeBoss 
 
 ## <span style="text-decoration:underline;">Delivery</span>
 
-### Add delivery
+### Add a Delivery
 
 > Adds a delivery to the delivery book.
 
@@ -758,7 +757,7 @@ Cool huh! We try to help you speed up the process as much as possible.
 
 [&uarr; Back to Table of Contents](#top)
 
-### View details of a delivery
+### View details of a Delivery
 
 > Shows the details of the specified delivery.
 
@@ -783,7 +782,7 @@ view a more in-depth description of the delivery.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### View a list of deliveries
+### View a list of Deliveries
 
 > Lists the deliveries in the delivery book.
 
@@ -826,7 +825,7 @@ You may combine any of the filters and sort options to get the list of deliverie
 
 [&uarr; Back to Table of Contents](#top)
 
-### Find deliveries
+### Find Deliveries
 
 > Finds deliveries whose names has words that exactly match _ANY_ of the given keywords.
 
@@ -855,7 +854,7 @@ Find all deliveries whose name has words that exactly match `Gambes`{.swift} or 
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-#### Update delivery details
+#### Update a Delivery's details
 
 > Updates the delivery details of an existing delivery in the delivery book.
 
@@ -897,7 +896,7 @@ delivery? No worries! Just edit the details of a delivery simply by using this f
 
   [&uarr; Back to Table of Contents](#top)
 
-### Update delivery status
+### Update a Delivery's status
 
 > Changes the status of a specified delivery to CREATED, SHIPPED, COMPLETED or CANCELLED
 
@@ -929,7 +928,7 @@ to SHIPPED! Using this feature, you can update the status of a delivery accordin
 
 [&uarr; Back to Table of Contents](#top)
 
-### Create a note for a delivery
+### Create a note for a Delivery
 
 > Creates a note for a specified delivery
 
@@ -954,7 +953,7 @@ note to a specific delivery.
 
 [&uarr; Back to Table of Contents](#top)
 
-### Delete delivery
+### Delete a Delivery
 
 > Deletes the specified delivery.
 
