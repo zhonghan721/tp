@@ -393,8 +393,7 @@ _These are general features in HomeBoss._
 
 _Register an account before you start using HomeBoss._
 
-**
-Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
+**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
 {.swift}
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
