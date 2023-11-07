@@ -393,8 +393,11 @@ _These are general features in HomeBoss._
 
 _Register an account before you start using HomeBoss._
 
-**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
-{.swift}
+</br>**Format:**
+
+`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -409,10 +412,9 @@ _Register an account before you start using HomeBoss._
 
   </box>
 
-**Example:**
+</br>**Example:**
 
-* `register --user Gabriel --password GabrielIsGreat --confirmPass GabrielIsGreat --secretQn First Pet Name? --answer Koko`
-  {.swift} </br>
+* `register --user Gabriel --password GabrielIsGreat --confirmPass GabrielIsGreat --secretQn First Pet Name? --answer Koko`{.swift}</br>
   Registers a new user account with the username `Gabriel`{.swift}, password `GabrielIsGreat`{.swift}, secret
   question `First Pet Name?`{.swift} and answer `Koko`{.swift}.
 
@@ -425,7 +427,11 @@ _Register an account before you start using HomeBoss._
 _You can log in to your account to access your customer and delivery data by calling this command.
 Note that you need to have an account registered with HomeBoss._
 
-**Format:** `login --user USERNAME --password PASSWORD`{.swift}
+</br>**Format:** 
+
+`login --user USERNAME --password PASSWORD`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -436,7 +442,7 @@ Note that you need to have an account registered with HomeBoss._
 
   </box>
 
-**Example:**
+</br>**Example:**
 
 * `login --user Gabriel --password GabrielIsGreat`{.swift} </br>
   Logs in to the user account with the username `Gabriel`{.swift} and password `GabrielIsGreat`{.swift}.
@@ -450,8 +456,12 @@ Note that you need to have an account registered with HomeBoss._
 
 _You can update your account details to keep your account secure by calling this command._
 
-**Format:** `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD]
+</br>**Format:** 
+
+`update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD]
 [--secretQn SECRET_QUESTION --answer ANSWER]`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -467,7 +477,7 @@ _You can update your account details to keep your account secure by calling this
 
   </box>
 
-**Example:**
+</br>**Example:**
 
 * `update --user GabrielV2 --password GabrielIsBest --confirmPass GabrielIsBest
   --secretQn Favourite Pet --answer BoBo`{.swift} </br>
@@ -493,7 +503,11 @@ _You can log out of your account to keep your data secure at the end of the day 
 _HomeBoss makes it easy for you to recover your account if you forget your password. You only need the answer to the
 secret question that was set during account registration._
 
-**Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift}
+</br>**Format:** 
+
+`recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -507,7 +521,7 @@ secret question that was set during account registration._
 
   </box>
 
-**Examples:**
+</br>**Examples:**
 
 * `recover account`{.swift} </br>
   Displays your account's secret question for account recovery.
@@ -552,7 +566,11 @@ recovery process by clicking `recover account`{.swift} [here](#account-recovery)
 
 _You can add a new customer's details into HomeBoss with this command._
 
-**Format:** `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`{.swift}
+</br>**Format:** 
+
+`customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -567,7 +585,7 @@ _You can add a new customer's details into HomeBoss with this command._
 
   </box>
 
-**Example:**
+</br>**Example:**
 
 * `customer add --name Gabriel --phone 87654321 --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift} </br>
   Adds a customer with the name `Gabriel`{.swift}, phone number `87654321`{.swift},
@@ -584,7 +602,11 @@ _You can add a new customer's details into HomeBoss with this command._
 If you want to see more details about a specific customer, you can use the customer view command to view a more
 in-depth description of the customer.
 
-**Format:** `customer view CUSTOMER_ID`{.swift}
+</br>**Format:** 
+
+`customer view CUSTOMER_ID`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -594,7 +616,7 @@ in-depth description of the customer.
 
   </box>
 
-**Example:**
+<br>**Example:**
 
 * `customer view 1`{.swift} </br>
   Displays the details of customer with ID `1`{.swift}.
@@ -629,7 +651,11 @@ You can frequently use this command together with `delivery list` to switch betw
 _If you want to find details of a customer, but you do not remember the customer's full name,
 you can search for the customer using keywords by calling this command._
 
-**Format:** `customer find KEYWORD [MORE_KEYWORDS...]`{.swift}
+</br>**Format:** 
+
+`customer find KEYWORD [MORE_KEYWORDS...]`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -646,7 +672,7 @@ you can search for the customer using keywords by calling this command._
 
   </box>
 
-**Example:**
+</br>**Example:**
 
 * `customer find Julius Yang`{.swift} </br>
   Finds customers whose names have words that exactly match either `Julius`{.swift} or `Yang`{.swift}.
@@ -662,7 +688,11 @@ you can search for the customer using keywords by calling this command._
 Did you accidentally key in the wrong details for a customer? Or perhaps your customer has changed his particulars? No
 worries! You can edit the details of a customer simply by calling this command.
 
-**Format:** `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`{.swift}
+</br>**Format:** 
+
+`customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -677,7 +707,7 @@ worries! You can edit the details of a customer simply by calling this command.
 
   </box>
 
-**Examples:**
+</br>**Examples:**
 
 - `customer edit 1 --name Gabriel -–phone 9813 1051`{.swift} </br>
   Edits customer 1's name to Gabriel and phone to 9813 1051.
@@ -693,7 +723,11 @@ worries! You can edit the details of a customer simply by calling this command.
 
 _You can delete any customers who no longer require your services from HomeBoss by calling this command._
 
-**Format:** `customer delete CUSTOMER_ID`{.swift}
+</br>**Format:** 
+
+`customer delete CUSTOMER_ID`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -710,7 +744,7 @@ _You can delete any customers who no longer require your services from HomeBoss 
 Be careful! You won't be able to undo this edit action!
 </box>
 
-**Example:**
+</br>**Example:**
 
 * `customer delete 1`{.swift} </br>
   Deletes the customer with ID 1.
@@ -749,7 +783,11 @@ Delivery Status can be one of CREATED, SHIPPED, COMPLETED, CANCELLED.
 
  </box>
 
-**Format:** `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE`{.swift}
+</br>**Format:** 
+
+`delivery add DELIVERY_NAME --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -762,7 +800,7 @@ Delivery Status can be one of CREATED, SHIPPED, COMPLETED, CANCELLED.
 
   </box>
 
-**Example:**
+</br>**Example:**
 
 - `delivery add Chocolate Cake --customer 1 --date 2023-12-12`{.swift} </br>
   Adds a delivery with Delivery Name Chocolate Cake, with the Customer who has Customer ID 1, with Delivery Date
@@ -780,7 +818,11 @@ Delivery Status can be one of CREATED, SHIPPED, COMPLETED, CANCELLED.
 If you would to see more details about a specific delivery, you can use the `delivery view`{.swift} command to
 view a more in-depth description of the delivery.
 
-**Format:** `delivery view DELIVERY_ID`{.swift}
+</br>**Format:** 
+
+`delivery view DELIVERY_ID`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -790,7 +832,7 @@ view a more in-depth description of the delivery.
 
   </box>
 
-**Example:**
+</br>**Example:**
 
 * `delivery view 1`{.swift} </br>
   Displays the details of delivery with ID `1001`{.swift}.
@@ -808,8 +850,11 @@ deliveries at once. You can also filter the list of deliveries by status, custom
 You can also sort the list of deliveries by expected delivery date in ascending or descending order. By default, the
 list of deliveries will be sorted by expected delivery date in descending order (latest first)._
 
-**Format:**
+</br>**Format:**
+
 `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]  [--sort SORT]`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -824,7 +869,7 @@ list of deliveries will be sorted by expected delivery date in descending order 
   
   </box>
 
-**Examples:**
+</br>**Examples:**
 
 * `delivery list --status CREATED --customer 1 --sort DESC`{.swift} </br>
   Lists all deliveries with status `CREATED`{.swift} for customer with ID `1`{.swift} with expected delivery date in
@@ -850,7 +895,11 @@ You may combine any of the filters and sort options to get the list of deliverie
 _Want to find details of a delivery, but you do not remember the delivery's full name?
 You can search for the delivery using keywords by calling this command._
 
-**Format:** `delivery find KEYWORD [MORE_KEYWORDS...]`{.swift}
+</br>**Format:** 
+
+`delivery find KEYWORD [MORE_KEYWORDS...]`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -866,7 +915,7 @@ You can search for the delivery using keywords by calling this command._
 
   </box>
 
-**Example:**
+</br>**Example:**
 `delivery find Gambes Banana`{.swift} </br>
 Find all deliveries whose name has words that exactly match `Gambes`{.swift} or `Banana`{.swift}
 
@@ -881,8 +930,12 @@ Find all deliveries whose name has words that exactly match `Gambes`{.swift} or 
 Oh no! Did you key in the wrong details for a delivery? Or did your customer change some details to his
 delivery? No worries! Just edit the details of a delivery simply by using this feature.
 
-**Format:** `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]
+</br>**Format:** 
+
+`delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]
 [--status STATUS] [--note NOTE]`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -911,7 +964,7 @@ If you only want to update the delivery's status, simply use `delivery status` i
 Be careful! You won't be able to undo this edit action! 
 </box>
 
-**Examples:**
+</br>**Examples:**
 
 - `delivery edit 1 --status CANCELLED --note Sudden overseas business trip to attend to.`{.swift} </br>
   Edits Delivery Status of the delivery, with Delivery ID of 1, to CANCELLED and edits the note of the Delivery.
@@ -937,8 +990,9 @@ to SHIPPED! Using this feature, you can update the status of a delivery accordin
 Delivery Status typed in need not be in uppercase.
 </box>
 
-**Format:** `delivery status DELIVERY_ID STATUS`{.swift}
+</br>**Format:** `delivery status DELIVERY_ID STATUS`{.swift}
 
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -950,7 +1004,7 @@ Delivery Status typed in need not be in uppercase.
 
   </box>
 
-**Examples:**
+</br>**Examples:**
 
 - `delivery status 1 CANCELLED`{.swift} </br>
 
@@ -965,7 +1019,11 @@ Delivery Status typed in need not be in uppercase.
 If you would like create a note about a specific delivery, you can use `delivery note`{.swift} to add a quick
 note to a specific delivery.
 
-**Format:** `delivery note DELIVERY_ID --note NOTE`{.swift}
+</br>**Format:** 
+
+`delivery note DELIVERY_ID --note NOTE`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -977,7 +1035,7 @@ note to a specific delivery.
   
   </box>
 
-**Example:**
+</br>**Example:**
 
 * `delivery note 1 --note By FedEx`{.swift} </br>
   Creates a new Note "By FedEx" for the Delivery with ID `1`{.swift}
@@ -991,7 +1049,11 @@ note to a specific delivery.
 Feel like your delivery book is getting cluttered up? Maybe you just want to get rid of a few deliveries that have
 been cancelled or completed. If that's the case, simply use this feature to delete the delivery.
 
-**Format:** `delivery delete DELIVERY_ID`{.swift}
+</br>**Format:** 
+
+`delivery delete DELIVERY_ID`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -1008,7 +1070,7 @@ been cancelled or completed. If that's the case, simply use this feature to dele
 Be careful! This action is irreversible. Once deleted, the delivery cannot be recovered.
 </box>
 
-**Example:**
+</br>**Example:**
 
 - `delivery delete 1`{.swift} </br>
   Deletes delivery 1 from the delivery book.
@@ -1026,7 +1088,7 @@ _Details coming soon..._
 _You can view a summary of the commands available, the format of the commands, and a link to this user guide
 by calling this command._
 
-**Format:** `help`{.swift}
+**Format:**`help`{.swift}
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
@@ -1045,7 +1107,7 @@ by calling this command._
 
 _You can exit the program by calling this command._
 
-**Format:** `exit`{.swift}
+**Format:**`exit`{.swift}
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -1076,7 +1138,7 @@ You can delete all your customer and delivery data by calling this command._
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-# FAQ
+# </br>FAQ
 
 **Q: Where do I get support for HomeBoss?**
 
@@ -1099,7 +1161,7 @@ A: It is currently not possible to export your data to another software.
 
 A: HomeBoss only supports English characters.
 
-# Command Summary
+# </br>Command Summary
 
 #### User
 
