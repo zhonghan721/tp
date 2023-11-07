@@ -883,6 +883,61 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | `*`      | a registered owner | know the sum of all the materials required for a fixed delivery schedule | I can plan my inventory.                                                                                                                                                                |
 | `*`      | a registered owner | have different user authorisation levels                                 | I can control who has access to what.                                                                                                                                                   |
 
+### Planned Enhancements
+
+#### User Interface
+
+* The user interface can show two lists views of both customer and delivery lists side by side to allow the user to see
+  both lists at the same time.
+
+#### Command Format
+
+* Prefixes can be shortened to allow the user to type less. For example, `--name` can be shortened to `-n`.
+* Potentially frequently used commands such as `customer list` and `delivery list` can be shortened to `cl` and `dl`
+  respectively.
+
+#### Error Messages
+
+* Error messages for dates would be more specific to allow the user to know what is wrong with the date that they
+  entered. For example, if a user enters 2023-02-30, the error message would be "Invalid date. The date entered does
+  not exist.".
+* Error messages for IDs should specify whether it is for the customer ID or for delivery ID as the current
+  implementation has some error messages that only specifies "ID" instead of "Customer ID" or "Delivery ID".
+* Error messages for numerical parameters that require a positive integer should throw errors for negative values.
+
+#### User Accounts
+
+* Allow the user to create multiple accounts for different businesses.
+* Allow the user to create multiple accounts for the same business.
+
+#### Security
+
+* The whole JSON authentication file would be encrypted to prevent unauthorised access to the user's account instead of
+  only hashing the user password.
+* The whole delivery and customer data would be encrypted to prevent unauthorised access to the customer and delivery
+  data.
+
+#### ID Generation
+
+* When a new customer or delivery is created, the ID of the customer or delivery would be the first available ID from 1
+  to the maximum integer in the list of customers or deliveries respectively.
+* ID of a new customer and delivery will reset to 1 for customers and deliveries if the user deletes all
+  customers and deliveries using the `clear` command.
+* ID of a new customer and delivery will reset to 1 for customers and deliveries deletes his account.
+
+#### Find Customer Command
+
+* Find command for customer would disallow special characters as a user cannot add special characters to the name of a
+  customer.
+
+#### Delivery Status
+
+* Allow the user to set their own customised delivery status.
+
+#### Enhanced Delivery Address
+
+* Allow tagging by area and region name to delivery address and enable users to filter them accordingly.
+
 ### Use cases
 
 (For all use cases below, the **System** is the `HomeBoss` and the **Actor** is the `user`, unless specified
