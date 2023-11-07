@@ -151,7 +151,7 @@ files/folder before the application is launched for the first time.
 4. If everything went well, you should be greeted by a window similar to the one below.
 5. We recommend reading how to [understand the layout](#understanding-the-layout)
    and familiarizing yourself with [HomeBoss's command format](#homebosss-command-format)
-   before learning how to [add your first delivery](#adding-your-first-delivery)
+   before learning how to [add your first delivery](#adding-your-first-delivery).
 
 ![HomeBoss Start Page](images/getting-started/register.png)
 
@@ -207,9 +207,12 @@ HomeBoss. You can use the scroll bar on the right to scroll through your custome
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
-**Note**: The `ID`{.swift} that appears next to each name is a unique identifier given to all added customers and
-deliveries separately, and is required to perform many of HomeBoss's commands.
-More details of these commands can be found in [Features](#features)
+**Note**: 
+
+* The `ID`{.swift} that appears next to each name is a unique identifier given to all added customers and
+  deliveries separately, and is required to perform many of HomeBoss's commands.
+  More details of these commands can be found in [Features](#features).
+* The `ID`{.swift} generated are guaranteed to be unique but may not be consecutive and may not start from 1.
   
 ![Command Result FeedBack](images/getting-started/delivery_card.png){style="display: block; margin: 0 auto;"}
 
@@ -1067,44 +1070,50 @@ A: HomeBoss only supports English characters.
 
 #### User
 
-| Command  | Format                                                                                                                       | Examples                                                                                                                    |
-|----------|------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| Register | `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`     | `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko` |
-| Login    | `login --user USERNAME --password PASSWORD`                                                                                  | `login --user gabriel --password gabrielIsGreat`                                                                            |
-| Update   | `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD] [--secretQn SECRET_QUESTION --answer ANSWER]` | `update --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest --secretQn Favourite Pet --answer BoBo`       |
-| Recover  | `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`                                   | `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`                                      |
-| Logout   | `logout`                                                                                                                     | `logout`                                                                                                                    |
-| Delete   | `delete account`                                                                                                             | `delete account`                                                                                                            |
+| Command  | Format                                                                                                                               | Examples                                                                                                                          |
+|----------|--------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| Register | `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`{.swift}     | `register --user Gabriel --password GabrielIsGreat --confirmPass GabrielIsGreat --secretQn First Pet Name? --answer Koko`{.swift} |
+| Login    | `login --user USERNAME --password PASSWORD`{.swift}                                                                                  | `login --user Gabriel --password GabrielIsGreat`{.swift}                                                                          |
+| Update   | `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD] [--secretQn SECRET_QUESTION --answer ANSWER]`{.swift} | `update --user GabrielV2 --password GabrielIsBest --confirmPass GabrielIsBest --secretQn Favourite Pet --answer BoBo`{.swift}     |
+| Recover  | `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift}                                   | `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`{.swift}                                    |
+| Logout   | `logout`{.swift}                                                                                                                     | `logout`{.swift}                                                                                                                  |
+| Delete   | `delete account`{.swift}                                                                                                             | `delete account`{.swift}                                                                                                          |
+
+<br>
 
 #### Customer
 
-| Command | Format                                                                                               | Examples                                                                                                    |
-|---------|------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
-| Add     | `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`                      | `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`        |
-| View    | `customer view CUSTOMER_ID`                                                                          | `customer view 1001`                                                                                        |
-| List    | `customer list`                                                                                      | `customer list`                                                                                             |
-| Find    | `customer find KEYWORD [MORE_KEYWORDS]`                                                              | `customer find Ibrahim Yu`                                                                                  |
-| Edit    | `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]` | `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielrocks@gmail.com --address RVRC Block B` |
-| Delete  | `customer delete CUSTOMER_ID`                                                                        | `customer delete 1001`                                                                                      |
+| Command | Format                                                                                                                                | Examples                                                                                                                 |
+|---------|---------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Add     | `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`{.swift}                                               | `customer add --name Gabriel --phone 87654321 --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift}             |
+| View    | `customer view CUSTOMER_ID`{.swift}                                                                                                   | `customer view 1`{swift}                                                                                                 |
+| List    | `customer list`{.swift}                                                                                                               | `customer list`{.swift}                                                                                                  |
+| Find    | `customer find KEYWORD [MORE_KEYWORDS]`{.swift}                                                                                       | `customer find Julius Yang`{.swift}                                                                                      |
+| Edit    | `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`{.swift}                          | `customer edit 1 --name Gabriel -–phone 12345678 --email Gabrielrock@gmail.com --address Block 10 Tampines Road`{.swift} |
+| Delete  | `customer delete CUSTOMER_ID`{.swift}                                                                                                 | `customer delete 1`{.swift}                                                                                              |
+
+<br>
 
 #### Delivery
 
-| Command | Format                                                                                                                             | Examples                                                                                                                      |
-|---------|------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Add     | `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE`                                                           | `delivery add furniture --customer 5 --date 2023-12-03`                                                                       |
-| View    | `delivery view DELIVERY_ID`                                                                                                        | `delivery view 1001`                                                                                                          |
-| List    | `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--sort SORT]`                                    | `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`                                                   |
-| Find    | `delivery find KEYWORD [MORE_KEYWORDS]`                                                                                            | `delivery find Ibrahim Yu`                                                                                                    |
-| Edit    | `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--status STATUS] [--note NOTE]` | `delivery edit 1001 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note Customer changed his mind` |
-| Status  | `delivery status DELIVERY_ID STATUS`                                                                                               | `delivery status 2 completed`                                                                                                 |
-| Note    | `delivery note DELIVERY_ID --note NOTE`                                                                                            | `delivery note 1 --note By FedEx`                                                                                             |
-| Delete  | `delivery delete DELIVERY_ID`                                                                                                      | `delivery delete 1001`                                                                                                        |
+| Command | Format                                                                                                                                     | Examples                                                                                                                           |
+|---------|--------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| Add     | `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE`{.swift}                                                           | `delivery add furniture --customer 5 --date 2023-12-03`{.swift}                                                                    |
+| View    | `delivery view DELIVERY_ID`{.swift}                                                                                                        | `delivery view 1`{.swift}                                                                                                          |
+| List    | `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--sort SORT]`{.swift}                                    | `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`{.swift}                                                |
+| Find    | `delivery find KEYWORD [MORE_KEYWORDS]`{.swift}                                                                                            | `delivery find Chocolate Bun`{.swift}                                                                                              |
+| Edit    | `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--status STATUS] [--note NOTE]`{.swift} | `delivery edit 1 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note Customer changed his mind`{.swift} |
+| Status  | `delivery status DELIVERY_ID STATUS`{.swift}                                                                                               | `delivery status 2 completed`{.swift}                                                                                              |
+| Note    | `delivery note DELIVERY_ID --note NOTE`{.swift}                                                                                            | `delivery note 1 --note By FedEx`{.swift}                                                                                          |
+| Delete  | `delivery delete DELIVERY_ID`{.swift}                                                                                                      | `delivery delete 1`{.swift}                                                                                                        |
 
-#### Other
+<br>
 
-| Command | Format  | Examples |
-|---------|---------|----------|
-| Exit    | `exit`  | `exit`   |
-| Help    | `help`  | `help`   |
-| Clear   | `clear` | `clear`  |
+#### Miscellaneous
+
+| Command | Format          | Examples        |
+|---------|-----------------|-----------------|
+| Exit    | `exit`{.swift}  | `exit`{.swift}  |
+| Help    | `help`{.swift}  | `help`{.swift}  |
+| Clear   | `clear`{.swift} | `clear`{.swift} |
 
