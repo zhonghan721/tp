@@ -433,7 +433,7 @@ Note that you need to have an account registered with HomeBoss._
 
 **Note:**
 
-* `USERNAME`{.swift} must be alphanumeric and can contain spaces.
+* `USERNAME`{.swift} must be alphanumeric.
 * `PASSWORD`{.swift} must be at least 8 alphanumeric characters long.
 </box>
 
@@ -1083,14 +1083,14 @@ A: HomeBoss only supports English characters.
 
 #### Customer
 
-| Command | Format                                                                                                                                | Examples                                                                                                                 |
-|---------|---------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| Add     | `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`{.swift}                                               | `customer add --name Gabriel --phone 87654321 --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift}             |
-| View    | `customer view CUSTOMER_ID`{.swift}                                                                                                   | `customer view 1`{swift}                                                                                                 |
-| List    | `customer list`{.swift}                                                                                                               | `customer list`{.swift}                                                                                                  |
-| Find    | `customer find KEYWORD [MORE_KEYWORDS]`{.swift}                                                                                       | `customer find Julius Yang`{.swift}                                                                                      |
-| Edit    | `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`{.swift}                          | `customer edit 1 --name Gabriel -–phone 12345678 --email Gabrielrock@gmail.com --address Block 10 Tampines Road`{.swift} |
-| Delete  | `customer delete CUSTOMER_ID`{.swift}                                                                                                 | `customer delete 1`{.swift}                                                                                              |
+| Command | Format                                                                                                       | Examples                                                                                                                 |
+|---------|--------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Add     | `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`{.swift}                      | `customer add --name Gabriel --phone 87654321 --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift}             |
+| View    | `customer view CUSTOMER_ID`{.swift}                                                                          | `customer view 1`{swift}                                                                                                 |
+| List    | `customer list`{.swift}                                                                                      | `customer list`{.swift}                                                                                                  |
+| Find    | `customer find KEYWORD [MORE_KEYWORDS]`{.swift}                                                              | `customer find Julius Yang`{.swift}                                                                                      |
+| Edit    | `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`{.swift} | `customer edit 1 --name Gabriel --phone 12345678 --email Gabrielrock@gmail.com --address Block 10 Tampines Road`{.swift} |
+| Delete  | `customer delete CUSTOMER_ID`{.swift}                                                                        | `customer delete 1`{.swift}                                                                                              |
 
 <br>
 
