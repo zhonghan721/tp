@@ -280,6 +280,7 @@ logout
   given as `Query`{.swift} or `Query AnotherQuery`{.swift}.
 * **Command Phrase** and **Prefixes** are **case-sensitive**! e.g. `clear`{.swift} is a valid command word but
   `customer LIST`{.swift} is not a valid command word.
+* Leading and trailing whitespaces of parameters will be trimmed, i.e., spaces added between `--password`{.swift}  and `PASSWORD`{.swift}  in `--password PASSWORD`{.swift} will be removed.
 
 </box>
 
@@ -399,33 +400,37 @@ _These are general features in HomeBoss._
 
 ### Register
 
-> Registers a new user account to use HomeBoss.
+Register an account before you start using HomeBoss.
 
-_Register an account before you start using HomeBoss._
-
-**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
+</br>**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
 {.swift}
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
-**Note:**
+</br>**Note:**
 
 * `USERNAME`{.swift} must be alphanumeric.
 * `PASSWORD`{.swift} must be at least 8 alphanumeric characters long.
 * `CONFIRM_PASSWORD`{.swift} must be the same as `PASSWORD`{.swift}.
-* `SECRET_QUESTION`{.swift} must be and can take any characters.
-* `ANSWER`{.swift} must be and can take any characters. 
+* `SECRET_QUESTION`{.swift} can include any characters but must not be empty.
+* `ANSWER`{.swift} can include any characters but must not be empty.
 * `SECRET_QUESTION`{.swift} and `ANSWER`{.swift} will be used for account recovery.
   </box>
 
-**Example:**
+</br>**Example:**
 
-* `register --user Gabriel --password GabrielIsGreat --confirmPass GabrielIsGreat --secretQn First Pet Name? --answer Koko`
-  {.swift} </br>
+* `register --user Gabriel --password GabrielIsGreat --confirmPass GabrielIsGreat --secretQn First Pet Name? --answer Koko`{.swift} </br>
   Registers a new user account with the username `Gabriel`{.swift}, password `GabrielIsGreat`{.swift}, secret
   question `First Pet Name?`{.swift} and answer `Koko`{.swift}.
 
+<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
+
+</br>**Tip:**
+Only one account can be registered at any one time. If you have already registered an account, you will not be able to register another account. If you must, you can delete your current account by calling `delete account`{.swift} [here](#delete-account) before registering a new account.
+</box>
+
 [&uarr; Back to Table of Contents](#table-of-contents)
+</br>
 
 ### Login
 
@@ -493,19 +498,18 @@ _You can log out of your account to keep your data secure at the end of the day 
 **Format:** `logout`{.swift}
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+</br>
 
 ### Recover Account
 
-> Recovers the user account.
+HomeBoss makes it easy for you to recover your account if you forget your password. You only need the answer to the
+secret question that was set during account registration.
 
-_HomeBoss makes it easy for you to recover your account if you forget your password. You only need the answer to the
-secret question that was set during account registration._
-
-**Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift}
+</br>**Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift}
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
-**Note:**
+</br>**Note:**
 
 * If `ANSWER`{.swift} is provided, `NEW_PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} must also be provided and vice
   versa.
@@ -514,7 +518,7 @@ secret question that was set during account registration._
 * `CONFIRM_PASSWORD`{.swift} must be the same as `NEW_PASSWORD`{.swift}.
   </box>
 
-**Examples:**
+</br>**Examples:**
 
 * `recover account`{.swift} </br>
   Displays your account's secret question for account recovery.
@@ -522,26 +526,25 @@ secret question that was set during account registration._
 * `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`{.swift} </br>
   Recovers the account with the answer `Koko`{.swift} and sets the new password to `NewPassword123`{.swift}.
 
-**Without optional fields (i.e., `recover account`{.swift} ):**
+</br>**Without optional fields (i.e., `recover account`{.swift} ):**
 ![](images/user/userRecoverAccount_after_secretQn.png)
 
-**With optional fields (i.e.,
+</br>**With optional fields (i.e.,
 `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`{.swift}):**
 ![](images/user/userRecoverAccount_after_answer.png)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+</br>
 
 ### Delete Account
 
-> Deletes the user account.
+If you simply want to erase all your data from HomeBoss, you can delete your account by calling this command.
 
-_If you simply want to erase all your data from HomeBoss, you can delete your account by calling this command._
-
-**Format:** `delete account`{.swift}
+</br>**Format:** `delete account`{.swift}
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
-**Tip:**
+</br>**Tip:**
 
 This command should be considered a last resort, to be used if you forget both your password and your secret answer.
 However, if you've forgotten your password but recall the answer to your secret question, you can initiate the account
@@ -549,6 +552,7 @@ recovery process by clicking `recover account`{.swift} [here](#account-recovery)
 </box>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+</br>
 
 ## <span style="text-decoration:underline;">Customer</span>
 
@@ -679,14 +683,18 @@ worries! You can edit the details of a Customer simply by calling this command.
 
 **Examples:**
 
+
 - `customer edit 1 --name Gabriel --phone 9813 1051`{.swift} </br>
   Edits Customer 1's name to Gabriel and phone to 9813 1051.
 - `customer edit 2 --name Joe --email yangyang@gmail.com --address Block 10 Tampines Road`{.swift} </br>
   Edits Customer 2's name to Joe, email to yangyang@gmail.com and address to Block 10 Tampines Road.\
 
+
   [&uarr; Back to Table of Contents](#top)
+</br>
 
 ### Delete a Customer
+
 
 > Deletes the specified Customer from the Customer database. All Deliveries associated with the Customer will also be
 > deleted.
@@ -710,12 +718,13 @@ Be careful! You won't be able to undo this edit action!
 
 </box>
 
-**Example:**
+</br>**Example:**
 
 * `customer delete 1`{.swift} </br>
   Deletes the Customer with ID 1.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+</br>
 
 ## <span style="text-decoration:underline;">Delivery</span>
 
@@ -1087,12 +1096,12 @@ well. However, if the Delivery data file  has invalid data, the Customer data fi
 
 | Command  | Format                                                                                                                       | Examples                                                                                                                    |
 |----------|------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| Register | `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`     | `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko` |
+| Register | `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`{.swift}     | `register --user Gabriel --password GabrielIsGreat --confirmPass GabrielIsGreat --secretQn First Pet Name? --answer Koko`{.swift} |
 | Login    | `login --user USERNAME --password PASSWORD`                                                                                  | `login --user gabriel --password gabrielIsGreat`                                                                            |
 | Update   | `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD] [--secretQn SECRET_QUESTION --answer ANSWER]` | `update --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest --secretQn Favourite Pet --answer BoBo`       |
-| Recover  | `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`                                   | `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`                                      |
+| Recover  | `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift}                                   | `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`{.swift}                                      |
 | Logout   | `logout`                                                                                                                     | `logout`                                                                                                                    |
-| Delete   | `delete account`                                                                                                             | `delete account`                                                                                                            |
+| Delete   | `delete account`{.swift}                                                                                                             | `delete account`{.swift}                                                                                                            |
 
 #### Customer
 
@@ -1104,6 +1113,7 @@ well. However, if the Delivery data file  has invalid data, the Customer data fi
 | Find    | `customer find KEYWORD [MORE_KEYWORDS]`                                                              | `customer find Ibrahim Yu`                                                                               |
 | Edit    | `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]` | `customer edit 1 --name Gabriel --phone 1234 5678 --email gabrielrocks@gmail.com --address RVRC Block B` |
 | Delete  | `customer delete CUSTOMER_ID`                                                                        | `customer delete 1`                                                                                      |
+
 
 #### Delivery
 
