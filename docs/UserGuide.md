@@ -11,8 +11,7 @@ With our application, you will be able to:
 * Keep track of the details of your Customers and Deliveries
 * Search for a particular Customer/Delivery easily
 * Organise your data in a neat and tidy manner by filtering and sorting to your needs </br>
-  </br>
-  and much more!
+and much more!
 
 All these are done to improve your efficiency and productivity all while being incredibly simple to use.
 HomeBoss is also **optimised for fast typist with the use of a Command Line Interface (CLI)**, allowing you to
@@ -361,11 +360,14 @@ HomeBoss stores your data in a JSON file automatically `[JAR file location]/data
 users are welcome to update data directly by editing the data file. 
 
 **Warning Box**
+
 <box type="warning" background-color="#f2dede" border-color="#ebccd1" icon=":exclamation:">
+
 **Warning:** If the files are edited and invalid data is
 input, HomeBoss will discard the entire data file and start with an empty data file at the next run.
 (If the Customer data file has invalid data, the whole Delivery data file will be deleted as
 well. However, if the Delivery data file  has invalid data, the Customer data file will not be affected.)
+
 </box>
 
 # Feature Summary
