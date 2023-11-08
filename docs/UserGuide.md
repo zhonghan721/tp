@@ -113,7 +113,7 @@ Provides you with important information to take note of to avoid any unintended 
 
 # Getting Started
 
-## Prerequisites
+## <span style="text-decoration:underline;">Prerequisites</span>
 
 Ensure that you have `Java 11`{.swift} or above installed on your computer. If you are unsure how to do so you may view
 this
@@ -129,7 +129,7 @@ helpful [guide](https://www.java.com/en/download/help/version_manual.html).
 
 </box>
 
-## </br>Installing HomeBoss
+## </br><span style="text-decoration:underline;">Installing HomeBoss</span>
 
 1. You may download the latest release of **HomeBoss**
    from [here](https://github.com/AY2324S1-CS2103T-T13-3/tp/releases/latest).
@@ -154,7 +154,7 @@ files/folder before the application is launched for the first time.
 
 ![HomeBoss Start Page](images/getting-started/register.png)
 
-## Understanding our layout
+## <span style="text-decoration:underline;">Understanding our layout</span>
 
 Don't worry if you don't understand what you're looking at. Let's go through a quick run down of HomeBoss's layout
 so that you can familiarise yourself with our various components.
@@ -217,7 +217,7 @@ HomeBoss. You can use the scroll bar on the right to scroll through your Custome
 
 </box>
 
-## </br>HomeBoss's Command Format
+## </br><span style="text-decoration:underline;">HomeBoss's Command Format</span>
 
 Commands are your main form of interaction with HomeBoss, and is the way to carry out various operations in HomeBoss.
 Don't worry if the commands seem daunting, the HomeBoss team has carefully crafted the commands to be as intuitive
@@ -287,7 +287,7 @@ logout
 
   </box>
 
-## </br>Registering and creating your first Delivery
+## </br><span style="text-decoration:underline;">Registering and creating your first Delivery</span>
 
 Hopefully at this point, you have a good understanding of the basics of HomeBoss. Let's get you started on HomeBoss
 by creating your first Delivery
@@ -331,9 +331,10 @@ Type `register --user Alex123 --password AlexIsGreat --confirmPass AlexIsGreat -
 > `DELIVERY_NAME`: MacBook Pro
 > `DELIVERY_DATE`: 2023-12-03
 
-8. Type `delivery add MacBook Pro --customer CUSTOMER_ID --date 2023-12-03`{.swift}, replacing `CUSTOMER_ID`{.swift} 
+7. Type `delivery add MacBook Pro --customer CUSTOMER_ID --date 2023-12-03`{.swift}, replacing `CUSTOMER_ID`{.swift} 
    with Gabriel's ID, and hit enter.
-9. A new Delivery should have been added for Gabriel, you should see a new Delivery similar to the image below.
+
+8. A new Delivery should have been added for Gabriel, you should see a new Delivery similar to the image below.
 
 ![DeliveryAdded](images/getting-started/delivery_add.png){style="display: block; margin: 0 auto;"}
 
