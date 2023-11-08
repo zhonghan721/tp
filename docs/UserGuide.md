@@ -2,14 +2,14 @@
 
 # About HomeBoss
 
-HomeBoss is a desktop application for **home-based business owners** to **manage their customers and deliveries**.
+HomeBoss is a desktop application for **home-based business owners** to **manage their Customers and Deliveries**.
 HomeBoss streamlines the process of your operations, optimises your resources, and enhances your overall business
 experience.
 
 With our application, you will be able to:
 
-* Keep track of the details of your customers and deliveries
-* Search for a particular customer/delivery easily
+* Keep track of the details of your Customers and Deliveries
+* Search for a particular Customer/Delivery easily
 * Organise your data in a neat and tidy manner by filtering and sorting to your needs </br>
   </br>
   and much more!
@@ -20,6 +20,52 @@ execute commands quickly. On top of that, we utilise a *Graphical User Interface
 data in a neater and more organised manner.
 
 Essentially, with HomeBoss, you can **focus on what matters most: running your business**.
+
+---
+
+# Table of Contents
+
+* 1\. [About HomeBoss](#about-homeboss)
+* 2\. [Table of Contents](#table-of-contents)
+* 3\. [Introduction](#user-guide)
+    * 3.1 [About this User Guide](#about-this-user-guide)
+    * 3.2 [Navigating the User Guide](#navigating-the-user-guide)
+* 4\. [Getting Started](#getting-started)
+    * 4.1 [Prerequisites](#prerequisites)
+    * 4.2 [Installing HomeBoss](#installing-homeboss)
+    * 4.3 [Understanding our layout](#understanding-our-layout)
+    * 4.4 [HomeBoss's Command Format](#homeboss-s-command-format)
+    * 4.5 [Adding your first Delivery](#adding-your-first-delivery)
+* 5\. [Features](#features)
+    * 5.1 [User](#user)
+        * 5.1.1 [Register](#register)
+        * 5.1.2 [Login](#login)
+        * 5.1.3 [Update Account details](#update-account-details)
+        * 5.1.4 [Logout](#logout)
+        * 5.1.5 [Recover Account](#recover-account)
+        * 5.1.6 [Delete Account](#delete-account)
+    * 5.2 [Customer](#customer)
+        * 5.2.1 [Add Customer](#add-a-customer)
+        * 5.2.2 [View details of a Customer](#view-details-of-a-delivery)
+        * 5.2.3 [List Customers](#list-customers)
+        * 5.2.4 [Find Customers](#find-customers)
+        * 5.2.5 [Update Customer details](#update-customer-details)
+        * 5.2.6 [Delete Customer](#delete-customer)
+    * 5.3 [Delivery](#delivery)
+        * 5.3.1 [Add Delivery](#add-delivery)
+        * 5.3.2 [View details of a Delivery](#view-details-of-a-delivery)
+        * 5.3.3 [List Deliveries](#view-a-list-of-deliveries)
+        * 5.3.4 [Find Deliveries](#find-deliveries)
+        * 5.3.5 [Update details of a Delivery](#update-delivery-details)
+        * 5.3.6 [Update delivery status](#update-delivery-status)
+        * 5.3.7 [Create a note for a Delivery](#create-a-note-for-a-delivery)
+        * 5.3.8 [Delete Delivery](#delete-delivery)
+    * 5.4 [Miscellaneous](#miscellaneous)
+        * 5.4.1 [Help](#help)
+        * 5.4.2 [Exit](#exit)
+        * 5.4.3 [Clear](#clear)
+* 6\. [FAQ](#faq)
+* 7\. [Command Summary](#command-summary)
 
 ---
 
@@ -65,53 +111,6 @@ Provides you with important information to take note of to avoid any unintended 
 
 ---
 
-# Table of Contents
-
-* 1\. [Introduction](#user-guide)
-    * 1.1 [About HomeBoss](#about-homeboss)
-    * 1.2 [About this User Guide](#about-this-user-guide)
-    * 1.3 [Navigating the User Guide](#navigating-the-user-guide)
-* 2\. Table of Contents
-* 3\. [Getting Started](#getting-started)
-    * 3.1 [Prerequisites](#prerequisites)
-    * 3.2 [Installing HomeBoss](#installing-homeboss)
-    * 3.3 [Understanding our layout](#understanding-our-layout)
-    * 3.4 [HomeBoss's Command Format](#homeboss-s-command-format)
-    * 3.5 [Adding your first Delivery](#adding-your-first-delivery)
-* 4\. [Features](#features)
-    * 4.1 [User](#user)
-        * 4.1.1 [Register](#register)
-        * 4.1.2 [Login](#login)
-        * 4.1.3 [Update Account details](#update-account-details)
-        * 4.1.4 [Logout](#logout)
-        * 4.1.5 [Recover Account](#recover-account)
-        * 4.1.6 [Delete Account](#delete-account)
-    * 4.2 [Customer](#customer)
-        * 4.2.1 [Add Customer](#add-a-customer)
-        * 4.2.2 [View details of a Customer](#view-details-of-a-delivery)
-        * 4.2.3 [List Customers](#list-customers)
-        * 4.2.4 [Find Customers](#find-customers)
-        * 4.2.5 [Update Customer details](#update-customer-details)
-        * 4.2.6 [Delete Customer](#delete-customer)
-    * 4.3 [Delivery](#delivery)
-        * 4.3.1 [Add Delivery](#add-delivery)
-        * 4.3.2 [View details of a delivery](#view-details-of-a-delivery)
-        * 4.3.3 [List Deliveries](#view-a-list-of-deliveries)
-        * 4.3.4 [Find deliveries](#find-deliveries)
-        * 4.3.5 [Update details of a delivery](#update-delivery-details)
-        * 4.3.6 [Update delivery status](#update-delivery-status)
-        * 4.3.7 [Create a note for a delivery](#create-a-note-for-a-delivery)
-        * 4.3.8 [Delete delivery](#delete-delivery)
-    * 4.4 [Miscellaneous](#miscellaneous)
-        * 4.4.1 [Help](#help)
-        * 4.4.2 [Exit](#exit)
-        * 4.4.3 [Clear](#clear)
-* 5\. [FAQ](#faq)
-* 6\. [Command Summary](#command-summary)
-* 7\. Glossary
-
----
-
 # Getting Started
 
 ## Prerequisites
@@ -130,7 +129,7 @@ helpful [guide](https://www.java.com/en/download/help/version_manual.html).
 
 </box>
 
-## Installing HomeBoss
+## </br>Installing HomeBoss
 
 1. You may download the latest release of **HomeBoss**
    from [here](https://github.com/AY2324S1-CS2103T-T13-3/tp/releases/latest).
@@ -151,7 +150,7 @@ files/folder before the application is launched for the first time.
 4. If everything went well, you should be greeted by a window similar to the one below.
 5. We recommend reading how to [understand the layout](#understanding-the-layout)
    and familiarizing yourself with [HomeBoss's command format](#homebosss-command-format)
-   before learning how to [add your first delivery](#adding-your-first-delivery)
+   before learning how to [add your first delivery](#adding-your-first-delivery).
 
 ![HomeBoss Start Page](images/getting-started/register.png)
 
@@ -202,20 +201,23 @@ You can use the scroll bar on the right to scroll through a long result or feedb
     </tr>
 </table>
 
-The Customer/Delivery List Panel is where you will be able to find the customers and deliveries that you have added to
-HomeBoss. You can use the scroll bar on the right to scroll through your customers or deliveries.
+The Customer/Delivery List Panel is where you will be able to find the Customers and Deliveries that you have added to
+HomeBoss. You can use the scroll bar on the right to scroll through your Customers or Deliveries.
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
-**Note**: The `ID`{.swift} that appears next to each name is a unique identifier given to all added customers and
-deliveries separately, and is required to perform many of HomeBoss's commands.
-More details of these commands can be found in [Features](#features)
+**Note**: 
+
+* The `ID`{.swift} that appears next to each name is a unique identifier given to all added Customers and
+  Deliveries separately, and is required to perform many of HomeBoss's commands.
+  More details of these commands can be found in [Features](#features).
+* The `ID`{.swift} generated are guaranteed to be unique but may not be consecutive and may not start from 1.
   
 ![Command Result FeedBack](images/getting-started/delivery_card.png){style="display: block; margin: 0 auto;"}
 
 </box>
 
-## HomeBoss's Command Format
+## </br>HomeBoss's Command Format
 
 Commands are your main form of interaction with HomeBoss, and is the way to carry out various operations in HomeBoss.
 Don't worry if the commands seem daunting, the HomeBoss team has carefully crafted the commands to be as intuitive
@@ -268,10 +270,10 @@ logout
 * Command Phrase are keywords or short phrases that are unique to each Command.
 * Words that are in `UPPER_CASE`{.swift} are parameters that are to be supplied by you.
 * Parameters that are preceded by a prefix must be supplied after that prefix, e.g. `--name DELIVERY_NAME`{.swift}
-  must be given as `--name deliveryName`{.swift} and not `deliveryName`{.swift} or `--name`{.swift}
+  must be given as, for example, `--name furniture`{.swift} and not `furniture`{.swift} or `--name`{.swift}
 * Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`
   {.swift} can either be
-  `1`{.swift} or `1 --name deliveryName`{.swift}.
+  `1`{.swift} or `1 --name furniture`{.swift}.
 * However, items that are grouped together in square brackets (`[]`{.swift}) must all be provided together,
   e.g. for `[--password PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift} both `PASSWORD`{.swift} and
   `CONFIRM_PASSWORD`{.swift} must be provided.
@@ -281,16 +283,26 @@ logout
   given as `Query`{.swift} or `Query AnotherQuery`{.swift}.
 * **Command Phrase** and **Prefixes** are **case-sensitive**! e.g. `clear`{.swift} is a valid command word but
   `customer LIST`{.swift} is not a valid command word.
+* Leading and trailing whitespaces of parameters will be trimmed, i.e., spaces added between `--password`{.swift}  and `PASSWORD`{.swift}  in `--password PASSWORD`{.swift} will be removed.
 
-</box>
+  </box>
 
-## Adding your first Delivery
+## </br>Registering and creating your first Delivery
 
 Hopefully at this point, you have a good understanding of the basics of HomeBoss. Let's get you started on HomeBoss
-by adding your first Delivery
+by creating your first Delivery
 
-1. First register for HomeBoss using the `register`{.swift} command, more details on the command can be found
-   [here](#register)
+1. First register for HomeBoss using the `register`{.swift} command. So, for example, if you want to register an account
+   with the following details:
+
+> `USERNAME`: Alex123
+> `PASSWORD`: AlexIsGreat
+> `CONFIRM_PASSWORD`: AlexIsGreat
+> `SECRET_QUESTION`: First Pet Name? 
+> `ANSWER`: KoKo 
+
+Type `register --user Alex123 --password AlexIsGreat --confirmPass AlexIsGreat --secretQn First Pet Name? 
+--answer Koko`{.swift} into the Command Box and hit enter. More details on the command can be found [here](#register).
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -298,9 +310,9 @@ by adding your first Delivery
 
 </box>
 
-2. After registering for an account, you should be greeted by some sample Customers
-   that have been generated by HomeBoss.
-3. Let's assume that a new customer, Gabriel, is to be added, using the `customer add`{.swift} command.
+2. After registering for an account, you will be greeted by HomeBoss's home page. It's empty at the moment, so let's populate it with some data.
+
+3. Let's assume that a new Customer, Gabriel, is to be added, using the `customer add`{.swift} command.
 
 > `NAME`: Gabriel
 > `PHONE`: 87654321
@@ -309,24 +321,25 @@ by adding your first Delivery
 
 4. Type `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`{.swift}
    into the Command Box and hit enter.
+
 5. A new Customer called Gabriel should be added, you should see a new Customer similar to the image below.
 
 ![CustomerAdded](images/getting-started/customer_add.png){style="display: block; margin: 0 auto;"}
 
-6. Now, let's add a new delivery for Gabriel into HomeBoss, suppose Gabriel ordered some furniture.
+6. Now, let's add a new Delivery for Gabriel into HomeBoss, suppose Gabriel ordered a MacBook Pro.
 
-> `DELIVERY_NAME`: Macbook Pro
+> `DELIVERY_NAME`: MacBook Pro
 > `DELIVERY_DATE`: 2023-12-03
 
-8. Type `delivery add Macbook Pro --customer CUSTOMER_ID --date 2023-12-03`{.swift}, replacing `CUSTOMER_ID`{.swift} with
-   Gabriel's ID, and hit enter.
+8. Type `delivery add MacBook Pro --customer CUSTOMER_ID --date 2023-12-03`{.swift}, replacing `CUSTOMER_ID`{.swift} 
+   with Gabriel's ID, and hit enter.
 9. A new Delivery should have been added for Gabriel, you should see a new Delivery similar to the image below.
 
 ![DeliveryAdded](images/getting-started/delivery_add.png){style="display: block; margin: 0 auto;"}
 
 Congratulations! You have just successfully added your first Customer and Delivery!
 
-HomeBoss has many other features for you to try to streamline your delivery workflow. Take a look at our
+HomeBoss has many other features for you to try to streamline your Delivery workflow. Take a look at our
 [Features](#features) below for even more commands and their details!
 
 ---
@@ -349,27 +362,27 @@ _These are features for managing your user account in HomeBoss._
 
 ### Customer
 
-_These are features for managing your customers in HomeBoss._
+_These are features for managing your Customers in HomeBoss._
 
-- `customer add` - Adds a customer to the address book.
-- `customer view` - Shows the details of the specified customer.
-- `customer list` - Lists all customers in the address book.
-- `customer find` - Finds customers whose names contain any of the given keywords.
-- `customer edit` - Updates the details of an existing customer in the address book.
-- `customer delete` - Deletes the specified customer from the address book.
+- `customer add` - Adds a Customer to the address book.
+- `customer view` - Shows the details of the specified Customer.
+- `customer list` - Lists all Customers in the address book.
+- `customer find` - Finds Customers whose names contain any of the given keywords.
+- `customer edit` - Updates the details of an existing Customer in the address book.
+- `customer delete` - Deletes the specified Customer from the address book.
 
 ### Delivery
 
-_These are features for managing your deliveries in HomeBoss._
+_These are features for managing your Deliveries in HomeBoss._
 
-- `delivery add` - Adds a delivery to the delivery book.
-- `delivery view` - Shows the details of the specified delivery.
-- `delivery list` - Lists all deliveries in the delivery book.
-- `delivery find` - Finds deliveries whose names contain any of the given keywords.
-- `delivery edit` - Updates the details of an existing delivery in the delivery book.
-- `delivery status` - Changes the status of a specified delivery.
-- `delivery note` - Creates a note for a specified delivery.
-- `delivery delete` - Deletes the specified delivery from the delivery book.
+- `delivery add` - Adds a Delivery to the delivery book.
+- `delivery view` - Shows the details of the specified Delivery.
+- `delivery list` - Lists all Deliveries in the delivery book.
+- `delivery find` - Finds Deliveries whose names contain any of the given keywords.
+- `delivery edit` - Updates the details of an existing Delivery in the delivery book.
+- `delivery status` - Changes the status of a specified Delivery.
+- `delivery note` - Creates a note for a specified Delivery.
+- `delivery delete` - Deletes the specified Delivery from the delivery book.
 
 ### Miscellaneous
 
@@ -377,7 +390,7 @@ _These are general features in HomeBoss._
 
 - `exit` - Exits the program.
 - `help` - Shows a list of commands and their usage.
-- `clear` - Clears both customer and delivery database. **Warning:** This action is irreversible.
+- `clear` - Clears both Customer and Delivery database. **Warning:** This action is irreversible.
 
 ---
 
@@ -389,12 +402,57 @@ _These are general features in HomeBoss._
 
 ### Register
 
-> Registers a new user account to use HomeBoss.
+Register an account before you start using HomeBoss.
 
 _Register an account before you start using HomeBoss._
 
-**Format:** `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
-{.swift}
+</br>**Format:**
+
+`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`{.swift}
+
+<br />
+
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+</br>**Note:**
+
+* `USERNAME`{.swift} must be alphanumeric.
+* `PASSWORD`{.swift} must be at least 8 alphanumeric characters long.
+* `CONFIRM_PASSWORD`{.swift} must be the same as `PASSWORD`{.swift}.
+* `SECRET_QUESTION`{.swift} can include any characters but must not be empty.
+* `ANSWER`{.swift} can include any characters but must not be empty.
+* `SECRET_QUESTION`{.swift} and `ANSWER`{.swift} will be used for account recovery.
+
+  </box>
+
+</br>**Example:**
+
+* `register --user Gabriel --password GabrielIsGreat --confirmPass GabrielIsGreat --secretQn First Pet Name? --answer Koko`{.swift}</br>
+
+  Registers a new user account with the username `Gabriel`{.swift}, password `GabrielIsGreat`{.swift}, secret
+  question `First Pet Name?`{.swift} and answer `Koko`{.swift}.
+
+<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
+
+</br>**Tip:**
+Only one account can be registered at any one time. If you have already registered an account, you will not be able to register another account. If you must, you can delete your current account by calling `delete account`{.swift} [here](#delete-account) before registering a new account.
+</box>
+
+[&uarr; Back to Table of Contents](#table-of-contents)
+</br>
+
+### </br>Login
+
+> Logs in to your user account.
+
+_You can log in to your account to access your Customer and Delivery data by calling this command.
+Note that you need to have an account registered with HomeBoss._
+
+</br>**Format:** 
+
+`login --user USERNAME --password PASSWORD`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -402,39 +460,10 @@ _Register an account before you start using HomeBoss._
 
 * `USERNAME`{.swift} must be alphanumeric.
 * `PASSWORD`{.swift} must be at least 8 alphanumeric characters long.
-* `CONFIRM_PASSWORD`{.swift} must be the same as `PASSWORD`{.swift}.
-* `SECRET_QUESTION`{.swift} must be and can take any characters.
-* `ANSWER`{.swift} must be and can take any characters. 
-* `SECRET_QUESTION`{.swift} and `ANSWER`{.swift} will be used for account recovery.
+
   </box>
 
-**Example:**
-
-* `register --user Gabriel --password GabrielIsGreat --confirmPass GabrielIsGreat --secretQn First Pet Name? --answer Koko`
-  {.swift} </br>
-  Registers a new user account with the username `Gabriel`{.swift}, password `GabrielIsGreat`{.swift}, secret
-  question `First Pet Name?`{.swift} and answer `Koko`{.swift}.
-
-[&uarr; Back to Table of Contents](#table-of-contents)
-
-### Login
-
-> Logs in to your user account.
-
-_You can log in to your account to access your customer and delivery data by calling this command.
-Note that you need to have an account registered with HomeBoss._
-
-**Format:** `login --user USERNAME --password PASSWORD`{.swift}
-
-<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
-
-**Note:**
-
-* `USERNAME`{.swift} must be alphanumeric and can contain spaces.
-* `PASSWORD`{.swift} must be at least 8 alphanumeric characters long.
-</box>
-
-**Example:**
+</br>**Example:**
 
 * `login --user Gabriel --password GabrielIsGreat`{.swift} </br>
   Logs in to the user account with the username `Gabriel`{.swift} and password `GabrielIsGreat`{.swift}.
@@ -442,14 +471,18 @@ Note that you need to have an account registered with HomeBoss._
 ![](images/ug/login.png)
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### Update Account details
+### </br>Update Account details
 
 > Updates your user account details.
 
 _You can update your account details to keep your account secure by calling this command._
 
-**Format:** `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD]
+</br>**Format:** 
+
+`update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD]
 [--secretQn SECRET_QUESTION --answer ANSWER]`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -465,7 +498,7 @@ _You can update your account details to keep your account secure by calling this
 
   </box>
 
-**Example:**
+</br>**Example:**
 
 * `update --user GabrielV2 --password GabrielIsBest --confirmPass GabrielIsBest
   --secretQn Favourite Pet --answer BoBo`{.swift} </br>
@@ -474,7 +507,7 @@ _You can update your account details to keep your account secure by calling this
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### Logout
+### </br>Logout
 
 > Logs out of your user account.
 
@@ -483,28 +516,32 @@ _You can log out of your account to keep your data secure at the end of the day 
 **Format:** `logout`{.swift}
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+</br>
 
-### Recover Account
+### </br>Recover Account
 
-> Recovers the user account.
+HomeBoss makes it easy for you to recover your account if you forget your password. You only need the answer to the
+secret question that was set during account registration.
 
-_HomeBoss makes it easy for you to recover your account if you forget your password. You only need the answer to the
-secret question that was set during account registration._
+</br>**Format:** 
 
-**Format:** `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift}
+`recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
-**Note:**
+</br>**Note:**
 
 * If `ANSWER`{.swift} is provided, `NEW_PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} must also be provided and vice
   versa.
 * `ANSWER`{.swift} can take any characters.
 * `NEW_PASSWORD`{.swift} must be at least 8 alphanumeric characters long.
 * `CONFIRM_PASSWORD`{.swift} must be the same as `NEW_PASSWORD`{.swift}.
+
   </box>
 
-**Examples:**
+</br>**Examples:**
 
 * `recover account`{.swift} </br>
   Displays your account's secret question for account recovery.
@@ -512,114 +549,133 @@ secret question that was set during account registration._
 * `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`{.swift} </br>
   Recovers the account with the answer `Koko`{.swift} and sets the new password to `NewPassword123`{.swift}.
 
-**Without optional fields (i.e., `recover account`{.swift} ):**
+</br>**Without optional fields (i.e., `recover account`{.swift} ):**
 ![](images/user/userRecoverAccount_after_secretQn.png)
 
-**With optional fields (i.e.,
+</br>**With optional fields (i.e.,
 `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`{.swift}):**
 ![](images/user/userRecoverAccount_after_answer.png)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+</br>
 
-### Delete Account
+### </br>Delete Account
 
-> Deletes the user account.
+If you simply want to erase all your data from HomeBoss, you can delete your account by calling this command.
 
-_If you simply want to erase all your data from HomeBoss, you can delete your account by calling this command._
-
-**Format:** `delete account`{.swift}
+</br>**Format:** `delete account`{.swift}
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
-**Tip:**
+</br>**Tip:**
 
 This command should be considered a last resort, to be used if you forget both your password and your secret answer.
 However, if you've forgotten your password but recall the answer to your secret question, you can initiate the account
 recovery process by clicking `recover account`{.swift} [here](#account-recovery).
+
 </box>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+</br>
 
-## <span style="text-decoration:underline;">Customer</span>
+## </br><span style="text-decoration:underline;">Customer</span>
 
 ### Add a Customer
 
-> Adds a customer to the address book.
+> Adds a Customer to the address book.
 
-_You can add a new customer's details into HomeBoss with this command._
+_You can add a new Customer's details into HomeBoss with this command._
 
-**Format:** `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`{.swift}
+</br>**Format:** 
+
+`customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note:**
 
-* HomeBoss does not allow you to add customers with the same phone number.
-* A unique customer ID (may not be consecutive) will be assigned to the customer.
+* HomeBoss does not allow you to add Customers with the same phone number.
+* A unique customer ID (may not be consecutive) will be assigned to the Customer.
 * `NAME`{.swift} must be alphanumeric and can contain spaces.
 * `PHONE_NUMBER`{.swift} must be exactly 8 digits.
 * `EMAIL`{.swift} must follow the `local@domain`{.swift} format.
 * `ADDRESS`{.swift} can take any characters.
+
   </box>
 
-**Example:**
+</br>**Example:**
 
 * `customer add --name Gabriel --phone 87654321 --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift} </br>
-  Adds a customer with the name `Gabriel`{.swift}, phone number `87654321`{.swift},
+  Adds a Customer with the name `Gabriel`{.swift}, phone number `87654321`{.swift},
   email `Gabrielrocks@gmail.com`{.swift} and address `RVRC Block B`{.swift}.
 
 ![](images/ug/customer_add.png)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### View details of a Customer
+### </br>View details of a Customer
 
-> Shows the details of the specified customer.
+> Shows the details of the specified Customer.
 
-If you want to see more details about a specific customer, you can use the customer view command to view a more
-in-depth description of the customer.
+If you want to see more details about a specific Customer, you can use the `customer view`{.swift} command to view a 
+more in-depth description of the Customer.
 
-**Format:** `customer view CUSTOMER_ID`{.swift}
+</br>**Format:** 
+
+`customer view CUSTOMER_ID`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note:**
 
 * `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
+
   </box>
 
-**Example:**
+<br>**Example:**
 
 * `customer view 1`{.swift} </br>
-  Displays the details of customer with ID `1`{.swift}.
+  Displays the details of Customer with ID `1`{.swift}.
 
 ![](images/ug/customer_view.png)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### List Customers
+### </br>List Customers
 
-> Lists all the customers added in the address book.
+> Lists all the Customers added in the address book.
 
-Want to get an overview of all your customers in ONE list? Then, just use this feature to list all your customers at
+Want to get an overview of all your Customers in ONE list? Then, just use this feature to list all your Customers at
 once.
 
 **Format:** `customer list`{.swift}
 
-<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
-    You can frequently use this command together with `delivery list` to switch between the two lists.
+<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
+
+**Tip:**
+
+You can frequently use this command together with `delivery list` to switch between the two lists.
+
 </box>
 
 [&uarr; Back to Table of Contents](#top)
 
-### Find Customers
+### </br>Find Customers
 
-> Finds customers whose names have words that exactly match _ANY_ of the given keywords.
+> Finds Customers whose names have words that exactly match _ANY_ of the given keywords.
 
-_If you want to find details of a customer, but you do not remember the customer's full name,
-you can search for the customer using keywords by calling this command._
+_If you want to find details of a Customer, but you do not remember the Customer's full name,
+you can search for the Customer using keywords by calling this command._
 
-**Format:** `customer find KEYWORD [MORE_KEYWORDS...]`{.swift}
+</br>**Format:** 
+
+`customer find KEYWORD [MORE_KEYWORDS...]`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -630,29 +686,33 @@ you can search for the customer using keywords by calling this command._
   displayed.
   For example, the keywords `Alex Tan`{.swift} will display `Alex Wong`{.swift}, `Alex Tan`{.swift},
   and `Tan Ah Meng`{.swift}.
-* The keyword must exactly match any word in the Customer name. For example the keyword `Alex`{.swift} will match
+* The keyword must exactly match any word in the Customer's name. For example the keyword `Alex`{.swift} will match
   `Alex`{.swift} but not `Alexander`{.swift}.
 * The search is not case sensitive.
 
   </box>
 
-**Example:**
+</br>**Example:**
 
 * `customer find Julius Yang`{.swift} </br>
-  Finds customers whose names have words that exactly match either `Julius`{.swift} or `Yang`{.swift}.
+  Finds Customers whose names have words that exactly match either `Julius`{.swift} or `Yang`{.swift}.
 
 ![](images/ug/find.png)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### Update a Customer's details
+### </br>Update a Customer's details
 
 > Updates the personal details of an existing customer in the address book.
 
-Did you accidentally key in the wrong details for a customer? Or perhaps your customer has changed his particulars? No
-worries! You can edit the details of a customer simply by calling this command.
+Did you accidentally key in the wrong details for a Customer? Or perhaps your Customer has changed his particulars? No
+worries! You can edit the details of a Customer simply by calling this command.
 
-**Format:** `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`{.swift}
+</br>**Format:** 
+
+`customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -665,33 +725,32 @@ worries! You can edit the details of a customer simply by calling this command.
 * `EMAIL`{.swift} must follow the `local@domain`{.swift} format.
 * `ADDRESS`{.swift} can take any characters.
 
-</box>
+  </box>
 
-**Examples:**
+</br>**Examples:**
 
-- `customer edit 1 --name Gabriel -–phone 9813 1051`{.swift} </br>
-  Edits customer 1's name to Gabriel and phone to 9813 1051.
-- `customer edit 2 --name Joe --email yangyang@gmail.com -–address Block 10 Tampines Road`{.swift} </br>
-  Edits customer 2's name to Joe, email to yangyang@gmail.com and address to Block 10 Tampines Road.\
+
+- `customer edit 1 --name Gabriel --phone 9813 1051`{.swift} </br>
+  Edits Customer 1's name to Gabriel and phone to 9813 1051.
+- `customer edit 2 --name Joe --email yangyang@gmail.com --address Block 10 Tampines Road`{.swift} </br>
+  Edits Customer 2's name to Joe, email to yangyang@gmail.com and address to Block 10 Tampines Road.\
+
 
   [&uarr; Back to Table of Contents](#top)
+</br>
 
-### Delete a Customer
+### </br>Delete a Customer
 
-> Deletes the specified customer from the customer database. All deliveries associated with the customer will also be
+> Deletes the specified Customer from the Customer database. All Deliveries associated with the Customer will also be
 > deleted.
 
-_You can delete any customers who no longer require your services from HomeBoss by calling this command._
+_You can delete any Customers who no longer require your services from HomeBoss by calling this command._
 
-**Format:** `customer delete CUSTOMER_ID`{.swift}
+</br>**Format:** 
 
-<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+`customer delete CUSTOMER_ID`{.swift}
 
-**Note:**
-
-* `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
-
-</box>
+<br />
 
 <box background-color="#f2dede" border-color="#ebccd1" type="warning" icon=":exclamation:">
 
@@ -700,39 +759,60 @@ _You can delete any customers who no longer require your services from HomeBoss 
 Be careful! You won't be able to undo this edit action!
 </box>
 
-**Example:**
+
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
+
+</box>
+
+</br>**Example:**
 
 * `customer delete 1`{.swift} </br>
-  Deletes the customer with ID 1.
+  Deletes the Customer with ID 1.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+</br>
 
-## <span style="text-decoration:underline;">Delivery</span>
+## </br><span style="text-decoration:underline;">Delivery</span>
 
 ### Add a Delivery
 
-> Adds a delivery to the delivery book.
+> Adds a Delivery to the delivery book.
 
-HomeBoss' most essential feature. The whole premise of our application is so that you can easily track your
-deliveries/orders. With this feature, you can do just that by adding a delivery to the delivery book.
+One of HomeBoss' most essential features. Before tracking your Deliveries, you have to first add them into our 
+application. With this feature, you can do just that by adding a Delivery to the delivery book.
 
-<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
-    Deliveries consist of a Delivery Name, a Customer ID, an Order Date, a Delivery Date, a Delivery Status and 
-  an Address to ship to. </br> </br>
-  You don't have to fill in Order Date, Delivery Status and Address. Instead they will be initialised with these values: 
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+Deliveries consist of a Delivery Name, a Customer ID, an Order Date, a Delivery Date, a Delivery Status and 
+an Address to ship to. </br> </br>
+You don't have to fill in Order Date, Delivery Status and Address. Instead they will be initialised with these values: 
 
 - Order Date: Today's date
 - Delivery Status: CREATED
 - Address: Customer's Address
 
-Cool huh! We try to help you speed up the process as much as possible.
+With this, it helps you speed up the process as much as possible!
 </box>
 
-<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
-    Delivery Status can be one of CREATED, SHIPPED, COMPLETED, CANCELLED.
-</box>
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
-**Format:** `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE`{.swift}
+**Note:**
+
+Delivery Status can be one of CREATED, SHIPPED, COMPLETED, CANCELLED.
+
+ </box>
+
+</br>**Format:** 
+
+`delivery add DELIVERY_NAME --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -740,15 +820,14 @@ Cool huh! We try to help you speed up the process as much as possible.
 
 * `DELIVERY_NAME`{.swift} must be alphanumeric and can contain spaces.
 * `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
-* `EXPECTED_DELIVERY_DATE`{.swift} must be today or after today's date in yyyy-MM-dd format OR 
-  `TODAY`{.swift} for today’s date.
+* `EXPECTED_DELIVERY_DATE`{.swift} must be today or after today's date in yyyy-MM-dd format.
 
-</box>
+  </box>
 
-**Example:**
+</br>**Example:**
 
 - `delivery add Chocolate Cake --customer 1 --date 2023-12-12`{.swift} </br>
-  Adds a delivery with Delivery Name Chocolate Cake, with the Customer who has Customer ID 1, with Delivery Date
+  Adds a Delivery with Delivery Name Chocolate Cake, with the Customer who has Customer ID 1, with Delivery Date
   of 2023-12-12, Order Date will be today's date, Delivery Status will be CREATED and Address will be the Customer's
   Address. \
 
@@ -756,42 +835,50 @@ Cool huh! We try to help you speed up the process as much as possible.
 
 [&uarr; Back to Table of Contents](#top)
 
-### View details of a Delivery
+### </br>View details of a Delivery
 
 > Shows the details of the specified delivery.
 
-If you would to see more details about a specific delivery, you can use the `delivery view`{.swift} command to
-view a more in-depth description of the delivery.
+If you want to see more details about a specific Delivery, you can use the `delivery view`{.swift} command to
+view a more in-depth description of the Delivery.
 
-**Format:** `delivery view DELIVERY_ID`{.swift}
+</br>**Format:** 
+
+`delivery view DELIVERY_ID`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note:**
 
 * `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
-</box>
 
-**Example:**
+  </box>
+
+</br>**Example:**
 
 * `delivery view 1`{.swift} </br>
-  Displays the details of delivery with ID `1001`{.swift}.
+  Displays the details of Delivery with ID `1`{.swift}.
 
 ![](images/ug/delivery_view.png)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### View a list of Deliveries
+### </br>View a list of Deliveries
 
-> Lists the deliveries in the delivery book.
+> Lists the Deliveries in the delivery book.
 
-_If you would like to get an overview of all your deliveries, you can use `delivery list`{.swift} to list all your
-deliveries at once. You can also filter the list of deliveries by status, customer ID and expected delivery date.
-You can also sort the list of deliveries by expected delivery date in ascending or descending order. By default, the
-list of deliveries will be sorted by expected delivery date in descending order (latest first)._
+_If you would like to get an overview of all your Deliveries, you can use `delivery list`{.swift} to list all your
+Deliveries at once. You can also filter the list of Deliveries by status, customer ID and expected delivery date.
+You can also sort the list of Deliveries by expected delivery date in ascending or descending order. By default, the
+list of Deliveries will be sorted by expected delivery date in descending order (latest first)._
 
-**Format:**
+</br>**Format:**
+
 `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]  [--sort SORT]`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -803,112 +890,136 @@ list of deliveries will be sorted by expected delivery date in descending order 
 * `EXPECTED_DELIVERY_DATE`{.swift} must be today or after today's date in yyyy-MM-dd format OR
   `TODAY`{.swift} for today’s date.
 * `SORT`{.swift} accepts the following values: `ASC`{.swift}/`DESC`{.swift}.
+  
   </box>
 
-**Examples:**
+</br>**Examples:**
 
 * `delivery list --status CREATED --customer 1 --sort DESC`{.swift} </br>
-  Lists all deliveries with status `CREATED`{.swift} for customer with ID `1`{.swift} with expected delivery date in
+  Lists all Deliveries with status `CREATED`{.swift} for Customer with ID `1`{.swift} with expected delivery date in
   descending order.
 
 * `delivery list --status SHIPPED --date TODAY`{.swift} </br>
-  Lists all deliveries with status `SHIPPED`{.swift} for all customers and expected delivery date of today.
+  Lists all Deliveries with status `SHIPPED`{.swift} for all Customers and expected delivery date of today.
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
 **Tip:**
-You may combine any of the filters and sort options to get the list of deliveries that you want.
+You may combine any of the filters and sort options to get the list of Deliveries that you want.
 </box>
 
 ![](images/ug/delivery_list.png)
 
 [&uarr; Back to Table of Contents](#top)
 
-### Find Deliveries
+### </br>Find Deliveries
 
-> Finds deliveries whose names has words that exactly match _ANY_ of the given keywords.
+> Finds Deliveries whose names has words that exactly match _ANY_ of the given keywords.
 
-_Want to find details of a delivery, but you do not remember the delivery's full name?
-You can search for the delivery using keywords by calling this command._
+_Want to find details of a Delivery, but you do not remember the Delivery's full name?
+You can search for the Delivery using keywords by calling this command._
 
-**Format:** `delivery find KEYWORD [MORE_KEYWORDS...]`{.swift}
+</br>**Format:** 
 
-<box background-color="#dff0d8" border-color="#d6e9c6" type="info" header="Note">
+`delivery find KEYWORD [MORE_KEYWORDS...]`{.swift}
 
-* You must provide at least one alphanumeric `KEYWORD`{.swift} to search for the delivery.
-* You can optionally provide additional keywords, a delivery that matches any of the given keywords will be displayed.
+<br />
+
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
+
+**Note:**
+
+* You must provide at least one alphanumeric `KEYWORD`{.swift} to search for the Delivery.
+* You can optionally provide additional keywords, a Delivery that matches any of the given keywords will be displayed.
   For example, the keywords `Chocolate Bun`{.swift} will display `Chocolate Cake`{.swift}, `Chocolate Bun`{.swift},
-  and `Strawberry Cake`{.swift}.
+  and `Strawberry Bun`{.swift}.
 * The keyword must exactly match any word in the delivery name. For example the keyword `Straw`{.swift} will match
   `Straw`{.swift} but not `Strawberry`{.swift}.
 * The search is not case sensitive.
 
-</box>
+  </box>
 
-**Example:**
+</br>**Example:**
 `delivery find Gambes Banana`{.swift} </br>
-Find all deliveries whose name has words that exactly match `Gambes`{.swift} or `Banana`{.swift}
+Find all Deliveries whose name has words that exactly match `Gambes`{.swift} or `Banana`{.swift}
 
 ![](images/ug/delivery_find.png)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-#### Update a Delivery's details
+#### </br>Update a Delivery's details
 
-> Updates the delivery details of an existing delivery in the delivery book.
+> Updates the Delivery details of an existing Delivery in the delivery book.
 
-Oh no! Did you key in the wrong details for a delivery? Or did your customer change some details to his
-delivery? No worries! Just edit the details of a delivery simply by using this feature.
+Oh no! Did you key in the wrong details for a Delivery? Or did your Customer change some details to his
+Delivery? No worries! Just edit the details of a Delivery simply by using this feature.
 
-**Format:** `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE]
-[--status STATUS] [--note NOTE]`{.swift}
+</br>**Format:** 
+
+`delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE][--status STATUS] [--note NOTE]`{.swift}
+
+<br />
+
+<box background-color="#f2dede" border-color="#ebccd1" type="warning" icon=":exclamation:">
+    Be careful! You won't be able to undo this edit action! 
+</box>
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note:**
 
 * At least one of the optional fields must be provided.
-* `DELIVERY_ID` {.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
+* `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
 * `DELIVERY_NAME`{.swift} must be alphanumeric and can contain spaces.
 * `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
-  `EXPECTED_DELIVERY_DATE`{.swift} must be today or after today's date in yyyy-MM-dd format OR
-  `TODAY`{.swift} for today’s date.
+  `EXPECTED_DELIVERY_DATE`{.swift} must be today or after today's date in yyyy-MM-dd format.
 
   </box>
 
-<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
-    If you only want to update the delivery's status, simply use `delivery status` instead.
+<box background-color="#f2dede" border-color="#ebccd1" type="warning" icon=":exclamation:">
+
+**Warning:**
+
+Be careful! You won't be able to undo this edit action! 
+
+</box>
+  
+<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
+
+**Tip:**
+   
+If you only want to update the delivery's status, simply use `delivery status` instead.
 </box>
 
-<box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
-    Be careful! You won't be able to undo this edit action! 
-</box>
-
-**Examples:**
+</br>**Examples:**
 
 - `delivery edit 1 --status CANCELLED --note Sudden overseas business trip to attend to.`{.swift} </br>
-  Edits Delivery Status of the delivery, with Delivery ID of 1, to CANCELLED and edits the note of the Delivery.
-  (If delivery does not have a note, a note will be created to the delivery)
+  Edits Delivery Status of the Delivery, with Delivery ID of 1, to CANCELLED and edits the note of the Delivery.
+  (If Delivery does not have a note, a note will be created to the Delivery)
 - `delivery edit 2 --name Vanilla Cake --customer 3`{.swift} </br>
-  Edits Delivery with the ID of 2's Delivery Name to Vanilla Cake as it was misspelled and edits the customer to 
+  Edits Delivery with the ID of 2's Delivery Name to Vanilla Cake as it was misspelled and edits the Customer to 
   Customer 3 as User accidentally typed in 2 instead. \
 
   [&uarr; Back to Table of Contents](#top)
 
-### Update a Delivery's status
+### </br>Update a Delivery's status
 
 > Changes the status of a specified delivery to CREATED, SHIPPED, COMPLETED or CANCELLED
 
-I see that you've just shipped out an order. Nice! Now you can update the status of that particular delivery
-to SHIPPED! Using this feature, you can update the status of a delivery accordingly.
+I see that you've just shipped out an order. Nice! Now you can update the status of that particular Delivery
+to SHIPPED! Using this feature, you can update the status of a Delivery accordingly.
 
 
-<box background-color="#d9edf7" border-color="#bce8f1" type="tip" header="Tip">
-    Delivery Status typed in need not be in uppercase.
+<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
+
+**Tip:**
+
+Delivery Status typed in need not be in uppercase.
 </box>
 
-**Format:** `delivery status DELIVERY_ID STATUS`{.swift}
+</br>**Format:** `delivery status DELIVERY_ID STATUS`{.swift}
 
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -920,46 +1031,56 @@ to SHIPPED! Using this feature, you can update the status of a delivery accordin
 
   </box>
 
-**Examples:**
+</br>**Examples:**
 
-- `delivery status 1 CANCELLED`{.swift}
+- `delivery status 1 CANCELLED`{.swift} </br>
+
 - `delivery status 2 SHIPPED`{.swift}
 
 [&uarr; Back to Table of Contents](#top)
 
-### Create a note for a Delivery
+### </br>Create a note for a Delivery
 
-> Creates a note for a specified delivery
+> Creates a note for a specified Delivery
 
-If you would like create a note about a specific delivery, you can use `delivery note`{.swift} to add a quick
-note to a specific delivery.
+If you would like create a note about a specific Delivery, you can use `delivery note`{.swift} to add a quick
+note to a specific Delivery.
 
-**Format:** `delivery note DELIVERY_ID --note NOTE`{.swift}
+</br>**Format:** 
+
+`delivery note DELIVERY_ID --note NOTE`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note:**
 
-* If the delivery already has a Note it will be overwritten by the new Note given.
+* If the Delivery already has a Note it will be overwritten by the new Note given.
 * `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
 * `NOTE`{.swift} must be alphanumeric and can contain spaces.
+  
   </box>
 
-**Example:**
+</br>**Example:**
 
 * `delivery note 1 --note By FedEx`{.swift} </br>
   Creates a new Note "By FedEx" for the Delivery with ID `1`{.swift}
 
 [&uarr; Back to Table of Contents](#top)
 
-### Delete a Delivery
+### </br>Delete a Delivery
 
-> Deletes the specified delivery.
+> Deletes the specified Delivery.
 
-Feel like your delivery book is getting cluttered up? Maybe you just want to get rid of a few deliveries that have
-been cancelled or completed. If that's the case, simply use this feature to delete the delivery.
+Feel like your delivery book is getting cluttered up? Maybe you just want to get rid of a few Deliveries that have
+been cancelled or completed. If that's the case, simply use this feature to delete the Delivery.
 
-**Format:** `delivery delete DELIVERY_ID`{.swift}
+</br>**Format:** 
+
+`delivery delete DELIVERY_ID`{.swift}
+
+<br />
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -967,22 +1088,26 @@ been cancelled or completed. If that's the case, simply use this feature to dele
 
 * `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
 
+  </box>
+
+<box background-color="#f2dede" border-color="#ebccd1" type="warning" icon=":exclamation:">
+
+**Warning:**
+
+Be careful! This action is irreversible. Once deleted, the delivery cannot be recovered.
+                               
 </box>
 
-<box background-color="#f2dede" border-color="#ebccd1" type="warning" header="Warning">
-    Be careful! This action is irreversible. Once deleted, the delivery cannot be recovered.
-</box>
-
-**Example:**
+</br>**Example:**
 
 - `delivery delete 1`{.swift} </br>
-  Deletes delivery 1 from the delivery book.
+  Deletes Delivery 1 from the delivery book.
 
   [&uarr; Back to Table of Contents](#top)
 
 _Details coming soon..._
 
-## <span style="text-decoration:underline;">Miscellaneous</span>
+## </br><span style="text-decoration:underline;">Miscellaneous</span>
 
 ### Help
 
@@ -991,7 +1116,7 @@ _Details coming soon..._
 _You can view a summary of the commands available, the format of the commands, and a link to this user guide
 by calling this command._
 
-**Format:** `help`{.swift}
+**Format:**`help`{.swift}
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
@@ -1004,13 +1129,13 @@ by calling this command._
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### Exit
+### </br>Exit
 
 > Exits the program.
 
 _You can exit the program by calling this command._
 
-**Format:** `exit`{.swift}
+**Format:**`exit`{.swift}
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
@@ -1021,12 +1146,12 @@ _You can exit the program by calling this command._
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### Clear
+### </br>Clear
 
 > Clears both customer and delivery database.
 
-_Need to clear your customer and delivery data?
-You can delete all your customer and delivery data by calling this command._
+_Need to clear your Customer and Delivery data?
+You can delete all your Customer and Delivery data by calling this command._
 
 **Format:** `clear`{.swift}
 
@@ -1034,13 +1159,16 @@ You can delete all your customer and delivery data by calling this command._
 
 **Warning:**
 
-* Be careful, this action is irreversible! All your customer and delivery data will be deleted permanently.
+* Be careful, this action is irreversible! All your Customer and Delivery data will be deleted permanently.
   Proceed with caution!
+  
   </box>
+
+
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-# FAQ
+# </br>FAQ
 
 **Q: Where do I get support for HomeBoss?**
 
@@ -1052,7 +1180,7 @@ A: You can raise a bug report on our [GitHub repository](https://github.com/AY23
 
 **Q: How do I import my data from another software?**
 
-A: You can import your data by converting your data into .json in the format of the customer and delivery data in the
+A: You can import your data by converting your data into .json in the format of the Customer and Delivery data in the
 data folder.
 
 **Q: How do I export my data to another software?**
@@ -1063,48 +1191,61 @@ A: It is currently not possible to export your data to another software.
 
 A: HomeBoss only supports English characters.
 
-# Command Summary
+**Q: What happens if the json file (file where the Customer/Delivery data is kept) is edited manually and invalid 
+data is being written to the file?**
+
+A: HomeBoss does not recommend the editing of files manually. However, if the files are edited and invalid data is 
+input, HomeBoss will discard the entire data file and start with an empty data file at the next run. 
+(If the Customer data file has invalid data, the whole Delivery data file will be deleted as 
+well. However, if the Delivery data file  has invalid data, the Customer data file will not be affected.)
+
+# </br>Command Summary
 
 #### User
 
-| Command  | Format                                                                                                                       | Examples                                                                                                                    |
-|----------|------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| Register | `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`     | `register --user gabriel --password gabrielIsGreat --confirmPass gabrielIsGreat --secretQn First pet's name? --answer Koko` |
-| Login    | `login --user USERNAME --password PASSWORD`                                                                                  | `login --user gabriel --password gabrielIsGreat`                                                                            |
-| Update   | `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD] [--secretQn SECRET_QUESTION --answer ANSWER]` | `update --user gabrielV2 --password gabrielIsBest --confirmPass gabrielIsBest --secretQn Favourite Pet --answer BoBo`       |
-| Recover  | `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`                                   | `recover account --answer Koko --password newPassword123 --confirmPass newPassword123`                                      |
-| Logout   | `logout`                                                                                                                     | `logout`                                                                                                                    |
-| Delete   | `delete account`                                                                                                             | `delete account`                                                                                                            |
+| Command  | Format                                                                                                                               | Examples                                                                                                                          |
+|----------|--------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| Register | `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`{.swift}     | `register --user Gabriel --password GabrielIsGreat --confirmPass GabrielIsGreat --secretQn First Pet Name? --answer Koko`{.swift} |
+| Login    | `login --user USERNAME --password PASSWORD`{.swift}                                                                                  | `login --user Gabriel --password GabrielIsGreat`{.swift}                                                                          |
+| Update   | `update [--user USERNAME] [--password PASSWORD --confirmPass CONFIRM_PASSWORD] [--secretQn SECRET_QUESTION --answer ANSWER]`{.swift} | `update --user GabrielV2 --password GabrielIsBest --confirmPass GabrielIsBest --secretQn Favourite Pet --answer BoBo`{.swift}     |
+| Recover  | `recover account [--answer ANSWER --password NEW_PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift}                                   | `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`{.swift}                                    |
+| Logout   | `logout`{.swift}                                                                                                                     | `logout`{.swift}                                                                                                                  |
+| Delete   | `delete account`{.swift}                                                                                                             | `delete account`{.swift}                                                                                                          |
+
+<br>
 
 #### Customer
 
-| Command | Format                                                                                               | Examples                                                                                                    |
-|---------|------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
-| Add     | `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`                      | `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`        |
-| View    | `customer view CUSTOMER_ID`                                                                          | `customer view 1001`                                                                                        |
-| List    | `customer list`                                                                                      | `customer list`                                                                                             |
-| Find    | `customer find KEYWORD [MORE_KEYWORDS]`                                                              | `customer find Ibrahim Yu`                                                                                  |
-| Edit    | `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]` | `customer edit 1001 --name Gabriel -–phone 1234 5678 --email gabrielrocks@gmail.com --address RVRC Block B` |
-| Delete  | `customer delete CUSTOMER_ID`                                                                        | `customer delete 1001`                                                                                      |
+| Command | Format                                                                                                       | Examples                                                                                                                 |
+|---------|--------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Add     | `customer add --name NAME --phone PHONE_NUMBER --email EMAIL --address ADDRESS`{.swift}                      | `customer add --name Gabriel --phone 87654321 --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift}             |
+| View    | `customer view CUSTOMER_ID`{.swift}                                                                          | `customer view 1`{swift}                                                                                                 |
+| List    | `customer list`{.swift}                                                                                      | `customer list`{.swift}                                                                                                  |
+| Find    | `customer find KEYWORD [MORE_KEYWORDS]`{.swift}                                                              | `customer find Julius Yang`{.swift}                                                                                      |
+| Edit    | `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`{.swift} | `customer edit 1 --name Gabriel --phone 12345678 --email Gabrielrock@gmail.com --address Block 10 Tampines Road`{.swift} |
+| Delete  | `customer delete CUSTOMER_ID`{.swift}                                                                        | `customer delete 1`{.swift}                                                                                              |
+
+<br>
 
 #### Delivery
 
-| Command | Format                                                                                                                             | Examples                                                                                                                      |
-|---------|------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Add     | `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE`                                                           | `delivery add furniture --customer 5 --date 2023-12-03`                                                                       |
-| View    | `delivery view DELIVERY_ID`                                                                                                        | `delivery view 1001`                                                                                                          |
-| List    | `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--sort SORT]`                                    | `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`                                                   |
-| Find    | `delivery find KEYWORD [MORE_KEYWORDS]`                                                                                            | `delivery find Ibrahim Yu`                                                                                                    |
-| Edit    | `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--status STATUS] [--note NOTE]` | `delivery edit 1001 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note Customer changed his mind` |
-| Status  | `delivery status DELIVERY_ID STATUS`                                                                                               | `delivery status 2 completed`                                                                                                 |
-| Note    | `delivery note DELIVERY_ID --note NOTE`                                                                                            | `delivery note 1 --note By FedEx`                                                                                             |
-| Delete  | `delivery delete DELIVERY_ID`                                                                                                      | `delivery delete 1001`                                                                                                        |
+| Command | Format                                                                                                                                     | Examples                                                                                                                           |
+|---------|--------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| Add     | `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE`{.swift}                                                           | `delivery add furniture --customer 5 --date 2023-12-03`{.swift}                                                                    |
+| View    | `delivery view DELIVERY_ID`{.swift}                                                                                                        | `delivery view 1`{.swift}                                                                                                          |
+| List    | `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--sort SORT]`{.swift}                                    | `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`{.swift}                                                |
+| Find    | `delivery find KEYWORD [MORE_KEYWORDS]`{.swift}                                                                                            | `delivery find Chocolate Bun`{.swift}                                                                                              |
+| Edit    | `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--status STATUS] [--note NOTE]`{.swift} | `delivery edit 1 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note Customer changed his mind`{.swift} |
+| Status  | `delivery status DELIVERY_ID STATUS`{.swift}                                                                                               | `delivery status 2 completed`{.swift}                                                                                              |
+| Note    | `delivery note DELIVERY_ID --note NOTE`{.swift}                                                                                            | `delivery note 1 --note By FedEx`{.swift}                                                                                          |
+| Delete  | `delivery delete DELIVERY_ID`{.swift}                                                                                                      | `delivery delete 1`{.swift}                                                                                                        |
 
-#### Other
+<br>
 
-| Command | Format  | Examples |
-|---------|---------|----------|
-| Exit    | `exit`  | `exit`   |
-| Help    | `help`  | `help`   |
-| Clear   | `clear` | `clear`  |
+#### Miscellaneous
 
+| Command | Format          | Examples        |
+|---------|-----------------|-----------------|
+| Exit    | `exit`{.swift}  | `exit`{.swift}  |
+| Help    | `help`{.swift}  | `help`{.swift}  |
+| Clear   | `clear`{.swift} | `clear`{.swift} |
