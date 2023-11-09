@@ -73,4 +73,3 @@ Given below are my contributions to the project.
     * Added NFRs
 
 * **Community:**
-  As of 9 November 2023, 
