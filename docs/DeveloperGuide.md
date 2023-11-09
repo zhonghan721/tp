@@ -1894,3 +1894,41 @@ testers are expected to do more _exploratory_ testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+---
+
+## **Appendix: Effort**
+
+<br>
+
+### Difficulty level
+
+This project was moderately challenging as we had to deal with a large existing code base.
+It took us some time to understand how the different components interact with each other.
+Furthermore, our team was not familiar with frameworks such as JavaFX prior to this, and we had to learn how to use it.
+
+<br>
+
+### Challenges faced
+
+* Understanding and refactoring the code base
+  * As HomeBoss deals with Customers and Deliveries, we had to refactor `Person` into `Customer`, and irrelevant
+    classes such as `Tag` has to be removed.
+* Creating storage for Deliveries
+  * AB3 deals with only one storage. However, HomeBoss has two storages, one for Customers and one for Deliveries.
+    Furthermore, there is a dependency between the two entities, requiring a new `BookStorageWithReference` 
+    class that accepts two type parameters to be created.
+* Adapting the `PersonListPanel` to `ListPanel`
+  * The `PersonListPanel` was designed to contain a list of `Person`. However, as we decided to display both 
+    `Customer` and `Delivery` in the same list, we had to adapt the `PersonListPanel` to `ListPanel` to 
+    accommodate both types of entities.
+
+<br>
+
+### Achievements
+
+* Displaying the list of Customers and list of Deliveries using the same panel.
+* Creating a new storage for Deliveries that has references to Customer.
+* A refreshing look of the UI.
+* New features such as filtering and sorting of deliveries.
+* Increasing code coverage to 83%.
