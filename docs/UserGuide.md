@@ -1,13 +1,13 @@
-# User Guide
+<span style="font-size: 3.3em; font-weight: 550;">HomeBoss User Guide</span>
 
-# About HomeBoss
+# Introduction
 
 HomeBoss is a powerful desktop application designed specifically for **home-based business owners**, offering *
 *efficient Customer and Delivery management solutions**. With HomeBoss, you can streamline your administrative processes
 and elevate your overall business experience to new heights.
 
 With our application, you will be able to:
-
+ 
 * Keep track of the details of your Customers and Deliveries
 * Search for a particular Customer / Delivery easily
 * Organise your data in a neat and tidy manner by filtering and sorting to your needs </br>
@@ -25,7 +25,7 @@ With HomeBoss, you can now **focus on what matters most: running your business.*
 
 # Table of Contents
 
-&nbsp;&nbsp;1\. [About HomeBoss](#about-homeboss)</br>
+&nbsp;&nbsp;1\. [Introduction](#introduction)</br>
 &nbsp;&nbsp;2\. [Table of Contents](#table-of-contents)</br>
 &nbsp;&nbsp;3\. [About this User Guide](#about-this-user-guide)</br>
 &nbsp;&nbsp;4\. [Navigating the User Guide](#navigating-the-user-guide)</br>
@@ -156,6 +156,8 @@ Ensure that you have `Java 11` or above installed on your computer. If you are u
 this
 helpful [guide](https://www.java.com/en/download/help/version_manual.html).
 
+<br/>
+
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
 **Tip**: You may find the following links helpful should you need to install `Java 11` :
@@ -174,8 +176,11 @@ helpful [guide](https://www.java.com/en/download/help/version_manual.html).
 1. You may download the latest release of **HomeBoss**
    from [here](https://github.com/AY2324S1-CS2103T-T13-3/tp/releases/latest).
    (Please download the file named `HomeBoss.jar`)
+
 2. Move the downloaded `HomeBoss.jar` file into the folder that you want to use as the home folder for your
    application.
+
+<br/> 
 
 <box type="warning" background-color="#f2dede" border-color="#ebccd1" icon=":exclamation:">
 
@@ -185,9 +190,13 @@ files / folders before the application is launched for the first time.
 
 </box>
 
+<br/> 
+
 3. Run `HomeBoss.jar`. If you are unsure of how to run a `.jar` file, you may refer to this helpful
    [guide](https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Run-JAR-file-example-windows-linux-ubuntu).
+
 4. If everything went well, you will be greeted by a window similar to the one shown below.
+
 5. If you are a first time user, we highly recommend reading the following sections to familiarise yourself with
    HomeBoss's layout and commands:
     * [Understanding our layout](#understanding-our-layout) <br/>
@@ -227,7 +236,7 @@ will be entered. Try typing the `help`{.swift} command and hitting enter!
 
 ### </br>Command Result / Feedback
 
-![Command Result Feedback](images/getting-started/help_feedback.png){style="display: block; margin: 0 auto;"}
+![Command Result Feedback](images/getting-started/help_feedback.png){style="display: block; margin: 0 auto; width: 60%;}
 
 The Command Result / Feedback Box is where HomeBoss will provide you the results or feedback about
 the commands you entered. For example, if you tried typing the `help`{.swift} command earlier, you should see
@@ -263,7 +272,7 @@ HomeBoss. You can use the scroll bar on the right to scroll through your Custome
 * The `ID`{.swift} that appears next to each name is a unique identifier given to all added Customers and
   Deliveries separately, and is required to perform many of HomeBoss's commands.
   More details of these commands can be found in [Features](#features). <br/><br/>
-* The `ID`{.swift} generated are guaranteed to be unique but may not be consecutive and may not start from 1.<br/>
+* The `ID`{.swift}s generated are guaranteed to be unique but may not be consecutive and may not start from 1.<br/>
 
 ![Command Result FeedBack](images/getting-started/delivery_card.png){style="display: block; margin: 0 auto;"}
 
@@ -300,11 +309,11 @@ However, not all commands have **Prefixes**. Take the
 [Update status of a Delivery](#update-status-of-a-delivery) command as example:
 
 ```swift
-delivery status STATUS CUSTOMER_ID
+delivery status DELIVERY_ID STATUS
 ```
 
 * The **Command Phrase** is `delivery status`{.swift}.
-* The **Parameters** are `STATUS`{.swift} and `CUSTOMER_ID`{.swift}.
+* The **Parameters** are `DELIVERY_ID`{.swift} and `STATUS`{.swift}.
 * It has no **Prefixes**.
 
 <br />
@@ -325,18 +334,17 @@ logout
 
 **Note**:
 
-* Command Phrase are keywords or short phrases that are unique to each Command.
-* Words that are in uppercase are parameters that are to be supplied by you.
+* A Command Phrase is made up of keywords or short phrases that are unique to each Command.
+* Words in uppercase are parameters that are supplied by you.
 * Parameters that are preceded by a prefix must be supplied after that prefix, e.g. `--name DELIVERY_NAME`{.swift}
-  must be given as, for example, `--name furniture` and not `furniture` or `--name`.
+  must be given as, for instance, `--name furniture` and not `furniture` or `--name`.
 * Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`
-  {.swift} can either be
-  `1` or `1 --name furniture`.
+can either be `1` or `1 --name furniture`.
 * However, items that are grouped together in square brackets (`[]`{.swift}) must all be provided together,
   e.g. for `[--password PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift} both `PASSWORD`{.swift} and
   `CONFIRM_PASSWORD`{.swift} must be provided.
-* Extraneous parameters for commands that do not have parameters (e.g. `customer list`{.swift} or `clear`{.swift}) will
-  be ignored, e.g. `customer list 123`.
+* Extraneous parameters for commands without parameters, like `customer list`{.swift} or `clear`{.swift}
+, will be disregarded, as seen in examples such as `customer list 123`.
 * Parameters that have `...`{.swift} as a postfix can be given one or more times, e.g. `KEYWORDS...`{.swift} can be
   given as `Keyword` or `Keyword AnotherKeyword`.
 * **Command Phrase** and **Prefixes** are **case-sensitive**! e.g. `clear`{.swift} is a valid command word but
@@ -397,7 +405,7 @@ found [here](#register).
 
 ![CustomerAdded](images/getting-started/customer_add.png){style="display: block; margin: 0 auto;"}
 
-1. Now, let's add a new Delivery for `Gabriel` into HomeBoss' Delivery database. For this example, `Gabriel` has just
+6. Now, let's add a new Delivery for `Gabriel` into HomeBoss' Delivery database. For this example, `Gabriel` has just
    ordered a `MacBook Pro` from you, and the delivery date that you expect to deliver to him by is `2023-12-03`.
 
 * `DELIVERY_NAME`{.swift} : MacBook Pro
@@ -415,6 +423,10 @@ Congratulations! You have just successfully added your first Customer and Delive
 
 HomeBoss is packed with many more features to help you manage your Customers and Deliveries.
 Check them out under the [Features](#features) section to learn more!
+
+<br/>
+
+[&uarr; Back to Table of Contents](#table-of-contents)
 
 ## </br>Editing the data file
 
@@ -441,7 +453,7 @@ file will remain unaffected.)
 Here is a brief introduction to all the features in HomeBoss. For more detailed information, please
 refer to the [Features](#features) section.
 
-## </br>User features summary
+## User features summary
 
 _These are features for managing your user account in HomeBoss._
 
@@ -1104,7 +1116,7 @@ whose names has words that exactly match any of the given keywords.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-#### </br></br>Update details of a Delivery
+### </br></br>Update details of a Delivery
 
 This command is useful for updating the details of a Delivery, such as due to a change in the details of a Delivery or
 in the event that you keyed in the Delivery's details wrongly.
