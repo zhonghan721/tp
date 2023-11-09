@@ -115,6 +115,14 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 
 </box>
 
+**Parameter Box**
+
+<box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
+
+**Parameters:** Parameters are inputs that you can customise to your needs. They are typically preceded by a prefix. If you're unsure what a prefix is, you can refer to the [Command Format](#homeboss-s-command-format) section.
+
+</box>
+
 **Links**
 
 * Words in blue are [links](#navigating-the-user-guide) that you can click on to navigate to the relevant section.
@@ -237,8 +245,8 @@ Don't worry if the commands seem daunting, the HomeBoss team has carefully craft
 and simple as possible. After learning the commands, you'll be faster than ever!
 
 Every command has a **Command Phrase** and possibly one or more **Parameters**
-(Inputs to customise the command to your needs) which is typically preceded by a **Prefix**
-(Special markers for HomeBoss to understand your inputs)
+(inputs to customise the command to your needs) which is typically preceded by a **Prefix**
+(special markers for HomeBoss to understand your inputs)
 
 Take the [Add Delivery Command](#add-delivery) for example:
 
@@ -253,7 +261,7 @@ delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE
 
 <br />
 
-However not all commands have **Prefixes**, take the
+However, not all commands have **Prefixes**, take the
 [Update Delivery Status Command](#update-delivery-status) for example:
 
 ```swift
