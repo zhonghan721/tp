@@ -28,8 +28,8 @@ import seedu.address.model.DeliveryBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.customer.Customer;
 import seedu.address.model.delivery.Delivery;
-import seedu.address.model.person.Customer;
 import seedu.address.model.user.User;
 import seedu.address.testutil.CustomerBuilder;
 import seedu.address.testutil.DeliveryAddDescriptorBuilder;
@@ -210,7 +210,7 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
-        public void addPerson(Customer customer) {
+        public void addCustomer(Customer customer) {
 
             throw new AssertionError("This method should not be called.");
         }
@@ -236,7 +236,7 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Customer customer) {
+        public boolean hasCustomer(Customer customer) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -246,23 +246,23 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
-        public void deletePerson(Customer target) {
+        public void deleteCustomer(Customer target) {
 
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Customer target, Customer editedCustomer) {
+        public void setCustomer(Customer target, Customer editedCustomer) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Customer> getFilteredPersonList() {
+        public ObservableList<Customer> getFilteredCustomerList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Customer> predicate) {
+        public void updateFilteredCustomerList(Predicate<Customer> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -443,7 +443,7 @@ public class DeliveryAddCommandTest {
             CustomerBuilder personBuilder = new CustomerBuilder();
             Customer validCustomer = personBuilder.build();
             AddressBook addressBook = new AddressBook();
-            addressBook.addPerson(validCustomer);
+            addressBook.addCustomer(validCustomer);
             return addressBook;
         }
 
@@ -481,7 +481,7 @@ public class DeliveryAddCommandTest {
             CustomerBuilder personBuilder = new CustomerBuilder();
             Customer validCustomer = personBuilder.build();
             AddressBook addressBook = new AddressBook();
-            addressBook.addPerson(validCustomer);
+            addressBook.addCustomer(validCustomer);
             return addressBook;
         }
 
@@ -514,7 +514,7 @@ public class DeliveryAddCommandTest {
             CustomerBuilder personBuilder = new CustomerBuilder();
             Customer validCustomer = personBuilder.build();
             AddressBook addressBook = new AddressBook();
-            addressBook.addPerson(validCustomer);
+            addressBook.addCustomer(validCustomer);
             return addressBook;
         }
 

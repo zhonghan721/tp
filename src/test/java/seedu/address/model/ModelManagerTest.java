@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalCustomers.ALICE;
+import static seedu.address.testutil.TypicalCustomers.BENSON;
 import static seedu.address.testutil.TypicalDeliveries.GABRIELS_MILK;
 import static seedu.address.testutil.TypicalDeliveries.GAMBES_RICE;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,10 +20,10 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.customer.Customer;
+import seedu.address.model.customer.NameContainsKeywordsPredicate;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
-import seedu.address.model.person.Customer;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -86,14 +86,14 @@ public class ModelManagerTest {
 
     @Test
     public void getCustomer_validId_returnsOptionalCustomer() {
-        modelManager.addPerson(ALICE);
+        modelManager.addCustomer(ALICE);
         Optional<Customer> customer = modelManager.getCustomer(1);
         assertEquals(customer.get(), ALICE);
     }
 
     @Test
     public void getCustomer_invalidId_returnsEmptyOptional() {
-        modelManager.addPerson(ALICE);
+        modelManager.addCustomer(ALICE);
         Optional<Customer> customer = modelManager.getCustomer(0);
         assertTrue(customer.isEmpty());
     }
@@ -107,47 +107,47 @@ public class ModelManagerTest {
     @Test
     public void getCustomerUsingFilteredList_validId_returnsCustomer() {
         modelManager.setLoginSuccess();
-        modelManager.addPerson(ALICE);
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        modelManager.addCustomer(ALICE);
+        modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
         Customer customer = modelManager.getCustomerUsingFilteredList(1);
         assertEquals(ALICE, customer);
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasCustomer_nullCustomer_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasCustomer(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasCustomer_customerNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasCustomer(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasCustomer_customerInAddressBook_returnsTrue() {
+        modelManager.addCustomer(ALICE);
+        assertTrue(modelManager.hasCustomer(ALICE));
     }
 
     @Test
-    public void hasCustomerWithSamePhone_nullPerson_throwsNullPointerException() {
+    public void hasCustomerWithSamePhone_nullCustomer_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasCustomerWithSamePhone(null));
     }
 
     @Test
-    public void hasCustomerWithSamePhone_personNotInAddressBook_returnsFalse() {
+    public void hasCustomerWithSamePhone_customerNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasCustomerWithSamePhone(ALICE));
     }
 
     @Test
-    public void hasCustomerWithSamePhone_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
+    public void hasCustomerWithSamePhone_customerInAddressBook_returnsTrue() {
+        modelManager.addCustomer(ALICE);
         assertTrue(modelManager.hasCustomerWithSamePhone(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredCustomerList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredCustomerList().remove(0));
     }
 
     // Delivery
@@ -217,7 +217,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
         DeliveryBook deliveryBook =
                 new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -244,13 +244,13 @@ public class ModelManagerTest {
         // different deliverybook -> returns false
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentDeliveryBook, userPrefs, true)));
 
-        // different filteredPersonList -> returns false
+        // different filteredCustomerList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredCustomerList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, userPrefs, true)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
 
         // different filteredDeliveryList -> returns false
         String[] deliveryKeywords = GABRIELS_MILK.getName().deliveryName.split("\\s+");
@@ -284,7 +284,7 @@ public class ModelManagerTest {
 
     @Test
     public void getLoginStatus_storedUserAndLoggedIn_success() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
         DeliveryBook deliveryBook =
                 new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
@@ -300,7 +300,7 @@ public class ModelManagerTest {
 
     @Test
     public void getLoginStatus_storedUserAndLoggedOut_success() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
         DeliveryBook deliveryBook =
                 new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
@@ -316,7 +316,7 @@ public class ModelManagerTest {
 
     @Test
     public void getLoginStatus_noStoredUser_success() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
         DeliveryBook deliveryBook =
                 new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();

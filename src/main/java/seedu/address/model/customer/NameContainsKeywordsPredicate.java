@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.customer;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -14,6 +14,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Customer> {
 
     /**
      * Creates a NameContainsKeywordsPredicate.
+     *
      * @param keywords the list of keywords to search for.
      */
     public NameContainsKeywordsPredicate(List<String> keywords) {

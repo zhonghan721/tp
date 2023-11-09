@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalCustomers.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -31,8 +31,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.customer.Customer;
 import seedu.address.model.delivery.Delivery;
-import seedu.address.model.person.Customer;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonDeliveryBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -93,8 +93,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredCustomerList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredCustomerList().remove(0));
     }
 
     /**
@@ -183,16 +183,16 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = CustomerAddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-            + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
 
         Customer expectedCustomer = new CustomerBuilder(AMY)
-            .withCustomerId(Customer.getCustomerCount()).build();
+                .withCustomerId(Customer.getCustomerCount()).build();
 
 
         ModelManager expectedModel = new ModelManager();
         // sets the expected model to be in logged in state
         expectedModel.setLoginSuccess();
-        expectedModel.addPerson(expectedCustomer);
+        expectedModel.addCustomer(expectedCustomer);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
@@ -204,7 +204,7 @@ public class LogicManagerTest {
                 .collect(Collectors.toCollection(
                         FXCollections::observableArrayList));
 
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
+        model.updateFilteredCustomerList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
         assertEquals(logic.getUiList(), customers);
 
         ObservableList<ListItem> deliveries = this.model.getFilteredDeliveryList().stream().map(
