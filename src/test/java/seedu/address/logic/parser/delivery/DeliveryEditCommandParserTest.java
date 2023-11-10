@@ -38,10 +38,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.delivery.DeliveryEditCommand;
 import seedu.address.logic.commands.delivery.DeliveryEditCommand.DeliveryEditDescriptor;
+import seedu.address.model.customer.Name;
 import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
-import seedu.address.model.person.Name;
 import seedu.address.testutil.DeliveryEditDescriptorBuilder;
 
 
@@ -98,7 +98,7 @@ public class DeliveryEditCommandParserTest {
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_CUSTOMER_ID_DESC + INVALID_NOTE_DESC,
-               Name.MESSAGE_CONSTRAINTS);
+                Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -125,7 +125,7 @@ public class DeliveryEditCommandParserTest {
 
         DeliveryEditDescriptor descriptor =
                 new DeliveryEditDescriptorBuilder().withDeliveryName(VALID_NAME_JAMES_MILK)
-                .withStatus(VALID_STATUS_CREATED).build();
+                        .withStatus(VALID_STATUS_CREATED).build();
         DeliveryEditCommand expectedCommand = new DeliveryEditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

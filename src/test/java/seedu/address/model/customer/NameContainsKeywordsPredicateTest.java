@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.customer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -20,10 +20,10 @@ public class NameContainsKeywordsPredicateTest {
         ArrayList<String> predicateKeywordList = new ArrayList<>();
         predicateKeywordList.add("shouldBeHere");
         NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
-            new NameContainsKeywordsPredicate(predicateKeywordList);
+                new NameContainsKeywordsPredicate(predicateKeywordList);
         predicateKeywordList.clear();
         assertEquals(nameContainsKeywordsPredicate.toString(),
-            NameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=[shouldBeHere]}");
+                NameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=[shouldBeHere]}");
     }
 
     @Test

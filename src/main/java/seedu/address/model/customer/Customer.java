@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.customer;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -41,10 +41,10 @@ public class Customer {
      * To be used only when creating customer from storage file.
      *
      * @param customerId Customer id of the customer.
-     * @param name Name of the customer.
-     * @param phone Phone number of the customer.
-     * @param email Email of the customer.
-     * @param address Address of the customer.
+     * @param name       Name of the customer.
+     * @param phone      Phone number of the customer.
+     * @param email      Email of the customer.
+     * @param address    Address of the customer.
      */
     public Customer(int customerId, Name name, Phone phone, Email email, Address address) {
         requireAllNonNull(name, phone, email, address);
@@ -81,7 +81,7 @@ public class Customer {
 
     /**
      * Returns current customerCount.
-     * Used by {@code PersonBuilder} to create customer with expected customerId.
+     * Used by {@code CustomerBuilder} to create customer with expected customerId.
      *
      * @return customerCount
      */
@@ -90,8 +90,8 @@ public class Customer {
     }
 
     /**
-     * Returns true if both persons have the same customerId or {@code Phone}.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both Customers have the same customerId or {@code Phone}.
+     * This defines a weaker notion of equality between two customers.
      */
     public boolean isSameCustomer(Customer otherCustomer) {
         if (otherCustomer == this) {
@@ -99,12 +99,12 @@ public class Customer {
         }
 
         return otherCustomer != null
-            && (customerId == otherCustomer.customerId
-            || phone.equals(otherCustomer.getPhone()));
+                && (customerId == otherCustomer.customerId
+                || phone.equals(otherCustomer.getPhone()));
     }
 
     /**
-     * Returns true if both persons have the same {@code Phone}.
+     * Returns true if both Customers have the same {@code Phone}.
      */
     public boolean hasSamePhone(Customer otherCustomer) {
         return otherCustomer != null
@@ -112,8 +112,8 @@ public class Customer {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both customers have the same identity and data fields.
+     * This defines a stronger notion of equality between two customers.
      */
     @Override
     public boolean equals(Object other) {
@@ -128,10 +128,10 @@ public class Customer {
 
         Customer otherCustomer = (Customer) other;
         return customerId == otherCustomer.customerId
-            && name.equals(otherCustomer.name)
-            && phone.equals(otherCustomer.phone)
-            && email.equals(otherCustomer.email)
-            && address.equals(otherCustomer.address);
+                && name.equals(otherCustomer.name)
+                && phone.equals(otherCustomer.phone)
+                && email.equals(otherCustomer.email)
+                && address.equals(otherCustomer.address);
     }
 
     @Override
@@ -143,12 +143,12 @@ public class Customer {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("customerId", customerId)
-            .add("name", name)
-            .add("phone", phone)
-            .add("email", email)
-            .add("address", address)
-            .toString();
+                .add("customerId", customerId)
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
+                .toString();
     }
 
 }

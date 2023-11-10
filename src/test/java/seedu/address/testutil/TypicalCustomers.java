@@ -14,12 +14,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Customer;
+import seedu.address.model.customer.Customer;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Customer} objects to be used in tests.
  */
-public class TypicalPersons {
+public class TypicalCustomers {
 
     public static final Customer ALICE = new CustomerBuilder().withCustomerId(1)
             .withName("Alice Pauline")
@@ -47,33 +47,33 @@ public class TypicalPersons {
 
     // Manually added
     public static final Customer HOON = new CustomerBuilder().withCustomerId(8).withName("Hoon Meier")
-        .withPhone("84824246").withEmail("stefan@example.com").withAddress("little india").build();
+            .withPhone("84824246").withEmail("stefan@example.com").withAddress("little india").build();
     public static final Customer IDA = new CustomerBuilder().withCustomerId(9).withName("Ida Mueller")
-        .withPhone("84821316").withEmail("hans@example.com").withAddress("chicago ave").build();
+            .withPhone("84821316").withEmail("hans@example.com").withAddress("chicago ave").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
+    // Manually added - Customer's details found in {@code CommandTestUtil}
     public static final Customer AMY = new CustomerBuilder().withCustomerId(10).withName(VALID_NAME_AMY)
-        .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).build();
+            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).build();
     public static final Customer BOB = new CustomerBuilder().withCustomerId(11).withName(VALID_NAME_BOB)
-        .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).build();
+            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {
+    private TypicalCustomers() {
     } // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical customers.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Customer customer : getTypicalPersons()) {
-            ab.addPerson(customer);
+        for (Customer customer : getTypicalCustomers()) {
+            ab.addCustomer(customer);
         }
         return ab;
     }
 
-    public static List<Customer> getTypicalPersons() {
+    public static List<Customer> getTypicalCustomers() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

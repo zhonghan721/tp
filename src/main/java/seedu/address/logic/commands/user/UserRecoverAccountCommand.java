@@ -90,7 +90,7 @@ public class UserRecoverAccountCommand extends Command {
         User newUser = new User(storedUser.getUsername(), newPassword, true,
                 storedUser.getSecretQuestion(), storedUser.getAnswer());
         model.resetPassword(newUser);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
         return new CommandResult(MESSAGE_SUCCESS_WITH_FLAGS, true);
     }
 
