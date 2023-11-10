@@ -1853,7 +1853,7 @@ testers are expected to do more _exploratory_ testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Initial launch.
 
     1. Download the jar file and copy it into an empty folder.
 
@@ -1874,7 +1874,7 @@ testers are expected to do more _exploratory_ testing.
 
    4. Expected: Should see the HomeBoss Homepage.
 
-2. Subsequent launches
+2. Subsequent launches.
 
    1. Relaunch the application by running `HomeBoss.jar`{.swift}.
 
@@ -1883,7 +1883,7 @@ testers are expected to do more _exploratory_ testing.
 
 ### Register
 
-1. Registering for an account
+1. Registering for an account.
 
    1. Prerequisites: None
 
@@ -1913,10 +1913,10 @@ testers are expected to do more _exploratory_ testing.
 
 ### Login
 
-1. Login to an account
+1. Login to an account.
 
    1. Prerequisites: There exists a stored user in the application, with the username `Gabriel`{.swift} and
-      password `GabrielIsGreat`{.swift}
+      password `GabrielIsGreat`{.swift}. The user is currently logged-out of the application.
 
    2. Test Case: `login --user Gabriel --password GabrielIsGreat`{.swift}.</br>
       Expected: The user is logged-in into the application. A welcome message is shown in the result message.
@@ -1936,14 +1936,14 @@ testers are expected to do more _exploratory_ testing.
    6. Test Case: `login --user Gabriel --password GabrielIsGreat1`{.swift}.</br>
       Expected: Similar to previous.
 
-   6. Test Case: `login --user Gabriel`{.swift}.</br>
+   7. Test Case: `login --user Gabriel`{.swift}.</br>
       Expected: The user does not get logged-in. Error indicating invalid command format is
       shown in the feedback message.
 
 
 ### Update Account Details
 
-1. Updating account details
+1. Updating account details.
 
    1. Prerequisites: Logged-in into the application with the `login`{.swift} command. 
 
@@ -1983,7 +1983,7 @@ testers are expected to do more _exploratory_ testing.
 
 ### Logout
 
-1. Logging out of the application
+1. Logging out of the application.
 
    1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
 
@@ -1996,16 +1996,16 @@ testers are expected to do more _exploratory_ testing.
 
 ### Recover Account
 
-1. Recovering user account
+1. Recovering user account.
 
-   1. Prerequisites: Logged-in into the application with the `login`{.swift} command, and the answer of the currently
-   logged-in user's secret question is "Koko".
+   1. Prerequisites: There exists a stored user in the application, and the answer of the currently
+      stored user's secret question is "Koko".
 
    2. Test Case: `recover account`{.swift}.</br>
-      Expected: The currently logged-in user's secret question is displayed.
+      Expected: The currently stored user's secret question is displayed.
 
    3. Test Case: `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`{.swift}.</br>
-      Expected: The currently logged-in user's password is updated to `NewPassword123`{.swift} 
+      Expected: The currently stored user's password is updated to `NewPassword123`{.swift} 
 
    4. Test Case: `recover account --answer NotKoko --password NewPassword123 --confirmPass NewPassword123`{.swift}</br>
       Expected: No user details are updated. Error indicating that answer is incorrect is shown in the feedback message.
@@ -2024,7 +2024,7 @@ testers are expected to do more _exploratory_ testing.
 
 ### Delete Account
 
-1. Delete currently stored user account
+1. Delete currently stored user account.
 
    1. Prerequisites: There exists a user account currently stored in the application
 
@@ -2036,7 +2036,7 @@ testers are expected to do more _exploratory_ testing.
 
 ### Add Customer
 
-1. Adding a Customer to the application
+1. Adding a Customer to the application.
 
    1. Prerequisites: Logged-in into the application with the `login`{.swift} command. There is currently no stored
       Customer with a phone number of 87654321. There is currently a stored Customer with a phone number of 87651234.
@@ -2047,27 +2047,27 @@ testers are expected to do more _exploratory_ testing.
       shown in the feedback message.
 
    3. Test Case: `customer add --name G_briel --phone 87654321 --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift}.</br>
-      Expected: No new Customer is added, Error indicating customer name constraints is
+      Expected: No new Customer is added. Error indicating customer name constraints is
       shown in the feedback message.
 
    4. Test Case: `customer add --name Gabriel --phone 987654321 --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift}.</br>
-      Expected: No new Customer is added, Error indicating phone number constraints is
+      Expected: No new Customer is added. Error indicating phone number constraints is
       shown in the feedback message.
 
    5. Test Case: `customer add --name Gabriel --phone abcdefgh --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift}.</br>
-      Expected: No new Customer is added, Error indicating phone number constraints is
+      Expected: No new Customer is added. Error indicating phone number constraints is
       shown in the feedback message.
 
    6. Test Case: `customer add --name Gabriel --phone 87651234 --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift}.</br>
-      Expected: No new Customer is added, Error indicating that the Customer already exists is
+      Expected: No new Customer is added. Error indicating that the Customer already exists is
       shown in the feedback message.
 
    7. Test Case: `customer add --name Gabriel --phone 987654321 --email Gabrielrocks --address RVRC Block B`{.swift}.</br>
-      Expected: No new Customer is added, Error indicating email constraints is
+      Expected: No new Customer is added. Error indicating email constraints is
       shown in the feedback message.
 
    8. Test Case: `customer add --name Gabriel --phone 987654321 --email Gabrielrocks@gmail.com`{.swift}.</br>
-      Expected: No new Customer is added, Error indicating invalid command format is
+      Expected: No new Customer is added. Error indicating invalid command format is
       shown in the feedback message.
 
 ### View Details of Customer
@@ -2081,18 +2081,18 @@ testers are expected to do more _exploratory_ testing.
       Expected: The details of the Customer with an ID of 1 is shown in the result message.
 
    3. Test Case: `customer view 0`{.swift}.</br>
-      Expected: No new Customer details are shown, Error indicating customer ID constraints is
+      Expected: No new Customer details are shown. Error indicating customer ID constraints is
       shown in the feedback message.
 
    4. Test Case: `customer view -1`{.swift}.</br>
-      Expected: No new Customer details are shown, Error indicating invalid command format is
+      Expected: No new Customer details are shown. Error indicating invalid command format is
       shown in the feedback message.
 
    5. Test Case: `customer view a`{.swift}.</br>
       Expected: Similar to previous.
 
    6. Test Case: `customer view 2`{.swift}.</br>
-      Expected: No new Customer details are shown, Error indicating invalid customer ID is
+      Expected: No new Customer details are shown. Error indicating invalid customer ID is
       shown in the feedback message.
 
 ### List Customers
@@ -2182,7 +2182,7 @@ testers are expected to do more _exploratory_ testing.
       in the feedback message.
 
    3. Test Case: `customer delete 0`{.swift}.</br>
-      Expected: No Customer is deleted, an Error indicating invalid command format is
+      Expected: No Customer is deleted. Error indicating invalid command format is
       shown in the feedback message.
 
    4. Test Case: `customer delete -1`{.swift}.</br>
@@ -2192,12 +2192,12 @@ testers are expected to do more _exploratory_ testing.
       Expected: Similar to previous.
 
    6. Test Case: `customer delete 2`{.swift}.</br>
-      Expected: No Customer is deleted, an Error indicating invalid Customer ID is
+      Expected: No Customer is deleted. Error indicating invalid Customer ID is
       shown in the feedback message.
 
 ### Add Delivery
 
-1. Adding a Delivery to the application
+1. Adding a Delivery to the application.
 
    1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
       There is currently a Customer stored with an ID of 1. And the current date is 2023-12-02.
@@ -2246,18 +2246,18 @@ testers are expected to do more _exploratory_ testing.
       Expected: The details of the Delivery with an ID of 1 is shown in the result message.
 
    3. Test Case: `delivery view 0`{.swift}.</br>
-      Expected: No new Delivery details are shown, Error indicating delivery ID constraints is
+      Expected: No new Delivery details are shown. Error indicating delivery ID constraints is
       shown in the feedback message.
 
    4. Test Case: `delivery view -1`{.swift}.</br>
-      Expected: No new Delivery details are shown, Error indicating invalid command format is
+      Expected: No new Delivery details are shown. Error indicating invalid command format is
       shown in the feedback message.
 
    5. Test Case: `delivery view a`{.swift}.</br>
       Expected: Similar to previous.
 
    6. Test Case: `delivery view 2`{.swift}.</br>
-      Expected: No new Delivery details are shown, Error indicating invalid delivery ID is
+      Expected: No new Delivery details are shown. Error indicating invalid delivery ID is
       shown in the feedback message.
 
 ### List Deliveries
@@ -2477,7 +2477,7 @@ testers are expected to do more _exploratory_ testing.
       in the feedback message.
 
    3. Test Case: `delivery delete 0`{.swift}.</br>
-      Expected: No Delivery is deleted, an Error indicating invalid command format is
+      Expected: No Delivery is deleted. An Error indicating invalid command format is
       shown in the feedback message.
 
    4. Test Case: `delivery delete -1`{.swift}.</br>
@@ -2487,7 +2487,7 @@ testers are expected to do more _exploratory_ testing.
       Expected: Similar to previous.
 
    6. Test Case: `delivery delete 2`{.swift}.</br>
-      Expected: No Delivery is deleted, an Error indicating invalid Delivery ID is
+      Expected: No Delivery is deleted. An Error indicating invalid Delivery ID is
       shown in the feedback message.
 
 ### Help
@@ -2529,7 +2529,7 @@ testers are expected to do more _exploratory_ testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing/corrupted data files.
 
    1. Prerequisites: There are existing Customer and Delivery Data files with existing stored Customers and Deliveries.
 
