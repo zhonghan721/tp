@@ -49,6 +49,8 @@ public class DeliveryCreateNoteCommand extends Command {
     public DeliveryCreateNoteCommand(int targetId, Note newNote) {
         requireNonNull(newNote);
 
+        assert targetId > 0;
+
         this.targetId = targetId;
         this.newNote = newNote;
     }
@@ -84,6 +86,7 @@ public class DeliveryCreateNoteCommand extends Command {
      */
     private static Delivery createDeliveryWithNewNote(Delivery deliveryToEdit, Note newNote) {
         assert deliveryToEdit != null;
+        assert newNote != null;
 
         int updatedId = deliveryToEdit.getDeliveryId();
         DeliveryName updatedName = deliveryToEdit.getName();

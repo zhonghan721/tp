@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all deliveries in delivery book whose name contains any of the argument keywords.
+ * Finds and lists all deliveries in delivery book whose name has words that match any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class DeliveryFindCommand extends DeliveryCommand {
@@ -26,7 +26,15 @@ public class DeliveryFindCommand extends DeliveryCommand {
 
     private final DeliveryNameContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a DeliveryFindCommand to find and list all deliveries in delivery book
+     * whose name has words that match any of the argument keywords
+     *
+     * @param predicate The predicate to search the deliveries by.
+     */
     public DeliveryFindCommand(DeliveryNameContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
+
         this.predicate = predicate;
     }
 

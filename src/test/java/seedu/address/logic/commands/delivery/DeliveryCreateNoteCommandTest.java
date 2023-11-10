@@ -70,7 +70,7 @@ public class DeliveryCreateNoteCommandTest {
     @Test
     public void execute_invalidTargetId_throwsCommandException() {
         Note note = new Note("This is a note");
-        DeliveryCreateNoteCommand deliveryCreateNoteCommand = new DeliveryCreateNoteCommand(-1, note);
+        DeliveryCreateNoteCommand deliveryCreateNoteCommand = new DeliveryCreateNoteCommand(Integer.MAX_VALUE, note);
         assertCommandFailure(deliveryCreateNoteCommand, model, Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
     }
 
@@ -88,7 +88,7 @@ public class DeliveryCreateNoteCommandTest {
     public void execute_invalidLoggedOut_throwsCommandException() {
         model.setLogoutSuccess();
         Note note = new Note("This is a note");
-        DeliveryCreateNoteCommand deliveryCreateNoteCommand = new DeliveryCreateNoteCommand(-1, note);
+        DeliveryCreateNoteCommand deliveryCreateNoteCommand = new DeliveryCreateNoteCommand(Integer.MAX_VALUE, note);
         assertCommandFailure(deliveryCreateNoteCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
