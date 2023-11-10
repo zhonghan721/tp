@@ -3,10 +3,10 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalDeliveries.GAMBES_RICE;
 import static seedu.address.testutil.TypicalDeliveries.JY_CAKE;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -22,7 +22,7 @@ import seedu.address.model.delivery.Delivery;
 
 public class JsonDeliveryBookStorageTest {
     private static final Path TEST_DATA_FOLDER =
-        Paths.get("src", "test", "data", "JsonDeliveryBookStorageTest");
+            Paths.get("src", "test", "data", "JsonDeliveryBookStorageTest");
 
     @TempDir
     public Path testFolder;
@@ -54,14 +54,15 @@ public class JsonDeliveryBookStorageTest {
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
         return prefsFileInTestDataFolder != null
-            ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
-            : null;
+                ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
+                : null;
     }
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
         assertFalse(readDeliveryBook("NonExistentFile.json").isPresent());
     }
+
     @Test
     public void read_notJsonFormat_exceptionThrown() {
         assertThrows(DataLoadingException.class, () -> readDeliveryBook("notJsonFormatDeliveryBook.json"));
@@ -114,7 +115,7 @@ public class JsonDeliveryBookStorageTest {
     private void saveDeliveryBook(ReadOnlyBook<Delivery> deliveryBook, String filePath) {
         try {
             new JsonDeliveryBookStorage(Paths.get(filePath))
-                .saveBook(deliveryBook, addToTestDataPathIfNotNull(filePath));
+                    .saveBook(deliveryBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
