@@ -9,7 +9,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.customer.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all customers in address book whose name contains any of the argument keywords.
@@ -39,10 +39,10 @@ public class CustomerFindCommand extends Command {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredCustomerList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_CUSTOMERS_MATCHED_LISTED,
-                        model.getFilteredPersonList().size()), true);
+                        model.getFilteredCustomerList().size()), true);
 
     }
 

@@ -17,12 +17,12 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyBook;
+import seedu.address.model.customer.Customer;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.OrderDate;
-import seedu.address.model.person.Customer;
 
 /**
  * Adds a delivery to the delivery book.
@@ -32,14 +32,14 @@ public class DeliveryAddCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Delivery to the HomeBoss database.\n\n"
-            + "Parameters: "
-            + "DELIVERY_NAME "
-            + PREFIX_CUSTOMER_ID + " CUSTOMER_ID "
-            + PREFIX_DATE + " DELIVERY_DATE\n\n"
-            + "Example: " + COMMAND_WORD + " "
-            + "furniture "
-            + PREFIX_CUSTOMER_ID + " 5 "
-            + PREFIX_DATE + " 2023-12-03 ";
+        + "Parameters: "
+        + "DELIVERY_NAME "
+        + PREFIX_CUSTOMER_ID + " CUSTOMER_ID "
+        + PREFIX_DATE + " DELIVERY_DATE\n\n"
+        + "Example: " + COMMAND_WORD + " "
+        + "furniture "
+        + PREFIX_CUSTOMER_ID + " 5 "
+        + PREFIX_DATE + " 2023-12-03 ";
 
     public static final String MESSAGE_SUCCESS = "New delivery added:\n\n%1$s";
     public static final String MESSAGE_DUPLICATE_DELIVERY = "This delivery already exists in HomeBoss";
@@ -88,12 +88,12 @@ public class DeliveryAddCommand extends DeliveryCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", deliveryAddDescriptor)
-                .toString();
+            .add("toAdd", deliveryAddDescriptor)
+            .toString();
     }
 
-    private static Delivery createDelivery(Model model, DeliveryAddDescriptor deliveryAddDescriptor)
-            throws CommandException {
+    private static Delivery createDelivery(Model model,
+                                           DeliveryAddDescriptor deliveryAddDescriptor) throws CommandException {
 
         DeliveryName deliveryName = deliveryAddDescriptor.getDeliveryName().get();
         int customerId = deliveryAddDescriptor.getCustomerId().get();
@@ -199,18 +199,18 @@ public class DeliveryAddCommand extends DeliveryCommand {
             DeliveryAddDescriptor otherDeliveryAddDescriptor = (DeliveryAddDescriptor) other;
 
             return Objects.equals(deliveryName, otherDeliveryAddDescriptor.deliveryName)
-                    && Objects.equals(customerId, otherDeliveryAddDescriptor.customerId)
-                    && Objects.equals(deliveryDate, otherDeliveryAddDescriptor.deliveryDate);
+                && Objects.equals(customerId, otherDeliveryAddDescriptor.customerId)
+                && Objects.equals(deliveryDate, otherDeliveryAddDescriptor.deliveryDate);
 
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", deliveryName)
-                    .add("customer", customerId)
-                    .add("deliveredAt", deliveryDate)
-                    .toString();
+                .add("name", deliveryName)
+                .add("customer", customerId)
+                .add("deliveredAt", deliveryDate)
+                .toString();
         }
     }
 }
