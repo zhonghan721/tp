@@ -1922,11 +1922,15 @@ Furthermore, our team was not familiar with frameworks such as JavaFX prior to t
   * The `PersonListPanel` was designed to contain a list of `Person`. However, as we decided to display both 
     `Customer` and `Delivery` in the same list, we had to adapt the `PersonListPanel` to `ListPanel` to 
     accommodate both types of entities.
+* Figuring out how to implement a secure login/logout system
+  * As one of the feature of HomeBoss is security, we had to figure out and implement the hashing of user password
+    and how to store the data related to the account.
 
 <br>
 
 ### Achievements
 
+* Added security feature to prevent unauthorised access to the application.
 * Displaying the list of Customers and list of Deliveries using the same panel.
 * Creating a new storage for Deliveries that has references to Customer.
 * A refreshing look of the UI.
