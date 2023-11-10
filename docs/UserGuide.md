@@ -272,7 +272,9 @@ HomeBoss. You can use the scroll bar on the right to scroll through your Custome
 * The `ID`{.swift} that appears next to each name is a unique identifier given to all added Customers and
   Deliveries separately, and is required to perform many of HomeBoss's commands.
   More details of these commands can be found in [Features](#features). <br/><br/>
+
 * The `ID`{.swift}s generated are guaranteed to be unique but may not be consecutive and may not start from 1.<br/>
+
 
 ![Command Result FeedBack](images/getting-started/delivery_card.png){style="display: block; margin: 0 auto;"}
 
@@ -379,6 +381,7 @@ found [here](#register).
 
 <br/>
 
+
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note**: Only 1 account can be registered in HomeBoss at any one time.
@@ -412,6 +415,7 @@ found [here](#register).
 * `EXPECTED_DELIVERY_DATE`{.swift} : 2023-12-03
 
 7. Type `delivery add MacBook Pro --customer CUSTOMER_ID --date 2023-12-03`, replacing `CUSTOMER_ID`{.swift}
+
    with Gabriel's ID, and hit enter.
 
 8. A new Delivery should have been added for `Gabriel`, you should see a new Delivery in the Delivery List panel,
@@ -496,6 +500,7 @@ _These are general features in HomeBoss._
 - `help` - Shows a list of commands and their usage.
 - `clear` - Clears both Customer and Delivery database.
 
+
 <br/>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
@@ -520,8 +525,11 @@ You can register for a new user account with HomeBoss by calling this command.
 
 </br>**Format:**
 
+
+ 
 `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
 {.swift}
+
 
 <br/>
 
@@ -570,6 +578,7 @@ You can log in to your account to access your Customer and Delivery data by call
 **Note:** You need to already have an account registered with HomeBoss.
 
 </box>
+
 
 </br>**Format:**
 
@@ -809,7 +818,7 @@ This command allows you to view a list of all the Customers that you have added 
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
-**Tip:** You can frequently use this command together with `delivery list` to switch between the two lists.
+**Tip:** You can frequently use this command together with `delivery list`{.swift} to switch between the two lists.
 
 </box>
 
@@ -904,6 +913,7 @@ that you keyed in the Customer's details wrongly.
 
 <br/>
 
+
 [&uarr; Back to Table of Contents](#table-of-contents)
 </br>
 
@@ -912,6 +922,7 @@ that you keyed in the Customer's details wrongly.
 You can delete any Customer who no longer require your services by calling this command.
 
 <br/>
+
 
 <box background-color="#f2dede" border-color="#ebccd1" type="warning" icon=":exclamation:">
 
@@ -987,9 +998,11 @@ Delivery-related commands.
 
 * `delivery add Chocolate Cake --customer 1 --date 2023-12-12` </br>
 
+
   Adds a Delivery with the name `Chocolate Cake` for the Customer with ID `1`. The expected Delivery date is set
   to `2023-12-12`, the order date is automatically set to today's date, the Delivery status is initialised to `CREATED`,
   and the Delivery address is the same as the Customer's address.
+
 
 ![](images/ug/delivery_add.png)
 
@@ -1126,6 +1139,7 @@ whose names has words that exactly match any of the given keywords.
 
   Finds all Deliveries whose name has words that exactly match `Gambes` or `Banana`.
 
+
 ![](images/ug/delivery_find.png)
 
 <br/>
@@ -1179,6 +1193,7 @@ in the event that you keyed in the Delivery's details wrongly.
   Edits the name of the Delivery, with Delivery ID of `2`, to `Vanilla Cake` and edits the Customer of the
   Delivery to the Customer with ID of `3`.
 
+
 <br/>
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
@@ -1208,7 +1223,9 @@ your easy tracking.
 **Parameter(s):**
 
 * `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
+ 
 * `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`.
+
 
   </box>
 
@@ -1227,6 +1244,7 @@ your easy tracking.
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
 **Tip:** Delivery status is not case sensitive. You can type `created` instead of `CREATED` and it will still work.
+
 </box>
 
 <br/>
@@ -1260,7 +1278,6 @@ to using the lengthier `delivery edit`{.swift} command found [here](#update-deta
 * `NOTE`{.swift} must be alphanumeric and can contain spaces.<br/>
 
 </box>
-
 
 </br>**Example:**
 
@@ -1297,7 +1314,6 @@ this command.
 
 </box>
 
-
 </br>**Example:**
 
 * `delivery delete 1` </br>
@@ -1313,6 +1329,7 @@ this command.
 <br/>
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
+
 
 **Tip:** The commands under this section can be used at any time, regardless of whether you are logged in or not.
 

@@ -8,13 +8,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.Messages;
 import seedu.address.model.ReadOnlyBook;
+import seedu.address.model.customer.Customer;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.delivery.OrderDate;
-import seedu.address.model.person.Customer;
 
 /**
  * Jackson-friendly version of {@link Customer}.
@@ -75,7 +75,7 @@ class JsonAdaptedDelivery {
 
         if (name == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryName.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryName.class.getSimpleName()));
         }
         if (!DeliveryName.isValidName(name)) {
             throw new IllegalValueException(DeliveryName.MESSAGE_CONSTRAINTS);
@@ -93,7 +93,7 @@ class JsonAdaptedDelivery {
             customerIdInt = Integer.parseInt(customerId);
         } catch (NumberFormatException e) {
             throw new IllegalValueException("Customer ID should only contain numbers, "
-                    + "and it should be at most 3 digits long");
+                + "and it should be at most 3 digits long");
         }
         Optional<Customer> c = customerBook.get().getById(customerIdInt);
         if (c.isEmpty()) {
@@ -103,7 +103,7 @@ class JsonAdaptedDelivery {
 
         if (orderDate == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, OrderDate.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, OrderDate.class.getSimpleName()));
         }
 
         if (!OrderDate.isValidDate(orderDate)) {
@@ -117,7 +117,7 @@ class JsonAdaptedDelivery {
 
         if (deliveryDate == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryDate.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryDate.class.getSimpleName()));
         }
         if (!DeliveryDate.isValidDate(deliveryDate)) {
             throw new IllegalValueException(DeliveryDate.MESSAGE_CONSTRAINTS);
@@ -126,7 +126,7 @@ class JsonAdaptedDelivery {
 
         if (status == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryStatus.class.getSimpleName()));
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryStatus.class.getSimpleName()));
         }
         if (!DeliveryStatus.isValidStatus(status)) {
             throw new IllegalValueException(DeliveryStatus.MESSAGE_CONSTRAINTS);
@@ -146,12 +146,12 @@ class JsonAdaptedDelivery {
         // For customers without customerId
         if (deliveryId == null) {
             return new Delivery(
-                    modelName,
-                    modelCustomer,
-                    modelOrderDate,
-                    modelDeliveryDate,
-                    modelDeliveryStatus,
-                    modelNote);
+                modelName,
+                modelCustomer,
+                modelOrderDate,
+                modelDeliveryDate,
+                modelDeliveryStatus,
+                modelNote);
         }
 
         final int modelDeliveryId;
@@ -160,7 +160,7 @@ class JsonAdaptedDelivery {
             modelDeliveryId = Integer.parseInt(deliveryId);
         } catch (NumberFormatException e) {
             throw new IllegalValueException("Delivery ID should only contain numbers, "
-                    + "and it should be at most 3 digits long");
+                + "and it should be at most 3 digits long");
         }
 
         if (modelDeliveryId < 0) {
@@ -168,13 +168,13 @@ class JsonAdaptedDelivery {
         }
 
         return new Delivery(
-                modelDeliveryId,
-                modelName,
-                modelCustomer,
-                modelOrderDate,
-                modelDeliveryDate,
-                modelDeliveryStatus,
-                modelNote);
+            modelDeliveryId,
+            modelName,
+            modelCustomer,
+            modelOrderDate,
+            modelDeliveryDate,
+            modelDeliveryStatus,
+            modelNote);
     }
 
 }

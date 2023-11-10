@@ -12,7 +12,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Customer;
+import seedu.address.model.customer.Customer;
 
 /**
  * Adds a person to the address book.
@@ -22,16 +22,16 @@ public class CustomerAddCommand extends CustomerCommand {
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " " + "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the HomeBoss database."
-        + "\n\nParameters: "
-        + PREFIX_NAME + " NAME "
-        + PREFIX_PHONE + " PHONE "
-        + PREFIX_EMAIL + " EMAIL "
-        + PREFIX_ADDRESS + " ADDRESS\n\n"
-        + "Example: " + COMMAND_WORD + " "
-        + PREFIX_NAME + " John Doe "
-        + PREFIX_PHONE + " 98765432 "
-        + PREFIX_EMAIL + " johnd@example.com "
-        + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25";
+            + "\n\nParameters: "
+            + PREFIX_NAME + " NAME "
+            + PREFIX_PHONE + " PHONE "
+            + PREFIX_EMAIL + " EMAIL "
+            + PREFIX_ADDRESS + " ADDRESS\n\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + " John Doe "
+            + PREFIX_PHONE + " 98765432 "
+            + PREFIX_EMAIL + " johnd@example.com "
+            + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25";
 
     public static final String MESSAGE_SUCCESS = "New customer added:\n\n%1$s";
     public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in HomeBoss";
@@ -57,13 +57,13 @@ public class CustomerAddCommand extends CustomerCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasCustomer(toAdd)) {
             // reset the customer count to the previous value
             Customer.setCustomerCount(toAdd.getCustomerId() - 1);
             throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
         }
 
-        model.addPerson(toAdd);
+        model.addCustomer(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), true);
     }
 
@@ -85,7 +85,7 @@ public class CustomerAddCommand extends CustomerCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("toAdd", toAdd)
-            .toString();
+                .add("toAdd", toAdd)
+                .toString();
     }
 }

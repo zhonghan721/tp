@@ -4,8 +4,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Customer;
+import seedu.address.model.customer.Address;
+import seedu.address.model.customer.Customer;
 
 /**
  * Represents a Delivery in the address book.

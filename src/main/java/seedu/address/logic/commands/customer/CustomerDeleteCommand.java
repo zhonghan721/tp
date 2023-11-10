@@ -9,7 +9,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Customer;
+import seedu.address.model.customer.Customer;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -40,12 +40,12 @@ public class CustomerDeleteCommand extends CustomerCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
+        model.updateFilteredCustomerList(Model.PREDICATE_SHOW_ALL_CUSTOMERS);
 
         Customer customerToDelete = model.getCustomerUsingFilteredList(targetIndex.getOneBased());
 
         if (customerToDelete != null) {
-            model.deletePerson(customerToDelete);
+            model.deleteCustomer(customerToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_CUSTOMER_SUCCESS,
                     Messages.format(customerToDelete)), true);
         } else {
