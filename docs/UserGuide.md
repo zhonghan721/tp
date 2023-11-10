@@ -1,5 +1,7 @@
 <span style="font-size: 3.3em; font-weight: 550;">HomeBoss User Guide</span>
 
+---
+
 # Introduction
 
 HomeBoss is a powerful desktop application designed specifically for **home-based business owners**, offering 
@@ -20,6 +22,8 @@ execution**, but it also features an elegant Graphical User Interface (GUI) that
 and organized** fashion.
 
 With HomeBoss, you can now **focus on what matters most: running your business.**
+
+
 
 ---
 
@@ -336,6 +340,7 @@ logout
 
 **Note**:
 
+* If Customer ID or Delivery ID is specified in the command, it must be a positive integer for the Command Format to be considered valid.
 * A Command Phrase is made up of keywords or short phrases that are unique to each Command.
 * Words in uppercase are parameters that are supplied by you.
 * Parameters that are preceded by a prefix must be supplied after that prefix, e.g. `--name DELIVERY_NAME`{.swift}
@@ -509,7 +514,7 @@ _These are general features in HomeBoss._
 
 # Features
 
-## <span style="text-decoration:underline;"><strong>User</strong></span>
+## <span style="text-decoration:underline; font-size:35px"><strong>User</strong></span>
 
 ### Register
 
@@ -692,15 +697,12 @@ secret question (set during account registration) to reset your password and thu
 
   Displays your account's secret question for account recovery.
 
+![](images/user/userRecoverAccount_after_secretQn.png)
+
 * `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123` </br>
 
   Recovers the account with the answer `Koko` and sets the new password to `NewPassword123`.
 
-</br>**Without optional fields (i.e., `recover account`):**
-![](images/user/userRecoverAccount_after_secretQn.png)
-
-</br>**With optional fields (i.e.,
-`recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`):**
 ![](images/user/userRecoverAccount_after_answer.png)
 
 <br/>
@@ -730,7 +732,7 @@ recovery process by using the `recover account`{.swift} command [here](#recover-
 [&uarr; Back to Table of Contents](#table-of-contents)
 </br>
 
-## </br><span style="text-decoration:underline;"><strong>Customer</strong></span>
+## </br><span style="text-decoration:underline;font-size:35px"><strong>Customer</strong></span>
 
 ### Add a Customer
 
@@ -953,7 +955,7 @@ this deletion!
 [&uarr; Back to Table of Contents](#table-of-contents)
 </br>
 
-## </br><span style="text-decoration:underline;"><strong>Delivery</strong></span>
+## </br><span style="text-decoration:underline;font-size:35px"><strong>Delivery</strong></span>
 
 ### Add a Delivery
 
@@ -1067,7 +1069,7 @@ sorted by expected Delivery date in descending order (latest first).
 * `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`.
 * `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
 * `EXPECTED_DELIVERY_DATE`{.swift} must be today or after today's date in yyyy-MM-dd format OR
-  `TODAY`{.swift} for today’s date.
+  `TODAY` for today’s date.
 * `SORT`{.swift} accepts the following values: `ASC`/`DESC`.
 
   </box>
@@ -1079,19 +1081,15 @@ sorted by expected Delivery date in descending order (latest first).
   Lists all Deliveries with status `CREATED` for Customer with ID `1` with expected Delivery date in
   descending order.
 
-* `delivery list --status SHIPPED --date TODAY`{.swift} </br>
-
-  Lists all Deliveries with status `SHIPPED` for all Customers and expected Delivery date of `TODAY`.
-
-<br />
+![](images/ug/delivery_list.png)
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
 **Tip:**
-You may combine any of the filters and sort options to get the list of Deliveries that you want.
+You may combine any of the filter and sort options to get the list of Deliveries that you want.
 </box>
 
-![](images/ug/delivery_list.png)
+
 
 <br/>
 
@@ -1283,7 +1281,7 @@ to using the lengthier `delivery edit`{.swift} command found [here](#update-deta
 
 * `delivery note 1 --note By FedEx` </br>
 
-  Creates a new note `By FedEx` for the Delivery with ID `1`{.swift}.
+  Creates a new note `By FedEx` for the Delivery with ID `1`.
 
 <br/>
 
@@ -1324,18 +1322,7 @@ this command.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-## </br><span style="text-decoration:underline;"><strong>Miscellaneous</strong></span>
-
-<br/>
-
-<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
-
-
-**Tip:** The commands under this section can be used at any time, regardless of whether you are logged in or not.
-
-</box>
-
-<br/>
+## </br><span style="text-decoration:underline;font-size:35px"><strong>Miscellaneous</strong></span>
 
 ### Help
 
@@ -1348,6 +1335,13 @@ guide.
 
 ![](images/ug/help.png)
 
+<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
+
+
+**Tip:** This command can be used at any time, regardless of whether you are logged in or not.
+
+</box>
+
 <br/>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
@@ -1356,13 +1350,22 @@ guide.
 
 You can exit the program by calling this command.
 
-**Format:** `exit`{.swift}
-
 <br/>
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note:** If you are logged in, this command will automatically log you out of your account and close the application.
+</box>
+
+**<br/>Format:** `exit`{.swift}
+
+<br/>
+
+<box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
+
+
+**Tip:** This command can be used at any time, regardless of whether you are logged in or not.
+
 </box>
 
 <br/>
