@@ -2,9 +2,9 @@
 
 # Introduction
 
-HomeBoss is a powerful desktop application designed specifically for **home-based business owners**, offering *
-*efficient Customer and Delivery management solutions**. With HomeBoss, you can streamline your administrative processes
-and elevate your overall business experience to new heights.
+HomeBoss is a powerful desktop application designed specifically for **home-based business owners**, offering 
+**efficient Customer and Delivery management solutions**. With HomeBoss, you can streamline your administrative 
+processes and elevate your overall business experience to new heights.
 
 With our application, you will be able to:
  
@@ -260,7 +260,7 @@ You can use the scroll bar on the right to scroll through a long result or feedb
     </tr>
 </table>
 
-The Customer / Delivery list panel is where you will be able to find the Customers and Deliveries that you have added to
+The Customer / Delivery List panel is where you will be able to find the Customers and Deliveries that you have added to
 HomeBoss. You can use the scroll bar on the right to scroll through your Customers or Deliveries.
 
 <br/>
@@ -295,7 +295,7 @@ Every command has a **Command Phrase** and possibly one or more **Parameters**
 Take the [Add a Delivery](#add-a-delivery) command for example:
 
 ```swift
-delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE
+delivery add DELIVERY_NAME --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE
 ```
 
 * The **Command Phrase** is `delivery add`{.swift}.
@@ -406,10 +406,10 @@ found [here](#register).
 ![CustomerAdded](images/getting-started/customer_add.png){style="display: block; margin: 0 auto;"}
 
 6. Now, let's add a new Delivery for `Gabriel` into HomeBoss' Delivery database. For this example, `Gabriel` has just
-   ordered a `MacBook Pro` from you, and the delivery date that you expect to deliver to him by is `2023-12-03`.
+   ordered a `MacBook Pro` from you, and the Delivery date that you expect to deliver to him by is `2023-12-03`.
 
 * `DELIVERY_NAME`{.swift} : MacBook Pro
-* `DELIVERY_DATE`{.swift} : 2023-12-03
+* `EXPECTED_DELIVERY_DATE`{.swift} : 2023-12-03
 
 7. Type `delivery add MacBook Pro --customer CUSTOMER_ID --date 2023-12-03`, replacing `CUSTOMER_ID`{.swift}
    with Gabriel's ID, and hit enter.
@@ -468,25 +468,25 @@ _These are features for managing your user account in HomeBoss._
 
 _These are features for managing your Customers in HomeBoss._
 
-- `customer add` - Adds a Customer to the address book.
+- `customer add` - Adds a Customer to the Customer database.
 - `customer view` - Shows the details of the specified Customer.
-- `customer list` - Lists all Customers in the address book.
+- `customer list` - Lists all Customers in the Customer database.
 - `customer find` - Finds Customers whose names contain any of the given keywords.
-- `customer edit` - Updates the details of an existing Customer in the address book.
-- `customer delete` - Deletes the specified Customer from the address book.
+- `customer edit` - Updates the details of an existing Customer in the Customer database.
+- `customer delete` - Deletes the specified Customer from the Customer database.
 
 ## </br>Delivery features summary
 
 _These are features for managing your Deliveries in HomeBoss._
 
-- `delivery add` - Adds a Delivery to the delivery book.
+- `delivery add` - Adds a Delivery to the Delivery database.
 - `delivery view` - Shows the details of the specified Delivery.
 - `delivery list` - Lists all Deliveries in the delivery book.
 - `delivery find` - Finds Deliveries whose names contain any of the given keywords.
-- `delivery edit` - Updates the details of an existing Delivery in the delivery book.
+- `delivery edit` - Updates the details of an existing Delivery in the Delivery database.
 - `delivery status` - Changes the status of a specified Delivery.
 - `delivery note` - Creates a note for a specified Delivery.
-- `delivery delete` - Deletes the specified Delivery from the delivery book.
+- `delivery delete` - Deletes the specified Delivery from the Delivery database.
 
 ## </br>Miscellaneous features summary
 
@@ -589,6 +589,7 @@ You can log in to your account to access your Customer and Delivery data by call
 </br>**Example:**
 
 * `login --user yourUsername --password GabrielIsGreat` </br>
+
   Logs in to the user account with the username `yourUsername` and password `GabrielIsGreat`.
 
 ![](images/ug/login_data.png)
@@ -632,6 +633,7 @@ This command allows you to update your account details, thus enabling greater se
 
 * `update --user GabrielV2 --password GabrielIsBest --confirmPass GabrielIsBest
   --secretQn Favourite Pet --answer BoBo` </br>
+
   Updates the username to `GabrielV2`, password to `GabrielIsBest`,
   secret question to `Favourite Pet` and answer to `BoBo`.
 
@@ -678,9 +680,11 @@ secret question (set during account registration) to reset your password and thu
 </br>**Examples:**
 
 * `recover account`{.swift} </br>
+
   Displays your account's secret question for account recovery.
 
 * `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123` </br>
+
   Recovers the account with the answer `Koko` and sets the new password to `NewPassword123`.
 
 </br>**Without optional fields (i.e., `recover account`):**
@@ -754,6 +758,7 @@ You can add a new Customer's details into HomeBoss with this command.
 </br>**Example:**
 
 * `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B` </br>
+
   Adds a Customer with the name `Gabriel`, phone number `87654321`,
   email `Gabrielrocks@gmail.com`and address `RVRC Block B`.
 
@@ -783,6 +788,7 @@ number, email and address.
 <br>**Example:**
 
 * `customer view 1` </br>
+
   Displays the details of Customer with ID `1`.
 
 ![](images/ug/customer_view.png)
@@ -851,6 +857,7 @@ given keywords.
 </br>**Example:**
 
 * `customer find Julius Yang`</br>
+
   Finds Customers whose names have words that exactly match either `Julius` or `Yang`.
 
 ![](images/ug/find.png)
@@ -886,8 +893,11 @@ that you keyed in the Customer's details wrongly.
 </br>**Examples:**
 
 * `customer edit 1 --name Gabriel --phone 98131051` </br>
+
   Edits the name of the Customer, with Customer ID of `1`, to `Gabriel` and his phone to `98131051`.
+
 * `customer edit 2 --name Joe --email yangyang@gmail.com --address Block 10 Tampines Road` </br>
+
   Edits the name of the Customer, with Customer ID of `2`, to `Joe`, his email to `yangyang@gmail.com` and his address
   to
   `Block 10 Tampines Road`.
@@ -924,6 +934,7 @@ this deletion!
 </br>**Example:**
 
 * `customer delete 1` </br>
+
   Deletes the Customer with ID `1`.
 
 <br/>
@@ -952,7 +963,7 @@ Delivery-related commands.
     * Delivery status: `CREATED`
     * Address: Customer's address
       <br/></br>
-* Delivery Status can be one of `CREATED`, `SHIPPED`, `COMPLETED`, `CANCELLED`. <br/>
+* Delivery status can be one of `CREATED`, `SHIPPED`, `COMPLETED`, `CANCELLED`. <br/>
 
 </box>
 
@@ -975,9 +986,10 @@ Delivery-related commands.
 </br>**Example:**
 
 * `delivery add Chocolate Cake --customer 1 --date 2023-12-12` </br>
-  Adds a delivery with the name `Chocolate Cake` for the customer with ID `1`. The expected delivery date is set
-  to `2023-12-12`, the order date is automatically set to today's date, the delivery status is initialised to `CREATED`,
-  and the delivery address is the same as the customer's address.
+
+  Adds a Delivery with the name `Chocolate Cake` for the Customer with ID `1`. The expected Delivery date is set
+  to `2023-12-12`, the order date is automatically set to today's date, the Delivery status is initialised to `CREATED`,
+  and the Delivery address is the same as the Customer's address.
 
 ![](images/ug/delivery_add.png)
 
@@ -988,7 +1000,7 @@ Delivery-related commands.
 ### </br></br>View details of a Delivery
 
 You can view the details of a Delivery by calling this command. The data displayed includes the Delivery's name, status,
-Customer, Customer ID, address, order date, expected delivery date and notes (if any).
+Customer, Customer ID, address, order date, expected Delivery date and notes (if any).
 
 </br>**Format:**
 
@@ -1005,6 +1017,7 @@ Customer, Customer ID, address, order date, expected delivery date and notes (if
 </br>**Example:**
 
 * `delivery view 1` </br>
+
   Displays the details of the Delivery with Delivery ID of `1`.
 
 ![](images/ug/delivery_view.png)
@@ -1022,9 +1035,9 @@ This command allows you to view a list of all the Deliveries that you have added
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note:** This is a more powerful command than `customer list`{.swift}, as it allows you to filter the list of
-Deliveries by status, customer ID and/or expected delivery date. This command also allows you to sort the list of
-Deliveries by expected delivery date in either ascending or descending order. By default, the list of Deliveries will be
-sorted by expected delivery date in descending order (latest first).
+Deliveries by status, Customer ID and/or expected Delivery date. This command also allows you to sort the list of
+Deliveries by expected Delivery date in either ascending or descending order. By default, the list of Deliveries will be
+sorted by expected Delivery date in descending order (latest first).
 
 </box>
 
@@ -1049,10 +1062,12 @@ sorted by expected delivery date in descending order (latest first).
 </br>**Examples:**
 
 * `delivery list --status CREATED --customer 1 --sort DESC`</br>
+
   Lists all Deliveries with status `CREATED` for Customer with ID `1` with expected Delivery date in
   descending order.
 
 * `delivery list --status SHIPPED --date TODAY`{.swift} </br>
+
   Lists all Deliveries with status `SHIPPED` for all Customers and expected Delivery date of `TODAY`.
 
 <br />
@@ -1084,7 +1099,7 @@ whose names has words that exactly match any of the given keywords.
 * You can optionally provide additional keywords. Deliveries that has names matching any of the given keywords will be
   displayed. For example, the keywords `Chocolate` and `Bun` in `Chocolate Bun` will
   display `Chocolate Cake`, `Chocolate Bun`, and `Strawberry Bun`.<br/><br/>
-* The keyword must exactly match any word in the delivery name. For example, the keyword `Straw` will match `Straw` but
+* The keyword must exactly match any word in the Delivery name. For example, the keyword `Straw` will match `Straw` but
   not `Strawberry`.<br/><br/>
 * The search is not case sensitive.<br/>
 
@@ -1108,6 +1123,7 @@ whose names has words that exactly match any of the given keywords.
 </br>**Example:**
 
 * `delivery find Gambes Banana` </br>
+
   Finds all Deliveries whose name has words that exactly match `Gambes` or `Banana`.
 
 ![](images/ug/delivery_find.png)
@@ -1153,10 +1169,13 @@ in the event that you keyed in the Delivery's details wrongly.
 </br>**Examples:**
 
 * `delivery edit 1 --status CANCELLED --note Sudden overseas business trip to attend to` </br>
+
   Edits the Delivery's status of the Delivery, with Delivery ID of `1`, to `CANCELLED` and edits the note of the
   Delivery to `Sudden overseas business trip to attend to`. If this Delivery does not already have a note, a note will
   be created for it.
+
 * `delivery edit 2 --name Vanilla Cake --customer 3` </br>
+
   Edits the name of the Delivery, with Delivery ID of `2`, to `Vanilla Cake` and edits the Customer of the
   Delivery to the Customer with ID of `3`.
 
@@ -1196,8 +1215,11 @@ your easy tracking.
 </br>**Examples:**
 
 * `delivery status 1 CANCELLED` </br>
+
   Updates the status of Delivery with ID `1` to `CANCELLED`.
+
 * `delivery status 2 SHIPPED` </br>
+
   Updates the status of Delivery with ID `2` to `SHIPPED`.
 
 <br/>
@@ -1213,7 +1235,7 @@ your easy tracking.
 
 ### </br></br>Create a note for a Delivery
 
-If you would like to create a note about a specific delivery, this command allows you to do so as a shortcut, as opposed
+If you would like to create a note about a specific Delivery, this command allows you to do so as a shortcut, as opposed
 to using the lengthier `delivery edit`{.swift} command found [here](#update-details-of-a-delivery).
 
 <br />
@@ -1243,6 +1265,7 @@ to using the lengthier `delivery edit`{.swift} command found [here](#update-deta
 </br>**Example:**
 
 * `delivery note 1 --note By FedEx` </br>
+
   Creates a new note `By FedEx` for the Delivery with ID `1`{.swift}.
 
 <br/>
@@ -1258,7 +1281,7 @@ this command.
 
 <box background-color="#f2dede" border-color="#ebccd1" type="warning" icon=":exclamation:">
 
-**Warning:** Be careful! This action is irreversible. Once deleted, the delivery cannot be recovered.
+**Warning:** Be careful! This action is irreversible. Once deleted, the Delivery cannot be recovered.
 
 </box>
 
@@ -1278,6 +1301,7 @@ this command.
 </br>**Example:**
 
 * `delivery delete 1` </br>
+
   Deletes the Delivery with ID of `1` from the Delivery database.
 
   <br/>
@@ -1411,16 +1435,16 @@ A: HomeBoss only supports English characters.<br/><br/>
 
 ## Delivery
 
-| Command | Format                                                                                                                                     | Examples                                                                                                                   |
-|---------|--------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| Add     | `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date DELIVERY_DATE`{.swift}                                                           | `delivery add furniture --customer 5 --date 2023-12-03`                                                                    |
-| View    | `delivery view DELIVERY_ID`{.swift}                                                                                                        | `delivery view 1`                                                                                                          |
-| List    | `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--sort SORT]`{.swift}                                    | `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`                                                |
-| Find    | `delivery find KEYWORD [MORE_KEYWORDS]`{.swift}                                                                                            | `delivery find Chocolate Bun`                                                                                              |
-| Edit    | `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date DELIVERY_DATE] [--status STATUS] [--note NOTE]`{.swift} | `delivery edit 1 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note Customer changed his mind` |
-| Status  | `delivery status DELIVERY_ID STATUS`{.swift}                                                                                               | `delivery status 2 completed`                                                                                              |
-| Note    | `delivery note DELIVERY_ID --note NOTE`{.swift}                                                                                            | `delivery note 1 --note By FedEx`                                                                                          |
-| Delete  | `delivery delete DELIVERY_ID`{.swift}                                                                                                      | `delivery delete 1`                                                                                                        |
+| Command | Format                                                                                                                                                   | Examples                                                                                                                   |
+|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Add     | `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE`{.swift}                                                                | `delivery add furniture --customer 5 --date 2023-12-03`                                                                    |
+| View    | `delivery view DELIVERY_ID`{.swift}                                                                                                                      | `delivery view 1`                                                                                                          |
+| List    | `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE] [--sort SORT]`{.swift}                                         | `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`                                                |
+| Find    | `delivery find KEYWORD [MORE_KEYWORDS]`{.swift}                                                                                                          | `delivery find Chocolate Bun`                                                                                              |
+| Edit    | `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE] <br/>[--status STATUS] [--note NOTE]`{.swift} | `delivery edit 1 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note Customer changed his mind` |
+| Status  | `delivery status DELIVERY_ID STATUS`{.swift}                                                                                                             | `delivery status 2 completed`                                                                                              |
+| Note    | `delivery note DELIVERY_ID --note NOTE`{.swift}                                                                                                          | `delivery note 1 --note By FedEx`                                                                                          |
+| Delete  | `delivery delete DELIVERY_ID`{.swift}                                                                                                                    | `delivery delete 1`                                                                                                        |
 
 <br>
 
