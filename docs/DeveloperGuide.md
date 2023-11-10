@@ -1849,7 +1849,7 @@ _{More to be added}_
 | Command Line Interface (CLI)   | A text-based user interface used to run programs                                        |
 | Graphical User Interface (GUI) | A visual interface where you can interact with the program through graphical components |
 | JSON                           | Short for JavaScript Object Notation, a lightweight format for storing your data        |
-| Owner                          | The customer who owns the home-based business and who uses the app                      |
+| Owner                          | The individual who owns the home-based business and who uses the HomeBoss app           |
 | Mainstream OS                  | Windows, Linux, Unix, OS-X                                                              |
 | Parameter                      | Inputs to customise the command to your needs                                           |
 | Prefix                         | Special markers for HomeBoss to understand your inputs                                  |
