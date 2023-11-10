@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
@@ -290,6 +291,11 @@ public class DeliveryAddCommandTest {
         public Optional<Delivery> getDelivery(int id) {
             return Optional.empty();
         }
+
+        @Override
+        public Stream<Delivery> getDeliveryByCustomerId(int id) {
+            throw new AssertionError("This method should not be called.");
+        };
 
         @Override
         public boolean hasDelivery(Delivery delivery) {

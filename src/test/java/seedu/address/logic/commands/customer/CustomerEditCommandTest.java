@@ -49,6 +49,7 @@ public class CustomerEditCommandTest {
 
         System.out.println(editedCustomer);
         System.out.println(editCommand);
+        System.out.println(expectedMessage);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new DeliveryBook(model.getDeliveryBook()),

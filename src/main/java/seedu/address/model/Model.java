@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -167,6 +168,14 @@ public interface Model {
      * @return the optional containing delivery with the given id
      */
     Optional<Delivery> getDelivery(int id);
+
+    /**
+     * Returns an optional containing a delivery with the given customer id.
+     *
+     * @param id the id of the customer
+     * @return the stream containing deliveries with the given customer id
+     */
+    public Stream<Delivery> getDeliveryByCustomerId(int id);
 
     /**
      * Returns true if a delivery with the same identity as {@code delivery} exists in the address book.

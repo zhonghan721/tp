@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -383,6 +384,11 @@ public class ModelManager implements Model {
     @Override
     public Optional<Delivery> getDelivery(int id) {
         return this.deliveryBook.getById(id);
+    }
+
+    @Override
+    public Stream<Delivery> getDeliveryByCustomerId(int id) {
+        return this.deliveryBook.getByCustomerId(id);
     }
 
     @Override

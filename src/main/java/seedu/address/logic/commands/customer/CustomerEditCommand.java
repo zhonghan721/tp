@@ -11,14 +11,22 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.delivery.DeliveryEditCommand.DeliveryEditDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryDate;
+import seedu.address.model.delivery.DeliveryName;
+import seedu.address.model.delivery.DeliveryStatus;
+import seedu.address.model.delivery.Note;
+import seedu.address.model.delivery.OrderDate;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.Email;
@@ -100,6 +108,7 @@ public class CustomerEditCommand extends CustomerCommand {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         } else {
             model.setPerson(customerToEdit, editedCustomer);
+            updateDelivery(model, editedCustomer);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
                     Messages.format(editedCustomer)), true);
@@ -123,6 +132,51 @@ public class CustomerEditCommand extends CustomerCommand {
 
         return new Customer(customerToEdit.getCustomerId(), updatedName, updatedPhone,
                 updatedEmail, updatedAddress);
+    }
+
+    /**
+     * Updates all the deliveries associated with the customer with new customer details.
+     */
+    public void updateDelivery(Model model, Customer editedCustomer) {
+        int customerId = editedCustomer.getCustomerId();
+        Stream<Delivery> deliveries = model.getDeliveryByCustomerId(customerId);
+        deliveries.forEach(d -> {
+            DeliveryEditDescriptor descriptor = new DeliveryEditDescriptor();
+            descriptor.setCustomerId(customerId);
+            Delivery editedDelivery = createEditedDelivery(d, descriptor, editedCustomer);
+            model.setDelivery(d, editedDelivery);
+        });
+    }
+
+    /**
+     * Creates and returns a {@code Delivery} with the customer details edited.
+     *
+     * @param deliveryToEdit         {@code Delivery} which the command edits.
+     * @param deliveryEditDescriptor {@code editDeliveryDescriptor} details to edit the delivery with.
+     * @param editedCustomer         {@code Customer} which the delivery is associated with.
+     */
+    private static Delivery createEditedDelivery(Delivery deliveryToEdit, DeliveryEditDescriptor
+            deliveryEditDescriptor, Customer editedCustomer) {
+
+        assert deliveryToEdit != null;
+
+        DeliveryName updatedDeliveryName =
+                deliveryEditDescriptor.getDeliveryName().orElse(deliveryToEdit.getName());
+
+        OrderDate orderDate = deliveryToEdit.getOrderDate();
+
+        DeliveryDate updatedDeliveryDate =
+                deliveryEditDescriptor.getDeliveryDate().orElse(deliveryToEdit.getDeliveryDate());
+
+        DeliveryStatus updatedDeliveryStatus =
+                deliveryEditDescriptor.getStatus().orElse(deliveryToEdit.getStatus());
+
+        Note updatedNote = deliveryEditDescriptor.getNote().orElse(deliveryToEdit.getNote());
+
+        return new Delivery(deliveryToEdit.getDeliveryId(), updatedDeliveryName, editedCustomer, orderDate,
+                updatedDeliveryDate,
+                updatedDeliveryStatus,
+                updatedNote);
     }
 
     @Override
