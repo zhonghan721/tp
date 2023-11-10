@@ -27,11 +27,11 @@ import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.delivery.OrderDate;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Customer;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.customer.Address;
+import seedu.address.model.customer.Customer;
+import seedu.address.model.customer.Email;
+import seedu.address.model.customer.Name;
+import seedu.address.model.customer.Phone;
 
 /**
  * Edits the details of an existing customer in the address book.
@@ -80,8 +80,8 @@ public class CustomerEditCommand extends CustomerCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
-        List<Customer> lastShownList = model.getFilteredPersonList();
+        model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        List<Customer> lastShownList = model.getFilteredCustomerList();
 
         boolean found = false;
         Customer customerToEdit = null;
@@ -107,9 +107,10 @@ public class CustomerEditCommand extends CustomerCommand {
         } else if (!customerToEdit.hasSamePhone(editedCustomer) && model.hasCustomerWithSamePhone(editedCustomer)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         } else {
-            model.setPerson(customerToEdit, editedCustomer);
+            model.setCustomer(customerToEdit, editedCustomer);
             updateDelivery(model, editedCustomer);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
+            model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
                     Messages.format(editedCustomer)), true);
         }

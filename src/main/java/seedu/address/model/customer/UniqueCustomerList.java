@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.customer;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -9,28 +9,31 @@ import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.customer.exceptions.CustomerNotFoundException;
+import seedu.address.model.customer.exceptions.DuplicateCustomerException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of customers that enforces uniqueness between its elements and does not allow nulls.
+ * A customer is considered unique by comparing using {@code Customer#isSameCustomer(Customer)}. As such, adding and
+ * updating of
+ * customers uses Customer#isSameCustomer(Customer) for equality so as to ensure that the customer being added or
+ * updated is
+ * unique in terms of identity in the UniqueCustomerList. However, the removal of a customer uses Customer#equals
+ * (Object) so
+ * as to ensure that the customer with exactly the same fields will be removed.
  * <p>
  * Supports a minimal set of list operations.
  *
  * @see Customer#isSameCustomer(Customer)
  */
-public class UniquePersonList implements Iterable<Customer> {
+public class UniqueCustomerList implements Iterable<Customer> {
 
     private final ObservableList<Customer> internalList = FXCollections.observableArrayList();
     private final ObservableList<Customer> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+        FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent customer as the given argument.
      */
     public boolean contains(Customer toCheck) {
         requireNonNull(toCheck);
@@ -47,61 +50,61 @@ public class UniquePersonList implements Iterable<Customer> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a customer to the list.
+     * The customer must not already exist in the list.
      */
     public void add(Customer toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateCustomerException();
         }
         internalList.add(toAdd);
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the customer {@code target} in the list with {@code editedCustomer}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The customer identity of {@code editedCustomer} must not be the same as another existing customer in the list.
      */
-    public void setPerson(Customer target, Customer editedCustomer) {
+    public void setCustomer(Customer target, Customer editedCustomer) {
         requireAllNonNull(target, editedCustomer);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new CustomerNotFoundException();
         }
 
         if (!target.isSameCustomer(editedCustomer) && contains(editedCustomer)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateCustomerException();
         }
 
         internalList.set(index, editedCustomer);
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent customer from the list.
+     * The customer must exist in the list.
      */
     public void remove(Customer toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new CustomerNotFoundException();
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setCustomers(UniqueCustomerList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code customers}.
+     * {@code customers} must not contain duplicate customers.
      */
-    public void setPersons(List<Customer> customers) {
+    public void setCustomers(List<Customer> customers) {
         requireAllNonNull(customers);
-        if (!personsAreUnique(customers)) {
-            throw new DuplicatePersonException();
+        if (!customersAreUnique(customers)) {
+            throw new DuplicateCustomerException();
         }
 
         internalList.setAll(customers);
@@ -109,11 +112,12 @@ public class UniquePersonList implements Iterable<Customer> {
 
     /**
      * Retrieves Customer by its id
+     *
      * @param id The id of the delivery to be retrieved
      * @return Optional containing the delivery if it exists
      */
     public Optional<Customer> getById(int id) {
-        for (Customer c: internalList) {
+        for (Customer c : internalList) {
             if (c.getCustomerId() == id) {
                 return Optional.of(c);
             }
@@ -140,12 +144,12 @@ public class UniquePersonList implements Iterable<Customer> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UniquePersonList)) {
+        if (!(other instanceof UniqueCustomerList)) {
             return false;
         }
 
-        UniquePersonList otherUniquePersonList = (UniquePersonList) other;
-        return internalList.equals(otherUniquePersonList.internalList);
+        UniqueCustomerList otherUniqueCustomerList = (UniqueCustomerList) other;
+        return internalList.equals(otherUniqueCustomerList.internalList);
     }
 
     @Override
@@ -159,9 +163,9 @@ public class UniquePersonList implements Iterable<Customer> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code customers} contains only unique customers.
      */
-    private boolean personsAreUnique(List<Customer> customers) {
+    private boolean customersAreUnique(List<Customer> customers) {
         for (int i = 0; i < customers.size() - 1; i++) {
             for (int j = i + 1; j < customers.size(); j++) {
                 if (customers.get(i).isSameCustomer(customers.get(j))) {

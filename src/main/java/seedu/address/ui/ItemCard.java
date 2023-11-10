@@ -9,7 +9,7 @@ import javafx.scene.layout.Region;
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class ItemCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -40,7 +40,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(ListItem item) {
+    public ItemCard(ListItem item) {
         super(FXML);
         this.item = item;
 

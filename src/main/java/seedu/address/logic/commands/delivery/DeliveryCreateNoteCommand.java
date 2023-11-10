@@ -13,13 +13,13 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.customer.Customer;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.delivery.OrderDate;
-import seedu.address.model.person.Customer;
 
 /**
  * Represents a Command to create a note for a delivery
@@ -29,10 +29,10 @@ public class DeliveryCreateNoteCommand extends Command {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "note";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to the delivery identified "
-            + "by the DELIVERY_ID of the delivery. Existing note if any will be replaced with the input note.\n\n"
-            + "Parameters: DELIVERY_ID (must be a integer representing a valid ID) "
-            + PREFIX_NOTE + " Note\n\n"
-            + "Example: " + COMMAND_WORD + " 1 --note This is a note";
+        + "by the DELIVERY_ID of the delivery. Existing note if any will be replaced with the input note.\n\n"
+        + "Parameters: DELIVERY_ID (must be a integer representing a valid ID) "
+        + PREFIX_NOTE + " Note\n\n"
+        + "Example: " + COMMAND_WORD + " 1 --note This is a note";
 
     public static final String MESSAGE_NOTE_SUCCESS = "Added Note to Delivery:\n\n%1$s";
 
@@ -94,7 +94,7 @@ public class DeliveryCreateNoteCommand extends Command {
         Note updatedNote = newNote;
 
         return new Delivery(updatedId, updatedName, updatedCustomer, updatedOrderDate,
-                updatedDeliveryDate, updatedStatus, updatedNote);
+            updatedDeliveryDate, updatedStatus, updatedNote);
     }
 
     @Override
@@ -110,14 +110,14 @@ public class DeliveryCreateNoteCommand extends Command {
 
         DeliveryCreateNoteCommand otherStatusCommand = (DeliveryCreateNoteCommand) other;
         return targetId == otherStatusCommand.targetId
-                && newNote.equals(otherStatusCommand.newNote);
+            && newNote.equals(otherStatusCommand.newNote);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetId", targetId)
-                .add("note", newNote)
-                .toString();
+            .add("targetId", targetId)
+            .add("note", newNote)
+            .toString();
     }
 }
