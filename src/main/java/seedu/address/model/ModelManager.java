@@ -526,7 +526,6 @@ public class ModelManager implements Model {
 
         // only shows the delivery list if the user is logged in
         filteredDeliveries.setPredicate(predicate);
-        
         // Update the sorted list
         this.sortedDeliveries = new SortedList<>(filteredDeliveries);
 
