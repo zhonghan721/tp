@@ -1,5 +1,6 @@
 package seedu.address.logic.commands.customer;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 
@@ -28,14 +29,18 @@ public class CustomerViewCommand extends CustomerCommand {
     private final int customerId;
 
     /**
-     * Creates a DeliveryViewCommand to display the specified {@code Delivery}.
+     * Creates a CustomerViewCommand to display the specified {@code Customer}.
      */
     public CustomerViewCommand(int customerId) {
+        assert customerId > 0;
+
         this.customerId = customerId;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);

@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.user.UserLoginCommand;
@@ -21,6 +22,9 @@ import seedu.address.model.user.Username;
  * Parses input arguments and creates a new UserLoginCommand object
  */
 public class UserLoginCommandParser implements Parser<UserLoginCommand> {
+
+    private static final Logger logger = Logger.getLogger(UserLoginCommandParser.class.getName());
+
     /**
      * Parses the given {@code String} of arguments in the context of the UserLoginCommand
      * and returns an UserLoginCommand object for execution.
@@ -33,6 +37,7 @@ public class UserLoginCommandParser implements Parser<UserLoginCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_USER, PREFIX_PASSWORD)
                 || !argMultimap.getPreamble().isEmpty()) {
+            logger.severe("Could not parse command");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UserLoginCommand.MESSAGE_USAGE));
         }
 

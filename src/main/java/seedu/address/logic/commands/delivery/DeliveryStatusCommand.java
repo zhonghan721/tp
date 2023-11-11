@@ -46,6 +46,8 @@ public class DeliveryStatusCommand extends DeliveryCommand {
     public DeliveryStatusCommand(int targetId, DeliveryStatus updatedStatus) {
         requireNonNull(updatedStatus);
 
+        assert targetId > 0;
+
         this.targetId = targetId;
         this.updatedStatus = updatedStatus;
     }
@@ -80,6 +82,7 @@ public class DeliveryStatusCommand extends DeliveryCommand {
      */
     private static Delivery createDeliveryWithNewStatus(Delivery deliveryToEdit, DeliveryStatus newStatus) {
         assert deliveryToEdit != null;
+        assert newStatus != null;
 
         int updatedId = deliveryToEdit.getDeliveryId();
         DeliveryName updatedName = deliveryToEdit.getName();
