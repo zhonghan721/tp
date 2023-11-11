@@ -360,8 +360,8 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
-        public User getStoredUser() {
-            return null;
+        public Optional<User> getStoredUser() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

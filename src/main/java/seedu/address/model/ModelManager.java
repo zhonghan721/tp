@@ -34,7 +34,7 @@ public class ModelManager implements Model {
 
     private final FilteredList<Customer> filteredCustomers;
     private final FilteredList<Delivery> filteredDeliveries;
-    private User loggedInUser;
+    private Optional<User> loggedInUser;
     private SortedList<Delivery> sortedDeliveries;
 
     private ObservableList<ListItem> uiList;
@@ -48,8 +48,8 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
-            + ", delivery book" + deliveryBook
-            + " and user prefs " + userPrefs);
+                + ", delivery book" + deliveryBook
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.deliveryBook = new DeliveryBook(deliveryBook);
@@ -97,15 +97,15 @@ public class ModelManager implements Model {
         String orderDateFormat = "Ordered on: %s";
         String deliveryDateFormat = "Deliver by: %s";
         this.uiList = this.getSortedDeliveryList().stream().map(
-                delivery -> new ListItem(String.format("[%d] %s",
-                    delivery.getDeliveryId(),
-                    delivery.getName()),
-                    String.format(orderDateFormat,
-                        delivery.getOrderDate().toString()),
-                    delivery.getStatus().toString(),
-                    String.format(deliveryDateFormat, delivery.getDeliveryDate().toString())))
-            .collect(Collectors.toCollection(
-                FXCollections::observableArrayList));
+                        delivery -> new ListItem(String.format("[%d] %s",
+                                delivery.getDeliveryId(),
+                                delivery.getName()),
+                                String.format(orderDateFormat,
+                                        delivery.getOrderDate().toString()),
+                                delivery.getStatus().toString(),
+                                String.format(deliveryDateFormat, delivery.getDeliveryDate().toString())))
+                .collect(Collectors.toCollection(
+                        FXCollections::observableArrayList));
     }
 
 
@@ -113,12 +113,12 @@ public class ModelManager implements Model {
     public void setUiListCustomer() {
         String descriptionFormat = "Email: %s\nAddress: %s";
         this.uiList = this.getFilteredCustomerList().stream().map(
-                customer -> new ListItem(String.format("[%d] %s", customer.getCustomerId(), customer.getName()),
-                    String.format(descriptionFormat,
-                        customer.getEmail().toString(),
-                        customer.getAddress().toString()),
-                    customer.getPhone().toString()))
-            .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                        customer -> new ListItem(String.format("[%d] %s", customer.getCustomerId(), customer.getName()),
+                                String.format(descriptionFormat,
+                                        customer.getEmail().toString(),
+                                        customer.getAddress().toString()),
+                                customer.getPhone().toString()))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     @Override
@@ -165,10 +165,11 @@ public class ModelManager implements Model {
      */
     @Override
     public String getLoginStatus() {
-        if (getStoredUser() == null) {
+        if (loggedInUser.isEmpty()) {
             return "No account found. Please register an account.";
         } else if (isLoggedIn) {
-            return "Hello " + loggedInUser.getUsername() + ".";
+            User currLoggedInUser = this.loggedInUser.get();
+            return "Hello " + currLoggedInUser.getUsername() + ".";
         } else {
             return "Logged out. Please login to continue.";
         }
@@ -284,7 +285,7 @@ public class ModelManager implements Model {
     @Override
     public boolean userMatches(User user) {
         requireNonNull(user);
-        return user.equals(loggedInUser);
+        return user.equals(loggedInUser.get());
     }
 
     /**
@@ -307,13 +308,13 @@ public class ModelManager implements Model {
      * Returns the stored user.
      */
     @Override
-    public User getStoredUser() {
-        return this.loggedInUser;
+    public Optional<User> getStoredUser() {
+        return loggedInUser;
     }
 
     @Override
     public void setLoggedInUser(User user) {
-        this.loggedInUser = user;
+        this.loggedInUser = Optional.ofNullable(user);
     }
 
     @Override
@@ -486,11 +487,11 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-            && deliveryBook.equals(otherModelManager.deliveryBook)
-            && userPrefs.equals(otherModelManager.userPrefs)
-            && filteredCustomers.equals(otherModelManager.filteredCustomers)
-            && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
-            && isLoggedIn == otherModelManager.isLoggedIn;
+                && deliveryBook.equals(otherModelManager.deliveryBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredCustomers.equals(otherModelManager.filteredCustomers)
+                && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
+                && isLoggedIn == otherModelManager.isLoggedIn;
     }
 
 }

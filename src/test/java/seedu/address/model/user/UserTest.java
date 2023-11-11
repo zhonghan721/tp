@@ -58,4 +58,19 @@ public class UserTest {
         User newAaron = new UserBuilder(AARON).build();
         assertTrue(AARON.equals(newAaron));
     }
+
+    @Test
+    public void checkAnswerEquals() {
+        // same answer -> returns true
+        assertTrue(AARON.checkAnswerEquals("Aaron"));
+
+        // null -> returns false
+        assertFalse(AARON.checkAnswerEquals(null));
+
+        // different answer -> returns false
+        assertFalse(AARON.checkAnswerEquals("foodbearAnswer"));
+
+        // check case sensitivity
+        assertTrue(AARON.checkAnswerEquals("aaroN"));
+    }
 }

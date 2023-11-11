@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
+import java.util.Optional;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,7 +20,13 @@ import seedu.address.model.user.User;
  */
 public class UserRecoverAccountCommand extends Command {
 
+    /**
+     * The command word.
+     */
     public static final String COMMAND_WORD = "recover account";
+    /**
+     * The message usage of the recover account command.
+     */
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Recover your account for HomeBoss.\n\n"
             + "Parameters: ["
@@ -29,16 +37,43 @@ public class UserRecoverAccountCommand extends Command {
             + PREFIX_ANSWER + " yourAnswer "
             + PREFIX_PASSWORD + " yourNewPassword "
             + PREFIX_PASSWORD_CONFIRM + " yourNewPassword";
+    /**
+     * The message displayed when the user has an account, and is the pre-text to showing the secret question.
+     */
     public static final String MESSAGE_SUCCESS_WITHOUT_FLAGS = "Your secret question is: %s";
+    /**
+     * The message displayed when the user has an account, and it is recovered successfully using this command.
+     */
     public static final String MESSAGE_SUCCESS_WITH_FLAGS = "Your account has been recovered successfully."
             + " Welcome back to HomeBoss.";
+    /**
+     * The message displayed when the user has an account but the answer is wrong.
+     */
     public static final String MESSAGE_WRONG_ANSWER = "Wrong answer to secret question. Either try again"
             + " or delete account (permanent loss of stored data).";
+    /**
+     * The message displayed when the password and password confirm fields do not match.
+     */
     public static final String MESSAGE_PASSWORD_MISMATCH = "Passwords do not match. Please try again.";
 
+    /**
+     * Indicates whether the secret question should be shown.
+     * This is true by default, unless the user has provided the answer to the secret question and the new password.
+     */
     private boolean isShowSecretQuestion = true;
+    /**
+     * The answer to the secret question.
+     */
     private String answer;
+    /**
+     * The new password to be set.
+     */
     private Password newPassword;
+    /**
+     * The additional message to be displayed after the secret question is shown.
+     */
+    private String additionalMessage = "\n\n" + "Please answer the question using the following command:\n"
+            + UserRecoverAccountCommand.MESSAGE_USAGE;
 
     /**
      * Creates a UserRecoverAccountCommand to recover the specified {@code User}
@@ -61,43 +96,60 @@ public class UserRecoverAccountCommand extends Command {
      *
      * @param model {@code Model} which the command should operate on.
      * @return {@code CommandResult} that indicates success.
-     * @throws CommandException if the user is already logged in or the user credentials are wrong.
+     * @throws CommandException If the user is already logged in or the user credentials are wrong.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // ensure stored user is not null
-        User storedUser = model.getStoredUser();
+        Optional<User> storedUser = model.getStoredUser();
 
-        if (storedUser == null) {
+        // ensure that the user has an account to recover
+        if (storedUser.isEmpty()) {
             throw new CommandException(UserDeleteCommand.MESSAGE_NO_ACCOUNT);
         }
 
+        User currentStoredUser = storedUser.get();
+
+        // show secret question
+        // considered as a success
         if (isShowSecretQuestion) {
-            String output = String.format(MESSAGE_SUCCESS_WITHOUT_FLAGS, storedUser.getSecretQuestion());
-            output += "\n\n" + "Please answer the question using the following command:\n"
-                    + UserRecoverAccountCommand.MESSAGE_USAGE;
+            String secretQuestion = currentStoredUser.getSecretQuestion();
+            String output = String.format(MESSAGE_SUCCESS_WITHOUT_FLAGS, secretQuestion);
+            output += additionalMessage;
             return new CommandResult(output);
         }
 
-        if (!storedUser.getAnswer().equalsIgnoreCase(answer)) {
+        // ensure that the user has provided the right answer to the secret question
+        // this check has to be done after isShowSecretQuestion is checked
+        // because if isShowSecretQuestion is true, then the user has not provided the answer yet
+        if (!currentStoredUser.checkAnswerEquals(answer)) {
             throw new CommandException(MESSAGE_WRONG_ANSWER);
         }
 
-        // answer is correct
-        // reset password
-        User newUser = new User(storedUser.getUsername(), newPassword, true,
-                storedUser.getSecretQuestion(), storedUser.getAnswer());
+        // answer is correct, proceed to reset password
+        User newUser = new User(currentStoredUser.getUsername(), newPassword, true,
+                currentStoredUser.getSecretQuestion(), currentStoredUser.getAnswer());
         model.resetPassword(newUser);
         model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
         return new CommandResult(MESSAGE_SUCCESS_WITH_FLAGS, true);
     }
 
+    /**
+     * Indicates whether the secret question should be shown.
+     *
+     * @return true if the secret question should be shown, false otherwise.
+     */
     public boolean isShowSecretQuestion() {
         return isShowSecretQuestion;
     }
 
+    /**
+     * Indicates if an instance of this command is equal to another object.
+     *
+     * @param other The other object to be compared.
+     * @return true if the other object is an instance of this command and has the same fields.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

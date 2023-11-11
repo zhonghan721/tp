@@ -290,9 +290,11 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, true);
-        User loggedInUser = modelManager.getStoredUser();
+        Optional<User> loggedInUser = modelManager.getStoredUser();
+        assertTrue(loggedInUser.isPresent());
+        User currentLoggedInUser = loggedInUser.get();
 
-        String expectedMessage = "Hello " + loggedInUser.getUsername() + ".";
+        String expectedMessage = "Hello " + currentLoggedInUser.getUsername() + ".";
         String actualMessage = modelManager.getLoginStatus();
 
         assertEquals(expectedMessage, actualMessage);
@@ -306,7 +308,6 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, false);
-        User loggedInUser = modelManager.getStoredUser();
 
         String expectedMessage = "Logged out. Please login to continue.";
         String actualMessage = modelManager.getLoginStatus();

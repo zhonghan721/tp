@@ -241,8 +241,10 @@ public interface Model {
 
     /**
      * Returns the stored user.
+     *
+     * @return Optional containing the stored user.
      */
-    User getStoredUser();
+    Optional<User> getStoredUser();
 
     /**
      * Registers the given {@code user}.

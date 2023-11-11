@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
+import java.util.Optional;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -53,8 +55,9 @@ public class UserLoginCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        Optional<User> storedUser = model.getStoredUser();
         // Check if there is a stored user
-        if (model.getStoredUser() == null) {
+        if (storedUser.isEmpty()) {
             throw new CommandException(MESSAGE_NO_REGISTERED_ACCOUNT_FOUND);
         }
 

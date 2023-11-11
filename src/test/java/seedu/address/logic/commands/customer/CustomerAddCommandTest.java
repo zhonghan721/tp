@@ -303,7 +303,7 @@ public class CustomerAddCommandTest {
         }
 
         @Override
-        public User getStoredUser() {
+        public Optional<User> getStoredUser() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -71,11 +71,12 @@ public class UserUpdateCommand extends Command {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        User storedUser = model.getStoredUser();
+        Optional<User> storedUser = model.getStoredUser();
         // there should always be a stored user after registering/to be able to log in
-        assert storedUser != null;
+        assert storedUser.isPresent();
+        User currentStoredUser = storedUser.get();
 
-        User updatedUser = createUpdatedUser(storedUser, userUpdateDescriptor);
+        User updatedUser = createUpdatedUser(currentStoredUser, userUpdateDescriptor);
 
         model.updateUser(updatedUser);
         return new CommandResult(MESSAGE_SUCCESS, true);
