@@ -1123,6 +1123,7 @@ sorted by expected Delivery date in descending order (latest first).
 * `EXPECTED_DELIVERY_DATE`{.swift} must be today or after today's date in yyyy-MM-dd format OR
   `TODAY` for today’s date.
 * `SORT`{.swift} accepts the following values: `ASC`/`DESC`.
+* If duplicate prefixes are provided, only the last occurrence of each prefix will be used.
 
   </box>
 
