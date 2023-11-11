@@ -31,6 +31,8 @@ class JsonSerializableDeliveryBook {
      */
     @JsonCreator
     public JsonSerializableDeliveryBook(@JsonProperty("deliveries") List<JsonAdaptedDelivery> persons) {
+        assert persons != null;
+
         this.deliveries.addAll(persons);
     }
 
@@ -40,6 +42,8 @@ class JsonSerializableDeliveryBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableDeliveryBook(ReadOnlyBook<Delivery> source) {
+        assert source != null;
+
         deliveries.addAll(source.getList().stream().map(JsonAdaptedDelivery::new).collect(Collectors.toList()));
     }
 
@@ -49,8 +53,9 @@ class JsonSerializableDeliveryBook {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public DeliveryBook toModelType(Optional<ReadOnlyBook<Customer>> customerBook) throws IllegalValueException {
+        assert customerBook.isPresent();
+
         DeliveryBook deliveryBook = new DeliveryBook();
-        int maxDeliveryId = 0;
         for (JsonAdaptedDelivery jsonAdaptedDelivery : deliveries) {
             Delivery delivery = jsonAdaptedDelivery.toModelType(customerBook);
             if (deliveryBook.hasDelivery(delivery)) {
