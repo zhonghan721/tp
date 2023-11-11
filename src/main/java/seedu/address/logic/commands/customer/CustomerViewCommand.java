@@ -9,7 +9,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Customer;
+import seedu.address.model.customer.Customer;
 
 /**
  * Represents a CustomerViewCommand which displays a single customer.

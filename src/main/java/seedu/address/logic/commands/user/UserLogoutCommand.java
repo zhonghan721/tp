@@ -29,7 +29,7 @@ public class UserLogoutCommand extends Command {
 
         // Set status in model to logged out, and update filtered lists
         model.setLogoutSuccess();
-        model.updateFilteredPersonList(PREDICATE_SHOW_NO_CUSTOMERS);
+        model.updateFilteredCustomerList(PREDICATE_SHOW_NO_CUSTOMERS);
         model.updateFilteredDeliveryList(PREDICATE_SHOW_NO_DELIVERIES);
         // Display the updated empty list
         model.setUiListCustomer();

@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalDeliveries.GABRIELS_MILK;
 import static seedu.address.testutil.TypicalDeliveries.GAMBES_RICE;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,17 +31,17 @@ public class DeliveryStatusCommandTest {
         DeliveryStatus deliveryStatus = DeliveryStatus.COMPLETED;
         Delivery expectedDelivery = new DeliveryBuilder(GABRIELS_MILK).withStatus(deliveryStatus).build();
         DeliveryStatusCommand deliveryStatusCommand =
-            new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(), deliveryStatus);
+                new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(), deliveryStatus);
 
         String expectedMessage = String.format(DeliveryStatusCommand.MESSAGE_EDIT_DELIVERY_SUCCESS,
-            Messages.format(expectedDelivery));
+                Messages.format(expectedDelivery));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-            new DeliveryBook(model.getDeliveryBook()),
-            new UserPrefs(),
-            true);
+                new DeliveryBook(model.getDeliveryBook()),
+                new UserPrefs(),
+                true);
         expectedModel.setDelivery(model.getDeliveryBook().getById(GABRIELS_MILK.getDeliveryId()).get(),
-            expectedDelivery);
+                expectedDelivery);
 
         assertCommandSuccess(deliveryStatusCommand, model, expectedMessage, expectedModel, true);
     }
@@ -74,11 +74,11 @@ public class DeliveryStatusCommandTest {
     @Test
     public void equals() {
         final DeliveryStatusCommand standardCommand =
-            new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(), DeliveryStatus.COMPLETED);
+                new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(), DeliveryStatus.COMPLETED);
 
         // same values -> returns true
         DeliveryStatusCommand commandWithSameValue =
-            new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(), DeliveryStatus.COMPLETED);
+                new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(), DeliveryStatus.COMPLETED);
         assertTrue(standardCommand.equals(commandWithSameValue));
 
         // same object -> returns true
@@ -92,20 +92,20 @@ public class DeliveryStatusCommandTest {
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new DeliveryStatusCommand(GAMBES_RICE.getDeliveryId(),
-            DeliveryStatus.COMPLETED)));
+                DeliveryStatus.COMPLETED)));
 
         // different status -> returns false
         assertFalse(standardCommand.equals(new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(),
-            DeliveryStatus.CANCELLED)));
+                DeliveryStatus.CANCELLED)));
     }
 
     @Test
     public void toStringMethod() {
         String expected = DeliveryStatusCommand.class.getCanonicalName()
-            + "{targetId=" + GABRIELS_MILK.getDeliveryId() + ", status="
-            + DeliveryStatus.COMPLETED + "}";
+                + "{targetId=" + GABRIELS_MILK.getDeliveryId() + ", status="
+                + DeliveryStatus.COMPLETED + "}";
         DeliveryStatusCommand deliveryStatusCommand =
-            new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(), DeliveryStatus.COMPLETED);
+                new DeliveryStatusCommand(GABRIELS_MILK.getDeliveryId(), DeliveryStatus.COMPLETED);
         assertEquals(expected, deliveryStatusCommand.toString());
     }
 }

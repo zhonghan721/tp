@@ -10,9 +10,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SECRET_QUESTION
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_FOODBEAR;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalDeliveries.getTypicalDeliveryBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,7 +33,7 @@ import seedu.address.model.DeliveryBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Customer;
+import seedu.address.model.customer.Customer;
 import seedu.address.model.user.User;
 import seedu.address.testutil.CustomerBuilder;
 import seedu.address.testutil.CustomerEditDescriptorBuilder;

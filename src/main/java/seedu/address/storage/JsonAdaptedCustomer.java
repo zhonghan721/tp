@@ -4,16 +4,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Customer;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.customer.Address;
+import seedu.address.model.customer.Customer;
+import seedu.address.model.customer.Email;
+import seedu.address.model.customer.Name;
+import seedu.address.model.customer.Phone;
 
 /**
  * Jackson-friendly version of {@link Customer}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedCustomer {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Customer's %s field is missing!";
 
@@ -24,12 +24,12 @@ class JsonAdaptedPerson {
     private final String address;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedCustomer} with the given customer details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("customerId") String customerId, @JsonProperty("name") String name,
-                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-                             @JsonProperty("address") String address) {
+    public JsonAdaptedCustomer(@JsonProperty("customerId") String customerId, @JsonProperty("name") String name,
+                               @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+                               @JsonProperty("address") String address) {
         this.customerId = customerId;
         this.name = name;
         this.phone = phone;
@@ -38,9 +38,9 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Customer} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Customer source) {
+    public JsonAdaptedCustomer(Customer source) {
         customerId = String.valueOf(source.getCustomerId());
         name = source.getName().fullName;
         phone = source.getPhone().value;
@@ -49,9 +49,9 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted customer object into the model's {@code Customer} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted customer.
      */
     public Customer toModelType() throws IllegalValueException {
         if (name == null) {
