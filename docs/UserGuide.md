@@ -154,7 +154,7 @@ If you're unsure what a prefix is, you can refer to the [Command Format](#homebo
 
 # Getting Started
 
-## Prerequisites
+## <span style="text-decoration:underline;">Prerequisites</span>
 
 Ensure that you have `Java 11` or above installed on your computer. If you are unsure how to do so you may view
 this
@@ -175,7 +175,7 @@ helpful [guide](https://www.java.com/en/download/help/version_manual.html).
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-## </br>Installing HomeBoss
+## </br><span style="text-decoration:underline;">Installing HomeBoss</span>
 
 1. You may download the latest release of **HomeBoss**
    from [here](https://github.com/AY2324S1-CS2103T-T13-3/tp/releases/latest).
@@ -213,7 +213,7 @@ files / folders before the application is launched for the first time.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-## <br/>Understanding our layout
+## <span style="text-decoration:underline;">Understanding our layout</span>
 
 Do not worry if the layout looks unfamiliar at first glance. Let's go through a quick run down of HomeBoss's layout
 so that you can familiarise yourself with our various components.
@@ -288,7 +288,7 @@ HomeBoss. You can use the scroll bar on the right to scroll through your Custome
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-## </br>HomeBoss's Command Format
+## </br><span style="text-decoration:underline;">HomeBoss's Command Format</span>
 
 Commands are your main form of interaction with HomeBoss, and is the way to carry out various operations in HomeBoss.
 Don't worry if the commands seem daunting, the HomeBoss team has carefully crafted the commands to be as intuitive
@@ -365,7 +365,7 @@ can either be `1` or `1 --name furniture`.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-## </br>Registering and creating your first Delivery
+## </br><span style="text-decoration:underline;">Registering and creating your first Delivery</span>
 
 At this juncture, you should already have a good understanding of the basic mechanisms of HomeBoss. Let's now get you
 started on HomeBoss
@@ -420,11 +420,11 @@ found [here](#register).
 * `EXPECTED_DELIVERY_DATE`{.swift} : 2023-12-03
 
 7. Type `delivery add MacBook Pro --customer CUSTOMER_ID --date 2023-12-03`, replacing `CUSTOMER_ID`{.swift}
-
    with Gabriel's ID, and hit enter.
 
 8. A new Delivery should have been added for `Gabriel`, you should see a new Delivery in the Delivery List panel,
    similar to the image shown below.
+
 
 ![DeliveryAdded](images/getting-started/delivery_add.png){style="display: block; margin: 0 auto;"}
 
