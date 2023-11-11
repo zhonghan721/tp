@@ -10,13 +10,13 @@ start
 if () then ([else])
     :ParseException: Invalid Command Format;
     stop
-([all fields are filled]) elseif () then ([user is already logged in])
+( [all fields are filled]) elseif () then ([user is already logged in])
     :CommandException: Already Logged In;
     stop
-([else]) elseif () then ([else])
+( [else]) elseif () then ([else])
     :CommandException: Wrong Credentials;
     stop
-else ([fields matches
+else ( [fields matches
     stored user])
 
 endif

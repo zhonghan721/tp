@@ -509,10 +509,11 @@ The format for the `login` command can be found [here](UserGuide.md#login).
 1. The user specifies the `Username` and `Password` in the `login` command.
 2. If any of the fields is not provided, an error message with the correct command usage will be shown.
 3. If invalid command parameters are provided, an error message with the correct parameter format will be shown.
-4. If the user is currently logged in, an error message will be shown.
-5. The `User` is then cross-referenced with the stored user in `Model` to check if the credentials match.
+4. If there is no registered account found, an error message will be shown.
+5. If the user is currently logged in, an error message will be shown.
+6. The `User` is then cross-referenced with the stored user in `Model` to check if the credentials match.
    If incorrect credentials are provided, an error message regarding wrong credentials will be shown.
-6. If all the previous steps are completed without exceptions, the user will be logged in and the
+7. If all the previous steps are completed without exceptions, the user will be logged in and the
    `isLoggedIn` status in `Model` will be updated to `true`.
 
 The following activity diagram shows the logic of a user logging in:
@@ -526,11 +527,12 @@ The sequence of the `login` command is as follows:
 2. The user inputs the `login` command with the username and password.
 3. The `userLoginCommandParser` checks whether all the required fields are present.
    If all fields are present, it creates a new `userLoginCommand`.
-4. The `userLoginCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`.
-5. The `userLoginCommand` then checks if the user credentials match the stored user by calling `Model#userMatches()`.
-6. If the user is not logged in and the credentials match, the `userLoginCommand` calls `Model#setLoginSuccess()`,
-   changing the login status to true and enabling the user access to all commands.
-7. The `userLoginCommand` also calls `Model#updateFilteredPersonList()` to display the list of customers.
+4. The `userLoginCommand` checks whether there is a registered account stored by calling `Model#getStoredUser`.
+5. The `userLoginCommand` then checks whether the user is currently logged in by calling `Model#getUserLoginStatus`.
+6. The `userLoginCommand` then checks if the user credentials match the stored user by calling `Model#userMatches`.
+7. If the user is not logged in and the credentials match, the `userLoginCommand` calls `Model#setLoginSuccess`,
+   changing the login status to true and giving the user access to all commands.
+8. The `userLoginCommand` also calls `Model#showAllFilteredCustomerList` to display the list of customers.
 
 The following sequence diagram shows how the `login` command works:
 
@@ -562,16 +564,17 @@ The sequence of the `logout` command is as follows:
 
 1. The user inputs the `logout` command.
 2. A new `userLogoutCommand` is created and checks whether the user is currently logged out
-   by calling `Model#getUserLoginStatus()`.
-3. If the user is currently logged in, the `userLogoutCommand` calls `Model#setLogoutSuccess()`,
+   by calling `Model#getUserLoginStatus`.
+3. If the user is currently logged in, the `userLogoutCommand` calls `Model#setLogoutSuccess`,
    changing the login status to false and restricting the user access to most commands.
-4. The `userLoginCommand` also calls `Model#updateFilteredPersonList()` to hide the list of customers.
+4. The `userLoginCommand` also calls `Model#clearFilteredDeliveryList` and `Model#clearFilteredCustomerList`
+   to hide the list of deliveries and customers.
 
-The following sequence diagram shows how the `login` command works:
+The following sequence diagram shows how the `logout` command works:
 
 <puml src="diagrams/UserLogoutSequenceDiagram.puml" alt="UserLogoutSequenceDiagram" />
 
-### Add Customer Command
+### Customer Add Command
 
 **Overview:**
 
@@ -586,8 +589,8 @@ The format for the `customer add` command can be found [here](UserGuide.md#add-a
 2. If any of the fields is not provided, an error message with the correct command usage will be shown.
 3. If invalid command parameters are provided, an error message with the correct parameter format will be shown.
 4. If the user is currently not logged in, an error message will be shown.
-5. The `Customer` is then cross-referenced in the `Model` to check if a customer with the same `Name` already exists.
-   If a customer with the same `Name` exists, an error message will be shown.
+5. The `Customer` is then cross-referenced in the `Model` to check if a customer with the same `Phone` already exists.
+   If a customer with the same `Phone` exists, an error message will be shown.
 6. If all the previous steps are completed without exceptions, the new `Customer` will be successfully added to the
    database.
 
@@ -597,19 +600,19 @@ The following activity diagram shows the logic of adding a `Customer` into the d
 
 The sequence of the `customer add` command is as follows:
 
-1. The user inputs the `customer add ARG` command (e.g. `customer add --name Gabriel --phone 87654321
+1. The user inputs the `customer add` command (e.g. `customer add --name Gabriel --phone 87654321
    --email gabrielrocks@gmail.com --address RVRC Block B`).
-2. The `LogicManager` calls the `AddressBookParser#parseCommand` with `ARG` to parse the command.
+2. The `LogicManager` calls the `AddressBookParser#parseCommand` with the user input to parse the command.
 3. The `AddressBookParser` then creates a new `CustomerAddCommandParser` to parse the fields provided by the user.
 4. A corresponding `Customer` is created by the `CustomerAddCommandParser`, which is used to
    create a new `CustomerAddCommand`.
-5. The `CustomerAddCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus()`.
-6. The `CustomerAddCommand` then checks if the `Model` contains a customer with the same `Name`
-   by calling `Model#hasPerson`.
-7. If the user is logged in and the `Model` does not contain a customer with the same `Name`, the `CustomerAddCommand`
-   calls `Model#addPerson` to add the new `Customer` to the database.
+5. The `CustomerAddCommand` checks whether the user is currently logged in by calling `Model#getUserLoginStatus`.
+6. The `CustomerAddCommand` then checks if the `Model` contains a customer with the same `Phone`
+   by calling `Model#hasCustomer`.
+7. If the user is logged in and the `Model` does not contain a customer with the same `Phone`, the `CustomerAddCommand`
+   calls `Model#addCustomer` to add the new `Customer` to the database.
 
-The following sequence diagram shows how the `login` command works:
+The following sequence diagram shows how the `customer add` command works:
 
 <puml src="diagrams/CustomerAddSequenceDiagram.puml" alt="CustomerAddSequenceDiagram" />
 
