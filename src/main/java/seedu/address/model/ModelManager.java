@@ -34,8 +34,8 @@ public class ModelManager implements Model {
 
     private final FilteredList<Customer> filteredCustomers;
     private final FilteredList<Delivery> filteredDeliveries;
-    private User loggedInUser;
     private SortedList<Delivery> sortedDeliveries;
+    private User loggedInUser;
 
     private ObservableList<ListItem> uiList;
 
@@ -54,13 +54,14 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.deliveryBook = new DeliveryBook(deliveryBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredCustomers = new FilteredList<>(this.addressBook.getList());
-        filteredDeliveries = new FilteredList<>(this.deliveryBook.getList());
-        sortedDeliveries = new SortedList<>(filteredDeliveries);
+        this.filteredCustomers = new FilteredList<>(this.addressBook.getList());
+        this.filteredDeliveries = new FilteredList<>(this.deliveryBook.getList());
+        this.sortedDeliveries = new SortedList<>(filteredDeliveries);
         this.isLoggedIn = isLoggedIn;
         this.loggedInUser = userPrefs.getStoredUser();
-        this.setUiListCustomer();
 
+        // Set the UI list to the customer list by default
+        this.setUiListCustomer();
     }
 
     public ModelManager() {
@@ -94,31 +95,35 @@ public class ModelManager implements Model {
 
     @Override
     public void setUiListDelivery() {
-        String orderDateFormat = "Ordered on: %s";
-        String deliveryDateFormat = "Deliver by: %s";
-        this.uiList = this.getSortedDeliveryList().stream().map(
-                delivery -> new ListItem(String.format("[%d] %s",
-                    delivery.getDeliveryId(),
-                    delivery.getName()),
-                    String.format(orderDateFormat,
-                        delivery.getOrderDate().toString()),
-                    delivery.getStatus().toString(),
-                    String.format(deliveryDateFormat, delivery.getDeliveryDate().toString())))
-            .collect(Collectors.toCollection(
-                FXCollections::observableArrayList));
+        this.uiList = this.getSortedDeliveryList()
+            .stream()
+            .map(this::transformDeliveryToListItem)
+            .collect(Collectors.toCollection(FXCollections::observableArrayList));
+    }
+
+    private ListItem transformDeliveryToListItem(Delivery delivery) {
+        return new ListItem(String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName()),
+            String.format("Ordered on: %s", delivery.getOrderDate().toString()),
+            delivery.getStatus().toString(),
+            String.format("Deliver by: %s", delivery.getDeliveryDate().toString()));
     }
 
 
     @Override
     public void setUiListCustomer() {
-        String descriptionFormat = "Email: %s\nAddress: %s";
-        this.uiList = this.getFilteredCustomerList().stream().map(
-                customer -> new ListItem(String.format("[%d] %s", customer.getCustomerId(), customer.getName()),
-                    String.format(descriptionFormat,
-                        customer.getEmail().toString(),
-                        customer.getAddress().toString()),
-                    customer.getPhone().toString()))
+        this.uiList = this.getFilteredCustomerList()
+            .stream()
+            .map(this::transformCustomerToListItem)
             .collect(Collectors.toCollection(FXCollections::observableArrayList));
+    }
+
+    private ListItem transformCustomerToListItem(Customer customer) {
+        String descriptionFormat = "Email: %s\nAddress: %s";
+        return new ListItem(String.format("[%d] %s", customer.getCustomerId(), customer.getName()),
+            String.format(descriptionFormat,
+                customer.getEmail().toString(),
+                customer.getAddress().toString()),
+            customer.getPhone().toString());
     }
 
     @Override
@@ -142,6 +147,7 @@ public class ModelManager implements Model {
         return userPrefs.getDeliveryBookFilePath();
     }
 
+    @Deprecated
     @Override
     public Delivery getDeliveryUsingFilteredList(int id) {
         for (Delivery d : filteredDeliveries) {
@@ -191,6 +197,7 @@ public class ModelManager implements Model {
         return this.addressBook.getById(id);
     }
 
+    @Deprecated
     @Override
     public Customer getCustomerUsingFilteredList(int id) {
         for (Customer c : filteredCustomers) {
@@ -263,6 +270,34 @@ public class ModelManager implements Model {
         }
 
         setUiListCustomer();
+    }
+
+    /**
+     * Resets the customer list to all customers.
+     */
+    @Override
+    public void showAllFilteredCustomerList() {
+        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+    }
+
+    /**
+     * Returns the number of customers in the filtered customer list.
+     *
+     * @return the number of customers in the filtered customer list.
+     */
+    @Override
+    public int getFilteredCustomerListSize() {
+        return this.filteredCustomers.size();
+    }
+
+    /**
+     * Returns true if the filtered customer list is empty.
+     *
+     * @return true if the filtered customer list is empty.
+     */
+    @Override
+    public boolean isFilteredCustomerListEmpty() {
+        return this.filteredCustomers.isEmpty();
     }
 
     //=========== User Related Methods =======================================================================
@@ -420,6 +455,44 @@ public class ModelManager implements Model {
         updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
     }
 
+    /**
+     * Resets the delivery list to show all deliveries.
+     */
+    @Override
+    public void showAllFilteredDeliveryList() {
+        updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+    }
+
+    /**
+     * Returns the number of deliveries in the filtered delivery list.
+     *
+     * @return the number of deliveries in the filtered delivery list.
+     */
+    @Override
+    public int getFilteredDeliveryListSize() {
+        return this.filteredDeliveries.size();
+    }
+
+    /**
+     * Returns true if the filtered delivery list is empty.
+     *
+     * @return true if the filtered delivery list is empty.
+     */
+    @Override
+    public boolean isFilteredDeliveryListEmpty() {
+        return this.filteredDeliveries.isEmpty();
+    }
+
+    /**
+     * Returns the number of deliveries in the sorted delivery list.
+     *
+     * @return the number of deliveries in the sorted delivery list.
+     */
+    @Override
+    public boolean isSortedDeliveryListEmpty() {
+        return this.sortedDeliveries.isEmpty();
+    }
+
     //=========== Filtered Customer List Accessors =============================================================
 
     /**
@@ -446,13 +519,13 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
         requireNonNull(predicate);
-        // only shows the delivery list if the user is logged in
-        if (isLoggedIn) {
-            filteredDeliveries.setPredicate(predicate);
-        } else {
+        if (!isLoggedIn) {
             filteredDeliveries.setPredicate(PREDICATE_SHOW_NO_DELIVERIES);
+            return;
         }
 
+        // only shows the delivery list if the user is logged in
+        filteredDeliveries.setPredicate(predicate);
         // Update the sorted list
         this.sortedDeliveries = new SortedList<>(filteredDeliveries);
 

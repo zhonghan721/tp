@@ -56,14 +56,14 @@ public class DeliveryAddCommandTest {
         CommandResult commandResult = null;
         try {
             commandResult = new DeliveryAddCommand(deliveryAddDescriptor)
-                    .execute(modelStub);
+                .execute(modelStub);
         } catch (CommandException e) {
             e.printStackTrace();
         }
 
 
         assertEquals(String.format(DeliveryAddCommand.MESSAGE_SUCCESS, Messages
-                .format(modelStub.getDelivery(0).get())), commandResult.getFeedbackToUser());
+            .format(modelStub.getDelivery(0).get())), commandResult.getFeedbackToUser());
 
     }
 
@@ -76,10 +76,10 @@ public class DeliveryAddCommandTest {
         Delivery validDelivery = new DeliveryBuilder().withCustomer(invalidCustomer).build();
 
         DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(
-                new DeliveryAddDescriptorBuilder(validDelivery).build());
+            new DeliveryAddDescriptorBuilder(validDelivery).build());
 
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX, () ->
-                deliveryAddCommand.execute(modelStub));
+            deliveryAddCommand.execute(modelStub));
     }
 
     @Test
@@ -89,14 +89,14 @@ public class DeliveryAddCommandTest {
 
         ModelStub modelStub = new ModelStubAcceptingDeliveryAdded();
         Delivery validDelivery =
-                new DeliveryBuilder().withCustomer(validCustomer)
-                        .withDeliveryDate(INVALID_DELIVERY_DATE).build();
+            new DeliveryBuilder().withCustomer(validCustomer)
+                .withDeliveryDate(INVALID_DELIVERY_DATE).build();
 
         DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(new
-                DeliveryAddDescriptorBuilder(validDelivery).build());
+            DeliveryAddDescriptorBuilder(validDelivery).build());
 
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_DELIVERY_DATE, () ->
-                deliveryAddCommand.execute(modelStub));
+            deliveryAddCommand.execute(modelStub));
     }
 
     @Test
@@ -108,9 +108,9 @@ public class DeliveryAddCommandTest {
         Delivery validDelivery = new DeliveryBuilder().withCustomer(validCustomer).build();
 
         DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(new
-                DeliveryAddDescriptorBuilder(validDelivery).build());
+            DeliveryAddDescriptorBuilder(validDelivery).build());
         assertThrows(CommandException.class, Messages.MESSAGE_USER_NOT_AUTHENTICATED, () ->
-                deliveryAddCommand.execute(modelStub));
+            deliveryAddCommand.execute(modelStub));
 
     }
 
@@ -146,8 +146,8 @@ public class DeliveryAddCommandTest {
         DeliveryAddDescriptor deliveryAddDescriptor = new DeliveryAddDescriptorBuilder().build();
         DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(deliveryAddDescriptor);
         String expected = new ToStringBuilder(deliveryAddCommand)
-                .add("toAdd", deliveryAddDescriptor)
-                .toString();
+            .add("toAdd", deliveryAddDescriptor)
+            .toString();
         assertEquals(expected, deliveryAddCommand.toString());
     }
 
@@ -266,6 +266,34 @@ public class DeliveryAddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * Resets the customer list to all customers.
+         */
+        @Override
+        public void showAllFilteredCustomerList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns the number of customers in the filtered customer list.
+         *
+         * @return the number of customers in the filtered customer list.
+         */
+        @Override
+        public int getFilteredCustomerListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns true if the filtered customer list is empty.
+         *
+         * @return true if the filtered customer list is empty.
+         */
+        @Override
+        public boolean isFilteredCustomerListEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public Path getDeliveryBookFilePath() {
             throw new AssertionError("This method should not be called.");
@@ -313,6 +341,44 @@ public class DeliveryAddCommandTest {
 
         @Override
         public void setDelivery(Delivery target, Delivery editedCustomer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Resets the delivery list to show all deliveries.
+         */
+        @Override
+        public void showAllFilteredDeliveryList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns the number of deliveries in the filtered delivery list.
+         *
+         * @return the number of deliveries in the filtered delivery list.
+         */
+        @Override
+        public int getFilteredDeliveryListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns true if the filtered delivery list is empty.
+         *
+         * @return true if the filtered delivery list is empty.
+         */
+        @Override
+        public boolean isFilteredDeliveryListEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns the number of deliveries in the sorted delivery list.
+         *
+         * @return the number of deliveries in the sorted delivery list.
+         */
+        @Override
+        public boolean isSortedDeliveryListEmpty() {
             throw new AssertionError("This method should not be called.");
         }
 
