@@ -21,17 +21,17 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.delivery.DeliveryEditCommand.DeliveryEditDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.customer.Address;
+import seedu.address.model.customer.Customer;
+import seedu.address.model.customer.Email;
+import seedu.address.model.customer.Name;
+import seedu.address.model.customer.Phone;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.delivery.OrderDate;
-import seedu.address.model.customer.Address;
-import seedu.address.model.customer.Customer;
-import seedu.address.model.customer.Email;
-import seedu.address.model.customer.Name;
-import seedu.address.model.customer.Phone;
 
 /**
  * Edits the details of an existing customer in the address book.
@@ -108,6 +108,8 @@ public class CustomerEditCommand extends CustomerCommand {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         } else {
             model.setCustomer(customerToEdit, editedCustomer);
+
+            // update delivery associated with the edited customer
             updateDelivery(model, editedCustomer);
             model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
 
@@ -138,7 +140,7 @@ public class CustomerEditCommand extends CustomerCommand {
     /**
      * Updates all the deliveries associated with the customer with new customer details.
      */
-    public void updateDelivery(Model model, Customer editedCustomer) {
+    protected static void updateDelivery(Model model, Customer editedCustomer) {
         int customerId = editedCustomer.getCustomerId();
         Stream<Delivery> deliveries = model.getDeliveryByCustomerId(customerId);
         deliveries.forEach(d -> {

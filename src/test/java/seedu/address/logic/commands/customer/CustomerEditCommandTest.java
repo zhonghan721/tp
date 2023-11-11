@@ -55,6 +55,7 @@ public class CustomerEditCommandTest {
                 new DeliveryBook(model.getDeliveryBook()),
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setCustomer(model.getFilteredCustomerList().get(0), editedCustomer);
+        CustomerEditCommand.updateDelivery(expectedModel, editedCustomer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, true);
     }
@@ -78,6 +79,7 @@ public class CustomerEditCommandTest {
                 new DeliveryBook(model.getDeliveryBook()),
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setCustomer(lastCustomer, editedCustomer);
+        CustomerEditCommand.updateDelivery(expectedModel, editedCustomer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, true);
     }
@@ -118,6 +120,7 @@ public class CustomerEditCommandTest {
                 new DeliveryBook(model.getDeliveryBook()),
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setCustomer(model.getFilteredCustomerList().get(0), editedCustomer);
+        CustomerEditCommand.updateDelivery(expectedModel, editedCustomer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, true);
     }
