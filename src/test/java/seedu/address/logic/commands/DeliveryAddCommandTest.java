@@ -515,7 +515,7 @@ public class DeliveryAddCommandTest {
 
         @Override
         public Optional<Customer> getCustomer(int id) {
-         return getAddressBook().getById(id);
+            return getAddressBook().getById(id);
         }
 
         @Override
