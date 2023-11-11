@@ -37,7 +37,7 @@ With HomeBoss, you can now **focus on what matters most: running your business.*
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1. [Prerequisites](#prerequisites)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2. [Installing HomeBoss](#installing-homeboss)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3. [Understanding our layout](#understanding-our-layout)</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.4. [HomeBoss's Command Format](#homeboss-s-command-format)</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.4. [HomeBoss Command Format](#homeboss-command-format)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.5. [Registering and creating your first Delivery](#registering-and-creating-your-first-delivery)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.6. [Editing the data file](#editing-the-data-file) </br>
 &nbsp;&nbsp;6\. [Feature Summary](#feature-summary)</br>
@@ -137,7 +137,7 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
 **Parameter(s):** Parameters are inputs that you can customise to your needs. They are typically preceded by a prefix.
-If you're unsure what a prefix is, you can refer to the [Command Format](#homeboss-s-command-format) section.
+If you're unsure what a prefix is, you can refer to the [HomeBoss Command Format](#homeboss-command-format) section.
 
 </box>
 
@@ -206,7 +206,7 @@ files / folders before the application is launched for the first time.
 5. If you are a first time user, we highly recommend reading the following sections to familiarise yourself with
    HomeBoss's layout and commands:
     * [Understanding our layout](#understanding-our-layout) <br/>
-    * [HomeBoss's Command Format](#homeboss-s-command-format) <br/>
+    * [HomeBoss Command Format](#homeboss-command-format) <br/>
     * [Registering and creating your first Delivery](#registering-and-creating-your-first-delivery)
 
 <!-- ![HomeBoss Start Page](images/getting-started/register.png) -->
