@@ -1,5 +1,6 @@
 package seedu.address.model.user;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalUsers.AARON;
@@ -57,5 +58,11 @@ public class UserTest {
         // same name, same password -> returns true
         User newAaron = new UserBuilder(AARON).build();
         assertTrue(AARON.equals(newAaron));
+    }
+
+    @Test
+    public void toStringMethod() {
+        String expected = User.class.getCanonicalName() + "{username=" + AARON.getUsername() + "}";
+        assertEquals(expected, AARON.toString());
     }
 }
