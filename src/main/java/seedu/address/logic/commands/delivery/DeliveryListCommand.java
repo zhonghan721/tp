@@ -83,7 +83,7 @@ public class DeliveryListCommand extends DeliveryCommand {
         Optional<Integer> customerId = Optional.ofNullable(this.customerId);
         Optional<Date> deliveryDate = Optional.ofNullable(this.deliveryDate);
 
-        Predicate<Delivery> filters = this.applyFilters(model, status, customerId, deliveryDate);
+        Predicate<Delivery> filters = this.createDeliveryListFilters(model, status, customerId, deliveryDate);
 
         assert filters != null : "Filters should not be null";
 
@@ -108,10 +108,10 @@ public class DeliveryListCommand extends DeliveryCommand {
      * @param deliveryDate delivery date to filter by.
      * @return predicate with filters applied.
      */
-    private Predicate<Delivery> applyFilters(Model model,
-                                             Optional<DeliveryStatus> status,
-                                             Optional<Integer> customerId,
-                                             Optional<Date> deliveryDate) {
+    private Predicate<Delivery> createDeliveryListFilters(Model model,
+                                                          Optional<DeliveryStatus> status,
+                                                          Optional<Integer> customerId,
+                                                          Optional<Date> deliveryDate) {
         Predicate<Delivery> filters = PREDICATE_SHOW_ALL_DELIVERIES;
 
         if (status.isPresent()) {
