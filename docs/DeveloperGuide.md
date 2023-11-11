@@ -13,8 +13,14 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well }_
+HomeBoss is a software project adapted from the
+[AddressBook-Level3 project](https://se-education.org/addressbook-level3/) created by
+the [SE-EDU initiative](https://se-education.org).
+
+Libraries used in this project:
+* [Jackson](https://github.com/FasterXML/jackson)
+* [JavaFX](https://openjfx.io/)
+* [JUnit5](https://github.com/junit-team/junit5)
 
 ---
 
@@ -117,7 +123,7 @@ call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<box type="info" seamless>
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline reaches the end of diagram.
@@ -1885,8 +1891,12 @@ otherwise)
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
 5. Data stored should be persistent until removal by user, and Private Contact Details should be secure.
-6. The project is expected to adhere to a schedule which delivers a feature set every milestone up to _V1.3_
-7. The application is not expected to
+6. Data should be stored locally.
+7. The GUI should not cause any resolution-related inconveniences to the user for standard screen resolutions of
+   1920x1080 and higher, and should be usable for screen resolutions of 1280x720 and higher.
+8. The application should be packaged into a single JAR file with size not exceeding 100MB.
+9. The project is expected to adhere to a schedule which delivers a feature set every milestone up to _V1.3_
+10. The application is not expected to
     1. Perform Inventory Management
     2. Perform Route Planning
 
@@ -1894,10 +1904,17 @@ _{More to be added}_
 
 ### Glossary
 
-- **Mainstream OS**: Windows, Linux, Unix, OS-X
-- **Private Contact Detail**: A contact detail that is not meant to be shared with others
-- **CLI**: Command Line Interface
-- **Owner**: The customer who owns the home-based business and who uses the app
+| Term                           | Definition                                                                              |
+|--------------------------------|-----------------------------------------------------------------------------------------|
+| Alphanumeric                   | Consisting of only letters and numbers                                                  |
+| Command Line Interface (CLI)   | A text-based user interface used to run programs                                        |
+| Graphical User Interface (GUI) | A visual interface where you can interact with the program through graphical components |
+| JSON                           | Short for JavaScript Object Notation, a lightweight format for storing your data        |
+| Owner                          | The individual who owns the home-based business and who uses the HomeBoss app           |
+| Mainstream OS                  | Windows, Linux, Unix, OS-X                                                              |
+| Parameter                      | Inputs to customise the command to your needs                                           |
+| Prefix                         | Special markers for HomeBoss to understand your inputs                                  |
+| Private Contact Detail         | A contact detail that is not meant to be shared with others                             |
 
 ---
 
@@ -1955,3 +1972,45 @@ testers are expected to do more _exploratory_ testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+---
+
+## **Appendix: Effort**
+
+<br>
+
+### Difficulty level
+
+This project was moderately challenging as we had to deal with a large existing code base.
+It took us some time to understand how the different components interact with each other.
+Furthermore, our team was not familiar with frameworks such as JavaFX prior to this, and we had to learn how to use it.
+
+<br>
+
+### Challenges faced
+
+* Understanding and refactoring the code base
+  * As HomeBoss deals with Customers and Deliveries, we had to refactor `Person` into `Customer`, and irrelevant
+    classes such as `Tag` has to be removed.
+* Creating storage for Deliveries
+  * AB3 deals with only one storage. However, HomeBoss has two storages, one for Customers and one for Deliveries.
+    Furthermore, there is a dependency between the two entities, requiring a new `BookStorageWithReference` 
+    class that accepts two type parameters to be created.
+* Adapting the `PersonListPanel` to `ListPanel`
+  * The `PersonListPanel` was designed to contain a list of `Person`. However, as we decided to display both 
+    `Customer` and `Delivery` in the same list, we had to adapt the `PersonListPanel` to `ListPanel` to 
+    accommodate both types of entities.
+* Figuring out how to implement a secure login/logout system
+  * As one of the feature of HomeBoss is security, we had to figure out and implement the hashing of user password
+    and how to store the data related to the account.
+
+<br>
+
+### Achievements
+
+* Added security feature to prevent unauthorised access to the application.
+* Displaying the list of Customers and list of Deliveries using the same panel.
+* Creating a new storage for Deliveries that has references to Customer.
+* A refreshing look of the UI.
+* New features such as filtering and sorting of deliveries.
+* Increasing code coverage to 83%.

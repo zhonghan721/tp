@@ -29,7 +29,7 @@ public class CustomerListCommand extends CustomerCommand {
 
         model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
 
-        if (model.getFilteredCustomerList().size() == 0) {
+        if (model.getFilteredCustomerListSize() == 0) {
             return new CommandResult(MESSAGE_EMPTY, true);
         }
 

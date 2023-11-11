@@ -37,7 +37,7 @@ With HomeBoss, you can now **focus on what matters most: running your business.*
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.1. [Prerequisites](#prerequisites)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.2. [Installing HomeBoss](#installing-homeboss)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.3. [Understanding our layout](#understanding-our-layout)</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.4. [HomeBoss's Command Format](#homeboss-s-command-format)</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.4. [HomeBoss Command Format](#homeboss-command-format)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.5. [Registering and creating your first Delivery](#registering-and-creating-your-first-delivery)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.6. [Editing the data file](#editing-the-data-file) </br>
 &nbsp;&nbsp;6\. [Feature Summary](#feature-summary)</br>
@@ -126,7 +126,7 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
-**Tip:** Provides you with information that can help enhance your user experience but is not necessary to know.
+**Tip(s):** Provides you with information that can help enhance your user experience but is not necessary to know.
 
 </box>
 
@@ -137,7 +137,7 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
 **Parameter(s):** Parameters are inputs that you can customise to your needs. They are typically preceded by a prefix.
-If you're unsure what a prefix is, you can refer to the [Command Format](#homeboss-s-command-format) section.
+If you're unsure what a prefix is, you can refer to the [Command Format](#homeboss-command-format) section.
 
 </box>
 
@@ -154,7 +154,7 @@ If you're unsure what a prefix is, you can refer to the [Command Format](#homebo
 
 # Getting Started
 
-## Prerequisites
+## <span style="text-decoration:underline; font-size:35px"><strong>Prerequisites</strong></span>
 
 Ensure that you have `Java 11` or above installed on your computer. If you are unsure how to do so you may view
 this
@@ -175,7 +175,9 @@ helpful [guide](https://www.java.com/en/download/help/version_manual.html).
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-## </br>Installing HomeBoss
+<br/>
+
+## <span style="text-decoration:underline; font-size:35px"><strong>Installing HomeBoss</strong></span>
 
 1. You may download the latest release of **HomeBoss**
    from [here](https://github.com/AY2324S1-CS2103T-T13-3/tp/releases/latest).
@@ -204,7 +206,7 @@ files / folders before the application is launched for the first time.
 5. If you are a first time user, we highly recommend reading the following sections to familiarise yourself with
    HomeBoss's layout and commands:
     * [Understanding our layout](#understanding-our-layout) <br/>
-    * [HomeBoss's Command Format](#homeboss-s-command-format) <br/>
+    * [HomeBoss Command Format](#homeboss-command-format) <br/>
     * [Registering and creating your first Delivery](#registering-and-creating-your-first-delivery)
 
 ![HomeBoss Start Page](images/getting-started/register.png)
@@ -213,7 +215,9 @@ files / folders before the application is launched for the first time.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-## <br/>Understanding our layout
+<br/>
+
+## <span style="text-decoration:underline; font-size:35px"><strong>Understanding our layout</strong></span>
 
 Do not worry if the layout looks unfamiliar at first glance. Let's go through a quick run down of HomeBoss's layout
 so that you can familiarise yourself with our various components.
@@ -287,7 +291,9 @@ HomeBoss. You can use the scroll bar on the right to scroll through your Custome
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-## </br>HomeBoss's Command Format
+<br/>
+
+## <span style="text-decoration:underline; font-size:35px"><strong>HomeBoss Command Format</strong></span>
 
 Commands are your main form of interaction with HomeBoss, and is the way to carry out various operations in HomeBoss.
 Don't worry if the commands seem daunting, the HomeBoss team has carefully crafted the commands to be as intuitive
@@ -345,8 +351,7 @@ logout
 * Words in uppercase are parameters that are supplied by you.
 * Parameters that are preceded by a prefix must be supplied after that prefix, e.g. `--name DELIVERY_NAME`{.swift}
   must be given as, for instance, `--name furniture` and not `furniture` or `--name`.
-* Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`
-  can either be `1` or `1 --name furniture`.
+* Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`{.swift} can either be `1` or `1 --name furniture`.
 * However, items that are grouped together in square brackets (`[]`{.swift}) must all be provided together,
   e.g. for `[--password PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift} both `PASSWORD`{.swift} and
   `CONFIRM_PASSWORD`{.swift} must be provided.
@@ -365,7 +370,9 @@ logout
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-## </br>Registering and creating your first Delivery
+<br/>
+
+## <span style="text-decoration:underline; font-size:35px"><strong>Registering and creating your first Delivery</strong></span>
 
 At this juncture, you should already have a good understanding of the basic mechanisms of HomeBoss. Let's now get you
 started on HomeBoss
@@ -420,7 +427,6 @@ found [here](#register).
 * `EXPECTED_DELIVERY_DATE`{.swift} : 2023-12-03
 
 7. Type `delivery add MacBook Pro --customer CUSTOMER_ID --date 2023-12-03`, replacing `CUSTOMER_ID`{.swift}
-
    with Gabriel's ID, and hit enter.
 
 8. A new Delivery should have been added for `Gabriel`, you should see a new Delivery in the Delivery List panel,
@@ -437,17 +443,16 @@ Check them out under the [Features](#features) section to learn more!
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-## </br>Editing the data file
+<br/>
 
-HomeBoss stores your data in a JSON file automatically `[JAR file location]/data/addressbook.json`. Advanced
-users are welcome to update data directly by editing the data file.
+## <span style="text-decoration:underline; font-size:35px"><strong>Editing the data file</strong></span>
+
+HomeBoss stores your data in three JSON files, namely `[JAR file location]/data/authentication.json`, `[JAR file location]/data/addressbook.json` (containing the customer database) and `[JAR file location]/data/deliverybook.json` (containing the delivery database).
+Advanced users are welcome to update the data by editing the data files directly.
 
 <box type="warning" background-color="#f2dede" border-color="#ebccd1" icon=":exclamation:">
 
-**Warning:** If the files are edited and contain invalid data as a result, HomeBoss will discard the entire data file
-and start with an empty data file during the next run. (If the Customer data file contains invalid data, the entire
-Delivery data file will also be deleted. However, if the Delivery data file contains invalid data, the Customer data
-file will remain unaffected.)
+**Warning:** If either the `addressbook.json` or `deliverybook.json` data file is edited and contain invalid data as a result, HomeBoss will discard the entire data file and start with an empty data file on the next application run. (e.g., If `deliverybook.json` contains invalid data, the entire Delivery database will be reset on the next application run. However, if `deliverybook.json` contains invalid data while the `addressbook.json` remains untouched and valid, the Customer database will remain unaffected.)
 
 </box>
 
@@ -462,7 +467,7 @@ file will remain unaffected.)
 Here is a brief introduction to all the features in HomeBoss. For more detailed information, please
 refer to the [Features](#features) section.
 
-## User features summary
+## <span style="text-decoration:underline; font-size:35px"><strong>User features summary</strong></span>
 
 _These are features for managing your user account in HomeBoss._
 
@@ -473,7 +478,9 @@ _These are features for managing your user account in HomeBoss._
 - `logout` - Logs out of your user account.
 - `delete account` - Deletes your user account.
 
-## </br>Customer features summary
+<br/>
+
+## <span style="text-decoration:underline; font-size:35px"><strong>Customer features summary</strong></span>
 
 _These are features for managing your Customers in HomeBoss._
 
@@ -484,7 +491,9 @@ _These are features for managing your Customers in HomeBoss._
 - `customer edit` - Updates the details of an existing Customer in the Customer database.
 - `customer delete` - Deletes the specified Customer from the Customer database.
 
-## </br>Delivery features summary
+<br/>
+
+## <span style="text-decoration:underline; font-size:35px"><strong>Delivery features summary</strong></span>
 
 _These are features for managing your Deliveries in HomeBoss._
 
@@ -497,7 +506,9 @@ _These are features for managing your Deliveries in HomeBoss._
 - `delivery note` - Creates a note for a specified Delivery.
 - `delivery delete` - Deletes the specified Delivery from the Delivery database.
 
-## </br>Miscellaneous features summary
+<br/>
+
+## <span style="text-decoration:underline; font-size:35px"><strong>Miscellaneous features summary</strong></span>
 
 _These are general features in HomeBoss._
 
@@ -529,15 +540,15 @@ You can register for a new user account with HomeBoss by calling this command.
 
 </br>**Format:**
 
-`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
-{.swift}
+
+`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`{.swift}
 
 
 <br/>
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * `USERNAME`{.swift} must be alphanumeric.<br/><br/>
 * `PASSWORD`{.swift} must be at least 8 alphanumeric characters long.<br/><br/>
@@ -562,8 +573,7 @@ You can register for a new user account with HomeBoss by calling this command.
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
 **Tip:** Since only one account can be registered at any one time, if you have already registered an account, you will
-not be able to register another account. If you must, you can delete your current account by using the `delete account`
-{.swift} command [here](#delete-account) before registering a new account.
+not be able to register another account. If you must, you can delete your current account by using the `delete account`{.swift} command [here](#delete-account) before registering a new account.
 </box>
 
 <br/>
@@ -592,7 +602,7 @@ You can log in to your account to access your Customer and Delivery data by call
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * `USERNAME`{.swift} must be alphanumeric.<br/><br/>
 * `PASSWORD`{.swift} must be at least 8 alphanumeric characters long.<br/>
@@ -631,7 +641,7 @@ This command allows you to update your account details, thus enabling greater se
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * At least one of the optional fields must be provided.<br/><br/>
 * `USERNAME`{.swift} must be alphanumeric.<br/><br/>
@@ -682,7 +692,7 @@ secret question (set during account registration) to reset your password and thu
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * If `ANSWER`{.swift} is provided, `NEW_PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} must also be provided and vice
   versa.<br/><br/>
@@ -760,7 +770,7 @@ You can add a new Customer's details into HomeBoss with this command.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * `NAME`{.swift} must be alphanumeric and can contain spaces.<br/><br/>
 * `PHONE_NUMBER`{.swift} must be exactly 8 digits.<br/><br/>
@@ -795,7 +805,7 @@ number, email and address.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):** `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
+**Parameter:** `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
 
   </box>
 
@@ -861,7 +871,7 @@ given keywords.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameter:**
 
 * Each `KEYWORD`{.swift} must be alphanumeric and cannot contain spaces.<br/><br/>
 * If there's more than one `KEYWORD`{.swift}, there has to be a space between each `KEYWORD`{.swift}.<br/>
@@ -893,7 +903,7 @@ that you keyed in the Customer's details wrongly.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * At least one of the optional fields must be provided. <br/><br/>
 * `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer's ID.<br/><br/>
@@ -943,7 +953,7 @@ this deletion!
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):** `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
+**Parameter:** `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
 
 </box>
 
@@ -991,7 +1001,7 @@ Delivery-related commands.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * `DELIVERY_NAME`{.swift} must be alphanumeric and can contain spaces.<br/><br/>
 * `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.<br/><br/>
@@ -1026,7 +1036,7 @@ Customer, Customer ID, address, order date, expected Delivery date and notes (if
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):** `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
+**Parameter:** `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
 
 </box>
 
@@ -1065,13 +1075,14 @@ sorted by expected Delivery date in descending order (latest first).
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
-* `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`.
-* `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
+* `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`. <br/><br/>
+* `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.<br/><br/>
 * `EXPECTED_DELIVERY_DATE`{.swift} must be today or after today's date in yyyy-MM-dd format OR
-  `TODAY` for today’s date.
-* `SORT`{.swift} accepts the following values: `ASC`/`DESC`.
+  `TODAY` for today’s date.<br/><br/>
+* `SORT`{.swift} accepts the following values: `ASC`/`DESC`.<br/><br/>
+* If duplicate prefixes are provided, only the last occurrence of each prefix will be used.<br/>
 
   </box>
 
@@ -1086,8 +1097,10 @@ sorted by expected Delivery date in descending order (latest first).
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
-**Tip:**
-You may combine any of the filter and sort options to get the list of Deliveries that you want.
+**Tips:**
+* You may combine any of the filter and sort options to get the list of Deliveries that you want.<br/><br/>
+* Delivery status is not case sensitive. You can type `created` instead of `CREATED` and it will still work.<br/>
+
 </box>
 
 
@@ -1107,7 +1120,7 @@ whose names has words that exactly match any of the given keywords.
 
 **Note:**
 
-* You must provide at least one alphanumeric keyword to search for the Delivery.<br/><br/>
+* You must provide at least one keyword to search for the Delivery.<br/><br/>
 * You can optionally provide additional keywords. Deliveries that has names matching any of the given keywords will be
   displayed. For example, the keywords `Chocolate` and `Bun` in `Chocolate Bun` will
   display `Chocolate Cake`, `Chocolate Bun`, and `Strawberry Bun`.<br/><br/>
@@ -1125,7 +1138,7 @@ whose names has words that exactly match any of the given keywords.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * Each `KEYWORD`{.swift} must be alphanumeric and cannot contain spaces.<br/><br/>
 * If there's more than one `KEYWORD`{.swift}, there has to be a space between each `KEYWORD`{.swift}.<br/>
@@ -1159,14 +1172,13 @@ in the event that you keyed in the Delivery's details wrongly.
 
 </br>**Format:**
 
-`delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE][--status STATUS] [--note NOTE]`
-{.swift}
+`delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE][--status STATUS] [--note NOTE]`{.swift}
 
 <br/>
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * At least one of the optional fields must be provided.<br/><br/>
 * `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.<br/><br/>
@@ -1195,10 +1207,12 @@ in the event that you keyed in the Delivery's details wrongly.
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
-**Tip:**
+**Tips:**
 
 * If you only want to update the Delivery's status, simply use `delivery status`{.swift} instead. </br><br/>
+* Delivery status is not case sensitive. You can type `created` instead of `CREATED` and it will still work. </br><br/>
 * If you only want to update the Delivery's note, simply use `delivery note`{.swift} instead.<br/>
+  
   </box>
 
 <br/>
@@ -1217,11 +1231,11 @@ your easy tracking.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
-* `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
+* `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.<br/><br/>
 
-* `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`.
+* `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`.<br/>
 
   </box>
 
@@ -1268,7 +1282,7 @@ to using the lengthier `delivery edit`{.swift} command found [here](#update-deta
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery's ID.<br/><br/>
 * `NOTE`{.swift} must be alphanumeric and can contain spaces.<br/>
@@ -1306,7 +1320,7 @@ this command.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):** `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
+**Parameter:** `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
 
 </box>
 
@@ -1324,7 +1338,7 @@ this command.
 
 ### Help
 
-This command allows you view a summary of the commands available, the format of the commands, and a link to this user
+This command allows you to view a summary of the commands available, the format of the commands, and a link to this user
 guide.
 
 <br/>
@@ -1398,11 +1412,11 @@ Proceed with caution!
 
 **Q: Where do I get support for HomeBoss?**
 
-A: You can raise an issue on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-3/tp/issues)<br/><br/>
+A: You can raise an issue on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-3/tp/issues).<br/><br/>
 
 **Q: How do I report a bug?**
 
-A: You can raise a bug report on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-3/tp/issues)<br/><br/>
+A: You can raise a bug report on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-3/tp/issues).<br/><br/>
 
 **Q: How do I import my data from another software?**
 
@@ -1425,7 +1439,7 @@ A: HomeBoss only supports English characters.<br/><br/>
 
 # Command Summary
 
-## User
+## <span style="text-decoration:underline; font-size:35px"><strong>User</strong></span>
 
 | Command  | Format                                                                                                                               | Examples                                                                                                                  |
 |----------|--------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
@@ -1436,9 +1450,9 @@ A: HomeBoss only supports English characters.<br/><br/>
 | Logout   | `logout`{.swift}                                                                                                                     | `logout`                                                                                                                  |
 | Delete   | `delete account`{.swift}                                                                                                             | `delete account`                                                                                                          |
 
-<br>
+<br/>
 
-## Customer
+## <span style="text-decoration:underline; font-size:35px"><strong>Customer</strong></span>
 
 | Command | Format                                                                                                       | Examples                                                                                                         |
 |---------|--------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
@@ -1449,24 +1463,24 @@ A: HomeBoss only supports English characters.<br/><br/>
 | Edit    | `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`{.swift} | `customer edit 1 --name Gabriel --phone 97659320 --email Gabrielrock@gmail.com --address Block 10 Tampines Road` |
 | Delete  | `customer delete CUSTOMER_ID`{.swift}                                                                        | `customer delete 1`                                                                                              |
 
-<br>
+<br/>
 
-## Delivery
+## <span style="text-decoration:underline; font-size:35px"><strong>Delivery</strong></span>
 
-| Command | Format                                                                                                                                                   | Examples                                                                                                                   |
-|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| Add     | `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE`{.swift}                                                                | `delivery add furniture --customer 5 --date 2023-12-03`                                                                    |
-| View    | `delivery view DELIVERY_ID`{.swift}                                                                                                                      | `delivery view 1`                                                                                                          |
-| List    | `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE] [--sort SORT]`{.swift}                                         | `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`                                                |
-| Find    | `delivery find KEYWORD [MORE_KEYWORDS]`{.swift}                                                                                                          | `delivery find Chocolate Bun`                                                                                              |
-| Edit    | `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE] <br/>[--status STATUS] [--note NOTE]`{.swift} | `delivery edit 1 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note Customer changed his mind` |
-| Status  | `delivery status DELIVERY_ID STATUS`{.swift}                                                                                                             | `delivery status 2 completed`                                                                                              |
-| Note    | `delivery note DELIVERY_ID --note NOTE`{.swift}                                                                                                          | `delivery note 1 --note By FedEx`                                                                                          |
-| Delete  | `delivery delete DELIVERY_ID`{.swift}                                                                                                                    | `delivery delete 1`                                                                                                        |
+| Command | Format                                                                                                                                              | Examples                                                                                                                   |
+|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Add     | `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE`{.swift}                                                           | `delivery add furniture --customer 5 --date 2023-12-03`                                                                    |
+| View    | `delivery view DELIVERY_ID`{.swift}                                                                                                                 | `delivery view 1`                                                                                                          |
+| List    | `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE] [--sort SORT]`{.swift}                                    | `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`                                                |
+| Find    | `delivery find KEYWORD [MORE_KEYWORDS]`{.swift}                                                                                                     | `delivery find Chocolate Bun`                                                                                              |
+| Edit    | `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE] [--status STATUS] [--note NOTE]`{.swift} | `delivery edit 1 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note Customer changed his mind` |
+| Status  | `delivery status DELIVERY_ID STATUS`{.swift}                                                                                                        | `delivery status 2 completed`                                                                                              |
+| Note    | `delivery note DELIVERY_ID --note NOTE`{.swift}                                                                                                     | `delivery note 1 --note By FedEx`                                                                                          |
+| Delete  | `delivery delete DELIVERY_ID`{.swift}                                                                                                               | `delivery delete 1`                                                                                                        |
 
-<br>
+<br/>
 
-## Miscellaneous
+## <span style="text-decoration:underline; font-size:35px"><strong>Miscellaneous</strong></span>
 
 | Command | Format          | Examples |
 |---------|-----------------|----------|
@@ -1474,7 +1488,7 @@ A: HomeBoss only supports English characters.<br/><br/>
 | Help    | `help`{.swift}  | `help`   |
 | Clear   | `clear`{.swift} | `clear`  |
 
-<br/>
+<br>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
