@@ -126,7 +126,7 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
-**Tip:** Provides you with information that can help enhance your user experience but is not necessary to know.
+**Tip(s):** Provides you with information that can help enhance your user experience but is not necessary to know.
 
 </box>
 
@@ -547,7 +547,7 @@ You can register for a new user account with HomeBoss by calling this command.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * `USERNAME`{.swift} must be alphanumeric.<br/><br/>
 * `PASSWORD`{.swift} must be at least 8 alphanumeric characters long.<br/><br/>
@@ -599,7 +599,7 @@ You can log in to your account to access your Customer and Delivery data by call
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * `USERNAME`{.swift} must be alphanumeric.<br/><br/>
 * `PASSWORD`{.swift} must be at least 8 alphanumeric characters long.<br/>
@@ -638,7 +638,7 @@ This command allows you to update your account details, thus enabling greater se
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * At least one of the optional fields must be provided.<br/><br/>
 * `USERNAME`{.swift} must be alphanumeric.<br/><br/>
@@ -687,7 +687,7 @@ secret question (set during account registration) to reset your password and thu
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * If `ANSWER`{.swift} is provided, `NEW_PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} must also be provided and vice
   versa.<br/><br/>
@@ -763,7 +763,7 @@ You can add a new Customer's details into HomeBoss with this command.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * `NAME`{.swift} must be alphanumeric and can contain spaces.<br/><br/>
 * `PHONE_NUMBER`{.swift} must be exactly 8 digits.<br/><br/>
@@ -798,7 +798,7 @@ number, email and address.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):** `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
+**Parameter:** `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
 
   </box>
 
@@ -864,7 +864,7 @@ given keywords.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameter:**
 
 * Each `KEYWORD`{.swift} must be alphanumeric and cannot contain spaces.<br/><br/>
 * If there's more than one `KEYWORD`{.swift}, there has to be a space between each `KEYWORD`{.swift}.<br/>
@@ -896,7 +896,7 @@ that you keyed in the Customer's details wrongly.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * At least one of the optional fields must be provided. <br/><br/>
 * `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer's ID.<br/><br/>
@@ -946,7 +946,7 @@ this deletion!
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):** `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
+**Parameter:** `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
 
 </box>
 
@@ -994,7 +994,7 @@ Delivery-related commands.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * `DELIVERY_NAME`{.swift} must be alphanumeric and can contain spaces.<br/><br/>
 * `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.<br/><br/>
@@ -1029,7 +1029,7 @@ Customer, Customer ID, address, order date, expected Delivery date and notes (if
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):** `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
+**Parameter:** `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
 
 </box>
 
@@ -1068,7 +1068,7 @@ sorted by expected Delivery date in descending order (latest first).
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`. <br/><br/>
 * `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.<br/><br/>
@@ -1131,7 +1131,7 @@ whose names has words that exactly match any of the given keywords.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * Each `KEYWORD`{.swift} must be alphanumeric and cannot contain spaces.<br/><br/>
 * If there's more than one `KEYWORD`{.swift}, there has to be a space between each `KEYWORD`{.swift}.<br/>
@@ -1171,7 +1171,7 @@ in the event that you keyed in the Delivery's details wrongly.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * At least one of the optional fields must be provided.<br/><br/>
 * `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.<br/><br/>
@@ -1224,11 +1224,11 @@ your easy tracking.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
-* `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
+* `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.<br/><br/>
 
-* `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`.
+* `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`.<br/>
 
   </box>
 
@@ -1275,7 +1275,7 @@ to using the lengthier `delivery edit`{.swift} command found [here](#update-deta
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):**
+**Parameters:**
 
 * `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery's ID.<br/><br/>
 * `NOTE`{.swift} must be alphanumeric and can contain spaces.<br/>
@@ -1313,7 +1313,7 @@ this command.
 
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
-**Parameter(s):** `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
+**Parameter:** `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
 
 </box>
 
