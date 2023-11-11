@@ -359,7 +359,8 @@ logout
 * Words in uppercase are parameters that are supplied by you.
 * Parameters that are preceded by a prefix must be supplied after that prefix, e.g. `--name DELIVERY_NAME`{.swift}
   must be given as, for instance, `--name furniture` and not `furniture` or `--name`.
-* Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`{.swift}
+* Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`
+  {.swift}
   can either be `1` or `1 --name furniture`.
 * However, items that are grouped together in square brackets (`[]`{.swift}) must all be provided together,
   e.g. for `[--password PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift} both `PASSWORD`{.swift} and
@@ -460,17 +461,21 @@ Check them out under the [Features](#features) section to learn more!
 
 ## <br/><span style="text-decoration:underline; font-size:29px"><strong>Editing the data file</strong></span>
 
-HomeBoss stores your data in three JSON files, namely `[JAR file location]/data/authentication.json`, `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/deliverybook.json`. Advanced
+HomeBoss stores your data in three JSON files,
+namely `[JAR file location]/data/authentication.json`, `[JAR file location]/data/addressbook.json` (containing the
+customer database) and `[JAR file location]/data/deliverybook.json` (containing the delivery database). Advanced
 users are welcome to update the data by editing the data files directly.
 
 <br/>
 
 <box type="warning" background-color="#f2dede" border-color="#ebccd1" icon=":exclamation:">
 
-**Warning:** If the files are edited and contain invalid data as a result, HomeBoss will discard the entire data file
-and start with an empty data file during the next run. (If the Customer data file contains invalid data, the entire
-Delivery data file will also be deleted. However, if the Delivery data file contains invalid data, the Customer data
-file will remain unaffected.)
+**Warning:** If either the `addressbook.json` or `deliverybook.json` data file is edited and contain invalid data as a
+result, HomeBoss will discard the entire data file
+and start with an empty data file on the next application run. (e.g., If `deliverybook.json` contains invalid data, the
+entire
+Delivery database will be reset on the next application run. However, if `deliverybook.json` contains invalid data while
+the `addressbook.json` remains untouched and valid, the Customer database will remain unaffected.)
 
 </box>
 
@@ -554,7 +559,8 @@ You can register for a new user account with HomeBoss by calling this command.
 
 </br>**Format:**
 
-`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`{.swift}
+`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
+{.swift}
 
 
 <br/>
@@ -584,7 +590,8 @@ You can register for a new user account with HomeBoss by calling this command.
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
 **Tip:** Since only one account can be registered at any one time, if you have already registered an account, you will
-not be able to register another account. If you must, you can delete your current account by using the `delete account`{.swift} command [here](#delete-account) before registering a new account.
+not be able to register another account. If you must, you can delete your current account by using the `delete account`
+{.swift} command [here](#delete-account) before registering a new account.
 </box>
 
 <br/>
@@ -1137,6 +1144,7 @@ sorted by expected Delivery date in descending order (latest first).
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
 **Tip:**
+
 * You may combine any of the filter and sort options to get the list of Deliveries that you want. <br/><br/>
 * Delivery status is not case sensitive. You can type `created` instead of `CREATED` and it will still work.<br/>
 
@@ -1215,7 +1223,8 @@ in the event that you keyed in the Delivery's details wrongly.
 
 </br>**Format:**
 
-`delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE][--status STATUS] [--note NOTE]`{.swift}
+`delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE][--status STATUS] [--note NOTE]`
+{.swift}
 
 <br/>
 
