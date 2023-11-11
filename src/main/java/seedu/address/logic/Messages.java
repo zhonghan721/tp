@@ -22,7 +22,7 @@ public class Messages {
     public static final String MESSAGE_CUSTOMERS_MATCHED_LISTED = "%1$d customers listed!";
     public static final String MESSAGE_DELIVERY_LISTED_OVERVIEW = "%1$d deliveries listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS = "Multiple values specified for the following"
-        + "single-valued field(s): ";
+        + " single-valued field(s): ";
     public static final String MESSAGE_USER_NOT_AUTHENTICATED = "Access denied! You are currently not logged in.";
     public static final String MESSAGE_WELCOME = "Welcome to HomeBoss!\n\n" + "You are currently logged out.\n"
         + "Login or register to start using HomeBoss.";
