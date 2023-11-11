@@ -141,6 +141,26 @@ public interface Model {
     void updateFilteredCustomerList(Predicate<Customer> predicate);
 
     /**
+     * Resets the customer list to all customers.
+     */
+    void showAllFilteredCustomerList();
+
+    /**
+     * Returns the number of customers in the filtered customer list.
+     *
+     * @return the number of customers in the filtered customer list.
+     */
+    int getFilteredCustomerListSize();
+
+    /**
+     * Returns true if the filtered customer list is empty.
+     *
+     * @return true if the filtered customer list is empty.
+     */
+    boolean isFilteredCustomerListEmpty();
+
+
+    /**
      * Returns the user prefs' delivery book file path.
      */
     Path getDeliveryBookFilePath();
@@ -201,12 +221,39 @@ public interface Model {
     void setDelivery(Delivery target, Delivery editedDelivery);
 
     /**
+     * Resets the delivery list to show all deliveries.
+     */
+    void showAllFilteredDeliveryList();
+
+    /**
+     * Returns the number of deliveries in the filtered delivery list.
+     *
+     * @return the number of deliveries in the filtered delivery list.
+     */
+    int getFilteredDeliveryListSize();
+
+    /**
+     * Returns true if the filtered delivery list is empty.
+     *
+     * @return true if the filtered delivery list is empty.
+     */
+    boolean isFilteredDeliveryListEmpty();
+
+    /**
+     * Returns the number of deliveries in the sorted delivery list.
+     *
+     * @return the number of deliveries in the sorted delivery list.
+     */
+    boolean isSortedDeliveryListEmpty();
+
+    /**
      * Returns an unmodifiable view of the filtered delivery list
      */
     ObservableList<Delivery> getFilteredDeliveryList();
 
     ObservableList<Delivery> getSortedDeliveryList();
 
+    @Deprecated
     Delivery getDeliveryUsingFilteredList(int id);
 
     /**
