@@ -38,7 +38,6 @@ public class DeliveryListCommandParser implements Parser<DeliveryListCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STATUS, PREFIX_SORT, PREFIX_CUSTOMER_ID, PREFIX_DATE);
-        
         Optional<String> sort = argMultimap.getValue(PREFIX_SORT);
         Optional<String> inputStatus = argMultimap.getValue(PREFIX_STATUS);
         Optional<String> inputCustomerId = argMultimap.getValue(PREFIX_CUSTOMER_ID);
