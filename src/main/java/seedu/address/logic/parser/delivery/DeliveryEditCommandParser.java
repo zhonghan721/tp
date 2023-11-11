@@ -52,6 +52,11 @@ public class DeliveryEditCommandParser implements Parser<DeliveryEditCommand> {
         return new DeliveryEditCommand(index, deliveryEditDescriptor);
     }
 
+    /**
+     * Creates and returns a {@code DeliveryEditDescriptor} based on the given {@code ArgumentMultimap}.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public DeliveryEditDescriptor createDeliveryEditDescriptor(ArgumentMultimap argMultimap) throws ParseException {
 
         DeliveryEditDescriptor deliveryEditDescriptor = new DeliveryEditDescriptor();

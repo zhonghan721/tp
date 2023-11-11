@@ -3,6 +3,8 @@ package seedu.address.logic.commands.delivery;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 
+import java.util.Optional;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -10,8 +12,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
-
-import java.util.Optional;
 
 /**
  * Deletes a delivery identified using it's displayed index from the address book.

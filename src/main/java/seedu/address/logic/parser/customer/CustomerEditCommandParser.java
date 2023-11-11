@@ -47,6 +47,10 @@ public class CustomerEditCommandParser implements Parser<CustomerEditCommand> {
         return new CustomerEditCommand(index, customerEditDescriptor);
     }
 
+    /**
+     * Creates and returns a {@code CustomerEditDescriptor} based on the given {@code ArgumentMultimap}.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public CustomerEditDescriptor createCustomerEditDescriptor(ArgumentMultimap argMultimap) throws ParseException {
 
         CustomerEditDescriptor customerEditDescriptor = new CustomerEditDescriptor();

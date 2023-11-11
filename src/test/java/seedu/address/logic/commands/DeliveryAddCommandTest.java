@@ -85,7 +85,7 @@ public class DeliveryAddCommandTest {
     @Test
     public void execute_invalidDeliveryDate_throwsCommandException() {
         CustomerBuilder personBuilder = new CustomerBuilder();
-        Customer validCustomer = personBuilder.build();
+        Customer validCustomer = personBuilder.withCustomerId(1).build();
 
         ModelStub modelStub = new ModelStubAcceptingDeliveryAdded();
         Delivery validDelivery =
@@ -514,6 +514,11 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
+        public Optional<Customer> getCustomer(int id) {
+         return getAddressBook().getById(id);
+        }
+
+        @Override
         public boolean getUserLoginStatus() {
             return true;
         }
@@ -551,6 +556,7 @@ public class DeliveryAddCommandTest {
             return addressBook;
         }
 
+
         @Override
         public boolean getUserLoginStatus() {
             return false;
@@ -582,6 +588,12 @@ public class DeliveryAddCommandTest {
             AddressBook addressBook = new AddressBook();
             addressBook.addCustomer(validCustomer);
             return addressBook;
+        }
+        @Override
+        public Optional<Customer> getCustomer(int id) {
+            CustomerBuilder personBuilder = new CustomerBuilder();
+            Customer validCustomer = personBuilder.build();
+            return Optional.of(validCustomer);
         }
 
         @Override

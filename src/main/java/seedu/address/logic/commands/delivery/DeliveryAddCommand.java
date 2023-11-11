@@ -16,7 +16,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyBook;
 import seedu.address.model.customer.Customer;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDate;
@@ -100,7 +99,6 @@ public class DeliveryAddCommand extends DeliveryCommand {
 
         int customerId = deliveryAddDescriptor.getCustomerId().get();
 
-
         DeliveryDate deliveryDate = null;
         DeliveryStatus newDeliveryStatus = DeliveryStatus.CREATED;
         LocalDate now = LocalDate.now();
@@ -109,7 +107,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
         Optional<Customer> targetCustomer = model.getCustomer(customerId);
         DeliveryName deliveryName = deliveryAddDescriptor.getDeliveryName().get();
 
-        if (targetCustomer.isEmpty()){
+        if (targetCustomer.isEmpty()) {
             throw new CommandException(MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
         Customer customer = targetCustomer.get();
