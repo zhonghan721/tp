@@ -18,6 +18,7 @@ HomeBoss is a software project adapted from the
 the [SE-EDU initiative](https://se-education.org).
 
 Libraries used in this project:
+
 * [Jackson](https://github.com/FasterXML/jackson)
 * [JavaFX](https://openjfx.io/)
 * [JUnit5](https://github.com/junit-team/junit5)
@@ -897,60 +898,41 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 ### Planned Enhancements
 
-#### User Interface
+1. Currently, when a new customer or a new delivery is created, the ID is guaranteed to be unique among customers and
+   deliveries respectively but may not be generated from the first available ID. We plan to modify the ID generation so
+   that the ID of the new customer or new delivery would be the first available ID from 1 to the maximum integer
+   respectively. Thus, preventing the strange behaviour of the ID not starting from 1 when the data is removed
+   by `clear` or `delete account` or if the data is manually removed.
 
-* The user interface can show two lists views of both customer and delivery lists side by side to allow the user to see
-  both lists at the same time.
+2. Currently, the `find` command for customer would allow special characters to be used to search for the name of a
+   customer. We plan to disallow special characters as a user cannot add special characters to the name of a customer in
+   the first place.
 
-#### Command Format
+3. Currently, you would need to type `delivery list` or `customer list` in order to switch between the two lists which
+   may hinder the user's ability to quickly type commands. We can create two side-by-side list views of both customer
+   and delivery for quicker reference and enable users to make quicker commands.
 
-* Prefixes can be shortened to allow the user to type less. For example, `--name` can be shortened to `-n`.
-* Potentially frequently used commands such as `customer list` and `delivery list` can be shortened to `cl` and `dl`
-  respectively.
+4. Currently, some error messages are not specific enough. Error messages can be made more specific and instructive. For
+   example, if a user enters 2023-02-30, the error message
+   can be "Invalid date. The date entered does not exist.", however the current implementation only states "Dates
+   should be in the format yyyy-MM-dd". Or, if a user enters the incorrect ID, the error should show "Customer ID" or "
+   Delivery ID", however, the current implementation does not specify whether it is for the customer ID or for delivery
+   ID and only states "ID". Or, if a user inputs a negative value or zero for a numerical parameter that requires a
+   positive integer, the error message should be more specific and state "Please enter a positive integer." instead of "
+   Invalid Command Format".
 
-#### Error Messages
+5. Currently, only the user password is the only thing that is hashed in the authentication file. We plan to hash the
+   whole JSON authentication file and the data to prevent unauthorised access to the user's account and data
+   instead of only hashing the user password.
 
-* Error messages for dates would be more specific to allow the user to know what is wrong with the date that they
-  entered. For example, if a user enters 2023-02-30, the error message would be "Invalid date. The date entered does
-  not exist.".
-* Error messages for IDs should specify whether it is for the customer ID or for delivery ID as the current
-  implementation has some error messages that only specifies "ID" instead of "Customer ID" or "Delivery ID".
-* Error messages for numerical parameters that require a positive integer should throw more specific errors for negative
-  values.
-* Error messages would be improved in general to be more informative and instructive.
+6. Currently, you can recover your account while logged in. We plan to disallow the user to recover their account while
+   logged in.
 
-#### User Accounts
+7. Currently, you can put duplicate prefixes for delivery list to filter or sort the deliveries. We plan to disallow
+   duplicate prefixes for delivery list.
 
-* Allow the user to create multiple accounts for different businesses.
-* Allow the user to create multiple accounts for the same business.
-
-#### Security
-
-* The whole JSON authentication file would be encrypted to prevent unauthorised access to the user's account instead of
-  only hashing the user password.
-* The whole delivery and customer data would be encrypted to prevent unauthorised access to the customer and delivery
-  data.
-
-#### ID Generation
-
-* When a new customer or delivery is created, the ID of the customer or delivery would be the first available ID from 1
-  to the maximum integer in the list of customers or deliveries respectively.
-* ID of a new customer and delivery will reset to 1 for customers and deliveries if the user deletes all
-  customers and deliveries using the `clear` command.
-* ID of a new customer and delivery will reset to 1 for customers and deliveries if the user deletes his account.
-
-#### Find Customer Command
-
-* Find command for customer would disallow special characters as a user cannot add special characters to the name of a
-  customer.
-
-#### Delivery Status
-
-* Allow the user to set their own customised delivery status.
-
-#### Enhanced Delivery Address
-
-* Allow tagging by area and region name to delivery address and enable users to filter them accordingly.
+8. Currently, you can filter delivery list by a customer id that does not exist. We plan to disallow filtering delivery
+   list by a customer id that does not exist.
 
 ### Use cases
 
@@ -1990,19 +1972,19 @@ Furthermore, our team was not familiar with frameworks such as JavaFX prior to t
 ### Challenges faced
 
 * Understanding and refactoring the code base
-  * As HomeBoss deals with Customers and Deliveries, we had to refactor `Person` into `Customer`, and irrelevant
-    classes such as `Tag` has to be removed.
+    * As HomeBoss deals with Customers and Deliveries, we had to refactor `Person` into `Customer`, and irrelevant
+      classes such as `Tag` has to be removed.
 * Creating storage for Deliveries
-  * AB3 deals with only one storage. However, HomeBoss has two storages, one for Customers and one for Deliveries.
-    Furthermore, there is a dependency between the two entities, requiring a new `BookStorageWithReference` 
-    class that accepts two type parameters to be created.
+    * AB3 deals with only one storage. However, HomeBoss has two storages, one for Customers and one for Deliveries.
+      Furthermore, there is a dependency between the two entities, requiring a new `BookStorageWithReference`
+      class that accepts two type parameters to be created.
 * Adapting the `PersonListPanel` to `ListPanel`
-  * The `PersonListPanel` was designed to contain a list of `Person`. However, as we decided to display both 
-    `Customer` and `Delivery` in the same list, we had to adapt the `PersonListPanel` to `ListPanel` to 
-    accommodate both types of entities.
+    * The `PersonListPanel` was designed to contain a list of `Person`. However, as we decided to display both
+      `Customer` and `Delivery` in the same list, we had to adapt the `PersonListPanel` to `ListPanel` to
+      accommodate both types of entities.
 * Figuring out how to implement a secure login/logout system
-  * As one of the feature of HomeBoss is security, we had to figure out and implement the hashing of user password
-    and how to store the data related to the account.
+    * As one of the feature of HomeBoss is security, we had to figure out and implement the hashing of user password
+      and how to store the data related to the account.
 
 <br>
 
