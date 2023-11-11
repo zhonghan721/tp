@@ -519,13 +519,14 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
         requireNonNull(predicate);
-        // only shows the delivery list if the user is logged in
-        if (isLoggedIn) {
-            filteredDeliveries.setPredicate(predicate);
-        } else {
+        if (!isLoggedIn) {
             filteredDeliveries.setPredicate(PREDICATE_SHOW_NO_DELIVERIES);
+            return;
         }
 
+        // only shows the delivery list if the user is logged in
+        filteredDeliveries.setPredicate(predicate);
+        
         // Update the sorted list
         this.sortedDeliveries = new SortedList<>(filteredDeliveries);
 
