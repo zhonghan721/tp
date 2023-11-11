@@ -11,13 +11,13 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.customer.Customer;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryName;
 import seedu.address.model.delivery.DeliveryStatus;
 import seedu.address.model.delivery.Note;
 import seedu.address.model.delivery.OrderDate;
-import seedu.address.model.person.Customer;
 
 /**
  * Represents a Command to update DeliveryStatus
@@ -27,10 +27,10 @@ public class DeliveryStatusCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "status";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the status of the delivery identified "
-            + "by the ID of the delivery. Existing status will be overwritten by the input status.\n\n"
-            + "Parameters: ID (must be a integer representing a valid ID) "
-            + "STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED)\n\n"
-            + "Example: " + COMMAND_WORD + " 1 COMPLETED";
+        + "by the ID of the delivery. Existing status will be overwritten by the input status.\n\n"
+        + "Parameters: ID (must be a integer representing a valid ID) "
+        + "STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED)\n\n"
+        + "Example: " + COMMAND_WORD + " 1 COMPLETED";
 
     public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery:\n\n%1$s";
 
@@ -45,6 +45,8 @@ public class DeliveryStatusCommand extends DeliveryCommand {
      */
     public DeliveryStatusCommand(int targetId, DeliveryStatus updatedStatus) {
         requireNonNull(updatedStatus);
+
+        assert targetId > 0;
 
         this.targetId = targetId;
         this.updatedStatus = updatedStatus;
@@ -80,6 +82,7 @@ public class DeliveryStatusCommand extends DeliveryCommand {
      */
     private static Delivery createDeliveryWithNewStatus(Delivery deliveryToEdit, DeliveryStatus newStatus) {
         assert deliveryToEdit != null;
+        assert newStatus != null;
 
         int updatedId = deliveryToEdit.getDeliveryId();
         DeliveryName updatedName = deliveryToEdit.getName();
@@ -91,7 +94,7 @@ public class DeliveryStatusCommand extends DeliveryCommand {
 
 
         return new Delivery(updatedId, updatedName, updatedCustomer, updatedOrderDate,
-                updatedDeliveryDate, updatedStatus, updatedNote);
+            updatedDeliveryDate, updatedStatus, updatedNote);
     }
 
     @Override
@@ -107,14 +110,14 @@ public class DeliveryStatusCommand extends DeliveryCommand {
 
         DeliveryStatusCommand otherStatusCommand = (DeliveryStatusCommand) other;
         return targetId == otherStatusCommand.targetId
-                && updatedStatus.equals(otherStatusCommand.updatedStatus);
+            && updatedStatus.equals(otherStatusCommand.updatedStatus);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetId", targetId)
-                .add("status", updatedStatus)
-                .toString();
+            .add("targetId", targetId)
+            .add("status", updatedStatus)
+            .toString();
     }
 }

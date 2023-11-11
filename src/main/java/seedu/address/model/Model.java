@@ -7,8 +7,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.customer.Customer;
 import seedu.address.model.delivery.Delivery;
-import seedu.address.model.person.Customer;
 import seedu.address.model.user.User;
 import seedu.address.ui.ListItem;
 
@@ -101,7 +101,7 @@ public interface Model {
     /**
      * Returns true if a customer with the same identity as {@code customer} exists in the address book.
      */
-    boolean hasPerson(Customer customer);
+    boolean hasCustomer(Customer customer);
 
     /**
      * Returns true if a customer with the same {@code Phone} as {@code customer} exists in the address book.
@@ -112,33 +112,58 @@ public interface Model {
      * Deletes the given customer.
      * The customer must exist in the address book.
      */
-    void deletePerson(Customer target);
+    void deleteCustomer(Customer target);
 
     /**
      * Adds the given customer.
      * {@code customer} must not already exist in the address book.
      */
-    void addPerson(Customer customer);
+    void addCustomer(Customer customer);
 
     /**
-     * Replaces the given customer {@code target} with {@code editedPerson}.
+     * Replaces the given customer {@code target} with {@code editedCustomer}.
      * {@code target} must exist in the address book.
-     * The customer identity of {@code editedPerson} must not be the same
+     * The customer identity of {@code editedCustomer} must not be the same
      * as another existing customer in the address book.
      */
-    void setPerson(Customer target, Customer editedCustomer);
+    void setCustomer(Customer target, Customer editedCustomer);
 
     /**
      * Returns an unmodifiable view of the filtered customer list
      */
-    ObservableList<Customer> getFilteredPersonList();
+    ObservableList<Customer> getFilteredCustomerList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered customer list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Customer> predicate);
+    void updateFilteredCustomerList(Predicate<Customer> predicate);
+
+    /**
+     * Resets the customer list to all customers.
+     */
+    void showAllFilteredCustomerList();
+
+    /**
+     * Resets the customer list to show no customers.
+     */
+    void clearFilteredCustomerList();
+
+    /**
+     * Returns the number of customers in the filtered customer list.
+     *
+     * @return the number of customers in the filtered customer list.
+     */
+    int getFilteredCustomerListSize();
+
+    /**
+     * Returns true if the filtered customer list is empty.
+     *
+     * @return true if the filtered customer list is empty.
+     */
+    boolean isFilteredCustomerListEmpty();
+
 
     /**
      * Returns the user prefs' delivery book file path.
@@ -201,12 +226,44 @@ public interface Model {
     void setDelivery(Delivery target, Delivery editedDelivery);
 
     /**
+     * Resets the delivery list to show all deliveries.
+     */
+    void showAllFilteredDeliveryList();
+
+    /**
+     * Resets the delivery list to show no deliveries.
+     */
+    void clearFilteredDeliveryList();
+
+    /**
+     * Returns the number of deliveries in the filtered delivery list.
+     *
+     * @return the number of deliveries in the filtered delivery list.
+     */
+    int getFilteredDeliveryListSize();
+
+    /**
+     * Returns true if the filtered delivery list is empty.
+     *
+     * @return true if the filtered delivery list is empty.
+     */
+    boolean isFilteredDeliveryListEmpty();
+
+    /**
+     * Returns the number of deliveries in the sorted delivery list.
+     *
+     * @return the number of deliveries in the sorted delivery list.
+     */
+    boolean isSortedDeliveryListEmpty();
+
+    /**
      * Returns an unmodifiable view of the filtered delivery list
      */
     ObservableList<Delivery> getFilteredDeliveryList();
 
     ObservableList<Delivery> getSortedDeliveryList();
 
+    @Deprecated
     Delivery getDeliveryUsingFilteredList(int id);
 
     /**

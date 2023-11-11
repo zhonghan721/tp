@@ -27,9 +27,9 @@ public class CustomerListCommand extends CustomerCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
 
-        if (model.getFilteredPersonList().size() == 0) {
+        if (model.getFilteredCustomerListSize() == 0) {
             return new CommandResult(MESSAGE_EMPTY, true);
         }
 
