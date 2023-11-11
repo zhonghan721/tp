@@ -39,7 +39,7 @@ public class CustomerViewCommandTest {
 
     @Test
     public void execute_invalidTargetId_throwsCommandException() {
-        CustomerViewCommand customerViewCommand = new CustomerViewCommand(model.getFilteredCustomerList().size() + 1);
+        CustomerViewCommand customerViewCommand = new CustomerViewCommand(model.getFilteredCustomerListSize() + 1);
         assertCommandFailure(customerViewCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }
 
@@ -53,7 +53,7 @@ public class CustomerViewCommandTest {
     @Test
     public void execute_invalidTargetIdLoggedOut_throwsCommandException() {
         model.setLogoutSuccess();
-        CustomerViewCommand customerViewCommand = new CustomerViewCommand(model.getFilteredCustomerList().size() + 1);
+        CustomerViewCommand customerViewCommand = new CustomerViewCommand(model.getFilteredCustomerListSize() + 1);
         assertCommandFailure(customerViewCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
