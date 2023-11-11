@@ -4,12 +4,12 @@
 
 # Introduction
 
-HomeBoss is a powerful desktop application designed specifically for **home-based business owners**, offering 
-**efficient Customer and Delivery management solutions**. With HomeBoss, you can streamline your administrative 
+HomeBoss is a powerful desktop application designed specifically for **home-based business owners**, offering
+**efficient Customer and Delivery management solutions**. With HomeBoss, you can streamline your administrative
 processes and elevate your overall business experience to new heights.
 
 With our application, you will be able to:
- 
+
 * Keep track of the details of your Customers and Deliveries
 * Search for a particular Customer / Delivery easily
 * Organise your data in a neat and tidy manner by filtering and sorting to your needs </br>
@@ -154,7 +154,7 @@ If you're unsure what a prefix is, you can refer to the [Command Format](#homebo
 
 # Getting Started
 
-## Prerequisites
+## <span style="text-decoration:underline; font-size:29px"><strong>Prerequisites</strong></span>
 
 Ensure that you have `Java 11` or above installed on your computer. If you are unsure how to do so you may view
 this
@@ -177,7 +177,7 @@ helpful [guide](https://www.java.com/en/download/help/version_manual.html).
 
 <div style="page-break-after: always;"></div>
 
-## </br>Installing HomeBoss
+## </br><span style="text-decoration:underline; font-size:29px"><strong>Installing HomeBoss</strong></span>
 
 1. You may download the latest release of **HomeBoss**
    from [here](https://github.com/AY2324S1-CS2103T-T13-3/tp/releases/latest).
@@ -219,7 +219,7 @@ files / folders before the application is launched for the first time.
 
 <div style="page-break-after: always;"></div>
 
-## <br/>Understanding our layout
+## </br><span style="text-decoration:underline; font-size:29px"><strong>Understanding our layout</strong></span>
 
 Do not worry if the layout looks unfamiliar at first glance. Let's go through a quick run down of HomeBoss's layout
 so that you can familiarise yourself with our various components.
@@ -289,7 +289,6 @@ HomeBoss. You can use the scroll bar on the right to scroll through your Custome
 
 * The `ID`{.swift}s generated are guaranteed to be unique but may not be consecutive and may not start from 1.<br/>
 
-
 ![Command Result FeedBack](images/getting-started/delivery_card.png){style="display: block; margin: 0 auto;"}
 
 </box>
@@ -300,7 +299,7 @@ HomeBoss. You can use the scroll bar on the right to scroll through your Custome
 
 <div style="page-break-after: always;"></div>
 
-## </br>HomeBoss's Command Format
+## </br><span style="text-decoration:underline; font-size:29px"><strong>HomeBoss Command Format</strong></span>
 
 Commands are your main form of interaction with HomeBoss, and is the way to carry out various operations in HomeBoss.
 Don't worry if the commands seem daunting, the HomeBoss team has carefully crafted the commands to be as intuitive
@@ -354,18 +353,19 @@ logout
 
 **Note**:
 
-* If Customer ID or Delivery ID is specified in the command, it must be a positive integer for the Command Format to be considered valid.
+* If Customer ID or Delivery ID is specified in the command, it must be a positive integer for the Command Format to be
+  considered valid.
 * A Command Phrase is made up of keywords or short phrases that are unique to each Command.
 * Words in uppercase are parameters that are supplied by you.
 * Parameters that are preceded by a prefix must be supplied after that prefix, e.g. `--name DELIVERY_NAME`{.swift}
   must be given as, for instance, `--name furniture` and not `furniture` or `--name`.
 * Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`
-can either be `1` or `1 --name furniture`.
+  can either be `1` or `1 --name furniture`.
 * However, items that are grouped together in square brackets (`[]`{.swift}) must all be provided together,
   e.g. for `[--password PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift} both `PASSWORD`{.swift} and
   `CONFIRM_PASSWORD`{.swift} must be provided.
 * Extraneous parameters for commands without parameters, like `customer list`{.swift} or `clear`{.swift}
-, will be disregarded, as seen in examples such as `customer list 123`.
+  , will be disregarded, as seen in examples such as `customer list 123`.
 * Parameters that have `...`{.swift} as a postfix can be given one or more times, e.g. `KEYWORDS...`{.swift} can be
   given as `Keyword` or `Keyword AnotherKeyword`.
 * **Command Phrase** and **Prefixes** are **case-sensitive**! e.g. `clear`{.swift} is a valid command word but
@@ -381,7 +381,7 @@ can either be `1` or `1 --name furniture`.
 
 <div style="page-break-after: always;"></div>
 
-## </br>Registering and creating your first Delivery
+## <br/><span style="text-decoration:underline; font-size:29px"><strong>Registering and creating your first Delivery</strong></span>
 
 At this juncture, you should already have a good understanding of the basic mechanisms of HomeBoss. Let's now get you
 started on HomeBoss
@@ -458,10 +458,12 @@ Check them out under the [Features](#features) section to learn more!
 
 <div style="page-break-after: always;"></div>
 
-## </br>Editing the data file
+## <br/><span style="text-decoration:underline; font-size:29px"><strong>Editing the data file</strong></span>
 
 HomeBoss stores your data in a JSON file automatically `[JAR file location]/data/addressbook.json`. Advanced
 users are welcome to update data directly by editing the data file.
+
+<br/>
 
 <box type="warning" background-color="#f2dede" border-color="#ebccd1" icon=":exclamation:">
 
@@ -483,7 +485,7 @@ file will remain unaffected.)
 Here is a brief introduction to all the features in HomeBoss. For more detailed information, please
 refer to the [Features](#features) section.
 
-## User features summary
+## <span style="text-decoration:underline; font-size:29px"><strong>User features summary</strong></span>
 
 _These are features for managing your user account in HomeBoss._
 
@@ -494,7 +496,7 @@ _These are features for managing your user account in HomeBoss._
 - `logout` - Logs out of your user account.
 - `delete account` - Deletes your user account.
 
-## </br>Customer features summary
+## </br><span style="text-decoration:underline; font-size:29px"><strong>Customer features summary</strong></span>
 
 _These are features for managing your Customers in HomeBoss._
 
@@ -505,7 +507,7 @@ _These are features for managing your Customers in HomeBoss._
 - `customer edit` - Updates the details of an existing Customer in the Customer database.
 - `customer delete` - Deletes the specified Customer from the Customer database.
 
-## </br>Delivery features summary
+## <br/><span style="text-decoration:underline; font-size:29px"><strong>Delivery features summary</strong></span>
 
 _These are features for managing your Deliveries in HomeBoss._
 
@@ -520,14 +522,13 @@ _These are features for managing your Deliveries in HomeBoss._
 
 <div style="page-break-after: always;"></div>
 
-## </br>Miscellaneous features summary
+## </br><span style="text-decoration:underline; font-size:29px"><strong>Miscellaneous features summary</strong></span>
 
 _These are general features in HomeBoss._
 
 - `exit` - Exits the program.
 - `help` - Shows a list of commands and their usage.
 - `clear` - Clears both Customer and Delivery database.
-
 
 <br/>
 
@@ -553,10 +554,7 @@ You can register for a new user account with HomeBoss by calling this command.
 
 </br>**Format:**
 
-
- 
-`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
-{.swift}
+`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`{.swift}
 
 
 <br/>
@@ -586,8 +584,7 @@ You can register for a new user account with HomeBoss by calling this command.
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
 **Tip:** Since only one account can be registered at any one time, if you have already registered an account, you will
-not be able to register another account. If you must, you can delete your current account by using the `delete account`
-{.swift} command [here](#delete-account) before registering a new account.
+not be able to register another account. If you must, you can delete your current account by using the `delete account`{.swift} command [here](#delete-account) before registering a new account.
 </box>
 
 <br/>
@@ -861,7 +858,7 @@ This command allows you to view a list of all the Customers that you have added 
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
-**Tip:** You can frequently use this command together with `delivery list`{.swift} to switch between the two lists.
+**Tip:** You can use this command together with `delivery list`{.swift} to switch between the two lists.
 
 </box>
 
@@ -1050,11 +1047,9 @@ Delivery-related commands.
 
 * `delivery add Chocolate Cake --customer 1 --date 2023-12-12` </br>
 
-
-  Adds a Delivery with the name `Chocolate Cake` for the Customer with ID `1`. The expected Delivery date is set
-  to `2023-12-12`, the order date is automatically set to today's date, the Delivery status is initialised to `CREATED`,
-  and the Delivery address is the same as the Customer's address.
-
+Adds a Delivery with the name `Chocolate Cake` for the Customer with ID `1`. The expected Delivery date is set
+to `2023-12-12`, the order date is automatically set to today's date, the Delivery status is initialised to `CREATED`,
+and the Delivery address is the same as the Customer's address.
 
 ![](images/ug/delivery_add.png)
 
@@ -1197,7 +1192,6 @@ whose names has words that exactly match any of the given keywords.
 
   Finds all Deliveries whose name has words that exactly match `Gambes` or `Banana`.
 
-
 ![](images/ug/delivery_find.png)
 
 <br/>
@@ -1221,8 +1215,7 @@ in the event that you keyed in the Delivery's details wrongly.
 
 </br>**Format:**
 
-`delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE][--status STATUS] [--note NOTE]`
-{.swift}
+`delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE][--status STATUS] [--note NOTE]`{.swift}
 
 <br/>
 
@@ -1255,7 +1248,6 @@ in the event that you keyed in the Delivery's details wrongly.
   Edits the name of the Delivery, with Delivery ID of `2`, to `Vanilla Cake` and edits the Customer of the
   Delivery to the Customer with ID of `3`.
 
-
 <br/>
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
@@ -1287,9 +1279,8 @@ your easy tracking.
 **Parameter(s):**
 
 * `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
- 
-* `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`.
 
+* `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`.
 
   </box>
 
@@ -1474,11 +1465,11 @@ Proceed with caution!
 
 **Q: Where do I get support for HomeBoss?**
 
-A: You can raise an issue on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-3/tp/issues)<br/><br/>
+A: You can raise an issue on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-3/tp/issues).<br/><br/>
 
 **Q: How do I report a bug?**
 
-A: You can raise a bug report on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-3/tp/issues)<br/><br/>
+A: You can raise a bug report on our [GitHub repository](https://github.com/AY2324S1-CS2103T-T13-3/tp/issues).<br/><br/>
 
 **Q: How do I import my data from another software?**
 
@@ -1501,7 +1492,7 @@ A: HomeBoss only supports English characters.<br/><br/>
 
 # Command Summary
 
-## User
+## <span style="text-decoration:underline; font-size:29px"><strong>User</strong></span>
 
 | Command  | Format                                                                                                                               | Examples                                                                                                                  |
 |----------|--------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
@@ -1512,9 +1503,9 @@ A: HomeBoss only supports English characters.<br/><br/>
 | Logout   | `logout`{.swift}                                                                                                                     | `logout`                                                                                                                  |
 | Delete   | `delete account`{.swift}                                                                                                             | `delete account`                                                                                                          |
 
-<div style="page-break-after: always;"></div><br/>
+<div style="page-break-after: always;"></div>
 
-## Customer
+## </br><span style="text-decoration:underline; font-size:29px"><strong>Customer</strong></span>
 
 | Command | Format                                                                                                       | Examples                                                                                                         |
 |---------|--------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
@@ -1525,24 +1516,24 @@ A: HomeBoss only supports English characters.<br/><br/>
 | Edit    | `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`{.swift} | `customer edit 1 --name Gabriel --phone 97659320 --email Gabrielrock@gmail.com --address Block 10 Tampines Road` |
 | Delete  | `customer delete CUSTOMER_ID`{.swift}                                                                        | `customer delete 1`                                                                                              |
 
-<div style="page-break-after: always;"></div><br/>
+<div style="page-break-after: always;"></div>
 
-## Delivery
+## <br/><span style="text-decoration:underline; font-size:29px"><strong>Delivery</strong></span>
 
-| Command | Format                                                                                                                                                   | Examples                                                                                                                   |
-|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| Add     | `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE`{.swift}                                                                | `delivery add furniture --customer 5 --date 2023-12-03`                                                                    |
-| View    | `delivery view DELIVERY_ID`{.swift}                                                                                                                      | `delivery view 1`                                                                                                          |
-| List    | `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE] [--sort SORT]`{.swift}                                         | `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`                                                |
-| Find    | `delivery find KEYWORD [MORE_KEYWORDS]`{.swift}                                                                                                          | `delivery find Chocolate Bun`                                                                                              |
-| Edit    | `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE] <br/>[--status STATUS] [--note NOTE]`{.swift} | `delivery edit 1 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note Customer changed his mind` |
-| Status  | `delivery status DELIVERY_ID STATUS`{.swift}                                                                                                             | `delivery status 2 completed`                                                                                              |
-| Note    | `delivery note DELIVERY_ID --note NOTE`{.swift}                                                                                                          | `delivery note 1 --note By FedEx`                                                                                          |
-| Delete  | `delivery delete DELIVERY_ID`{.swift}                                                                                                                    | `delivery delete 1`                                                                                                        |
+| Command | Format                                                                                                                                              | Examples                                                                                                                   |
+|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Add     | `delivery add DELIVERY_NAME --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE`{.swift}                                                           | `delivery add furniture --customer 5 --date 2023-12-03`                                                                    |
+| View    | `delivery view DELIVERY_ID`{.swift}                                                                                                                 | `delivery view 1`                                                                                                          |
+| List    | `delivery list [--status STATUS] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE] [--sort SORT]`{.swift}                                    | `delivery list --status created --customer 1 --date 2023-12-12 --sort desc`                                                |
+| Find    | `delivery find KEYWORD [MORE_KEYWORDS]`{.swift}                                                                                                     | `delivery find Chocolate Bun`                                                                                              |
+| Edit    | `delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE] [--status STATUS] [--note NOTE]`{.swift} | `delivery edit 1 --name Chocolate Cake --customer 2 --date 2024-12-12 --status CANCELLED --note Customer changed his mind` |
+| Status  | `delivery status DELIVERY_ID STATUS`{.swift}                                                                                                        | `delivery status 2 completed`                                                                                              |
+| Note    | `delivery note DELIVERY_ID --note NOTE`{.swift}                                                                                                     | `delivery note 1 --note By FedEx`                                                                                          |
+| Delete  | `delivery delete DELIVERY_ID`{.swift}                                                                                                               | `delivery delete 1`                                                                                                        |
 
-<div style="page-break-after: always;"></div><br/>
+<div style="page-break-after: always;"></div>
 
-## Miscellaneous
+## <br/><span style="text-decoration:underline; font-size:29px"><strong>Miscellaneous</strong></span>
 
 | Command | Format          | Examples |
 |---------|-----------------|----------|
