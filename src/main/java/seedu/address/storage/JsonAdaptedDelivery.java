@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -57,6 +59,8 @@ class JsonAdaptedDelivery {
      * Converts a given {@code Delivery} into this class for Jackson use.
      */
     public JsonAdaptedDelivery(Delivery source) {
+        requireNonNull(source);
+
         deliveryId = String.valueOf(source.getDeliveryId());
         name = source.getName().deliveryName;
         customerId = String.valueOf(source.getCustomer().getCustomerId());
@@ -72,7 +76,9 @@ class JsonAdaptedDelivery {
      * @throws IllegalValueException if there were any data constraints violated in the adapted delivery.
      */
     public Delivery toModelType(Optional<ReadOnlyBook<Customer>> customerBook) throws IllegalValueException {
+        requireNonNull(customerBook);
 
+        // Name
         if (name == null) {
             throw new IllegalValueException(
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryName.class.getSimpleName()));
@@ -82,6 +88,7 @@ class JsonAdaptedDelivery {
         }
         final DeliveryName modelName = new DeliveryName(name);
 
+        // Customer
         if (customerId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Customer ID"));
         }
@@ -92,8 +99,7 @@ class JsonAdaptedDelivery {
         try {
             customerIdInt = Integer.parseInt(customerId);
         } catch (NumberFormatException e) {
-            throw new IllegalValueException("Customer ID should only contain numbers, "
-                + "and it should be at most 3 digits long");
+            throw new IllegalValueException("Customer ID should only contain numbers");
         }
         Optional<Customer> c = customerBook.get().getById(customerIdInt);
         if (c.isEmpty()) {
@@ -101,20 +107,20 @@ class JsonAdaptedDelivery {
         }
         final Customer modelCustomer = c.get();
 
+        // Order Date
         if (orderDate == null) {
             throw new IllegalValueException(
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, OrderDate.class.getSimpleName()));
         }
-
         if (!OrderDate.isValidDate(orderDate)) {
             throw new IllegalValueException(OrderDate.MESSAGE_CONSTRAINTS);
         }
-
         if (!OrderDate.isPastDate(orderDate)) {
             throw new IllegalValueException(Messages.MESSAGE_INVALID_ORDER_DATE);
         }
         final OrderDate modelOrderDate = new OrderDate(orderDate);
 
+        // Expected Delivery Date
         if (deliveryDate == null) {
             throw new IllegalValueException(
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryDate.class.getSimpleName()));
@@ -124,6 +130,7 @@ class JsonAdaptedDelivery {
         }
         final DeliveryDate modelDeliveryDate = new DeliveryDate(deliveryDate);
 
+        // Delivery Status
         if (status == null) {
             throw new IllegalValueException(
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryStatus.class.getSimpleName()));
@@ -133,6 +140,7 @@ class JsonAdaptedDelivery {
         }
         final DeliveryStatus modelDeliveryStatus = DeliveryStatus.valueOf(status);
 
+        // Delivery Note
         final Note modelNote;
         if (note != null) {
             if (!Note.isValid(note)) {
@@ -143,7 +151,7 @@ class JsonAdaptedDelivery {
             modelNote = null;
         }
 
-        // For customers without customerId
+        // For deliveries without deliveryId
         if (deliveryId == null) {
             return new Delivery(
                 modelName,
@@ -159,12 +167,11 @@ class JsonAdaptedDelivery {
         try {
             modelDeliveryId = Integer.parseInt(deliveryId);
         } catch (NumberFormatException e) {
-            throw new IllegalValueException("Delivery ID should only contain numbers, "
-                + "and it should be at most 3 digits long");
+            throw new IllegalValueException("Delivery ID should only contain numbers");
         }
 
-        if (modelDeliveryId < 0) {
-            throw new IllegalValueException("Delivery ID should be a non-negative number");
+        if (modelDeliveryId <= 0) {
+            throw new IllegalValueException("Delivery ID must be an integer more than 0.");
         }
 
         return new Delivery(

@@ -52,9 +52,11 @@ public class UserDeleteCommand extends Command {
 
         // No user to delete
         if (storedUser.isEmpty()) {
+            logger.warning("No user to delete.\n");
             throw new CommandException(MESSAGE_NO_ACCOUNT);
         }
 
+        logger.info("User to delete found.\n");
         assert storedUser.isPresent() : "User should be present.";
 
         model.deleteUser();

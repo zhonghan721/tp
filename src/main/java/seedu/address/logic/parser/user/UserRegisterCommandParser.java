@@ -44,7 +44,7 @@ public class UserRegisterCommandParser implements Parser<UserRegisterCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM,
                 PREFIX_SECRET_QUESTION, PREFIX_ANSWER)
-                || !argMultimap.preambleIsEmpty()) {
+                || !argMultimap.isEmptyPreamble()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UserRegisterCommand.MESSAGE_USAGE));
         }
 

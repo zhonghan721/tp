@@ -3,9 +3,9 @@ package seedu.address.logic.commands.user;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -33,6 +33,7 @@ public class UserLoginCommand extends Command {
 
     public static final String MESSAGE_NO_REGISTERED_ACCOUNT_FOUND = "No registered account found.\n\n"
             + "Please register an account first.\n\n" + UserRegisterCommand.MESSAGE_USAGE;
+    private static final Logger logger = Logger.getLogger(UserLoginCommand.class.getName());
 
     private final User user;
 
@@ -54,25 +55,29 @@ public class UserLoginCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing UserLoginCommand: user " + user.getUsername());
 
         Optional<User> storedUser = model.getStoredUser();
         // Check if there is a stored user
         if (storedUser.isEmpty()) {
+            logger.warning("No registered account found!");
             throw new CommandException(MESSAGE_NO_REGISTERED_ACCOUNT_FOUND);
         }
 
         // Logged in user cannot login again
         if (model.getUserLoginStatus()) {
+            logger.warning("User is already logged in!");
             throw new CommandException(MESSAGE_ALREADY_LOGGED_IN);
         }
 
         // Check if the user matches the user loaded in model
         if (!model.userMatches(user)) {
+            logger.warning("User credentials does not match!");
             throw new CommandException(MESSAGE_WRONG_CREDENTIALS);
         }
 
         model.setLoginSuccess();
-        model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        model.showAllFilteredCustomerList();
         return new CommandResult(MESSAGE_SUCCESS, true);
     }
 

@@ -49,7 +49,8 @@ public class DeliveryStatusCommandTest {
     @Test
     public void execute_invalidTargetId_throwsCommandException() {
         DeliveryStatus deliveryStatus = DeliveryStatus.COMPLETED;
-        DeliveryStatusCommand deliveryStatusCommand = new DeliveryStatusCommand(-1, deliveryStatus);
+        Model m = model;
+        DeliveryStatusCommand deliveryStatusCommand = new DeliveryStatusCommand(Integer.MAX_VALUE, deliveryStatus);
         assertCommandFailure(deliveryStatusCommand, model, Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
     }
 
@@ -67,7 +68,8 @@ public class DeliveryStatusCommandTest {
     public void execute_invalidTargetIdLoggedOut_throwsCommandException() {
         model.setLogoutSuccess();
         DeliveryStatus deliveryStatus = DeliveryStatus.COMPLETED;
-        DeliveryStatusCommand deliveryStatusCommand = new DeliveryStatusCommand(-1, deliveryStatus);
+        DeliveryStatusCommand deliveryStatusCommand =
+            new DeliveryStatusCommand(Integer.MAX_VALUE, deliveryStatus);
         assertCommandFailure(deliveryStatusCommand, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 

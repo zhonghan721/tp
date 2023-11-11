@@ -100,6 +100,7 @@ public class UserRegisterCommand extends Command {
         // Throws exception is user already has an account
         // Only one user account is allowed
         if (storedUser.isPresent()) {
+            logger.warning("User already has an account.\n");
             User currentStoredUser = storedUser.get();
             Username username = currentStoredUser.getUsername();
             String outputMessage = String.format(MESSAGE_ALREADY_HAVE_ACCOUNT, username);

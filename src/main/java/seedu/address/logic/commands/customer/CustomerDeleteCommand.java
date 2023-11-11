@@ -73,6 +73,7 @@ public class CustomerDeleteCommand extends CustomerCommand {
 
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
+            logger.warning("User is not logged in.\n");
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
@@ -80,6 +81,7 @@ public class CustomerDeleteCommand extends CustomerCommand {
         Optional<Customer> customerToDelete = model.getCustomer(referenceCustomerID);
 
         if (customerToDelete.isEmpty()) {
+            logger.warning("Customer to be deleted does not exist.\n");
             throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
 

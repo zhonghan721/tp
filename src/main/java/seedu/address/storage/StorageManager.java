@@ -77,11 +77,16 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveAddressBook(ReadOnlyBook<Customer> addressBook) throws IOException {
+        assert addressBook != null;
+
         saveAddressBook(addressBook, addressBookStorage.getBookFilePath());
     }
 
     @Override
     public void saveAddressBook(ReadOnlyBook<Customer> addressBook, Path filePath) throws IOException {
+        assert addressBook != null;
+        assert filePath != null;
+
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveBook(addressBook, filePath);
     }
@@ -105,17 +110,24 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlyBook<Delivery>> readDeliveryBook(Path filePath) throws DataLoadingException {
+        assert filePath != null;
+
         logger.fine("Attempting to read data from file: " + filePath);
         return deliveryBookStorage.readBook(filePath);
     }
 
     @Override
     public void saveDeliveryBook(ReadOnlyBook<Delivery> deliveryBook) throws IOException {
+        assert deliveryBook != null;
+
         saveDeliveryBook(deliveryBook, deliveryBookStorage.getBookFilePath());
     }
 
     @Override
     public void saveDeliveryBook(ReadOnlyBook<Delivery> deliveryBook, Path filePath) throws IOException {
+        assert deliveryBook != null;
+        assert filePath != null;
+
         logger.fine("Attempting to write to data file: " + filePath);
         deliveryBookStorage.saveBook(deliveryBook, filePath);
     }

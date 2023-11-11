@@ -114,6 +114,7 @@ public class UserRecoverAccountCommand extends Command {
 
         // ensure that the user has an account to recover
         if (storedUser.isEmpty()) {
+            logger.warning("No user to recover.\n");
             throw new CommandException(UserDeleteCommand.MESSAGE_NO_ACCOUNT);
         }
 
@@ -133,6 +134,7 @@ public class UserRecoverAccountCommand extends Command {
         // this check has to be done after isShowSecretQuestion is checked
         // because if isShowSecretQuestion is true, then the user has not provided the answer yet
         if (!currentStoredUser.checkAnswerEquals(answer)) {
+            logger.warning("Wrong answer to secret question.\n");
             throw new CommandException(MESSAGE_WRONG_ANSWER);
         }
 

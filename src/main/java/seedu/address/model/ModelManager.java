@@ -273,6 +273,14 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Resets the customer list to show no customers.
+     */
+    @Override
+    public void clearFilteredCustomerList() {
+        updateFilteredCustomerList(PREDICATE_SHOW_NO_CUSTOMERS);
+    }
+
+    /**
      * Returns the number of customers in the filtered customer list.
      *
      * @return the number of customers in the filtered customer list.
@@ -453,6 +461,14 @@ public class ModelManager implements Model {
     @Override
     public void showAllFilteredDeliveryList() {
         updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+    }
+
+    /**
+     * Resets the delivery list to show no deliveries.
+     */
+    @Override
+    public void clearFilteredDeliveryList() {
+        updateFilteredDeliveryList(PREDICATE_SHOW_NO_DELIVERIES);
     }
 
     /**

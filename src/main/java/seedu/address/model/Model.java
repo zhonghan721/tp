@@ -138,6 +138,11 @@ public interface Model {
     void showAllFilteredCustomerList();
 
     /**
+     * Resets the customer list to show no customers.
+     */
+    void clearFilteredCustomerList();
+
+    /**
      * Returns the number of customers in the filtered customer list.
      *
      * @return the number of customers in the filtered customer list.
@@ -216,6 +221,11 @@ public interface Model {
      * Resets the delivery list to show all deliveries.
      */
     void showAllFilteredDeliveryList();
+
+    /**
+     * Resets the delivery list to show no deliveries.
+     */
+    void clearFilteredDeliveryList();
 
     /**
      * Returns the number of deliveries in the filtered delivery list.

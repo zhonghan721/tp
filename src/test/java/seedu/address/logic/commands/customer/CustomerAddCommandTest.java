@@ -212,6 +212,14 @@ public class CustomerAddCommandTest {
         }
 
         /**
+         * Resets the customer list to show no customers.
+         */
+        @Override
+        public void clearFilteredCustomerList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
          * Returns the number of customers in the filtered customer list.
          *
          * @return the number of customers in the filtered customer list.
@@ -286,6 +294,14 @@ public class CustomerAddCommandTest {
          */
         @Override
         public void showAllFilteredDeliveryList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Resets the delivery list to show no deliveries.
+         */
+        @Override
+        public void clearFilteredDeliveryList() {
             throw new AssertionError("This method should not be called.");
         }
 

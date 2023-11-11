@@ -41,7 +41,7 @@ public class UserRecoverAccountCommandParser implements Parser<UserRecoverAccoun
 
         // if not viewing secret question, then all prefixes must be present
         if (!arePrefixesPresent(argMultimap, PREFIX_ANSWER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM)
-                || !argMultimap.preambleIsEmpty()) {
+                || !argMultimap.isEmptyPreamble()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     UserRecoverAccountCommand.MESSAGE_USAGE));
         }

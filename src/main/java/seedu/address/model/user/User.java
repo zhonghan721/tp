@@ -18,17 +18,6 @@ public class User {
     private String secretQuestion;
     private String answer;
 
-
-    /**
-     * Every field must be present and not null.
-     * This constructor assumes a non-hashed password is passed in
-     */
-    public User(Username username, Password password) {
-        requireAllNonNull(username, password);
-        this.username = username;
-        this.hashedPassword = new Password(password.toString());
-    }
-
     /**
      * Overloaded constructor for creating a new user with a hashed password
      *
