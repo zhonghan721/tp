@@ -12,24 +12,30 @@ It is written in Java, and has about 19 kLoC.
 Given below are my contributions to the project.
 
 * **New Feature:** Create a new storage for Deliveries
-  * What it does:
-  * Justification:
-  * Highlights:
-  * Credits:
+  * What it does: This feature allows the storage of Delivery data in local data files.
+  * Justification: The current existing implementation only allows the storage of Persons and does not allow different
+    sets of data to refer to each other, however our application requires the storage of two different types of data, 
+    Customer and Deliveries, where Deliveries are reference a specific Customer.
+  * Highlights: Update of existing storage system to be more easily extended through the use of generic types, 
+    where the storage system now uses `BookStorage`, implemented a new type of storage `BookStorageWithReference` 
+    which can reference another `BookStorage`. (E.g. Deliveries referencing Customers)
   * Related Pull Requests: [#118](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/118) </br></br>
 
 * **New Feature:** Added Delivery Update Status Command 
-  * What it does:
-  * Justification:
-  * Highlights:
-  * Credits:
+  * What it does: This feature allows the user to update the status of a specific Delivery.
+  * Justification: This feature is important as it is a common operation, and it allows a shortcut quickly update 
+    the status of a specific delivery without using the full delivery edit command.
+  * Highlights: As this command is designed to be short without a prefix, it is unable to use the existing tokenizers 
+    to parse the input, instead it uses a custom RegEx pattern to parse the preamble to the correct arguments.
   * Related Pull Requests: [#121](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/121), 
     [#174](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/174),
     [#348](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/348) </br></br>
 
 * **New Feature:** Added Delivery Create Note Command
-  * What it does:
-  * Justification:
+  * What it does: This feature allows the user to add a small note to a specific delivery.
+  * Justification: This feature is important as different delivery orders might have small remarks or changes that do
+    not necessitate the addition of another field (E.g. A cake shop might receive a special request to include a
+    particular word on the cake).
   * Highlights:
   * Credits:
   * Related Pull Requests: [#123](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/123), 
@@ -37,19 +43,16 @@ Given below are my contributions to the project.
     [#327](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/327) </br></br>
 
 * **New Feature:** Added Delivery Find Command
-  * What it does:
-  * Justification:
-  * Highlights:
-  * Credits:
+  * What it does: This feature allows the user to quickly search up deliveries by name.
+  * Justification: This feature is important as a user would need to find the Delivery ID associated with a Delivery
+    to perform other operations, but cannot remember the ID.
   * Related Pull Requests: [#196](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/196), 
     [#197](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/197),
     [#353](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/353) </br></br>
 
 * **New Feature:** Added Customer List Command
-  * What it does:
-  * Justification:
-  * Highlights:
-  * Credits:
+  * What it does: This feature allows the user to quickly list all Customers.
+  * Justification: This feature is important as the user might want to see an overview of their Customer base. 
   * Related Pull Requests: [#108](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/108), 
     [#206](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/206)</br></br>
 
@@ -93,7 +96,4 @@ Given below are my contributions to the project.
       [#86](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/86))</br></br>
 
 * **Community:**
-  As of 9 November 2023, 
-
-* ds
-* Doc
+  Reported Bugs for other teams during PE Dry Run: Total of 15 issues reported as [issues](https://github.com/B-enguin/ped/issues)
