@@ -27,6 +27,13 @@ public class DeliveryNameContainsKeywordsPredicate implements Predicate<Delivery
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(delivery.getName().deliveryName, keyword));
     }
 
+    /**
+     * Returns a list of the keywords as {@code String}.
+     */
+    public String getKeywordsAsString() {
+        return keywords.stream().map(keyword -> keyword + " ").reduce("", String::concat).trim();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
