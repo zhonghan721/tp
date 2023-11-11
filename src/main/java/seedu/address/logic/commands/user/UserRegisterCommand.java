@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -21,6 +22,7 @@ import seedu.address.model.user.Username;
  * Logs in the user and allows the user to access other functionalities.
  */
 public class UserRegisterCommand extends Command {
+
     /**
      * The command word.
      */
@@ -62,6 +64,10 @@ public class UserRegisterCommand extends Command {
      */
     public static final String MESSAGE_EMPTY_ANSWER = "Answer cannot be empty.";
     /**
+     * The logger instance for UserRegisterCommand.
+     */
+    private static final Logger logger = Logger.getLogger(UserRegisterCommand.class.getName());
+    /**
      * Stores the user to be registered.
      */
     private final User user;
@@ -87,6 +93,8 @@ public class UserRegisterCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        logger.info("Executing UserRegisterCommand.\n");
+
         Optional<User> storedUser = model.getStoredUser();
 
         // Throws exception is user already has an account
@@ -97,6 +105,9 @@ public class UserRegisterCommand extends Command {
             String outputMessage = String.format(MESSAGE_ALREADY_HAVE_ACCOUNT, username);
             throw new CommandException(outputMessage);
         }
+
+        logger.info("User to be registered: " + user.toString() + "\n");
+        assert storedUser.isEmpty() : "User should not be present.";
 
         model.registerUser(this.user);
         model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);

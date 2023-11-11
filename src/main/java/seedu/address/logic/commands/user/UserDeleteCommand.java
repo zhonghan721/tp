@@ -3,6 +3,7 @@ package seedu.address.logic.commands.user;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -29,6 +30,10 @@ public class UserDeleteCommand extends Command {
      * The message displayed when the user has no account.
      */
     public static final String MESSAGE_NO_ACCOUNT = "No accounts found. Please register an account first.";
+    /**
+     * The logger instance for UserDeleteCommand.
+     */
+    private static final Logger logger = Logger.getLogger(UserDeleteCommand.class.getName());
 
     /**
      * Executes the delete user command.
@@ -41,12 +46,16 @@ public class UserDeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        logger.info("Executing UserDeleteCommand.\n");
+
         Optional<User> storedUser = model.getStoredUser();
 
         // No user to delete
         if (storedUser.isEmpty()) {
             throw new CommandException(MESSAGE_NO_ACCOUNT);
         }
+
+        assert storedUser.isPresent() : "User should be present.";
 
         model.deleteUser();
         return new CommandResult(MESSAGE_SUCCESS, true);

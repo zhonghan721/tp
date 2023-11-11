@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -13,10 +14,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.customer.Customer;
 
+
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
 public class CustomerDeleteCommand extends CustomerCommand {
+
     /**
      * The command word.
      */
@@ -34,6 +37,11 @@ public class CustomerDeleteCommand extends CustomerCommand {
      * The pre-text to the message displayed when the customer is deleted successfully.
      */
     public static final String MESSAGE_DELETE_CUSTOMER_SUCCESS = "Deleted Customer:\n\n%1$s";
+
+    /**
+     * The logger instance for CustomerDeleteCommand.
+     */
+    private static final Logger logger = Logger.getLogger(CustomerDeleteCommand.class.getName());
 
     /**
      * The identification (ID) of the customer to be deleted.
@@ -60,6 +68,9 @@ public class CustomerDeleteCommand extends CustomerCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        logger.info("Executing CustomerDeleteCommand:"
+                + " customerID: " + customerID.getOneBased() + "\n");
+
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
@@ -71,6 +82,9 @@ public class CustomerDeleteCommand extends CustomerCommand {
         if (customerToDelete.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
+
+        logger.info("Customer to be deleted: " + customerToDelete.get().toString() + "\n");
+        assert customerToDelete.isPresent() : "Customer to be deleted should be present.";
 
         model.deleteCustomer(customerToDelete.get());
         return new CommandResult(String.format(MESSAGE_DELETE_CUSTOMER_SUCCESS,

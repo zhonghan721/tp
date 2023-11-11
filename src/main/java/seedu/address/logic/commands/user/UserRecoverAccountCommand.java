@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -57,6 +58,11 @@ public class UserRecoverAccountCommand extends Command {
     public static final String MESSAGE_PASSWORD_MISMATCH = "Passwords do not match. Please try again.";
 
     /**
+     * The logger instance for UserRecoverAccountCommand.
+     */
+    private static final Logger logger = Logger.getLogger(UserRecoverAccountCommand.class.getName());
+
+    /**
      * Indicates whether the secret question should be shown.
      * This is true by default, unless the user has provided the answer to the secret question and the new password.
      */
@@ -102,6 +108,8 @@ public class UserRecoverAccountCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        logger.info("Executing UserRecoverAccountCommand.\n");
+
         Optional<User> storedUser = model.getStoredUser();
 
         // ensure that the user has an account to recover
@@ -115,6 +123,7 @@ public class UserRecoverAccountCommand extends Command {
         // considered as a success
         if (isShowSecretQuestion) {
             String secretQuestion = currentStoredUser.getSecretQuestion();
+            logger.info("Showing secret question: " + secretQuestion + "\n");
             String output = String.format(MESSAGE_SUCCESS_WITHOUT_FLAGS, secretQuestion);
             output += additionalMessage;
             return new CommandResult(output);
@@ -126,6 +135,13 @@ public class UserRecoverAccountCommand extends Command {
         if (!currentStoredUser.checkAnswerEquals(answer)) {
             throw new CommandException(MESSAGE_WRONG_ANSWER);
         }
+
+        logger.info("Executing UserRecoverAccountCommand: "
+                + "answer: " + answer + "\n"
+                + "newPassword: " + newPassword + "\n"
+                + "user: " + currentStoredUser.toString() + "\n");
+
+        assert currentStoredUser.checkAnswerEquals(answer) : "Answer should be correct.";
 
         // answer is correct, proceed to reset password
         User newUser = new User(currentStoredUser.getUsername(), newPassword, true,
