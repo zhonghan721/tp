@@ -36,7 +36,6 @@ public class DeliveryListCommandParser implements Parser<DeliveryListCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeliveryListCommand.MESSAGE_USAGE));
         }
-        
         Optional<String> sort = argMultimap.getValue(PREFIX_SORT);
         Optional<String> inputStatus = argMultimap.getValue(PREFIX_STATUS);
         Optional<String> inputCustomerId = argMultimap.getValue(PREFIX_CUSTOMER_ID);
