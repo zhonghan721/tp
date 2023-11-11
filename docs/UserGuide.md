@@ -351,8 +351,7 @@ logout
 * Words in uppercase are parameters that are supplied by you.
 * Parameters that are preceded by a prefix must be supplied after that prefix, e.g. `--name DELIVERY_NAME`{.swift}
   must be given as, for instance, `--name furniture` and not `furniture` or `--name`.
-* Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`
-  can either be `1` or `1 --name furniture`.
+* Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`{.swift} can either be `1` or `1 --name furniture`.
 * However, items that are grouped together in square brackets (`[]`{.swift}) must all be provided together,
   e.g. for `[--password PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift} both `PASSWORD`{.swift} and
   `CONFIRM_PASSWORD`{.swift} must be provided.
@@ -448,15 +447,12 @@ Check them out under the [Features](#features) section to learn more!
 
 ## <span style="text-decoration:underline; font-size:35px"><strong>Editing the data file</strong></span>
 
-HomeBoss stores your data in a JSON file automatically `[JAR file location]/data/addressbook.json`. Advanced
-users are welcome to update data directly by editing the data file.
+HomeBoss stores your data in three JSON files, namely `[JAR file location]/data/authentication.json`, `[JAR file location]/data/addressbook.json` (containing the customer database) and `[JAR file location]/data/deliverybook.json` (containing the delivery database).
+Advanced users are welcome to update the data by editing the data files directly.
 
 <box type="warning" background-color="#f2dede" border-color="#ebccd1" icon=":exclamation:">
 
-**Warning:** If the files are edited and contain invalid data as a result, HomeBoss will discard the entire data file
-and start with an empty data file during the next run. (If the Customer data file contains invalid data, the entire
-Delivery data file will also be deleted. However, if the Delivery data file contains invalid data, the Customer data
-file will remain unaffected.)
+**Warning:** If either the `addressbook.json` or `deliverybook.json` data file is edited and contain invalid data as a result, HomeBoss will discard the entire data file and start with an empty data file on the next application run. (e.g., If `deliverybook.json` contains invalid data, the entire Delivery database will be reset on the next application run. However, if `deliverybook.json` contains invalid data while the `addressbook.json` remains untouched and valid, the Customer database will remain unaffected.)
 
 </box>
 
@@ -544,8 +540,7 @@ You can register for a new user account with HomeBoss by calling this command.
 
 </br>**Format:**
 
-`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
-{.swift}
+`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`{.swift}
 
 
 <br/>
@@ -575,8 +570,7 @@ You can register for a new user account with HomeBoss by calling this command.
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
 **Tip:** Since only one account can be registered at any one time, if you have already registered an account, you will
-not be able to register another account. If you must, you can delete your current account by using the `delete account`
-{.swift} command [here](#delete-account) before registering a new account.
+not be able to register another account. If you must, you can delete your current account by using the `delete account`{.swift} command [here](#delete-account) before registering a new account.
 </box>
 
 <br/>
@@ -1076,11 +1070,12 @@ sorted by expected Delivery date in descending order (latest first).
 
 **Parameter(s):**
 
-* `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`.
-* `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.
+* `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`. <br/><br/>
+* `CUSTOMER_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Customer.<br/><br/>
 * `EXPECTED_DELIVERY_DATE`{.swift} must be today or after today's date in yyyy-MM-dd format OR
-  `TODAY` for today’s date.
-* `SORT`{.swift} accepts the following values: `ASC`/`DESC`.
+  `TODAY` for today’s date.<br/><br/>
+* `SORT`{.swift} accepts the following values: `ASC`/`DESC`.<br/><br/>
+* If duplicate prefixes are provided, only the last occurrence of each prefix will be used.<br/>
 
   </box>
 
@@ -1095,8 +1090,10 @@ sorted by expected Delivery date in descending order (latest first).
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
-**Tip:**
-You may combine any of the filter and sort options to get the list of Deliveries that you want.
+**Tips:**
+* You may combine any of the filter and sort options to get the list of Deliveries that you want.<br/><br/>
+* Delivery status is not case sensitive. You can type `created` instead of `CREATED` and it will still work.<br/>
+
 </box>
 
 
@@ -1116,7 +1113,7 @@ whose names has words that exactly match any of the given keywords.
 
 **Note:**
 
-* You must provide at least one alphanumeric keyword to search for the Delivery.<br/><br/>
+* You must provide at least one keyword to search for the Delivery.<br/><br/>
 * You can optionally provide additional keywords. Deliveries that has names matching any of the given keywords will be
   displayed. For example, the keywords `Chocolate` and `Bun` in `Chocolate Bun` will
   display `Chocolate Cake`, `Chocolate Bun`, and `Strawberry Bun`.<br/><br/>
@@ -1168,8 +1165,7 @@ in the event that you keyed in the Delivery's details wrongly.
 
 </br>**Format:**
 
-`delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE][--status STATUS] [--note NOTE]`
-{.swift}
+`delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE][--status STATUS] [--note NOTE]`{.swift}
 
 <br/>
 
@@ -1204,10 +1200,12 @@ in the event that you keyed in the Delivery's details wrongly.
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
-**Tip:**
+**Tips:**
 
 * If you only want to update the Delivery's status, simply use `delivery status`{.swift} instead. </br><br/>
+* Delivery status is not case sensitive. You can type `created` instead of `CREATED` and it will still work. </br><br/>
 * If you only want to update the Delivery's note, simply use `delivery note`{.swift} instead.<br/>
+  
   </box>
 
 <br/>
@@ -1333,7 +1331,7 @@ this command.
 
 ### Help
 
-This command allows you view a summary of the commands available, the format of the commands, and a link to this user
+This command allows you to view a summary of the commands available, the format of the commands, and a link to this user
 guide.
 
 <br/>
