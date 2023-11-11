@@ -10,7 +10,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
 import java.util.Comparator;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
 import seedu.address.logic.Sort;
 import seedu.address.logic.commands.CommandResult;
@@ -38,6 +40,7 @@ public class DeliveryListCommand extends DeliveryCommand {
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_STATUS + " CREATED " + PREFIX_SORT + " ASC "
         + PREFIX_CUSTOMER_ID + " 1 " + PREFIX_DATE + " 2020-10-10";
+    private static final Logger logger = Logger.getLogger(DeliveryListCommand.class.getName());
     private DeliveryStatus status;
     private final Integer customerId;
     private final Date deliveryDate;
@@ -51,6 +54,7 @@ public class DeliveryListCommand extends DeliveryCommand {
      * @param sortType asc or desc.
      */
     public DeliveryListCommand(DeliveryStatus status, Integer customerId, Date deliveryDate, Sort sortType) {
+
         this.status = status;
         this.customerId = customerId;
         this.deliveryDate = deliveryDate;
@@ -64,45 +68,83 @@ public class DeliveryListCommand extends DeliveryCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing DeliveryListCommand: status "
+            + status + ", customerId "
+            + customerId + " deliveryDate "
+            + deliveryDate + " and sortType "
+            + sortType);
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
+        assert model.getUserLoginStatus() : "User should be logged in";
 
+        Optional<DeliveryStatus> status = Optional.ofNullable(this.status);
+        Optional<Integer> customerId = Optional.ofNullable(this.customerId);
+        Optional<Date> deliveryDate = Optional.ofNullable(this.deliveryDate);
 
-        Predicate<Delivery> filters = PREDICATE_SHOW_ALL_DELIVERIES;
+        Predicate<Delivery> filters = this.applyFilters(model, status, customerId, deliveryDate);
 
-
-        if (status != null) {
-            // filter by status
-            filters = filters.and(delivery -> delivery.getStatus().equals(status));
-        }
-
-        if (customerId != null) {
-            // filter by customer id
-            filters = filters.and(delivery -> delivery.getCustomer().getCustomerId() == customerId);
-        }
-
-        if (deliveryDate != null) {
-            // filter by expected delivery date
-            filters = filters.and(delivery -> delivery.getDeliveryDate().equals(deliveryDate));
-        }
+        assert filters != null : "Filters should not be null";
 
         model.updateFilteredDeliveryList(filters);
 
-        if (model.getFilteredDeliveryList().size() == 0) {
+        if (model.isSortedDeliveryListEmpty()) {
             return new CommandResult(MESSAGE_EMPTY, true);
         }
 
         // sort by expected delivery date
-        model.sortFilteredDeliveryList(
-            sortType.equals(Sort.ASC) ? Comparator.comparing(Delivery::getDeliveryDate) : Comparator.comparing(
-                    Delivery::getDeliveryDate)
-                .reversed());
+        this.sortDeliveryList(model);
 
-        //TODO: UI
         return new CommandResult(MESSAGE_SUCCESS, true);
     }
+
+    /**
+     * Applies the filters to the delivery list.
+     *
+     * @param model        model to apply filters to.
+     * @param status       status to filter by.
+     * @param customerId   customer id to filter by.
+     * @param deliveryDate delivery date to filter by.
+     * @return predicate with filters applied.
+     */
+    private Predicate<Delivery> applyFilters(Model model,
+                                             Optional<DeliveryStatus> status,
+                                             Optional<Integer> customerId,
+                                             Optional<Date> deliveryDate) {
+        Predicate<Delivery> filters = PREDICATE_SHOW_ALL_DELIVERIES;
+
+        if (status.isPresent()) {
+            // filter by status
+            filters = filters.and(delivery -> delivery.getStatus().equals(status.get()));
+        }
+
+        if (customerId.isPresent()) {
+            // filter by customer id
+            filters = filters.and(delivery -> delivery.getCustomer().getCustomerId() == customerId.get());
+        }
+
+        if (deliveryDate.isPresent()) {
+            // filter by expected delivery date
+            filters = filters.and(delivery -> delivery.getDeliveryDate().equals(deliveryDate.get()));
+        }
+
+        return filters;
+    }
+
+    /**
+     * Sorts the delivery list by expected delivery date.
+     *
+     * @param model model to sort.
+     */
+    private void sortDeliveryList(Model model) {
+        Comparator<Delivery> sortAscending = Comparator.comparing(Delivery::getDeliveryDate);
+        Comparator<Delivery> sortDescending = Comparator.comparing(Delivery::getDeliveryDate).reversed();
+        boolean isAscending = sortType.equals(Sort.ASC);
+
+        model.sortFilteredDeliveryList(isAscending ? sortAscending : sortDescending);
+    }
+
 
     @Override
     public boolean equals(Object other) {
