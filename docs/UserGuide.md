@@ -359,9 +359,7 @@ logout
 * Words in uppercase are parameters that are supplied by you.
 * Parameters that are preceded by a prefix must be supplied after that prefix, e.g. `--name DELIVERY_NAME`{.swift}
   must be given as, for instance, `--name furniture` and not `furniture` or `--name`.
-* Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`
-  {.swift}
-  can either be `1` or `1 --name furniture`.
+* Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`{.swift} can either be `1` or `1 --name furniture`.
 * However, items that are grouped together in square brackets (`[]`{.swift}) must all be provided together,
   e.g. for `[--password PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift} both `PASSWORD`{.swift} and
   `CONFIRM_PASSWORD`{.swift} must be provided.
@@ -559,8 +557,7 @@ You can register for a new user account with HomeBoss by calling this command.
 
 </br>**Format:**
 
-`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
-{.swift}
+`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`{.swift}
 
 
 <br/>
@@ -590,8 +587,7 @@ You can register for a new user account with HomeBoss by calling this command.
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
 **Tip:** Since only one account can be registered at any one time, if you have already registered an account, you will
-not be able to register another account. If you must, you can delete your current account by using the `delete account`
-{.swift} command [here](#delete-account) before registering a new account.
+not be able to register another account. If you must, you can delete your current account by using the `delete account`{.swift} command [here](#delete-account) before registering a new account.
 </box>
 
 <br/>
@@ -1223,8 +1219,7 @@ in the event that you keyed in the Delivery's details wrongly.
 
 </br>**Format:**
 
-`delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE][--status STATUS] [--note NOTE]`
-{.swift}
+`delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE][--status STATUS] [--note NOTE]`{.swift}
 
 <br/>
 
