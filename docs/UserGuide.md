@@ -359,7 +359,7 @@ logout
 * Words in uppercase are parameters that are supplied by you.
 * Parameters that are preceded by a prefix must be supplied after that prefix, e.g. `--name DELIVERY_NAME`{.swift}
   must be given as, for instance, `--name furniture` and not `furniture` or `--name`.
-* Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`
+* Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`{.swift}
   can either be `1` or `1 --name furniture`.
 * However, items that are grouped together in square brackets (`[]`{.swift}) must all be provided together,
   e.g. for `[--password PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift} both `PASSWORD`{.swift} and
@@ -460,8 +460,8 @@ Check them out under the [Features](#features) section to learn more!
 
 ## <br/><span style="text-decoration:underline; font-size:29px"><strong>Editing the data file</strong></span>
 
-HomeBoss stores your data in a JSON file automatically `[JAR file location]/data/addressbook.json`. Advanced
-users are welcome to update data directly by editing the data file.
+HomeBoss stores your data in three JSON files, namely `[JAR file location]/data/authentication.json`, `[JAR file location]/data/addressbook.json` and `[JAR file location]/data/deliverybook.json`. Advanced
+users are welcome to update the data by editing the data files directly.
 
 <br/>
 
@@ -1137,10 +1137,10 @@ sorted by expected Delivery date in descending order (latest first).
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
 **Tip:**
-You may combine any of the filter and sort options to get the list of Deliveries that you want.
+* You may combine any of the filter and sort options to get the list of Deliveries that you want. <br/><br/>
+* Delivery status is not case sensitive. You can type `created` instead of `CREATED` and it will still work.<br/>
+
 </box>
-
-
 
 <br/>
 
@@ -1159,7 +1159,7 @@ whose names has words that exactly match any of the given keywords.
 
 **Note:**
 
-* You must provide at least one alphanumeric keyword to search for the Delivery.<br/><br/>
+* You must provide at least one keyword to search for the Delivery.<br/><br/>
 * You can optionally provide additional keywords. Deliveries that has names matching any of the given keywords will be
   displayed. For example, the keywords `Chocolate` and `Bun` in `Chocolate Bun` will
   display `Chocolate Cake`, `Chocolate Bun`, and `Strawberry Bun`.<br/><br/>
@@ -1255,6 +1255,7 @@ in the event that you keyed in the Delivery's details wrongly.
 **Tip:**
 
 * If you only want to update the Delivery's status, simply use `delivery status`{.swift} instead. </br><br/>
+* Delivery status is not case sensitive. You can type `created` instead of `CREATED` and it will still work. </br><br/>
 * If you only want to update the Delivery's note, simply use `delivery note`{.swift} instead.<br/>
   </box>
 
@@ -1389,7 +1390,7 @@ this command.
 
 ### Help
 
-This command allows you view a summary of the commands available, the format of the commands, and a link to this user
+This command allows you to view a summary of the commands available, the format of the commands, and a link to this user
 guide.
 
 <br/>
