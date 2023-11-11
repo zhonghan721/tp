@@ -4,12 +4,12 @@
 
 # Introduction
 
-HomeBoss is a powerful desktop application designed specifically for **home-based business owners**, offering 
-**efficient Customer and Delivery management solutions**. With HomeBoss, you can streamline your administrative 
+HomeBoss is a powerful desktop application designed specifically for **home-based business owners**, offering
+**efficient Customer and Delivery management solutions**. With HomeBoss, you can streamline your administrative
 processes and elevate your overall business experience to new heights.
 
 With our application, you will be able to:
- 
+
 * Keep track of the details of your Customers and Deliveries
 * Search for a particular Customer / Delivery easily
 * Organise your data in a neat and tidy manner by filtering and sorting to your needs </br>
@@ -279,7 +279,6 @@ HomeBoss. You can use the scroll bar on the right to scroll through your Custome
 
 * The `ID`{.swift}s generated are guaranteed to be unique but may not be consecutive and may not start from 1.<br/>
 
-
 ![Command Result FeedBack](images/getting-started/delivery_card.png){style="display: block; margin: 0 auto;"}
 
 </box>
@@ -340,18 +339,19 @@ logout
 
 **Note**:
 
-* If Customer ID or Delivery ID is specified in the command, it must be a positive integer for the Command Format to be considered valid.
+* If Customer ID or Delivery ID is specified in the command, it must be a positive integer for the Command Format to be
+  considered valid.
 * A Command Phrase is made up of keywords or short phrases that are unique to each Command.
 * Words in uppercase are parameters that are supplied by you.
 * Parameters that are preceded by a prefix must be supplied after that prefix, e.g. `--name DELIVERY_NAME`{.swift}
   must be given as, for instance, `--name furniture` and not `furniture` or `--name`.
 * Items that are placed in square brackets (`[]`{.swift}) are optional, e.g. `DELIVERY_ID [--name DELIVERY_NAME]`
-can either be `1` or `1 --name furniture`.
+  can either be `1` or `1 --name furniture`.
 * However, items that are grouped together in square brackets (`[]`{.swift}) must all be provided together,
   e.g. for `[--password PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift} both `PASSWORD`{.swift} and
   `CONFIRM_PASSWORD`{.swift} must be provided.
 * Extraneous parameters for commands without parameters, like `customer list`{.swift} or `clear`{.swift}
-, will be disregarded, as seen in examples such as `customer list 123`.
+  , will be disregarded, as seen in examples such as `customer list 123`.
 * Parameters that have `...`{.swift} as a postfix can be given one or more times, e.g. `KEYWORDS...`{.swift} can be
   given as `Keyword` or `Keyword AnotherKeyword`.
 * **Command Phrase** and **Prefixes** are **case-sensitive**! e.g. `clear`{.swift} is a valid command word but
@@ -505,7 +505,6 @@ _These are general features in HomeBoss._
 - `help` - Shows a list of commands and their usage.
 - `clear` - Clears both Customer and Delivery database.
 
-
 <br/>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
@@ -530,8 +529,6 @@ You can register for a new user account with HomeBoss by calling this command.
 
 </br>**Format:**
 
-
- 
 `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
 {.swift}
 
@@ -547,7 +544,9 @@ You can register for a new user account with HomeBoss by calling this command.
 * `CONFIRM_PASSWORD`{.swift} must be the same as `PASSWORD`{.swift}.<br/><br/>
 * `SECRET_QUESTION`{.swift} can include any characters but must not be empty.<br/><br/>
 * `ANSWER`{.swift} can include any characters but must not be empty.<br/><br/>
-* `SECRET_QUESTION`{.swift} and `ANSWER`{.swift} will be used for account recovery.<br/>
+* `SECRET_QUESTION`{.swift} and `ANSWER`{.swift} will be used for account recovery.<br/><br/>
+* Verification of the correct format of `PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} will precede the check for
+  equality of passwords.<br/>
 
 </box>
 
@@ -639,7 +638,9 @@ This command allows you to update your account details, thus enabling greater se
 * `PASSWORD`{.swift} must be at least 8 alphanumeric characters long.<br/><br/>
 * `CONFIRM_PASSWORD`{.swift} must be the same as `PASSWORD`{.swift}.<br/><br/>
 * `SECRET_QUESTION`{.swift} can take any characters.<br/><br/>
-* `ANSWER`{.swift} can take any characters.<br/>
+* `ANSWER`{.swift} can take any characters.<br/><br/>
+* Verification of the correct format of `PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} will precede the check for
+  equality of passwords.<br/>
 
 </box>
 
@@ -687,7 +688,9 @@ secret question (set during account registration) to reset your password and thu
   versa.<br/><br/>
 * `ANSWER`{.swift} can take any characters.<br/><br/>
 * `NEW_PASSWORD`{.swift} must be at least 8 alphanumeric characters long.<br/><br/>
-* `CONFIRM_PASSWORD`{.swift} must be the same as `NEW_PASSWORD`{.swift}.<br/>
+* `CONFIRM_PASSWORD`{.swift} must be the same as `NEW_PASSWORD`{.swift}.<br/><br/>
+* Verification of the correct format of `PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} will precede the check for
+  equality of passwords.<br/>
 
 </box>
 
@@ -1000,11 +1003,9 @@ Delivery-related commands.
 
 * `delivery add Chocolate Cake --customer 1 --date 2023-12-12` </br>
 
-
-  Adds a Delivery with the name `Chocolate Cake` for the Customer with ID `1`. The expected Delivery date is set
-  to `2023-12-12`, the order date is automatically set to today's date, the Delivery status is initialised to `CREATED`,
-  and the Delivery address is the same as the Customer's address.
-
+Adds a Delivery with the name `Chocolate Cake` for the Customer with ID `1`. The expected Delivery date is set
+to `2023-12-12`, the order date is automatically set to today's date, the Delivery status is initialised to `CREATED`,
+and the Delivery address is the same as the Customer's address.
 
 ![](images/ug/delivery_add.png)
 
@@ -1137,7 +1138,6 @@ whose names has words that exactly match any of the given keywords.
 
   Finds all Deliveries whose name has words that exactly match `Gambes` or `Banana`.
 
-
 ![](images/ug/delivery_find.png)
 
 <br/>
@@ -1191,7 +1191,6 @@ in the event that you keyed in the Delivery's details wrongly.
   Edits the name of the Delivery, with Delivery ID of `2`, to `Vanilla Cake` and edits the Customer of the
   Delivery to the Customer with ID of `3`.
 
-
 <br/>
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
@@ -1221,9 +1220,8 @@ your easy tracking.
 **Parameter(s):**
 
 * `DELIVERY_ID`{.swift} must be an integer greater than 0 that corresponds to an existing Delivery.
- 
-* `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`.
 
+* `STATUS`{.swift} accepts the following values: `CREATED`/`SHIPPED`/`COMPLETED`/`CANCELLED`.
 
   </box>
 
