@@ -87,6 +87,8 @@ public class DeliveryListCommand extends DeliveryCommand {
 
         assert filters != null : "Filters should not be null";
 
+        logger.info("Filters: " + filters.toString());
+
         model.updateFilteredDeliveryList(filters);
 
         if (model.isSortedDeliveryListEmpty()) {

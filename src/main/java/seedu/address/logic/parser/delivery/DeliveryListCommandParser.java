@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.delivery;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
@@ -12,6 +12,10 @@ import java.util.Optional;
 
 import seedu.address.logic.Sort;
 import seedu.address.logic.commands.delivery.DeliveryListCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.DeliveryStatus;
@@ -20,7 +24,7 @@ import seedu.address.model.delivery.DeliveryStatus;
 /**
  * Parses input arguments and creates a new DeliveryListCommand object.
  */
-public class DeliveryListParser implements Parser<DeliveryListCommand> {
+public class DeliveryListCommandParser implements Parser<DeliveryListCommand> {
 
     @Override
     public DeliveryListCommand parse(String userInput) throws ParseException {
@@ -32,6 +36,9 @@ public class DeliveryListParser implements Parser<DeliveryListCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeliveryListCommand.MESSAGE_USAGE));
         }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STATUS, PREFIX_SORT, PREFIX_CUSTOMER_ID, PREFIX_DATE);
+        
         Optional<String> sort = argMultimap.getValue(PREFIX_SORT);
         Optional<String> inputStatus = argMultimap.getValue(PREFIX_STATUS);
         Optional<String> inputCustomerId = argMultimap.getValue(PREFIX_CUSTOMER_ID);
@@ -50,7 +57,6 @@ public class DeliveryListParser implements Parser<DeliveryListCommand> {
         }
 
         if (inputDate.isPresent()) {
-
             if (inputDate.get().equalsIgnoreCase("today")) {
                 deliveryDate = new Date(LocalDate.now().format(DateTimeFormatter.ofPattern(Date.FORMAT)));
             } else {
@@ -65,7 +71,7 @@ public class DeliveryListParser implements Parser<DeliveryListCommand> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof DeliveryListParser); // instanceof handles nulls
+            || (other instanceof DeliveryListCommandParser); // instanceof handles nulls
 
     }
 }
