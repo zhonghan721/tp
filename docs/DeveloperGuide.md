@@ -2266,9 +2266,10 @@ testers are expected to do more _exploratory_ testing.
 
    1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
       There are two Customers with an ID of 1 and 2 stored in the application.
-      There are two deliveries stored in the application. 
+      There are three deliveries stored in the application. 
       The first with ID 1, Customer ID of 1, delivery status `CREATED`{.swift}, expected delivery date `2023-12-03`{.swift}.
       The second with ID 2, Customer ID of 2, delivery status `SHIPPED`{.swift}, expected delivery date `2023-12-04`{.swift}.
+      The third with ID 3, Customer ID of 2, delivery status `SHIPPED`{.swift}, expected delivery date `2023-12-05`{.swift}.
       The current date is `2023-12-03`{.swift}.
 
    2. Test Case: `delivery list`{.swift}.</br>
@@ -2293,19 +2294,23 @@ testers are expected to do more _exploratory_ testing.
       Expected: All Deliveries are listed sorted in ascending expected delivery date.
       A message indicating that deliveries have been listen is shown in the feedback message.
 
-   8. Test Case: `delivery list --status INVALID`{.swift}.</br>
+   8. Test Case: `delivery list --customer 2 --status SHIPPED --sort ASC`{.swift}.</br>
+      Expected: The deliveries with ID 2 and 3 are listed in ascending expected delivery date.
+      A message indicating that deliveries have been listen is shown in the feedback message.
+
+   9. Test Case: `delivery list --status INVALID`{.swift}.</br>
       Expected: No Deliveries are listed. An Error indicating delivery status constraints
       is shown in the feedback message.
 
-   9. Test Case: `delivery list --customer 0`{.swift}.</br>
-      Expected: No Deliveries are listed. An Error indicating Customer ID constraints
-      is shown in the feedback message.
+   10. Test Case: `delivery list --customer 0`{.swift}.</br>
+       Expected: No Deliveries are listed. An Error indicating Customer ID constraints
+       is shown in the feedback message.
 
-   10. Test Case: `delivery list --date 2023-13-04`{.swift}.</br>
-      Expected: No Deliveries are listed. An Error indicating expected delivery date constraints
-      is shown in the feedback message.
+   11. Test Case: `delivery list --date 2023-13-04`{.swift}.</br>
+       Expected: No Deliveries are listed. An Error indicating expected delivery date constraints
+       is shown in the feedback message.
 
-   11. Test Case: `delivery list --sort random`{.swift}.</br>
+   12. Test Case: `delivery list --sort random`{.swift}.</br>
        Expected: No Deliveries are listed. An Error indicating sort constraints
        is shown in the feedback message.
 
