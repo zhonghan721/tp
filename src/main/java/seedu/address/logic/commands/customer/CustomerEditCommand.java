@@ -72,38 +72,32 @@ public class CustomerEditCommand extends CustomerCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
-        List<Customer> lastShownList = model.getFilteredCustomerList();
+        model.showAllFilteredCustomerList();
+        model.getFilteredCustomerList();
 
-        boolean found = false;
+        Optional<Customer> targetCustomer = model.getCustomer(targetIndex.getOneBased());
         Customer customerToEdit = null;
         Customer editedCustomer = null;
 
-        for (Customer customer : lastShownList) {
-            if (customer.getCustomerId() == targetIndex.getOneBased()) {
-                found = true;
-                customerToEdit = customer;
-                editedCustomer = createEditedCustomer(customerToEdit, customerEditDescriptor);
-                break;
-            }
+        if (targetCustomer.isPresent()) {
+            customerToEdit = targetCustomer.get();
+            editedCustomer = createEditedCustomer(customerToEdit, customerEditDescriptor);
         }
-        boolean isNull = customerToEdit == null || editedCustomer == null || !found;
+
+        boolean isNull = customerToEdit == null || editedCustomer == null;
 
         if (isNull) {
             throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
-
-            // checks if the customer to edit has the same phone as another customer,
-            // else check if the new phone is not already in the list
-            // (because the list will always have a customer with the same customerId as the editedCustomer,
-            // so using model.hasPerson will always return true)
-        } else if (!customerToEdit.hasSamePhone(editedCustomer) && model.hasCustomerWithSamePhone(editedCustomer)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        } else {
-            model.setCustomer(customerToEdit, editedCustomer);
-            model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
-            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
-                    Messages.format(editedCustomer)), true);
         }
+        if (!customerToEdit.hasSamePhone(editedCustomer) && model.hasCustomerWithSamePhone(editedCustomer)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        model.setCustomer(customerToEdit, editedCustomer);
+        model.showAllFilteredCustomerList();
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(editedCustomer)), true);
+
 
     }
 

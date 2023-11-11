@@ -75,27 +75,28 @@ public class DeliveryEditCommand extends DeliveryCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        boolean found = false;
         Delivery editedDelivery = null;
+        Delivery deliveryToEdit = null;
 
-        model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        model.showAllFilteredDeliveryList();
 
-        Delivery deliveryToEdit = model.getDeliveryUsingFilteredList(targetIndex.getOneBased());
+        Optional<Delivery> targetDelivery = model.getDelivery(targetIndex.getOneBased());
 
-        if (deliveryToEdit != null) {
-            found = true;
+        if (targetDelivery.isPresent()) {
+            deliveryToEdit = targetDelivery.get();
             editedDelivery = createEditedDelivery(model, deliveryToEdit, deliveryEditDescriptor);
         }
-        boolean isNull = deliveryToEdit == null || editedDelivery == null || !found;
+        boolean isNull = deliveryToEdit == null || editedDelivery == null;
 
         if (isNull) {
             throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
-        } else {
-            model.setDelivery(deliveryToEdit, editedDelivery);
-            model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
-            return new CommandResult(String.format(MESSAGE_EDIT_DELIVERY_SUCCESS,
-                Messages.format(editedDelivery)), true);
         }
+        model.setDelivery(deliveryToEdit, editedDelivery);
+        model.showAllFilteredDeliveryList();
+
+        return new CommandResult(String.format(MESSAGE_EDIT_DELIVERY_SUCCESS,
+                Messages.format(editedDelivery)), true);
+
     }
 
     /**

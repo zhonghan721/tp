@@ -63,8 +63,11 @@ public class DeliveryAddCommand extends DeliveryCommand {
         if (!model.getUserLoginStatus()) {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
+
+        //Create Delivery
         Delivery toAdd = createDelivery(model, deliveryAddDescriptor);
 
+        //Add Delivery
         model.addDelivery(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), true);
 
@@ -95,45 +98,29 @@ public class DeliveryAddCommand extends DeliveryCommand {
     private static Delivery createDelivery(Model model,
                                            DeliveryAddDescriptor deliveryAddDescriptor) throws CommandException {
 
-        DeliveryName deliveryName = deliveryAddDescriptor.getDeliveryName().get();
         int customerId = deliveryAddDescriptor.getCustomerId().get();
-        Customer customer = null;
-        DeliveryDate deliveryDate = null;
 
+
+        DeliveryDate deliveryDate = null;
+        DeliveryStatus newDeliveryStatus = DeliveryStatus.CREATED;
         LocalDate now = LocalDate.now();
         OrderDate orderDate = new OrderDate(now.toString());
 
-        DeliveryStatus newDeliveryStatus = DeliveryStatus.CREATED;
+        Optional<Customer> targetCustomer = model.getCustomer(customerId);
+        DeliveryName deliveryName = deliveryAddDescriptor.getDeliveryName().get();
 
-        ReadOnlyBook<Customer> customerReadOnlyBook = model.getAddressBook();
-
-        if (checkValidCustomer(model, deliveryAddDescriptor)) {
-            customer = customerReadOnlyBook.getById(customerId).get();
-
-        } else {
+        if (targetCustomer.isEmpty()){
             throw new CommandException(MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
-        if (DeliveryDate.isFutureDate(deliveryAddDescriptor.getDate().get().toString())) {
-            deliveryDate = deliveryAddDescriptor.getDate().get();
-        } else {
+        Customer customer = targetCustomer.get();
+
+        if (!DeliveryDate.isFutureDate(deliveryAddDescriptor.getDate().get().toString())) {
             throw new CommandException(MESSAGE_INVALID_DELIVERY_DATE);
         }
+        deliveryDate = deliveryAddDescriptor.getDate().get();
+
         return new Delivery(deliveryName, customer, orderDate, deliveryDate, newDeliveryStatus);
 
-    }
-
-    private static boolean checkValidCustomer(Model model, DeliveryAddDescriptor deliveryAddDescriptor) {
-        int customerId = deliveryAddDescriptor.getCustomerId().get();
-
-        ReadOnlyBook<Customer> customerReadOnlyBook = model.getAddressBook();
-        boolean found = false;
-
-        for (Customer customer : customerReadOnlyBook.getList()) {
-            if (customerId == customer.getCustomerId()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

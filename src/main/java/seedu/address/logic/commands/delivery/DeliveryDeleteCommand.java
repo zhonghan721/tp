@@ -11,6 +11,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
 
+import java.util.Optional;
+
 /**
  * Deletes a delivery identified using it's displayed index from the address book.
  */
@@ -40,17 +42,20 @@ public class DeliveryDeleteCommand extends DeliveryCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        model.updateFilteredDeliveryList(Model.PREDICATE_SHOW_ALL_DELIVERIES);
+        model.showAllFilteredDeliveryList();
 
-        Delivery deliveryToDelete = model.getDeliveryUsingFilteredList(targetIndex.getOneBased());
+        Optional<Delivery> targetDelivery = model.getDelivery(targetIndex.getOneBased());
 
-        if (deliveryToDelete != null) {
-            model.deleteDelivery(deliveryToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_DELIVERY_SUCCESS,
-                    Messages.format(deliveryToDelete)), true);
-        } else {
+        if (targetDelivery.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
         }
+
+        Delivery deliveryToDelete = targetDelivery.get();
+        model.deleteDelivery(deliveryToDelete);
+
+        return new CommandResult(String.format(MESSAGE_DELETE_DELIVERY_SUCCESS,
+                Messages.format(deliveryToDelete)), true);
+
     }
 
     @Override

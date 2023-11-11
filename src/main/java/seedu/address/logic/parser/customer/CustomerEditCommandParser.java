@@ -42,6 +42,13 @@ public class CustomerEditCommandParser implements Parser<CustomerEditCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
+        CustomerEditDescriptor customerEditDescriptor = createCustomerEditDescriptor(argMultimap);
+
+        return new CustomerEditCommand(index, customerEditDescriptor);
+    }
+
+    public CustomerEditDescriptor createCustomerEditDescriptor(ArgumentMultimap argMultimap) throws ParseException {
+
         CustomerEditDescriptor customerEditDescriptor = new CustomerEditDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -59,7 +66,8 @@ public class CustomerEditCommandParser implements Parser<CustomerEditCommand> {
         if (!customerEditDescriptor.isAnyFieldEdited()) {
             throw new ParseException(CustomerEditCommand.MESSAGE_NOT_EDITED);
         }
+        return customerEditDescriptor;
 
-        return new CustomerEditCommand(index, customerEditDescriptor);
+
     }
 }
