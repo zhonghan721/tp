@@ -3,6 +3,8 @@ package seedu.address.logic.commands.delivery;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 
+import java.util.Optional;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -40,17 +42,20 @@ public class DeliveryDeleteCommand extends DeliveryCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        model.updateFilteredDeliveryList(Model.PREDICATE_SHOW_ALL_DELIVERIES);
+        model.showAllFilteredDeliveryList();
 
-        Delivery deliveryToDelete = model.getDeliveryUsingFilteredList(targetIndex.getOneBased());
+        Optional<Delivery> targetDelivery = model.getDelivery(targetIndex.getOneBased());
 
-        if (deliveryToDelete != null) {
-            model.deleteDelivery(deliveryToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_DELIVERY_SUCCESS,
-                    Messages.format(deliveryToDelete)), true);
-        } else {
+        if (targetDelivery.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
         }
+
+        Delivery deliveryToDelete = targetDelivery.get();
+        model.deleteDelivery(deliveryToDelete);
+
+        return new CommandResult(String.format(MESSAGE_DELETE_DELIVERY_SUCCESS,
+                Messages.format(deliveryToDelete)), true);
+
     }
 
     @Override

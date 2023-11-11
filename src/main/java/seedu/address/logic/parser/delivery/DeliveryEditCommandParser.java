@@ -47,8 +47,19 @@ public class DeliveryEditCommandParser implements Parser<DeliveryEditCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_CUSTOMER_ID,
                 PREFIX_DATE, PREFIX_STATUS, PREFIX_NOTE);
 
-        DeliveryEditDescriptor deliveryEditDescriptor =
-                new DeliveryEditDescriptor();
+        DeliveryEditDescriptor deliveryEditDescriptor = createDeliveryEditDescriptor(argMultimap);
+
+        return new DeliveryEditCommand(index, deliveryEditDescriptor);
+    }
+
+    /**
+     * Creates and returns a {@code DeliveryEditDescriptor} based on the given {@code ArgumentMultimap}.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public DeliveryEditDescriptor createDeliveryEditDescriptor(ArgumentMultimap argMultimap) throws ParseException {
+
+        DeliveryEditDescriptor deliveryEditDescriptor = new DeliveryEditDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             deliveryEditDescriptor.setDeliveryName(ParserUtil
@@ -62,18 +73,15 @@ public class DeliveryEditCommandParser implements Parser<DeliveryEditCommand> {
                     .parseDeliveryDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-            deliveryEditDescriptor.setStatus(ParserUtil
-                    .parseDeliveryStatus(argMultimap.getValue(PREFIX_STATUS).get()));
+            deliveryEditDescriptor.setStatus(ParserUtil.parseDeliveryStatus(argMultimap.getValue(PREFIX_STATUS).get()));
         }
         if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
-            deliveryEditDescriptor.setNote(ParserUtil
-                    .parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
+            deliveryEditDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
         }
 
         if (!deliveryEditDescriptor.isAnyFieldEdited()) {
             throw new ParseException(DeliveryEditCommand.MESSAGE_NOT_EDITED);
         }
-
-        return new DeliveryEditCommand(index, deliveryEditDescriptor);
+        return deliveryEditDescriptor;
     }
 }
