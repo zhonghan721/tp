@@ -273,7 +273,7 @@ public class ModelManagerTest {
         modelManager.setLoginSuccess();
         modelManager.addCustomer(ALICE);
         modelManager.addCustomer(BENSON);
-        modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        modelManager.showAllFilteredCustomerList();
         assertEquals(Arrays.asList(ALICE, BENSON), modelManager.getFilteredCustomerList());
     }
 
@@ -282,7 +282,7 @@ public class ModelManagerTest {
         modelManager.setLoginSuccess();
         modelManager.addDelivery(GABRIELS_MILK);
         modelManager.addDelivery(GAMBES_RICE);
-        modelManager.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        modelManager.showAllFilteredDeliveryList();
         assertEquals(Arrays.asList(GABRIELS_MILK, GAMBES_RICE), modelManager.getFilteredDeliveryList());
     }
 
