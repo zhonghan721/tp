@@ -25,7 +25,7 @@ With HomeBoss, you can now **focus on what matters most: running your business.*
 
 
 
----
+<div style="page-break-after: always;"></div><br/>
 
 # Table of Contents
 
@@ -76,7 +76,7 @@ With HomeBoss, you can now **focus on what matters most: running your business.*
 &nbsp;&nbsp;8\. [FAQ](#faq)</br>
 &nbsp;&nbsp;9\. [Command Summary](#command-summary)</br>
 
----
+<div style="page-break-after: always;"></div><br/>
 
 # About this User Guide
 
@@ -98,7 +98,7 @@ you may refer to the [Developer Guide](./DeveloperGuide.md).
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
----
+<div style="page-break-after: always;"></div><br/>
 
 # Navigating the User Guide
 
@@ -150,7 +150,7 @@ If you're unsure what a prefix is, you can refer to the [Command Format](#homebo
 * A [&uarr; Back to Table of Contents](#table-of-contents) link is available at the end of every section
   for you to return to the Table of Contents, so that you can access another section from there easily.
 
----
+<div style="page-break-after: always;"></div><br/>
 
 # Getting Started
 
@@ -174,6 +174,8 @@ helpful [guide](https://www.java.com/en/download/help/version_manual.html).
 <br/>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## </br>Installing HomeBoss
 
@@ -207,11 +209,15 @@ files / folders before the application is launched for the first time.
     * [HomeBoss's Command Format](#homeboss-s-command-format) <br/>
     * [Registering and creating your first Delivery](#registering-and-creating-your-first-delivery)
 
-![HomeBoss Start Page](images/getting-started/register.png)
-
+<!-- ![HomeBoss Start Page](images/getting-started/register.png) -->
+<div style="text-align:center">
+  <img src="images/getting-started/register.png" alt="HomeBoss Start Page" width="500"/>
+</div>
 <br/>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## <br/>Understanding our layout
 
@@ -231,6 +237,8 @@ the application for the first time.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
+<div style="page-break-after: always;"></div>
+
 ### <br/>Command Box
 
 ![HomeBoss Command Box](images/getting-started/command_box.png){style="display: block; margin: 0 auto;"}
@@ -246,6 +254,8 @@ The Command Result / Feedback Box is where HomeBoss will provide you the results
 the commands you entered. For example, if you tried typing the `help`{.swift} command earlier, you should see
 the above feedback in your application window, together with a Help window popup.
 You can use the scroll bar on the right to scroll through a long result or feedback!
+
+<div style="page-break-after: always;"></div>
 
 ### </br>Customer / Delivery List
 
@@ -287,6 +297,8 @@ HomeBoss. You can use the scroll bar on the right to scroll through your Custome
 <br/>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## </br>HomeBoss's Command Format
 
@@ -334,6 +346,8 @@ logout
 * The **Command Phrase** is `logout`{.swift}.
 * It has no **Parameters**.
 
+<div style="page-break-after: always;"></div>
+
 <br/>
 
 <box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
@@ -364,6 +378,8 @@ can either be `1` or `1 --name furniture`.
 <br/>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## </br>Registering and creating your first Delivery
 
@@ -408,6 +424,8 @@ found [here](#register).
 4. Type `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B`
    into the Command Box and hit enter.
 
+<div style="page-break-after: always;"></div><br/>
+
 5. A new Customer called `Gabriel` will be added, and you will see the Customer's details reflected in the Customer List
    panel, similar to the image shown below.
 
@@ -420,8 +438,9 @@ found [here](#register).
 * `EXPECTED_DELIVERY_DATE`{.swift} : 2023-12-03
 
 7. Type `delivery add MacBook Pro --customer CUSTOMER_ID --date 2023-12-03`, replacing `CUSTOMER_ID`{.swift}
-
    with Gabriel's ID, and hit enter.
+
+<div style="page-break-after: always;"></div>
 
 8. A new Delivery should have been added for `Gabriel`, you should see a new Delivery in the Delivery List panel,
    similar to the image shown below.
@@ -436,6 +455,8 @@ Check them out under the [Features](#features) section to learn more!
 <br/>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
+
+<div style="page-break-after: always;"></div>
 
 ## </br>Editing the data file
 
@@ -455,7 +476,7 @@ file will remain unaffected.)
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
----
+<div style="page-break-after: always;"></div><br/>
 
 # Feature Summary
 
@@ -497,6 +518,8 @@ _These are features for managing your Deliveries in HomeBoss._
 - `delivery note` - Creates a note for a specified Delivery.
 - `delivery delete` - Deletes the specified Delivery from the Delivery database.
 
+<div style="page-break-after: always;"></div>
+
 ## </br>Miscellaneous features summary
 
 _These are general features in HomeBoss._
@@ -510,11 +533,11 @@ _These are general features in HomeBoss._
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
----
+<div style="page-break-after: always;"></div><br/>
 
 # Features
 
-## <span style="text-decoration:underline; font-size:35px"><strong>User</strong></span>
+## <span style="text-decoration:underline; font-size:29px"><strong>User</strong></span>
 
 ### Register
 
@@ -600,6 +623,8 @@ You can log in to your account to access your Customer and Delivery data by call
 
 </box>
 
+<div style="page-break-after: always;"></div><br/>
+
 </br>**Example:**
 
 * `login --user yourUsername --password GabrielIsGreat` </br>
@@ -611,7 +636,9 @@ You can log in to your account to access your Customer and Delivery data by call
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### </br></br>Update Account details
+<div style="page-break-after: always;"></div>
+
+### </br>Update Account details
 
 This command allows you to update your account details, thus enabling greater security and personalisation.
 
@@ -655,7 +682,9 @@ This command allows you to update your account details, thus enabling greater se
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### </br></br>Logout
+<div style="page-break-after: always;"></div><br/>
+
+### Logout
 
 You can log out of your account to keep your data secure at the end of the day by calling this command.
 
@@ -666,9 +695,8 @@ You can log out of your account to keep your data secure at the end of the day b
 <br/>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
-</br>
 
-### </br></br>Recover Account
+### Recover Account
 
 HomeBoss makes it easy for you to recover your account if you forget your password. You only need the answer to the
 secret question (set during account registration) to reset your password and thus regain access to your account.
@@ -691,6 +719,8 @@ secret question (set during account registration) to reset your password and thu
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 </br>**Examples:**
 
 * `recover account`{.swift} </br>
@@ -698,6 +728,8 @@ secret question (set during account registration) to reset your password and thu
   Displays your account's secret question for account recovery.
 
 ![](images/user/userRecoverAccount_after_secretQn.png)
+
+<div style="page-break-after: always;"></div><br/>
 
 * `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123` </br>
 
@@ -708,9 +740,10 @@ secret question (set during account registration) to reset your password and thu
 <br/>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
-</br>
 
-### </br></br>Delete Account
+<div style="page-break-after: always;"></div><br/>
+
+### Delete Account
 
 If you simply want to erase all your data from HomeBoss, you can delete your account by calling this command.
 
@@ -732,7 +765,9 @@ recovery process by using the `recover account`{.swift} command [here](#recover-
 [&uarr; Back to Table of Contents](#table-of-contents)
 </br>
 
-## </br><span style="text-decoration:underline;font-size:35px"><strong>Customer</strong></span>
+<div style="page-break-after: always;"></div>
+
+## </br><span style="text-decoration:underline;font-size:29px"><strong>Customer</strong></span>
 
 ### Add a Customer
 
@@ -766,6 +801,8 @@ You can add a new Customer's details into HomeBoss with this command.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 </br>**Example:**
 
 * `customer add --name Gabriel --phone 87654321 --email gabrielrocks@gmail.com --address RVRC Block B` </br>
@@ -779,7 +816,9 @@ You can add a new Customer's details into HomeBoss with this command.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### </br></br>View details of a Customer
+<div style="page-break-after: always;"></div>
+
+### </br>View details of a Customer
 
 You can view the details of a Customer by calling this command. The data displayed includes the Customer's name, phone
 number, email and address.
@@ -808,7 +847,9 @@ number, email and address.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### </br></br>View a list of Customers
+<div style="page-break-after: always;"></div><br/>
+
+### View a list of Customers
 
 This command allows you to view a list of all the Customers that you have added to HomeBoss.
 
@@ -856,6 +897,8 @@ given keywords.
 
 <br/>
 
+<div style="page-break-after: always;"></div><br/>
+
 <box type="info" background-color="#fcf8e3" border-color="#fcf8ff" icon=":gear:">
 
 **Parameter(s):**
@@ -877,7 +920,9 @@ given keywords.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### </br></br>Update details of a Customer
+<div style="page-break-after: always;"></div><br/>
+
+### Update details of a Customer
 
 This command is useful for updating the details of a Customer, such as due to a change in particulars or in the event
 that you keyed in the Customer's details wrongly.
@@ -917,9 +962,10 @@ that you keyed in the Customer's details wrongly.
 
 
 [&uarr; Back to Table of Contents](#table-of-contents)
-</br>
 
-### </br></br>Delete a Customer
+<div style="page-break-after: always;"></div><br/>
+
+### Delete a Customer
 
 You can delete any Customer who no longer require your services by calling this command.
 
@@ -955,7 +1001,9 @@ this deletion!
 [&uarr; Back to Table of Contents](#table-of-contents)
 </br>
 
-## </br><span style="text-decoration:underline;font-size:35px"><strong>Delivery</strong></span>
+<div style="page-break-after: always;"></div>
+
+## </br><span style="text-decoration:underline;font-size:29px"><strong>Delivery</strong></span>
 
 ### Add a Delivery
 
@@ -996,6 +1044,8 @@ Delivery-related commands.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 </br>**Example:**
 
 * `delivery add Chocolate Cake --customer 1 --date 2023-12-12` </br>
@@ -1012,7 +1062,9 @@ Delivery-related commands.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### </br></br>View details of a Delivery
+<div style="page-break-after: always;"></div><br/>
+
+### View details of a Delivery
 
 You can view the details of a Delivery by calling this command. The data displayed includes the Delivery's name, status,
 Customer, Customer ID, address, order date, expected Delivery date and notes (if any).
@@ -1041,7 +1093,9 @@ Customer, Customer ID, address, order date, expected Delivery date and notes (if
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### </br></br>View a list of Deliveries
+<div style="page-break-after: always;"></div><br/>
+
+### View a list of Deliveries
 
 This command allows you to view a list of all the Deliveries that you have added to HomeBoss.
 
@@ -1074,7 +1128,9 @@ sorted by expected Delivery date in descending order (latest first).
 
   </box>
 
-</br>**Examples:**
+  <div style="page-break-after: always;"></div>
+
+</br>**Example:**
 
 * `delivery list --status CREATED --customer 1 --sort DESC`</br>
 
@@ -1095,7 +1151,9 @@ You may combine any of the filter and sort options to get the list of Deliveries
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### </br></br>Find Deliveries
+<div style="page-break-after: always;"></div><br/>
+
+### Find Deliveries
 
 If you cannot remember the full name of a Delivery, you can find the Delivery with this command. It finds Deliveries
 whose names has words that exactly match any of the given keywords.
@@ -1131,6 +1189,8 @@ whose names has words that exactly match any of the given keywords.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 </br>**Example:**
 
 * `delivery find Gambes Banana` </br>
@@ -1144,7 +1204,9 @@ whose names has words that exactly match any of the given keywords.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### </br></br>Update details of a Delivery
+<div style="page-break-after: always;"></div><br/>
+
+### Update details of a Delivery
 
 This command is useful for updating the details of a Delivery, such as due to a change in the details of a Delivery or
 in the event that you keyed in the Delivery's details wrongly.
@@ -1178,6 +1240,8 @@ in the event that you keyed in the Delivery's details wrongly.
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 </br>**Examples:**
 
 * `delivery edit 1 --status CANCELLED --note Sudden overseas business trip to attend to` </br>
@@ -1206,7 +1270,9 @@ in the event that you keyed in the Delivery's details wrongly.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### </br></br>Update status of a Delivery
+<div style="page-break-after: always;"></div><br/>
+
+### Update status of a Delivery
 
 An order can have one of the following statuses: CREATED, SHIPPED, COMPLETED or CANCELLED. This command allows you to
 update the status of a Delivery to any of the aforementioned statuses, according to the progress of the Delivery for
@@ -1249,7 +1315,9 @@ your easy tracking.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### </br></br>Create a note for a Delivery
+<div style="page-break-after: always;"></div><br/>
+
+### Create a note for a Delivery
 
 If you would like to create a note about a specific Delivery, this command allows you to do so as a shortcut, as opposed
 to using the lengthier `delivery edit`{.swift} command found [here](#update-details-of-a-delivery).
@@ -1287,7 +1355,9 @@ to using the lengthier `delivery edit`{.swift} command found [here](#update-deta
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### </br></br>Delete a Delivery
+<div style="page-break-after: always;"></div><br/>
+
+### Delete a Delivery
 
 If you feel that a Delivery is no longer relevant (i.e., cancelled or completed), you can delete it from HomeBoss using
 this command.
@@ -1322,7 +1392,9 @@ this command.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-## </br><span style="text-decoration:underline;font-size:35px"><strong>Miscellaneous</strong></span>
+<div style="page-break-after: always;"></div>
+
+## </br><span style="text-decoration:underline;font-size:29px"><strong>Miscellaneous</strong></span>
 
 ### Help
 
@@ -1346,7 +1418,9 @@ guide.
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
-### </br></br>Exit
+<div style="page-break-after: always;"></div><br/>
+
+### Exit
 
 You can exit the program by calling this command.
 
@@ -1392,7 +1466,7 @@ Proceed with caution!
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
----
+<div style="page-break-after: always;"></div><br/>
 
 # FAQ
 
@@ -1423,7 +1497,7 @@ A: HomeBoss only supports English characters.<br/><br/>
 
 [&uarr; Back to Table of Contents](#table-of-contents)
 
----
+<div style="page-break-after: always;"></div><br/>
 
 # Command Summary
 
@@ -1438,7 +1512,7 @@ A: HomeBoss only supports English characters.<br/><br/>
 | Logout   | `logout`{.swift}                                                                                                                     | `logout`                                                                                                                  |
 | Delete   | `delete account`{.swift}                                                                                                             | `delete account`                                                                                                          |
 
-<br>
+<div style="page-break-after: always;"></div><br/>
 
 ## Customer
 
@@ -1451,7 +1525,7 @@ A: HomeBoss only supports English characters.<br/><br/>
 | Edit    | `customer edit CUSTOMER_ID [--name NAME] [--phone PHONE_NUMBER] [--email EMAIL] [--address ADDRESS]`{.swift} | `customer edit 1 --name Gabriel --phone 97659320 --email Gabrielrock@gmail.com --address Block 10 Tampines Road` |
 | Delete  | `customer delete CUSTOMER_ID`{.swift}                                                                        | `customer delete 1`                                                                                              |
 
-<br>
+<div style="page-break-after: always;"></div><br/>
 
 ## Delivery
 
@@ -1466,7 +1540,7 @@ A: HomeBoss only supports English characters.<br/><br/>
 | Note    | `delivery note DELIVERY_ID --note NOTE`{.swift}                                                                                                          | `delivery note 1 --note By FedEx`                                                                                          |
 | Delete  | `delivery delete DELIVERY_ID`{.swift}                                                                                                                    | `delivery delete 1`                                                                                                        |
 
-<br>
+<div style="page-break-after: always;"></div><br/>
 
 ## Miscellaneous
 
