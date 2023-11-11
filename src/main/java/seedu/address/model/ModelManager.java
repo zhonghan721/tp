@@ -96,34 +96,34 @@ public class ModelManager implements Model {
     @Override
     public void setUiListDelivery() {
         this.uiList = this.getSortedDeliveryList()
-            .stream()
-            .map(this::transformDeliveryToListItem)
-            .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                .stream()
+                .map(this::transformDeliveryToListItem)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     private ListItem transformDeliveryToListItem(Delivery delivery) {
         return new ListItem(String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName()),
-            String.format("Ordered on: %s", delivery.getOrderDate().toString()),
-            delivery.getStatus().toString(),
-            String.format("Deliver by: %s", delivery.getDeliveryDate().toString()));
+                String.format("Ordered on: %s", delivery.getOrderDate().toString()),
+                delivery.getStatus().toString(),
+                String.format("Deliver by: %s", delivery.getDeliveryDate().toString()));
     }
 
 
     @Override
     public void setUiListCustomer() {
         this.uiList = this.getFilteredCustomerList()
-            .stream()
-            .map(this::transformCustomerToListItem)
-            .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                .stream()
+                .map(this::transformCustomerToListItem)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     private ListItem transformCustomerToListItem(Customer customer) {
         String descriptionFormat = "Email: %s\nAddress: %s";
         return new ListItem(String.format("[%d] %s", customer.getCustomerId(), customer.getName()),
-            String.format(descriptionFormat,
-                customer.getEmail().toString(),
-                customer.getAddress().toString()),
-            customer.getPhone().toString());
+                String.format(descriptionFormat,
+                        customer.getEmail().toString(),
+                        customer.getAddress().toString()),
+                customer.getPhone().toString());
     }
 
     @Override
@@ -173,12 +173,14 @@ public class ModelManager implements Model {
     public String getLoginStatus() {
         if (loggedInUser.isEmpty()) {
             return "No account found. Please register an account.";
-        } else if (isLoggedIn) {
+        }
+
+        if (isLoggedIn) {
             User currLoggedInUser = this.loggedInUser.get();
             return "Hello " + currLoggedInUser.getUsername() + ".";
-        } else {
-            return "Logged out. Please login to continue.";
         }
+
+        return "Logged out. Please login to continue.";
     }
 
     //=========== AddressBook ================================================================================
@@ -198,17 +200,6 @@ public class ModelManager implements Model {
         return this.addressBook.getById(id);
     }
 
-    @Deprecated
-    @Override
-    public Customer getCustomerUsingFilteredList(int id) {
-        for (Customer c : filteredCustomers) {
-            if (c.getCustomerId() == id) {
-                return c;
-            }
-        }
-        return null;
-    }
-
     @Override
     public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
@@ -225,13 +216,13 @@ public class ModelManager implements Model {
     public void deleteCustomer(Customer target) {
         addressBook.removeCustomer(target);
         deleteDeliveryByCustomer(target);
-        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        showAllFilteredCustomerList();
     }
 
     @Override
     public void addCustomer(Customer customer) {
         addressBook.addCustomer(customer);
-        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        showAllFilteredCustomerList();
     }
 
     @Override
@@ -239,7 +230,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedCustomer);
 
         addressBook.setCustomer(target, editedCustomer);
-        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        showAllFilteredCustomerList();
     }
 
     //=========== Filtered Customer List Accessors =============================================================
@@ -371,7 +362,7 @@ public class ModelManager implements Model {
         userPrefs.registerUser(user);
         this.setLoggedInUser(user);
         this.setLoginSuccess();
-        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        showAllFilteredCustomerList();
     }
 
     /**
