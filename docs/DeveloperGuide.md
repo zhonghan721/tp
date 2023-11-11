@@ -1220,13 +1220,13 @@ otherwise)
 
 - 1a. Logged-in Owner does not specify the id.
 
-    - 1a1. CMS requests Logged-in Owner to key in an id.
+    - 1a1. CMS requests Logged-in Owner to specify all required fields.
 
       Use Case ends.
 
-- 1b. Logged-in Owner specifies a customer id that does not exist.
+- 1b. Logged-in Owner specifies an invalid Customer.
 
-    - 1b1. CMS displays a message that customer id does not exist.
+    - 1b1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
 
       Use Case ends.
 
@@ -1456,6 +1456,18 @@ otherwise)
     - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
       Use Case Ends.
+
+- 1b. Command specifies an invalid Delivery.
+
+   - 1b1. DMS displays an error to Logged-in Owner that the specified Delivery does not exist.
+
+     Use Case Ends.
+
+- 1c. Command specifies an invalid note.
+
+   - 1c1. DMS informs the logged-in owner of an invalid note being entered.
+
+     Use Case Ends.
 
 ---
 
@@ -1773,15 +1785,15 @@ otherwise)
 
 **Extensions**
 
-- 1a. Logged-in owner did not specify the delivery id or delivery status.
+- 1a. Command has missing fields.
 
-    - 1a1. DMS informs the logged-in owner of the missing field.
+    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
       Use case ends.
 
-- 1b. Logged-in owner specified a delivery id that does not exist.
+- 1b. Logged-in owner specified an invalid Delivery.
 
-    - 1b1. DMS informs the logged-in owner of an invalid delivery id being entered.
+    - 1b1. DMS displays an error to Logged-in Owner that the specified Delivery does not exist.
 
       Use case ends.
 
