@@ -184,14 +184,15 @@ public class DeliveryListCommandParserTest {
 
     @Test
     public void equals() {
-        DeliveryListCommand deliveryListCommand = new DeliveryListCommand(DeliveryStatus.SHIPPED, null,
+        DeliveryListCommand deliveryListCommand = new DeliveryListCommand(DeliveryStatus.SHIPPED, 1,
             new Date("2023-12-12"), Sort.ASC);
 
         // same object -> returns true
         assertEquals(deliveryListCommand, deliveryListCommand);
 
         // same values -> returns true
-        DeliveryListCommand deliveryListCommandCopy = new DeliveryListCommand(DeliveryStatus.SHIPPED, null, null,
+        DeliveryListCommand deliveryListCommandCopy = new DeliveryListCommand(DeliveryStatus.SHIPPED, 1,
+            new Date("2023-12-12"),
             Sort.ASC);
         assertEquals(deliveryListCommand, deliveryListCommandCopy);
 
@@ -202,20 +203,22 @@ public class DeliveryListCommandParserTest {
         assertNotEquals(deliveryListCommand, null);
 
         // different status -> returns false
-        DeliveryListCommand differentDeliveryListCommand = new DeliveryListCommand(DeliveryStatus.CANCELLED, null,
-            null, Sort.ASC);
+        DeliveryListCommand differentDeliveryListCommand = new DeliveryListCommand(DeliveryStatus.CANCELLED, 1,
+            new Date("2023-12-12"), Sort.ASC);
         assertNotEquals(deliveryListCommand, differentDeliveryListCommand);
 
         // different sort -> returns false
-        differentDeliveryListCommand = new DeliveryListCommand(DeliveryStatus.SHIPPED, null, null, Sort.DESC);
+        differentDeliveryListCommand = new DeliveryListCommand(DeliveryStatus.SHIPPED, 1, new Date("2023-12-12"),
+            Sort.DESC);
         assertNotEquals(deliveryListCommand, differentDeliveryListCommand);
 
         // different customer id -> returns false
-        differentDeliveryListCommand = new DeliveryListCommand(DeliveryStatus.SHIPPED, 1, null, Sort.ASC);
+        differentDeliveryListCommand = new DeliveryListCommand(DeliveryStatus.SHIPPED, 2, new Date("2023-12-12"),
+            Sort.ASC);
         assertNotEquals(deliveryListCommand, differentDeliveryListCommand);
 
         // different delivery date -> returns false
-        differentDeliveryListCommand = new DeliveryListCommand(DeliveryStatus.SHIPPED, null,
+        differentDeliveryListCommand = new DeliveryListCommand(DeliveryStatus.SHIPPED, 1,
             new Date("2024-12-12"), Sort.ASC);
         assertNotEquals(deliveryListCommand, differentDeliveryListCommand);
     }
