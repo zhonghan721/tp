@@ -293,6 +293,8 @@ This section describes some noteworthy details on how certain features are imple
 
 - [Create Delivery Note](#create-note-for-delivery-feature)
 - [User Register Account Command](#user-register-account-command)
+- [Delivery List Command](#list-delivery-feature)
+- [Deliver View Command](#view-delivery-feature)
 - [User Login Command](#user-login-command)
 - User Update Details Command
 - [User Logout Command](#user-logout-command)
@@ -404,7 +406,7 @@ The following sequence diagram shows how the `register` command works:
 The `delivery list` command is used to list all deliveries in the delivery book.
 
 The format of the `delivery list` command can be found
-[here](./UserGuide.md#view-all-deliveries)
+[here](./UserGuide.md#view-a-list-of-deliveries)
 
 ### Feature Details
 
@@ -421,7 +423,7 @@ The format of the `delivery list` command can be found
 8. If the user is not logged in, a `CommandException` will be thrown.
 9. If the status was provided, the status is added as a filter.
 10. If the customer id was provided, the customer id is added as a filter.
-11. If the date was provided, the date is added as a expected delivery date filter.
+11. If the date was provided, the date is added as an expected delivery date filter.
 12. The delivery list will be filtered by the filters created, if any.
 13. If the sort was provided, the sort provided is added as the sort. By default, a descending order sort is
     added as a sort.
@@ -473,7 +475,7 @@ The following sequence diagram illustrates the `delivery list` command sequence:
 The `delivery view` command is used to view a selected delivery with the id specified by the user.
 
 The format of the `delivery view` command can be found
-[here](./UserGuide.md#view-details-of-deliveries)
+[here](./UserGuide.md#view-details-of-a-delivery)
 
 #### Feature Details
 
