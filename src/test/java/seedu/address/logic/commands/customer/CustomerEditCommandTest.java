@@ -49,18 +49,21 @@ public class CustomerEditCommandTest {
 
         System.out.println(editedCustomer);
         System.out.println(editCommand);
+        System.out.println(expectedMessage);
+        System.out.println(model.getDeliveryBook());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setCustomer(model.getFilteredCustomerList().get(0), editedCustomer);
+        CustomerEditCommand.updateDelivery(expectedModel, editedCustomer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, true);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastCustomer = Index.fromOneBased(model.getFilteredCustomerList().size());
+        Index indexLastCustomer = Index.fromOneBased(model.getFilteredCustomerListSize());
         Customer lastCustomer = model.getFilteredCustomerList().get(indexLastCustomer.getZeroBased());
 
         CustomerBuilder customerInList = new CustomerBuilder(lastCustomer);
@@ -77,6 +80,7 @@ public class CustomerEditCommandTest {
                 new DeliveryBook(model.getDeliveryBook()),
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setCustomer(lastCustomer, editedCustomer);
+        CustomerEditCommand.updateDelivery(expectedModel, editedCustomer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, true);
     }
@@ -117,6 +121,7 @@ public class CustomerEditCommandTest {
                 new DeliveryBook(model.getDeliveryBook()),
                 new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setCustomer(model.getFilteredCustomerList().get(0), editedCustomer);
+        CustomerEditCommand.updateDelivery(expectedModel, editedCustomer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, true);
     }

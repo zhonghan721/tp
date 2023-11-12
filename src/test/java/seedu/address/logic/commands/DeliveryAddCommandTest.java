@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
@@ -56,14 +57,14 @@ public class DeliveryAddCommandTest {
         CommandResult commandResult = null;
         try {
             commandResult = new DeliveryAddCommand(deliveryAddDescriptor)
-                .execute(modelStub);
+                    .execute(modelStub);
         } catch (CommandException e) {
             e.printStackTrace();
         }
 
 
         assertEquals(String.format(DeliveryAddCommand.MESSAGE_SUCCESS, Messages
-            .format(modelStub.getDelivery(0).get())), commandResult.getFeedbackToUser());
+                .format(modelStub.getDelivery(0).get())), commandResult.getFeedbackToUser());
 
     }
 
@@ -76,10 +77,10 @@ public class DeliveryAddCommandTest {
         Delivery validDelivery = new DeliveryBuilder().withCustomer(invalidCustomer).build();
 
         DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(
-            new DeliveryAddDescriptorBuilder(validDelivery).build());
+                new DeliveryAddDescriptorBuilder(validDelivery).build());
 
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX, () ->
-            deliveryAddCommand.execute(modelStub));
+                deliveryAddCommand.execute(modelStub));
     }
 
     @Test
@@ -89,14 +90,14 @@ public class DeliveryAddCommandTest {
 
         ModelStub modelStub = new ModelStubAcceptingDeliveryAdded();
         Delivery validDelivery =
-            new DeliveryBuilder().withCustomer(validCustomer)
-                .withDeliveryDate(INVALID_DELIVERY_DATE).build();
+                new DeliveryBuilder().withCustomer(validCustomer)
+                        .withDeliveryDate(INVALID_DELIVERY_DATE).build();
 
         DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(new
-            DeliveryAddDescriptorBuilder(validDelivery).build());
+                DeliveryAddDescriptorBuilder(validDelivery).build());
 
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_DELIVERY_DATE, () ->
-            deliveryAddCommand.execute(modelStub));
+                deliveryAddCommand.execute(modelStub));
     }
 
     @Test
@@ -108,9 +109,9 @@ public class DeliveryAddCommandTest {
         Delivery validDelivery = new DeliveryBuilder().withCustomer(validCustomer).build();
 
         DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(new
-            DeliveryAddDescriptorBuilder(validDelivery).build());
+                DeliveryAddDescriptorBuilder(validDelivery).build());
         assertThrows(CommandException.class, Messages.MESSAGE_USER_NOT_AUTHENTICATED, () ->
-            deliveryAddCommand.execute(modelStub));
+                deliveryAddCommand.execute(modelStub));
 
     }
 
@@ -146,8 +147,8 @@ public class DeliveryAddCommandTest {
         DeliveryAddDescriptor deliveryAddDescriptor = new DeliveryAddDescriptorBuilder().build();
         DeliveryAddCommand deliveryAddCommand = new DeliveryAddCommand(deliveryAddDescriptor);
         String expected = new ToStringBuilder(deliveryAddCommand)
-            .add("toAdd", deliveryAddDescriptor)
-            .toString();
+                .add("toAdd", deliveryAddDescriptor)
+                .toString();
         assertEquals(expected, deliveryAddCommand.toString());
     }
 
@@ -228,11 +229,6 @@ public class DeliveryAddCommandTest {
         @Override
         public Optional<Customer> getCustomer(int id) {
             return Optional.empty();
-        }
-
-        @Override
-        public Customer getCustomerUsingFilteredList(int id) {
-            return null;
         }
 
         @Override
@@ -326,6 +322,11 @@ public class DeliveryAddCommandTest {
         public Optional<Delivery> getDelivery(int id) {
             return Optional.empty();
         }
+
+        @Override
+        public Stream<Delivery> getDeliveryByCustomerId(int id) {
+            throw new AssertionError("This method should not be called.");
+        };
 
         @Override
         public boolean hasDelivery(Delivery delivery) {
@@ -442,8 +443,8 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
-        public User getStoredUser() {
-            return null;
+        public Optional<User> getStoredUser() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
