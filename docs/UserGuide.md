@@ -584,7 +584,8 @@ You can register for a new user account with HomeBoss by calling this command.
 * `CONFIRM_PASSWORD`{.swift} must be the same as `PASSWORD`{.swift}.<br/><br/>
 * `SECRET_QUESTION`{.swift} can include any characters but must not be empty.<br/><br/>
 * `ANSWER`{.swift} can include any characters but must not be empty.<br/><br/>
-* `SECRET_QUESTION`{.swift} and `ANSWER`{.swift} will be used for account recovery.<br/>
+* `SECRET_QUESTION`{.swift} and `ANSWER`{.swift} will be used for account recovery.<br/><br/>
+* Verification of the correct format of `PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} will precede the check for equality of passwords.<br/>
 
 </box>
 
@@ -679,7 +680,9 @@ This command allows you to update your account details, thus enabling greater se
 * `PASSWORD`{.swift} must be at least 8 alphanumeric characters long.<br/><br/>
 * `CONFIRM_PASSWORD`{.swift} must be the same as `PASSWORD`{.swift}.<br/><br/>
 * `SECRET_QUESTION`{.swift} can take any characters.<br/><br/>
-* `ANSWER`{.swift} can take any characters.<br/>
+* `ANSWER`{.swift} can take any characters.<br/><br/>
+* Verification of the correct format of `PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} will precede the check for
+  equality of passwords.<br/>
 
 </box>
 
@@ -728,7 +731,8 @@ secret question (set during account registration) to reset your password and thu
   versa.<br/><br/>
 * `ANSWER`{.swift} can take any characters.<br/><br/>
 * `NEW_PASSWORD`{.swift} must be at least 8 alphanumeric characters long.<br/><br/>
-* `CONFIRM_PASSWORD`{.swift} must be the same as `NEW_PASSWORD`{.swift}.<br/>
+* `CONFIRM_PASSWORD`{.swift} must be the same as `NEW_PASSWORD`{.swift}.<br/><br/>
+* Verification of the correct format of `PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} will precede the check for equality of passwords.<br/>
 
 </box>
 
