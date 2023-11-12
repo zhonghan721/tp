@@ -162,6 +162,36 @@ public class Delivery {
         return deliveryDate;
     }
 
+    /**
+     * Returns true if the delivery date matches the delivery date of the delivery.
+     *
+     * @param date The delivery date to check.
+     * @return True if the delivery date matches the delivery date of the delivery.
+     */
+    public boolean isSameDeliveryDate(Date date) {
+        return deliveryDate.equals(date);
+    }
+
+    /**
+     * Returns true if the customer ID matches the customer ID of the delivery.
+     *
+     * @param customerId The customer ID to check.
+     * @return True if the customer ID matches the customer ID of the delivery.
+     */
+    public boolean isSameCustomerIdToDeliver(int customerId) {
+        return customer.isSameCustomerId(customerId);
+    }
+
+    /**
+     * Returns true if the delivery status matches the delivery status of the delivery.
+     *
+     * @param status The delivery status to check.
+     * @return True if the delivery status matches the delivery status of the delivery.
+     */
+    public boolean isSameDeliveryStatus(DeliveryStatus status) {
+        return this.status.equals(status);
+    }
+
     public DeliveryStatus getStatus() {
         return status;
     }
@@ -190,7 +220,7 @@ public class Delivery {
         }
 
         return otherDelivery != null
-                && otherDelivery.getDeliveryId() == getDeliveryId();
+            && otherDelivery.getDeliveryId() == getDeliveryId();
     }
 
     /**
@@ -213,13 +243,13 @@ public class Delivery {
         Delivery otherDelivery = (Delivery) other;
 
         return otherDelivery.deliveryId == deliveryId
-                && otherDelivery.deliveryDate.equals(deliveryDate)
-                && otherDelivery.name.equals(name)
-                && otherDelivery.customer.equals(customer)
-                && Objects.equals(otherDelivery.note, note)
-                && otherDelivery.orderDate.equals(orderDate)
-                && otherDelivery.status.equals(status)
-                && otherDelivery.address.equals(address);
+            && otherDelivery.deliveryDate.equals(deliveryDate)
+            && otherDelivery.name.equals(name)
+            && otherDelivery.customer.equals(customer)
+            && Objects.equals(otherDelivery.note, note)
+            && otherDelivery.orderDate.equals(orderDate)
+            && otherDelivery.status.equals(status)
+            && otherDelivery.address.equals(address);
     }
 
     @Override
@@ -230,13 +260,13 @@ public class Delivery {
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("deliveryId", deliveryId)
-                .add("name", name)
-                .add("customer", customer)
-                .add("orderedAt", orderDate)
-                .add("deliveredAt", deliveryDate)
-                .add("address:", address)
-                .add("note:", Optional.ofNullable(note)
-                        .map(n -> String.format("\n Note:%s", n)).orElse(""))
-                .toString();
+            .add("name", name)
+            .add("customer", customer)
+            .add("orderedAt", orderDate)
+            .add("deliveredAt", deliveryDate)
+            .add("address:", address)
+            .add("note:", Optional.ofNullable(note)
+                .map(n -> String.format("\n Note:%s", n)).orElse(""))
+            .toString();
     }
 }

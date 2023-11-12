@@ -99,8 +99,18 @@ public class Customer {
         }
 
         return otherCustomer != null
-                && (customerId == otherCustomer.customerId
-                || phone.equals(otherCustomer.getPhone()));
+            && (customerId == otherCustomer.customerId
+            || phone.equals(otherCustomer.getPhone()));
+    }
+
+    /**
+     * Returns true if the customer has the same customerId.
+     *
+     * @param customerId Customer id to compare with.
+     * @return True if the customer has the same customerId.
+     */
+    public boolean isSameCustomerId(int customerId) {
+        return this.customerId == customerId;
     }
 
     /**
@@ -108,7 +118,7 @@ public class Customer {
      */
     public boolean hasSamePhone(Customer otherCustomer) {
         return otherCustomer != null
-                && phone.equals(otherCustomer.getPhone());
+            && phone.equals(otherCustomer.getPhone());
     }
 
     /**
@@ -128,10 +138,10 @@ public class Customer {
 
         Customer otherCustomer = (Customer) other;
         return customerId == otherCustomer.customerId
-                && name.equals(otherCustomer.name)
-                && phone.equals(otherCustomer.phone)
-                && email.equals(otherCustomer.email)
-                && address.equals(otherCustomer.address);
+            && name.equals(otherCustomer.name)
+            && phone.equals(otherCustomer.phone)
+            && email.equals(otherCustomer.email)
+            && address.equals(otherCustomer.address);
     }
 
     @Override
@@ -143,12 +153,12 @@ public class Customer {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("customerId", customerId)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .toString();
+            .add("customerId", customerId)
+            .add("name", name)
+            .add("phone", phone)
+            .add("email", email)
+            .add("address", address)
+            .toString();
     }
 
 }

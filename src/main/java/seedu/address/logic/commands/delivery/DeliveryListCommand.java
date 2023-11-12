@@ -79,11 +79,7 @@ public class DeliveryListCommand extends DeliveryCommand {
         }
         assert model.getUserLoginStatus() : "User should be logged in";
 
-        Optional<DeliveryStatus> status = Optional.ofNullable(this.status);
-        Optional<Integer> customerId = Optional.ofNullable(this.customerId);
-        Optional<Date> deliveryDate = Optional.ofNullable(this.deliveryDate);
-
-        Predicate<Delivery> filters = this.createDeliveryListFilters(model, status, customerId, deliveryDate);
+        Predicate<Delivery> filters = this.createDeliveryListFilters();
 
         assert filters != null : "Filters should not be null";
 
@@ -105,31 +101,28 @@ public class DeliveryListCommand extends DeliveryCommand {
     /**
      * Applies the filters to the delivery list.
      *
-     * @param model        model to apply filters to.
-     * @param status       status to filter by.
-     * @param customerId   customer id to filter by.
-     * @param deliveryDate delivery date to filter by.
      * @return predicate with filters applied.
      */
-    private Predicate<Delivery> createDeliveryListFilters(Model model,
-                                                          Optional<DeliveryStatus> status,
-                                                          Optional<Integer> customerId,
-                                                          Optional<Date> deliveryDate) {
+    private Predicate<Delivery> createDeliveryListFilters() {
+        Optional<DeliveryStatus> status = Optional.ofNullable(this.status);
+        Optional<Integer> customerId = Optional.ofNullable(this.customerId);
+        Optional<Date> deliveryDate = Optional.ofNullable(this.deliveryDate);
+
         Predicate<Delivery> filters = PREDICATE_SHOW_ALL_DELIVERIES;
 
         if (status.isPresent()) {
             // filter by status
-            filters = filters.and(delivery -> delivery.getStatus().equals(status.get()));
+            filters = filters.and(delivery -> delivery.isSameDeliveryStatus(status.get()));
         }
 
         if (customerId.isPresent()) {
             // filter by customer id
-            filters = filters.and(delivery -> delivery.getCustomer().getCustomerId() == customerId.get());
+            filters = filters.and(delivery -> delivery.isSameCustomerIdToDeliver(customerId.get()));
         }
 
         if (deliveryDate.isPresent()) {
             // filter by expected delivery date
-            filters = filters.and(delivery -> delivery.getDeliveryDate().equals(deliveryDate.get()));
+            filters = filters.and(delivery -> delivery.isSameDeliveryDate(deliveryDate.get()));
         }
 
         return filters;
