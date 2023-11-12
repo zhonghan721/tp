@@ -18,7 +18,6 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.delivery.DeliveryEditCommand.DeliveryEditDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.customer.Address;
@@ -111,7 +110,7 @@ public class CustomerEditCommand extends CustomerCommand {
 
             // update delivery associated with the edited customer
             updateDelivery(model, editedCustomer);
-            model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+            model.showAllFilteredCustomerList();
 
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
                     Messages.format(editedCustomer)), true);
@@ -144,9 +143,7 @@ public class CustomerEditCommand extends CustomerCommand {
         int customerId = editedCustomer.getCustomerId();
         Stream<Delivery> deliveries = model.getDeliveryByCustomerId(customerId);
         deliveries.forEach(d -> {
-            DeliveryEditDescriptor descriptor = new DeliveryEditDescriptor();
-            descriptor.setCustomerId(customerId);
-            Delivery editedDelivery = createEditedDelivery(d, descriptor, editedCustomer);
+            Delivery editedDelivery = createEditedDelivery(d, editedCustomer);
             model.setDelivery(d, editedDelivery);
         });
     }
@@ -155,31 +152,28 @@ public class CustomerEditCommand extends CustomerCommand {
      * Creates and returns a {@code Delivery} with the customer details edited.
      *
      * @param deliveryToEdit         {@code Delivery} which the command edits.
-     * @param deliveryEditDescriptor {@code editDeliveryDescriptor} details to edit the delivery with.
      * @param editedCustomer         {@code Customer} which the delivery is associated with.
      */
-    private static Delivery createEditedDelivery(Delivery deliveryToEdit, DeliveryEditDescriptor
-            deliveryEditDescriptor, Customer editedCustomer) {
+    private static Delivery createEditedDelivery(Delivery deliveryToEdit, Customer editedCustomer) {
 
         assert deliveryToEdit != null;
 
-        DeliveryName updatedDeliveryName =
-                deliveryEditDescriptor.getDeliveryName().orElse(deliveryToEdit.getName());
+        DeliveryName deliveryName = deliveryToEdit.getName();
+        assert deliveryName != null;
 
         OrderDate orderDate = deliveryToEdit.getOrderDate();
+        assert orderDate != null;
 
-        DeliveryDate updatedDeliveryDate =
-                deliveryEditDescriptor.getDeliveryDate().orElse(deliveryToEdit.getDeliveryDate());
+        DeliveryDate deliveryDate = deliveryToEdit.getDeliveryDate();
+        assert deliveryDate != null;
 
-        DeliveryStatus updatedDeliveryStatus =
-                deliveryEditDescriptor.getStatus().orElse(deliveryToEdit.getStatus());
+        DeliveryStatus deliveryStatus = deliveryToEdit.getStatus();
+        assert deliveryStatus != null;
 
-        Note updatedNote = deliveryEditDescriptor.getNote().orElse(deliveryToEdit.getNote());
+        Note note = deliveryToEdit.getNote();
 
-        return new Delivery(deliveryToEdit.getDeliveryId(), updatedDeliveryName, editedCustomer, orderDate,
-                updatedDeliveryDate,
-                updatedDeliveryStatus,
-                updatedNote);
+        return new Delivery(deliveryToEdit.getDeliveryId(), deliveryName, editedCustomer, orderDate,
+                deliveryDate, deliveryStatus, note);
     }
 
     @Override
@@ -243,6 +237,10 @@ public class CustomerEditCommand extends CustomerCommand {
             this.customerId = customerId;
         }
 
+        public int getCustomerId() {
+            return customerId;
+        }
+
         public void setName(Name name) {
             this.name = name;
         }
@@ -296,6 +294,7 @@ public class CustomerEditCommand extends CustomerCommand {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
+                    .add("customerId", customerId)
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)

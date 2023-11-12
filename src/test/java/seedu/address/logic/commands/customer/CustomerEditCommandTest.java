@@ -50,6 +50,7 @@ public class CustomerEditCommandTest {
         System.out.println(editedCustomer);
         System.out.println(editCommand);
         System.out.println(expectedMessage);
+        System.out.println(model.getDeliveryBook());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
@@ -62,7 +63,7 @@ public class CustomerEditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastCustomer = Index.fromOneBased(model.getFilteredCustomerList().size());
+        Index indexLastCustomer = Index.fromOneBased(model.getFilteredCustomerListSize());
         Customer lastCustomer = model.getFilteredCustomerList().get(indexLastCustomer.getZeroBased());
 
         CustomerBuilder customerInList = new CustomerBuilder(lastCustomer);
