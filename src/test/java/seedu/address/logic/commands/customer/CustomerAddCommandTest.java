@@ -47,7 +47,7 @@ public class CustomerAddCommandTest {
         CommandResult commandResult = new CustomerAddCommand(validCustomer).execute(modelStub);
 
         assertEquals(String.format(CustomerAddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
-            commandResult.getFeedbackToUser());
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validCustomer), modelStub.customersAdded);
     }
 
@@ -59,7 +59,7 @@ public class CustomerAddCommandTest {
 
 
         assertThrows(CommandException.class,
-            CustomerAddCommand.MESSAGE_DUPLICATE_CUSTOMER, () -> customerAddCommand.execute(modelStub));
+                CustomerAddCommand.MESSAGE_DUPLICATE_CUSTOMER, () -> customerAddCommand.execute(modelStub));
 
     }
 
@@ -71,7 +71,7 @@ public class CustomerAddCommandTest {
         CustomerAddCommand customerAddCommand = new CustomerAddCommand(validCustomer);
 
         assertThrows(CommandException.class,
-            Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> customerAddCommand.execute(modelStub));
+                Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> customerAddCommand.execute(modelStub));
     }
 
     @Test
@@ -172,11 +172,6 @@ public class CustomerAddCommandTest {
         @Override
         public Optional<Customer> getCustomer(int id) {
             return Optional.empty();
-        }
-
-        @Override
-        public Customer getCustomerUsingFilteredList(int id) {
-            return null;
         }
 
         @Override
@@ -391,7 +386,7 @@ public class CustomerAddCommandTest {
         }
 
         @Override
-        public User getStoredUser() {
+        public Optional<User> getStoredUser() {
             throw new AssertionError("This method should not be called.");
         }
 

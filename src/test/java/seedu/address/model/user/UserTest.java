@@ -65,4 +65,19 @@ public class UserTest {
         String expected = User.class.getCanonicalName() + "{username=" + AARON.getUsername() + "}";
         assertEquals(expected, AARON.toString());
     }
+
+    @Test
+    public void checkAnswerEquals() {
+        // same answer -> returns true
+        assertTrue(AARON.checkAnswerEquals("Aaron"));
+
+        // null -> returns false
+        assertFalse(AARON.checkAnswerEquals(null));
+
+        // different answer -> returns false
+        assertFalse(AARON.checkAnswerEquals("foodbearAnswer"));
+
+        // check case sensitivity
+        assertTrue(AARON.checkAnswerEquals("aaroN"));
+    }
 }
