@@ -13,8 +13,14 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well }_
+HomeBoss is a software project adapted from the
+[AddressBook-Level3 project](https://se-education.org/addressbook-level3/) created by
+the [SE-EDU initiative](https://se-education.org).
+
+Libraries used in this project:
+* [Jackson](https://github.com/FasterXML/jackson)
+* [JavaFX](https://openjfx.io/)
+* [JUnit5](https://github.com/junit-team/junit5)
 
 ---
 
@@ -117,7 +123,7 @@ call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<box type="info" seamless>
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline reaches the end of diagram.
@@ -1885,8 +1891,12 @@ otherwise)
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
 5. Data stored should be persistent until removal by user, and Private Contact Details should be secure.
-6. The project is expected to adhere to a schedule which delivers a feature set every milestone up to _V1.3_
-7. The application is not expected to
+6. Data should be stored locally.
+7. The GUI should not cause any resolution-related inconveniences to the user for standard screen resolutions of
+   1920x1080 and higher, and should be usable for screen resolutions of 1280x720 and higher.
+8. The application should be packaged into a single JAR file with size not exceeding 100MB.
+9. The project is expected to adhere to a schedule which delivers a feature set every milestone up to _V1.3_
+10. The application is not expected to
     1. Perform Inventory Management
     2. Perform Route Planning
 
@@ -1894,10 +1904,17 @@ _{More to be added}_
 
 ### Glossary
 
-- **Mainstream OS**: Windows, Linux, Unix, OS-X
-- **Private Contact Detail**: A contact detail that is not meant to be shared with others
-- **CLI**: Command Line Interface
-- **Owner**: The customer who owns the home-based business and who uses the app
+| Term                           | Definition                                                                              |
+|--------------------------------|-----------------------------------------------------------------------------------------|
+| Alphanumeric                   | Consisting of only letters and numbers                                                  |
+| Command Line Interface (CLI)   | A text-based user interface used to run programs                                        |
+| Graphical User Interface (GUI) | A visual interface where you can interact with the program through graphical components |
+| JSON                           | Short for JavaScript Object Notation, a lightweight format for storing your data        |
+| Owner                          | The individual who owns the home-based business and who uses the HomeBoss app           |
+| Mainstream OS                  | Windows, Linux, Unix, OS-X                                                              |
+| Parameter                      | Inputs to customise the command to your needs                                           |
+| Prefix                         | Special markers for HomeBoss to understand your inputs                                  |
+| Private Contact Detail         | A contact detail that is not meant to be shared with others                             |
 
 ---
 
@@ -1914,44 +1931,745 @@ testers are expected to do more _exploratory_ testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+1. Initial launch.
 
-    1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy it into an empty folder.
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
-       optimum.
+    2. Run `HomeBoss.jar`{.swift}. If you are unsure how to run a `.jar` file, you may refer to this helpful
+       [guide](https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Run-JAR-file-example-windows-linux-ubuntu).
 
-1. Saving window preferences
+    3. First register for HomeBoss using the `register`{.swift} command. So, for example, if you want to register an account
+       with the following details:
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+       > `USERNAME`: Alex123
+       > `PASSWORD`: AlexIsGreat
+       > `CONFIRM_PASSWORD`: AlexIsGreat
+       > `SECRET_QUESTION`: First Pet Name?
+       > `ANSWER`: KoKo
 
-    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+       Type `register --user Alex123 --password AlexIsGreat --confirmPass AlexIsGreat --secretQn First Pet Name?
+       --answer Koko`{.swift} into the Command Box and hit enter. More details on the command can be found [here](#register).
 
-1. _{ more test cases …​ }_
+   4. Expected: Should see the HomeBoss Homepage.
 
-### Deleting a customer
+2. Subsequent launches.
 
-1. Deleting a customer while all customers are being shown
+   1. Relaunch the application by running `HomeBoss.jar`{.swift}.
 
-    1. Prerequisites: List all customers using the `list` command. Multiple customers in the list.
+   2. Using the `login`{.swift} command, log in into HomeBoss with the same user details entered earlier.
+      Expected: User is able to log in successfully and see the HomeBoss homepage.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-       Timestamp in the status bar is updated.
+### Register
 
-    1. Test case: `delete 0`<br>
-       Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
+1. Registering for an account.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+   1. Prerequisites: None
 
-1. _{ more test cases …​ }_
+   2. Test Case: `register --user Gabriel --password GabrielIsGreat --confirmPass GabrielIsGreat --secretQn First Pet Name? --answer Koko`{.swift}.</br>
+      Expected: A new user account is registered with username `Gabriel`{.swift}, password `GabrielIsGreat`{.swift},
+      secret question `First Pet Name?`{.swift} and answer `Koko`{.swift}. 
+
+   3. Test Case: `register --user Ga_briel --password GabrielIsGreat --confirmPass GabrielIsGreat --secretQn First Pet Name? --answer Koko`{.swift}.</br>
+      Expected: No new user is registered. Error indicating username constraints is
+      shown in the feedback message.
+
+   4. Test Case: `register --user Gabriel --password Gabriel_IsGreat --confirmPass Gabriel_IsGreat --secretQn First Pet Name? --answer Koko`{.swift}.</br>
+      Expected: No new user is registered. Error indicating password constraints is
+      shown in the feedback message.
+
+   5. Test Case: `register --user Gabriel --password GabrielIsGreat --confirmPass GabrielIsGreat1 --secretQn First Pet Name? --answer Koko`{.swift}.</br>
+      Expected: No new user is registered. Error indicating password and confirm password do not match is
+      shown in the feedback message.
+
+   6. Test Case: `register --user Gabriel --password GabrielIsGreat --confirmPass GabrielIsGreat --secretQn First Pet Name?`{.swift}.</br>
+      Expected: No new user is registered. Error indicating invalid command format is
+      shown in the feedback message.
+
+   7. Test Case: There already exists a user account stored in the application.</br>
+      Expected: No new user is registered. Error indicating existing account is
+      shown in the feedback message.
+
+### Login
+
+1. Login to an account.
+
+   1. Prerequisites: There exists a stored user in the application, with the username `Gabriel`{.swift} and
+      password `GabrielIsGreat`{.swift}. The user is currently logged-out of the application.
+
+   2. Test Case: `login --user Gabriel --password GabrielIsGreat`{.swift}.</br>
+      Expected: The user is logged-in into the application. A welcome message is shown in the result message.
+
+   3. Test Case: `login --user Ga_briel --password GabrielIsGreat`{.swift}.</br>
+      Expected: The user does not get logged-in. Error indicating username constraints is
+      shown in the feedback message.
+
+   4. Test Case: `login --user Gabriel --password Gabriel_IsGreat`{.swift}.</br>
+      Expected: The user does not get logged-in. Error indicating password constraints is
+      shown in the feedback message.
+
+   5. Test Case: `login --user Gabriel1 --password GabrielIsGreat`{.swift}.</br>
+      Expected: The user does not get logged-in. Error indicating wrong username or password is
+      shown in the feedback message.
+
+   6. Test Case: `login --user Gabriel --password GabrielIsGreat1`{.swift}.</br>
+      Expected: Similar to previous.
+
+   7. Test Case: `login --user Gabriel`{.swift}.</br>
+      Expected: The user does not get logged-in. Error indicating invalid command format is
+      shown in the feedback message.
+
+
+### Update Account Details
+
+1. Updating account details.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command. 
+
+   2. Test Case: `update --user Gabriel123`{.swift}.</br>
+      Expected: The username of the currently logged-in user is updated to `Gabriel123`{.swift}.
+
+   3. Test Case: `update --password GabrielIsCool --confirmPass GabrielIsCool`{.swift}.</br>
+      Expected: The password of the currently logged-in user is updated to `GabrielIsCool`{.swift}.
+
+   4. Test Case: `update --secretQn Favourite Pet --answer Bobo`{.swift}.</br>
+      Expected: The secret question of the currently logged-in user is updated to `GabrielIsCool`{.swift} and the
+      answer is updated to `Bobo`{.swift}.
+
+   5. Test Case: `update`{.swift}.</br>
+      Expected: No user details are updated. Error indicating that at least one field must be specified is
+      shown in the feedback message.
+
+   6. Test Case: `update --user G_briel123`{.swift}.</br>
+      Expected: No user details are updated. Error indicating username constraints is
+      shown in the feedback message.
+
+   7. Test Case: `update --password Gabriel_IsCool --confirmPass Gabriel_IsCool`{.swift}.</br>
+      Expected: No user details are updated. Error indicating password constraints is
+      shown in the feedback message.
+
+   8. Test Case: `update --password GabrielIsCool --confirmPass GabrielIsNotCool`{.swift}.</br>
+      Expected: No user details are updated. Error indicating password and confirm password do not match is
+      shown in the feedback message.
+
+   9. Test Case: `update --password GabrielIsCool`{.swift}.</br>
+      Expected: No user details are updated. Error indicating that password and confirm password must be both present 
+      or both absent is shown in the feedback message.
+
+   10. Test Case: `update --secretQn Favourite Pet`{.swift}.</br>
+       Expected: No user details are updated. Error indicating that secret question and answer must be both present
+       or both absent is shown in the feedback message.
+
+### Logout
+
+1. Logging out of the application.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
+
+   2. Test Case: `logout`{.swift}.</br>
+      Expected: The currently logged-in user is logged out of the application, currently displayed Customers/Deliveries
+      are hidden.
+
+   3. Test Case: `logout extra`{.swift} or other extra arguments.</br>
+      Expected: Similar to previous.
+
+### Recover Account
+
+1. Recovering user account.
+
+   1. Prerequisites: There exists a stored user in the application, and the answer of the currently
+      stored user's secret question is "Koko".
+
+   2. Test Case: `recover account`{.swift}.</br>
+      Expected: The currently stored user's secret question is displayed.
+
+   3. Test Case: `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword123`{.swift}.</br>
+      Expected: The currently stored user's password is updated to `NewPassword123`{.swift} 
+
+   4. Test Case: `recover account --answer NotKoko --password NewPassword123 --confirmPass NewPassword123`{.swift}</br>
+      Expected: No user details are updated. Error indicating that answer is incorrect is shown in the feedback message.
+
+   5. Test Case: `recover account --answer Koko --password NewPassword_123 --confirmPass NewPassword_123`{.swift}.</br>
+      Expected: No user details are updated. Error indicating password constraints is
+      shown in the feedback message.
+
+   6. Test Case: `recover account --answer Koko --password NewPassword123 --confirmPass NewPassword1234`{.swift}.</br>
+      Expected: No user details are updated. Error indicating password and confirm password do not match is
+      shown in the feedback message.
+
+   7. Test Case: `recover account --answer Koko --password NewPassword123`{.swift}</br>
+      Expected: No user details are updated. Error indicating invalid command format is
+      shown in the feedback message.
+
+### Delete Account
+
+1. Delete currently stored user account.
+
+   1. Prerequisites: There exists a user account currently stored in the application
+
+   2. Test Case: `delete account`{.swift}.</br>
+      Expected: The currently stored user is deleted and all stored Customer and Delivery Data is deleted.
+
+   3. Test Case: `delete account extra`{.swift} or other extra arguments.</br>
+      Expected: Similar to previous.
+
+### Add Customer
+
+1. Adding a Customer to the application.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command. There is currently no stored
+      Customer with a phone number of 87654321. There is currently a stored Customer with a phone number of 87651234.
+
+   2. Test Case: `customer add --name Gabriel --phone 87654321 --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift}.</br>
+      Expected: A new Customer is added, with name `Gabriel`{.swift}, phone `87654321`{.swift}, 
+      email `Gabrielrocks@gmail.com`{.swift} and address `RVRC Block B`{.swift}. The details of the added Customer is
+      shown in the feedback message.
+
+   3. Test Case: `customer add --name G_briel --phone 87654321 --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift}.</br>
+      Expected: No new Customer is added. Error indicating customer name constraints is
+      shown in the feedback message.
+
+   4. Test Case: `customer add --name Gabriel --phone 987654321 --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift}.</br>
+      Expected: No new Customer is added. Error indicating phone number constraints is
+      shown in the feedback message.
+
+   5. Test Case: `customer add --name Gabriel --phone abcdefgh --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift}.</br>
+      Expected: No new Customer is added. Error indicating phone number constraints is
+      shown in the feedback message.
+
+   6. Test Case: `customer add --name Gabriel --phone 87651234 --email Gabrielrocks@gmail.com --address RVRC Block B`{.swift}.</br>
+      Expected: No new Customer is added. Error indicating that the Customer already exists is
+      shown in the feedback message.
+
+   7. Test Case: `customer add --name Gabriel --phone 987654321 --email Gabrielrocks --address RVRC Block B`{.swift}.</br>
+      Expected: No new Customer is added. Error indicating email constraints is
+      shown in the feedback message.
+
+   8. Test Case: `customer add --name Gabriel --phone 987654321 --email Gabrielrocks@gmail.com`{.swift}.</br>
+      Expected: No new Customer is added. Error indicating invalid command format is
+      shown in the feedback message.
+
+### View Details of Customer
+
+1. View the details of a Customer.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
+      There is currently a stored Customer with an ID of 1. There is only one Customer stored in the application.
+
+   2. Test Case: `customer view 1`{.swift}.</br>
+      Expected: The details of the Customer with an ID of 1 is shown in the result message.
+
+   3. Test Case: `customer view 0`{.swift}.</br>
+      Expected: No new Customer details are shown. Error indicating customer ID constraints is
+      shown in the feedback message.
+
+   4. Test Case: `customer view -1`{.swift}.</br>
+      Expected: No new Customer details are shown. Error indicating invalid command format is
+      shown in the feedback message.
+
+   5. Test Case: `customer view a`{.swift}.</br>
+      Expected: Similar to previous.
+
+   6. Test Case: `customer view 2`{.swift}.</br>
+      Expected: No new Customer details are shown. Error indicating invalid customer ID is
+      shown in the feedback message.
+
+### List Customers
+
+1. List the Customers stored in the application.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
+      There is at least one Customer Stored in the application.
+
+   2. Test Case: `customer list`{.swift}.</br>
+      Expected: All customers are listed. A message indicating that Customers have been listed is
+      shown in the feedback message.
+
+   3. Test Case: `customer list extra`{.swift}.</br>
+      Expected: Similar to previous.
+
+### Find Customers
+
+1. Find a Customers matching query.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
+      There are currently three stored Customers with names `Alex Wong`{.swift}, `Alex Tan`{.swift} and `Tan Ah Meng`{.swift}.
+
+   2. Test Case: `customer find Alex`{.swift}.</br>
+      Expected: Only the Customers `Alex Wong`{.swift} and `Alex Tan`{.swift} are shown. 
+      A message indicating the number of Customers listed is shown in the result message.
+
+   3. Test Case: `customer find Alex Tan`{.swift}.</br>
+      Expected: All three Customers, `Alex Wong`{.swift}, `Alex Tan`{.swift} and `Tan Ah Meng`{.swift} are shown. 
+      A message indicating the number of Customers listed is shown in the result message.
+
+   4. Test Case: `customer find Ale`{.swift}.</br>
+      Expected: No customers are shown. A message indicating the number of Customers listed
+      is shown in the result message.
+
+   5. Test Case: `customer find`{.swift}.</br>
+      Expected: No customers are shown. An error indicating invalid command format is shown in the feedback message.
+
+   6. Test Case: `customer find Al_x`{.swift}.</br>
+      Expected: No customers are shown. A message indicating the number of Customers listed
+      is shown in the result message.
+
+### Update Customer Details
+
+1. Update the details of a specific Customer.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
+      There is currently a stored Customer with an ID of 1. There is only one Customer stored in the application.
+
+   2. Test Case: `customer edit 1 --name Gabriel`{.swift}.</br>
+      Expected: The name of the Customer with an ID of 1 is updated to `Gabriel`{.swift}.
+      The updated details of the Customer with an ID of 1 is shown in the feedback message.
+
+   3. Test Case: `customer edit 1 --phone 98761234`{.swift}.</br>
+      Expected: The phone number of the Customer with an ID of 1 is updated to `98761234`{.swift}.
+      The updated details of the Customer with an ID of 1 is shown in the feedback message.
+
+   4. Test Case: `customer edit 1 --email GabrielIsCool@gmail.com`{.swift}.</br>
+      Expected: The email of the Customer with an ID of 1 is updated to `GabrielIsCool@gmail.com`{.swift}.
+      The updated details of the Customer with an ID of 1 is shown in the feedback message.
+
+   5. Test Case: `customer edit 1 --address RVRC Block E`{.swift}.</br>
+      Expected: The address of the Customer with an ID of 1 is updated to `RVRC Block E`{.swift}.
+      The updated details of the Customer with an ID of 1 is shown in the feedback message.
+
+   6. Test Case: `customer edit 1`{.swift}.</br>
+      Expected: No Customer details are updated. An error indicating that at least one field must be provided is shown
+      in the feedback message.
+
+   7. Test Case: `customer edit 2 --name Gabriel`{.swift}.</br>
+      Expected: No Customer details are updated. An error indicating invalid customer ID is shown
+      in the feedback message.
+
+   8. Test Case: `customer edit 0 --name Gabriel`{.swift}.</br>
+      Expected: No Customer details are updated. An error indicating invalid command format is shown
+      in the feedback message.
+
+### Delete Customers
+
+1. Delete a specified Customer.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
+      There is currently a stored Customer with an ID of 1. There is only one Customer stored in the application.
+
+   2. Test Case: `customer delete 1`{.swift}.</br>
+      Expected: The Customer with an ID of 1 is deleted. The details of the deleted Customer is shown
+      in the feedback message.
+
+   3. Test Case: `customer delete 0`{.swift}.</br>
+      Expected: No Customer is deleted. Error indicating invalid command format is
+      shown in the feedback message.
+
+   4. Test Case: `customer delete -1`{.swift}.</br>
+      Expected: Similar to previous.
+
+   5. Test Case: `customer delete a`{.swift}.</br>
+      Expected: Similar to previous.
+
+   6. Test Case: `customer delete 2`{.swift}.</br>
+      Expected: No Customer is deleted. Error indicating invalid Customer ID is
+      shown in the feedback message.
+
+### Add Delivery
+
+1. Adding a Delivery to the application.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
+      There is currently a Customer stored with an ID of 1. And the current date is 2023-12-02.
+
+   2. Test Case: `delivery add Chocolate Cake --customer 1 --date 2023-12-12`{.swift}.</br>
+      Expected: A new Delivery is added, with name `Chocolate Cake`{.swift}, Customer ID `1`{.swift},
+      expected delivery date `2023-12-12`{.swift}, order date as today's date, delivery status as `CREATED`{.swift}, 
+      and the address as the address of the Customer with an ID of 1.
+      The details of the added Customer is shown in the feedback message.
+
+   3. Test Case: `delivery add Chocolate_Cake --customer 1 --date 2023-12-12`{.swift}.</br>
+      Expected: No new Delivery is added. An Error indicating delivery name constraints is
+      shown in the feedback message.
+
+   4. Test Case: `delivery add Chocolate Cake --customer 0 --date 2023-12-12`{.swift}.</br>
+      Expected: No new Delivery is added. An Error indicating customer ID constraints is
+      shown in the feedback message.
+
+   5. Test Case: `delivery add Chocolate Cake --customer a --date 2023-12-12`{.swift}.</br>
+      Expected: Similar to previous.
+
+   6. Test Case: `delivery add Chocolate Cake --customer 2 --date 2023-12-12`{.swift}.</br>
+      Expected: No new Delivery is added. An Error indicating invalid Customer ID is
+      shown in the feedback message.
+
+   7. Test Case: `delivery add Chocolate Cake --customer 1 --date 2023-12-01`{.swift}.</br>
+      Expected: No new Delivery is added. An Error indicating expected delivery date constraints is
+      shown in the feedback message.
+
+   8. Test Case: `delivery add Chocolate Cake --customer 1 --date 2023-13-01`{.swift}.</br>
+      Expected: No new Delivery is added. An Error indicating date constraints is
+      shown in the feedback message.
+
+   9. Test Case: `delivery add Chocolate Cake --date 2023-13-01`{.swift}.</br>
+      Expected: No new Delivery is added. An Error indicating invalid command format is
+      shown in the feedback message.
+
+### View Details of a Delivery
+
+1. View the details of a Delivery.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
+      There is currently a stored Delivery with an ID of 1. There is only one Delivery stored in the application.
+
+   2. Test Case: `delivery view 1`{.swift}.</br>
+      Expected: The details of the Delivery with an ID of 1 is shown in the result message.
+
+   3. Test Case: `delivery view 0`{.swift}.</br>
+      Expected: No new Delivery details are shown. Error indicating delivery ID constraints is
+      shown in the feedback message.
+
+   4. Test Case: `delivery view -1`{.swift}.</br>
+      Expected: No new Delivery details are shown. Error indicating invalid command format is
+      shown in the feedback message.
+
+   5. Test Case: `delivery view a`{.swift}.</br>
+      Expected: Similar to previous.
+
+   6. Test Case: `delivery view 2`{.swift}.</br>
+      Expected: No new Delivery details are shown. Error indicating invalid delivery ID is
+      shown in the feedback message.
+
+### List Deliveries
+
+1. List the Deliveries stored in the application.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
+      There are two Customers with an ID of 1 and 2 stored in the application.
+      There are three deliveries stored in the application. 
+      The first with ID 1, Customer ID of 1, delivery status `CREATED`{.swift}, expected delivery date `2023-12-03`{.swift}.
+      The second with ID 2, Customer ID of 2, delivery status `SHIPPED`{.swift}, expected delivery date `2023-12-04`{.swift}.
+      The third with ID 3, Customer ID of 2, delivery status `SHIPPED`{.swift}, expected delivery date `2023-12-05`{.swift}.
+      The current date is `2023-12-03`{.swift}.
+
+   2. Test Case: `delivery list`{.swift}.</br>
+      Expected: All Deliveries are listed sorted in descending expected delivery date. 
+      A message indicating that deliveries have been listen is shown in the feedback message.
+
+   3. Test Case: `delivery list --status CREATED`{.swift}.</br>
+      Expected: The Delivery with an ID of 1 is listed. A message indicating that Deliveries have been listed is
+      shown in the feedback message.
+
+   4. Test Case: `delivery list --customer 1`{.swift}.</br>
+      Expected: Similar to previous.
+
+   5. Test Case: `delivery list --date today`{.swift}.</br>
+      Expected: Similar to previous.
+
+   6. Test Case: `delivery list --date 2023-12-04`{.swift}.</br>
+      Expected: The Delivery with an ID of 2 is listed. A message indicating that Deliveries have been listed is
+      shown in the feedback message.
+
+   7. Test Case: `delivery list --sort ASC`{.swift}.</br>
+      Expected: All Deliveries are listed sorted in ascending expected delivery date.
+      A message indicating that deliveries have been listen is shown in the feedback message.
+
+   8. Test Case: `delivery list --customer 2 --status SHIPPED --sort ASC`{.swift}.</br>
+      Expected: The deliveries with ID 2 and 3 are listed in ascending expected delivery date.
+      A message indicating that deliveries have been listen is shown in the feedback message.
+
+   9. Test Case: `delivery list --status INVALID`{.swift}.</br>
+      Expected: No Deliveries are listed. An Error indicating delivery status constraints
+      is shown in the feedback message.
+
+   10. Test Case: `delivery list --customer 0`{.swift}.</br>
+       Expected: No Deliveries are listed. An Error indicating Customer ID constraints
+       is shown in the feedback message.
+
+   11. Test Case: `delivery list --date 2023-13-04`{.swift}.</br>
+       Expected: No Deliveries are listed. An Error indicating expected delivery date constraints
+       is shown in the feedback message.
+
+   12. Test Case: `delivery list --sort random`{.swift}.</br>
+       Expected: No Deliveries are listed. An Error indicating sort constraints
+       is shown in the feedback message.
+
+### Find Deliveries
+
+1. Find Deliveries matching query.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
+      There are currently three stored Deliveries with names `Chocolate Cake`{.swift}, `Chocolate Bun`{.swift} and
+      `Strawberry Bun`{.swift}
+
+   2. Test Case: `delivery find Chocolate`{.swift}.</br>
+      Expected: Only the Deliveries `Chocolate Cake`{.swift} and `Chocolate Bun`{.swift} are shown. 
+      A message indicating the number of Deliveries listed is shown in the result message.
+
+   3. Test Case: `delivery find Choclate Bun`{.swift}.</br>
+      Expected: All three Deliveries, `Chocolate Cake`{.swift}, `Chocolate Bun`{.swift} and `Strawberry Bun`{.swift} 
+      are shown. A message indicating the number of Customers listed is shown in the result message.
+
+   4. Test Case: `delivery find Choc`{.swift}.</br>
+      Expected: No Deliveries are shown. A message indicating the number of Deliveries listed
+      is shown in the result message.
+
+   5. Test Case: `delivery find`{.swift}.</br>
+      Expected: No Deliveries are shown. An error indicating invalid command format is shown in the feedback message.
+
+   6. Test Case: `delivery find Chocolate_Cake`{.swift}.</br>
+      Expected: No Deliveries are shown. A message indicating the number of Deliveries listed
+      is shown in the result message.
+
+### Update details of a Delivery
+
+1. Update the details of a specific Delivery.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
+      There are currently two stored Customers with an ID of 1 and 2.
+      There is currently a stored Delivery with an ID of 1, Customer ID of 1. 
+      There is only one stored Delivery in the application.
+      The current date is `2023-12-12`{.swift}.
+
+   2. Test Case: `delivery edit 1 --name Vanilla Cake`{.swift}.</br>
+      Expected: The name of the Delivery with an ID of 1 is updated to `Vanilla Cake`{.swift}.
+      The updated details of the Delivery with an ID of 1 is shown in the feedback message.
+
+   3. Test Case: `delivery edit 1 --customer 2`{.swift}.</br>
+      Expected: The Customer ID of the Delivery with an ID of 1 is updated to `2`{.swift}.
+      The updated details of the Delivery with an ID of 1 is shown in the feedback message.
+
+   4. Test Case: `delivery edit 1 --date 2023-12-13`{.swift}.</br>
+      Expected: The expected delivery date of the Delivery with an ID of 1 is updated to `2023-12-13`{.swift}.
+      The updated details of the Delivery with an ID of 1 is shown in the feedback message.
+
+   5. Test Case: `delivery edit 1 --status CANCELLED`{.swift}.</br>
+      Expected: The delivery status of the Delivery with an ID of 1 is updated to `CANCELLED`{.swift}.
+      The updated details of the Delivery with an ID of 1 is shown in the feedback message.
+
+   6. Test Case: `delivery edit 1 --note By FedEx`{.swift}.</br>
+      Expected: The note of the Delivery with an ID of 1 is updated to `By FedEx`{.swift}.
+      The updated details of the Delivery with an ID of 1 is shown in the feedback message.
+
+   7. Test Case: `delivery edit 1`{.swift}.</br>
+      Expected: No Delivery details are updated. An error indicating that at least one field must be provided is shown
+      in the feedback message.
+
+   8. Test Case: `delivery edit 1 --name Vanilla_Cake`{.swift}.</br>
+      Expected: No Delivery details are updated. An error indicating delivery name constraints is shown
+      in the feedback message.
+
+   9. Test Case: `delivery edit 1 --customer 0`{.swift}.</br>
+      Expected: No Delivery details are updated. An error indicating invalid command format is shown
+      in the feedback message.
+
+   10. Test Case: `delivery edit 1 --customer 3`{.swift}.</br>
+       Expected: No Delivery details are updated. An error indicating invalid Customer ID is shown
+       in the feedback message.
+
+   11. Test Case: `delivery edit 1 --date 2023-13-13`{.swift}.</br>
+       Expected: No Delivery details are updated. An error indicating expected delivery date constraints is shown
+       in the feedback message.
+
+   12. Test Case: `delivery edit 1 --date 2023-12-11`{.swift}.</br>
+       Expected: No Delivery details are updated. An error indicating expected delivery date constraints is shown
+       in the feedback message.
+
+   13. Test Case: `delivery edit 1 --status INVALID`{.swift}.</br>
+       Expected: No Delivery details are updated. An error indicating delivery status constraints is shown
+       in the feedback message.
+
+   14. Test Case: `delivery edit 1 --note By_FedEx`{.swift}.</br>
+       Expected: No Delivery details are updated. An error indicating note constraints is shown
+       in the feedback message.
+
+   15. Test Case: `delivery edit 2 --name Vanilla Cake`{.swift}.</br>
+       Expected: No Delivery details are updated. An error indicating invalid Delivery ID is shown
+       in the feedback message.
+
+   16. Test Case: `delivery edit a --name Vanilla Cake`{.swift}.</br>
+       Expected: No Delivery details are updated. An error indicating invalid command format is shown
+       in the feedback message.
+
+### Update delivery status
+
+1. Update the status of a specific Delivery.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
+      There is currently a stored Delivery with an ID of 1.
+      There is only one stored Delivery in the application.
+
+   2. Test Case: `delivery status 1 SHIPPED`{.swift}.</br>
+      Expected: The delivery status of the Delivery with an ID of 1 is updated to `SHIPPED`{.swift}.
+      The updated details of the Delivery with an ID of 1 is shown in the feedback message.
+
+   3. Test Case: `delivery status 1 INVALID`{.swift}.</br>
+      Expected: No delivery statuses are updated. An error indicating delivery status constraints is shown
+      in the feedback message.
+
+   4. Test Case: `delivery status 0 SHIPPED`{.swift}.</br>
+      Expected: No delivery statuses are updated. An error indicating delivery ID constraints is shown
+      in the feedback message.
+
+   5. Test Case: `delivery status 2 SHIPPED`{.swift}.</br>
+      Expected: No delivery statuses are updated. An error indicating invalid delivery ID is shown
+      in the feedback message.
+
+   6. Test Case: `delivery status SHIPPED 1`{.swift}.</br>
+      Expected: No delivery statuses are updated. An error indicating invalid command format is shown
+      in the feedback message.
+
+### Create a note for a Delivery
+
+1. Create a note for a specific delivery.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
+      There is currently a stored Delivery with an ID of 1.
+      There is only one stored Delivery in the application.
+
+   2. Test Case: `delivery note 1 --note By FedEx`{.swift}.</br>
+      Expected: The note of the Delivery with an ID of 1 is updated to `By FedEx`{.swift}.
+      The updated details of the Delivery with an ID of 1 is shown in the feedback message.
+
+   3. Test Case: `delivery note 1 --note By_FedEx`{.swift}.</br>
+      Expected: No delivery notes are updated. An error indicating note constraints is shown
+      in the feedback message.
+
+   4. Test Case: `delivery note 0 --note By FedEx`{.swift}.</br>
+      Expected: No delivery notes are updated. An error indicating invalid command format is shown
+      in the feedback message.
+
+   5. Test Case: `delivery note a --note By FedEx`{.swift}.</br>
+      Expected: Similar to previous.
+
+   6. Test Case: `delivery note 1`{.swift}.</br>
+      Expected: Similar to previous.
+
+   7. Test Case: `delivery note 2 --note By FedEx`{.swift}.</br>
+      Expected: No delivery notes are updated. An error indicating invalid delivery ID is shown
+      in the feedback message.
+
+### Delete Delivery
+
+1. Delete a specific delivery.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
+      There is currently a stored Delivery with an ID of 1.
+      There is only one stored Delivery in the application.
+
+   2. Test Case: `delivery delete 1`{.swift}.</br>
+      Expected: The Delivery with an ID of 1 is deleted. The details of the deleted Delivery is shown
+      in the feedback message.
+
+   3. Test Case: `delivery delete 0`{.swift}.</br>
+      Expected: No Delivery is deleted. An Error indicating invalid command format is
+      shown in the feedback message.
+
+   4. Test Case: `delivery delete -1`{.swift}.</br>
+      Expected: Similar to previous.
+
+   5. Test Case: `delivery delete a`{.swift}.</br>
+      Expected: Similar to previous.
+
+   6. Test Case: `delivery delete 2`{.swift}.</br>
+      Expected: No Delivery is deleted. An Error indicating invalid Delivery ID is
+      shown in the feedback message.
+
+### Help
+
+1. Shows the help information to the user.
+
+   1. Prerequisites: None.
+
+   2. Test Case: `help`{.swift}.</br>
+      Expected: Help message is shown in the feedback message. A new window is created with the link to the User Guide.
+
+   3. Test Case: `help extra`{.swift}.</br>
+      Expected: Similar to previous.
+
+### Exit
+
+1. Exits the application.
+
+   1. Prerequisites: None.
+
+   2. Test Case: `exit`{.swift}.</br>
+      Expected: The application exits.
+
+   3. Test Case: `exit extra`{.swift}.</br>
+      Expected: Similar to previous.
+
+### Clear
+
+1. Clears all Customer and Delivery data.
+
+   1. Prerequisites: Logged-in into the application with the `login`{.swift} command.
+
+   2. Test Case: `clear`{.swift}.</br>
+      Expected: All stored Customer and Delivery data is deleted from the application. A message indicating that data
+      is cleared is shown in the feedback message.
+
+   3. Test Case: `clear extra`{.swift}.</br>
+      Expected: Similar to previous.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing/corrupted data files.
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: There are existing Customer and Delivery Data files with existing stored Customers and Deliveries.
 
-1. _{ more test cases …​ }_
+   2. Test Case: Close the application and delete `addressbook.json`{.swift}. <br/>
+      Expected: Upon the next application start and login, a new `addressbook.json`{.swift} is created and
+      `deliverybook.json`{.swift} is cleared.
+
+   3. Test Case: Close the application and delete `addressbook.json`{.swift}.<br/>
+      Expected: Upon the next application start and login, a new `deliverybook.json`{.swift} is created.
+
+   4. Test Case: Close the application and edit `addressbook.json`{.swift} by changing the name of the first Customer
+      to `John_Doe`{.swift}.<br/>
+      Expected: Upon the next application start and login, `addressbook.json`{.swift} and 
+      `deliverybook.json`{.swift} is cleared.
+
+   5. Test Case: Close the application and edit `deliverybook.json`{.swift} by changing the name of the first Delivery
+      to `Chocolate_Cake`{.swift}.<br/>
+      Expected: Upon the next application start and login, `deliverybook.json`{.swift} is cleared.
+
+---
+
+## **Appendix: Effort**
+
+<br>
+
+### Difficulty level
+
+This project was moderately challenging as we had to deal with a large existing code base.
+It took us some time to understand how the different components interact with each other.
+Furthermore, our team was not familiar with frameworks such as JavaFX prior to this, and we had to learn how to use it.
+
+<br>
+
+### Challenges faced
+
+* Understanding and refactoring the code base
+  * As HomeBoss deals with Customers and Deliveries, we had to refactor `Person` into `Customer`, and irrelevant
+    classes such as `Tag` has to be removed.
+* Creating storage for Deliveries
+  * AB3 deals with only one storage. However, HomeBoss has two storages, one for Customers and one for Deliveries.
+    Furthermore, there is a dependency between the two entities, requiring a new `BookStorageWithReference` 
+    class that accepts two type parameters to be created.
+* Adapting the `PersonListPanel` to `ListPanel`
+  * The `PersonListPanel` was designed to contain a list of `Person`. However, as we decided to display both 
+    `Customer` and `Delivery` in the same list, we had to adapt the `PersonListPanel` to `ListPanel` to 
+    accommodate both types of entities.
+* Figuring out how to implement a secure login/logout system
+  * As one of the feature of HomeBoss is security, we had to figure out and implement the hashing of user password
+    and how to store the data related to the account.
+
+<br>
+
+### Achievements
+
+* Added security feature to prevent unauthorised access to the application.
+* Displaying the list of Customers and list of Deliveries using the same panel.
+* Creating a new storage for Deliveries that has references to Customer.
+* A refreshing look of the UI.
+* New features such as filtering and sorting of deliveries.
+* Increasing code coverage to 83%.

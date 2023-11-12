@@ -32,6 +32,9 @@ public class JsonDeliveryBookStorage extends BookStorageWithReference<Delivery, 
      */
     public JsonDeliveryBookStorage(Path filePath) {
         super();
+
+        requireNonNull(filePath);
+
         this.filePath = filePath;
     }
 
@@ -76,6 +79,7 @@ public class JsonDeliveryBookStorage extends BookStorageWithReference<Delivery, 
 
         Optional<JsonSerializableDeliveryBook> jsonDeliveryBook = JsonUtil.readJsonFile(
             filePath, JsonSerializableDeliveryBook.class);
+
         if (!jsonDeliveryBook.isPresent()) {
             return Optional.empty();
         }
@@ -90,6 +94,8 @@ public class JsonDeliveryBookStorage extends BookStorageWithReference<Delivery, 
 
     @Override
     public void saveBook(ReadOnlyBook<Delivery> deliveryBook) throws IOException {
+        requireNonNull(deliveryBook);
+
         saveBook(deliveryBook, filePath);
     }
 

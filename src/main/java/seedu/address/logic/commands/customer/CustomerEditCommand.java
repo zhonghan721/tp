@@ -11,6 +11,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -24,6 +25,12 @@ import seedu.address.model.customer.Customer;
 import seedu.address.model.customer.Email;
 import seedu.address.model.customer.Name;
 import seedu.address.model.customer.Phone;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryDate;
+import seedu.address.model.delivery.DeliveryName;
+import seedu.address.model.delivery.DeliveryStatus;
+import seedu.address.model.delivery.Note;
+import seedu.address.model.delivery.OrderDate;
 
 /**
  * Edits the details of an existing customer in the address book.
@@ -100,7 +107,11 @@ public class CustomerEditCommand extends CustomerCommand {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         } else {
             model.setCustomer(customerToEdit, editedCustomer);
-            model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+
+            // update delivery associated with the edited customer
+            updateDelivery(model, editedCustomer);
+            model.showAllFilteredCustomerList();
+
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
                     Messages.format(editedCustomer)), true);
         }
@@ -123,6 +134,46 @@ public class CustomerEditCommand extends CustomerCommand {
 
         return new Customer(customerToEdit.getCustomerId(), updatedName, updatedPhone,
                 updatedEmail, updatedAddress);
+    }
+
+    /**
+     * Updates all the deliveries associated with the customer with new customer details.
+     */
+    protected static void updateDelivery(Model model, Customer editedCustomer) {
+        int customerId = editedCustomer.getCustomerId();
+        Stream<Delivery> deliveries = model.getDeliveryByCustomerId(customerId);
+        deliveries.forEach(d -> {
+            Delivery editedDelivery = createEditedDelivery(d, editedCustomer);
+            model.setDelivery(d, editedDelivery);
+        });
+    }
+
+    /**
+     * Creates and returns a {@code Delivery} with the customer details edited.
+     *
+     * @param deliveryToEdit         {@code Delivery} which the command edits.
+     * @param editedCustomer         {@code Customer} which the delivery is associated with.
+     */
+    private static Delivery createEditedDelivery(Delivery deliveryToEdit, Customer editedCustomer) {
+
+        assert deliveryToEdit != null;
+
+        DeliveryName deliveryName = deliveryToEdit.getName();
+        assert deliveryName != null;
+
+        OrderDate orderDate = deliveryToEdit.getOrderDate();
+        assert orderDate != null;
+
+        DeliveryDate deliveryDate = deliveryToEdit.getDeliveryDate();
+        assert deliveryDate != null;
+
+        DeliveryStatus deliveryStatus = deliveryToEdit.getStatus();
+        assert deliveryStatus != null;
+
+        Note note = deliveryToEdit.getNote();
+
+        return new Delivery(deliveryToEdit.getDeliveryId(), deliveryName, editedCustomer, orderDate,
+                deliveryDate, deliveryStatus, note);
     }
 
     @Override
@@ -186,6 +237,10 @@ public class CustomerEditCommand extends CustomerCommand {
             this.customerId = customerId;
         }
 
+        public int getCustomerId() {
+            return customerId;
+        }
+
         public void setName(Name name) {
             this.name = name;
         }
@@ -239,6 +294,7 @@ public class CustomerEditCommand extends CustomerCommand {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
+                    .add("customerId", customerId)
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)

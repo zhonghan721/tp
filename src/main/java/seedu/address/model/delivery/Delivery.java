@@ -21,7 +21,6 @@ public class Delivery {
     private OrderDate orderDate;
     private DeliveryDate deliveryDate;
     private DeliveryStatus status;
-    private Address address; //The address of the delivery, which is automatically tied to Customer's address.
     private Note note;
 
 
@@ -47,7 +46,6 @@ public class Delivery {
         this.deliveryDate = deliveryDate;
         this.status = status;
         this.note = note;
-        this.address = customer.getAddress();
     }
 
 
@@ -71,7 +69,6 @@ public class Delivery {
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.status = status;
-        this.address = customer.getAddress();
     }
 
     /**
@@ -93,7 +90,6 @@ public class Delivery {
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.status = status;
-        this.address = customer.getAddress();
     }
 
 
@@ -119,7 +115,6 @@ public class Delivery {
         this.deliveryDate = deliveryDate;
         this.status = status;
         this.note = note;
-        this.address = customer.getAddress();
     }
 
     public void setOrderDate(OrderDate orderDate) {
@@ -197,7 +192,7 @@ public class Delivery {
     }
 
     public Address getAddress() {
-        return address;
+        return customer.getAddress();
     }
 
     public Note getNote() {
@@ -243,30 +238,30 @@ public class Delivery {
         Delivery otherDelivery = (Delivery) other;
 
         return otherDelivery.deliveryId == deliveryId
-            && otherDelivery.deliveryDate.equals(deliveryDate)
-            && otherDelivery.name.equals(name)
-            && otherDelivery.customer.equals(customer)
-            && Objects.equals(otherDelivery.note, note)
-            && otherDelivery.orderDate.equals(orderDate)
-            && otherDelivery.status.equals(status)
-            && otherDelivery.address.equals(address);
+                && otherDelivery.deliveryDate.equals(deliveryDate)
+                && otherDelivery.name.equals(name)
+                && otherDelivery.customer.equals(customer)
+                && Objects.equals(otherDelivery.note, note)
+                && otherDelivery.orderDate.equals(orderDate)
+                && otherDelivery.status.equals(status)
+                && otherDelivery.getAddress().equals(customer.getAddress());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deliveryId, name, customer, orderDate, deliveryDate, address);
+        return Objects.hash(deliveryId, name, customer, orderDate, deliveryDate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("deliveryId", deliveryId)
-            .add("name", name)
-            .add("customer", customer)
-            .add("orderedAt", orderDate)
-            .add("deliveredAt", deliveryDate)
-            .add("address:", address)
-            .add("note:", Optional.ofNullable(note)
-                .map(n -> String.format("\n Note:%s", n)).orElse(""))
-            .toString();
+                .add("name", name)
+                .add("customer", customer)
+                .add("orderedAt", orderDate)
+                .add("deliveredAt", deliveryDate)
+                .add("address:", customer.getAddress())
+                .add("note:", Optional.ofNullable(note)
+                        .map(n -> String.format("\n Note:%s", n)).orElse(""))
+                .toString();
     }
 }

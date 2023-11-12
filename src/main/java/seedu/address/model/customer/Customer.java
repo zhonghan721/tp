@@ -81,12 +81,19 @@ public class Customer {
 
     /**
      * Returns current customerCount.
-     * Used by {@code CustomerBuilder} to create customer with expected customerId.
+     * To be used by {@code CustomerBuilder} to create customer with expected customerId.
      *
      * @return customerCount
      */
     public static int getCustomerCount() {
         return Customer.customerCount;
+    }
+
+    /**
+     * Decrements customerCount by 1.
+     */
+    public static void resetPrevCustomerCount() {
+        Customer.customerCount -= 1;
     }
 
     /**
