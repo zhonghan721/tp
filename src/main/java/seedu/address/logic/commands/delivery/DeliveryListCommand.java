@@ -80,20 +80,22 @@ public class DeliveryListCommand extends DeliveryCommand {
         assert model.getUserLoginStatus() : "User should be logged in";
 
         Predicate<Delivery> filters = this.createDeliveryListFilters();
-
         assert filters != null : "Filters should not be null";
 
-        logger.info("Filters: " + filters.toString());
-
+        // apply filter
         model.updateFilteredDeliveryList(filters);
 
-        if (model.isSortedDeliveryListEmpty()) {
+        if (model.isFilteredDeliveryListEmpty()) {
             logger.warning("Executing DeliveryListCommand: The list is empty");
             return new CommandResult(MESSAGE_EMPTY, true);
         }
 
+        // apply sort if delivery list is not empty
+        Comparator<Delivery> sortOrder = createDeliveryListSort();
+        assert sortOrder != null : "Sort order should not be null";
+
         // sort by expected delivery date
-        this.sortDeliveryList(model);
+        model.sortFilteredDeliveryList(sortOrder);
 
         return new CommandResult(MESSAGE_SUCCESS, true);
     }
@@ -125,6 +127,7 @@ public class DeliveryListCommand extends DeliveryCommand {
             filters = filters.and(delivery -> delivery.isSameDeliveryDate(deliveryDate.get()));
         }
 
+        logger.info("Filters: " + filters.toString());
         return filters;
     }
 
@@ -133,14 +136,13 @@ public class DeliveryListCommand extends DeliveryCommand {
      *
      * @param model model to sort.
      */
-    private void sortDeliveryList(Model model) {
+    private Comparator<Delivery> createDeliveryListSort() {
         Comparator<Delivery> sortAscending = Comparator.comparing(Delivery::getDeliveryDate);
         Comparator<Delivery> sortDescending = Comparator.comparing(Delivery::getDeliveryDate).reversed();
         boolean isAscending = sortType.equals(Sort.ASC);
+        logger.info("Sorting delivery list by expected delivery date: " + isAscending);
 
-        logger.info("Sorting delivery list by expected delivery date: "
-            + (isAscending ? "ascending" : "descending"));
-        model.sortFilteredDeliveryList(isAscending ? sortAscending : sortDescending);
+        return isAscending ? sortAscending : sortDescending;
     }
 
 
