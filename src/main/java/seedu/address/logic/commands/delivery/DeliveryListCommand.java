@@ -68,13 +68,10 @@ public class DeliveryListCommand extends DeliveryCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        logger.info("Executing DeliveryListCommand: status "
-            + status + ", customerId "
-            + customerId + " deliveryDate "
-            + deliveryDate + " and sortType "
-            + sortType);
-        // User cannot perform this operation before logging in
+        logger.info("Executing DeliveryListCommand: status " + status + ", customerId " + customerId
+            + " deliveryDate " + deliveryDate + " and sortType " + sortType);
         if (!model.getUserLoginStatus()) {
+            logger.warning("Executing DeliveryListCommand failed: user not logged in");
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
         assert model.getUserLoginStatus() : "User should be logged in";
@@ -86,7 +83,7 @@ public class DeliveryListCommand extends DeliveryCommand {
         model.updateFilteredDeliveryList(filters);
 
         if (model.isFilteredDeliveryListEmpty()) {
-            logger.warning("Executing DeliveryListCommand: The list is empty");
+            logger.info("Executing DeliveryListCommand: The list is empty");
             return new CommandResult(MESSAGE_EMPTY, true);
         }
 
