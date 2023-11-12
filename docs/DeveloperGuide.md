@@ -567,7 +567,7 @@ The sequence of the `logout` command is as follows:
    by calling `Model#getUserLoginStatus`.
 3. If the user is currently logged in, the `userLogoutCommand` calls `Model#setLogoutSuccess`,
    changing the login status to false and restricting the user access to most commands.
-4. The `userLoginCommand` also calls `Model#clearFilteredDeliveryList` and `Model#clearFilteredCustomerList`
+4. The `userLogoutCommand` also calls `Model#clearFilteredDeliveryList` and `Model#clearFilteredCustomerList`
    to hide the list of deliveries and customers.
 
 The following sequence diagram shows how the `logout` command works:
