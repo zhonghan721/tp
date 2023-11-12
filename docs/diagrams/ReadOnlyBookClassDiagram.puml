@@ -14,12 +14,6 @@ Class Customer
 Class Delivery
 }
 
-Class I<<Hidden>> #FFFFFF
-Class H<<Hidden>> #FFFFFF
-Class J<<Hidden>> #FFFFFF
-Class K<<Hidden>> #FFFFFF
-
-
 Class HiddenOutside<<HIDDEN>> #FFFFFF
 HiddenOutside ..> ReadOnlyBook
 
@@ -29,11 +23,5 @@ AddressBook -down-> "1" UniqueCustomerList
 UniqueCustomerList -down-> "*" Customer
 DeliveryBook -down-> "1" UniqueDeliveryList
 UniqueDeliveryList -down-> "*" Delivery
-
-
-Customer-[hidden]left--> H
-Delivery -[hidden]left--> I
-
-
 
 @enduml

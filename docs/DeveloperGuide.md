@@ -181,13 +181,15 @@ The `Model` component,
 
 #### ReadOnlyBook Model
 
-* `ReadOnlyBook` exposes the `AddressBook` and `DeliveryBook` to the outside.
+The `ReadOnlyBook` model,
+
+<puml src="diagrams/ReadOnlyBookClassDiagram.puml" width="450" />
+
+* exposes the `AddressBook` and `DeliveryBook` to the outside.
 * The `AddressBook` class stores the address book data i.e., all `Customer` that are contained through
   the `UniqueCustomerList`.
 * The `DeliveryBook` class stores the delivery book data i.e., all `Delivery` that are contained through
   the `UniqueDeliveryList`.
-
-<puml src="diagrams/ReadOnlyBookClassDiagram.puml" width="450" />
 
 #### User Model
 
