@@ -43,6 +43,7 @@ public class DeliveryViewCommand extends DeliveryCommand {
 
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
+            logger.warning("Executing DeliveryViewCommand failed: user not logged in");
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
@@ -51,6 +52,7 @@ public class DeliveryViewCommand extends DeliveryCommand {
         Optional<Delivery> delivery = model.getDelivery(deliveryId);
 
         if (delivery.isEmpty()) {
+            logger.warning("Executing DeliveryViewCommand failed: Delivery not found");
             throw new CommandException(MESSAGE_INVALID_DELIVERY_ID);
         }
 

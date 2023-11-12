@@ -92,6 +92,7 @@ public class DeliveryListCommand extends DeliveryCommand {
         model.updateFilteredDeliveryList(filters);
 
         if (model.isSortedDeliveryListEmpty()) {
+            logger.warning("Executing DeliveryListCommand: The list is empty");
             return new CommandResult(MESSAGE_EMPTY, true);
         }
 
@@ -144,6 +145,8 @@ public class DeliveryListCommand extends DeliveryCommand {
         Comparator<Delivery> sortDescending = Comparator.comparing(Delivery::getDeliveryDate).reversed();
         boolean isAscending = sortType.equals(Sort.ASC);
 
+        logger.info("Sorting delivery list by expected delivery date: "
+            + (isAscending ? "ascending" : "descending"));
         model.sortFilteredDeliveryList(isAscending ? sortAscending : sortDescending);
     }
 
