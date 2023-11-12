@@ -18,6 +18,7 @@ HomeBoss is a software project adapted from the
 the [SE-EDU initiative](https://se-education.org).
 
 Libraries used in this project:
+
 * [Jackson](https://github.com/FasterXML/jackson)
 * [JavaFX](https://openjfx.io/)
 * [JUnit5](https://github.com/junit-team/junit5)
@@ -161,20 +162,32 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Customer` objects (which are contained in a `UniqueCustomerList` object). The
-  address book is exposed to the outside as a `ReadOnlyBook` objects.
-* stores the delivery book data i.e., all `Delivery` objects (which are contained in a `UniqueDeliveryList` object). The
-  delivery book is exposed to the outside as a `ReadOnlyBook` objects.
+* stores the address book data i.e., all `Customer` objects. (See the [ReadOnlyBook Model](#ReadOnlyBook-Model) section
+  below for
+  more details)
+* stores the delivery book data i.e., all `Delivery` objects. (See the [ReadOnlyBook Model](#ReadOnlyBook-Model) section
+  below for
+  more details)
 * stores the currently filtered `Customer` objects (e.g., results of a search query) as a separate _filteredCustomers_
-  list
+  list.
 * stores the currently filtered `Delivery` objects (e.g., results of a status filter query) as a separate
-  _filteredDeliveries_ list
+  _filteredDeliveries_ list.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
+  a `ReadOnlyUserPref` objects.
 * stores the currently sorted `Delivery` objects (e.g., results of a sort query) as a separate _sortedDeliveries_
   list
 * stores an unmodifiable `ObservableList<ListItem>` that can be 'observed' e.g. the UI can be bound
   to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
-  a `ReadOnlyUserPref` objects.
+
+#### ReadOnlyBook Model
+
+* `ReadOnlyBook` exposes the `AddressBook` and `DeliveryBook` to the outside.
+* The `AddressBook` class stores the address book data i.e., all `Customer` that are contained through
+  the `UniqueCustomerList`.
+* The `DeliveryBook` class stores the delivery book data i.e., all `Delivery` that are contained through
+  the `UniqueDeliveryList`.
+
+<puml src="diagrams/ReadOnlyBookClassDiagram.puml" width="450" />
 
 #### User Model
 
@@ -1990,19 +2003,19 @@ Furthermore, our team was not familiar with frameworks such as JavaFX prior to t
 ### Challenges faced
 
 * Understanding and refactoring the code base
-  * As HomeBoss deals with Customers and Deliveries, we had to refactor `Person` into `Customer`, and irrelevant
-    classes such as `Tag` has to be removed.
+    * As HomeBoss deals with Customers and Deliveries, we had to refactor `Person` into `Customer`, and irrelevant
+      classes such as `Tag` has to be removed.
 * Creating storage for Deliveries
-  * AB3 deals with only one storage. However, HomeBoss has two storages, one for Customers and one for Deliveries.
-    Furthermore, there is a dependency between the two entities, requiring a new `BookStorageWithReference` 
-    class that accepts two type parameters to be created.
+    * AB3 deals with only one storage. However, HomeBoss has two storages, one for Customers and one for Deliveries.
+      Furthermore, there is a dependency between the two entities, requiring a new `BookStorageWithReference`
+      class that accepts two type parameters to be created.
 * Adapting the `PersonListPanel` to `ListPanel`
-  * The `PersonListPanel` was designed to contain a list of `Person`. However, as we decided to display both 
-    `Customer` and `Delivery` in the same list, we had to adapt the `PersonListPanel` to `ListPanel` to 
-    accommodate both types of entities.
+    * The `PersonListPanel` was designed to contain a list of `Person`. However, as we decided to display both
+      `Customer` and `Delivery` in the same list, we had to adapt the `PersonListPanel` to `ListPanel` to
+      accommodate both types of entities.
 * Figuring out how to implement a secure login/logout system
-  * As one of the feature of HomeBoss is security, we had to figure out and implement the hashing of user password
-    and how to store the data related to the account.
+    * As one of the feature of HomeBoss is security, we had to figure out and implement the hashing of user password
+      and how to store the data related to the account.
 
 <br>
 
