@@ -1487,7 +1487,7 @@ otherwise)
 
 - 1a. User specifies status field in command.
 
-    - 1a1. DMS display a list of deliveries filtered with the specified status.
+    - 1a1. DMS displays a list of deliveries filtered with the specified status.
 
       Use Case Ends.
 
@@ -1509,82 +1509,43 @@ otherwise)
 
       Use Case Ends.
 
-- 1e. User specifies both status and customer fields.
+- 1e. User specifies a sort field in command.
 
-    - 1e1. DMS displays a list of deliveries filtered by the specified status and customer.
-
-      Use Case Ends.
-
-- 1f. User specifies both status and expected delivery date fields.
-
-    - 1f1. DMS displays a list of deliveries filtered by the specified status and expected delivery date.
+    - 1e1. DMS displays a list of all deliveries sorted by the specified sort order.
 
       Use Case Ends.
 
-- 1g. User specifies both status and expected delivery date fields as "TODAY".
+- 1f. User specifies a combination of the filter fields and sort field.
 
-    - 1g1. DMS displays a list of deliveries filtered by the specified status and expected delivery date that is today's
-      date.
-
-      Use Case Ends.
-
-
-- 1h. User specifies both customer and expected delivery date fields.
-
-    - 1h1. DMS displays a list of deliveries filtered by the specified customer and expected delivery date.
+    - 1f1. DMS displays a list of deliveries filtered by the specified filters and sorted by the specified sort
+      order.
 
       Use Case Ends.
 
-- 1i. User specifies both customer and expected delivery date fields as "TODAY".
+- 1g. User specifies duplicate fields
 
-    - 1i1. DMS displays a list of deliveries filtered by the specified customer and expected delivery date that is
-      today's date.
-
-      Use Case Ends.
-
-- 1j. User specifies customer, expected delivery date and status fields.
-
-    - 1j1. DMS displays a list of deliveries filtered by the specified customer, expected delivery date and status.
+    - 1g1. DMS displays a list of deliveries filtered by the last occurrence of each specified filters and sorted by the
+      last specified sort
 
       Use Case Ends.
 
-- 1k. User specifies customer, expected delivery date as "TODAY" and status fields.
+- 1h. Logged-in Owner specifies invalid status.
 
-    - 1k1. DMS displays a list of deliveries filtered by the specified customer, expected delivery date that is today's
-      date and status.
-
-          Use Case Ends.
-
-- 1l. User specifies sort field in command.
-
-    - 1l1. DMS displays a list of all deliveries sorted by the specified sort order.
-
-      Use Case Ends.
-
-- 1m. User Specifies any of the filter fields and sort field.
-
-    - 1m1. DMS displays a list of deliveries filtered by the specified filters and then expected delivery date sorted
-      by the specified sort order.
-
-          Use Case Ends.
-
-- 1n. Logged-in Owner specifies invalid status.
-
-    - 1n1. DMS displays an error to Logged-in Owner that the specified status is invalid and state the possible accepted
+    - 1h1. DMS displays an error to Logged-in Owner that the specified status is invalid and state the possible accepted
       status values.
 
       Use Case Ends.
 
-- 1o. Logged-in Owner specifies an invalid date.
+- 1i. Logged-in Owner specifies an invalid date.
 
-    - 1o1. DMS displays an error to Logged-in Owner that the specified date is in an invalid format and states what
+    - 1i1. DMS displays an error to Logged-in Owner that the specified date is in an invalid format and states what
       format it should be in.
 
       Use Case Ends.
 
-- 1p. Logged-in Owner specifies an invalid sort.
+- 1j. Logged-in Owner specifies an invalid sort.
 
-    - 1p1. DMS displays an error to Logged-in Owner that the specified sort is invalid and state the possible accepted
+    - 1j1. DMS displays an error to Logged-in Owner that the specified sort is invalid and state the possible accepted
       values.
 
       Use Case Ends.
