@@ -116,4 +116,9 @@ public class DeliveryStatusCommandParserTest {
         assertParseFailure(parser,
             "1 1 " + INVALID_STATUS, MESSAGE_INVALID_FORMAT);
     }
+
+    @Test
+    public void parse_extraArgs_failure() {
+        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+    }
 }
