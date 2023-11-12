@@ -38,8 +38,8 @@ import seedu.address.model.delivery.DeliveryStatus;
 
 
 public class DeliveryListCommandParserTest {
-    private DeliveryListParser parser = new DeliveryListParser();
 
+    private DeliveryListCommandParser parser = new DeliveryListCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeliveryListCommand() {
@@ -75,6 +75,7 @@ public class DeliveryListCommandParserTest {
 
         CommandParserTestUtil.assertParseSuccess(parser, VALID_DELIVERY_LIST_SORT_DESC,
             new DeliveryListCommand(null, null, null, Sort.DESC));
+
     }
 
     @Test
@@ -104,7 +105,6 @@ public class DeliveryListCommandParserTest {
                 + VALID_DELIVERY_LIST_DELIVERY_DATE + VALID_DELIVERY_LIST_SORT_DESC + VALID_DELIVERY_LIST_SORT_ASC,
             new DeliveryListCommand(DeliveryStatus.CANCELLED, null, new DeliveryDate(VALID_DELIVERY_DATE_3),
                 Sort.ASC));
-
     }
 
     @Test
