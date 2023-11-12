@@ -182,7 +182,7 @@ The `Model` component,
 
 The `User` model,
 
-* stores the user data i.e, the username and password of the user.
+* stores the user data i.e, the username, password, secret question and secret answer of the user.
 
 #### Delivery Model
 
@@ -190,9 +190,8 @@ The `User` model,
 
 The `Delivery` model,
 
-* stores the delivery data i.e, the delivery name, customer, delivery status, order date, expected delivery date and
-  note for the
-  delivery.
+* stores the delivery data i.e, the delivery ID, delivery name, customer, delivery status, order date,
+  expected delivery date and note for the delivery.
 
 #### Customer Model
 
@@ -200,7 +199,7 @@ The `Delivery` model,
 
 The `Customer` model,
 
-* stores the customer data i.e, the customer address, phone, email and address.
+* stores the customer data i.e, the customer ID, customer address, phone, email and address.
 
 ### Storage component
 
