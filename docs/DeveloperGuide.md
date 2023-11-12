@@ -876,17 +876,17 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | `***`    | a registered owner | view a customer                                                          | I can see their detailed information.                                                                                                                                                   |
 | `***`    | a registered owner | see a customer's list of deliveries                                      | I can easily see all the deliveries of a certain customer.                                                                                                                              |
 | `***`    | a registered owner | quickly search for the details of a client                               | I can monitor the progress of an order efficiently and effectively.                                                                                                                     |
-| `***`    | a registered owner | update a customer                                                        | I can change details if keyed in wrongly.                                                                                                                                               |
+| `***`    | a registered owner | update a customer's details                                              | I can change details if keyed in wrongly.                                                                                                                                               |
 | `***`    | a registered owner | delete a customer                                                        | I can remove redundant or incorrect customer records, especially when unforeseen errors occur.                                                                                          |
 | `***`    | a registered owner | view a list of customers                                                 | I can have a comprehensive overview of my customer base.                                                                                                                                |
 | `***`    | a registered owner | create a delivery                                                        | I can efficiently organise and access delivery information.                                                                                                                             |
 | `***`    | a registered owner | create notes about deliveries                                            | I can add additional information about deliveries.                                                                                                                                      |
 | `***`    | a registered owner | view a list of deliveries                                                | I can see a comprehensive overview of my deliveries.                                                                                                                                    |
 | `***`    | a registered owner | see the list of deliveries that would be delivered for the day           | I can prioritise particular orders.                                                                                                                                                     |
-| `***`    | a registered owner | add a customer to a delivery                                             | I know who the delivery is for.                                                                                                                                                         |
+| `***`    | a registered owner | add a customer to a delivery                                             | I can know who the delivery is for.                                                                                                                                                     |
 | `***`    | a registered owner | quickly search for the name of a delivery                                | I can monitor the progress of delivery.                                                                                                                                                 |
-| `***`    | a registered owner | see a list of deliveries sorted by their expected date of delivery       | It more organised and easier for me to get an overview of all orders.                                                                                                                   |
-| `***`    | a registered owner | view the details of a delivery                                           | I know what the order is and where to deliver it to.                                                                                                                                    |
+| `***`    | a registered owner | see a list of deliveries sorted by their expected date of delivery       | I can see a more organised list and easier for me to get an overview of all orders.                                                                                                     |
+| `***`    | a registered owner | view the details of a delivery                                           | I can know what the order is and where to deliver it to.                                                                                                                                |
 | `***`    | a registered owner | update the status of the delivery                                        | I can keep track of the delivery progress and notify my client.                                                                                                                         |
 | `***`    | a registered owner | update delivery details                                                  | I can change any information if there was an error from                                                                                                                        user/me. |
 | `***`    | a registered owner | delete a delivery                                                        | I can get rid of deliveries that are redundant.                                                                                                                                         |
@@ -1318,21 +1318,21 @@ otherwise)
 
 **Extensions:**
 
-- 1a. Logged-in Owner does not specify at least one updated field(s).
+- 1a. Logged-in owner did not specify at least one field to update.
 
-    - 1a1. CMS displays an error to Logged-in Owner to specify at least one field to update.
-
-      Use Case Ends.
-
-- 1b. Logged-in Owner specifies invalid customer.
-
-    - 1b1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
+    - 1a1. CMS informs the Logged-in Owner to specify at least one field to update.
 
       Use Case Ends.
 
-- 1c. Logged-in Owner does not specify customer.
+- 1b. Logged-in Owner specified a Customer ID that does not exist.
 
-    - 1c1. CMS displays an error to Logged-in Owner to specify a customer to update.
+    - 1b1. CMS informs the Logged-in Owner of invalid Customer ID being entered. 
+
+      Use Case Ends.
+
+- 1c. Logged-in Owner did not specify a Customer ID.
+
+    - 1c1. CMS informs the Logged-in Owner to specify a Customer to update.
 
       Use Case Ends.
 
@@ -1415,21 +1415,27 @@ otherwise)
 
 **Extensions:**
 
-- 1a. Command has missing fields.
+- 1a. Logged-in Owner did not specify all required fields.
 
-    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
-
-      Use Case Ends.
-
-- 1b. Command has invalid date.
-
-    - 1b1. DMS displays an error to Logged-in Owner that an invalid date was given.
+    - 1a1. DMS informs the Logged-in Owner to specify all required fields.
 
       Use Case Ends.
 
-- 1c. Command has invalid date format.
+- 1b. Logged-in Owner specified an invalid Expected Delivery date.
 
-    - 1c1. DMS displays an error to Logged-in Owner to specify the date in a valid format.
+    - 1b1. DMS informs the Logged-in Owner that an Invalid date was given.
+
+      Use Case Ends.
+
+- 1c. Logged-in Owner specified an invalid date format.
+
+    - 1c1. DMS informs the Logged-in Owner to specify the date in a valid format.
+
+      Use Case Ends.
+  
+- 1d. Logged-in Owner specfied a Customer ID that does not exist.
+
+    - 1d1. DMS informs the Logged-in Owner of invalid Customer ID being entered.
 
       Use Case Ends.
 
@@ -1557,109 +1563,7 @@ otherwise)
 
 ---
 
-#### **Use case:** UC17 - Add Customer to Delivery
-
-**System:** Delivery Management System (DMS)
-**Actor:** Logged-in owner.
-
-**Preconditions:** Owner is logged in.
-
-**Guarantees:**
-
-- A customer is added to a delivery only if the command is executed successfully.
-
-**MSS:**
-
-1. Logged-in Owner types command to add a customer to a delivery.
-2. DMS shows success message.
-
-   Use Case Ends.
-
-**Extensions:**
-
-- 1a. Command has missing fields.
-
-    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
-
-      Use Case Ends.
-
-- 1b. Command has invalid customer details.
-
-    - 1b1. DMS displays an error to Logged-in Owner that the specified customer details is invalid.
-
-      Use Case Ends.
-
----
-
-#### **Use case:** UC18 - Remove Customer from Delivery
-
-**System:** Delivery Management System (DMS)
-**Actor:** Logged-in owner.
-
-**Preconditions:** Owner is logged in.
-
-**Guarantees:**
-
-- A customer is removed from a delivery only if the command is executed successfully.
-
-**MSS:**
-
-1. Logged-in Owner types command to remove a customer from a delivery.
-2. DMS shows success message.
-
-   Use Case Ends.
-
-**Extensions:**
-
-- 1a. Command has missing fields.
-
-    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
-
-      Use Case Ends.
-
-- 1b. Command has invalid customer details.
-
-    - 1b1. DMS displays an error to Logged-in Owner that the specified customer cannot be found.
-
-      Use Case Ends.
-
----
-
-#### **Use case:** UC19 - Specify Delivery Method
-
-**System:** Delivery Management System (DMS)
-**Actor:** Logged-in owner.
-
-**Preconditions:** Owner is logged in.
-
-**Guarantees:**
-
-- A delivery method is specified only if the command is executed successfully.
-
-**MSS:**
-
-1. Logged-in Owner types command to specify a delivery method.
-2. DMS shows success message.
-
-   Use Case Ends.
-
-**Extensions:**
-
-- 1a. Command has missing fields.
-
-    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
-
-      Use Case Ends.
-
-- 1b. Command has invalid delivery options.
-
-    - 1b1. DMS displays an error to Logged-in Owner that the specified delivery method is invalid.
-
-      Use Case Ends.
-
----
-
-#### **Use case:** UC20 - Search for Delivery
+#### **Use case:** UC17 - Search for Delivery
 
 **System:** Delivery Management System (DMS)
 **Actor:** Logged-in owner.
@@ -1687,42 +1591,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC21 - View location of delivery
-
-**System:** Delivery Management System (DMS)
-
-**Actor:** Logged-in owner.
-
-**Preconditions:** Owner is logged-in.
-
-**Guarantees:**
-
-- Delivery location is shown only if the command is executed successfully.
-
-**MSS:**
-
-1. Logged-in owner types command to view location of delivery.
-2. DMS displays the address of the customer associated with the delivery.
-
-   Use case ends.
-
-**Extensions**
-
-- 1a. Logged-in owner did not specify the delivery id.
-
-    - 1a1. DMS informs the logged-in owner of the missing field.
-
-      Use case ends.
-
-- 1b. Logged-in owner specified a delivery id that does not exist.
-
-    - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
-
-      Use case ends.
-
----
-
-#### Use Case: UC22 - View details of delivery
+#### Use Case: UC18 - View details of delivery
 
 **System:** Delivery Management System (DMS)
 
@@ -1757,7 +1626,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC23 - Update delivery status
+#### Use Case: UC19 - Update delivery status
 
 **System:** Delivery Management System (DMS)
 
@@ -1798,7 +1667,7 @@ otherwise)
 
 ---
 
-#### Use Case: UC24 - Update delivery details
+#### Use Case: UC20 - Update delivery details
 
 **System:** Delivery Management System (DMS)
 
@@ -1819,27 +1688,27 @@ otherwise)
 
 **Extensions**
 
-- 1a. Logged-in owner did not specify all the fields.
+- 1a. Logged-in owner did not specify at least one field to update.
 
-    - 1a1. DMS informs the logged-in owner to specify all the fields.
-
-      Use case ends.
-
-- 1b. Logged-in owner specified a delivery id that does not exist.
-
-    - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+    - 1a1. DMS informs the Logged-in Owner to specify at least one field to update.
 
       Use case ends.
 
-- 1c. Logged-in owner entered date in the wrong format.
+- 1b. Logged-in owner specified a Delivery ID that does not exist.
 
-    - 1c1. DMS informs the logged-in owner of invalid format and shows the correct format.
+    - 1b1. DMS informs the logged-in owner of Invalid delivery id being entered.
+
+      Use case ends.
+
+- 1c. Logged-in owner did not specifiy a Delivery ID.
+
+    - 1c1. DMS informs the logged-in Owner to specify a Delivery to update. 
 
       Use case ends
 
 ---
 
-#### Use Case: UC25 - Delete delivery
+#### Use Case: UC21 - Delete delivery
 
 **System:** Delivery Management System (DMS)
 
@@ -1860,23 +1729,18 @@ otherwise)
 
 **Extensions**
 
-- 1a. Logged-in owner did not specify the delivery id.
+- 1a. Logged-in owner did not specify the Delivery ID.
 
-    - 1a1. DMS informs the logged-in owner of the missing field.
-
-      Use case ends.
-
-- 1b. Logged-in owner specified a delivery id that does not exist.
-
-    - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+    - 1a1. DMS informs the Logged-in Owner to specify a Delivery to delete.
 
       Use case ends.
 
-- 1c. Logged-in owner specified a delivery that is in-progress.
+- 1b. Logged-in owner specified a Delivery ID that does not exist.
 
-    - 1c1. DMS informs the logged-in owner of the status of the delivery and does not delete it.
+    - 1b1. DMS informs the logged-in owner of Invalid Delivery ID being entered.
 
-      Use case ends
+      Use case ends.
+
 
 ---
 
