@@ -157,6 +157,36 @@ public class Delivery {
         return deliveryDate;
     }
 
+    /**
+     * Returns true if the delivery date matches the delivery date of the delivery.
+     *
+     * @param date The delivery date to check.
+     * @return True if the delivery date matches the delivery date of the delivery.
+     */
+    public boolean isSameDeliveryDate(Date date) {
+        return deliveryDate.equals(date);
+    }
+
+    /**
+     * Returns true if the customer ID matches the customer ID of the delivery.
+     *
+     * @param customerId The customer ID to check.
+     * @return True if the customer ID matches the customer ID of the delivery.
+     */
+    public boolean isSameCustomerIdToDeliver(int customerId) {
+        return customer.isSameCustomerId(customerId);
+    }
+
+    /**
+     * Returns true if the delivery status matches the delivery status of the delivery.
+     *
+     * @param status The delivery status to check.
+     * @return True if the delivery status matches the delivery status of the delivery.
+     */
+    public boolean isSameDeliveryStatus(DeliveryStatus status) {
+        return this.status.equals(status);
+    }
+
     public DeliveryStatus getStatus() {
         return status;
     }
@@ -185,7 +215,7 @@ public class Delivery {
         }
 
         return otherDelivery != null
-                && otherDelivery.getDeliveryId() == getDeliveryId();
+            && otherDelivery.getDeliveryId() == getDeliveryId();
     }
 
     /**

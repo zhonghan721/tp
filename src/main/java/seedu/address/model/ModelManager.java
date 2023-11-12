@@ -547,7 +547,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortFilteredDeliveryList(Comparator<Delivery> comparator) {
+    public void updateSortedDeliveryList(Comparator<Delivery> comparator) {
         requireNonNull(comparator);
         sortedDeliveries.setComparator(comparator);
         setUiListDelivery();

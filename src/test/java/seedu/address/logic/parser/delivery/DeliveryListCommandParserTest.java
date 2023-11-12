@@ -26,14 +26,13 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.Sort;
 import seedu.address.logic.commands.delivery.DeliveryListCommand;
 import seedu.address.logic.parser.CommandParserTestUtil;
-import seedu.address.logic.parser.DeliveryListParser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.DeliveryStatus;
 
 
-public class DeliveryListParserTest {
-    private DeliveryListParser parser = new DeliveryListParser();
+public class DeliveryListCommandParserTest {
+    private DeliveryListCommandParser parser = new DeliveryListCommandParser();
 
 
     @Test
