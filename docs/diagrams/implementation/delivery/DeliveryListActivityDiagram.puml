@@ -6,7 +6,7 @@ skinparam ArrowFontSize 12
 !pragma useVerticalIf on
 start
 :User enters <i>delivery list --status COMPLETED \n <i> --customer 1</i> \n <i> --date TODAY </i> \n <i> --sort ASC </i>;
-partition DeliveryListParser {
+partition DeliveryListCommandParser {
     if () then ([else])
         :ParseException: Invalid Command Format;
         stop

@@ -6,7 +6,7 @@ skinparam ArrowFontSize 12
 !pragma useVerticalIf on
 start
 :User enters <i>delivery view 1 </i> command;
-partition DeliveryViewParser {
+partition DeliveryViewCommandParser {
     if () then ([else])
         :ParseException: Invalid Command Format;
         stop
