@@ -35,7 +35,8 @@ public class DeliveryListCommandParser implements Parser<DeliveryListCommand> {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(userInput, PREFIX_STATUS, PREFIX_SORT, PREFIX_CUSTOMER_ID, PREFIX_DATE);
 
-        if (!argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.isEmptyPreamble()) {
+            logger.warning("DeliveryListCommandParser: preamble is not empty");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeliveryListCommand.MESSAGE_USAGE));
         }

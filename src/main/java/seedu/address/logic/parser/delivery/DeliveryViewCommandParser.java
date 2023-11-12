@@ -23,12 +23,14 @@ public class DeliveryViewCommandParser implements Parser<DeliveryViewCommand> {
     @Override
     public DeliveryViewCommand parse(String args) throws ParseException {
         if (args.isEmpty()) {
+            logger.warning("DeliveryViewCommandParser: args is empty");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeliveryViewCommand.MESSAGE_USAGE));
         }
 
         final Matcher matcher = ARGUMENT_FORMAT.matcher(args.trim().toUpperCase());
         if (!matcher.matches()) {
+            logger.warning("DeliveryViewCommandParser: args does not match regex");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeliveryViewCommand.MESSAGE_USAGE));
         }
