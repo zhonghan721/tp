@@ -398,7 +398,7 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
-        public void sortFilteredDeliveryList(Comparator<Delivery> comparator) {
+        public void updateSortedDeliveryList(Comparator<Delivery> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 

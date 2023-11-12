@@ -264,7 +264,7 @@ public interface Model {
     void updateFilteredDeliveryList(Predicate<Delivery> predicate);
 
 
-    void sortFilteredDeliveryList(Comparator<Delivery> comparator);
+    void updateSortedDeliveryList(Comparator<Delivery> comparator);
 
     /**
      * Returns true if the {@code user} is currently logged in.

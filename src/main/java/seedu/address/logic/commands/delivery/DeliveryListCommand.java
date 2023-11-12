@@ -95,7 +95,7 @@ public class DeliveryListCommand extends DeliveryCommand {
         assert sortOrder != null : "Sort order should not be null";
 
         // sort by expected delivery date
-        model.sortFilteredDeliveryList(sortOrder);
+        model.updateSortedDeliveryList(sortOrder);
 
         return new CommandResult(MESSAGE_SUCCESS, true);
     }

@@ -204,7 +204,7 @@ public class ModelManagerTest {
         modelManager.setLoginSuccess();
         modelManager.addDelivery(GABRIELS_MILK);
         modelManager.addDelivery(GAMBES_RICE);
-        modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName));
+        modelManager.updateSortedDeliveryList(Comparator.comparing(Delivery::getName));
         assertEquals(Arrays.asList(GABRIELS_MILK, GAMBES_RICE), modelManager.getSortedDeliveryList());
     }
 
@@ -213,7 +213,7 @@ public class ModelManagerTest {
         modelManager.setLoginSuccess();
         modelManager.addDelivery(GABRIELS_MILK);
         modelManager.addDelivery(GAMBES_RICE);
-        modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName).reversed());
+        modelManager.updateSortedDeliveryList(Comparator.comparing(Delivery::getName).reversed());
         assertEquals(Arrays.asList(GAMBES_RICE, GABRIELS_MILK), modelManager.getSortedDeliveryList());
     }
 
@@ -333,10 +333,10 @@ public class ModelManagerTest {
         modelManager.setLoginSuccess();
         modelManager.addDelivery(GABRIELS_MILK);
         modelManager.addDelivery(GAMBES_RICE);
-        modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName));
+        modelManager.updateSortedDeliveryList(Comparator.comparing(Delivery::getName));
         assertFalse(modelManager.isSortedDeliveryListEmpty());
 
-        modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName).reversed());
+        modelManager.updateSortedDeliveryList(Comparator.comparing(Delivery::getName).reversed());
         assertFalse(modelManager.isSortedDeliveryListEmpty());
     }
 
