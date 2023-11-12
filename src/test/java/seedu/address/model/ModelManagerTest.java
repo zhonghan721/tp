@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
+import static seedu.address.model.Model.PREDICATE_SHOW_NO_CUSTOMERS;
+import static seedu.address.model.Model.PREDICATE_SHOW_NO_DELIVERIES;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCustomers.ALICE;
 import static seedu.address.testutil.TypicalCustomers.BENSON;
@@ -219,7 +221,7 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
         DeliveryBook deliveryBook =
-                new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+            new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         AddressBook differentAddressBook = new AddressBook();
         DeliveryBook differentDeliveryBook = new DeliveryBook();
         UserPrefs userPrefs = new UserPrefs();
@@ -267,6 +269,78 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void showAllCustomerList_success() {
+        modelManager.setLoginSuccess();
+        modelManager.addCustomer(ALICE);
+        modelManager.addCustomer(BENSON);
+        modelManager.showAllFilteredCustomerList();
+        assertEquals(Arrays.asList(ALICE, BENSON), modelManager.getFilteredCustomerList());
+    }
+
+    @Test
+    public void showAllDeliveryList_success() {
+        modelManager.setLoginSuccess();
+        modelManager.addDelivery(GABRIELS_MILK);
+        modelManager.addDelivery(GAMBES_RICE);
+        modelManager.showAllFilteredDeliveryList();
+        assertEquals(Arrays.asList(GABRIELS_MILK, GAMBES_RICE), modelManager.getFilteredDeliveryList());
+    }
+
+    @Test
+    public void getFilteredCustomerListSize_success() {
+        modelManager.setLoginSuccess();
+        modelManager.addCustomer(ALICE);
+        modelManager.addCustomer(BENSON);
+        modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        assertEquals(2, modelManager.getFilteredCustomerListSize());
+    }
+
+    @Test
+    public void getFilteredDeliveryListSize_success() {
+        modelManager.setLoginSuccess();
+        modelManager.addDelivery(GABRIELS_MILK);
+        modelManager.addDelivery(GAMBES_RICE);
+        modelManager.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        assertEquals(2, modelManager.getFilteredDeliveryListSize());
+    }
+
+    @Test
+    public void isFilteredCustomerListEmpty_success() {
+        modelManager.setLoginSuccess();
+        modelManager.addCustomer(ALICE);
+        modelManager.addCustomer(BENSON);
+        modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        assertFalse(modelManager.isFilteredCustomerListEmpty());
+
+        modelManager.updateFilteredCustomerList(PREDICATE_SHOW_NO_CUSTOMERS);
+        assertTrue(modelManager.isFilteredCustomerListEmpty());
+    }
+
+    @Test
+    public void isFilteredDeliveryListEmpty_success() {
+        modelManager.setLoginSuccess();
+        modelManager.addDelivery(GABRIELS_MILK);
+        modelManager.addDelivery(GAMBES_RICE);
+        modelManager.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        assertFalse(modelManager.isFilteredDeliveryListEmpty());
+
+        modelManager.updateFilteredDeliveryList(PREDICATE_SHOW_NO_DELIVERIES);
+        assertTrue(modelManager.isFilteredDeliveryListEmpty());
+    }
+
+    @Test
+    public void isSortedDeliveryListEmpty_success() {
+        modelManager.setLoginSuccess();
+        modelManager.addDelivery(GABRIELS_MILK);
+        modelManager.addDelivery(GAMBES_RICE);
+        modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName));
+        assertFalse(modelManager.isSortedDeliveryListEmpty());
+
+        modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName).reversed());
+        assertFalse(modelManager.isSortedDeliveryListEmpty());
+    }
+
+    @Test
     public void getDelivery_returnsDelivery() {
         modelManager.addDelivery(GABRIELS_MILK);
         assertEquals(modelManager.getDelivery(1), Optional.of(GABRIELS_MILK));
@@ -286,7 +360,7 @@ public class ModelManagerTest {
     public void getLoginStatus_storedUserAndLoggedIn_success() {
         AddressBook addressBook = new AddressBookBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
         DeliveryBook deliveryBook =
-                new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+            new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, true);
@@ -302,7 +376,7 @@ public class ModelManagerTest {
     public void getLoginStatus_storedUserAndLoggedOut_success() {
         AddressBook addressBook = new AddressBookBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
         DeliveryBook deliveryBook =
-                new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+            new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, false);
@@ -318,7 +392,7 @@ public class ModelManagerTest {
     public void getLoginStatus_noStoredUser_success() {
         AddressBook addressBook = new AddressBookBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
         DeliveryBook deliveryBook =
-                new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+            new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, false);

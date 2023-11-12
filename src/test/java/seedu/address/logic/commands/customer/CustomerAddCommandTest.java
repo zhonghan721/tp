@@ -47,7 +47,7 @@ public class CustomerAddCommandTest {
         CommandResult commandResult = new CustomerAddCommand(validCustomer).execute(modelStub);
 
         assertEquals(String.format(CustomerAddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
-                commandResult.getFeedbackToUser());
+            commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validCustomer), modelStub.customersAdded);
     }
 
@@ -59,7 +59,7 @@ public class CustomerAddCommandTest {
 
 
         assertThrows(CommandException.class,
-                CustomerAddCommand.MESSAGE_DUPLICATE_CUSTOMER, () -> customerAddCommand.execute(modelStub));
+            CustomerAddCommand.MESSAGE_DUPLICATE_CUSTOMER, () -> customerAddCommand.execute(modelStub));
 
     }
 
@@ -71,7 +71,7 @@ public class CustomerAddCommandTest {
         CustomerAddCommand customerAddCommand = new CustomerAddCommand(validCustomer);
 
         assertThrows(CommandException.class,
-                Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> customerAddCommand.execute(modelStub));
+            Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> customerAddCommand.execute(modelStub));
     }
 
     @Test
@@ -209,6 +209,42 @@ public class CustomerAddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * Resets the customer list to all customers.
+         */
+        @Override
+        public void showAllFilteredCustomerList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Resets the customer list to show no customers.
+         */
+        @Override
+        public void clearFilteredCustomerList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns the number of customers in the filtered customer list.
+         *
+         * @return the number of customers in the filtered customer list.
+         */
+        @Override
+        public int getFilteredCustomerListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns true if the filtered customer list is empty.
+         *
+         * @return true if the filtered customer list is empty.
+         */
+        @Override
+        public boolean isFilteredCustomerListEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public Path getDeliveryBookFilePath() {
             throw new AssertionError("This method should not be called.");
@@ -261,6 +297,52 @@ public class CustomerAddCommandTest {
 
         @Override
         public void setDelivery(Delivery target, Delivery editedCustomer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Resets the delivery list to show all deliveries.
+         */
+        @Override
+        public void showAllFilteredDeliveryList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Resets the delivery list to show no deliveries.
+         */
+        @Override
+        public void clearFilteredDeliveryList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns the number of deliveries in the filtered delivery list.
+         *
+         * @return the number of deliveries in the filtered delivery list.
+         */
+        @Override
+        public int getFilteredDeliveryListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns true if the filtered delivery list is empty.
+         *
+         * @return true if the filtered delivery list is empty.
+         */
+        @Override
+        public boolean isFilteredDeliveryListEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns the number of deliveries in the sorted delivery list.
+         *
+         * @return the number of deliveries in the sorted delivery list.
+         */
+        @Override
+        public boolean isSortedDeliveryListEmpty() {
             throw new AssertionError("This method should not be called.");
         }
 

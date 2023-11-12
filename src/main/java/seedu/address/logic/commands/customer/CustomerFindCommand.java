@@ -3,6 +3,8 @@ package seedu.address.logic.commands.customer;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 
+import java.util.logging.Logger;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
@@ -24,6 +26,8 @@ public class CustomerFindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
+    private static final Logger logger = Logger.getLogger(CustomerFindCommand.class.getName());
+
     private final NameContainsKeywordsPredicate predicate;
 
     public CustomerFindCommand(NameContainsKeywordsPredicate predicate) {
@@ -33,16 +37,19 @@ public class CustomerFindCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing CustomerFindCommand: keyword "
+                + predicate.getKeywordsAsString());
 
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
+            logger.warning("User is not logged in!");
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
         model.updateFilteredCustomerList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_CUSTOMERS_MATCHED_LISTED,
-                        model.getFilteredCustomerList().size()), true);
+                        model.getFilteredCustomerListSize()), true);
 
     }
 
