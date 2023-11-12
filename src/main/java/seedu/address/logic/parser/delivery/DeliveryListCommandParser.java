@@ -77,13 +77,11 @@ public class DeliveryListCommandParser implements Parser<DeliveryListCommand> {
 
     private Date parseInputDate(String inputDate) throws ParseException {
         boolean isToday = inputDate.equalsIgnoreCase("today");
-
         if (isToday) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Date.FORMAT);
             return new Date(LocalDate.now().format(formatter));
-        } else {
-            return ParserUtil.parseDate(inputDate);
         }
+        return ParserUtil.parseDate(inputDate);
     }
 
     private DeliveryStatus parseInputStatus(String inputStatus) throws ParseException {
