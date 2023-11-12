@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
+import java.util.logging.Logger;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.delivery.DeliveryEditCommand;
 import seedu.address.logic.commands.delivery.DeliveryEditCommand.DeliveryEditDescriptor;
@@ -22,6 +24,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class DeliveryEditCommandParser implements Parser<DeliveryEditCommand> {
 
+    private static final Logger logger = Logger.getLogger(DeliveryEditCommandParser.class.getName());
     /**
      * Parses the given {@code String} of arguments in the context of the DeliveryEditCommand
      * and returns an DeliveryEditCommand object for execution.
@@ -31,6 +34,8 @@ public class DeliveryEditCommandParser implements Parser<DeliveryEditCommand> {
     public DeliveryEditCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
+        logger.info("Parsing DeliveryEditCommand: " + args);
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CUSTOMER_ID,
                         PREFIX_DATE, PREFIX_STATUS, PREFIX_NOTE);
@@ -39,16 +44,18 @@ public class DeliveryEditCommandParser implements Parser<DeliveryEditCommand> {
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            logger.info("Index parsed: " + index);
         } catch (ParseException pe) {
+            logger.warning("Index parse failed. Invalid Command Format.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeliveryEditCommand.MESSAGE_USAGE), pe);
         }
-
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_CUSTOMER_ID,
                 PREFIX_DATE, PREFIX_STATUS, PREFIX_NOTE);
 
         DeliveryEditDescriptor deliveryEditDescriptor = createDeliveryEditDescriptor(argMultimap);
 
+        logger.info("DeliveryEditDescriptor created: " + deliveryEditDescriptor);
         return new DeliveryEditCommand(index, deliveryEditDescriptor);
     }
 
@@ -80,6 +87,7 @@ public class DeliveryEditCommandParser implements Parser<DeliveryEditCommand> {
         }
 
         if (!deliveryEditDescriptor.isAnyFieldEdited()) {
+            logger.warning("No fields provided.");
             throw new ParseException(DeliveryEditCommand.MESSAGE_NOT_EDITED);
         }
         return deliveryEditDescriptor;
