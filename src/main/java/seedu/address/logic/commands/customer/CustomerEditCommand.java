@@ -109,20 +109,15 @@ public class CustomerEditCommand extends CustomerCommand {
         model.getFilteredCustomerList();
 
         Optional<Customer> targetCustomer = model.getCustomer(targetIndex.getOneBased());
-        Customer customerToEdit = null;
-        Customer editedCustomer = null;
 
-        if (targetCustomer.isPresent()) {
-            customerToEdit = targetCustomer.get();
-            editedCustomer = createEditedCustomer(customerToEdit, customerEditDescriptor);
-        }
-
-        boolean isNull = customerToEdit == null || editedCustomer == null;
-
-        if (isNull) {
+        if (targetCustomer.isEmpty()) {
             logger.warning("Customer to be edited does not exist.\n");
             throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
+
+        Customer customerToEdit = targetCustomer.get();
+        Customer editedCustomer = createEditedCustomer(customerToEdit, customerEditDescriptor);
+
         if (!customerToEdit.hasSamePhone(editedCustomer) && model.hasCustomerWithSamePhone(editedCustomer)) {
             logger.warning("Customer to be edited already exist.(has the same phone number as another customer)."
                     + "\n");
@@ -131,11 +126,13 @@ public class CustomerEditCommand extends CustomerCommand {
 
         assert customerToEdit != null : "Customer to be edited should exist.";
         assert editedCustomer != null : "Edited Customer should exist.";
+
         logger.info("Customer to be edited: " + customerToEdit.toString() + "\n");
         logger.info("Edited Customer: " + editedCustomer.toString() + "\n");
 
         model.setCustomer(customerToEdit, editedCustomer);
         model.showAllFilteredCustomerList();
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
                 Messages.format(editedCustomer)), true);
 

@@ -93,26 +93,21 @@ public class DeliveryEditCommand extends DeliveryCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        Delivery editedDelivery = null;
-        Delivery deliveryToEdit = null;
-
         model.showAllFilteredDeliveryList();
 
         Optional<Delivery> targetDelivery = model.getDelivery(targetIndex.getOneBased());
 
-        if (targetDelivery.isPresent()) {
-            deliveryToEdit = targetDelivery.get();
-            editedDelivery = createEditedDelivery(model, deliveryToEdit, deliveryEditDescriptor);
-        }
-        boolean isNull = deliveryToEdit == null || editedDelivery == null;
-
-        if (isNull) {
+        if (targetDelivery.isEmpty()) {
             logger.warning("Delivery to be edited does not exist.\n");
             throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
         }
 
+        Delivery deliveryToEdit = targetDelivery.get();
+        Delivery editedDelivery = createEditedDelivery(model, deliveryToEdit, deliveryEditDescriptor);
+
         assert deliveryToEdit != null : "Delivery to be edited should exist.";
         assert editedDelivery != null : "Edited Delivery should exist.";
+
         logger.info("Delivery to be edited: " + deliveryToEdit.toString() + "\n");
         logger.info("Edited Delivery: " + editedDelivery.toString() + "\n");
 

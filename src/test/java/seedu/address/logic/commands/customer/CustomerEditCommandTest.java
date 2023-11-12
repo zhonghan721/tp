@@ -47,15 +47,10 @@ public class CustomerEditCommandTest {
         String expectedMessage = String.format(CustomerEditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
                 Messages.format(editedCustomer));
 
-        System.out.println(editedCustomer);
-        System.out.println(editCommand);
-        System.out.println(expectedMessage);
-        System.out.println(model.getDeliveryBook());
-
-        Model expectedModel = model;
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new DeliveryBook(model.getDeliveryBook()),
+                new UserPrefs(), model.getUserLoginStatus());
         expectedModel.setCustomer(model.getFilteredCustomerList().get(0), editedCustomer);
-        CustomerEditCommand.updateDelivery(expectedModel, editedCustomer);
-
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel, true);
     }
 

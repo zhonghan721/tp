@@ -78,7 +78,6 @@ public class DeliveryDeleteCommand extends DeliveryCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
         }
 
-
         Delivery deliveryToDelete = targetDelivery.get();
 
         logger.info("Delivery to be deleted:" + deliveryToDelete + "\n");
