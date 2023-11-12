@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.address.logic.Sort;
 import seedu.address.logic.commands.delivery.DeliveryListCommand;
@@ -26,6 +27,8 @@ import seedu.address.model.delivery.DeliveryStatus;
  */
 public class DeliveryListCommandParser implements Parser<DeliveryListCommand> {
 
+    private static final Logger logger = Logger.getLogger(DeliveryListCommandParser.class.getName());
+
     @Override
     public DeliveryListCommand parse(String userInput) throws ParseException {
 
@@ -36,33 +39,62 @@ public class DeliveryListCommandParser implements Parser<DeliveryListCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeliveryListCommand.MESSAGE_USAGE));
         }
+
+        return parseDeliveryListCommand(argMultimap);
+    }
+
+    private DeliveryListCommand parseDeliveryListCommand(ArgumentMultimap argMultimap) throws ParseException {
         Optional<String> sort = argMultimap.getValue(PREFIX_SORT);
         Optional<String> inputStatus = argMultimap.getValue(PREFIX_STATUS);
         Optional<String> inputCustomerId = argMultimap.getValue(PREFIX_CUSTOMER_ID);
         Optional<String> inputDate = argMultimap.getValue(PREFIX_DATE);
-        DeliveryStatus status = null;
         Integer customerId = null;
+        DeliveryStatus status = null;
         Date deliveryDate = null;
-        Sort sortString = ParserUtil.parseSort(sort.orElse("desc"));
+
+        Sort sortString = parseInputSort(sort.orElse("desc"));
+        assert sortString != null : "Sort string should not be null";
 
         if (inputStatus.isPresent()) {
-            status = ParserUtil.parseDeliveryStatus(inputStatus.get());
+            logger.info("Input status is present with value: " + inputStatus.get());
+            status = parseInputStatus(inputStatus.get());
         }
 
         if (inputCustomerId.isPresent()) {
-            customerId = ParserUtil.parseId(inputCustomerId.get());
+            logger.info("Input customer id is present with value: " + inputCustomerId.get());
+            customerId = parseInputCustomerId(inputCustomerId.get());
         }
 
         if (inputDate.isPresent()) {
-            if (inputDate.get().equalsIgnoreCase("today")) {
-                deliveryDate = new Date(LocalDate.now().format(DateTimeFormatter.ofPattern(Date.FORMAT)));
-            } else {
-                deliveryDate = ParserUtil.parseDate(inputDate.get());
-            }
+            logger.info("Input date is present with value: " + inputDate.get());
+            deliveryDate = parseInputDate(inputDate.get());
+            assert deliveryDate != null : "Delivery date should not be null";
         }
 
-
         return new DeliveryListCommand(status, customerId, deliveryDate, sortString);
+    }
+
+    private Date parseInputDate(String inputDate) throws ParseException {
+        boolean isToday = inputDate.equalsIgnoreCase("today");
+
+        if (isToday) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Date.FORMAT);
+            return new Date(LocalDate.now().format(formatter));
+        } else {
+            return ParserUtil.parseDate(inputDate);
+        }
+    }
+
+    private DeliveryStatus parseInputStatus(String inputStatus) throws ParseException {
+        return ParserUtil.parseDeliveryStatus(inputStatus);
+    }
+
+    private Integer parseInputCustomerId(String inputCustomerId) throws ParseException {
+        return ParserUtil.parseId(inputCustomerId);
+    }
+
+    private Sort parseInputSort(String inputSort) throws ParseException {
+        return ParserUtil.parseSort(inputSort);
     }
 
     @Override
