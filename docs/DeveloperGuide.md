@@ -18,6 +18,7 @@ HomeBoss is a software project adapted from the
 the [SE-EDU initiative](https://se-education.org).
 
 Libraries used in this project:
+
 * [Jackson](https://github.com/FasterXML/jackson)
 * [JavaFX](https://openjfx.io/)
 * [JUnit5](https://github.com/junit-team/junit5)
@@ -407,53 +408,59 @@ The format of the `delivery list` command can be found
 
 ### Feature Details
 
-1. The user enters the `delivery list` command.
-2. If the user enters no arguments, the `delivery list` command will list all
-   deliveries in the delivery book.
-3. If the user enters an invalid or empty status that is prefixed by `--status`, a `ParseException` will be thrown.
-4. If the user enters an invalid or empty sort that is prefixed by `--sort`, a `ParseException` will be thrown.
-5. If the command is parsed successfully, a `DeliveryListCommand` object will be created, and executed.
-6. If the user is not logged in, a `CommandException` will be thrown.
-7. If the status was provided, the status is used to filter the current delivery list with the specified status.
-8. If the customer id was provided, the customer id is used to filter the current delivery list with the specified
-   customer id.
-9. If the expected delivery date was provided, the expected delivery date is used to filter the current delivery list
-   with the specified expected delivery date.
-10. If the sort was provided, the sort is used to sort the current delivery list. By default, the deliveries will be
-    sorted in descending order of their expected delivery date.
-11. The list on the ui will be updated with the filtered and sorted deliveries.
-12. If the command completed successfully, a `CommandResult` object will be created, and returned.
+1. The user can optionally specify a `status`, `customer id`, `date` and `sort` to filter and sort the
+   current delivery list in any combination.
+2. If the preamble is not empty, a `ParseException` will be thrown.
+3. If the user enters a delivery status, it will be parsed and stored as a `DeliveryStatus` object.
+4. If the user enters a customer id, it will be parsed and stored as an `Integer`.
+5. If the user enters a date, it will be parsed. If the date is specified as `TODAY`, today's date
+   will be stored as a `Date` object. Else, the date provided will be parsed and stored as a `Date` object.
+6. If the user enters a sort, it will be parsed and stored as a `Sort` object. Else, it will be stored as a `Sort` with
+   descending order.
+7. If the command is parsed successfully, a `DeliveryListCommand` object will be created, and executed.
+8. If the user is not logged in, a `CommandException` will be thrown.
+9. If the status was provided, the status is added as a filter.
+10. If the customer id was provided, the customer id is added as a filter.
+11. If the date was provided, the date is added as a expected delivery date filter.
+12. The delivery list will be filtered by the filters created, if any.
+13. If the sort was provided, the sort provided is added as the sort. By default, a descending order sort is
+    added as a sort.
+14. The delivery list will be sorted by the sort created.
+15. If the command completed successfully, a `CommandResult` object will be created, and returned.
 
-The following activity diagram illustrates the logic for listing `Delivery`
+The following activity diagram illustrates the logic for listing `Delivery`. Some ParseExceptions are omitted for better
+readability.
 
 <puml src="diagrams/implementation/delivery/DeliveryListActivityDiagram.puml" width="450"> </puml>
 
 The sequence of the `delivery list` command is as follows:
 
-1. The command `delivery list --status STATUS --sort SORT` is entered by the user
-   (e.g. `delivery list --status created --sort ASC`)
-2. The `LogicManager` calls the `AdressBookParser#parseCommand()` with `delivery list --status STATUS --sort SORT`
+1. The command `delivery list --status STATUS --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE --sort SORT` is
+   entered by the user
+   (e.g. `delivery list --status created --customer 1 --date 2023-12-12 --sort ASC`)
+2. The `LogicManager` calls the `AdressBookParser#parseCommand()`
+   with `delivery list --status STATUS --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE --sort SORT`
 3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryListCommandParser` calling
-   `DeliveryListCommandParser#parse()` to parse the remaining input after the command word has been removed
-   (i.e. the command arguments)
-4. `DeliveryListCommandParser` will parse the arguments, and return a new instance of `DeliveryListCommand`
-   with the parsed `STATUS` and `SORT`
+   `DeliveryListCommandParser#parse()`  to parse remaining input after the command word has been removed (i.e. the
+   command arguments)
+4. `DeliveryListCommandParser#parse()` will call `DeliveryListCommandParser#parseDeliveryListCommand()`to parse the
+   arguments and return a new instance of `DeliveryListCommand` with the parsed `STATUS`, `CUSTOMER_ID`
+   , `EXPECTED_DELIVERY_DATE` and `SORT`, if any.
 5. `LogicManager` calls `DeliveryListCommand#execute()`, first checking if the user is logged in by calling
    `Model#getUserLoginStatus()`
-6. If status is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)` to
-   filter the
-   delivery list by the specified status.
-7. If expected delivery date is not null, `DeliveryListCommand` will call
-   `Model#updateFilteredDeliveryListByStatus(Predicate)` to filter the delivery list by the specified date.
-8. If customer id is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)`
-   to filter the delivery list by the specified customer id.
-9. If the sort is `asc`, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList(Comparator)` to sort the
-   delivery list by expected delivery date in descending order.
-10. Else, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList()` to sort the delivery list by the
-    expected delivery date in descending order.
-11. It creates a new "CommandResult" with the result of the execution.
+6. If status is not false, `DeliveryListCommand` will call `DeliveryListCommand#createDeliveryListFilters()` to create
+   the filters based on the parsed arguments, if any.
+7. `DeliveryListCommand` will call `Model#updateFilteredDeliveryList(Predicate)` to filter the delivery list by
+   the filters created.
+8. `DeliveryListCommand` will call `DeliveryListCommand#createDeliveryListSort()` to create the sort for the delivery
+   list by expected delivery date based on the parsed arguments, if any, or by default, create the sort in descending
+   expected delivery date.
+9. `DeliveryListCommand` will call `Model#updateSortedDeliveryList(Comparator)` to sort the delivery list by the sort
+   created.
+10. It creates a new "CommandResult" with the result of the execution.
 
-The default delivery sort is `asc`.
+The default delivery sort is `desc` which sorts the delivery list by expected delivery date in descending order from
+the latest date to the earliest date.
 
 The following sequence diagram illustrates the `delivery list` command sequence:
 
@@ -471,12 +478,16 @@ The format of the `delivery view` command can be found
 #### Feature Details
 
 1. The user will specify a `Delivery` through its `id`.
-2. If a number is not specified, or is in the incorrect format, an `ParseException` will be thrown.
-3. If the command is parsed successfully, a new `DeliveryViewCommand` is created, and executed
-4. If the user is not logged in during command execution, a `CommandException` will be thrown.
-5. The number provided is used to fetch the associated `Delivery` from `Model` if it exists. If the provided number does
-   not match any of the IDs of the `Delivery` stored in `Model`, a `CommandException` is thrown.
-6. It creates and returns a new `CommandResult` with the result of the execution.
+2. If there are no arguments specified, a `ParseException` will be thrown.
+3. If a number is not specified, or is in the incorrect format, a `ParseException` will be thrown.
+4. If the number provided is not a valid id, a `ParseException` will be thrown.
+5. If the command is parsed successfully, a new `DeliveryViewCommand` is created, and executed
+6. If the user is not logged in during command execution, a `CommandException` will be thrown.
+7. The number provided is used to fetch the associated `Delivery` from `Model`.
+8. If the provided number does not match any of the IDs of the `Delivery` stored in `Model`, a `CommandException` is
+   thrown.
+9. If the provided number matches an ID of a `Delivery`, it creates and returns a new `CommandResult` with the result of
+   the execution.
 
 The following activity diagram illustrates the logic of viewing a `Delivery`.
 
@@ -484,18 +495,18 @@ The following activity diagram illustrates the logic of viewing a `Delivery`.
 
 The sequence of the `delivery view` command is as follows:
 
-1. The command `delivery view DELIVERY_ID` is entered by the user (e.g. `delivery view 1`)
-2. `LogicManager` calls the `AddressBookParser#parseCommand()` with `delivery view 1`
+1. The command `delivery view DELIVERY_ID` is entered by the user (e.g. `delivery view 1`).
+2. `LogicManager` calls the `AddressBookParser#parseCommand()` with `delivery view 1`.
 3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryViewCommandParser` calling
    `DeliveryViewCommandParser#parse()` to parse the remaining input after the command word has been removed
-   (i.e. the command arguments)
+   (i.e. the command arguments).
 4. `DeliveryViewCommandParser` will parse the arguments, and return a new instance of `DeliveryViewCommand` with
-   the parsed `DELIVERY_ID`
-5. `LogicManager` calls `Delivery#execute()`, first checking if the user is logged in by calling
-   `Model#getUserLoginStatus()`
-6. It then attempts to fetch the `Delivery` with the specified `DELIVERY_ID`, using `Model#getDelivery(DELIVERY_ID)`
-   and returns the delivery.
-7. It creates and returns a new `CommandResult` with the result of the execution
+   the parsed `DELIVERY_ID`.
+5. `LogicManager` calls `DeliveryViewCommand#execute()`, first checking if the user is logged in by calling
+   `Model#getUserLoginStatus()`.
+6. If the status is not false, it attempts to fetch the `Delivery` with the specified `DELIVERY_ID`,
+   using `Model#getDelivery(DELIVERY_ID)` and returns the delivery if found.
+7. It creates and returns a new `CommandResult` with the result of the execution.
 
 The following sequence diagram illustrates the `delivery view` command sequence:
 
