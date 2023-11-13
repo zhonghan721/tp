@@ -95,7 +95,7 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
 
         // Both password and confirm password are present.
         Password parsedPassword = ParserUtil.parsePassword(password.get());
-        Password parsedConfirmPassword = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD_CONFIRM).get());
+        Password parsedConfirmPassword = ParserUtil.parsePassword(confirmPassword.get());
 
         // Passwords mismatch
         if (!parsedPassword.equals(parsedConfirmPassword)) {
