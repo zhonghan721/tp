@@ -133,9 +133,9 @@ PlantUML, the lifeline reaches the end of diagram.
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
-   a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
-   is executed by the `LogicManager`.
+   a parser that matches the command (e.g., `CustomerDeleteCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `CustomerDeleteCommand`)
+   which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a customer).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -146,11 +146,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 - When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
-  a `Command` object.
-- All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
-  interface so that they can be treated similarly where possible e.g, during testing.
+  placeholder for the specific command name e.g., `CustomerAddCommandParser`) which uses the other classes shown above
+  to parse the user command and create a `XYZCommand` object (e.g., `CustomerAddCommand`) which the `AddressBookParser`
+  returns back as a `Command` object.
+- All `XYZCommandParser` classes (e.g., `CustomerAddCommandParser`, `DeliveryDeleteCommandParser`, ...) inherit from
+  the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
@@ -158,13 +158,13 @@ How the parsing works:
 [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="900" />
 
 The `Model` component,
 
-* stores the address book data i.e., all `Customer` objects. (See the [ReadOnlyBook Model](#ReadOnlyBook-Model) section
+* stores the address book data i.e., all `Customer` objects. (See the [ReadOnlyBook Model](#readonlybook-model) section
   below for more details)
-* stores the delivery book data i.e., all `Delivery` objects. (See the [ReadOnlyBook Model](#ReadOnlyBook-Model) section
+* stores the delivery book data i.e., all `Delivery` objects. (See the [ReadOnlyBook Model](#readonlybook-model) section
   below for more details)
 * stores the currently filtered `Customer` objects (See the [Customer Model](#customer-model)) as a separate
   _filteredCustomers_ list. (e.g., results of a `customer list` command)
@@ -185,7 +185,7 @@ The `Model` component,
 
 The `ReadOnlyBook` model,
 
-<puml src="diagrams/ReadOnlyBookClassDiagram.puml" width="450" />
+<puml src="diagrams/ReadOnlyBookClassDiagram.puml" width="350" />
 
 * exposes the `AddressBook` and `DeliveryBook` to the outside.
 * The `AddressBook` class stores the address book data i.e., all `Customer` that are contained through
@@ -195,7 +195,7 @@ The `ReadOnlyBook` model,
 
 #### User Model
 
-<puml src="diagrams/UserClassDiagram.puml" width="450" />
+<puml src="diagrams/UserClassDiagram.puml" width="300" />
 
 The `User` model,
 
@@ -203,7 +203,7 @@ The `User` model,
 
 #### Delivery Model
 
-<puml src="diagrams/DeliveryClassDiagram.puml" width="450" />
+<puml src="diagrams/DeliveryClassDiagram.puml" width="600" />
 
 The `Delivery` model,
 
@@ -212,7 +212,7 @@ The `Delivery` model,
 
 #### Customer Model
 
-<puml src="diagrams/CustomerClassDiagram.puml" width="450" />
+<puml src="diagrams/CustomerClassDiagram.puml" width="350" />
 
 The `Customer` model,
 
@@ -302,7 +302,7 @@ The sequence of the `delivery status` command is as follows:
 
 The following sequence diagram illustrates the `delivery status` command sequence:
 
-<puml src="diagrams/DeliveryStatusCommandSequenceDiagram.puml" width="450" />
+<puml src="diagrams/DeliveryStatusCommandSequenceDiagram.puml" width="900" />
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -367,7 +367,7 @@ command executes successfully
 
 The following diagram illustrates the `delivery note` command sequence:
 
-<puml src="diagrams/DeliveryCreateNoteSequenceDiagram.puml" width="450" />
+<puml src="diagrams/DeliveryCreateNoteSequenceDiagram.puml" width="1000" />
 
 ### User Register Account Command
 
@@ -448,7 +448,7 @@ The format of the `delivery list` command can be found
 The following activity diagram illustrates the logic for listing `Delivery`. Some ParseExceptions are omitted for better
 readability.
 
-<puml src="diagrams/implementation/delivery/DeliveryListActivityDiagram.puml" width="450"> </puml>
+<puml src="diagrams/implementation/delivery/DeliveryListActivityDiagram.puml" width="800"> </puml>
 
 The sequence of the `delivery list` command is as follows:
 
@@ -508,7 +508,7 @@ The format of the `delivery view` command can be found
 
 The following activity diagram illustrates the logic of viewing a `Delivery`.
 
-<puml src="diagrams/implementation/delivery/DeliveryViewActivityDiagram.puml" width="450" />
+<puml src="diagrams/implementation/delivery/DeliveryViewActivityDiagram.puml" width="600" />
 
 The sequence of the `delivery view` command is as follows:
 
@@ -527,7 +527,7 @@ The sequence of the `delivery view` command is as follows:
 
 The following sequence diagram illustrates the `delivery view` command sequence:
 
-<puml src="diagrams/implementation/delivery/DeliveryViewSequenceDiagram.puml" width="450" />
+<puml src="diagrams/implementation/delivery/DeliveryViewSequenceDiagram.puml" width="900" />
 
 ### User Login Command
 
@@ -603,7 +603,7 @@ The sequence of the `logout` command is as follows:
 
 The following sequence diagram shows how the `login` command works:
 
-<puml src="diagrams/UserLogoutSequenceDiagram.puml" alt="UserLogoutSequenceDiagram" />
+<puml src="diagrams/UserLogoutSequenceDiagram.puml" alt="UserLogoutSequenceDiagram" width="900" />
 
 ### Add Customer Command
 
