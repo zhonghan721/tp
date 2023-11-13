@@ -924,13 +924,13 @@ thereby improving efficiency for business owners.
 
 Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikely to have) - `*`
 
-| Priority | As a …​            | I want to …​                                                             | So that I can…​                                                                                                                                                                         |
+| Priority | As …​              | I want to …​                                                             | So that …​                                                                                                                                                                              |
 |----------|--------------------|--------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `***`    | an owner           | create a local account                                                   | I can personalise and secure my account.                                                                                                                                                |
+| `***`    | an owner           | create a local account                                                   | I can personalise my account and secure my data.                                                                                                                                        |
 | `***`    | a registered owner | log in to my local account                                               | I can access my data.                                                                                                                                                                   |
-| `***`    | a forgetful owner  | retrieve my account                                                      | I can still recover my data.                                                                                                                                                            |
+| `***`    | a forgetful owner  | retrieve my account                                                      | I can still recover my data if I forget my password.                                                                                                                                    |
 | `***`    | a logged-in owner  | log out of my account                                                    | I can keep my data secure.                                                                                                                                                              |
-| `***`    | a registered owner | delete my account                                                        | I can have greater control over my data and account removal for privacy reasons.                                                                                                        |
+| `***`    | a registered owner | delete my account                                                        | I can clear all personal information or data from HomeBoss for privacy and security reasons.                                                                                            |
 | `***`    | a registered owner | update my details                                                        | I can change my personalisation.                                                                                                                                                        |
 | `***`    | a registered owner | create a customer                                                        | I can tie deliveries to customers’ information.                                                                                                                                         |
 | `***`    | a registered owner | view a customer                                                          | I can see their detailed information.                                                                                                                                                   |
@@ -1009,8 +1009,8 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 ### Use cases
 
-(For all use cases below, the **System** is the `HomeBoss` and the **Actor** is the `user`, unless specified
-otherwise)
+For all use cases below, the **System** is `HomeBoss` and the **Actor** is the `user`, unless specified
+otherwise.
 
 #### Use Case: UC01 - Register an Account
 
@@ -1029,21 +1029,22 @@ otherwise)
 
 1. Unregistered owner opens HomeBoss application.
 2. Unregistered owner enters register command with his username, password, confirm password, a "forget password"
-   question and answer.
-3. US creates an account and shows a welcome message with the newly created username.
+   secret question and answer.
+3. US creates an account and shows a welcome message. The GUI footer is updated with the username.
+
    Use case ends.
 
 **Extensions:**
 
 * 2a. Unregistered owner does not enter one of the fields.
 
-    * 2a1. US requests unregistered owner to fill up all the required fields.
+    * 2a1. US requests unregistered owner to fill up all the required fields by showing expected command format.
 
       Use case ends.
 
 * 2b. Unregistered owner types incorrect confirm password.
 
-    * 2b1. US requests unregistered owner to retype their confirm password.
+    * 2b1. US points out password mismatch and requests unregistered owner to try again.
 
       Use case ends.
 
@@ -1102,31 +1103,33 @@ otherwise)
 
 **Actor:** Registered owner
 
-**Preconditions:** Registered owner is logged out.
+**Preconditions:** An owner is registered with HomeBoss.
 
 **Guarantees:**
 
-- Password would be changed.
+- Password will be changed.
 
 **MSS:**
 
 1. Registered owner opens the HomeBoss application.
-2. Registered owner enters the account recovery command without any command flags (i.e., `--answer`).
-3. US displays the forget password question that the user set during account registration.
+2. Registered owner enters the account recovery command without any command flags (i.e., no `--answer`).
+3. US displays the "forget password" secret question that the user set during account registration, together with the
+   command format for account recovery.
 4. Registered owner enters the account recovery command, this time with the answer, new password and confirm password
    fields.
-5. US logins and shows a success message.
+5. US logs in and shows a success message confirming account recovery.
+
    Use case ends.
 
 **Extensions:**
 
 * 4a. Registered owner does not enter the answer field.
-    * 4a1. US requests registered owner to fill up the answer field.
+    * 4a1. US requests registered owner to fill up all the required fields, and shows the expected command format.
 
       Use case ends.
 
-* 4b. Registered owner types incorrect answer
-    * 4b1. US requests registered owner to retype their answer.
+* 4b. Registered owner types incorrect answer.
+    * 4b1. US says that the answer is incorrect and requests registered owner to try again.
 
       Use case ends.
 
@@ -1135,8 +1138,8 @@ otherwise)
 
       Use case ends.
 
-* 4d. Registered owner types incorrect confirm password.
-    * 4d1. US requests registered owner to retype their confirm password.
+* 4d. Registered owner types a password and confirm password that do not match.
+    * 4d1. US says that the passwords do not match and requests registered owner to try again.
 
       Use case ends.
 
@@ -1166,7 +1169,7 @@ otherwise)
 
 **System:** User System (US)
 
-**Actor:** Logged-in owner.
+**Actor:** Registered owner.
 
 **Preconditions:** Account is present.
 
@@ -1176,7 +1179,7 @@ otherwise)
 
 **MSS:**
 
-1. Logged-in owner types command to delete his account.
+1. Registered owner types command to delete his account.
 2. User system shows a success message.
 
    Use case ends.
@@ -1417,7 +1420,7 @@ otherwise)
 
 **Guarantees:**
 
-- Selected customer is deleted only if the command is executed successfully.
+- Selected customer is deleted if the command is executed successfully.
 
 **MSS:**
 
@@ -1428,15 +1431,21 @@ otherwise)
 
 **Extensions:**
 
-- 1a. Logged-in Owner specifies invalid customer.
+- 1a. Logged-in Owner specifies a customer ID that does not exist is a positive integer.
 
-    - 1a1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
+    - 1a1. CMS displays an error to Logged-in Owner that the specified customer ID is invalid.
 
       Use Case Ends.
 
-- 1b. Logged-in Owner does not specify customer.
+- 1b. Logged-in Owner specifies a non-positive integer as customer ID.
 
-    - 1b1. CMS displays an error to Logged-in Owner to specify a customer to update.
+    - 1b1. CMS displays an error to Logged-in Owner that the command format used is invalid, and shows the expected
+      command format.
+
+- 1c. Logged-in Owner does not specify customer ID.
+
+    - 1c1. CMS displays an error to Logged-in Owner that the command format used is invalid, and shows the expected
+      command format.
 
       Use Case Ends.
 
