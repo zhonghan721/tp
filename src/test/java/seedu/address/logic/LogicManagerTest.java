@@ -81,14 +81,26 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_storageThrowsIoException_throwsCommandException() {
-        assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
+    public void execute_storageAddressBookThrowsIoException_throwsCommandException() {
+        assertCommandFailureForExceptionFromAddressBookStorage(DUMMY_IO_EXCEPTION, String.format(
             LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
     }
 
     @Test
-    public void execute_storageThrowsAdException_throwsCommandException() {
-        assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
+    public void execute_storageAddressBookThrowsAdException_throwsCommandException() {
+        assertCommandFailureForExceptionFromAddressBookStorage(DUMMY_AD_EXCEPTION, String.format(
+            LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
+    }
+
+    @Test
+    public void execute_storageDeliveryBookThrowsIoException_throwsCommandException() {
+        assertCommandFailureForExceptionFromDeliveryBookStorage(DUMMY_IO_EXCEPTION, String.format(
+            LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
+    }
+
+    @Test
+    public void execute_storageDeliveryBookThrowsAdException_throwsCommandException() {
+        assertCommandFailureForExceptionFromDeliveryBookStorage(DUMMY_AD_EXCEPTION, String.format(
             LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }
 
@@ -157,12 +169,12 @@ public class LogicManagerTest {
     }
 
     /**
-     * Tests the Logic component's handling of an {@code IOException} thrown by the Storage component.
+     * Tests the Logic component's handling of an {@code IOException} thrown by the Storage component for AddressBook.
      *
-     * @param e               the exception to be thrown by the Storage component
+     * @param e               the exception to be thrown by the Storage component for AddressBook
      * @param expectedMessage the message expected inside exception thrown by the Logic component
      */
-    private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
+    private void assertCommandFailureForExceptionFromAddressBookStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
         // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
@@ -236,5 +248,47 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         assertEquals(logic.getLoginStatus(), model.getLoginStatus());
+    }
+
+    /**
+     * Tests the Logic component's handling of an {@code IOException} thrown by the Storage component for DeliveryBook.
+     *
+     * @param e               the exception to be thrown by the Storage component for DeliveryBook
+     * @param expectedMessage the message expected inside exception thrown by the Logic component
+     */
+    private void assertCommandFailureForExceptionFromDeliveryBookStorage(IOException e, String expectedMessage) {
+        Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
+
+
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath);
+
+        // Inject LogicManager with an DeliveryBookStorage that throws the IOException e when saving
+        JsonDeliveryBookStorage deliveryBookStorage =
+            new JsonDeliveryBookStorage(temporaryFolder.resolve("deliveryBook.json")) {
+                @Override
+                public void saveBook(ReadOnlyBook<Delivery> deliveryBook, Path filePath) throws IOException {
+                    throw e;
+                }
+            };
+
+        JsonUserPrefsStorage userPrefsStorage =
+            new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, deliveryBookStorage, userPrefsStorage);
+
+        logic = new LogicManager(model, storage);
+
+        // Triggers the saveAddressBook method by executing an add command
+        String addCommand = CustomerAddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
+            + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+
+        Customer expectedCustomer = new CustomerBuilder(AMY)
+            .withCustomerId(Customer.getCustomerCount()).build();
+
+
+        ModelManager expectedModel = new ModelManager();
+        // sets the expected model to be in logged in state
+        expectedModel.setLoginSuccess();
+        expectedModel.addCustomer(expectedCustomer);
+        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

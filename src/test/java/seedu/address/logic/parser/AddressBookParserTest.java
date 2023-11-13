@@ -168,6 +168,7 @@ public class AddressBookParserTest {
         assertEquals(new DeliveryEditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
+    @Test
     public void parseCommand_deliveryFind() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         DeliveryFindCommand command = (DeliveryFindCommand) parser.parseCommand(
