@@ -18,6 +18,7 @@ HomeBoss is a software project adapted from the
 the [SE-EDU initiative](https://se-education.org).
 
 Libraries used in this project:
+
 * [Jackson](https://github.com/FasterXML/jackson)
 * [JavaFX](https://openjfx.io/)
 * [JUnit5](https://github.com/junit-team/junit5)
@@ -161,20 +162,36 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Customer` objects (which are contained in a `UniqueCustomerList` object). The
-  address book is exposed to the outside as a `ReadOnlyBook` objects.
-* stores the delivery book data i.e., all `Delivery` objects (which are contained in a `UniqueDeliveryList` object). The
-  delivery book is exposed to the outside as a `ReadOnlyBook` objects.
-* stores the currently filtered `Customer` objects (e.g., results of a search query) as a separate _filteredCustomers_
-  list
-* stores the currently filtered `Delivery` objects (e.g., results of a status filter query) as a separate
-  _filteredDeliveries_ list
-* stores the currently sorted `Delivery` objects (e.g., results of a sort query) as a separate _sortedDeliveries_
-  list
-* stores an unmodifiable `ObservableList<ListItem>` that can be 'observed' e.g. the UI can be bound
-  to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Customer` objects. (See the [ReadOnlyBook Model](#ReadOnlyBook-Model) section
+  below for more details)
+* stores the delivery book data i.e., all `Delivery` objects. (See the [ReadOnlyBook Model](#ReadOnlyBook-Model) section
+  below for more details)
+* stores the currently filtered `Customer` objects (See the [Customer Model](#customer-model)) as a separate
+  _filteredCustomers_ list. (e.g., results of a `customer list` command)
+* stores the currently filtered `Delivery` objects (See the [Delivery Model](#delivery-model)) as a separate
+  _filteredDeliveries_ list. (e.g., results of a `delivery list --status COMPLETED` command)
+* stores the currently sorted `Delivery` objects as a separate _sortedDeliveries_ list. (eg., results of
+  a `delivery list --sort ASC` command)
+* stores a `User` object that represents the logged-in user's data (See the [User Model](#user-model)).
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
+* stores an unmodifiable `ObservableList<ListItem>` that exposes the `Customer` or `Delivery`  details that is
+  shown on the UI list panel that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically
+  updates when the data in the list change.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
+  should make sense on their own without depending on other components)
+
+#### ReadOnlyBook Model
+
+The `ReadOnlyBook` model,
+
+<puml src="diagrams/ReadOnlyBookClassDiagram.puml" width="450" />
+
+* exposes the `AddressBook` and `DeliveryBook` to the outside.
+* The `AddressBook` class stores the address book data i.e., all `Customer` that are contained through
+  the `UniqueCustomerList`.
+* The `DeliveryBook` class stores the delivery book data i.e., all `Delivery` that are contained through
+  the `UniqueDeliveryList`.
 
 #### User Model
 
@@ -291,6 +308,8 @@ This section describes some noteworthy details on how certain features are imple
 
 - [Create Delivery Note](#create-note-for-delivery-feature)
 - [User Register Account Command](#user-register-account-command)
+- [Delivery List Command](#list-delivery-feature)
+- [Deliver View Command](#view-delivery-feature)
 - [User Login Command](#user-login-command)
 - User Update Details Command
 - [User Logout Command](#user-logout-command)
@@ -402,57 +421,63 @@ The following sequence diagram shows how the `register` command works:
 The `delivery list` command is used to list all deliveries in the delivery book.
 
 The format of the `delivery list` command can be found
-[here](./UserGuide.md#view-all-deliveries)
+[here](./UserGuide.md#view-a-list-of-deliveries)
 
 ### Feature Details
 
-1. The user enters the `delivery list` command.
-2. If the user enters no arguments, the `delivery list` command will list all
-   deliveries in the delivery book.
-3. If the user enters an invalid or empty status that is prefixed by `--status`, a `ParseException` will be thrown.
-4. If the user enters an invalid or empty sort that is prefixed by `--sort`, a `ParseException` will be thrown.
-5. If the command is parsed successfully, a `DeliveryListCommand` object will be created, and executed.
-6. If the user is not logged in, a `CommandException` will be thrown.
-7. If the status was provided, the status is used to filter the current delivery list with the specified status.
-8. If the customer id was provided, the customer id is used to filter the current delivery list with the specified
-   customer id.
-9. If the expected delivery date was provided, the expected delivery date is used to filter the current delivery list
-   with the specified expected delivery date.
-10. If the sort was provided, the sort is used to sort the current delivery list. By default, the deliveries will be
-    sorted in descending order of their expected delivery date.
-11. The list on the ui will be updated with the filtered and sorted deliveries.
-12. If the command completed successfully, a `CommandResult` object will be created, and returned.
+1. The user can optionally specify a `status`, `customer id`, `date` and `sort` to filter and sort the
+   current delivery list in any combination.
+2. If the preamble is not empty, a `ParseException` will be thrown.
+3. If the user enters a delivery status, it will be parsed and stored as a `DeliveryStatus` object.
+4. If the user enters a customer id, it will be parsed and stored as an `Integer`.
+5. If the user enters a date, it will be parsed. If the date is specified as `TODAY`, today's date
+   will be stored as a `Date` object. Else, the date provided will be parsed and stored as a `Date` object.
+6. If the user enters a sort, it will be parsed and stored as a `Sort` object. Else, it will be stored as a `Sort` with
+   descending order.
+7. If the command is parsed successfully, a `DeliveryListCommand` object will be created, and executed.
+8. If the user is not logged in, a `CommandException` will be thrown.
+9. If the status was provided, the status is added as a filter.
+10. If the customer id was provided, the customer id is added as a filter.
+11. If the date was provided, the date is added as an expected delivery date filter.
+12. The delivery list will be filtered by the filters created, if any.
+13. If the sort was provided, the sort provided is added as the sort. By default, a descending order sort is
+    added as a sort.
+14. The delivery list will be sorted by the sort created.
+15. If the command completed successfully, a `CommandResult` object will be created, and returned.
 
-The following activity diagram illustrates the logic for listing `Delivery`
+The following activity diagram illustrates the logic for listing `Delivery`. Some ParseExceptions are omitted for better
+readability.
 
 <puml src="diagrams/implementation/delivery/DeliveryListActivityDiagram.puml" width="450"> </puml>
 
 The sequence of the `delivery list` command is as follows:
 
-1. The command `delivery list --status STATUS --sort SORT` is entered by the user
-   (e.g. `delivery list --status created --sort ASC`)
-2. The `LogicManager` calls the `AdressBookParser#parseCommand()` with `delivery list --status STATUS --sort SORT`
+1. The command `delivery list --status STATUS --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE --sort SORT` is
+   entered by the user
+   (e.g. `delivery list --status created --customer 1 --date 2023-12-12 --sort ASC`)
+2. The `LogicManager` calls the `AdressBookParser#parseCommand()`
+   with `delivery list --status STATUS --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE --sort SORT`
 3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryListCommandParser` calling
-   `DeliveryListCommandParser#parse()` to parse the remaining input after the command word has been removed
-   (i.e. the command arguments)
-4. `DeliveryListCommandParser` will parse the arguments, and return a new instance of `DeliveryListCommand`
-   with the parsed `STATUS` and `SORT`
+   `DeliveryListCommandParser#parse()`  to parse remaining input after the command word has been removed (i.e. the
+   command arguments)
+4. `DeliveryListCommandParser#parse()` will call `DeliveryListCommandParser#parseDeliveryListCommand()`to parse the
+   arguments and return a new instance of `DeliveryListCommand` with the parsed `STATUS`, `CUSTOMER_ID`
+   , `EXPECTED_DELIVERY_DATE` and `SORT`, if any.
 5. `LogicManager` calls `DeliveryListCommand#execute()`, first checking if the user is logged in by calling
    `Model#getUserLoginStatus()`
-6. If status is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)` to
-   filter the
-   delivery list by the specified status.
-7. If expected delivery date is not null, `DeliveryListCommand` will call
-   `Model#updateFilteredDeliveryListByStatus(Predicate)` to filter the delivery list by the specified date.
-8. If customer id is not null, `DeliveryListCommand` will call `Model#updateFilteredDeliveryListByStatus(Predicate)`
-   to filter the delivery list by the specified customer id.
-9. If the sort is `asc`, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList(Comparator)` to sort the
-   delivery list by expected delivery date in descending order.
-10. Else, `DeliveryListCommand` will call `Model#sortFilteredDeliveryList()` to sort the delivery list by the
-    expected delivery date in descending order.
-11. It creates a new "CommandResult" with the result of the execution.
+6. If status is not false, `DeliveryListCommand` will call `DeliveryListCommand#createDeliveryListFilters()` to create
+   the filters based on the parsed arguments, if any.
+7. `DeliveryListCommand` will call `Model#updateFilteredDeliveryList(Predicate)` to filter the delivery list by
+   the filters created.
+8. `DeliveryListCommand` will call `DeliveryListCommand#createDeliveryListSort()` to create the sort for the delivery
+   list by expected delivery date based on the parsed arguments, if any, or by default, create the sort in descending
+   expected delivery date.
+9. `DeliveryListCommand` will call `Model#updateSortedDeliveryList(Comparator)` to sort the delivery list by the sort
+   created.
+10. It creates a new "CommandResult" with the result of the execution.
 
-The default delivery sort is `asc`.
+The default delivery sort is `desc` which sorts the delivery list by expected delivery date in descending order from
+the latest date to the earliest date.
 
 The following sequence diagram illustrates the `delivery list` command sequence:
 
@@ -465,17 +490,21 @@ The following sequence diagram illustrates the `delivery list` command sequence:
 The `delivery view` command is used to view a selected delivery with the id specified by the user.
 
 The format of the `delivery view` command can be found
-[here](./UserGuide.md#view-details-of-deliveries)
+[here](./UserGuide.md#view-details-of-a-delivery)
 
 #### Feature Details
 
 1. The user will specify a `Delivery` through its `id`.
-2. If a number is not specified, or is in the incorrect format, an `ParseException` will be thrown.
-3. If the command is parsed successfully, a new `DeliveryViewCommand` is created, and executed
-4. If the user is not logged in during command execution, a `CommandException` will be thrown.
-5. The number provided is used to fetch the associated `Delivery` from `Model` if it exists. If the provided number does
-   not match any of the IDs of the `Delivery` stored in `Model`, a `CommandException` is thrown.
-6. It creates and returns a new `CommandResult` with the result of the execution.
+2. If there are no arguments specified, a `ParseException` will be thrown.
+3. If a number is not specified, or is in the incorrect format, a `ParseException` will be thrown.
+4. If the number provided is not a valid id, a `ParseException` will be thrown.
+5. If the command is parsed successfully, a new `DeliveryViewCommand` is created, and executed
+6. If the user is not logged in during command execution, a `CommandException` will be thrown.
+7. The number provided is used to fetch the associated `Delivery` from `Model`.
+8. If the provided number does not match any of the IDs of the `Delivery` stored in `Model`, a `CommandException` is
+   thrown.
+9. If the provided number matches an ID of a `Delivery`, it creates and returns a new `CommandResult` with the result of
+   the execution.
 
 The following activity diagram illustrates the logic of viewing a `Delivery`.
 
@@ -483,18 +512,18 @@ The following activity diagram illustrates the logic of viewing a `Delivery`.
 
 The sequence of the `delivery view` command is as follows:
 
-1. The command `delivery view DELIVERY_ID` is entered by the user (e.g. `delivery view 1`)
-2. `LogicManager` calls the `AddressBookParser#parseCommand()` with `delivery view 1`
+1. The command `delivery view DELIVERY_ID` is entered by the user (e.g. `delivery view 1`).
+2. `LogicManager` calls the `AddressBookParser#parseCommand()` with `delivery view 1`.
 3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryViewCommandParser` calling
    `DeliveryViewCommandParser#parse()` to parse the remaining input after the command word has been removed
-   (i.e. the command arguments)
+   (i.e. the command arguments).
 4. `DeliveryViewCommandParser` will parse the arguments, and return a new instance of `DeliveryViewCommand` with
-   the parsed `DELIVERY_ID`
-5. `LogicManager` calls `Delivery#execute()`, first checking if the user is logged in by calling
-   `Model#getUserLoginStatus()`
-6. It then attempts to fetch the `Delivery` with the specified `DELIVERY_ID`, using `Model#getDelivery(DELIVERY_ID)`
-   and returns the delivery.
-7. It creates and returns a new `CommandResult` with the result of the execution
+   the parsed `DELIVERY_ID`.
+5. `LogicManager` calls `DeliveryViewCommand#execute()`, first checking if the user is logged in by calling
+   `Model#getUserLoginStatus()`.
+6. If the status is not false, it attempts to fetch the `Delivery` with the specified `DELIVERY_ID`,
+   using `Model#getDelivery(DELIVERY_ID)` and returns the delivery if found.
+7. It creates and returns a new `CommandResult` with the result of the execution.
 
 The following sequence diagram illustrates the `delivery view` command sequence:
 
@@ -896,60 +925,56 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 ### Planned Enhancements
 
-#### User Interface
+1. Currently, when a new customer or a new delivery is created, the ID is guaranteed to be unique among customers and
+   deliveries respectively but may not be generated from the first available ID. We plan to modify the ID generation so
+   that the ID of the new customer or new delivery would be the first available ID from 1 to the maximum integer
+   respectively. Thus, preventing the strange behaviour of the ID not starting from 1 or from the first available ID
+   when the data is removed by `clear` or `delete account` or if the data is manually removed or when the application is
+   closed and opened again.
 
-* The user interface can show two lists views of both customer and delivery lists side by side to allow the user to see
-  both lists at the same time.
+2. Currently, you are unable to key in special characters for the name of a customer or for delivery notes. We plan to
+   allow certain special characters only such as `/` for the name of a customer as some people have special characters
+   eg. `Gabriel s/o Bryan` in their name or require special characters when taking notes.
 
-#### Command Format
+3. Currently, the `find` command for customer would allow special characters to be used to find a customer by their
+   name. We plan to limit the allowed special characters to the allowed special characters for names based on the
+   previous point to avoid confusion.
 
-* Prefixes can be shortened to allow the user to type less. For example, `--name` can be shortened to `-n`.
-* Potentially frequently used commands such as `customer list` and `delivery list` can be shortened to `cl` and `dl`
-  respectively.
+4. Currently, the `find` command requires exact match of keywords and returns results that matches any of those
+   keywords. This potentially results in numerous in unwanted data to be shown if there are multiple matching keywords.
+   Or, if there are no matching keywords, no results would be shown. For example, if you have `100` Chocolate Cake
+   and `100` Strawberry Buns and `1` Chocolate Buns, and you search for Chocolate Buns, the result would be `100`
+   Chocolate Cake and `1` Chocolate Buns and `100` Strawberry Buns. Or, if you misspelled your search as Chcolate Bns,
+   you would receive no result. We plan to make the `find` command have more options to do more complex search
+   functionalities such as fuzzy search and exact match search. For example, if you search for Chocolate Buns, with
+   exact search, the result would be `1` Chocolate Buns. Or, if you misspelled your search as Chcolate Bns, with fuzzy
+   search, the result would be `1` Chocolate Buns.
 
-#### Error Messages
+5. Currently, you would need to type `delivery list` or `customer list` in order to switch between the two lists to get
+   information which may hinder the user's ability to quickly type commands. We can create two side-by-side list views
+   of both customer and delivery for quicker reference and enable users to make quicker commands.
 
-* Error messages for dates would be more specific to allow the user to know what is wrong with the date that they
-  entered. For example, if a user enters 2023-02-30, the error message would be "Invalid date. The date entered does
-  not exist.".
-* Error messages for IDs should specify whether it is for the customer ID or for delivery ID as the current
-  implementation has some error messages that only specifies "ID" instead of "Customer ID" or "Delivery ID".
-* Error messages for numerical parameters that require a positive integer should throw more specific errors for negative
-  values.
-* Error messages would be improved in general to be more informative and instructive.
+6. Currently, some error messages are not specific enough. Error messages can be made more specific and instructive. For
+   example, if a user enters 2023-02-30, the error message can be "Invalid date. The date entered does not exist.",
+   however the current implementation only states "Dates should be in the format yyyy-MM-dd". Or, if a user enters the
+   incorrect ID, the error should show "Customer ID" or "Delivery ID", however, the current implementation of some
+   commands does not specify whether it is for the customer ID or for delivery ID and only states "ID". Or, if a user
+   inputs a negative value or zero for some numerical parameters that requires a positive integer, the error message
+   should be more specific and state "Please enter a positive integer." instead of "Invalid Command Format".
 
-#### User Accounts
+7. Currently, only the user password is the only thing that is hashed in the authentication file. We plan to encrypt the
+   whole JSON authentication file and the data to prevent unauthorised access to the user's account and data
+   instead of only hashing the user password.
 
-* Allow the user to create multiple accounts for different businesses.
-* Allow the user to create multiple accounts for the same business.
+8. Currently, you can recover your account while logged in. We plan to disallow the user to recover their account while
+   logged in.
 
-#### Security
+9. Currently, you can put duplicate prefixes for delivery list to filter or sort the deliveries that may arise in
+   confusion by which filter is applied. We plan to disallow duplicate prefixes for delivery list so that users would
+   not be confused by the output.
 
-* The whole JSON authentication file would be encrypted to prevent unauthorised access to the user's account instead of
-  only hashing the user password.
-* The whole delivery and customer data would be encrypted to prevent unauthorised access to the customer and delivery
-  data.
-
-#### ID Generation
-
-* When a new customer or delivery is created, the ID of the customer or delivery would be the first available ID from 1
-  to the maximum integer in the list of customers or deliveries respectively.
-* ID of a new customer and delivery will reset to 1 for customers and deliveries if the user deletes all
-  customers and deliveries using the `clear` command.
-* ID of a new customer and delivery will reset to 1 for customers and deliveries if the user deletes his account.
-
-#### Find Customer Command
-
-* Find command for customer would disallow special characters as a user cannot add special characters to the name of a
-  customer.
-
-#### Delivery Status
-
-* Allow the user to set their own customised delivery status.
-
-#### Enhanced Delivery Address
-
-* Allow tagging by area and region name to delivery address and enable users to filter them accordingly.
+10. Currently, you can filter delivery list by a customer id that does not exist. We plan to disallow filtering delivery
+    list by a customer id that does not exist.
 
 ### Use cases
 
@@ -1225,13 +1250,13 @@ otherwise)
 
 - 1a. Logged-in Owner does not specify the id.
 
-    - 1a1. CMS requests Logged-in Owner to key in an id.
+    - 1a1. CMS requests Logged-in Owner to specify all required fields.
 
       Use Case ends.
 
-- 1b. Logged-in Owner specifies a customer id that does not exist.
+- 1b. Logged-in Owner specifies an invalid Customer.
 
-    - 1b1. CMS displays a message that customer id does not exist.
+    - 1b1. CMS displays an error to Logged-in Owner that the specified customer does not exist.
 
       Use Case ends.
 
@@ -1461,6 +1486,18 @@ otherwise)
     - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
       Use Case Ends.
+
+- 1b. Command specifies an invalid Delivery.
+
+   - 1b1. DMS displays an error to Logged-in Owner that the specified Delivery does not exist.
+
+     Use Case Ends.
+
+- 1c. Command specifies an invalid note.
+
+   - 1c1. DMS informs the logged-in owner of an invalid note being entered.
+
+     Use Case Ends.
 
 ---
 
@@ -1778,15 +1815,15 @@ otherwise)
 
 **Extensions**
 
-- 1a. Logged-in owner did not specify the delivery id or delivery status.
+- 1a. Command has missing fields.
 
-    - 1a1. DMS informs the logged-in owner of the missing field.
+    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
       Use case ends.
 
-- 1b. Logged-in owner specified a delivery id that does not exist.
+- 1b. Logged-in owner specified an invalid Delivery.
 
-    - 1b1. DMS informs the logged-in owner of an invalid delivery id being entered.
+    - 1b1. DMS displays an error to Logged-in Owner that the specified Delivery does not exist.
 
       Use case ends.
 
@@ -2648,19 +2685,19 @@ Furthermore, our team was not familiar with frameworks such as JavaFX prior to t
 ### Challenges faced
 
 * Understanding and refactoring the code base
-  * As HomeBoss deals with Customers and Deliveries, we had to refactor `Person` into `Customer`, and irrelevant
-    classes such as `Tag` has to be removed.
+    * As HomeBoss deals with Customers and Deliveries, we had to refactor `Person` into `Customer`, and irrelevant
+      classes such as `Tag` has to be removed.
 * Creating storage for Deliveries
-  * AB3 deals with only one storage. However, HomeBoss has two storages, one for Customers and one for Deliveries.
-    Furthermore, there is a dependency between the two entities, requiring a new `BookStorageWithReference` 
-    class that accepts two type parameters to be created.
+    * AB3 deals with only one storage. However, HomeBoss has two storages, one for Customers and one for Deliveries.
+      Furthermore, there is a dependency between the two entities, requiring a new `BookStorageWithReference`
+      class that accepts two type parameters to be created.
 * Adapting the `PersonListPanel` to `ListPanel`
-  * The `PersonListPanel` was designed to contain a list of `Person`. However, as we decided to display both 
-    `Customer` and `Delivery` in the same list, we had to adapt the `PersonListPanel` to `ListPanel` to 
-    accommodate both types of entities.
+    * The `PersonListPanel` was designed to contain a list of `Person`. However, as we decided to display both
+      `Customer` and `Delivery` in the same list, we had to adapt the `PersonListPanel` to `ListPanel` to
+      accommodate both types of entities.
 * Figuring out how to implement a secure login/logout system
-  * As one of the feature of HomeBoss is security, we had to figure out and implement the hashing of user password
-    and how to store the data related to the account.
+    * As one of the feature of HomeBoss is security, we had to figure out and implement the hashing of user password
+      and how to store the data related to the account.
 
 <br>
 

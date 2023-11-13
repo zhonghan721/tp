@@ -36,7 +36,7 @@ public class UserLoginCommandParser implements Parser<UserLoginCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_USER, PREFIX_PASSWORD);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_USER, PREFIX_PASSWORD)
-                || !argMultimap.getPreamble().isEmpty()) {
+                || !argMultimap.isEmptyPreamble()) {
             logger.severe("Could not parse command");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UserLoginCommand.MESSAGE_USAGE));
         }

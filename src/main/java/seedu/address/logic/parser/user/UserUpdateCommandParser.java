@@ -41,7 +41,7 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
 
         UserUpdateDescriptor userUpdateDescriptor = new UserUpdateDescriptor();
 
-        if (!argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.isEmptyPreamble()) {
             logger.severe("Could not parse command");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UserUpdateCommand.MESSAGE_USAGE));
         }

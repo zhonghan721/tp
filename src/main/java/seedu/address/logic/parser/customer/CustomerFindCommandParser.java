@@ -3,6 +3,7 @@ package seedu.address.logic.parser.customer;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 import seedu.address.logic.commands.customer.CustomerFindCommand;
 import seedu.address.logic.parser.Parser;
@@ -14,6 +15,8 @@ import seedu.address.model.customer.NameContainsKeywordsPredicate;
  */
 public class CustomerFindCommandParser implements Parser<CustomerFindCommand> {
 
+    private static final Logger logger = Logger.getLogger(CustomerFindCommandParser.class.getName());
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -23,6 +26,7 @@ public class CustomerFindCommandParser implements Parser<CustomerFindCommand> {
     public CustomerFindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
+            logger.severe("Could not parse command");
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CustomerFindCommand.MESSAGE_USAGE));
         }
