@@ -1,5 +1,5 @@
 //@@author {Gabriel4357}
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.delivery;
 
 
 import static java.util.Objects.requireNonNull;
@@ -12,6 +12,10 @@ import java.util.logging.Logger;
 
 import seedu.address.logic.commands.delivery.DeliveryAddCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.DeliveryDate;
 
@@ -32,10 +36,10 @@ public class DeliveryAddCommandParser implements Parser<DeliveryAddCommand> {
         requireNonNull(args);
         logger.info("Parsing DeliveryAddCommand: " + args);
         ArgumentMultimap argMultimap =
-              ArgumentTokenizer.tokenize(args, PREFIX_CUSTOMER_ID, PREFIX_DATE);
+                ArgumentTokenizer.tokenize(args, PREFIX_CUSTOMER_ID, PREFIX_DATE);
 
         if (!argMultimap.arePrefixesPresent(PREFIX_CUSTOMER_ID, PREFIX_DATE)
-              || argMultimap.getPreamble().isEmpty()) {
+                || argMultimap.getPreamble().isEmpty()) {
             logger.warning("No/Wrong prefix provided. Invalid Command Format.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeliveryAddCommand.MESSAGE_USAGE));
         }
@@ -49,7 +53,7 @@ public class DeliveryAddCommandParser implements Parser<DeliveryAddCommand> {
 
         if (!argMultimap.isEmptyPreamble()) {
             deliveryAddDescriptor.setDeliveryName(ParserUtil
-                  .parseDeliveryName(argMultimap.getPreamble()));
+                    .parseDeliveryName(argMultimap.getPreamble()));
         }
         if (customerId.isPresent()) {
             int id = ParserUtil.parseId(customerId.get());

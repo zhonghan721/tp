@@ -264,9 +264,6 @@ public interface Model {
 
     ObservableList<Delivery> getSortedDeliveryList();
 
-    @Deprecated
-    Delivery getDeliveryUsingFilteredList(int id);
-
     /**
      * Updates the filter of the filtered delivery list to filter by the given {@code predicate}.
      *

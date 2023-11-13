@@ -189,12 +189,6 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
-        public Delivery getDeliveryUsingFilteredList(int id) {
-
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<ListItem> getUiList() {
             return null;
         }
@@ -326,7 +320,9 @@ public class DeliveryAddCommandTest {
         @Override
         public Stream<Delivery> getDeliveryByCustomerId(int id) {
             throw new AssertionError("This method should not be called.");
-        };
+        }
+
+        ;
 
         @Override
         public boolean hasDelivery(Delivery delivery) {
@@ -606,6 +602,7 @@ public class DeliveryAddCommandTest {
             addressBook.addCustomer(validCustomer);
             return addressBook;
         }
+
         @Override
         public Optional<Customer> getCustomer(int id) {
             CustomerBuilder personBuilder = new CustomerBuilder();
