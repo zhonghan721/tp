@@ -384,8 +384,7 @@ logout
 * Words in uppercase are parameters that are supplied by you.
 * Parameters that are preceded by a prefix must be supplied after that prefix.<br/>e.g. `--name DELIVERY_NAME`{.swift}
   must be given as `--name furniture` and not `furniture` or `--name`.
-* Items that are placed in square brackets (`[]`{.swift}) are optional. <br/>e.g. `DELIVERY_ID [--name DELIVERY_NAME]`
-  {.swift} can either be `1` or <br/>`1 --name furniture`.
+* Items that are placed in square brackets (`[]`{.swift}) are optional. <br/>e.g. `DELIVERY_ID [--name DELIVERY_NAME]`{.swift} can either be `1` or <br/>`1 --name furniture`.
 * However, items that are grouped together in square brackets (`[]`{.swift}) must all be provided together.
   <br/>e.g. for `[--password PASSWORD --confirmPass CONFIRM_PASSWORD]`{.swift} both `PASSWORD`{.swift} and
   `CONFIRM_PASSWORD`{.swift} must be provided.
@@ -644,8 +643,7 @@ question `First Pet Name?` and answer `Koko`.
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
 **Tip:** Since only one account can be registered at any one time, if you have already registered an account, you will
-not be able to register another account. If you must, you can delete your current account by using the `delete account`
-{.swift} command [here](#delete-account) before registering a new account.
+not be able to register another account. If you must, you can delete your current account by using the `delete account`{.swift} command [here](#delete-account) before registering a new account.
 </box>
 
 <br/>
