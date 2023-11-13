@@ -27,6 +27,7 @@ public class DeliveryNameTest {
         // invalid name
         assertFalse(DeliveryName.isValidName("")); // empty string
         assertFalse(DeliveryName.isValidName(" ")); // spaces only
+        assertFalse(DeliveryName.isValidName("\n\r\t")); // escape sequences
         assertFalse(DeliveryName.isValidName("^")); // only non-alphanumeric characters
         assertFalse(DeliveryName.isValidName("peter*")); // contains non-alphanumeric characters
 

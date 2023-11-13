@@ -18,10 +18,10 @@ public class JsonAdaptedCustomerTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-
     private static final String INVALID_ID_NEGATIVE = "-1";
-
     private static final String INVALID_ID_MAX_INT = "2147483648";
+    private static final String INVALID_ID_ZERO = "0";
+    private static final String INVALID_ID_NAN = "NaN";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -50,6 +50,19 @@ public class JsonAdaptedCustomerTest {
         assertThrows(IllegalValueException.class, INVALID_ID_EXPECTED_MESSAGE, person::toModelType);
     }
 
+    @Test
+    public void toModelType_invalidCustomerIdZero_throwsIllegalValueException() throws Exception {
+        JsonAdaptedCustomer person =
+            new JsonAdaptedCustomer(INVALID_ID_ZERO, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS);
+        assertThrows(IllegalValueException.class, INVALID_ID_EXPECTED_MESSAGE, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidCustomerIdNan_throwsIllegalValueException() throws Exception {
+        JsonAdaptedCustomer person =
+            new JsonAdaptedCustomer(INVALID_ID_NAN, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS);
+        assertThrows(IllegalValueException.class, INVALID_ID_EXPECTED_MESSAGE, person::toModelType);
+    }
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedCustomer person =

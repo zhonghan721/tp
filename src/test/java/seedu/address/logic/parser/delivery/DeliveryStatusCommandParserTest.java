@@ -1,16 +1,20 @@
 package seedu.address.logic.parser.delivery;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_MAX_VALUE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_NAN;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_NEGATIVE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_ZERO;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STATUS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_CANCELLED_VIEW;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_COMPLETED_VIEW;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_CREATED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_CREATED_VIEW;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_SHIPPED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_SHIPPED_VIEW;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +36,6 @@ public class DeliveryStatusCommandParserTest {
 
         // SHIPPED
         deliveryStatusCommand = new DeliveryStatusCommand(1, DeliveryStatus.SHIPPED);
-
         assertParseSuccess(parser, " 1 " + VALID_STATUS_SHIPPED_VIEW, deliveryStatusCommand);
 
         // COMPLETED
@@ -64,6 +67,12 @@ public class DeliveryStatusCommandParserTest {
     }
 
     @Test
+    public void parse_allFieldsEscapeCharacters_success() {
+        DeliveryStatusCommand deliveryStatusCommand = new DeliveryStatusCommand(1, DeliveryStatus.CREATED);
+        assertParseSuccess(parser, "\n\r\t1 \n\r\t" + VALID_STATUS_CREATED + " ", deliveryStatusCommand);
+    }
+
+    @Test
     public void parse_statusLowerCase_success() {
         DeliveryStatusCommand deliveryStatusCommand = new DeliveryStatusCommand(1, DeliveryStatus.CREATED);
 
@@ -77,6 +86,11 @@ public class DeliveryStatusCommandParserTest {
 
         assertParseSuccess(parser, "1 " + VALID_STATUS_CREATED_VIEW.toUpperCase(), deliveryStatusCommand);
 
+    }
+
+    @Test
+    public void parse_noSpace_failure() {
+        assertParseFailure(parser, "1" + VALID_STATUS_SHIPPED, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -109,6 +123,18 @@ public class DeliveryStatusCommandParserTest {
     public void parse_nanId_failure() {
         assertParseFailure(parser,
             INVALID_ID_NAN + " " + INVALID_STATUS, MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_zeroId_failure() {
+        assertParseFailure(parser,
+            INVALID_ID_ZERO + " " + VALID_STATUS_SHIPPED, MESSAGE_INVALID_INDEX);
+    }
+
+    @Test
+    public void parse_maxValueId_failure() {
+        assertParseFailure(parser,
+            INVALID_ID_MAX_VALUE + " " + VALID_STATUS_SHIPPED, MESSAGE_INVALID_INDEX);
     }
 
     @Test

@@ -27,6 +27,7 @@ public class PasswordTest {
         assertFalse(Password.isValidPassword("")); // empty string
         assertFalse(Password.isValidPassword("abc123")); // less than 8 characters
         assertFalse(Password.isValidPassword("        ")); // spaces only
+        assertFalse(Password.isValidPassword("\n\r\t")); // escape sequences
         assertFalse(Password.isValidPassword("^&%$@#!%*#()")); // only non-alphanumeric characters
         assertFalse(Password.isValidPassword("peter*is*me")); // contains non-alphanumeric characters
         assertFalse(Password.isValidPassword("peter abc")); // contains whitespace
