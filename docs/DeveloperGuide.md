@@ -277,8 +277,6 @@ This section describes some noteworthy details on how certain features are imple
 - [Customer Edit Command](#customer-edit-command)
 - [Delivery Add Command](#delivery-add-command)
 
-<br>
-
 ### Update Delivery Status Feature
 
 #### Overview
@@ -323,6 +321,7 @@ The sequence of the `delivery status` command is as follows:
 7. It creates and returns a new `CommandResult` with the result of the execution
 
 The following sequence diagram illustrates the `delivery status` command sequence:
+
 
 <puml src="diagrams/DeliveryStatusCommandSequenceDiagram.puml" width="900" />
 
@@ -381,7 +380,7 @@ The following diagram illustrates the `delivery note` command sequence:
 
 <br>
 
-### User Register Account Command
+### <br/>User Register Account Command
 
 **Overview:**
 The `register` command is used to register a new user account.
@@ -391,16 +390,18 @@ The format for the `register` command can be found [here](UserGuide.md#register)
 
 **Feature details:**
 
-1. The user specifies the `Username`, `Password`, `Confirm Password`, `Forget Password Question`
-   and `Forget Password Answer` in the `register` command.
-2. If any of the fields is not provided, an error message with the correct command usage will be shown.
-3. If invalid command parameters are provided, an error message with the correct parameter format will be shown.
-4. If the `Password` and `Confirm Password` fields do not match, an error message will be shown.
-5. If the user is currently logged in, an error message will be shown.
-6. The `User` is then cross-referenced with the stored user in `Model` to check if there's already a user stored. If
+1. The user specifies the `USERNAME`{.swift}, `PASSWORD`{.swift}, `CONFIRM_PASSWORD`{.swift}, `SECRET_QUESTION`{.swift}
+   and `ANSWER`{.swift} in the `register`{.swift} command.
+1. If any of the fields is not provided, an error message with the correct command format will be shown.
+1. If command parameters provided are not within the acceptable value range, an error message with the correct command format will be shown.
+1. If the `PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} fields do not match, an error message will be shown to
+   inform the user that the passwords do not match.
+1. If the user is currently logged in, an error message will be shown.
+1. The `User` is then cross-referenced with the stored user in `Model` to check if there's already a user stored. If
    there's already a user stored, an error message will be shown.
-7. If all the previous steps are completed without exceptions, the user will be registered and the `User` will be stored
+1. If all the previous steps are completed without exceptions, the user will be registered and the `User` will be stored
    in `Model`. The `isLoggedIn` status in `Model` will be updated to `true`.
+1. The user's username, password, secret question and answer will then be stored in the `authentication.json` file. The password is hashed using SHA-256.
 
 The following activity diagram shows the logic of a user registering an account:
 
@@ -408,25 +409,28 @@ The following activity diagram shows the logic of a user registering an account:
 
 The sequence of the `register` command is as follows:
 
-1. The command `register INPUT` is entered by the user (e.g., register --user gab --password pass1234 --confirmPass
-   pass1234 --secretQn First Pet? --answer Koko).
-2. Logic Manager calls the `AddressBookParser#parseCommand` with the `INPUT`.
-3. The `AddressBookParser` parses the command word, creating an instance of `UserRegisterCommandParser` to parse the
+1. The `register` command is entered by the user (i.e., `register --user gab --password pass1234 --confirmPass
+   pass1234 --secretQn First Pet? --answer Koko`).
+1. Logic Manager calls the `AddressBookParser#parseCommand` with the full user input.
+1. The `AddressBookParser` parses the command word, creating an instance of `UserRegisterCommandParser` to parse the
    rest of the command.
-4. If all fields are present, it checks if password and confirm password match.
-5. If password and confirm password match, it creates an instance of `UserRegisterCommand`.
-6. `Logic Manager` executes `UserRegisterCommand` by calling `UserRegisterCommand#execute()`.
-7. `UserRegisterCommand` checks if a user is already registered by calling `Model#getStoredUser`.
-8. If no user is registered, `UserRegisterCommand` calls `Model#registerUser` to store the user. Login status is set to
+1. If not all fields are present, a `ParseException` is thrown saying incorrect command format.
+1. If all fields are present, it checks if `PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} match.
+1. If `PASSWORD`{.swift} and `CONFIRM_PASSWORD`{.swift} match, it creates an instance of `UserRegisterCommand`.
+1. `Logic Manager` executes `UserRegisterCommand` by calling `UserRegisterCommand#execute()`.
+1. `UserRegisterCommand` checks if a user is already registered by calling `Model#getStoredUser`.
+1. If no user is registered, `UserRegisterCommand` calls `Model#registerUser` to store the user. Login status is set to
    true.
-9. `UserRegisterCommand` calls `Model#updateFilteredPersonList` to display the list of customers.
-10. `UserRegisterCommand` returns a `CommandResult` with a success message.
+1. `UserRegisterCommand` calls `Model#showAllFilteredCustomerList` to display the list of customers.
+1. `UserRegisterCommand` returns a `CommandResult` with a success message.
 
 The following sequence diagram shows how the `register` command works:
 
 <puml src="diagrams/UserRegisterSequenceDiagram.puml" alt="UserRegisterSequenceDiagram" />
 
-<br>
+
+<br/>
+
 
 ### List Delivery Feature
 
