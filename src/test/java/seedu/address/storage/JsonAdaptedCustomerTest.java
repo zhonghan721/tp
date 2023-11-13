@@ -40,14 +40,14 @@ public class JsonAdaptedCustomerTest {
     public void toModelType_invalidCustomerIdNegative_throwsIllegalValueException() throws Exception {
         JsonAdaptedCustomer person =
             new JsonAdaptedCustomer(INVALID_ID_NEGATIVE, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS);
-        assertThrows(IllegalValueException.class, INVALID_ID_EXPECTED_MESSAGE  ,person::toModelType);
+        assertThrows(IllegalValueException.class, INVALID_ID_EXPECTED_MESSAGE, person::toModelType);
     }
 
     @Test
     public void toModelType_invalidCustomerIdMaxInt_throwsIllegalValueException() throws Exception {
         JsonAdaptedCustomer person =
             new JsonAdaptedCustomer(INVALID_ID_MAX_INT, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS);
-        assertThrows(IllegalValueException.class, INVALID_ID_EXPECTED_MESSAGE  ,person::toModelType);
+        assertThrows(IllegalValueException.class, INVALID_ID_EXPECTED_MESSAGE, person::toModelType);
     }
 
     @Test
