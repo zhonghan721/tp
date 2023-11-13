@@ -322,8 +322,6 @@ public class DeliveryAddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        ;
-
         @Override
         public boolean hasDelivery(Delivery delivery) {
             throw new AssertionError("This method should not be called.");
