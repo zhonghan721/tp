@@ -31,13 +31,13 @@ AddressBookParser -> CustomerAddCommandParser : parse(arg)
 activate CustomerAddCommandParser
 
 create Customer
-CustomerAddCommandParser -> Customer 
+CustomerAddCommandParser -> Customer
 
 Customer --> CustomerAddCommandParser
 deactivate Customer
 
 create CustomerAddCommand
-CustomerAddCommandParser -> CustomerAddCommand 
+CustomerAddCommandParser -> CustomerAddCommand
 activate CustomerAddCommand
 
 CustomerAddCommand --> CustomerAddCommandParser

@@ -77,7 +77,6 @@ deactivate Model
 UserLoginCommand -> Model : setLoginSuccess()
 activate Model
 
-Model --> UserLoginCommand
 deactivate Model
 
 UserLoginCommand -> Model : showAllFilteredCustomerList()
