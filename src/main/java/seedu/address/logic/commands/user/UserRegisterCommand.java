@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SECRET_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -111,7 +110,7 @@ public class UserRegisterCommand extends Command {
         assert storedUser.isEmpty() : "User should not be present.";
 
         model.registerUser(this.user);
-        model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        model.showAllFilteredCustomerList();
         return new CommandResult(MESSAGE_SUCCESS, true);
     }
 

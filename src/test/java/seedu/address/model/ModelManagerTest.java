@@ -3,8 +3,6 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 import static seedu.address.model.Model.PREDICATE_SHOW_NO_CUSTOMERS;
 import static seedu.address.model.Model.PREDICATE_SHOW_NO_DELIVERIES;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -110,7 +108,7 @@ public class ModelManagerTest {
     public void getCustomerUsingFilteredList_validId_returnsCustomer() {
         modelManager.setLoginSuccess();
         modelManager.addCustomer(ALICE);
-        modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        modelManager.showAllFilteredCustomerList();
         Optional<Customer> customerOptional = modelManager.getCustomer(1);
         assertEquals(ALICE, customerOptional.get());
     }
@@ -252,7 +250,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, userPrefs, true)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        modelManager.showAllFilteredCustomerList();
 
         // different filteredDeliveryList -> returns false
         String[] deliveryKeywords = GABRIELS_MILK.getName().deliveryName.split("\\s+");
@@ -260,7 +258,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(addressBook, deliveryBook, userPrefs, true)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        modelManager.showAllFilteredDeliveryList();
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
@@ -291,7 +289,7 @@ public class ModelManagerTest {
         modelManager.setLoginSuccess();
         modelManager.addCustomer(ALICE);
         modelManager.addCustomer(BENSON);
-        modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        modelManager.showAllFilteredCustomerList();
         assertEquals(2, modelManager.getFilteredCustomerListSize());
     }
 
@@ -300,7 +298,7 @@ public class ModelManagerTest {
         modelManager.setLoginSuccess();
         modelManager.addDelivery(GABRIELS_MILK);
         modelManager.addDelivery(GAMBES_RICE);
-        modelManager.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        modelManager.showAllFilteredDeliveryList();
         assertEquals(2, modelManager.getFilteredDeliveryListSize());
     }
 
@@ -309,7 +307,7 @@ public class ModelManagerTest {
         modelManager.setLoginSuccess();
         modelManager.addCustomer(ALICE);
         modelManager.addCustomer(BENSON);
-        modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        modelManager.showAllFilteredCustomerList();
         assertFalse(modelManager.isFilteredCustomerListEmpty());
 
         modelManager.updateFilteredCustomerList(PREDICATE_SHOW_NO_CUSTOMERS);
@@ -321,7 +319,7 @@ public class ModelManagerTest {
         modelManager.setLoginSuccess();
         modelManager.addDelivery(GABRIELS_MILK);
         modelManager.addDelivery(GAMBES_RICE);
-        modelManager.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        modelManager.showAllFilteredDeliveryList();
         assertFalse(modelManager.isFilteredDeliveryListEmpty());
 
         modelManager.updateFilteredDeliveryList(PREDICATE_SHOW_NO_DELIVERIES);

@@ -115,7 +115,7 @@ public class ModelManager implements Model {
      */
     private ListItem transformDeliveryToListItem(Delivery delivery) {
         String title = String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName());
-        String description = String.format("Customer: %s", delivery.getCustomer().getName());
+        String description = String.format("Ordered on: %s", delivery.getOrderDate().toString());
         String mainAccessory = delivery.getStatus().toString();
         String accessory = String.format("Deliver by: %s", delivery.getDeliveryDate().toString());
         return new ListItem(title, description, mainAccessory, accessory);
@@ -450,7 +450,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteDelivery(Delivery target) {
         deliveryBook.removeDelivery(target);
-        updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        showAllFilteredDeliveryList();
     }
 
     /**
@@ -459,7 +459,7 @@ public class ModelManager implements Model {
     @Override
     public void addDelivery(Delivery delivery) {
         deliveryBook.addDelivery(delivery);
-        updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        showAllFilteredDeliveryList();
     }
 
     /**
@@ -470,7 +470,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedDelivery);
 
         deliveryBook.setDelivery(target, editedDelivery);
-        updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        showAllFilteredDeliveryList();
     }
 
     /**
@@ -566,7 +566,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteDeliveryByCustomer(Customer target) {
         deliveryBook.removeDeliveryByCustomer(target);
-        updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        showAllFilteredDeliveryList();
     }
 
 
