@@ -137,6 +137,7 @@ public class CustomerEditCommand extends CustomerCommand {
         assert editedCustomer != null : "Edited Customer should exist.";
 
         model.setCustomer(customerToEdit, editedCustomer);
+        updateDelivery(model, editedCustomer);
         model.showAllFilteredCustomerList();
 
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
