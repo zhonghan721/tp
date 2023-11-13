@@ -29,9 +29,9 @@ public class CustomerDeleteCommand extends CustomerCommand {
      * The message usage of the delete customer command.
      */
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the customer identified by the customer ID used in the displayed customer list.\n\n"
-            + "Parameters: CUSTOMER_ID (must be a positive integer)\n\n"
-            + "Example: " + COMMAND_WORD + " 1";
+        + ": Deletes the customer identified by the customer ID used in the displayed customer list.\n\n"
+        + "Parameters: CUSTOMER_ID (must be a positive integer and less than 2147483648)\n\n"
+        + "Example: " + COMMAND_WORD + " 1";
 
     /**
      * The pre-text to the message displayed when the customer is deleted successfully.
@@ -69,7 +69,7 @@ public class CustomerDeleteCommand extends CustomerCommand {
         requireNonNull(model);
 
         logger.info("Executing CustomerDeleteCommand:"
-                + " customerID: " + customerID.getOneBased() + "\n");
+            + " customerID: " + customerID.getOneBased() + "\n");
 
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
@@ -90,7 +90,7 @@ public class CustomerDeleteCommand extends CustomerCommand {
 
         model.deleteCustomer(customerToDelete.get());
         return new CommandResult(String.format(MESSAGE_DELETE_CUSTOMER_SUCCESS,
-                Messages.format(customerToDelete.get())), true);
+            Messages.format(customerToDelete.get())), true);
     }
 
     /**
@@ -122,7 +122,7 @@ public class CustomerDeleteCommand extends CustomerCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("customerID", customerID)
-                .toString();
+            .add("customerID", customerID)
+            .toString();
     }
 }

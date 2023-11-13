@@ -26,9 +26,9 @@ public class DeliveryDeleteCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the delivery identified by the delivery ID used in the displayed delivery list.\n\n"
-            + "Parameters: DELIVERY_ID (must be a positive integer)\n\n"
-            + "Example: " + COMMAND_WORD + " 1";
+        + ": Deletes the delivery identified by the delivery ID used in the displayed delivery list.\n\n"
+        + "Parameters: DELIVERY_ID (must be a positive integer and less than 2147483648)\n\n"
+        + "Example: " + COMMAND_WORD + " 1";
 
     /**
      * The text to the message displayed when the Delivery is delete successfuly.
@@ -44,6 +44,7 @@ public class DeliveryDeleteCommand extends DeliveryCommand {
 
     /**
      * Creates a DeliveryDeleteCommand to delete the specified {@code Delivery}
+     *
      * @param targetIndex
      */
     public DeliveryDeleteCommand(Index targetIndex) {
@@ -52,6 +53,7 @@ public class DeliveryDeleteCommand extends DeliveryCommand {
 
     /**
      * Executes the DeliveryDeleteCommand.
+     *
      * @param model {@code Model} which the command should operate on.
      * @return The command result along with the message to be displayed to the user.
      * @throws CommandException If the delivery to be deleted does not exist or the user is not logged in.
