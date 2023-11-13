@@ -1,3 +1,4 @@
+//@@author {zhonghan721}
 package seedu.address.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
@@ -22,9 +23,9 @@ public class CustomerFindCommand extends Command {
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+        + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n\n"
+        + "Parameters: KEYWORD [MORE_KEYWORDS]...\n\n"
+        + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private static final Logger logger = Logger.getLogger(CustomerFindCommand.class.getName());
 
@@ -38,7 +39,7 @@ public class CustomerFindCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         logger.info("Executing CustomerFindCommand: keyword "
-                + predicate.getKeywordsAsString());
+            + predicate.getKeywordsAsString());
 
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
@@ -48,8 +49,8 @@ public class CustomerFindCommand extends Command {
 
         model.updateFilteredCustomerList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_CUSTOMERS_MATCHED_LISTED,
-                        model.getFilteredCustomerListSize()), true);
+            String.format(Messages.MESSAGE_CUSTOMERS_MATCHED_LISTED,
+                model.getFilteredCustomerListSize()), true);
 
     }
 
@@ -71,7 +72,8 @@ public class CustomerFindCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
-                .toString();
+            .add("predicate", predicate)
+            .toString();
     }
 }
+//@@author {zhonghan721}

@@ -1,3 +1,4 @@
+//@@author {Gabriel4357}
 package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
@@ -44,21 +45,21 @@ public class DeliveryEditCommand extends DeliveryCommand {
      * The text displayed to show what the command does and how to use it.
      */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the delivery identified "
-            + "by the DELIVERY_ID used in the displayed delivery list. "
-            + "Existing values will be overwritten by the input values.\n\n"
-            + "Parameters: DELIVERY_ID (must be a positive integer)\n\n"
-            + "At least one field must be specified."
-            + "[" + PREFIX_NAME + " DELIVERY_NAME] "
-            + "[" + PREFIX_CUSTOMER_ID + " CUSTOMER_ID] "
-            + "[" + PREFIX_DATE + " DELIVERY_DATE] "
-            + "[" + PREFIX_STATUS + " STATUS] "
-            + "[" + PREFIX_NOTE + " NOTE]...\n\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NAME + " 10 Chocolate Cakes "
-            + PREFIX_DATE + " 2025-12-12";
+        + "by the DELIVERY_ID used in the displayed delivery list. "
+        + "Existing values will be overwritten by the input values.\n\n"
+        + "Parameters: DELIVERY_ID (must be a positive integer)\n\n"
+        + "At least one field must be specified."
+        + "[" + PREFIX_NAME + " DELIVERY_NAME] "
+        + "[" + PREFIX_CUSTOMER_ID + " CUSTOMER_ID] "
+        + "[" + PREFIX_DATE + " DELIVERY_DATE] "
+        + "[" + PREFIX_STATUS + " STATUS] "
+        + "[" + PREFIX_NOTE + " NOTE]...\n\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_NAME + " 10 Chocolate Cakes "
+        + PREFIX_DATE + " 2025-12-12";
 
     /**
-     *  The text to the message displayed when the Delivery is edited successfuly.
+     * The text to the message displayed when the Delivery is edited successfuly.
      */
     public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery:\n\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field must be provided!";
@@ -70,6 +71,7 @@ public class DeliveryEditCommand extends DeliveryCommand {
 
     /**
      * Creates a DeliveryEditCommand to edit the specified {@code Delivery}
+     *
      * @param targetIndex            of the delivery in the delivery list to edit
      * @param deliveryEditDescriptor details to edit the delivery with
      */
@@ -115,8 +117,7 @@ public class DeliveryEditCommand extends DeliveryCommand {
         model.showAllFilteredDeliveryList();
 
         return new CommandResult(String.format(MESSAGE_EDIT_DELIVERY_SUCCESS,
-                Messages.format(editedDelivery)), true);
-
+            Messages.format(editedDelivery)), true);
     }
 
     /**
@@ -127,34 +128,29 @@ public class DeliveryEditCommand extends DeliveryCommand {
      * @param deliveryEditDescriptor {@code editDeliveryDescriptor} details to edit the delivery with.
      */
     private static Delivery createEditedDelivery(Model model, Delivery deliveryToEdit, DeliveryEditDescriptor
-            deliveryEditDescriptor) throws CommandException {
+        deliveryEditDescriptor) throws CommandException {
 
         assert deliveryToEdit != null;
 
-        DeliveryName updatedDeliveryName =
-                deliveryEditDescriptor.getDeliveryName().orElse(deliveryToEdit.getName());
-
         int customerId = deliveryEditDescriptor.getCustomerId().orElse(deliveryToEdit.getCustomerId());
-        Customer updatedCustomer = null;
-
+        DeliveryName updatedDeliveryName =
+            deliveryEditDescriptor.getDeliveryName().orElse(deliveryToEdit.getName());
         OrderDate orderDate = deliveryToEdit.getOrderDate();
-
         DeliveryDate updatedDeliveryDate =
-                deliveryEditDescriptor.getDeliveryDate().orElse(deliveryToEdit.getDeliveryDate());
-
+            deliveryEditDescriptor.getDeliveryDate().orElse(deliveryToEdit.getDeliveryDate());
         DeliveryStatus updatedDeliveryStatus =
-                deliveryEditDescriptor.getStatus().orElse(deliveryToEdit.getStatus());
-
+            deliveryEditDescriptor.getStatus().orElse(deliveryToEdit.getStatus());
         Note updatedNote = deliveryEditDescriptor.getNote().orElse(deliveryToEdit.getNote());
-
         Optional<Customer> targetCustomer = model.getCustomer(customerId);
 
-        if (targetCustomer.isPresent()) {
-            updatedCustomer = targetCustomer.get();
-        } else {
+
+        if (targetCustomer.isEmpty()) {
             logger.warning("Customer to be added to this Delivery does not exist.\n");
             throw new CommandException(MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
+
+        Customer updatedCustomer = targetCustomer.get();
+
         if (!DeliveryDate.isFutureDate(updatedDeliveryDate.toString())) {
             logger.warning("Delivery date is not valid since it is not a future date.\n");
             throw new CommandException(MESSAGE_INVALID_DELIVERY_DATE);
@@ -168,9 +164,9 @@ public class DeliveryEditCommand extends DeliveryCommand {
             + "Note: " + updatedNote + "\n");
 
         return new Delivery(deliveryToEdit.getDeliveryId(), updatedDeliveryName, updatedCustomer, orderDate,
-                updatedDeliveryDate,
-                updatedDeliveryStatus,
-                updatedNote);
+            updatedDeliveryDate,
+            updatedDeliveryStatus,
+            updatedNote);
     }
 
     @Override
@@ -186,15 +182,15 @@ public class DeliveryEditCommand extends DeliveryCommand {
 
         DeliveryEditCommand otherEditCommand = (DeliveryEditCommand) other;
         return targetIndex.equals(otherEditCommand.targetIndex)
-                && deliveryEditDescriptor.equals(otherEditCommand.deliveryEditDescriptor);
+            && deliveryEditDescriptor.equals(otherEditCommand.deliveryEditDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("id", targetIndex)
-                .add("deliveryEditDescriptor", deliveryEditDescriptor)
-                .toString();
+            .add("id", targetIndex)
+            .add("deliveryEditDescriptor", deliveryEditDescriptor)
+            .toString();
     }
 
     /**
@@ -303,24 +299,23 @@ public class DeliveryEditCommand extends DeliveryCommand {
 
             DeliveryEditDescriptor otherEditDeliveryDescriptor = (DeliveryEditDescriptor) other;
             return Objects.equals(deliveryName, otherEditDeliveryDescriptor.deliveryName)
-                    && Objects.equals(customerId, otherEditDeliveryDescriptor.customerId)
-                    && Objects.equals(deliveryDate, otherEditDeliveryDescriptor.deliveryDate)
-                    && Objects.equals(status, otherEditDeliveryDescriptor.status)
-                    && Objects.equals(note, otherEditDeliveryDescriptor.note);
+                && Objects.equals(customerId, otherEditDeliveryDescriptor.customerId)
+                && Objects.equals(deliveryDate, otherEditDeliveryDescriptor.deliveryDate)
+                && Objects.equals(status, otherEditDeliveryDescriptor.status)
+                && Objects.equals(note, otherEditDeliveryDescriptor.note);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("Delivery Name", deliveryName)
-                    .add("Customer Id", customerId)
-                    .add("Delivery Date", deliveryDate)
-                    .add("Status", status)
-                    .add("Note", note)
-                    .toString();
+                .add("Delivery Name", deliveryName)
+                .add("Customer Id", customerId)
+                .add("Delivery Date", deliveryDate)
+                .add("Status", status)
+                .add("Note", note)
+                .toString();
         }
     }
 }
 
-
-
+//@@author {Gabriel4357}

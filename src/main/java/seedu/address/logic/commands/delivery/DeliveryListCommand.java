@@ -1,3 +1,4 @@
+//@@author {juliusgambe}
 package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
@@ -79,7 +80,7 @@ public class DeliveryListCommand extends DeliveryCommand {
         Predicate<Delivery> filters = this.createDeliveryListFilters();
         assert filters != null : "Filters should not be null";
 
-        // apply filter
+        // apply filters
         model.updateFilteredDeliveryList(filters);
 
         if (model.isFilteredDeliveryListEmpty()) {
@@ -130,8 +131,6 @@ public class DeliveryListCommand extends DeliveryCommand {
 
     /**
      * Sorts the delivery list by expected delivery date.
-     *
-     * @param model model to sort.
      */
     private Comparator<Delivery> createDeliveryListSort() {
         Comparator<Delivery> sortAscending = Comparator.comparing(Delivery::getDeliveryDate);
@@ -172,3 +171,4 @@ public class DeliveryListCommand extends DeliveryCommand {
         return sortType.equals(otherDeliveryListCommand.sortType);
     }
 }
+//@@author {juliusgambe}

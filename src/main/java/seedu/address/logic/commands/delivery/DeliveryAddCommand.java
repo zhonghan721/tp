@@ -1,3 +1,4 @@
+//@@author {Gabriel4357}
 package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
@@ -51,7 +52,6 @@ public class DeliveryAddCommand extends DeliveryCommand {
      * The text to the message displayed when the Delivery is added successfuly.
      */
     public static final String MESSAGE_SUCCESS = "New delivery added:\n\n%1$s";
-    public static final String MESSAGE_DUPLICATE_DELIVERY = "This delivery already exists in HomeBoss";
 
     /**
      * The logger instance for DeliveryAddCommand.
@@ -70,6 +70,7 @@ public class DeliveryAddCommand extends DeliveryCommand {
 
     /**
      * Executes the DeliveryAddCommand.
+     *
      * @param model {@code Model} which the command should operate on.
      * @return The command result along with the message to be displayed to the user.
      * @throws CommandException If the user is not logged in.
@@ -80,14 +81,13 @@ public class DeliveryAddCommand extends DeliveryCommand {
         requireNonNull(model);
 
         logger.info("Executing DeliveryAddCommand with the following DeliveryAddDescriptor: "
-                + deliveryAddDescriptor.toString() + "\n");
+            + deliveryAddDescriptor.toString() + "\n");
 
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
             logger.warning("User is not logged in.\n");
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
-
 
         //Create Delivery
         Delivery toAdd = createDelivery(model, deliveryAddDescriptor);
@@ -124,7 +124,8 @@ public class DeliveryAddCommand extends DeliveryCommand {
 
     /**
      * Creates and returns a {@code Delivery} with the details of {@code deliveryAddDescriptor}.
-     * @param model {@code Model} which the command should operate on.
+     *
+     * @param model                 {@code Model} which the command should operate on.
      * @param deliveryAddDescriptor The descriptor of the delivery to be added.
      * @return The delivery to be added.
      * @throws CommandException If the customer ID is invalid or the delivery date is not a future date.
@@ -132,38 +133,34 @@ public class DeliveryAddCommand extends DeliveryCommand {
 
     private static Delivery createDelivery(Model model,
                                            DeliveryAddDescriptor deliveryAddDescriptor) throws CommandException {
-
-        logger.info("Creating Delivery with:" + "\n"
-            + "Delivery Name: " + deliveryAddDescriptor.getDeliveryName().get() + "\n"
-            + "Customer ID: " + deliveryAddDescriptor.getCustomerId().get() + "\n"
-            + "Delivery Date: " + deliveryAddDescriptor.getDate().get() + "\n");
-
         int customerId = deliveryAddDescriptor.getCustomerId().get();
-
-        DeliveryDate deliveryDate = null;
-        DeliveryStatus newDeliveryStatus = DeliveryStatus.CREATED;
-        LocalDate now = LocalDate.now();
-        OrderDate orderDate = new OrderDate(now.toString());
-
         Optional<Customer> targetCustomer = model.getCustomer(customerId);
-        DeliveryName deliveryName = deliveryAddDescriptor.getDeliveryName().get();
 
         if (targetCustomer.isEmpty()) {
             logger.warning("Customer to be added to this Delivery does not exist.\n");
             throw new CommandException(MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
+
         assert targetCustomer.isPresent() : "Customer to be added to this Delivery should exist.";
-        Customer customer = targetCustomer.get();
 
         if (!DeliveryDate.isFutureDate(deliveryAddDescriptor.getDate().get().toString())) {
             logger.warning("Delivery date is not valid since it is not a future date.\n");
             throw new CommandException(MESSAGE_INVALID_DELIVERY_DATE);
         }
 
-        deliveryDate = deliveryAddDescriptor.getDate().get();
+        DeliveryName deliveryName = deliveryAddDescriptor.getDeliveryName().get();
+        DeliveryStatus newDeliveryStatus = DeliveryStatus.CREATED;
+        DeliveryDate deliveryDate = deliveryAddDescriptor.getDate().get();
+        LocalDate now = LocalDate.now();
+        OrderDate orderDate = new OrderDate(now.toString());
+        Customer customer = targetCustomer.get();
+
+        logger.info("Creating Delivery with:" + "\n"
+            + "Delivery Name: " + deliveryName + "\n"
+            + "Customer ID: " + customerId + "\n"
+            + "Delivery Date: " + deliveryDate + "\n");
 
         return new Delivery(deliveryName, customer, orderDate, deliveryDate, newDeliveryStatus);
-
     }
 
     /**
@@ -244,4 +241,4 @@ public class DeliveryAddCommand extends DeliveryCommand {
         }
     }
 }
-
+//@@author {Gabriel4357}

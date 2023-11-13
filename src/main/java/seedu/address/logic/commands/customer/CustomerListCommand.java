@@ -34,10 +34,11 @@ public class CustomerListCommand extends CustomerCommand {
 
         model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
 
-        if (model.getFilteredCustomerListSize() == 0) {
+        if (model.isFilteredCustomerListEmpty()) {
             return new CommandResult(MESSAGE_EMPTY, true);
         }
 
         return new CommandResult(MESSAGE_SUCCESS, true);
     }
 }
+//@@author {B-enguin}
