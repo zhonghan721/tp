@@ -44,21 +44,21 @@ public class DeliveryEditCommand extends DeliveryCommand {
      * The text displayed to show what the command does and how to use it.
      */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the delivery identified "
-            + "by the DELIVERY_ID used in the displayed delivery list. "
-            + "Existing values will be overwritten by the input values.\n\n"
-            + "Parameters: DELIVERY_ID (must be a positive integer)\n\n"
-            + "At least one field must be specified."
-            + "[" + PREFIX_NAME + " DELIVERY_NAME] "
-            + "[" + PREFIX_CUSTOMER_ID + " CUSTOMER_ID] "
-            + "[" + PREFIX_DATE + " DELIVERY_DATE] "
-            + "[" + PREFIX_STATUS + " STATUS] "
-            + "[" + PREFIX_NOTE + " NOTE]...\n\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NAME + " 10 Chocolate Cakes "
-            + PREFIX_DATE + " 2025-12-12";
+        + "by the DELIVERY_ID used in the displayed delivery list. "
+        + "Existing values will be overwritten by the input values.\n\n"
+        + "Parameters: DELIVERY_ID (must be a positive integer and less than 2147483648)\n\n"
+        + "At least one field must be specified."
+        + "[" + PREFIX_NAME + " DELIVERY_NAME] "
+        + "[" + PREFIX_CUSTOMER_ID + " CUSTOMER_ID] "
+        + "[" + PREFIX_DATE + " DELIVERY_DATE] "
+        + "[" + PREFIX_STATUS + " STATUS] "
+        + "[" + PREFIX_NOTE + " NOTE]...\n\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_NAME + " 10 Chocolate Cakes "
+        + PREFIX_DATE + " 2025-12-12";
 
     /**
-     *  The text to the message displayed when the Delivery is edited successfuly.
+     * The text to the message displayed when the Delivery is edited successfuly.
      */
     public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery:\n\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field must be provided!";
@@ -70,6 +70,7 @@ public class DeliveryEditCommand extends DeliveryCommand {
 
     /**
      * Creates a DeliveryEditCommand to edit the specified {@code Delivery}
+     *
      * @param targetIndex            of the delivery in the delivery list to edit
      * @param deliveryEditDescriptor details to edit the delivery with
      */
@@ -115,7 +116,7 @@ public class DeliveryEditCommand extends DeliveryCommand {
         model.showAllFilteredDeliveryList();
 
         return new CommandResult(String.format(MESSAGE_EDIT_DELIVERY_SUCCESS,
-                Messages.format(editedDelivery)), true);
+            Messages.format(editedDelivery)), true);
 
     }
 
