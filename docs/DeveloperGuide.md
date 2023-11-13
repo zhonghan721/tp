@@ -1565,80 +1565,74 @@ otherwise)
 **MSS:**
 
 1. Logged-in Owner types command to view a list of deliveries.
-2. DMS displays a list of all deliveries sorted in descending expected delivery date (newest to oldest).
+2. DMS displays a list of all deliveries sorted in descending expected delivery date (latest to earliest).
 
    Use Case Ends.
 
 **Extensions:**
 
-* 1a. User specifies status field in command.
-    * 1a1. DMS display a list of deliveries filtered by the specified status.
+- 1a. User specifies status field in command.
+
+    - 1a1. DMS displays a list of deliveries filtered with the specified status.
 
       Use Case Ends.
 
-* 1b. User specifies customer field in command.
-    * 1b1. DMS displays a list of deliveries filtered by the specified customer.
+- 1b. User specifies customer field in command.
+
+    - 1b1. DMS displays a list of deliveries filtered by the specified customer id.
 
       Use Case Ends.
 
-* 1c. User specifies expected delivery date field in command.
-    * 1c1. DMS displays a list of deliveries filtered by the specified expected delivery date.
+- 1c. User specifies expected delivery date field in command.
+
+    - 1c1. DMS displays a list of deliveries filtered by the specified expected delivery date.
 
       Use Case Ends.
 
-* 1d. User specifies both status and customer fields.
-    * 1c1. DMS displays a list of deliveries filtered by the specified status and customer.
+- 1d. User specifies expected delivery date field as "TODAY" in command.
+
+    - 1d1. DMS displays a list of deliveries filtered by the expected delivery date that is today's date.
 
       Use Case Ends.
 
-* 1e. User specifies both status and expected delivery date fields.
-    * 1e1. DMS displays a list of deliveries filtered by the specified status and expected delivery date.
+- 1e. User specifies a sort field in command.
+
+    - 1e1. DMS displays a list of all deliveries sorted by the specified sort order.
 
       Use Case Ends.
 
-* 1f. User specifies both customer and expected delivery date fields.
-    * 1f1. DMS displays a list of deliveries filtered by the specified customer and expected delivery date.
+- 1f. User specifies a combination of the filter fields and sort field.
 
-      Use Case Ends.
-* 1g. User specifies customer, expected delivery date and status fields.
-    * 1g1. DMS displays a list of deliveries filtered by the specified customer, expected delivery date and status.
-
-      Use Case Ends.
-
-* 1g. User specifies sort field in command.
-    * 1b1. DMS displays a list of all deliveries sorted by the specified sort order.
+    - 1f1. DMS displays a list of deliveries filtered by the specified filters and sorted by the specified sort
+      order.
 
       Use Case Ends.
 
-* 1h. User Specifies both filter fields and sort fields.
-    * 1c1. DMS displays a list of deliveries filtered by the specified filters and then expected delivery date sorted
-      by the specified sort order.
+- 1g. User specifies duplicate fields
+
+    - 1g1. DMS displays a list of deliveries filtered by the last occurrence of each specified filters and sorted by the
+      last specified sort
 
       Use Case Ends.
 
-#### **Use case:** UC16 - Delivery List for the Day
+- 1h. Logged-in Owner specifies invalid status.
 
-**System:** Delivery Management System (DMS)
-**Actor:** Logged-in owner.
+    - 1h1. DMS displays an error to Logged-in Owner that the specified status is invalid and state the possible accepted
+      status values.
 
-**Preconditions:** Owner is logged in.
+      Use Case Ends.
 
-**Guarantees:**
+- 1i. Logged-in Owner specifies an invalid date.
 
-- A list of deliveries for the day is displayed only if the command is executed successfully.
+    - 1i1. DMS displays an error to Logged-in Owner that the specified date is in an invalid format and states what
+      format it should be in.
 
-**MSS:**
+      Use Case Ends.
 
-1. Logged-in Owner types command to view a list of deliveries for the day.
-2. DMS displays a list of deliveries for the day.
+- 1j. Logged-in Owner specifies an invalid sort.
 
-   Use Case Ends.
-
-**Extensions:**
-
-- 1a. Command has missing fields.
-
-    - 1a1. DMS displays an error to Logged-in Owner.
+    - 1j1. DMS displays an error to Logged-in Owner that the specified sort is invalid and state the possible accepted
+      values.
 
       Use Case Ends.
 
@@ -1676,7 +1670,7 @@ otherwise)
 
 **System:** Delivery Management System (DMS)
 
-**Actor:** Logged-in owner.
+**Actor:** Logged-in Owner.
 
 **Preconditions:** Owner is logged-in.
 
@@ -1695,13 +1689,13 @@ otherwise)
 
 - 1a. Logged-in owner did not specify the delivery id.
 
-    - 1a1. DMS informs the logged-in owner of the missing field.
+    - 1a1. DMS displays an error to Logged-in Owner to specify all required fields.
 
       Use case ends.
 
 - 1b. Logged-in owner specified a delivery id that does not exist.
 
-    - 1b1. DMS informs the logged-in owner of invalid delivery id being entered.
+    - 1b1. DMS displays an error to Logged-in Owner of invalid delivery id being entered.
 
       Use case ends.
 
