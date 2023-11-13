@@ -59,6 +59,7 @@ Given below are my contributions to the project.
 * Managed and facilitated team meetings and discussions.
 * Managed issues and pull requests on GitHub.
 * Managed release of `v1.3` on GitHub.
+* Checked code quality of team members' pull requests.
 
 * **Documentation**
 * User Guide:
@@ -80,7 +81,7 @@ Given below are my contributions to the project.
       (Pull request [#440](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/440))
 
 * **Community:**
-    * PRs Reviewed: As of 12th November, I have reviewed 92 PRs
+    * PRs Reviewed: As of 12th November, I have reviewed 101 PRs
       [(Github)](https://github.com/AY2324S1-CS2103T-T13-3/tp/pulls?q=is%3Apr+reviewed-by%3Ajuliusgambe+is%3Aclosed+)
 * Reported bugs for other teams during PE Dry Run:
   reported 26 bugs posted as [issues](https://github.com/juliusgambe/ped/issues)
