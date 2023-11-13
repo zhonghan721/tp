@@ -163,21 +163,23 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Customer` objects. (See the [ReadOnlyBook Model](#ReadOnlyBook-Model) section
-  below for
-  more details)
+  below for more details)
 * stores the delivery book data i.e., all `Delivery` objects. (See the [ReadOnlyBook Model](#ReadOnlyBook-Model) section
-  below for
-  more details)
-* stores the currently filtered `Customer` objects (e.g., results of a search query) as a separate _filteredCustomers_
-  list.
-* stores the currently filtered `Delivery` objects (e.g., results of a status filter query) as a separate
-  _filteredDeliveries_ list.
+  below for more details)
+* stores the currently filtered `Customer` objects (See the [Customer Model](#customer-model)) as a separate
+  _filteredCustomers_ list. (e.g., results of a `customer list` command)
+* stores the currently filtered `Delivery` objects (See the [Delivery Model](#delivery-model)) as a separate
+  _filteredDeliveries_ list. (e.g., results of a `delivery list --status COMPLETED` command)
+* stores the currently sorted `Delivery` objects as a separate _sortedDeliveries_ list. (eg., results of
+  a `delivery list --sort ASC` command)
+* stores a `User` object that represents the logged-in user's data (See the [User Model](#user-model)).
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
-* stores the currently sorted `Delivery` objects (e.g., results of a sort query) as a separate _sortedDeliveries_
-  list
-* stores an unmodifiable `ObservableList<ListItem>` that can be 'observed' e.g. the UI can be bound
-  to this list so that the UI automatically updates when the data in the list change.
+* stores an unmodifiable `ObservableList<ListItem>` that exposes the `Customer` or `Delivery`  details that is
+  shown on the UI list panel that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically
+  updates when the data in the list change.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
+  should make sense on their own without depending on other components)
 
 #### ReadOnlyBook Model
 
@@ -205,9 +207,8 @@ The `User` model,
 
 The `Delivery` model,
 
-* stores the delivery data i.e, the delivery name, customer, delivery status, order date, expected delivery date and
-  note for the
-  delivery.
+* stores the delivery data i.e, the delivery id, the delivery name, customer, delivery status, order date, expected
+  delivery date and note for the delivery.
 
 #### Customer Model
 
@@ -215,7 +216,7 @@ The `Delivery` model,
 
 The `Customer` model,
 
-* stores the customer data i.e, the customer address, phone, email and address.
+* stores the customer data i.e, the customer id, the customer address, phone, email and address.
 
 ### Storage component
 
