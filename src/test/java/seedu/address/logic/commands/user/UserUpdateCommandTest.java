@@ -18,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -68,8 +69,10 @@ public class UserUpdateCommandTest {
     @Test
     public void execute_allFieldsSpecified_success() {
 
-        User updatedUser = model.getStoredUser();
-        UserUpdateDescriptor descriptor = new UpdateUserDescriptorBuilder(updatedUser).build();
+        Optional<User> updatedUser = model.getStoredUser();
+        assertTrue(updatedUser.isPresent());
+        User currentUpdatedUser = updatedUser.get();
+        UserUpdateDescriptor descriptor = new UpdateUserDescriptorBuilder(currentUpdatedUser).build();
         UserUpdateCommand updateCommand = new UserUpdateCommand(descriptor);
 
         String expectedMessage = UserUpdateCommand.MESSAGE_SUCCESS;
@@ -77,7 +80,7 @@ public class UserUpdateCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new DeliveryBook(model.getDeliveryBook()),
                 new UserPrefs(model.getUserPrefs()), model.getUserLoginStatus());
-        expectedModel.setLoggedInUser(updatedUser);
+        expectedModel.setLoggedInUser(currentUpdatedUser);
 
         assertCommandSuccess(updateCommand, model, expectedMessage, expectedModel, true);
     }

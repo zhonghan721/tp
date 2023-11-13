@@ -98,6 +98,15 @@ public class DeliveryNameContainsKeywordsPredicateTest {
     }
 
     @Test
+    public void getKeywordsAsStringMethod() {
+        List<String> keywords = List.of("keyword1", "keyword2");
+        DeliveryNameContainsKeywordsPredicate predicate = new DeliveryNameContainsKeywordsPredicate(keywords);
+
+        String expected = "keyword1 keyword2";
+        assertEquals(expected, predicate.getKeywordsAsString());
+    }
+
+    @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
         DeliveryNameContainsKeywordsPredicate predicate =

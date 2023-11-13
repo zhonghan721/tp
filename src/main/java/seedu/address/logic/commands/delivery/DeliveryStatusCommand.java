@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -34,6 +35,8 @@ public class DeliveryStatusCommand extends DeliveryCommand {
 
     public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery:\n\n%1$s";
 
+    private static final Logger logger = Logger.getLogger(DeliveryStatusCommand.class.getName());
+
     private final int targetId;
     private final DeliveryStatus updatedStatus;
 
@@ -46,6 +49,8 @@ public class DeliveryStatusCommand extends DeliveryCommand {
     public DeliveryStatusCommand(int targetId, DeliveryStatus updatedStatus) {
         requireNonNull(updatedStatus);
 
+        assert targetId > 0;
+
         this.targetId = targetId;
         this.updatedStatus = updatedStatus;
     }
@@ -53,8 +58,13 @@ public class DeliveryStatusCommand extends DeliveryCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing DeliveryStatusCommand:"
+            + " deliveryId " + targetId
+            + " and status " + updatedStatus);
+
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
+            logger.warning("User is not logged in!");
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
@@ -68,6 +78,11 @@ public class DeliveryStatusCommand extends DeliveryCommand {
         // Edit Delivery
         Delivery editedDelivery = createDeliveryWithNewStatus(targetDelivery.get(), updatedStatus);
 
+        logger.info("Updating Delivery:"
+            + " deliveryId " + targetId
+            + ", oldStatus " + targetDelivery.get().getStatus()
+            + " and newStatus " + updatedStatus);
+
         // Update Delivery
         model.setDelivery(targetDelivery.get(), editedDelivery);
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
@@ -80,6 +95,7 @@ public class DeliveryStatusCommand extends DeliveryCommand {
      */
     private static Delivery createDeliveryWithNewStatus(Delivery deliveryToEdit, DeliveryStatus newStatus) {
         assert deliveryToEdit != null;
+        assert newStatus != null;
 
         int updatedId = deliveryToEdit.getDeliveryId();
         DeliveryName updatedName = deliveryToEdit.getName();

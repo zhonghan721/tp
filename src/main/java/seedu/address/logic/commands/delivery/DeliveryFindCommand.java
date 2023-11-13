@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
+import java.util.logging.Logger;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
@@ -12,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.delivery.DeliveryNameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all deliveries in delivery book whose name contains any of the argument keywords.
+ * Finds and lists all deliveries in delivery book whose name has words that match any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class DeliveryFindCommand extends DeliveryCommand {
@@ -24,18 +26,31 @@ public class DeliveryFindCommand extends DeliveryCommand {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n\n"
             + "Example: " + COMMAND_WORD + " chocolate vanilla";
 
+    private static final Logger logger = Logger.getLogger(DeliveryFindCommand.class.getName());
+
     private final DeliveryNameContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a DeliveryFindCommand to find and list all deliveries in delivery book
+     * whose name has words that match any of the argument keywords
+     *
+     * @param predicate The predicate to search the deliveries by.
+     */
     public DeliveryFindCommand(DeliveryNameContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
+
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing DeliveryFindCommand:"
+            + " keywords " + predicate.getKeywordsAsString());
 
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
+            logger.warning("User is not logged in!");
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
