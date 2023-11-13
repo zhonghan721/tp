@@ -1,3 +1,4 @@
+//@@author {B-enguin}
 package seedu.address.logic.parser.delivery;
 
 import static java.util.Objects.requireNonNull;
@@ -26,6 +27,7 @@ public class DeliveryCreateNoteCommandParser implements Parser<DeliveryCreateNot
     /**
      * Parses the given {@code String} of arguments in the context of the DeliveryCreateNoteCommand
      * and returns an DeliveryCreateNoteCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeliveryCreateNoteCommand parse(String args) throws ParseException {
@@ -34,8 +36,8 @@ public class DeliveryCreateNoteCommandParser implements Parser<DeliveryCreateNot
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_NOTE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NOTE)
-            || argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.arePrefixesPresent(PREFIX_NOTE)
+            || argMultimap.isEmptyPreamble()) {
             logger.warning("DeliveryCreateNoteCommand: missing either note or Delivery ID");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeliveryCreateNoteCommand.MESSAGE_USAGE));
@@ -60,12 +62,5 @@ public class DeliveryCreateNoteCommandParser implements Parser<DeliveryCreateNot
         return new DeliveryCreateNoteCommand(id, note);
 
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
 }
+//@@author {B-enguin}

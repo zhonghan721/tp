@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.logging.Logger;
 
 import seedu.address.logic.commands.customer.CustomerFindCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.customer.NameContainsKeywordsPredicate;
@@ -24,11 +26,12 @@ public class CustomerFindCommandParser implements Parser<CustomerFindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public CustomerFindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
+        String trimmedArgs = argMultimap.getPreamble();
+        if (argMultimap.isEmptyPreamble()) {
             logger.severe("Could not parse command");
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CustomerFindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CustomerFindCommand.MESSAGE_USAGE));
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");

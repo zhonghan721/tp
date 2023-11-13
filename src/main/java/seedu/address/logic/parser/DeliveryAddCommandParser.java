@@ -1,3 +1,4 @@
+//@@author {Gabriel4357}
 package seedu.address.logic.parser;
 
 
@@ -6,12 +7,14 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.delivery.DeliveryAddCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.delivery.DeliveryDate;
 
 /**
  * Parses input arguments and creates a new DeliveryAddCommand object
@@ -30,10 +33,10 @@ public class DeliveryAddCommandParser implements Parser<DeliveryAddCommand> {
         requireNonNull(args);
         logger.info("Parsing DeliveryAddCommand: " + args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CUSTOMER_ID, PREFIX_DATE);
+            ArgumentTokenizer.tokenize(args, PREFIX_CUSTOMER_ID, PREFIX_DATE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CUSTOMER_ID, PREFIX_DATE)
-                || argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.arePrefixesPresent(PREFIX_CUSTOMER_ID, PREFIX_DATE)
+            || argMultimap.getPreamble().isEmpty()) {
             logger.warning("No/Wrong prefix provided. Invalid Command Format.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeliveryAddCommand.MESSAGE_USAGE));
         }
@@ -42,28 +45,24 @@ public class DeliveryAddCommandParser implements Parser<DeliveryAddCommand> {
 
         DeliveryAddDescriptor deliveryAddDescriptor = new DeliveryAddDescriptor();
 
-        if (!argMultimap.getPreamble().isEmpty()) {
+        Optional<String> customerId = argMultimap.getValue(PREFIX_CUSTOMER_ID);
+        Optional<String> deliveryDate = argMultimap.getValue(PREFIX_DATE);
+
+        if (!argMultimap.isEmptyPreamble()) {
             deliveryAddDescriptor.setDeliveryName(ParserUtil
-                    .parseDeliveryName(argMultimap.getPreamble()));
+                .parseDeliveryName(argMultimap.getPreamble()));
         }
-        if (argMultimap.getValue(PREFIX_CUSTOMER_ID).isPresent()) {
-            deliveryAddDescriptor.setCustomerId(ParserUtil
-                    .parseId(argMultimap.getValue(PREFIX_CUSTOMER_ID).get()));
+        if (customerId.isPresent()) {
+            int id = ParserUtil.parseId(customerId.get());
+            deliveryAddDescriptor.setCustomerId(id);
         }
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            deliveryAddDescriptor.setDeliveryDate(ParserUtil
-                    .parseDeliveryDate(argMultimap.getValue(PREFIX_DATE).get()));
+        if (deliveryDate.isPresent()) {
+            DeliveryDate date = ParserUtil.parseDeliveryDate(deliveryDate.get());
+            deliveryAddDescriptor.setDeliveryDate(date);
         }
+
         logger.info("DeliveryAddDescriptor created: " + deliveryAddDescriptor);
         return new DeliveryAddCommand(deliveryAddDescriptor);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }
+//@@author {Gabriel4357}
