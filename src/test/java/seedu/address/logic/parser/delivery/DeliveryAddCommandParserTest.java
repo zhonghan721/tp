@@ -19,9 +19,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.delivery.DeliveryAddCommand;
 import seedu.address.logic.commands.delivery.DeliveryAddCommand.DeliveryAddDescriptor;
-import seedu.address.logic.parser.DeliveryAddCommandParser;
 import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryName;
+
 public class DeliveryAddCommandParserTest {
     private DeliveryAddCommandParser parser = new DeliveryAddCommandParser();
 
@@ -69,6 +69,7 @@ public class DeliveryAddCommandParserTest {
 
         assertParseFailure(parser, "", expectedMessage);
     }
+
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // delivery add <name> --customer <customer id> --date <expected delivery date>
@@ -83,7 +84,7 @@ public class DeliveryAddCommandParserTest {
 
         // invalid customer id
         assertParseFailure(parser, VALID_NAME_GABRIELS_MILK + INVALID_CUSTOMER_ID_DESC
-               + DELIVERY_DATE_DESC_MILK, MESSAGE_INVALID_INDEX);
+                + DELIVERY_DATE_DESC_MILK, MESSAGE_INVALID_INDEX);
 
     }
 }

@@ -1,3 +1,4 @@
+//@@author {jianyangg}
 package seedu.address.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
@@ -126,3 +127,4 @@ public class CustomerDeleteCommand extends CustomerCommand {
             .toString();
     }
 }
+//@@author {jianyangg}

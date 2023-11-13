@@ -70,12 +70,27 @@ public class ArgumentMultimap {
      */
     public void verifyNoDuplicatePrefixesFor(Prefix... prefixes) throws ParseException {
         Prefix[] duplicatedPrefixes = Stream.of(prefixes).distinct()
-                .filter(prefix -> argMultimap.containsKey(prefix) && argMultimap.get(prefix).size() > 1)
-                .toArray(Prefix[]::new);
+            .filter(prefix -> argMultimap.containsKey(prefix) && argMultimap.get(prefix).size() > 1)
+            .toArray(Prefix[]::new);
 
         if (duplicatedPrefixes.length > 0) {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public boolean arePrefixesPresent(Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> this.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if all of the prefixes contains empty {@code Optional} values in the given
+     */
+    public boolean arePrefixesAbsent(Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> this.getValue(prefix).isEmpty());
     }
 
     /**

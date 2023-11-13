@@ -1,3 +1,4 @@
+//@@author {B-enguin}
 package seedu.address.logic.parser.delivery;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -7,6 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.delivery.DeliveryStatusCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -30,12 +33,13 @@ public class DeliveryStatusCommandParser implements Parser<DeliveryStatusCommand
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeliveryStatusCommand parse(String args) throws ParseException {
-        if (args.isEmpty()) {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
+        if (argMultimap.isEmptyPreamble()) {
             logger.warning("DeliveryStatusCommand: empty arguments given");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeliveryStatusCommand.MESSAGE_USAGE));
         }
-        final Matcher matcher = ARGUMENT_FORMAT.matcher(args.trim().toUpperCase());
+        final Matcher matcher = ARGUMENT_FORMAT.matcher(argMultimap.getPreamble().toUpperCase());
         if (!matcher.matches()) {
             logger.warning("DeliveryStatusCommand: arguments do not match command format");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -55,3 +59,4 @@ public class DeliveryStatusCommandParser implements Parser<DeliveryStatusCommand
     }
 
 }
+//@@author {B-enguin}

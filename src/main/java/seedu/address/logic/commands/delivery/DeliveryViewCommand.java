@@ -52,7 +52,7 @@ public class DeliveryViewCommand extends DeliveryCommand {
         Optional<Delivery> delivery = model.getDelivery(deliveryId);
 
         if (delivery.isEmpty()) {
-            logger.warning("Executing DeliveryViewCommand failed: Delivery not found");
+            logger.warning("Executing DeliveryViewCommand: Delivery not found");
             throw new CommandException(MESSAGE_INVALID_DELIVERY_ID);
         }
 

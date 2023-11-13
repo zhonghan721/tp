@@ -1,3 +1,4 @@
+//@@author {Gabriel4357}
 package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
@@ -128,34 +129,29 @@ public class DeliveryEditCommand extends DeliveryCommand {
      * @param deliveryEditDescriptor {@code editDeliveryDescriptor} details to edit the delivery with.
      */
     private static Delivery createEditedDelivery(Model model, Delivery deliveryToEdit, DeliveryEditDescriptor
-            deliveryEditDescriptor) throws CommandException {
+        deliveryEditDescriptor) throws CommandException {
 
         assert deliveryToEdit != null;
 
-        DeliveryName updatedDeliveryName =
-                deliveryEditDescriptor.getDeliveryName().orElse(deliveryToEdit.getName());
-
         int customerId = deliveryEditDescriptor.getCustomerId().orElse(deliveryToEdit.getCustomerId());
-        Customer updatedCustomer = null;
-
+        DeliveryName updatedDeliveryName =
+            deliveryEditDescriptor.getDeliveryName().orElse(deliveryToEdit.getName());
         OrderDate orderDate = deliveryToEdit.getOrderDate();
-
         DeliveryDate updatedDeliveryDate =
-                deliveryEditDescriptor.getDeliveryDate().orElse(deliveryToEdit.getDeliveryDate());
-
+            deliveryEditDescriptor.getDeliveryDate().orElse(deliveryToEdit.getDeliveryDate());
         DeliveryStatus updatedDeliveryStatus =
-                deliveryEditDescriptor.getStatus().orElse(deliveryToEdit.getStatus());
-
+            deliveryEditDescriptor.getStatus().orElse(deliveryToEdit.getStatus());
         Note updatedNote = deliveryEditDescriptor.getNote().orElse(deliveryToEdit.getNote());
-
         Optional<Customer> targetCustomer = model.getCustomer(customerId);
 
-        if (targetCustomer.isPresent()) {
-            updatedCustomer = targetCustomer.get();
-        } else {
+
+        if (targetCustomer.isEmpty()) {
             logger.warning("Customer to be added to this Delivery does not exist.\n");
             throw new CommandException(MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
+
+        Customer updatedCustomer = targetCustomer.get();
+
         if (!DeliveryDate.isFutureDate(updatedDeliveryDate.toString())) {
             logger.warning("Delivery date is not valid since it is not a future date.\n");
             throw new CommandException(MESSAGE_INVALID_DELIVERY_DATE);
@@ -169,9 +165,9 @@ public class DeliveryEditCommand extends DeliveryCommand {
             + "Note: " + updatedNote + "\n");
 
         return new Delivery(deliveryToEdit.getDeliveryId(), updatedDeliveryName, updatedCustomer, orderDate,
-                updatedDeliveryDate,
-                updatedDeliveryStatus,
-                updatedNote);
+            updatedDeliveryDate,
+            updatedDeliveryStatus,
+            updatedNote);
     }
 
     @Override
@@ -187,15 +183,15 @@ public class DeliveryEditCommand extends DeliveryCommand {
 
         DeliveryEditCommand otherEditCommand = (DeliveryEditCommand) other;
         return targetIndex.equals(otherEditCommand.targetIndex)
-                && deliveryEditDescriptor.equals(otherEditCommand.deliveryEditDescriptor);
+            && deliveryEditDescriptor.equals(otherEditCommand.deliveryEditDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("id", targetIndex)
-                .add("deliveryEditDescriptor", deliveryEditDescriptor)
-                .toString();
+            .add("id", targetIndex)
+            .add("deliveryEditDescriptor", deliveryEditDescriptor)
+            .toString();
     }
 
     /**
@@ -304,24 +300,23 @@ public class DeliveryEditCommand extends DeliveryCommand {
 
             DeliveryEditDescriptor otherEditDeliveryDescriptor = (DeliveryEditDescriptor) other;
             return Objects.equals(deliveryName, otherEditDeliveryDescriptor.deliveryName)
-                    && Objects.equals(customerId, otherEditDeliveryDescriptor.customerId)
-                    && Objects.equals(deliveryDate, otherEditDeliveryDescriptor.deliveryDate)
-                    && Objects.equals(status, otherEditDeliveryDescriptor.status)
-                    && Objects.equals(note, otherEditDeliveryDescriptor.note);
+                && Objects.equals(customerId, otherEditDeliveryDescriptor.customerId)
+                && Objects.equals(deliveryDate, otherEditDeliveryDescriptor.deliveryDate)
+                && Objects.equals(status, otherEditDeliveryDescriptor.status)
+                && Objects.equals(note, otherEditDeliveryDescriptor.note);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("Delivery Name", deliveryName)
-                    .add("Customer Id", customerId)
-                    .add("Delivery Date", deliveryDate)
-                    .add("Status", status)
-                    .add("Note", note)
-                    .toString();
+                .add("Delivery Name", deliveryName)
+                .add("Customer Id", customerId)
+                .add("Delivery Date", deliveryDate)
+                .add("Status", status)
+                .add("Note", note)
+                .toString();
         }
     }
 }
 
-
-
+//@@author {Gabriel4357}

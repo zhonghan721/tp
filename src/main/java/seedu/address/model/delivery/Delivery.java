@@ -6,6 +6,7 @@ import java.util.Optional;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.customer.Address;
 import seedu.address.model.customer.Customer;
+import seedu.address.model.customer.Name;
 
 /**
  * Represents a Delivery in the address book.
@@ -120,6 +121,10 @@ public class Delivery {
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    public Name getCustomerName() {
+        return customer.getName();
     }
 
     public int getCustomerId() {

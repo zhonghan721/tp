@@ -268,7 +268,7 @@ public class CustomerAddCommandTest {
         @Override
         public Stream<Delivery> getDeliveryByCustomerId(int id) {
             throw new AssertionError("This method should not be called.");
-        };
+        }
 
         @Override
         public boolean hasDelivery(Delivery delivery) {
@@ -351,10 +351,6 @@ public class CustomerAddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public Delivery getDeliveryUsingFilteredList(int id) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
         public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {

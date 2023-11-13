@@ -1,3 +1,4 @@
+//@@author {juliusgambe}
 package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
@@ -30,16 +31,16 @@ public class DeliveryListCommand extends DeliveryCommand {
     public static final String MESSAGE_SUCCESS = "Listed Deliveries";
     public static final String MESSAGE_EMPTY = "There are currently no deliveries to be listed.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all deliveries or the deliveries filtered and "
-        + "sorted by the specified filters or sort.\n\n"
-        + "Parameters: \n"
-        + "Any of the fields can be specified.\n"
-        + "[" + PREFIX_STATUS + " STATUS] "
-        + "[" + PREFIX_CUSTOMER_ID + " CUSTOMER_ID] "
-        + "[" + PREFIX_DATE + " DATE] "
-        + "[" + PREFIX_SORT + " SORT]\n\n"
-        + "Example: " + COMMAND_WORD + " "
-        + PREFIX_STATUS + " CREATED " + PREFIX_SORT + " ASC "
-        + PREFIX_CUSTOMER_ID + " 1 " + PREFIX_DATE + " 2020-10-10";
+          + "sorted by the specified filters or sort.\n\n"
+          + "Parameters: \n"
+          + "Any of the fields can be specified.\n"
+          + "[" + PREFIX_STATUS + " STATUS] "
+          + "[" + PREFIX_CUSTOMER_ID + " CUSTOMER_ID] "
+          + "[" + PREFIX_DATE + " DATE] "
+          + "[" + PREFIX_SORT + " SORT]\n\n"
+          + "Example: " + COMMAND_WORD + " "
+          + PREFIX_STATUS + " CREATED " + PREFIX_SORT + " ASC "
+          + PREFIX_CUSTOMER_ID + " 1 " + PREFIX_DATE + " 2020-10-10";
     private static final Logger logger = Logger.getLogger(DeliveryListCommand.class.getName());
     private DeliveryStatus status;
     private final Integer customerId;
@@ -69,7 +70,7 @@ public class DeliveryListCommand extends DeliveryCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         logger.info("Executing DeliveryListCommand: status " + status + ", customerId " + customerId
-            + " deliveryDate " + deliveryDate + " and sortType " + sortType);
+              + " deliveryDate " + deliveryDate + " and sortType " + sortType);
         if (!model.getUserLoginStatus()) {
             logger.warning("Executing DeliveryListCommand failed: user not logged in");
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
@@ -79,7 +80,7 @@ public class DeliveryListCommand extends DeliveryCommand {
         Predicate<Delivery> filters = this.createDeliveryListFilters();
         assert filters != null : "Filters should not be null";
 
-        // apply filter
+        // apply filters
         model.updateFilteredDeliveryList(filters);
 
         if (model.isFilteredDeliveryListEmpty()) {
@@ -130,8 +131,6 @@ public class DeliveryListCommand extends DeliveryCommand {
 
     /**
      * Sorts the delivery list by expected delivery date.
-     *
-     * @param model model to sort.
      */
     private Comparator<Delivery> createDeliveryListSort() {
         Comparator<Delivery> sortAscending = Comparator.comparing(Delivery::getDeliveryDate);
@@ -165,10 +164,11 @@ public class DeliveryListCommand extends DeliveryCommand {
         }
 
         if (this.deliveryDate != null && otherDeliveryListCommand.deliveryDate != null
-            && !this.deliveryDate.equals(otherDeliveryListCommand.deliveryDate)) {
+              && !this.deliveryDate.equals(otherDeliveryListCommand.deliveryDate)) {
             return false;
         }
 
         return sortType.equals(otherDeliveryListCommand.sortType);
     }
 }
+//@@author {juliusgambe}
