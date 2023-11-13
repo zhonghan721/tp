@@ -114,10 +114,11 @@ public class ModelManager implements Model {
      * @return the ListItem to be shown in the UI List.
      */
     private ListItem transformDeliveryToListItem(Delivery delivery) {
-        return new ListItem(String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName()),
-                String.format("Ordered on: %s", delivery.getOrderDate().toString()),
-                delivery.getStatus().toString(),
-                String.format("Deliver by: %s", delivery.getDeliveryDate().toString()));
+        String title = String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName());
+        String description = String.format("Customer: %s", delivery.getCustomer().getName());
+        String mainAccessory = delivery.getStatus().toString();
+        String accessory = String.format("Deliver by: %s", delivery.getDeliveryDate().toString());
+        return new ListItem(title, description, mainAccessory, accessory);
     }
 
     /**
@@ -139,11 +140,11 @@ public class ModelManager implements Model {
      */
     private ListItem transformCustomerToListItem(Customer customer) {
         String descriptionFormat = "Email: %s\nAddress: %s";
-        return new ListItem(String.format("[%d] %s", customer.getCustomerId(), customer.getName()),
-                String.format(descriptionFormat,
-                        customer.getEmail().toString(),
-                        customer.getAddress().toString()),
-                customer.getPhone().toString());
+        String title = String.format("[%d] %s", customer.getCustomerId(), customer.getName());
+        String description = String.format(descriptionFormat, customer.getEmail().toString(),
+                customer.getAddress().toString());
+        String accessory = customer.getPhone().toString();
+        return new ListItem(title, description, accessory);
     }
 
     @Override
