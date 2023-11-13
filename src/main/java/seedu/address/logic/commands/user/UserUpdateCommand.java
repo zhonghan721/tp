@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -45,6 +46,8 @@ public class UserUpdateCommand extends Command {
     public static final String MESSAGE_PASSWORD_MISMATCH = "Passwords do not match. Please try again.";
     public static final String MESSAGE_QUESTION_OR_ANSWER_MISSING = "Secret Question and Answer have to be "
             + "either all present or all absent. Try again.";
+    private static final Logger logger = Logger.getLogger(UserUpdateCommand.class.getName());
+
     private final UserUpdateDescriptor userUpdateDescriptor;
 
     /**
@@ -65,17 +68,20 @@ public class UserUpdateCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing UserUpdateCommand");
 
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
+            logger.warning("User is not logged in!");
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        User storedUser = model.getStoredUser();
+        Optional<User> storedUser = model.getStoredUser();
         // there should always be a stored user after registering/to be able to log in
-        assert storedUser != null;
+        assert storedUser.isPresent();
+        User currentStoredUser = storedUser.get();
 
-        User updatedUser = createUpdatedUser(storedUser, userUpdateDescriptor);
+        User updatedUser = createUpdatedUser(currentStoredUser, userUpdateDescriptor);
 
         model.updateUser(updatedUser);
         return new CommandResult(MESSAGE_SUCCESS, true);

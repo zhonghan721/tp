@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,7 +36,7 @@ public class ModelManager implements Model {
     private final FilteredList<Customer> filteredCustomers;
     private final FilteredList<Delivery> filteredDeliveries;
     private SortedList<Delivery> sortedDeliveries;
-    private User loggedInUser;
+    private Optional<User> loggedInUser;
 
     private ObservableList<ListItem> uiList;
 
@@ -48,8 +49,8 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
-            + ", delivery book" + deliveryBook
-            + " and user prefs " + userPrefs);
+                + ", delivery book" + deliveryBook
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.deliveryBook = new DeliveryBook(deliveryBook);
@@ -96,34 +97,34 @@ public class ModelManager implements Model {
     @Override
     public void setUiListDelivery() {
         this.uiList = this.getSortedDeliveryList()
-            .stream()
-            .map(this::transformDeliveryToListItem)
-            .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                .stream()
+                .map(this::transformDeliveryToListItem)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     private ListItem transformDeliveryToListItem(Delivery delivery) {
         return new ListItem(String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName()),
-            String.format("Ordered on: %s", delivery.getOrderDate().toString()),
-            delivery.getStatus().toString(),
-            String.format("Deliver by: %s", delivery.getDeliveryDate().toString()));
+                String.format("Ordered on: %s", delivery.getOrderDate().toString()),
+                delivery.getStatus().toString(),
+                String.format("Deliver by: %s", delivery.getDeliveryDate().toString()));
     }
 
 
     @Override
     public void setUiListCustomer() {
         this.uiList = this.getFilteredCustomerList()
-            .stream()
-            .map(this::transformCustomerToListItem)
-            .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                .stream()
+                .map(this::transformCustomerToListItem)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     private ListItem transformCustomerToListItem(Customer customer) {
         String descriptionFormat = "Email: %s\nAddress: %s";
         return new ListItem(String.format("[%d] %s", customer.getCustomerId(), customer.getName()),
-            String.format(descriptionFormat,
-                customer.getEmail().toString(),
-                customer.getAddress().toString()),
-            customer.getPhone().toString());
+                String.format(descriptionFormat,
+                        customer.getEmail().toString(),
+                        customer.getAddress().toString()),
+                customer.getPhone().toString());
     }
 
     @Override
@@ -171,13 +172,16 @@ public class ModelManager implements Model {
      */
     @Override
     public String getLoginStatus() {
-        if (getStoredUser() == null) {
+        if (loggedInUser.isEmpty()) {
             return "No account found. Please register an account.";
-        } else if (isLoggedIn) {
-            return "Hello " + loggedInUser.getUsername() + ".";
-        } else {
-            return "Logged out. Please login to continue.";
         }
+
+        if (isLoggedIn) {
+            User currLoggedInUser = this.loggedInUser.get();
+            return "Hello " + currLoggedInUser.getUsername() + ".";
+        }
+
+        return "Logged out. Please login to continue.";
     }
 
     //=========== AddressBook ================================================================================
@@ -197,17 +201,6 @@ public class ModelManager implements Model {
         return this.addressBook.getById(id);
     }
 
-    @Deprecated
-    @Override
-    public Customer getCustomerUsingFilteredList(int id) {
-        for (Customer c : filteredCustomers) {
-            if (c.getCustomerId() == id) {
-                return c;
-            }
-        }
-        return null;
-    }
-
     @Override
     public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
@@ -224,13 +217,13 @@ public class ModelManager implements Model {
     public void deleteCustomer(Customer target) {
         addressBook.removeCustomer(target);
         deleteDeliveryByCustomer(target);
-        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        showAllFilteredCustomerList();
     }
 
     @Override
     public void addCustomer(Customer customer) {
         addressBook.addCustomer(customer);
-        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        showAllFilteredCustomerList();
     }
 
     @Override
@@ -238,7 +231,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedCustomer);
 
         addressBook.setCustomer(target, editedCustomer);
-        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        showAllFilteredCustomerList();
     }
 
     //=========== Filtered Customer List Accessors =============================================================
@@ -281,6 +274,14 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Resets the customer list to show no customers.
+     */
+    @Override
+    public void clearFilteredCustomerList() {
+        updateFilteredCustomerList(PREDICATE_SHOW_NO_CUSTOMERS);
+    }
+
+    /**
      * Returns the number of customers in the filtered customer list.
      *
      * @return the number of customers in the filtered customer list.
@@ -319,7 +320,7 @@ public class ModelManager implements Model {
     @Override
     public boolean userMatches(User user) {
         requireNonNull(user);
-        return user.equals(loggedInUser);
+        return user.equals(loggedInUser.get());
     }
 
     /**
@@ -342,13 +343,13 @@ public class ModelManager implements Model {
      * Returns the stored user.
      */
     @Override
-    public User getStoredUser() {
-        return this.loggedInUser;
+    public Optional<User> getStoredUser() {
+        return loggedInUser;
     }
 
     @Override
     public void setLoggedInUser(User user) {
-        this.loggedInUser = user;
+        this.loggedInUser = Optional.ofNullable(user);
     }
 
     @Override
@@ -370,7 +371,7 @@ public class ModelManager implements Model {
         userPrefs.registerUser(user);
         this.setLoggedInUser(user);
         this.setLoginSuccess();
-        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        showAllFilteredCustomerList();
     }
 
     /**
@@ -421,6 +422,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Stream<Delivery> getDeliveryByCustomerId(int id) {
+        return this.deliveryBook.getByCustomerId(id);
+    }
+
+    @Override
     public boolean hasDelivery(Delivery delivery) {
         requireNonNull(delivery);
         return deliveryBook.hasDelivery(delivery);
@@ -461,6 +467,14 @@ public class ModelManager implements Model {
     @Override
     public void showAllFilteredDeliveryList() {
         updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+    }
+
+    /**
+     * Resets the delivery list to show no deliveries.
+     */
+    @Override
+    public void clearFilteredDeliveryList() {
+        updateFilteredDeliveryList(PREDICATE_SHOW_NO_DELIVERIES);
     }
 
     /**
@@ -533,7 +547,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortFilteredDeliveryList(Comparator<Delivery> comparator) {
+    public void updateSortedDeliveryList(Comparator<Delivery> comparator) {
         requireNonNull(comparator);
         sortedDeliveries.setComparator(comparator);
         setUiListDelivery();
@@ -559,11 +573,11 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
-            && deliveryBook.equals(otherModelManager.deliveryBook)
-            && userPrefs.equals(otherModelManager.userPrefs)
-            && filteredCustomers.equals(otherModelManager.filteredCustomers)
-            && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
-            && isLoggedIn == otherModelManager.isLoggedIn;
+                && deliveryBook.equals(otherModelManager.deliveryBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredCustomers.equals(otherModelManager.filteredCustomers)
+                && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
+                && isLoggedIn == otherModelManager.isLoggedIn;
     }
 
 }

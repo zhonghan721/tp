@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.customer.exceptions.CustomerNotFoundException;
 import seedu.address.model.customer.exceptions.DuplicateCustomerException;
+import seedu.address.model.delivery.UniqueDeliveryList;
 import seedu.address.testutil.CustomerBuilder;
 
 public class UniqueCustomerListTest {
@@ -229,5 +230,31 @@ public class UniqueCustomerListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniqueCustomerList.asUnmodifiableObservableList().toString(), uniqueCustomerList.toString());
+    }
+
+    @Test
+    public void equals() {
+        UniqueCustomerList firstList = new UniqueCustomerList();
+        UniqueCustomerList secondList = new UniqueCustomerList();
+        UniqueDeliveryList deliveryList = new UniqueDeliveryList();
+
+        // same list -> true
+        assertTrue(firstList.equals(firstList));
+
+        // different list both empty -> true
+        assertTrue(firstList.equals(secondList));
+
+        // different list -> false
+        assertFalse(firstList.equals(deliveryList));
+
+        secondList.add(ALICE);
+
+        // different items -> false
+        assertFalse(firstList.equals(secondList));
+
+        firstList.add(ALICE);
+
+        // same items -> true
+        assertTrue(firstList.equals(secondList));
     }
 }

@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
@@ -46,7 +47,7 @@ public class CustomerAddCommandTest {
         CommandResult commandResult = new CustomerAddCommand(validCustomer).execute(modelStub);
 
         assertEquals(String.format(CustomerAddCommand.MESSAGE_SUCCESS, Messages.format(validCustomer)),
-            commandResult.getFeedbackToUser());
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validCustomer), modelStub.customersAdded);
     }
 
@@ -58,7 +59,7 @@ public class CustomerAddCommandTest {
 
 
         assertThrows(CommandException.class,
-            CustomerAddCommand.MESSAGE_DUPLICATE_CUSTOMER, () -> customerAddCommand.execute(modelStub));
+                CustomerAddCommand.MESSAGE_DUPLICATE_CUSTOMER, () -> customerAddCommand.execute(modelStub));
 
     }
 
@@ -70,7 +71,7 @@ public class CustomerAddCommandTest {
         CustomerAddCommand customerAddCommand = new CustomerAddCommand(validCustomer);
 
         assertThrows(CommandException.class,
-            Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> customerAddCommand.execute(modelStub));
+                Messages.MESSAGE_USER_NOT_AUTHENTICATED, () -> customerAddCommand.execute(modelStub));
     }
 
     @Test
@@ -174,11 +175,6 @@ public class CustomerAddCommandTest {
         }
 
         @Override
-        public Customer getCustomerUsingFilteredList(int id) {
-            return null;
-        }
-
-        @Override
         public boolean hasCustomer(Customer customer) {
             throw new AssertionError("This method should not be called.");
         }
@@ -213,6 +209,14 @@ public class CustomerAddCommandTest {
          */
         @Override
         public void showAllFilteredCustomerList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Resets the customer list to show no customers.
+         */
+        @Override
+        public void clearFilteredCustomerList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -262,6 +266,11 @@ public class CustomerAddCommandTest {
         }
 
         @Override
+        public Stream<Delivery> getDeliveryByCustomerId(int id) {
+            throw new AssertionError("This method should not be called.");
+        };
+
+        @Override
         public boolean hasDelivery(Delivery delivery) {
             throw new AssertionError("This method should not be called.");
         }
@@ -291,6 +300,14 @@ public class CustomerAddCommandTest {
          */
         @Override
         public void showAllFilteredDeliveryList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Resets the delivery list to show no deliveries.
+         */
+        @Override
+        public void clearFilteredDeliveryList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -345,7 +362,7 @@ public class CustomerAddCommandTest {
         }
 
         @Override
-        public void sortFilteredDeliveryList(Comparator<Delivery> comparator) {
+        public void updateSortedDeliveryList(Comparator<Delivery> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -369,7 +386,7 @@ public class CustomerAddCommandTest {
         }
 
         @Override
-        public User getStoredUser() {
+        public Optional<User> getStoredUser() {
             throw new AssertionError("This method should not be called.");
         }
 
