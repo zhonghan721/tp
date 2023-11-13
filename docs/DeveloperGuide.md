@@ -82,6 +82,8 @@ implementation of a component), as illustrated in the (partial) class diagram be
 
 The sections below give more details of each component.
 
+<br>
+
 ### UI component
 
 The **API** of this component is specified
@@ -110,6 +112,8 @@ The `UI` component,
   and `Delivery` objects residing in the
   `Model`.
 
+<br>
+
 ### Logic component
 
 **API** :
@@ -133,9 +137,9 @@ PlantUML, the lifeline reaches the end of diagram.
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
-   a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
-   is executed by the `LogicManager`.
+   a parser that matches the command (e.g., `CustomerDeleteCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `CustomerDeleteCommand`)
+   which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a customer).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -146,11 +150,13 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 - When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
-  a `Command` object.
-- All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
-  interface so that they can be treated similarly where possible e.g, during testing.
+  placeholder for the specific command name e.g., `CustomerAddCommandParser`) which uses the other classes shown above
+  to parse the user command and create a `XYZCommand` object (e.g., `CustomerAddCommand`) which the `AddressBookParser`
+  returns back as a `Command` object.
+- All `XYZCommandParser` classes (e.g., `CustomerAddCommandParser`, `DeliveryDeleteCommandParser`, ...) inherit from
+  the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<br>
 
 ### Model component
 
@@ -158,13 +164,13 @@ How the parsing works:
 [`Model.java`](https://github.com/AY2324S1-CS2103T-T13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="900" />
 
 The `Model` component,
 
-* stores the address book data i.e., all `Customer` objects. (See the [ReadOnlyBook Model](#ReadOnlyBook-Model) section
+* stores the address book data i.e., all `Customer` objects. (See the [ReadOnlyBook Model](#readonlybook-model) section
   below for more details)
-* stores the delivery book data i.e., all `Delivery` objects. (See the [ReadOnlyBook Model](#ReadOnlyBook-Model) section
+* stores the delivery book data i.e., all `Delivery` objects. (See the [ReadOnlyBook Model](#readonlybook-model) section
   below for more details)
 * stores the currently filtered `Customer` objects (See the [Customer Model](#customer-model)) as a separate
   _filteredCustomers_ list. (e.g., results of a `customer list` command)
@@ -181,11 +187,14 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
+
+<br>
+
 #### ReadOnlyBook Model
 
-The `ReadOnlyBook` model,
+<puml src="diagrams/ReadOnlyBookClassDiagram.puml" width="350" />
 
-<puml src="diagrams/ReadOnlyBookClassDiagram.puml" width="450" />
+The `ReadOnlyBook` model,
 
 * exposes the `AddressBook` and `DeliveryBook` to the outside.
 * The `AddressBook` class stores the address book data i.e., all `Customer` that are contained through
@@ -193,30 +202,38 @@ The `ReadOnlyBook` model,
 * The `DeliveryBook` class stores the delivery book data i.e., all `Delivery` that are contained through
   the `UniqueDeliveryList`.
 
+<br>
+
 #### User Model
 
-<puml src="diagrams/UserClassDiagram.puml" width="450" />
+<puml src="diagrams/UserClassDiagram.puml" width="300" />
 
 The `User` model,
 
 * stores the user data i.e, the username, password, secret question and secret answer of the user.
 
+<br>
+
 #### Delivery Model
 
-<puml src="diagrams/DeliveryClassDiagram.puml" width="450" />
+<puml src="diagrams/DeliveryClassDiagram.puml" width="600" />
 
 The `Delivery` model,
 
 * stores the delivery data i.e, the delivery ID, delivery name, customer, delivery status, order date,
   expected delivery date and note for the delivery.
 
+<br>
+
 #### Customer Model
 
-<puml src="diagrams/CustomerClassDiagram.puml" width="450" />
+<puml src="diagrams/CustomerClassDiagram.puml" width="350" />
 
 The `Customer` model,
 
 * stores the customer data i.e, the customer ID, customer address, phone, email and address.
+
+<br>
 
 ### Storage component
 
@@ -237,6 +254,8 @@ The concrete implementation of storage is done through `StorageManger`, which ho
 `BookStorage` and `BookStorageWithReference`. Which represents the User Preference Data, Address Book and Delivery Book
 respectively.
 
+<br>
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
@@ -250,12 +269,15 @@ This section describes some noteworthy details on how certain features are imple
 - [Update Delivery Status](#update-delivery-status-feature)
 - [Create Delivery Note](#create-note-for-delivery-feature)
 - [User Register Account Command](#user-register-account-command)
+- [Delivery List Command](#list-delivery-feature)
+- [Deliver View Command](#view-delivery-feature)
 - [User Login](#user-login-command)
-- User Update Details
 - [User Logout](#user-logout-command)
-- User Account Recovery
-- User Account Deletion
 - [Add Customer](#add-customer-command)
+- [Customer Edit Command](#customer-edit-command)
+- [Delivery Add Command](#delivery-add-command)
+
+<br>
 
 ### Update Delivery Status Feature
 
@@ -302,21 +324,9 @@ The sequence of the `delivery status` command is as follows:
 
 The following sequence diagram illustrates the `delivery status` command sequence:
 
-<puml src="diagrams/DeliveryStatusCommandSequenceDiagram.puml" width="450" />
+<puml src="diagrams/DeliveryStatusCommandSequenceDiagram.puml" width="900" />
 
-This section describes some noteworthy details on how certain features are implemented.
-
-- [Create Delivery Note](#create-note-for-delivery-feature)
-- [User Register Account Command](#user-register-account-command)
-- [Delivery List Command](#list-delivery-feature)
-- [Deliver View Command](#view-delivery-feature)
-- [User Login Command](#user-login-command)
-- User Update Details Command
-- [User Logout Command](#user-logout-command)
-- User Account Recovery
-- User Account Deletion
-- Customer Edit Command
-- Delivery Add Command
+<br>
 
 ### Create Note for Delivery Feature
 
@@ -367,7 +377,9 @@ command executes successfully
 
 The following diagram illustrates the `delivery note` command sequence:
 
-<puml src="diagrams/DeliveryCreateNoteSequenceDiagram.puml" width="450" />
+<puml src="diagrams/DeliveryCreateNoteSequenceDiagram.puml" width="1000" />
+
+<br>
 
 ### User Register Account Command
 
@@ -414,6 +426,8 @@ The following sequence diagram shows how the `register` command works:
 
 <puml src="diagrams/UserRegisterSequenceDiagram.puml" alt="UserRegisterSequenceDiagram" />
 
+<br>
+
 ### List Delivery Feature
 
 ### Overview
@@ -448,7 +462,7 @@ The format of the `delivery list` command can be found
 The following activity diagram illustrates the logic for listing `Delivery`. Some ParseExceptions are omitted for better
 readability.
 
-<puml src="diagrams/implementation/delivery/DeliveryListActivityDiagram.puml" width="450"> </puml>
+<puml src="diagrams/implementation/delivery/DeliveryListActivityDiagram.puml" width="800"> </puml>
 
 The sequence of the `delivery list` command is as follows:
 
@@ -483,6 +497,8 @@ The following sequence diagram illustrates the `delivery list` command sequence:
 
 <puml src="diagrams/implementation/delivery/DeliveryListSequenceDiagram.puml" />
 
+<br>
+
 ### View Delivery Feature
 
 #### Overview
@@ -508,7 +524,7 @@ The format of the `delivery view` command can be found
 
 The following activity diagram illustrates the logic of viewing a `Delivery`.
 
-<puml src="diagrams/implementation/delivery/DeliveryViewActivityDiagram.puml" width="450" />
+<puml src="diagrams/implementation/delivery/DeliveryViewActivityDiagram.puml" width="600" />
 
 The sequence of the `delivery view` command is as follows:
 
@@ -527,7 +543,9 @@ The sequence of the `delivery view` command is as follows:
 
 The following sequence diagram illustrates the `delivery view` command sequence:
 
-<puml src="diagrams/implementation/delivery/DeliveryViewSequenceDiagram.puml" width="450" />
+<puml src="diagrams/implementation/delivery/DeliveryViewSequenceDiagram.puml" width="900" />
+
+<br>
 
 ### User Login Command
 
@@ -570,6 +588,8 @@ The following sequence diagram shows how the `login` command works:
 
 <puml src="diagrams/UserLoginSequenceDiagram.puml" alt="UserLoginSequenceDiagram" />
 
+<br>
+
 ### User Logout Command
 
 **Overview:**
@@ -603,7 +623,9 @@ The sequence of the `logout` command is as follows:
 
 The following sequence diagram shows how the `login` command works:
 
-<puml src="diagrams/UserLogoutSequenceDiagram.puml" alt="UserLogoutSequenceDiagram" />
+<puml src="diagrams/UserLogoutSequenceDiagram.puml" alt="UserLogoutSequenceDiagram" width="900" />
+
+<br>
 
 ### Add Customer Command
 
@@ -646,6 +668,8 @@ The sequence of the `customer add` command is as follows:
 The following sequence diagram shows how the `login` command works:
 
 <puml src="diagrams/CustomerAddSequenceDiagram.puml" alt="CustomerAddSequenceDiagram" />
+
+<br>
 
 ### Customer Edit Command
 
@@ -695,6 +719,8 @@ The following sequence diagram shows how the `customer edit` command works:
 
 <puml src="diagrams/Gabriels Diagrams/CustomerEditDiagram.puml" alt="CustomerEditSequenceDiagram" />
 
+<br>
+
 ### Delivery Add Command
 
 **Overview:**
@@ -741,6 +767,8 @@ The sequence of the `delivery add` command is as follows:
 The following sequence diagram shows how the `delivery add` command works:
 
 <puml src="diagrams/Gabriels Diagrams/DeliveryAddDiagram.puml" alt="DeliveryAddSequenceDiagram" />
+
+<br>
 
 ### \[Proposed\] Undo/redo feature
 
@@ -1936,7 +1964,7 @@ otherwise)
     1. Perform Inventory Management
     2. Perform Route Planning
 
-_{More to be added}_
+<br>
 
 ### Glossary
 
@@ -1958,7 +1986,7 @@ _{More to be added}_
 
 Given below are instructions to test the app manually.
 
-<box type="info" seamless>
+<box type="note" background-color="#dff0d8" border-color="#d6e9c6" icon=":information_source:">
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more _exploratory_ testing.
@@ -1995,6 +2023,8 @@ testers are expected to do more _exploratory_ testing.
    2. Using the `login`{.swift} command, log in into HomeBoss with the same user details entered earlier.
       Expected: User is able to log in successfully and see the HomeBoss homepage.
 
+<br>
+
 ### Register
 
 1. Registering for an account.
@@ -2025,6 +2055,8 @@ testers are expected to do more _exploratory_ testing.
       Expected: No new user is registered. Error indicating existing account is
       shown in the feedback message.
 
+<br>
+
 ### Login
 
 1. Login to an account.
@@ -2054,6 +2086,7 @@ testers are expected to do more _exploratory_ testing.
       Expected: The user does not get logged-in. Error indicating invalid command format is
       shown in the feedback message.
 
+<br>
 
 ### Update Account Details
 
@@ -2095,6 +2128,8 @@ testers are expected to do more _exploratory_ testing.
        Expected: No user details are updated. Error indicating that secret question and answer must be both present
        or both absent is shown in the feedback message.
 
+<br>
+
 ### Logout
 
 1. Logging out of the application.
@@ -2107,6 +2142,8 @@ testers are expected to do more _exploratory_ testing.
 
    3. Test Case: `logout extra`{.swift} or other extra arguments.</br>
       Expected: Similar to previous.
+
+<br>
 
 ### Recover Account
 
@@ -2136,6 +2173,8 @@ testers are expected to do more _exploratory_ testing.
       Expected: No user details are updated. Error indicating invalid command format is
       shown in the feedback message.
 
+<br>
+
 ### Delete Account
 
 1. Delete currently stored user account.
@@ -2147,6 +2186,8 @@ testers are expected to do more _exploratory_ testing.
 
    3. Test Case: `delete account extra`{.swift} or other extra arguments.</br>
       Expected: Similar to previous.
+
+<br>
 
 ### Add Customer
 
@@ -2184,6 +2225,8 @@ testers are expected to do more _exploratory_ testing.
       Expected: No new Customer is added. Error indicating invalid command format is
       shown in the feedback message.
 
+<br>
+
 ### View Details of Customer
 
 1. View the details of a Customer.
@@ -2209,6 +2252,8 @@ testers are expected to do more _exploratory_ testing.
       Expected: No new Customer details are shown. Error indicating invalid customer ID is
       shown in the feedback message.
 
+<br>
+
 ### List Customers
 
 1. List the Customers stored in the application.
@@ -2222,6 +2267,8 @@ testers are expected to do more _exploratory_ testing.
 
    3. Test Case: `customer list extra`{.swift}.</br>
       Expected: Similar to previous.
+
+<br>
 
 ### Find Customers
 
@@ -2248,6 +2295,8 @@ testers are expected to do more _exploratory_ testing.
    6. Test Case: `customer find Al_x`{.swift}.</br>
       Expected: No customers are shown. A message indicating the number of Customers listed
       is shown in the result message.
+
+<br>
 
 ### Update Customer Details
 
@@ -2284,6 +2333,8 @@ testers are expected to do more _exploratory_ testing.
       Expected: No Customer details are updated. An error indicating invalid command format is shown
       in the feedback message.
 
+<br>
+
 ### Delete Customers
 
 1. Delete a specified Customer.
@@ -2308,6 +2359,8 @@ testers are expected to do more _exploratory_ testing.
    6. Test Case: `customer delete 2`{.swift}.</br>
       Expected: No Customer is deleted. Error indicating invalid Customer ID is
       shown in the feedback message.
+
+<br>
 
 ### Add Delivery
 
@@ -2349,6 +2402,8 @@ testers are expected to do more _exploratory_ testing.
       Expected: No new Delivery is added. An Error indicating invalid command format is
       shown in the feedback message.
 
+<br>
+
 ### View Details of a Delivery
 
 1. View the details of a Delivery.
@@ -2373,6 +2428,8 @@ testers are expected to do more _exploratory_ testing.
    6. Test Case: `delivery view 2`{.swift}.</br>
       Expected: No new Delivery details are shown. Error indicating invalid delivery ID is
       shown in the feedback message.
+
+<br>
 
 ### List Deliveries
 
@@ -2428,6 +2485,8 @@ testers are expected to do more _exploratory_ testing.
        Expected: No Deliveries are listed. An Error indicating sort constraints
        is shown in the feedback message.
 
+<br>
+
 ### Find Deliveries
 
 1. Find Deliveries matching query.
@@ -2454,6 +2513,8 @@ testers are expected to do more _exploratory_ testing.
    6. Test Case: `delivery find Chocolate_Cake`{.swift}.</br>
       Expected: No Deliveries are shown. A message indicating the number of Deliveries listed
       is shown in the result message.
+
+<br>
 
 ### Update details of a Delivery
 
@@ -2525,6 +2586,8 @@ testers are expected to do more _exploratory_ testing.
        Expected: No Delivery details are updated. An error indicating invalid command format is shown
        in the feedback message.
 
+<br>
+
 ### Update delivery status
 
 1. Update the status of a specific Delivery.
@@ -2552,6 +2615,8 @@ testers are expected to do more _exploratory_ testing.
    6. Test Case: `delivery status SHIPPED 1`{.swift}.</br>
       Expected: No delivery statuses are updated. An error indicating invalid command format is shown
       in the feedback message.
+
+<br>
 
 ### Create a note for a Delivery
 
@@ -2583,6 +2648,8 @@ testers are expected to do more _exploratory_ testing.
       Expected: No delivery notes are updated. An error indicating invalid delivery ID is shown
       in the feedback message.
 
+<br>
+
 ### Delete Delivery
 
 1. Delete a specific delivery.
@@ -2609,6 +2676,8 @@ testers are expected to do more _exploratory_ testing.
       Expected: No Delivery is deleted. An Error indicating invalid Delivery ID is
       shown in the feedback message.
 
+<br>
+
 ### Help
 
 1. Shows the help information to the user.
@@ -2620,6 +2689,8 @@ testers are expected to do more _exploratory_ testing.
 
    3. Test Case: `help extra`{.swift}.</br>
       Expected: Similar to previous.
+
+<br>
 
 ### Exit
 
@@ -2633,6 +2704,8 @@ testers are expected to do more _exploratory_ testing.
    3. Test Case: `exit extra`{.swift}.</br>
       Expected: Similar to previous.
 
+<br>
+
 ### Clear
 
 1. Clears all Customer and Delivery data.
@@ -2645,6 +2718,8 @@ testers are expected to do more _exploratory_ testing.
 
    3. Test Case: `clear extra`{.swift}.</br>
       Expected: Similar to previous.
+
+<br>
 
 ### Saving data
 
