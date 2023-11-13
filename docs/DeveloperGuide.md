@@ -1067,15 +1067,29 @@ otherwise)
 
 **Extensions:**
 
-* 2a. Registered owner does not enter one of the fields
-    * 2a1. US requests registered owner to fill up all the required fields
+* 2a. Registered Owner does not enter one of the fields.
+
+    * 2a1. US displays an error to Registered Owner to fill up all the required fields.
 
       Use case ends.
 
-* 2b. Registered owner types incorrect password or username
-    * 2b1. US requests registered owner to retype their username or password
+* 2b. Registered Owner types incorrect username or password.
+
+    * 2b1. US displays an error to Registered Owner that the username or password is incorrect.
 
       Use case ends.
+
+* 2c. Registered Owner types duplicated fields.
+
+    * 2c1. US displays an error to Registered Owner that the field is duplicated.
+
+      Use case ends.
+
+* 2d. Registered Owner specifies values that do not match the field constraint.
+
+    * 2d1. US displays an error to Registered Owner that the value is invalid and shows the constraint.
+
+      Use Case ends.
 
 ---
 
@@ -1189,7 +1203,7 @@ otherwise)
 
 * 1a. Logged-in Owner does not specify at least one updated field(s).
 
-    * 1a1. US requests Logged-in Owner to specify at least one updated field.
+    * 1a1. US requests Logged-in Owner to specify at least one updated field by showing the expected command format.
 
       Use Case ends.
 
@@ -1223,6 +1237,12 @@ otherwise)
 
       Use Case ends.
 
+* 1c. Logged-in Owner specifies values that do not match the field constraint.
+
+    * 1c1. US displays an error to Logged-in Owner that the value is invalid and shows the constraint.
+
+      Use Case ends.
+
 ---
 
 #### **Use Case: UC07 - Create Customer**
@@ -1247,11 +1267,23 @@ otherwise)
 
 **Extensions:**
 
-- 1a. Logged-in Owner does not specify the required field(s)
+- 1a. Logged-in Owner does not specify the required field(s).
 
-    - 1a1. CMS requests Logged-in Owner to key in all the fields required to create a customer.
+    - 1a1. CMS displays an error to Logged-in Owner to key in all the fields required to create a customer.
 
       Use Case ends.
+
+- 1b. Logged-in Owner specifies duplicated fields.
+
+    - 1b1. CMS displays an error to Logged-in Owner that the field is entered more than once.
+
+      Use Case ends.
+
+- 1c. Logged-in Owner specifies values that do not match the field constraint.
+
+   - 1c1. CMS displays an error to Logged-in Owner that the value is invalid and shows the constraint.
+
+     Use Case ends.
 
 ---
 
@@ -1290,25 +1322,6 @@ otherwise)
 
 ---
 
-#### **Use Case: UC09 - Sort customers**
-
-**System:** Customer Management System (CMS)
-
-**Actor:** Logged-in owner
-
-**Preconditions:** Owner is logged in
-
-**Guarantees**
-
-* A list of deliveries of a customer is shown if the command is executed successfully.
-
-**MSS:**
-
-1. Logged-in Owner types in command to view what deliveries a particular customer has.
-2. CMS shows the list of deliveries of that specific customer.
-
----
-
 #### **Use Case: UC09 - Search for a Customer**
 
 **System:** Customer Management System (CMS)
@@ -1332,19 +1345,19 @@ otherwise)
 
 - 1a. Logged-in Owner does not include any keyword.
 
-    - 1a1. CMS requests Logged-in Owner to specify a keyword.
+    - 1a1. CMS displays an error to Logged-in Owner to specify a keyword.
 
       Use Case ends.
 
 - 1b. No customer with specified keyword is found.
 
-    - 1b1. CMS displays a message where no customers with the specified keyword is found.
+    - 1b1. CMS displays a message where there are no customers found.
 
       Use Case ends.
 
 - 1c. There are no customers.
 
-    - 1c1. CMS displays a message where there are no customers at all.
+    - 1c1. CMS displays a message where there are no customers found.
 
       Use Case ends.
 
