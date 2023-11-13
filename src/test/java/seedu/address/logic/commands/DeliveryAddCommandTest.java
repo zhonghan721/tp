@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
@@ -85,7 +86,7 @@ public class DeliveryAddCommandTest {
     @Test
     public void execute_invalidDeliveryDate_throwsCommandException() {
         CustomerBuilder personBuilder = new CustomerBuilder();
-        Customer validCustomer = personBuilder.build();
+        Customer validCustomer = personBuilder.withCustomerId(1).build();
 
         ModelStub modelStub = new ModelStubAcceptingDeliveryAdded();
         Delivery validDelivery =
@@ -231,11 +232,6 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
-        public Customer getCustomerUsingFilteredList(int id) {
-            return null;
-        }
-
-        @Override
         public boolean hasCustomer(Customer customer) {
             throw new AssertionError("This method should not be called.");
         }
@@ -266,6 +262,42 @@ public class DeliveryAddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * Resets the customer list to all customers.
+         */
+        @Override
+        public void showAllFilteredCustomerList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Resets the customer list to show no customers.
+         */
+        @Override
+        public void clearFilteredCustomerList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns the number of customers in the filtered customer list.
+         *
+         * @return the number of customers in the filtered customer list.
+         */
+        @Override
+        public int getFilteredCustomerListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns true if the filtered customer list is empty.
+         *
+         * @return true if the filtered customer list is empty.
+         */
+        @Override
+        public boolean isFilteredCustomerListEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public Path getDeliveryBookFilePath() {
             throw new AssertionError("This method should not be called.");
@@ -292,6 +324,11 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
+        public Stream<Delivery> getDeliveryByCustomerId(int id) {
+            throw new AssertionError("This method should not be called.");
+        };
+
+        @Override
         public boolean hasDelivery(Delivery delivery) {
             throw new AssertionError("This method should not be called.");
         }
@@ -316,6 +353,52 @@ public class DeliveryAddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * Resets the delivery list to show all deliveries.
+         */
+        @Override
+        public void showAllFilteredDeliveryList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Resets the delivery list to show no deliveries.
+         */
+        @Override
+        public void clearFilteredDeliveryList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns the number of deliveries in the filtered delivery list.
+         *
+         * @return the number of deliveries in the filtered delivery list.
+         */
+        @Override
+        public int getFilteredDeliveryListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns true if the filtered delivery list is empty.
+         *
+         * @return true if the filtered delivery list is empty.
+         */
+        @Override
+        public boolean isFilteredDeliveryListEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Returns the number of deliveries in the sorted delivery list.
+         *
+         * @return the number of deliveries in the sorted delivery list.
+         */
+        @Override
+        public boolean isSortedDeliveryListEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public ObservableList<Delivery> getFilteredDeliveryList() {
             throw new AssertionError("This method should not be called.");
@@ -332,7 +415,7 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
-        public void sortFilteredDeliveryList(Comparator<Delivery> comparator) {
+        public void updateSortedDeliveryList(Comparator<Delivery> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -360,8 +443,8 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
-        public User getStoredUser() {
-            return null;
+        public Optional<User> getStoredUser() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -448,6 +531,11 @@ public class DeliveryAddCommandTest {
         }
 
         @Override
+        public Optional<Customer> getCustomer(int id) {
+            return getAddressBook().getById(id);
+        }
+
+        @Override
         public boolean getUserLoginStatus() {
             return true;
         }
@@ -485,6 +573,7 @@ public class DeliveryAddCommandTest {
             return addressBook;
         }
 
+
         @Override
         public boolean getUserLoginStatus() {
             return false;
@@ -516,6 +605,12 @@ public class DeliveryAddCommandTest {
             AddressBook addressBook = new AddressBook();
             addressBook.addCustomer(validCustomer);
             return addressBook;
+        }
+        @Override
+        public Optional<Customer> getCustomer(int id) {
+            CustomerBuilder personBuilder = new CustomerBuilder();
+            Customer validCustomer = personBuilder.build();
+            return Optional.of(validCustomer);
         }
 
         @Override

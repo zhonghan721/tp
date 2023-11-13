@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -36,6 +37,8 @@ public class DeliveryCreateNoteCommand extends Command {
 
     public static final String MESSAGE_NOTE_SUCCESS = "Added Note to Delivery:\n\n%1$s";
 
+    private static final Logger logger = Logger.getLogger(DeliveryCreateNoteCommand.class.getName());
+
     private final int targetId;
     private final Note newNote;
 
@@ -49,6 +52,8 @@ public class DeliveryCreateNoteCommand extends Command {
     public DeliveryCreateNoteCommand(int targetId, Note newNote) {
         requireNonNull(newNote);
 
+        assert targetId > 0;
+
         this.targetId = targetId;
         this.newNote = newNote;
     }
@@ -56,9 +61,13 @@ public class DeliveryCreateNoteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing DeliveryCreateNoteCommand:"
+            + " deliveryId " + targetId
+            + " and note " + newNote);
 
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
+            logger.warning("User is not logged in!");
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
@@ -72,6 +81,11 @@ public class DeliveryCreateNoteCommand extends Command {
         // Edit Delivery
         Delivery editedDelivery = createDeliveryWithNewNote(targetDelivery.get(), newNote);
 
+        logger.info("Updating Delivery:"
+            + " deliveryId " + targetId
+            + ", oldNote " + targetDelivery.get().getNote()
+            + " and newNote " + newNote);
+
         // Update Delivery
         model.setDelivery(targetDelivery.get(), editedDelivery);
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
@@ -84,6 +98,7 @@ public class DeliveryCreateNoteCommand extends Command {
      */
     private static Delivery createDeliveryWithNewNote(Delivery deliveryToEdit, Note newNote) {
         assert deliveryToEdit != null;
+        assert newNote != null;
 
         int updatedId = deliveryToEdit.getDeliveryId();
         DeliveryName updatedName = deliveryToEdit.getName();

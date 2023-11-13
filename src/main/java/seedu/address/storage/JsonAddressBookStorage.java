@@ -24,7 +24,14 @@ public class JsonAddressBookStorage implements BookStorage<Customer> {
 
     private Path filePath;
 
+    /**
+     * Creates a JsonAddressBookStorage to access AddressBook data stored as a json file.
+     *
+     * @param filePath path to file storing data.
+     */
     public JsonAddressBookStorage(Path filePath) {
+        requireNonNull(filePath);
+
         this.filePath = filePath;
     }
 
@@ -66,6 +73,8 @@ public class JsonAddressBookStorage implements BookStorage<Customer> {
 
     @Override
     public void saveBook(ReadOnlyBook<Customer> addressBook) throws IOException {
+        requireNonNull(addressBook);
+
         saveBook(addressBook, filePath);
     }
 

@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -91,14 +92,6 @@ public interface Model {
     Optional<Customer> getCustomer(int id);
 
     /**
-     * Returns a Customer with the same one-based id.
-     *
-     * @param id the customer's id.
-     * @return Customer with the same one-based id
-     */
-    Customer getCustomerUsingFilteredList(int id);
-
-    /**
      * Returns true if a customer with the same identity as {@code customer} exists in the address book.
      */
     boolean hasCustomer(Customer customer);
@@ -141,6 +134,31 @@ public interface Model {
     void updateFilteredCustomerList(Predicate<Customer> predicate);
 
     /**
+     * Resets the customer list to all customers.
+     */
+    void showAllFilteredCustomerList();
+
+    /**
+     * Resets the customer list to show no customers.
+     */
+    void clearFilteredCustomerList();
+
+    /**
+     * Returns the number of customers in the filtered customer list.
+     *
+     * @return the number of customers in the filtered customer list.
+     */
+    int getFilteredCustomerListSize();
+
+    /**
+     * Returns true if the filtered customer list is empty.
+     *
+     * @return true if the filtered customer list is empty.
+     */
+    boolean isFilteredCustomerListEmpty();
+
+
+    /**
      * Returns the user prefs' delivery book file path.
      */
     Path getDeliveryBookFilePath();
@@ -167,6 +185,14 @@ public interface Model {
      * @return the optional containing delivery with the given id
      */
     Optional<Delivery> getDelivery(int id);
+
+    /**
+     * Returns an optional containing a delivery with the given customer id.
+     *
+     * @param id the id of the customer
+     * @return the stream containing deliveries with the given customer id
+     */
+    public Stream<Delivery> getDeliveryByCustomerId(int id);
 
     /**
      * Returns true if a delivery with the same identity as {@code delivery} exists in the address book.
@@ -201,12 +227,44 @@ public interface Model {
     void setDelivery(Delivery target, Delivery editedDelivery);
 
     /**
+     * Resets the delivery list to show all deliveries.
+     */
+    void showAllFilteredDeliveryList();
+
+    /**
+     * Resets the delivery list to show no deliveries.
+     */
+    void clearFilteredDeliveryList();
+
+    /**
+     * Returns the number of deliveries in the filtered delivery list.
+     *
+     * @return the number of deliveries in the filtered delivery list.
+     */
+    int getFilteredDeliveryListSize();
+
+    /**
+     * Returns true if the filtered delivery list is empty.
+     *
+     * @return true if the filtered delivery list is empty.
+     */
+    boolean isFilteredDeliveryListEmpty();
+
+    /**
+     * Returns the number of deliveries in the sorted delivery list.
+     *
+     * @return the number of deliveries in the sorted delivery list.
+     */
+    boolean isSortedDeliveryListEmpty();
+
+    /**
      * Returns an unmodifiable view of the filtered delivery list
      */
     ObservableList<Delivery> getFilteredDeliveryList();
 
     ObservableList<Delivery> getSortedDeliveryList();
 
+    @Deprecated
     Delivery getDeliveryUsingFilteredList(int id);
 
     /**
@@ -217,7 +275,7 @@ public interface Model {
     void updateFilteredDeliveryList(Predicate<Delivery> predicate);
 
 
-    void sortFilteredDeliveryList(Comparator<Delivery> comparator);
+    void updateSortedDeliveryList(Comparator<Delivery> comparator);
 
     /**
      * Returns true if the {@code user} is currently logged in.
@@ -241,8 +299,10 @@ public interface Model {
 
     /**
      * Returns the stored user.
+     *
+     * @return Optional containing the stored user.
      */
-    User getStoredUser();
+    Optional<User> getStoredUser();
 
     /**
      * Registers the given {@code user}.

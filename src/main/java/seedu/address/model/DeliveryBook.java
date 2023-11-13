@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -122,6 +123,10 @@ public class DeliveryBook implements ReadOnlyBook<Delivery> {
     @Override
     public Optional<Delivery> getById(int id) {
         return deliveries.getById(id);
+    }
+
+    public Stream<Delivery> getByCustomerId(int id) {
+        return deliveries.getByCustomerId(id);
     }
 
     @Override

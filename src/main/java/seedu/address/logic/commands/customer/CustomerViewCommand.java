@@ -1,9 +1,11 @@
 package seedu.address.logic.commands.customer;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
@@ -25,19 +27,28 @@ public class CustomerViewCommand extends CustomerCommand {
 
     public static final String MESSAGE_SUCCESS = "Customer displayed: %1$s";
 
+    private static final Logger logger = Logger.getLogger(CustomerViewCommand.class.getName());
+
     private final int customerId;
 
     /**
-     * Creates a DeliveryViewCommand to display the specified {@code Delivery}.
+     * Creates a CustomerViewCommand to display the specified {@code Customer}.
      */
     public CustomerViewCommand(int customerId) {
+        assert customerId > 0;
+
         this.customerId = customerId;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        logger.info("Executing CustomerViewCommand: customerId "
+            + customerId);
+
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
+            logger.warning("User is not logged in!");
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 

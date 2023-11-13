@@ -96,8 +96,7 @@ public class JsonAdaptedDeliveryTest {
                         VALID_DELIVERY_DATE,
                         VALID_DELIVERY_STATUS,
                         VALID_DELIVERY_NOTE);
-        String expectedMessage = "Customer ID should only contain numbers, "
-                + "and it should be at most 3 digits long";
+        String expectedMessage = "Customer ID should only contain numbers";
         assertThrows(IllegalValueException.class, expectedMessage, ()
                 -> delivery.toModelType(Optional.of(getTypicalAddressBook())));
     }
@@ -288,7 +287,7 @@ public class JsonAdaptedDeliveryTest {
                         VALID_DELIVERY_DATE,
                         VALID_DELIVERY_STATUS,
                         VALID_DELIVERY_NOTE);
-        String expectedMessage = "Delivery ID should be a non-negative number";
+        String expectedMessage = "Delivery ID must be an integer more than 0.";
         assertThrows(IllegalValueException.class, expectedMessage, ()
                 -> delivery.toModelType(Optional.of(getTypicalAddressBook())));
     }
@@ -304,8 +303,7 @@ public class JsonAdaptedDeliveryTest {
                         VALID_DELIVERY_DATE,
                         VALID_DELIVERY_STATUS,
                         VALID_DELIVERY_NOTE);
-        String expectedMessage = "Delivery ID should only contain numbers, "
-                + "and it should be at most 3 digits long";
+        String expectedMessage = "Delivery ID should only contain numbers";
         assertThrows(IllegalValueException.class, expectedMessage, ()
                 -> delivery.toModelType(Optional.of(getTypicalAddressBook())));
     }
