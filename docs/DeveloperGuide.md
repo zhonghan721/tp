@@ -901,38 +901,53 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 1. Currently, when a new customer or a new delivery is created, the ID is guaranteed to be unique among customers and
    deliveries respectively but may not be generated from the first available ID. We plan to modify the ID generation so
    that the ID of the new customer or new delivery would be the first available ID from 1 to the maximum integer
-   respectively. Thus, preventing the strange behaviour of the ID not starting from 1 when the data is removed
-   by `clear` or `delete account` or if the data is manually removed.
+   respectively. Thus, preventing the strange behaviour of the ID not starting from 1 or from the first available ID
+   when the data is removed by `clear` or `delete account` or if the data is manually removed or when the application is
+   closed and opened again.
 
-2. Currently, the `find` command for customer would allow special characters to be used to search for the name of a
-   customer. We plan to disallow special characters as a user cannot add special characters to the name of a customer in
-   the first place.
+2. Currently, you are unable to key in special characters for the name of a customer or for delivery notes. We plan to
+   allow certain special characters only such as `/` for the name of a customer as some people have special characters
+   eg. `Gabriel s/o Bryan` in their name or require special characters when taking notes.
 
-3. Currently, you would need to type `delivery list` or `customer list` in order to switch between the two lists which
-   may hinder the user's ability to quickly type commands. We can create two side-by-side list views of both customer
-   and delivery for quicker reference and enable users to make quicker commands.
+3. Currently, the `find` command for customer would allow special characters to be used to find a customer by their
+   name. We plan to limit the allowed special characters to the allowed special characters for names based on the
+   previous point to avoid confusion.
 
-4. Currently, some error messages are not specific enough. Error messages can be made more specific and instructive. For
-   example, if a user enters 2023-02-30, the error message
-   can be "Invalid date. The date entered does not exist.", however the current implementation only states "Dates
-   should be in the format yyyy-MM-dd". Or, if a user enters the incorrect ID, the error should show "Customer ID" or "
-   Delivery ID", however, the current implementation does not specify whether it is for the customer ID or for delivery
-   ID and only states "ID". Or, if a user inputs a negative value or zero for a numerical parameter that requires a
-   positive integer, the error message should be more specific and state "Please enter a positive integer." instead of "
-   Invalid Command Format".
+4. Currently, the `find` command requires exact match of keywords and returns results that matches any of those
+   keywords. This potentially results in numerous in unwanted data to be shown if there are multiple matching keywords.
+   Or, if there are no matching keywords, no results would be shown. For example, if you have `100` Chocolate Cake
+   and `100` Strawberry Buns and `1` Chocolate Buns, and you search for Chocolate Buns, the result would be `100`
+   Chocolate Cake and `1` Chocolate Buns and `100` Strawberry Buns. Or, if you misspelled your search as Chcolate Bns,
+   you would receive no result. We plan to make the `find` command have more options to do more complex search
+   functionalities such as fuzzy search and exact match search. For example, if you search for Chocolate Buns, with
+   exact search, the result would be `1` Chocolate Buns. Or, if you misspelled your search as Chcolate Bns, with fuzzy
+   search, the result would be `1` Chocolate Buns.
 
-5. Currently, only the user password is the only thing that is hashed in the authentication file. We plan to hash the
+5. Currently, you would need to type `delivery list` or `customer list` in order to switch between the two lists to get
+   information which may hinder the user's ability to quickly type commands. We can create two side-by-side list views
+   of both customer and delivery for quicker reference and enable users to make quicker commands.
+
+6. Currently, some error messages are not specific enough. Error messages can be made more specific and instructive. For
+   example, if a user enters 2023-02-30, the error message can be "Invalid date. The date entered does not exist.",
+   however the current implementation only states "Dates should be in the format yyyy-MM-dd". Or, if a user enters the
+   incorrect ID, the error should show "Customer ID" or "Delivery ID", however, the current implementation of some
+   commands does not specify whether it is for the customer ID or for delivery ID and only states "ID". Or, if a user
+   inputs a negative value or zero for some numerical parameters that requires a positive integer, the error message
+   should be more specific and state "Please enter a positive integer." instead of "Invalid Command Format".
+
+7. Currently, only the user password is the only thing that is hashed in the authentication file. We plan to encrypt the
    whole JSON authentication file and the data to prevent unauthorised access to the user's account and data
    instead of only hashing the user password.
 
-6. Currently, you can recover your account while logged in. We plan to disallow the user to recover their account while
+8. Currently, you can recover your account while logged in. We plan to disallow the user to recover their account while
    logged in.
 
-7. Currently, you can put duplicate prefixes for delivery list to filter or sort the deliveries. We plan to disallow
-   duplicate prefixes for delivery list.
+9. Currently, you can put duplicate prefixes for delivery list to filter or sort the deliveries that may arise in
+   confusion by which filter is applied. We plan to disallow duplicate prefixes for delivery list so that users would
+   not be confused by the output.
 
-8. Currently, you can filter delivery list by a customer id that does not exist. We plan to disallow filtering delivery
-   list by a customer id that does not exist.
+10. Currently, you can filter delivery list by a customer id that does not exist. We plan to disallow filtering delivery
+    list by a customer id that does not exist.
 
 ### Use cases
 
