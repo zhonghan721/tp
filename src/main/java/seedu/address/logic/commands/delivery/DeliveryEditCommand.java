@@ -47,7 +47,7 @@ public class DeliveryEditCommand extends DeliveryCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the delivery identified "
         + "by the DELIVERY_ID used in the displayed delivery list. "
         + "Existing values will be overwritten by the input values.\n\n"
-        + "Parameters: DELIVERY_ID (must be a positive integer)\n\n"
+        + "Parameters: DELIVERY_ID (must be a positive integer and less than 2147483648)\n\n"
         + "At least one field must be specified."
         + "[" + PREFIX_NAME + " DELIVERY_NAME] "
         + "[" + PREFIX_CUSTOMER_ID + " CUSTOMER_ID] "
@@ -118,6 +118,7 @@ public class DeliveryEditCommand extends DeliveryCommand {
 
         return new CommandResult(String.format(MESSAGE_EDIT_DELIVERY_SUCCESS,
             Messages.format(editedDelivery)), true);
+
     }
 
     /**

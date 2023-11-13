@@ -26,7 +26,7 @@ import seedu.address.model.user.Username;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "ID must be an integer more than 0.";
+    public static final String MESSAGE_INVALID_INDEX = "ID must be an integer more than 0 and less than 2147483648.";
 
 
     /**

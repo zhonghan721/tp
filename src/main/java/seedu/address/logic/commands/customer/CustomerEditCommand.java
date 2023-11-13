@@ -48,7 +48,7 @@ public class CustomerEditCommand extends CustomerCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
         + "by the customer ID used in the displayed person list. "
         + "Existing values will be overwritten by the input values.\n\n"
-        + "Parameters: CUSTOMER_ID (must be a positive integer) "
+        + "Parameters: CUSTOMER_ID (must be a positive integer and less than 2147483648) "
         + "[" + PREFIX_NAME + " NAME] "
         + "[" + PREFIX_PHONE + " PHONE] "
         + "[" + PREFIX_EMAIL + " EMAIL] "

@@ -31,7 +31,7 @@ public class CustomerDeleteCommand extends CustomerCommand {
      */
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Deletes the customer identified by the customer ID used in the displayed customer list.\n\n"
-        + "Parameters: CUSTOMER_ID (must be a positive integer)\n\n"
+        + "Parameters: CUSTOMER_ID (must be a positive integer and less than 2147483648)\n\n"
         + "Example: " + COMMAND_WORD + " 1";
 
     /**
