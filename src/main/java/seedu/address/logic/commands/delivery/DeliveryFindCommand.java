@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
+import java.util.logging.Logger;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
@@ -24,6 +26,8 @@ public class DeliveryFindCommand extends DeliveryCommand {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n\n"
             + "Example: " + COMMAND_WORD + " chocolate vanilla";
 
+    private static final Logger logger = Logger.getLogger(DeliveryFindCommand.class.getName());
+
     private final DeliveryNameContainsKeywordsPredicate predicate;
 
     /**
@@ -41,9 +45,12 @@ public class DeliveryFindCommand extends DeliveryCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing DeliveryFindCommand:"
+            + " keywords " + predicate.getKeywordsAsString());
 
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
+            logger.warning("User is not logged in!");
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);

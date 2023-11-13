@@ -102,8 +102,8 @@ public class ModelManagerTest {
 
     @Test
     public void getCustomerUsingFilteredList_invalidId_retunsNull() {
-        Customer customer = modelManager.getCustomerUsingFilteredList(1);
-        assertEquals(null, customer);
+        Optional<Customer> customer = modelManager.getCustomer(1);
+        assertEquals(Optional.empty(), customer);
     }
 
     @Test
@@ -111,8 +111,8 @@ public class ModelManagerTest {
         modelManager.setLoginSuccess();
         modelManager.addCustomer(ALICE);
         modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
-        Customer customer = modelManager.getCustomerUsingFilteredList(1);
-        assertEquals(ALICE, customer);
+        Optional<Customer> customerOptional = modelManager.getCustomer(1);
+        assertEquals(ALICE, customerOptional.get());
     }
 
     @Test
@@ -204,7 +204,7 @@ public class ModelManagerTest {
         modelManager.setLoginSuccess();
         modelManager.addDelivery(GABRIELS_MILK);
         modelManager.addDelivery(GAMBES_RICE);
-        modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName));
+        modelManager.updateSortedDeliveryList(Comparator.comparing(Delivery::getName));
         assertEquals(Arrays.asList(GABRIELS_MILK, GAMBES_RICE), modelManager.getSortedDeliveryList());
     }
 
@@ -213,7 +213,7 @@ public class ModelManagerTest {
         modelManager.setLoginSuccess();
         modelManager.addDelivery(GABRIELS_MILK);
         modelManager.addDelivery(GAMBES_RICE);
-        modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName).reversed());
+        modelManager.updateSortedDeliveryList(Comparator.comparing(Delivery::getName).reversed());
         assertEquals(Arrays.asList(GAMBES_RICE, GABRIELS_MILK), modelManager.getSortedDeliveryList());
     }
 
@@ -221,7 +221,7 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
         DeliveryBook deliveryBook =
-            new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+                new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         AddressBook differentAddressBook = new AddressBook();
         DeliveryBook differentDeliveryBook = new DeliveryBook();
         UserPrefs userPrefs = new UserPrefs();
@@ -333,10 +333,10 @@ public class ModelManagerTest {
         modelManager.setLoginSuccess();
         modelManager.addDelivery(GABRIELS_MILK);
         modelManager.addDelivery(GAMBES_RICE);
-        modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName));
+        modelManager.updateSortedDeliveryList(Comparator.comparing(Delivery::getName));
         assertFalse(modelManager.isSortedDeliveryListEmpty());
 
-        modelManager.sortFilteredDeliveryList(Comparator.comparing(Delivery::getName).reversed());
+        modelManager.updateSortedDeliveryList(Comparator.comparing(Delivery::getName).reversed());
         assertFalse(modelManager.isSortedDeliveryListEmpty());
     }
 
@@ -360,13 +360,15 @@ public class ModelManagerTest {
     public void getLoginStatus_storedUserAndLoggedIn_success() {
         AddressBook addressBook = new AddressBookBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
         DeliveryBook deliveryBook =
-            new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+                new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, true);
-        User loggedInUser = modelManager.getStoredUser();
+        Optional<User> loggedInUser = modelManager.getStoredUser();
+        assertTrue(loggedInUser.isPresent());
+        User currentLoggedInUser = loggedInUser.get();
 
-        String expectedMessage = "Hello " + loggedInUser.getUsername() + ".";
+        String expectedMessage = "Hello " + currentLoggedInUser.getUsername() + ".";
         String actualMessage = modelManager.getLoginStatus();
 
         assertEquals(expectedMessage, actualMessage);
@@ -376,11 +378,10 @@ public class ModelManagerTest {
     public void getLoginStatus_storedUserAndLoggedOut_success() {
         AddressBook addressBook = new AddressBookBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
         DeliveryBook deliveryBook =
-            new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+                new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, false);
-        User loggedInUser = modelManager.getStoredUser();
 
         String expectedMessage = "Logged out. Please login to continue.";
         String actualMessage = modelManager.getLoginStatus();
@@ -392,7 +393,7 @@ public class ModelManagerTest {
     public void getLoginStatus_noStoredUser_success() {
         AddressBook addressBook = new AddressBookBuilder().withCustomer(ALICE).withCustomer(BENSON).build();
         DeliveryBook deliveryBook =
-            new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
+                new DeliveryBookBuilder().withDelivery(GABRIELS_MILK).withDelivery(GAMBES_RICE).build();
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAuthenticationFilePath(Paths.get("src/test/data/Authentication", "authentication.json"));
         Model modelManager = new ModelManager(addressBook, deliveryBook, userPrefs, false);

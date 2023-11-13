@@ -125,4 +125,15 @@ public class User {
                 .toString();
     }
 
+    /**
+     * Checks if the answer is equal to the user's answer.
+     * This method is case-insensitive.
+     *
+     * @param answer The answer to be checked
+     * @return true if the answer is equal to the user's answer, false otherwise
+     */
+    public boolean checkAnswerEquals(String answer) {
+        return this.answer.equalsIgnoreCase(answer);
+    }
+
 }

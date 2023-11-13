@@ -42,7 +42,7 @@ public class JsonDeliveryBookStorageTest {
     }
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
+    public void readDeliveryBook_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> readDeliveryBook(null));
     }
 
@@ -50,6 +50,21 @@ public class JsonDeliveryBookStorageTest {
         JsonDeliveryBookStorage jsonDeliveryBookStorage = new JsonDeliveryBookStorage(Paths.get(filePath));
         jsonDeliveryBookStorage.setReferencingBook(getTypicalAddressBook());
         return jsonDeliveryBookStorage.readBook(addToTestDataPathIfNotNull(filePath));
+    }
+
+    @Test
+    public void readDeliveryBook_emptyReferenceBook_throwsDataLoadingException() {
+        Path filePath = testFolder.resolve("TempDeliveryBook.json");
+        JsonDeliveryBookStorage jsonDeliveryBookStorage = new JsonDeliveryBookStorage(filePath);
+        assertThrows(DataLoadingException.class, jsonDeliveryBookStorage::readBook);
+    }
+
+    @Test
+    public void readDeliveryBookWithPath_emptyReferenceBook_throwsDataLoadingException() {
+        Path filePath = testFolder.resolve("TempDeliveryBook.json");
+        JsonDeliveryBookStorage jsonDeliveryBookStorage = new JsonDeliveryBookStorage(filePath);
+        assertThrows(DataLoadingException.class, ()
+            -> jsonDeliveryBookStorage.readBook(addToTestDataPathIfNotNull(filePath.toString())));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {

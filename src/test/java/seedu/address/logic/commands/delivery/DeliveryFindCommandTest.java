@@ -96,6 +96,15 @@ public class DeliveryFindCommandTest {
         assertCommandFailure(command, model, Messages.MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
+    @Test
+    public void toStringMethod() {
+        DeliveryNameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        String expected = DeliveryFindCommand.class.getCanonicalName()
+            + "{predicate=" + predicate + "}";
+        DeliveryFindCommand deliveryFindCommand = new DeliveryFindCommand(predicate);
+        assertEquals(expected, deliveryFindCommand.toString());
+    }
+
     /**
      * Parses {@code userInput} into a {@code DeliveryNameContainsKeywordsPredicate}.
      */

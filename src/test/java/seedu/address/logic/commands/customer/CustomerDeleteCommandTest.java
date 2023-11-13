@@ -97,7 +97,7 @@ public class CustomerDeleteCommandTest {
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
         CustomerDeleteCommand deleteCommand = new CustomerDeleteCommand(targetIndex);
-        String expected = CustomerDeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        String expected = CustomerDeleteCommand.class.getCanonicalName() + "{customerID=" + targetIndex + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 
