@@ -3,7 +3,6 @@ package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
 import java.util.Optional;
 import java.util.logging.Logger;
