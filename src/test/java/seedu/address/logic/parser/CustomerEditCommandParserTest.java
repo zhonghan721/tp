@@ -7,6 +7,10 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_MAX_VALUE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_NAN;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_NEGATIVE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_ZERO;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -60,17 +64,23 @@ public class CustomerEditCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
-        // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        // negative id
+        assertParseFailure(parser, INVALID_ID_NEGATIVE + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
-        // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        // zero id
+        assertParseFailure(parser, INVALID_ID_ZERO + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
+        // NaN id
+        assertParseFailure(parser, INVALID_ID_NAN + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+
+        // max value id
+        assertParseFailure(parser, INVALID_ID_MAX_VALUE + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 --i string", MESSAGE_INVALID_FORMAT);
     }
 
     @Test

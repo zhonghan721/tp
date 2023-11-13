@@ -27,6 +27,7 @@ public class UsernameTest {
         // invalid name
         assertFalse(Username.isValidUsername("")); // empty string
         assertFalse(Username.isValidUsername(" ")); // spaces only
+        assertFalse(Username.isValidUsername("\n\r\t")); // escape sequences
         assertFalse(Username.isValidUsername("^")); // only non-alphanumeric characters
         assertFalse(Username.isValidUsername("peter*")); // contains non-alphanumeric characters
         assertFalse(Username.isValidUsername("peter abc")); // contains whitespace

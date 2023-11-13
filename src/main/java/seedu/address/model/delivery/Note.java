@@ -40,6 +40,6 @@ public class Note {
     }
 
     public static boolean isValid(String test) {
-        return !test.isEmpty() && test.matches("^[A-Za-z0-9\\s]+$");
+        return !test.isBlank() && test.matches("^[A-Za-z0-9\\s]+$");
     }
 }

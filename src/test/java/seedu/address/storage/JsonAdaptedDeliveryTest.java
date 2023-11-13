@@ -28,8 +28,13 @@ public class JsonAdaptedDeliveryTest {
     private static final String INVALID_ORDER_DATE_FORMAT = "12-12-2023";
     private static final String INVALID_DELIVERY_NOTE = "";
     private static final String NON_EXISTENT_CUSTOMER = "-1";
+    private static final String NON_EXISTENT_CUSTOMER_ZERO = "0";
+    private static final String NON_EXISTENT_CUSTOMER_MAX_VALUE = "2147483648";
     private static final String INVALID_CUSTOMER_FORMAT = "A";
-    private static final String INVALID_DELIVERY_ID = "-1";
+    private static final String INVALID_DELIVERY_ID_NEGATIVE = "-1";
+    private static final String INVALID_DELIVERY_ID_MAX_VALUE = "2147483648";
+    private static final String INVALID_DELIVERY_ID_NAN = "NaN";
+    private static final String INVALID_DELIVERY_ID_ZERO = "0";
     private static final String INVALID_DELIVERY_ID_FORMAT = "A";
 
     private static final String VALID_DELIVERY_NAME = GABRIELS_MILK.getName().toString();
@@ -96,7 +101,7 @@ public class JsonAdaptedDeliveryTest {
                         VALID_DELIVERY_DATE,
                         VALID_DELIVERY_STATUS,
                         VALID_DELIVERY_NOTE);
-        String expectedMessage = "Customer ID should only contain numbers";
+        String expectedMessage = "ID must be a positive integer and less than 2147483648";
         assertThrows(IllegalValueException.class, expectedMessage, ()
                 -> delivery.toModelType(Optional.of(getTypicalAddressBook())));
     }
@@ -115,6 +120,38 @@ public class JsonAdaptedDeliveryTest {
         String expectedMessage = "Customer ID does not exist";
         assertThrows(IllegalValueException.class, expectedMessage, ()
                 -> delivery.toModelType(Optional.of(getTypicalAddressBook())));
+    }
+
+    @Test
+    public void toModelType_nonExistentCustomerZero_throwsIllegalValueException() {
+        JsonAdaptedDelivery delivery =
+            new JsonAdaptedDelivery(
+                null,
+                VALID_DELIVERY_NAME,
+                NON_EXISTENT_CUSTOMER_ZERO,
+                VALID_ORDER_DATE,
+                VALID_DELIVERY_DATE,
+                VALID_DELIVERY_STATUS,
+                VALID_DELIVERY_NOTE);
+        String expectedMessage = "Customer ID does not exist";
+        assertThrows(IllegalValueException.class, expectedMessage, ()
+            -> delivery.toModelType(Optional.of(getTypicalAddressBook())));
+    }
+
+    @Test
+    public void toModelType_nonExistentCustomerMaxValue_throwsIllegalValueException() {
+        JsonAdaptedDelivery delivery =
+            new JsonAdaptedDelivery(
+                null,
+                VALID_DELIVERY_NAME,
+                NON_EXISTENT_CUSTOMER_MAX_VALUE,
+                VALID_ORDER_DATE,
+                VALID_DELIVERY_DATE,
+                VALID_DELIVERY_STATUS,
+                VALID_DELIVERY_NOTE);
+        String expectedMessage = "ID must be a positive integer and less than 2147483648";
+        assertThrows(IllegalValueException.class, expectedMessage, ()
+            -> delivery.toModelType(Optional.of(getTypicalAddressBook())));
     }
 
     @Test
@@ -277,19 +314,67 @@ public class JsonAdaptedDeliveryTest {
     }
 
     @Test
-    public void toModelType_invalidDeliveryId_throwsIllegalValueException() {
+    public void toModelType_invalidDeliveryIdMaxValue_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery =
                 new JsonAdaptedDelivery(
-                        INVALID_DELIVERY_ID,
+                        INVALID_DELIVERY_ID_MAX_VALUE,
                         VALID_DELIVERY_NAME,
                         VALID_CUSTOMER,
                         VALID_ORDER_DATE,
                         VALID_DELIVERY_DATE,
                         VALID_DELIVERY_STATUS,
                         VALID_DELIVERY_NOTE);
-        String expectedMessage = "Delivery ID must be an integer more than 0.";
+        String expectedMessage = "ID must be a positive integer and less than 2147483648";
         assertThrows(IllegalValueException.class, expectedMessage, ()
                 -> delivery.toModelType(Optional.of(getTypicalAddressBook())));
+    }
+
+    @Test
+    public void toModelType_invalidDeliveryIdZero_throwsIllegalValueException() {
+        JsonAdaptedDelivery delivery =
+            new JsonAdaptedDelivery(
+                INVALID_DELIVERY_ID_ZERO,
+                VALID_DELIVERY_NAME,
+                VALID_CUSTOMER,
+                VALID_ORDER_DATE,
+                VALID_DELIVERY_DATE,
+                VALID_DELIVERY_STATUS,
+                VALID_DELIVERY_NOTE);
+        String expectedMessage = "ID must be a positive integer and less than 2147483648";
+        assertThrows(IllegalValueException.class, expectedMessage, ()
+            -> delivery.toModelType(Optional.of(getTypicalAddressBook())));
+    }
+
+    @Test
+    public void toModelType_invalidDeliveryIdNaN_throwsIllegalValueException() {
+        JsonAdaptedDelivery delivery =
+            new JsonAdaptedDelivery(
+                INVALID_DELIVERY_ID_NAN,
+                VALID_DELIVERY_NAME,
+                VALID_CUSTOMER,
+                VALID_ORDER_DATE,
+                VALID_DELIVERY_DATE,
+                VALID_DELIVERY_STATUS,
+                VALID_DELIVERY_NOTE);
+        String expectedMessage = "ID must be a positive integer and less than 2147483648";
+        assertThrows(IllegalValueException.class, expectedMessage, ()
+            -> delivery.toModelType(Optional.of(getTypicalAddressBook())));
+    }
+
+    @Test
+    public void toModelType_invalidDeliveryIdNegative_throwsIllegalValueException() {
+        JsonAdaptedDelivery delivery =
+            new JsonAdaptedDelivery(
+                INVALID_DELIVERY_ID_NEGATIVE,
+                VALID_DELIVERY_NAME,
+                VALID_CUSTOMER,
+                VALID_ORDER_DATE,
+                VALID_DELIVERY_DATE,
+                VALID_DELIVERY_STATUS,
+                VALID_DELIVERY_NOTE);
+        String expectedMessage = "ID must be a positive integer and less than 2147483648";
+        assertThrows(IllegalValueException.class, expectedMessage, ()
+            -> delivery.toModelType(Optional.of(getTypicalAddressBook())));
     }
 
     @Test
@@ -303,7 +388,7 @@ public class JsonAdaptedDeliveryTest {
                         VALID_DELIVERY_DATE,
                         VALID_DELIVERY_STATUS,
                         VALID_DELIVERY_NOTE);
-        String expectedMessage = "Delivery ID should only contain numbers";
+        String expectedMessage = "ID must be a positive integer and less than 2147483648";
         assertThrows(IllegalValueException.class, expectedMessage, ()
                 -> delivery.toModelType(Optional.of(getTypicalAddressBook())));
     }

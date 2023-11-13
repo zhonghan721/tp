@@ -1,7 +1,12 @@
 package seedu.address.logic.parser.delivery;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_MAX_VALUE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_NAN;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_NEGATIVE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_ZERO;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NOTE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NOTE_SPACES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -37,18 +42,42 @@ public class DeliveryCreateNoteCommandParserTest {
     }
 
     @Test
+    public void parse_invalidNoteOnlySpace_failure() {
+        assertParseFailure(parser, "1 " + PREFIX_NOTE + " " + INVALID_NOTE_SPACES, Note.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
     public void parse_missingNotePrefix_failure() {
         assertParseFailure(parser, "1 " + VALID_NOTE, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidIdNegative_failure() {
-        assertParseFailure(parser, "-1 " + PREFIX_NOTE + " " + VALID_NOTE, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser,
+            INVALID_ID_NEGATIVE + " " + PREFIX_NOTE + " " + VALID_NOTE, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidIdNan_failure() {
-        assertParseFailure(parser, "NaN " + PREFIX_NOTE + " " + VALID_NOTE, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser,
+            INVALID_ID_NAN + " " + PREFIX_NOTE + " " + VALID_NOTE, MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_invalidIdZero_failure() {
+        assertParseFailure(parser,
+            INVALID_ID_ZERO + " " + PREFIX_NOTE + " " + VALID_NOTE, MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_invalidIdIntegerMaxValue_failure() {
+        assertParseFailure(parser,
+            INVALID_ID_MAX_VALUE + " " + PREFIX_NOTE + " " + VALID_NOTE, MESSAGE_INVALID_FORMAT);
+    }
+
+    @Test
+    public void parse_invalidIdDuplicated_failure() {
+        assertParseFailure(parser, "1 1 " + PREFIX_NOTE + " " + VALID_NOTE, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
