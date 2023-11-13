@@ -3,7 +3,6 @@ package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
 import java.util.logging.Logger;
 
@@ -23,9 +22,9 @@ public class DeliveryFindCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all deliveries whose names contain any of "
-        + "the specified keywords (case-insensitive) and displays them as a list with ID numbers.\n\n"
-        + "Parameters: KEYWORD [MORE_KEYWORDS]...\n\n"
-        + "Example: " + COMMAND_WORD + " chocolate vanilla";
+          + "the specified keywords (case-insensitive) and displays them as a list with ID numbers.\n\n"
+          + "Parameters: KEYWORD [MORE_KEYWORDS]...\n\n"
+          + "Example: " + COMMAND_WORD + " chocolate vanilla";
 
     private static final Logger logger = Logger.getLogger(DeliveryFindCommand.class.getName());
 
@@ -47,7 +46,7 @@ public class DeliveryFindCommand extends DeliveryCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         logger.info("Executing DeliveryFindCommand:"
-            + " keywords " + predicate.getKeywordsAsString());
+              + " keywords " + predicate.getKeywordsAsString());
 
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
@@ -57,8 +56,8 @@ public class DeliveryFindCommand extends DeliveryCommand {
         model.showAllFilteredDeliveryList();
         model.updateFilteredDeliveryList(predicate);
         return new CommandResult(
-            String.format(Messages.MESSAGE_DELIVERY_LISTED_OVERVIEW,
-                model.getFilteredDeliveryListSize()), true);
+              String.format(Messages.MESSAGE_DELIVERY_LISTED_OVERVIEW,
+                    model.getFilteredDeliveryListSize()), true);
     }
 
     @Override
@@ -77,8 +76,8 @@ public class DeliveryFindCommand extends DeliveryCommand {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("predicate", predicate)
-            .toString();
+              .add("predicate", predicate)
+              .toString();
     }
 }
 //@@author {B-enguin}

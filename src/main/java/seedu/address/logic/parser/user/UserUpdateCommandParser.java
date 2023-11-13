@@ -35,11 +35,11 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
      */
     public UserUpdateCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM,
-                PREFIX_SECRET_QUESTION, PREFIX_ANSWER);
+                ArgumentTokenizer.tokenize(args, PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM,
+                        PREFIX_SECRET_QUESTION, PREFIX_ANSWER);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_USER, PREFIX_PASSWORD, PREFIX_PASSWORD_CONFIRM,
-            PREFIX_SECRET_QUESTION, PREFIX_ANSWER);
+                PREFIX_SECRET_QUESTION, PREFIX_ANSWER);
 
         UserUpdateDescriptor userUpdateDescriptor = new UserUpdateDescriptor();
 
@@ -59,7 +59,7 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
         if (!userUpdateDescriptor.isAnyFieldEdited()) {
             logger.warning("No fields provided");
             throw new ParseException(
-                String.format(UserUpdateCommand.MESSAGE_MISSING_FIELDS, UserUpdateCommand.MESSAGE_USAGE));
+                    String.format(UserUpdateCommand.MESSAGE_MISSING_FIELDS, UserUpdateCommand.MESSAGE_USAGE));
         }
 
         return new UserUpdateCommand(userUpdateDescriptor);
@@ -74,8 +74,8 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
      * @throws ParseException if the password and confirm password fields are not both present or both absent,
      *                        and if they are both present but does not match each other
      */
-    public UserUpdateDescriptor parsePasswords(ArgumentMultimap argMultimap, UserUpdateDescriptor userUpdateDescriptor)
-        throws ParseException {
+    public UserUpdateDescriptor parsePasswords(ArgumentMultimap argMultimap,
+                                               UserUpdateDescriptor userUpdateDescriptor) throws ParseException {
         Optional<String> password = argMultimap.getValue(PREFIX_PASSWORD);
         Optional<String> confirmPassword = argMultimap.getValue(PREFIX_PASSWORD_CONFIRM);
         if (password.isEmpty() && confirmPassword.isEmpty()) {
@@ -116,15 +116,15 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
      * @throws ParseException if the secret question and answer fields are not both present or both absent.
      */
     public UserUpdateDescriptor parseSecretQuestionAndAnswer(ArgumentMultimap argMultimap,
-                                                             UserUpdateDescriptor userUpdateDescriptor)
-        throws ParseException {
+                                                             UserUpdateDescriptor userUpdateDescriptor) throws
+            ParseException {
         Optional<String> secretQuestion = argMultimap.getValue(PREFIX_SECRET_QUESTION);
         Optional<String> answer = argMultimap.getValue(PREFIX_ANSWER);
 
         // Either one of secret question or answer is missing.
         // Both secret question and answer are present.
         if (secretQuestion.isEmpty()
-            && answer.isEmpty()) {
+                && answer.isEmpty()) {
             return userUpdateDescriptor;
         }
 

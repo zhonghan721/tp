@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
@@ -38,8 +37,8 @@ public class ArgumentTokenizer {
      */
     private static List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix... prefixes) {
         return Arrays.stream(prefixes)
-            .flatMap(prefix -> findPrefixPositions(argsString, prefix).stream())
-            .collect(Collectors.toList());
+              .flatMap(prefix -> findPrefixPositions(argsString, prefix).stream())
+              .collect(Collectors.toList());
     }
 
     /**
@@ -73,7 +72,7 @@ public class ArgumentTokenizer {
     private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {
         int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
         return prefixIndex == -1 ? -1
-            : prefixIndex + 1; // +1 as offset for whitespace
+              : prefixIndex + 1; // +1 as offset for whitespace
     }
 
     /**
