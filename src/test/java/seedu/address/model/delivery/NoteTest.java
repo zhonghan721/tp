@@ -1,5 +1,6 @@
 package seedu.address.model.delivery;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -13,9 +14,16 @@ public class NoteTest {
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
-        String invalidName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Note(invalidName));
+    public void constructor_invalidNote_throwsIllegalArgumentException() {
+        String invalidNote = "";
+        assertThrows(IllegalArgumentException.class, () -> new Note(invalidNote));
+    }
+
+    @Test
+    public void getNote_returnsNote() {
+        String validNote = "FedEx";
+        Note note = new Note(validNote);
+        assertEquals(validNote, note.getNote());
     }
 
     @Test
@@ -26,13 +34,19 @@ public class NoteTest {
         // invalid note -> returns false
         assertFalse(Note.isValid("")); // empty string
 
-        // valid note -> returns false
+        // invalid note -> returns false
+        assertFalse(Note.isValid(" ")); // whitespace
+
+        // invalid note -> returns false
+        assertFalse(Note.isValid("\r\t\n")); // escape sequence
+
+        // valid note -> returns true
         assertTrue(Note.isValid("peter jack")); // alphabets only
 
-        // valid note -> returns false
+        // valid note -> returns true
         assertTrue(Note.isValid("az 09")); // alphanumeric
 
-        // valid note -> returns false
+        // valid note -> returns true
         assertTrue(Note.isValid("AZ 123")); // alphanumeric with capital letters
 
         // invalid note -> returns false

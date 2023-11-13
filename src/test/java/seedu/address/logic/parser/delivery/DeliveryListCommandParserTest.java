@@ -1,5 +1,7 @@
 package seedu.address.logic.parser.delivery;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_ALL;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_CUSTOMER_ID;
@@ -7,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_DELIVERY_DATE_MONTH;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_DELIVERY_DATE_TODAY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DELIVERY_LIST_SORT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_DATE_3;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_CANCELLED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_COMPLETED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DELIVERY_LIST_CREATED;
@@ -25,16 +28,17 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.Sort;
 import seedu.address.logic.commands.delivery.DeliveryListCommand;
+import seedu.address.logic.commands.delivery.DeliveryViewCommand;
 import seedu.address.logic.parser.CommandParserTestUtil;
-import seedu.address.logic.parser.DeliveryListParser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.delivery.Date;
+import seedu.address.model.delivery.DeliveryDate;
 import seedu.address.model.delivery.DeliveryStatus;
 
 
-public class DeliveryListParserTest {
-    private DeliveryListParser parser = new DeliveryListParser();
+public class DeliveryListCommandParserTest {
 
+    private DeliveryListCommandParser parser = new DeliveryListCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeliveryListCommand() {
@@ -71,7 +75,35 @@ public class DeliveryListParserTest {
         CommandParserTestUtil.assertParseSuccess(parser, VALID_DELIVERY_LIST_SORT_DESC,
             new DeliveryListCommand(null, null, null, Sort.DESC));
 
+    }
 
+    @Test
+    public void parse_duplicateArgs_returnsDeliveryListCommand() {
+        CommandParserTestUtil.assertParseSuccess(parser, VALID_DELIVERY_LIST_SHIPPED + VALID_DELIVERY_LIST_CANCELLED,
+            new DeliveryListCommand(DeliveryStatus.CANCELLED, null, null, Sort.DESC));
+        CommandParserTestUtil.assertParseSuccess(parser,
+            VALID_DELIVERY_LIST_DELIVERY_DATE + VALID_DELIVERY_LIST_DELIVERY_DATE,
+            new DeliveryListCommand(null, null, new DeliveryDate(VALID_DELIVERY_DATE_3), Sort.DESC));
+        CommandParserTestUtil.assertParseSuccess(parser,
+            VALID_DELIVERY_LIST_DELIVERY_DATE + VALID_DELIVERY_LIST_DELIVERY_DATE_TODAY,
+            new DeliveryListCommand(null, null, new DeliveryDate(LocalDate.now().format(
+                DateTimeFormatter.ofPattern(Date.FORMAT))), Sort.DESC));
+        CommandParserTestUtil.assertParseSuccess(parser,
+            VALID_DELIVERY_LIST_SHIPPED + VALID_DELIVERY_LIST_CANCELLED + VALID_DELIVERY_LIST_DELIVERY_DATE_TODAY
+                + VALID_DELIVERY_LIST_DELIVERY_DATE,
+            new DeliveryListCommand(DeliveryStatus.CANCELLED, null, new DeliveryDate(VALID_DELIVERY_DATE_3),
+                Sort.DESC));
+
+        CommandParserTestUtil.assertParseSuccess(parser,
+            VALID_DELIVERY_LIST_SORT_DESC + VALID_DELIVERY_LIST_SORT_ASC,
+            new DeliveryListCommand(null, null, null,
+                Sort.ASC));
+
+        CommandParserTestUtil.assertParseSuccess(parser,
+            VALID_DELIVERY_LIST_SHIPPED + VALID_DELIVERY_LIST_CANCELLED + VALID_DELIVERY_LIST_DELIVERY_DATE_TODAY
+                + VALID_DELIVERY_LIST_DELIVERY_DATE + VALID_DELIVERY_LIST_SORT_DESC + VALID_DELIVERY_LIST_SORT_ASC,
+            new DeliveryListCommand(DeliveryStatus.CANCELLED, null, new DeliveryDate(VALID_DELIVERY_DATE_3),
+                Sort.ASC));
     }
 
     @Test
@@ -147,5 +179,46 @@ public class DeliveryListParserTest {
             new DeliveryListCommand(DeliveryStatus.SHIPPED, null, null, Sort.ASC));
         CommandParserTestUtil.assertParseSuccess(parser, VALID_DELIVERY_LIST_SHIPPED + VALID_DELIVERY_LIST_SORT_DESC,
             new DeliveryListCommand(DeliveryStatus.SHIPPED, null, null, Sort.DESC));
+    }
+
+    @Test
+    public void equals() {
+        DeliveryListCommand deliveryListCommand = new DeliveryListCommand(DeliveryStatus.SHIPPED, 1,
+            new Date("2023-12-12"), Sort.ASC);
+
+        // same object -> returns true
+        assertEquals(deliveryListCommand, deliveryListCommand);
+
+        // same values -> returns true
+        DeliveryListCommand deliveryListCommandCopy = new DeliveryListCommand(DeliveryStatus.SHIPPED, 1,
+            new Date("2023-12-12"),
+            Sort.ASC);
+        assertEquals(deliveryListCommand, deliveryListCommandCopy);
+
+        // different types -> returns false
+        assertNotEquals(deliveryListCommand, new DeliveryViewCommand(1));
+
+        // null -> returns false
+        assertNotEquals(deliveryListCommand, null);
+
+        // different status -> returns false
+        DeliveryListCommand differentDeliveryListCommand = new DeliveryListCommand(DeliveryStatus.CANCELLED, 1,
+            new Date("2023-12-12"), Sort.ASC);
+        assertNotEquals(deliveryListCommand, differentDeliveryListCommand);
+
+        // different sort -> returns false
+        differentDeliveryListCommand = new DeliveryListCommand(DeliveryStatus.SHIPPED, 1, new Date("2023-12-12"),
+            Sort.DESC);
+        assertNotEquals(deliveryListCommand, differentDeliveryListCommand);
+
+        // different customer id -> returns false
+        differentDeliveryListCommand = new DeliveryListCommand(DeliveryStatus.SHIPPED, 2, new Date("2023-12-12"),
+            Sort.ASC);
+        assertNotEquals(deliveryListCommand, differentDeliveryListCommand);
+
+        // different delivery date -> returns false
+        differentDeliveryListCommand = new DeliveryListCommand(DeliveryStatus.SHIPPED, 1,
+            new Date("2024-12-12"), Sort.ASC);
+        assertNotEquals(deliveryListCommand, differentDeliveryListCommand);
     }
 }

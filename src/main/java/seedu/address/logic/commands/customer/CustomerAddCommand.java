@@ -1,3 +1,4 @@
+//@@author {zhonghan721}
 package seedu.address.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
@@ -7,12 +8,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.logging.Logger;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Customer;
+import seedu.address.model.customer.Customer;
 
 /**
  * Adds a person to the address book.
@@ -35,6 +38,7 @@ public class CustomerAddCommand extends CustomerCommand {
 
     public static final String MESSAGE_SUCCESS = "New customer added:\n\n%1$s";
     public static final String MESSAGE_DUPLICATE_CUSTOMER = "This customer already exists in HomeBoss";
+    private static final Logger logger = Logger.getLogger(CustomerAddCommand.class.getName());
 
     private final Customer toAdd;
 
@@ -49,21 +53,28 @@ public class CustomerAddCommand extends CustomerCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing CustomerAddCommand: name "
+            + toAdd.getName() + ", phone "
+            + toAdd.getPhone() + ", email "
+            + toAdd.getEmail() + ", address "
+            + toAdd.getAddress());
 
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
             // reset the customer count to the previous value
-            Customer.setCustomerCount(toAdd.getCustomerId() - 1);
+            Customer.resetPrevCustomerCount();
+            logger.warning("User is not logged in!");
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasCustomer(toAdd)) {
             // reset the customer count to the previous value
-            Customer.setCustomerCount(toAdd.getCustomerId() - 1);
+            Customer.resetPrevCustomerCount();
+            logger.warning("Duplicate customer found!");
             throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
         }
 
-        model.addPerson(toAdd);
+        model.addCustomer(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), true);
     }
 
@@ -89,3 +100,4 @@ public class CustomerAddCommand extends CustomerCommand {
             .toString();
     }
 }
+//@@author {zhonghan721}

@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -29,7 +28,7 @@ public class ClearCommand extends Command {
 
         model.setAddressBook(new AddressBook());
         model.setDeliveryBook(new DeliveryBook());
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        model.showAllFilteredCustomerList();
         return new CommandResult(MESSAGE_SUCCESS, true);
     }
 }

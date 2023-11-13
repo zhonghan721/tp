@@ -32,4 +32,28 @@ public class CustomerDeleteCommandParserTest {
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CustomerDeleteCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_duplicatePrefix_throwsParseException() {
+        assertParseFailure(parser, "0001 0002",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CustomerDeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_integerMaxValue_throwsParseException() {
+        assertParseFailure(parser, "2147483648",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, CustomerDeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_zero_throwsParseException() {
+        assertParseFailure(parser, "0",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, CustomerDeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_negativeValue_throwsParseException() {
+        assertParseFailure(parser, "-1",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, CustomerDeleteCommand.MESSAGE_USAGE));
+    }
 }

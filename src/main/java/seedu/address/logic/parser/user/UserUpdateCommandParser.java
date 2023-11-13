@@ -1,3 +1,4 @@
+//@@author {zhonghan721}
 package seedu.address.logic.parser.user;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -6,6 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD_CONFIRM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SECRET_QUESTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
+
+import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.address.logic.commands.user.UserUpdateCommand;
 import seedu.address.logic.commands.user.UserUpdateCommand.UserUpdateDescriptor;
@@ -20,6 +24,9 @@ import seedu.address.model.user.Password;
  * Parses input arguments and creates a new UserUpdateCommand object
  */
 public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
+
+    private static final Logger logger = Logger.getLogger(UserUpdateCommandParser.class.getName());
+
     /**
      * Parses the given {@code String} of arguments in the context of the UserUpdateCommand
      * and returns a UserUpdateCommand object for execution.
@@ -36,7 +43,8 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
 
         UserUpdateDescriptor userUpdateDescriptor = new UserUpdateDescriptor();
 
-        if (!argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.isEmptyPreamble()) {
+            logger.severe("Could not parse command");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UserUpdateCommand.MESSAGE_USAGE));
         }
 
@@ -49,6 +57,7 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
         userUpdateDescriptor = parseSecretQuestionAndAnswer(argMultimap, userUpdateDescriptor);
 
         if (!userUpdateDescriptor.isAnyFieldEdited()) {
+            logger.warning("No fields provided");
             throw new ParseException(
                     String.format(UserUpdateCommand.MESSAGE_MISSING_FIELDS, UserUpdateCommand.MESSAGE_USAGE));
         }
@@ -65,28 +74,36 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
      * @throws ParseException if the password and confirm password fields are not both present or both absent,
      *                        and if they are both present but does not match each other
      */
-    public UserUpdateDescriptor parsePasswords(ArgumentMultimap argMultimap, UserUpdateDescriptor userUpdateDescriptor)
-            throws ParseException {
+    public UserUpdateDescriptor parsePasswords(ArgumentMultimap argMultimap,
+                                               UserUpdateDescriptor userUpdateDescriptor) throws ParseException {
+        Optional<String> password = argMultimap.getValue(PREFIX_PASSWORD);
+        Optional<String> confirmPassword = argMultimap.getValue(PREFIX_PASSWORD_CONFIRM);
+        if (password.isEmpty() && confirmPassword.isEmpty()) {
+            return userUpdateDescriptor;
+        }
+
         // Either one of password or confirm password is missing.
-        if (argMultimap.getValue(PREFIX_PASSWORD).isPresent()
-                && argMultimap.getValue(PREFIX_PASSWORD_CONFIRM).isEmpty()) {
+        if (password.isEmpty()) {
+            logger.warning("Password missing");
             throw new ParseException(UserUpdateCommand.MESSAGE_PASSWORD_OR_CONFIRM_PASSWORD_MISSING);
         }
-        if (argMultimap.getValue(PREFIX_PASSWORD_CONFIRM).isPresent()
-                && argMultimap.getValue(PREFIX_PASSWORD).isEmpty()) {
+
+        if (confirmPassword.isEmpty()) {
+            logger.warning("Confirm password missing");
             throw new ParseException(UserUpdateCommand.MESSAGE_PASSWORD_OR_CONFIRM_PASSWORD_MISSING);
         }
+
         // Both password and confirm password are present.
-        if (argMultimap.getValue(PREFIX_PASSWORD).isPresent()
-                && argMultimap.getValue(PREFIX_PASSWORD_CONFIRM).isPresent()) {
-            Password password = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD).get());
-            Password confirmPassword = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD_CONFIRM).get());
-            // Passwords mismatch
-            if (!password.equals(confirmPassword)) {
-                throw new ParseException(UserUpdateCommand.MESSAGE_PASSWORD_MISMATCH);
-            }
-            userUpdateDescriptor.setPassword(password);
+        Password parsedPassword = ParserUtil.parsePassword(password.get());
+        Password parsedConfirmPassword = ParserUtil.parsePassword(confirmPassword.get());
+
+        // Passwords mismatch
+        if (!parsedPassword.equals(parsedConfirmPassword)) {
+            logger.warning("Passwords mismatch");
+            throw new ParseException(UserUpdateCommand.MESSAGE_PASSWORD_MISMATCH);
         }
+        userUpdateDescriptor.setPassword(parsedPassword);
+
         return userUpdateDescriptor;
     }
 
@@ -99,24 +116,35 @@ public class UserUpdateCommandParser implements Parser<UserUpdateCommand> {
      * @throws ParseException if the secret question and answer fields are not both present or both absent.
      */
     public UserUpdateDescriptor parseSecretQuestionAndAnswer(ArgumentMultimap argMultimap,
-                                                             UserUpdateDescriptor userUpdateDescriptor)
-            throws ParseException {
+                                                             UserUpdateDescriptor userUpdateDescriptor) throws
+            ParseException {
+        Optional<String> secretQuestion = argMultimap.getValue(PREFIX_SECRET_QUESTION);
+        Optional<String> answer = argMultimap.getValue(PREFIX_ANSWER);
+
         // Either one of secret question or answer is missing.
-        if (argMultimap.getValue(PREFIX_SECRET_QUESTION).isPresent()
-                && argMultimap.getValue(PREFIX_ANSWER).isEmpty()) {
-            throw new ParseException(UserUpdateCommand.MESSAGE_QUESTION_OR_ANSWER_MISSING);
-        }
-        if (argMultimap.getValue(PREFIX_ANSWER).isPresent()
-                && argMultimap.getValue(PREFIX_SECRET_QUESTION).isEmpty()) {
-            throw new ParseException(UserUpdateCommand.MESSAGE_QUESTION_OR_ANSWER_MISSING);
-        }
         // Both secret question and answer are present.
-        if (argMultimap.getValue(PREFIX_SECRET_QUESTION).isPresent()
-                && argMultimap.getValue(PREFIX_ANSWER).isPresent()) {
-            userUpdateDescriptor.setSecretQuestion(ParserUtil.parseSecretQuestion(
-                    argMultimap.getValue(PREFIX_SECRET_QUESTION).get()));
-            userUpdateDescriptor.setAnswer(ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get()));
+        if (secretQuestion.isEmpty()
+                && answer.isEmpty()) {
+            return userUpdateDescriptor;
         }
+
+        if (secretQuestion.isEmpty()) {
+            logger.warning("Secret question missing");
+            throw new ParseException(UserUpdateCommand.MESSAGE_QUESTION_OR_ANSWER_MISSING);
+        }
+
+        if (answer.isEmpty()) {
+            logger.warning("Answer missing");
+            throw new ParseException(UserUpdateCommand.MESSAGE_QUESTION_OR_ANSWER_MISSING);
+        }
+
+        String parsedSecretQuestion = ParserUtil.parseSecretQuestion(secretQuestion.get());
+        String parsedAnswer = ParserUtil.parseAnswer(answer.get());
+
+        userUpdateDescriptor.setSecretQuestion(parsedSecretQuestion);
+        userUpdateDescriptor.setAnswer(parsedAnswer);
+
         return userUpdateDescriptor;
     }
 }
+//@@author {zhonghan721}
