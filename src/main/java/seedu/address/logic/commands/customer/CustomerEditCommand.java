@@ -42,19 +42,19 @@ public class CustomerEditCommand extends CustomerCommand {
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " " + "edit";
 
     /**
-     *  The text displayed to show what the command does and how to use it.
+     * The text displayed to show what the command does and how to use it.
      */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the customer ID used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n\n"
-            + "Parameters: CUSTOMER_ID (must be a positive integer) "
-            + "[" + PREFIX_NAME + " NAME] "
-            + "[" + PREFIX_PHONE + " PHONE] "
-            + "[" + PREFIX_EMAIL + " EMAIL] "
-            + "[" + PREFIX_ADDRESS + " ADDRESS]\n\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + " 91234567 "
-            + PREFIX_EMAIL + " johndoe@example.com";
+        + "by the customer ID used in the displayed person list. "
+        + "Existing values will be overwritten by the input values.\n\n"
+        + "Parameters: CUSTOMER_ID (must be a positive integer and less than 2147483648) "
+        + "[" + PREFIX_NAME + " NAME] "
+        + "[" + PREFIX_PHONE + " PHONE] "
+        + "[" + PREFIX_EMAIL + " EMAIL] "
+        + "[" + PREFIX_ADDRESS + " ADDRESS]\n\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_PHONE + " 91234567 "
+        + PREFIX_EMAIL + " johndoe@example.com";
 
     /**
      * The text to the message displayed when the Customer is edited successfuly.
@@ -73,6 +73,7 @@ public class CustomerEditCommand extends CustomerCommand {
 
     /**
      * Creates a CustomerEditCommand to edit the customers.
+     *
      * @param targetIndex            of the person in the filtered person list to edit
      * @param customerEditDescriptor details to edit the person with
      */
@@ -86,6 +87,7 @@ public class CustomerEditCommand extends CustomerCommand {
 
     /**
      * Executes the CustomerEditCommand.
+     *
      * @param model {@code Model} which the command should operate on.
      * @return The command result along with the message to be displayed to the user.
      * @throws CommandException If the user is not logged in or if the customer does not exist or if the edited
