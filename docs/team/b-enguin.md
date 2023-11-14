@@ -36,8 +36,8 @@ Given below are my contributions to the project.
   * Justification: This feature is important as different delivery orders might have small remarks or changes that do
     not necessitate the addition of another field (E.g. A cake shop might receive a special request to include a
     particular word on the cake).
-  * Highlights:
-  * Credits:
+  * Highlights: As the note may not be present for all orders, special management is done for notes to ensure that
+    empty notes do not crash the application.
   * Related Pull Requests: [#123](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/123), 
     [#134](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/134),
     [#327](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/327) </br></br>
