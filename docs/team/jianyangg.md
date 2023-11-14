@@ -11,7 +11,7 @@ It is written in Java, and has about 19 kLoC.
 
 Given below are my contributions to the project.
 
-* **New Feature:** Added ability to register for an account in HomeBoss
+* **New Feature:** Added ability to register for an account in HomeBoss. The user is also allowed to delete the account if they wish to.
   * What it does: Allows the user to register for an account in HomeBoss. Upon registering for an account, the user
     will have their user details stored in a file, with the password hashed for enhanced security.
   * Justification: This feature improves the product as it allows the user to secure their data and prevent unlawful
@@ -20,7 +20,7 @@ Given below are my contributions to the project.
     ensures that the password cannot be retrieved from the hash, and the password is stored securely. As the user
     should not be able to execute most of the commands without logging in (and by
     extension, having an account registered), the blocking of
-    the execution of commands that deal with the Customer and Delivery database was also implemented.
+    the execution of commands that deal with the Customer and Delivery database was also implemented. This register command also prepared for the recovery of an account in HomeBoss, by storing the user's secret question and answer in the user's account file.
   * Credits: The implementation of the SHA-256 hashing algorithm was adapted from [this](https://www.baeldung.com/sha-256-hashing-java)
     article.
   * Related Pull Requests:
@@ -28,45 +28,85 @@ Given below are my contributions to the project.
       * [\#194](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/194)
       * [\#225](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/225)
 
+<br>
+
 * **New Feature**: Added ability to recover an account in HomeBoss
     * What it does: Allows the user to recover their account in HomeBoss in case they forget their password.
     * Justification: This feature allows for corrective action to be taken in case the user forgets their password. This
       in turn ensures that they are able to access their data through the GUI if they forget their password.
-    * Highlights:
-    * Related Pull Requests:
+    * Highlights: This feature required the user to first register for an account with a secret question and answer. The secret question is then shown to the user when prompted, and they are allowed to recover their account by resetting their password is their answer matches with the stored answer to the secret question.
+    * Related Pull Request: 
+      * [\#198](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/198)
+
+<br>
 
 * **Major Enhancement:** Revamped the UI experience of the user
   * What it does: This enhancement reordered the UI elements and gave the GUI a more aesthetic look. The UI is also made more personalised
     for the user by displaying the user's username in the UI.
   * Justification: The AB3's implementation of the UI has the error messages squeezed into a narrow rectangle that frequently required scrolling to get through. Thus for displaying things like `Customer` or `Delivery` details, it's difficult to display all the information in a single page. This enhancement allows the user to read more data at once before having to scroll. The UI was also made to feel friendly and welcoming to the user by displaying the user's username in the UI.
   * Highlights: Each ItemCard is redesigned to include details specific to our application. The footer was also edited to include information such as if the user is logged out or hasn't registered an account or if the user is logged in (where it'll then display the user's username instead).
-  * 
+  * Related Pull Requests: 
+    * [\#271](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/271)
+    * [\#222](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/222)
+    * [\#119](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/119)
 
-* #### Code contributed:
+<br>
+  
+* **Enhancements to existing features:** Updated the `delete ID` command from AB3 to `customer delete ID`, which allows for the deletion of `Delivery` objects linked to the deleted `Customer`.
+  * What it does: Once a Customer is deleted, all Deliveries linked to the Customer will also be deleted.
+  * Justification: If a `Customer` is no longer relevant to a home-based business (i.e., all the `Deliveries` are completed for a one-off `Customer`), all the `Deliveries` associated with this `Customer` will become irrelevant as well.
+  * Highlights: `Customer` deletion will cascade delete all `Deliveries` associated with the `Customer`.
+  * Credits: This method was adapated from AB3's `delete ID` command.
+  * Related Pull Requests:
+    * [\#109](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/109)
+    * [\#230](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/230)
+
+<br>
+
+* **Bug fixing:**
+  * Fixed bugs in own features that arose after PE Dry Run
+    * Related Pull Request: [\#454](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/454/files)
+  * Fixed Ui text overflow problem
+    * Related Pull Request: [\#339](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/339)
+
+<br>
+
+* **Code contributed:** 
     * [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jianyangg&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code)
 
-* ##### Enhancements Implemented
-    * Register account feature:
-    * Recover account feature:
-    * Delete account feature:
-    * Customer delete feature:
-    * Test cases (for all implemented features):
+<br>
 
-- ##### Contributions to the User Guide
-  *to be added soon*
+* **Contributions to team-based tasks:** _Aside from those already mentioned in this document_
+  * Made error messages in the GUI clearer by introducing whitespace where appropriate. 
+  * Added the inital Glossary draft and contributed to the Use Cases and User Stories. 
 
-- ##### Contributions to the Developer Guide
-    * Use cases
-    * Glossary
-    * Class diagram for UI component
-    * Sequence and activity diagrams for `RegisterAccountCommand`
+<br>
 
-- ##### Contributions to team-based tasks
-  *to be added soon*
+* **Documentation:**
+  * User Guide:
+    * Added and updated documentation for the features `register`, `recover account`, `delete account`, `customer edit`
+    * Refined description for all features to incorporate the "you" language.
+    * Added explanation and expected output for each feature.
+    * Refined the format of the User Guide to be more consistent and prepared it for print version.
+    * Refined content of User Guide.
+    * Related Pull Requests:
+      * [\#454](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/454/files)
+      * [\#541](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/541)
 
-- ##### Review/mentoring contributions
-    * Created issues, reviewed, approved and merged pull requests.
-    * Left comments on PRs to suggest improvements.
+  <br>
 
-- ##### Contributions beyond the project team
-    * Reported bugs during PE dry-run
+  * Developer Guide:
+    * Modified the Ui class diagram for our application to include the new classes added / modified classes.
+    * Updated the Ui component's description.
+    * Added the activity and sequence diagram for `register account` command.
+    * Refined diagrams and description of all features under the `Implementation` section. 
+    * Added use case and user stories of own features.
+    * Related Pull Requests:
+      * [\#546](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/546)
+      * [\#498](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/498)
+
+<br>
+
+* **Community:**
+  * PRs reviewed: As of 14th November, I have reviewed 72 PRs [(GitHub)](https://github.com/AY2324S1-CS2103T-T13-3/tp/pulls?q=is%3Apr+reviewed-by%3Ajianyangg+is%3Aclosed+)
+  * Reported bugs for other teams during PE Dry Run: I found 11 [issues](https://github.com/jianyangg/ped/issues) with my allocated PE-Dry-Run project.
