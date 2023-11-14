@@ -14,7 +14,7 @@ It is written in Java, and has about 19 kLoC.
 Given below are my contributions to the project.
 
 - ##### Code Contributed
-  [RepoSense link] (https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=gabriel4357&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
+  [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=gabriel4357&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
 
 - ##### Enhancements Implemented
     * Add a Delivery
