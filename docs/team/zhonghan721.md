@@ -23,10 +23,10 @@ Given below are my contributions to the project.
     [#124](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/124) 
     [#139](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/139)
 
-* **New Feature:** Added the user update commands.
+* **New Feature:** Added the user update command.
   * What it does: This feature allows the user to update their account details.
   * Justification: This feature is important because it allows the user to update their details to secure their data.
-  * Related pull requests: [#201](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/201)
+  * Related pull request: [#201](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/201)
 
 * **Major Enhancement:** Added Customer ID field to the Customer model.
   * What it does: This enhancement allows the user to identify customers by their ID instead of the index of the 
@@ -36,21 +36,28 @@ Given below are my contributions to the project.
   * Highlights: This enhancement required the creation of the class-level variable `customerCount` in the
     `Customer` model, which complicates the testing of the model as the `customerId` created does not match the
     expected `customerId` during the early stage of implementation.
-  * Related pull requests: [#110](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/110)
+  * Related pull request: [#110](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/110)
 
 * **Enhancements to existing features:**
   * Added JUnit tests for all features implemented by me.
-  * Bug fixing in V1.3. Related pull requests: [442](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/442)
+  * Bug fixing in V1.3. Related pull request: [442](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/442)
 
-* **Code contributed:** [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=zhonghan721&breakdown=true)
+* **Bug fixing:**
+  * Updated `customer edit` such that whenever a `Customer` is edited, deliveries associated with the `Customer`
+    will be updated with the latest customer details as well. This prevents outdated and incorrect information 
+    from being shown to the user. Related pull request: [#482](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/482)
+
+* **Code contributed:** 
+  [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=zhonghan721&breakdown=true)
 
 * **Contributions to team-based tasks:**
   * Managed release of `v1.3.trial` on GitHub
+  * Created and uploaded demo for `v1.3`
   * Added the sections About this User Guide and Navigating the User Guide in UserGuide.md
     (Pull request [#298](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/298))
   * Added value proposition of HomeBoss in DeveloperGuide.md
     (Pull request [#71](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/71))
-  * Updated the details of Acknowledgements, NFR, Glossary and Effort in DeveloperGuide.md
+  * Updated the details of Acknowledgements, NFRs, Glossary and Effort in DeveloperGuide.md
     (Pull requests [#455](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/455)
     [#457](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/457))
 
@@ -63,15 +70,17 @@ Given below are my contributions to the project.
       (Pull request [#298](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/298))
   * Developer Guide:
     * Added value proposition of HomeBoss (Pull request [#71](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/71))
-    * Added implementation details of the features `login`, `logout`, `customer add`
+    * Added implementation details and diagrams for the features `login`, `logout`, `customer add`
       (Pull requests [#177](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/177)
       [#191](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/191))
-    * Updated the details of Acknowledgements, NFR, Glossary and Effort
+    * Updated the details of Acknowledgements, NFRs, Glossary and Effort
       (Pull requests [#455](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/455)
       [#457](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/457))
+    * Updated the class diagrams for `User`, `Customer` and `Delivery` 
+      (Pull request [#492](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/492))
 
 * **Community:**
-  * PRs reviewed: As of 9th November, I have reviewed 32 PRs
+  * PRs reviewed: As of 13th November, I have reviewed 49 PRs
     [(GitHub)](https://github.com/AY2324S1-CS2103T-T13-3/tp/pulls?q=is%3Apr+reviewed-by%3Azhonghan721+is%3Aclosed)
   * Reported bugs for other teams during PE Dry Run:
     reported 12 bugs posted as [issues](https://github.com/zhonghan721/ped/issues)
