@@ -5,11 +5,13 @@ pageNav: 3
 ---
 
 # HomeBoss Developer Guide
+---
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
----
+
+<div style="page-break-after: always;"></div><br/>
 
 ## **Acknowledgements**
 
@@ -30,6 +32,7 @@ Libraries used in this project:
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ---
+<div style="page-break-after: always;"></div><br/>
 
 ## **Design**
 
@@ -73,6 +76,8 @@ Each of the four main components (also shown in the diagram above),
 - implements its functionality using a concrete `{Component Name}Manager` class which follows the corresponding
   API `interface` mentioned in the previous point.
 
+<div style="page-break-after: always;"></div><br/>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
 the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component
 through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the
@@ -83,6 +88,8 @@ implementation of a component), as illustrated in the (partial) class diagram be
 The sections below give more details of each component.
 
 <br>
+
+<div style="page-break-after: always;"></div><br/>
 
 ### UI component
 
@@ -113,6 +120,8 @@ The `UI` component,
   `Model`.
 
 <br>
+
+<div style="page-break-after: always;"></div><br/>
 
 ### Logic component
 
@@ -159,6 +168,8 @@ How the parsing works:
   the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 <br>
+
+<div style="page-break-after: always;"></div><br/>
 
 ### Model component
 
@@ -242,6 +253,8 @@ The `Customer` model,
 
 <br>
 
+<div style="page-break-after: always;"></div><br/>
+
 ### Storage component
 
 **API** :
@@ -269,117 +282,31 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ---
 
+<div style="page-break-after: always;"></div><br/>
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-- [Update Delivery Status](#update-delivery-status-feature)
-- [Create Delivery Note](#create-note-for-delivery-feature)
-- [User Register Account Command](#user-register-account-command)
-- [Delivery List Command](#list-delivery-feature)
-- [Deliver View Command](#view-delivery-feature)
-- [User Login](#user-login-command)
-- [User Logout](#user-logout-command)
-- [Add Customer](#add-customer-command)
+- [Register Command](#register-command)
+- [Login Command](#login-command)
+- [Logout Command](#logout-command)
+- [Customer Add Command](#customer-add-command)
 - [Customer Edit Command](#customer-edit-command)
 - [Delivery Add Command](#delivery-add-command)
+- [Delivery View Command](#delivery-view-command)
+- [Delivery List Command](#delivery-list-command)
+- [Delivery Status Command](#delivery-status-command)
+- [Delivery Note Command](#delivery-note-command)
 
-### Update Delivery Status Feature
+---
 
-#### Overview
+<div style="page-break-after: always;"></div><br/>
 
-The `delivery status` command is used to update the `DeliveryStatus` of a selected delivery with the new status
-specified by the user.
-
-The format of the `delivery status` command can be found
-[here](./UserGuide.md#update-delivery-status)
-
-#### Feature Details
-
-1. The user will specify a `Delivery` through its `ID`. The user must specify a `DeliveryStatus` to replace the
-   current status of the selected delivery.
-1. If the user is not logged in during command execution, a `CommandException` will be thrown.
-1. If the provided `ID` does not match any of the existing Delivery IDs, a `CommandException` will be thrown.
-1. If the command completes successfully, the status of the `Delivery` with the specified Delivery ID will be updated to the new status.
-
-The following activity diagram illustrates the logic of updating the `DeliveryStatus` of a `Delivery`:
-
-<puml src="diagrams/DeliveryStatusCommandActivityDiagram.puml" width="450" />
-
-The sequence of the `delivery status` command is as follows:
-
-1. The command `delivery status DELIVERY_ID STATUS` is entered by the user (e.g. `delivery status 1 completed`)
-1. `LogicManager` calls the `AddressBookParser#parseCommand` with `delivery status DELIVERY_ID STATUS` as input.
-1. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryStatusCommandParser`, thereafter calling
-   `DeliveryStatusCommandParser#parse` to parse the command arguments.
-1. `DeliveryStatusCommandParser` will parse the arguments, and return a new instance of `DeliveryStatusCommand` which is in turn passed back to `AddressBookParser` then back to `LogicManager`.
-1. `LogicManager` calls `DeliveryStatusCommand#execute` with the Model instance as input, which checks if the user is logged in by calling
-   `Model#getUserLoginStatus()`.
-1. Thereafter, the `DeliveryStatusCommand` instance fetches the `Delivery` with the specified `DELIVERY_ID` from `Model`, then calls it's own `DeliveryStatusCommand#createDeliveryWithNewStatus` method to create a new `Delivery` with the updated `DeliveryStatus`.
-1. It then replaces the existing `Delivery` with the same ID in the `Model`
-   using `Model#setDelivery` with the newly created `Delivery` with identical fields except for its updated `DeliveryStatus`.
-1. Finally, `DeliveryStatusCommand` creates a new `CommandResult` instance with the result of the execution and returns it back to `LogicManager` which then returns it to the UI.
-
-The following sequence diagram illustrates the `delivery status` command sequence:
-
-
-<puml src="diagrams/DeliveryStatusCommandSequenceDiagram.puml" width="900" />
-
-<br>
-
-### Create Note for Delivery Feature
+### **Register Command**
 
 #### Overview
 
-The `delivery note` command is used to create a new `Note` a selected delivery with the new note
-specified by the user
-
-The format of the `delivery note` command can be found
-[here](./UserGuide.md#create-a-note-for-a-delivery)
-
-#### Feature Details
-
-1. The user will specify a `Delivery` through its `id`. The user must specify a non-empty `Note` to replace the
-   current status of the selected delivery.
-1. If the user is not logged in during command execution, a `CommandException` will be thrown.
-1. If the provided `ID` does not match any of the existing Delivery IDs, a `CommandException` will be thrown.
-1. If the command completes successfully, the selected `Delivery` will be updated with the new `Note`.
-
-The following activity diagram illustrates the logic of creating a `Note` for a `Delivery`:
-
-<puml src="diagrams/DeliveryCreateNoteActivityDiagram.puml" width="450" />
-
-The sequence of the `delivery note` command is as follows:
-
-1. The command `delivery note DELIVERY_ID --note NOTE` is entered by the user
-   (e.g. `delivery note 1 --note This is a note`).
-1. The `LogicManager` calls the `AddressBookParser#parseCommand` with `delivery note DELIVERY_ID --note NOTE` as input.
-1. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryCreateNoteCommandParser`,
-   thereafter calling `DeliveryCreateNoteCommandParser#parse` to parse the command arguments.
-1. `DeliveryCreateNoteCommandParser` will parse the arguments, and return a new instance of `DeliveryCreateNoteCommand`,
-   which is in turn passed back to `AddressBookParser` then back to `LogicManager`.
-1. `LogicManager` calls `DeliveryCreateNoteCommand#execute` with the `Model` instance as input,
-   which checks if the user is logged in by calling `Model#getUserLoginStatus`.
-1. Thereafter, the `DeliveryCreateNoteCommand` instance fetchs the `Delivery` with the specified `DELIVERY_ID`,
-   from `Model` then calls it's own `DeliveryCreateNoteCommand#createDeliveryWithNewNote` method
-   to create a new `Delivery` with the updated `Note`.
-1. It then replaces the existing `Delivery` with the same ID in the `Model` using `Model#setDelivery` with
-   the newly created `Delivery` with identical fields except for its updated `Note`.
-1. Finally, `DeliveryCreateNoteCommand` creates a new `CommandResult` instance with the result of the execution and
-   returns it back to `LogicManager` which then returns it to the UI.
-
-If the specified `Delivery` already has an existing `Note`, it will be overridden by the new `Note` supplied if the
-command executes successfully.
-
-The following diagram illustrates the `delivery note` command sequence:
-
-<puml src="diagrams/DeliveryCreateNoteSequenceDiagram.puml" width="1000" />
-
-<br>
-
-### <br/>User Register Account Command
-
-#### Overview
 The `register` command is used to register a new user account.
 Once registered, the user will be able to log in to the account and access all the commands available.
 
@@ -397,129 +324,33 @@ The following activity diagram shows the logic of a user registering an account:
 
 The sequence of the `register` command is as follows:
 
-1. The command `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD 
+1. The command `register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD
    --secretQn SECRET_QUESTION --answer ANSWER`
    is entered by the user (i.e., `register --user gab --password pass1234 --confirmPass
    pass1234 --secretQn First Pet? --answer Koko`).
-1. `LogicManager` calls the `AddressBookParser#parseCommand` with the full user input.
-1. The `AddressBookParser` will parse the command, creating a new instance of `UserRegisterCommandParser`,
+2. `LogicManager` calls the `AddressBookParser#parseCommand` with the full user input.
+3. The `AddressBookParser` will parse the command, creating a new instance of `UserRegisterCommandParser`,
    thereafter calling `UserRegisterCommandParser#parse` to parse the command arguments.
-1. `UserRegisterCommandParser` will parse the arguments, create a new `User` and return a new instance of `UserRegisterCommand`,
+4. `UserRegisterCommandParser` will parse the arguments, create a new `User` and return a new instance
+   of `UserRegisterCommand`,
    which is in turn passed back to `AddressBookParser` then back to `LogicManager`.
-1. `LogicManager` calls `UserRegisterCommand#execute` with the `Model` instance as input,
+5. `LogicManager` calls `UserRegisterCommand#execute` with the `Model` instance as input,
    which checks if a user is already registered by calling `Model#getStoredUser`.
-1. If no user is registered, `UserRegisterCommand` calls `Model#registerUser` to store the user.
-1. Finally, `UserRegisterCommand` creates a new `CommandResult` instance with the result of the execution
+6. If no user is registered, `UserRegisterCommand` calls `Model#registerUser` to store the user.
+7. Finally, `UserRegisterCommand` creates a new `CommandResult` instance with the result of the execution
    and returns it back to `LogicManager` which then returns it to the UI.
 
 The following sequence diagram shows how the `register` command works:
 
 <puml src="diagrams/UserRegisterSequenceDiagram.puml" alt="UserRegisterSequenceDiagram" />
 
+---
 
 <br/>
 
-### List Delivery Feature
+<div style="page-break-after: always;"></div>
 
-### Overview
-
-The `delivery list` command is used to list all deliveries in the delivery book.
-
-The format of the `delivery list` command can be found
-[here](./UserGuide.md#view-a-list-of-deliveries)
-
-### Feature Details
-
-1. The user can optionally specify a `status`, `customer id`, `date` and `sort` to filter and sort the
-   current delivery list in any combination.
-1. If the user is not logged in during command execution, a `CommandException` will be thrown.
-1. If the status was provided, the status is added as a filter.
-1. If the Customer ID was provided, the Customer ID is added as a filter.
-1. If the date was provided, the date is added as an expected delivery date filter.
-1. The delivery list will be filtered by the filters created, if any.
-1. If the filtered list is empty, the application informs the user of empty list and the command execution ends.
-1. If the sort was provided, the sort provided is added as the sort. By default, a descending order sort is
-   added as a sort.
-1. The delivery list will be sorted by the sort created.
-1. If the command completes successfully, the list of deliveries is displayed to the user.
-
-The following activity diagram illustrates the logic for listing `Delivery`:
-
-<puml src="diagrams/implementation/delivery/DeliveryListActivityDiagram.puml" width="800"> </puml>
-
-The sequence of the `delivery list` command is as follows:
-
-1. The command `delivery list --status STATUS --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE --sort SORT` is
-   entered by the user
-   (e.g. `delivery list --status created --customer 1 --date 2023-12-12 --sort ASC`).
-1. The `LogicManager` calls the `AddressBookParser#parseCommand` with the full user input.
-1. The `AddressBookParser` will parse the command, creating a new instance of `DeliveryListCommandParser`,
-   thereafter calling `DeliveryListCommandParser#parse` to parse the command arguments.
-1. `DeliveryListCommandParser#parse` will call `DeliveryListCommandParser#parseDeliveryListCommand`to parse the
-   arguments and return a new instance of `DeliveryListCommand`, which is in turn passed back to `AddressBookParser`
-   then back to `LogicManager`.
-1. `LogicManager` calls `DeliveryListCommand#execute` with the `Model` as input, which checks if the user is logged in
-   by calling `Model#getUserLoginStatus`.
-1. Thereafter, `DeliveryListCommand` will call `DeliveryListCommand#createDeliveryListFilters` to create
-   the filters based on the parsed arguments, if any.
-1. `DeliveryListCommand` will call `Model#updateFilteredDeliveryList(Predicate)` to filter the delivery list by
-   the filters created.
-1. `DeliveryListCommand` will call `DeliveryListCommand#createDeliveryListSort()` to create the sort for the delivery
-   list by expected delivery date based on the parsed arguments, if any, or by default, create the sort in descending
-   expected delivery date.
-1. `DeliveryListCommand` will call `Model#updateSortedDeliveryList(Comparator)` to sort the delivery list by the sort
-   created.
-1. Finally, `DeliveryListCommand` creates a new `CommandResult` instance with the result of the execution
-   and returns it back to `LogicManager` which then returns it to the UI.
-
-The default delivery sort is `desc` which sorts the delivery list by expected delivery date in descending order from
-the latest date to the earliest date.
-
-The following sequence diagram illustrates the `delivery list` command sequence:
-
-<puml src="diagrams/implementation/delivery/DeliveryListSequenceDiagram.puml" />
-
-<br>
-
-### View Delivery Feature
-
-#### Overview
-
-The `delivery view` command is used to view a selected delivery with the id specified by the user.
-
-The format of the `delivery view` command can be found
-[here](./UserGuide.md#view-details-of-a-delivery)
-
-#### Feature Details
-
-1. The user will specify a `Delivery` through its `ID`.
-2. If the user is not logged in during command execution, a `CommandException` will be thrown.
-3. If the provided `ID` does not match any of the existing Delivery IDs, a `CommandException` will be thrown.
-4. If the command completes successfully, the details of the specified `Delivery` will be shown.
-
-The following activity diagram illustrates the logic of viewing a `Delivery`.
-
-<puml src="diagrams/implementation/delivery/DeliveryViewActivityDiagram.puml" width="600" />
-
-The sequence of the `delivery view` command is as follows:
-
-1. The command `delivery view DELIVERY_ID` is entered by the user (e.g. `delivery view 1`).
-2. `LogicManager` calls the `AddressBookParser#parseCommand` with `delivery view DELIVERY_ID` as input.
-3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryViewCommandParser` thereafter calling
-   `DeliveryViewCommandParser#parse` to parse the command arguments.
-4. `DeliveryViewCommandParser` will parse the arguments, and return a new instance of `DeliveryViewCommand`. This instance is then returned to the `LogicManager`.
-5. `LogicManager` calls `DeliveryViewCommand#execute` with the Model instance as input, which checks if the user is logged in by calling
-   `Model#getUserLoginStatus`.
-6. Thereafter, the `DeliveryViewCommand` instance fetches the `Delivery` with the specified `DELIVERY_ID` from `Model`, calling `Model#getDelivery`.
-7. Finally, `DeliveryViewCommand` creates a new `CommandResult` instance with the result of the execution and returns it back to `LogicManager` which then returns it to the UI.
-
-The following sequence diagram illustrates the `delivery view` command sequence:
-
-<puml src="diagrams/implementation/delivery/DeliveryViewSequenceDiagram.puml" width="900" />
-
-<br>
-
-### User Login Command
+### **Login Command**
 
 #### Overview
 
@@ -538,6 +369,8 @@ The format for the `login` command can be found [here](UserGuide.md#login).
 5. If the command completes successfully, the user will be logged in and the
    `isLoggedIn` status in `Model` will be updated to `true`.
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram shows the logic of a user logging in:
 
 <puml src="diagrams/UserLoginActivityDiagram.puml" alt="UserLoginActivityDiagram" />
@@ -546,25 +379,36 @@ The sequence of the `login` command is as follows:
 
 1. Upon launching the application, the `ModelManager` will be initialized with
    the `User` constructed with details from the authentication.json file.
-2. The command `login --user USERNAME --password PASSWORD` is entered by the user (e.g. `login --user Gabriel435 --password 12345678`)
+2. The command `login --user USERNAME --password PASSWORD` is entered by the user (
+   e.g. `login --user Gabriel435 --password 12345678`)
 3. `LogicManager` calls the `AddressBookParser#parseCommand` with `login --user USERNAME --password PASSWORD` as input.
-4. `AddressBookParser` will parse the command and creates a new instance of `UserLoginCommandParser`, thereafter calling `UserLoginCommandParser#parse` to parse the command arguments.
-5. `UserLoginCommandParser` will parse the arguments, create a new `User` instance, and return a new instance of `UserLoginCommand`. This `UserLoginCommand` instance is then returned to `LogicManager`.
-6. `LogicManager` calls `UserLoginCommand#execute` with the Model instance as input, which checks whether there is a registered account stored by calling
-`Model#getStoredUser`.
+4. `AddressBookParser` will parse the command and creates a new instance of `UserLoginCommandParser`, thereafter
+   calling `UserLoginCommandParser#parse` to parse the command arguments.
+5. `UserLoginCommandParser` will parse the arguments, create a new `User` instance, and return a new instance
+   of `UserLoginCommand`. This `UserLoginCommand` instance is then returned to `LogicManager`.
+6. `LogicManager` calls `UserLoginCommand#execute` with the Model instance as input, which checks whether there is a
+   registered account stored by calling
+   `Model#getStoredUser`.
 7. The `UserLoginCommand` then checks whether the user is currently logged in by calling `Model#getUserLoginStatus`.
-8. After that, the `UserLoginCommand` checks if the user credentials match the stored user by calling `Model#userMatches`.
-9. If the user is not logged in and the credentials match, the `UserLoginCommand` calls `Model#setLoginSuccess`, changing the login status to true and giving the user access to all the commands.
+8. After that, the `UserLoginCommand` checks if the user credentials match the stored user by
+   calling `Model#userMatches`.
+9. If the user is not logged in and the credentials match, the `UserLoginCommand` calls `Model#setLoginSuccess`,
+   changing the login status to true and giving the user access to all the commands.
 10. The `userLoginCommand` also calls `Model#showAllFilteredCustomerList` to display the list of customers.
-11. Finally, `UserLoginCommand` creates a new `CommandResult` instance with the result of the execution and returns it back to `LogicManager` which then returns it to the UI.
+11. Finally, `UserLoginCommand` creates a new `CommandResult` instance with the result of the execution and returns it
+    back to `LogicManager` which then returns it to the UI.
 
 The following sequence diagram shows how the `login` command works:
 
 <puml src="diagrams/UserLoginSequenceDiagram.puml" alt="UserLoginSequenceDiagram" />
 
+---
+
 <br>
 
-### User Logout Command
+<div style="page-break-after: always;"></div>
+
+### **Logout Command**
 
 #### Overview
 
@@ -588,22 +432,30 @@ The following activity diagram shows the logic of a user logging out:
 The sequence of the `logout` command is as follows:
 
 1. The command `logout` is entered by the user.
-2. `LogicManager` calls the `AddressBookParser#parseCommand` with `logout` as input. 
+2. `LogicManager` calls the `AddressBookParser#parseCommand` with `logout` as input.
 3. `AddressBookParser` will parse the command, and create a new instance of
-`UserLogoutCommand`. This instance is then returned to `LogicManager`.
-4. Then, `LogicManager` calls `UserLogoutCommand#execute` with the Model instance as input, which checks if the user is logged in by calling `Model#getUserLoginStatus`.
+   `UserLogoutCommand`. This instance is then returned to `LogicManager`.
+4. Then, `LogicManager` calls `UserLogoutCommand#execute` with the Model instance as input, which checks if the user is
+   logged in by calling `Model#getUserLoginStatus`.
 5. If the user is currently logged in, the `UserLogoutCommand` calls `Model#setLogoutSuccess`,
    changing the login status to false and restricting the user access to most commands.
-6. The `UserLogoutCommand` also calls `Model#clearFilteredDeliveryList` and `Model#clearFilteredCustomerList` to hide the list of deliveries and customers.
-7. Finally, `UserLogoutCommand` creates a new `CommandResult` instance with the result of the execution and returns it back to `LogicManager` which then returns it to the UI.
+6. The `UserLogoutCommand` also calls `Model#clearFilteredDeliveryList` and `Model#clearFilteredCustomerList` to hide
+   the list of deliveries and customers.
+7. Finally, `UserLogoutCommand` creates a new `CommandResult` instance with the result of the execution and returns it
+   back to `LogicManager` which then returns it to the UI.
 
 The following sequence diagram shows how the `logout` command works:
 
+
 <puml src="diagrams/UserLogoutSequenceDiagram.puml" alt="UserLogoutSequenceDiagram" width="900" />
+
+---
 
 <br>
 
-### Customer Add Command
+<div style="page-break-after: always;"></div><br/>
+
+### **Customer Add Command**
 
 #### Overview
 
@@ -615,9 +467,9 @@ The format for the `customer add` command can be found [here](UserGuide.md#add-a
 #### Feature Details
 
 1. The user executes the `customer add` command.
-1. If the user is not logged in during command execution, a `CommandException` will be thrown.
-2. If the Customer already exists in the database, a `CommandException` will be thrown.
-3. If the command completes successfully, the `Customer` will be added to the `Customer` database. 
+2. If the user is not logged in during command execution, a `CommandException` will be thrown.
+3. If the Customer already exists in the database, a `CommandException` will be thrown.
+4. If the command completes successfully, the `Customer` will be added to the `Customer` database.
 
 The following activity diagram shows the logic of adding a `Customer` into the database:
 
@@ -626,24 +478,34 @@ The following activity diagram shows the logic of adding a `Customer` into the d
 The sequence of the `customer add` command is as follows:
 
 1. The User executes the `customer add` command.
-1. `LogicManager` calls the `AddressBookParser#parseCommand` on the command.
-1. `AddressBookParser` will parse the command, and creates a new instance of `CustomerAddCommandParser`, thereafter calling
+2. `LogicManager` calls the `AddressBookParser#parseCommand` on the command.
+3. `AddressBookParser` will parse the command, and creates a new instance of `CustomerAddCommandParser`, thereafter
+   calling
    `CustomerAddCommandParser#parse` to parse the command arguments.
-1. `CustomerAddCommandParser` will parse the arguments, and creates a new `Customer` instance, followed by a new instance of `CustomerAddCommand` using the `Customer` instance as a parameter.
-1. `CustomerAddCommand` instance is then passed back to `AddressBookParser` instance, which then passes it back to `LogicManager`.
-1. `LogicManager` calls `CustomerAddCommand#execute` with the `Model` instance as input, which checks if the user is logged in by calling the
+4. `CustomerAddCommandParser` will parse the arguments, and creates a new `Customer` instance, followed by a new
+   instance of `CustomerAddCommand` using the `Customer` instance as a parameter.
+5. `CustomerAddCommand` instance is then passed back to `AddressBookParser` instance, which then passes it back
+   to `LogicManager`.
+6. `LogicManager` calls `CustomerAddCommand#execute` with the `Model` instance as input, which checks if the user is
+   logged in by calling the
    `Model#getUserLoginStatus`.
-1. Thereafter, the `CustomerAddCommand` instance checks if the `Customer` exists in `Model` using `Model#hasCustomer`.
-1. If the `Customer` does not exist, `CustomerAddCommand` calls `Model#addCustomer` to add the `Customer` into the database.
-1. Finally, `CustomerAddCommand` creates a new `CommandResult` instance with the result of the execution and returns it back to `LogicManager` which then returns it to the UI.
+7. Thereafter, the `CustomerAddCommand` instance checks if the `Customer` exists in `Model` using `Model#hasCustomer`.
+8. If the `Customer` does not exist, `CustomerAddCommand` calls `Model#addCustomer` to add the `Customer` into the
+   database.
+9. Finally, `CustomerAddCommand` creates a new `CommandResult` instance with the result of the execution and returns it
+   back to `LogicManager` which then returns it to the UI.
 
 The following sequence diagram shows how the `customer add` command works:
 
 <puml src="diagrams/CustomerAddSequenceDiagram.puml" alt="CustomerAddSequenceDiagram" />
 
+---
+
 <br>
 
-### Customer Edit Command
+<div style="page-break-after: always;"></div>
+
+### **Customer Edit Command**
 
 #### Overview
 
@@ -660,38 +522,56 @@ The format for the `customer edit` command can be found [here](UserGuide.md#upda
 4. If the edits result in a duplicate Customer, a `CommandException` will be thrown.
 5. If the command completes successfully, the Customer will be edited with the new information provided by the user.
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram shows the logic of a user editing a customer's information:
 
 <puml src="diagrams/Gabriels Diagrams/CustomerEditActivityDiagram.puml" alt="CustomerEditActivityDiagram" />
 
 The sequence of the `customer edit` command is as follows:
 
-1. The command `customer edit CUSTOMER_ID --name NAME --phone PHONE --email EMAIL --address ADDRESS` is entered by the user.
-2. LogicManager calls the `AddressBookParser#parseCommand` with `customer edit CUSTOMER_ID --name NAME --phone PHONE --email EMAIL --address ADDRESS` as input.
-3. `AddressBookParser` will parse the command, and creates a new instance of `CustomerEditCommandParser`, thereafter calling `CustomerEditCommandParser#parse` to parse the command arguments.
-4. `CustomerEditCommandParser` will call its own `CustomerEditCommandParser#createCustomerEditDescriptor` method which in turn creates a new `CustomerEditDescriptor` instance with the parsed arguments and returns it to `CustomerEditCommandParser`. 
+1. The command `customer edit CUSTOMER_ID --name NAME --phone PHONE --email EMAIL --address ADDRESS` is entered by the
+   user.
+2. LogicManager calls the `AddressBookParser#parseCommand`
+   with `customer edit CUSTOMER_ID --name NAME --phone PHONE --email EMAIL --address ADDRESS` as input.
+3. `AddressBookParser` will parse the command, and creates a new instance of `CustomerEditCommandParser`, thereafter
+   calling `CustomerEditCommandParser#parse` to parse the command arguments.
+4. `CustomerEditCommandParser` will call its own `CustomerEditCommandParser#createCustomerEditDescriptor` method which
+   in turn creates a new `CustomerEditDescriptor` instance with the parsed arguments and returns it
+   to `CustomerEditCommandParser`.
 5. `CustomerEditCommandParser` then creates a `CustomerEditCommand` instance and returns it to `AddressBookParser`.
 6. `AddressBookParser` then passes the `CustomerEditCommand` instance to `LogicManager`.
 7. `LogicManager` then calls `CustomerEditCommand#execute` with the `Model` instance as input.
 8. The `CustomerEditCommand` instance then checks if the user is logged in by calling `Model#getUserLoginStatus`.
-9. Thereafter, the `CustomerEditCommand` calls its own `CustomerEditCommand#createEditedCustomer` method which in turn creates a new `Customer` instance with the edited information provided by the user.
-10. This `Customer` instance is returned to `CustomerEditCommand`. `CustomerEditCommand` then calls `Model#setCustomer` to update the existing `Customer` with the new information provided by the user.
-11. The `CustomerEditCommand` then calls `CustomerEditCommand#updateDelivery` to update `Deliveries` associated with this updated `Customer`.
+9. Thereafter, the `CustomerEditCommand` calls its own `CustomerEditCommand#createEditedCustomer` method which in turn
+   creates a new `Customer` instance with the edited information provided by the user.
+10. This `Customer` instance is returned to `CustomerEditCommand`. `CustomerEditCommand` then calls `Model#setCustomer`
+    to update the existing `Customer` with the new information provided by the user.
+11. The `CustomerEditCommand` then calls `CustomerEditCommand#updateDelivery` to update `Deliveries` associated with
+    this updated `Customer`.
 12. `Model#showAllFilteredCustomerList` is then called to display the updated list of customers.
-13. Finally, `CustomerEditCommand` creates a new `CommandResult` instance with the result of the execution and returns it back to `LogicManager` which then returns it to the UI.
+13. Finally, `CustomerEditCommand` creates a new `CommandResult` instance with the result of the execution and returns
+    it back to `LogicManager` which then returns it to the UI.
 
 The following sequence diagram shows how the `customer edit` command works:
 
 <puml src="diagrams/Gabriels Diagrams/CustomerEditSequenceDiagram.puml" alt="CustomerEditSequenceDiagram" />
 
+---
+
 <br>
 
-### Delivery Add Command
+<div style="page-break-after: always;"></div>
+
+### **Delivery Add Command**
 
 #### Overview
 
 The `delivery add` command is used to add a new Delivery with all the given information fields
-specified by the user, namely the delivery's `DeliveryName`, customer id of a `Customer` and `DeliveryDate`. All fields are compulsory.
+specified by the user, namely the delivery's `DeliveryName`, customer id of a `Customer` and `DeliveryDate`. All fields
+are compulsory.
+
+<div style="page-break-after: always;"></div>
 
 The format for the `delivery add` command can be found [here](UserGuide.md#create-delivery).
 
@@ -717,17 +597,248 @@ The sequence of the `delivery add` command is as follows:
    `DeliveryAddCommandParser#parse` to parse the command arguments.
 4. The `DeliveryAddCommandParser` then creates a `DeliveryAddDescriptor` instance.
 5. A new `DeliveryAddCommand` instance is then created by `DeliveryAddCommandParser`.
-6. The `DeliveryAddCommand` instance is then returned to `AddressBookParser`, and finally to the `LogicManager` where `DeliveryAddCommand#execute` method is called with `Model` instance as input.
+6. The `DeliveryAddCommand` instance is then returned to `AddressBookParser`, and finally to the `LogicManager`
+   where `DeliveryAddCommand#execute` method is called with `Model` instance as input.
 7. The `DeliveryAddCommand` then calls upon `Model#getUserLoginStatus` to check if the user is logged in.
-8. The `DeliveryAddCommand` then calls its own `DeliveryAddCommand#createDelivery` method which creates a new `Delivery` instance using the `DeliveryAddDescriptor` instance created earlier.
-9. The `DeliveryAddCommand` then calls the `Model#addDelivery` method to add the newly created `Delivery` instance into the database.
-10. Finally, the `DeliveryAddCommand` creates a new `CommandResult` instance with the result of the execution and returns it back to `LogicManager` which then returns it to the UI.
+8. The `DeliveryAddCommand` then calls its own `DeliveryAddCommand#createDelivery` method which creates a new `Delivery`
+   instance using the `DeliveryAddDescriptor` instance created earlier.
+9. The `DeliveryAddCommand` then calls the `Model#addDelivery` method to add the newly created `Delivery` instance into
+   the database.
+10. Finally, the `DeliveryAddCommand` creates a new `CommandResult` instance with the result of the execution and
+    returns it back to `LogicManager` which then returns it to the UI.
 
 The following sequence diagram shows how the `delivery add` command works:
 
 <puml src="diagrams/Gabriels Diagrams/DeliveryAddDiagram.puml" alt="DeliveryAddSequenceDiagram" />
 
-<br><br>
+---
+
+<div style="page-break-after: always;"></div>
+
+### **Delivery View Command**
+
+#### Overview
+
+The `delivery view` command is used to view a selected delivery with the id specified by the user.
+
+The format of the `delivery view` command can be found
+[here](./UserGuide.md#view-details-of-a-delivery)
+
+#### Feature Details
+
+1. The user will specify a `Delivery` through its `ID`.
+2. If the user is not logged in during command execution, a `CommandException` will be thrown.
+3. If the provided `ID` does not match any of the existing Delivery IDs, a `CommandException` will be thrown.
+4. If the command completes successfully, the details of the specified `Delivery` will be shown.
+
+<div style="page-break-after: always;"></div>
+
+The following activity diagram illustrates the logic of viewing a `Delivery`.
+
+<puml src="diagrams/implementation/delivery/DeliveryViewActivityDiagram.puml" width="600" />
+
+The sequence of the `delivery view` command is as follows:
+
+1. The command `delivery view DELIVERY_ID` is entered by the user (e.g. `delivery view 1`).
+2. `LogicManager` calls the `AddressBookParser#parseCommand` with `delivery view DELIVERY_ID` as input.
+3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryViewCommandParser` thereafter
+   calling
+   `DeliveryViewCommandParser#parse` to parse the command arguments.
+4. `DeliveryViewCommandParser` will parse the arguments, and return a new instance of `DeliveryViewCommand`. This
+   instance is then returned to the `LogicManager`.
+5. `LogicManager` calls `DeliveryViewCommand#execute` with the Model instance as input, which checks if the user is
+   logged in by calling
+   `Model#getUserLoginStatus`.
+6. Thereafter, the `DeliveryViewCommand` instance fetches the `Delivery` with the specified `DELIVERY_ID` from `Model`,
+   calling `Model#getDelivery`.
+7. Finally, `DeliveryViewCommand` creates a new `CommandResult` instance with the result of the execution and returns it
+   back to `LogicManager` which then returns it to the UI.
+
+The following sequence diagram illustrates the `delivery view` command sequence:
+
+<puml src="diagrams/implementation/delivery/DeliveryViewSequenceDiagram.puml" width="900" />
+
+---
+
+<br>
+<div style="page-break-after: always;"></div>
+
+### **Delivery List Command**
+
+### Overview
+
+The `delivery list` command is used to list all deliveries in the delivery book.
+
+The format of the `delivery list` command can be found
+[here](./UserGuide.md#view-a-list-of-deliveries)
+
+### Feature Details
+
+1. The user can optionally specify a `status`, `customer id`, `date` and `sort` to filter and sort the
+   current delivery list in any combination.
+2. If the user is not logged in during command execution, a `CommandException` will be thrown.
+3. If the status was provided, the status is added as a filter.
+4. If the Customer ID was provided, the Customer ID is added as a filter.
+5. If the date was provided, the date is added as an expected delivery date filter.
+6. The delivery list will be filtered by the filters created, if any.
+7. If the filtered list is empty, the application informs the user of empty list and the command execution ends.
+8. If the sort was provided, the sort provided is added as the sort. By default, a descending order sort is
+   added as a sort.
+9. The delivery list will be sorted by the sort created.
+10. If the command completes successfully, the list of deliveries is displayed to the user.
+
+<div style="page-break-after: always;"></div>
+
+The following activity diagram illustrates the logic for listing `Delivery`:
+
+<puml src="diagrams/implementation/delivery/DeliveryListActivityDiagram.puml" width="800"> </puml>
+
+<div style="page-break-after: always;"></div>
+
+The sequence of the `delivery list` command is as follows:
+
+1. The command `delivery list --status STATUS --customer CUSTOMER_ID --date EXPECTED_DELIVERY_DATE --sort SORT` is
+   entered by the user
+   (e.g. `delivery list --status created --customer 1 --date 2023-12-12 --sort ASC`).
+2. The `LogicManager` calls the `AddressBookParser#parseCommand` with the full user input.
+3. The `AddressBookParser` will parse the command, creating a new instance of `DeliveryListCommandParser`,
+   thereafter calling `DeliveryListCommandParser#parse` to parse the command arguments.
+4. `DeliveryListCommandParser#parse` will call `DeliveryListCommandParser#parseDeliveryListCommand`to parse the
+   arguments and return a new instance of `DeliveryListCommand`, which is in turn passed back to `AddressBookParser`
+   then back to `LogicManager`.
+5. `LogicManager` calls `DeliveryListCommand#execute` with the `Model` as input, which checks if the user is logged in
+   by calling `Model#getUserLoginStatus`.
+6. Thereafter, `DeliveryListCommand` will call `DeliveryListCommand#createDeliveryListFilters` to create
+   the filters based on the parsed arguments, if any.
+7. `DeliveryListCommand` will call `Model#updateFilteredDeliveryList(Predicate)` to filter the delivery list by
+   the filters created.
+8. `DeliveryListCommand` will call `DeliveryListCommand#createDeliveryListSort()` to create the sort for the delivery
+   list by expected delivery date based on the parsed arguments, if any, or by default, create the sort in descending
+   expected delivery date.
+9. `DeliveryListCommand` will call `Model#updateSortedDeliveryList(Comparator)` to sort the delivery list by the sort
+   created.
+10. Finally, `DeliveryListCommand` creates a new `CommandResult` instance with the result of the execution
+    and returns it back to `LogicManager` which then returns it to the UI.
+
+The default delivery sort is `desc` which sorts the delivery list by expected delivery date in descending order from
+the latest date to the earliest date.
+
+<div style="page-break-after: always;"></div>
+
+The following sequence diagram illustrates the `delivery list` command sequence:
+
+<puml src="diagrams/implementation/delivery/DeliveryListSequenceDiagram.puml" />
+
+---
+
+<br>
+<div style="page-break-after: always;"></div>
+
+### **Delivery Status Command**
+
+#### Overview
+
+The `delivery status` command is used to update the `DeliveryStatus` of a selected delivery with the new status
+specified by the user.
+
+The format of the `delivery status` command can be found
+[here](./UserGuide.md#update-delivery-status)
+
+#### Feature Details
+
+1. The user will specify a `Delivery` through its `ID`. The user must specify a `DeliveryStatus` to replace the
+   current status of the selected delivery.
+2. If the user is not logged in during command execution, a `CommandException` will be thrown.
+3. If the provided `ID` does not match any of the existing Delivery IDs, a `CommandException` will be thrown.
+4. If the command completes successfully, the status of the `Delivery` with the specified Delivery ID will be updated to
+   the new status.
+
+The following activity diagram illustrates the logic of updating the `DeliveryStatus` of a `Delivery`:
+
+<puml src="diagrams/DeliveryStatusCommandActivityDiagram.puml" width="450" />
+
+The sequence of the `delivery status` command is as follows:
+
+1. The command `delivery status DELIVERY_ID STATUS` is entered by the user (e.g. `delivery status 1 completed`)
+2. `LogicManager` calls the `AddressBookParser#parseCommand` with `delivery status DELIVERY_ID STATUS` as input.
+3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryStatusCommandParser`, thereafter
+   calling
+   `DeliveryStatusCommandParser#parse` to parse the command arguments.
+4. `DeliveryStatusCommandParser` will parse the arguments, and return a new instance of `DeliveryStatusCommand` which is
+   in turn passed back to `AddressBookParser` then back to `LogicManager`.
+5. `LogicManager` calls `DeliveryStatusCommand#execute` with the Model instance as input, which checks if the user is
+   logged in by calling
+   `Model#getUserLoginStatus()`.
+6. Thereafter, the `DeliveryStatusCommand` instance fetches the `Delivery` with the specified `DELIVERY_ID` from `Model`
+   , then calls it's own `DeliveryStatusCommand#createDeliveryWithNewStatus` method to create a new `Delivery` with the
+   updated `DeliveryStatus`.
+7. It then replaces the existing `Delivery` with the same ID in the `Model`
+   using `Model#setDelivery` with the newly created `Delivery` with identical fields except for its
+   updated `DeliveryStatus`.
+8. Finally, `DeliveryStatusCommand` creates a new `CommandResult` instance with the result of the execution and returns
+   it back to `LogicManager` which then returns it to the UI.
+
+The following sequence diagram illustrates the `delivery status` command sequence:
+
+
+<puml src="diagrams/DeliveryStatusCommandSequenceDiagram.puml" width="900" />
+
+---
+
+<br>
+<div style="page-break-after: always;"></div>
+
+### **Delivery Note Command**
+
+#### Overview
+
+The `delivery note` command is used to create a new `Note` a selected delivery with the new note
+specified by the user
+
+The format of the `delivery note` command can be found
+[here](./UserGuide.md#create-a-note-for-a-delivery)
+
+#### Feature Details
+
+1. The user will specify a `Delivery` through its `id`. The user must specify a non-empty `Note` to replace the
+   current status of the selected delivery.
+2. If the user is not logged in during command execution, a `CommandException` will be thrown.
+3. If the provided `ID` does not match any of the existing Delivery IDs, a `CommandException` will be thrown.
+4. If the command completes successfully, the selected `Delivery` will be updated with the new `Note`.
+
+The following activity diagram illustrates the logic of creating a `Note` for a `Delivery`:
+
+<puml src="diagrams/DeliveryCreateNoteActivityDiagram.puml" width="450" />
+
+The sequence of the `delivery note` command is as follows:
+
+1. The command `delivery note DELIVERY_ID --note NOTE` is entered by the user
+   (e.g. `delivery note 1 --note This is a note`).
+2. The `LogicManager` calls the `AddressBookParser#parseCommand` with `delivery note DELIVERY_ID --note NOTE` as input.
+3. `AddressBookParser` will parse the command, and creates a new instance of `DeliveryCreateNoteCommandParser`,
+   thereafter calling `DeliveryCreateNoteCommandParser#parse` to parse the command arguments.
+4. `DeliveryCreateNoteCommandParser` will parse the arguments, and return a new instance of `DeliveryCreateNoteCommand`,
+   which is in turn passed back to `AddressBookParser` then back to `LogicManager`.
+5. `LogicManager` calls `DeliveryCreateNoteCommand#execute` with the `Model` instance as input,
+   which checks if the user is logged in by calling `Model#getUserLoginStatus`.
+6. Thereafter, the `DeliveryCreateNoteCommand` instance fetchs the `Delivery` with the specified `DELIVERY_ID`,
+   from `Model` then calls it's own `DeliveryCreateNoteCommand#createDeliveryWithNewNote` method
+   to create a new `Delivery` with the updated `Note`.
+7. It then replaces the existing `Delivery` with the same ID in the `Model` using `Model#setDelivery` with
+   the newly created `Delivery` with identical fields except for its updated `Note`.
+8. Finally, `DeliveryCreateNoteCommand` creates a new `CommandResult` instance with the result of the execution and
+   returns it back to `LogicManager` which then returns it to the UI.
+
+If the specified `Delivery` already has an existing `Note`, it will be overridden by the new `Note` supplied if the
+command executes successfully.
+
+The following diagram illustrates the `delivery note` command sequence:
+
+<puml src="diagrams/DeliveryCreateNoteSequenceDiagram.puml" width="1000" />
+
+---
+
+<br>
 
 ### \[Proposed\] Undo/redo feature
 
@@ -839,12 +950,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     - Pros: Will use less memory (e.g. for `delete`, just save the customer being deleted).
     - Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -856,6 +961,8 @@ _{Explain here how the data archiving feature will be implemented}_
 - [DevOps guide](DevOps.md)
 
 ---
+
+<div style="page-break-after: always;"></div><br/>
 
 ## **Appendix: Requirements**
 
@@ -910,50 +1017,73 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 | `*`      | a registered owner | know the sum of all the materials required for a fixed delivery schedule | I can plan my inventory.                                                                                                                                                                |
 | `*`      | a registered owner | have different user authorisation levels                                 | I can control who has access to what.                                                                                                                                                   |
 
+<div style="page-break-after: always;"></div><br/>
+
 ### Planned Enhancements
 
-1. Our ID generation is not consistent (e.g., If there are 5 customers with IDs 1-5 and the last 4 are deleted, the next ID will be 6. However, if you restart the application, the next created Customer will have ID of 2.) Currently, we only reset the next available ID to (max ID + 1) when the user closes and launches the program again. Other times, it might skip a few numbers depending on the operations performed. We plan to perform this clean up operation (where ID resets to (max ID + 1)) after every command that modifies the data. This will ensure that the next available ID is always (max ID + 1) and also help in keeping the ID generation more consistent and be more space efficient.
+1. Our ID generation is not consistent (e.g., If there are 5 customers with `ID` 1-5 and the last 4 are deleted, the
+   next
+   `ID` will be `6`. However, if you restart the application, the next created Customer will have `ID` of `2`.)
+   Currently, we
+   only reset the next available ID to (max `ID` + `1`) when the user closes and launches the program again. Other
+   times, it
+   might skip a few numbers depending on the operations performed. We plan to perform this clean up operation (
+   where `ID`
+   resets to (max `ID` + `1`)) after every command that modifies the data. This will ensure that the next available `ID`
+   is
+   always (max `ID` + 1) and also help in keeping the `ID` generation more consistent and be more space efficient.
 
 2. Currently, you are unable to key in special characters for the name of a customer or for delivery notes. We plan to
    allow certain special characters only such as `/` for the name of a customer as some people have special characters
    eg. `Gabriel s/o Bryan` in their name or require special characters when taking notes.
 
-3. Currently, there is an inconsistency in Command Format in terms of whether a prefix is required in a command despite having the same number of parameters. For example, `delivery note` requires a `--note` prefix while `delivery status` does not require a prefix at all even though both have 1 parameter. 
-   
+3. Currently, there is an inconsistency in Command Format in terms of whether a prefix is required in a command despite
+   having the same number of parameters which may cause confusion for the user. For example, `delivery note` requires
+   a `--note` prefix while `delivery status` does not require a prefix at all even though both have 1 parameter. We plan
+   to make our command format for consistent by having delivery status require a `--status` prefix to make it more
+   predictable.
+
 4. Currently, the `find` command requires exact match of keywords and returns results that matches any of those
    keywords. This potentially results in numerous in unwanted data to be shown if there are multiple matching keywords.
    Or, if there are no matching keywords, no results would be shown. For example, if you have `100` Chocolate Cake
    and `100` Strawberry Buns and `1` Chocolate Buns, and you search for Chocolate Buns, the result would be `100`
-   Chocolate Cake and `1` Chocolate Buns and `100` Strawberry Buns. Or, if you misspelled your search as Chcolate Bns,
+   Chocolate Cake and `1` Chocolate Buns and `100` Strawberry Buns. Or, if you misspelled your search as `Chcolate Bns`,
    you would receive no result. We plan to make the `find` command have more options to do more complex search
    functionalities such as fuzzy search and exact match search. For example, if you search for Chocolate Buns, with
-   exact search, the result would be `1` Chocolate Buns. Or, if you misspelled your search as Chcolate Bns, with fuzzy
+   exact search, the result would be `1` Chocolate Buns. Or, if you misspelled your search as `Chcolate Bns`, with fuzzy
    search, the result would be `1` Chocolate Buns.
 
-5. Currently, there is no proper precedence of errors which may cause confusion among users. For example, keying in an invalid command format for `customer edit` while logged out will show all the errors regarding the format first before it tells that you are logged out (once the command format is valid and evaluated). This may result in time wasted as you need to then login first before re-typing your command again. Thus, we plan to set a precedece of error so that more important errors such as authentication errors are shown first and make errors more consistent in the order of how it is displayed.
+5. Currently, there is no proper precedence of errors which may cause confusion among users. For example, keying in an
+   invalid command format for `customer edit` while logged out will show all the errors regarding the format first
+   before it tells that you are logged out (once the command format is valid and evaluated). This may result in time
+   wasted as you need to then login first before re-typing your command again. Thus, we plan to set a precedence of
+   error
+   so that more important errors such as authentication errors are shown first and make errors more consistent in the
+   order of how it is displayed.
 
-// new
-6. Currently, if you input an invalid ID, it simply states "ID must be an integer more than 0 and less than 2147483648." but does not state whether it is a `Delivery` ID or `Customer` ID. 
-We plan to make the error message more specific by stating whether it is a `Delivery` ID or `Customer` ID.
-
+6. Currently, if you input an invalid ID, it simply
+   states `"ID must be an integer more than 0 and less than 2147483648."`
+   but does not state whether it is a Delivery ID or Customer ID.
+   We plan to make the error message more specific by stating whether it is a Delivery ID or Customer ID.
 
 7. Currently, only the user password is the only thing that is hashed in the authentication file. We plan to encrypt the
    whole JSON authentication file and the data to prevent unauthorised access to the user's account and data
-   instead of only hashing the user password.  For example, if a user enters 2023-02-30, the error message can be "Invalid date. The date entered does not exist.",
-   however the current implementation only states "Dates should be in the format yyyy-MM-dd". Or, if a user enters the
-   incorrect ID, the error should show "Customer ID" or "Delivery ID", however, the current implementation of some
-   commands does not specify whether it is for the customer ID or for delivery ID and only states "ID"
+   instead of only hashing the user password.
 
-// new
-8. Currently, if you input an invalid day, month or year such as `2023-02-30`, it simply states date "Dates should be in the format yyyy-MM-dd" but does not specify why it is invalid. We plan to make the error more specific by stating what is the actual invalid input of the date.
+8. Currently, if you input an invalid day, month or year such as `2023-02-30`, it simply states
+   date `"Dates should be in
+   the format yyyy-MM-dd"` but does not specify why it is invalid. We plan to make the error more specific by stating
+   what is the actual invalid input of the date, in this case, the day is invalid as 30th February does not exist.
 
 9. Currently, you can put duplicate prefixes for delivery list to filter or sort the deliveries that may arise in
    confusion by which filter is applied. We plan to disallow duplicate prefixes for delivery list so that users would
    not be confused by the output.
 
-// new
-10. Currently, inputting a negative value or zero for some numerical parameters that requires a positive integer simply states "Invalid Command Format". The error message
-   should be more specific and state "Please enter a positive integer that is more than 0 and less than 2147483648."
+10. Currently, inputting a negative value or zero for some numerical parameters that requires a positive integer simply
+    states `"Invalid Command Format"`. The error message
+    should be more specific and state `"Please enter a positive integer that is more than 0 and less than 2147483648."`.
+
+<div style="page-break-after: always;"></div><br/>
 
 ### Use cases
 
@@ -1006,7 +1136,7 @@ otherwise.
 
 1. Registered owner enters the login command with login details.
 2. US logs-in the user.
-   
+
    Use case ends.
 
 **Extensions:**
@@ -1075,7 +1205,7 @@ otherwise.
 
 1. Logged-In owner types logout
 2. US logs owner out.
-   
+
    Use case ends.
 
 ---
@@ -1126,6 +1256,7 @@ otherwise.
     * 1a1. US states error in command.
 
       Use case ends.
+
 ---
 
 #### **Use Case: UC07 - Create Customer**
@@ -1138,7 +1269,7 @@ otherwise.
 
 **Guarantees**
 
-- Customer is created and added to Customer database  if the command is executed successfully.
+- Customer is created and added to Customer database if the command is executed successfully.
 
 **MSS:**
 
@@ -1151,15 +1282,15 @@ otherwise.
 
 - 1a. CMS detects error in entered command.
 
-  - 1a1. CMS states error in command.
+    - 1a1. CMS states error in command.
 
-   Use case ends. 
+  Use case ends.
 
 - 1b. CMS detects duplicated customer.
-  
-  - 1b1. CMS states that customer already exists.
-   
-   Use case ends.
+
+    - 1b1. CMS states that customer already exists.
+
+  Use case ends.
 
 ---
 
@@ -1186,15 +1317,15 @@ otherwise.
 
 - 1a. CMS detects error in entered command.
 
-  - 1a1. CMS states error in command.
+    - 1a1. CMS states error in command.
 
-   Use case ends. 
+  Use case ends.
 
 - 1b. CMS detects Customer does not exist.
 
-   - 1b1. CMS states that Customer does not exist.
-   
-   Use case ends.
+    - 1b1. CMS states that Customer does not exist.
+
+  Use case ends.
 
 ---
 
@@ -1221,9 +1352,9 @@ otherwise.
 
 - 1a. CMS detects error in entered command.
 
-  - 1a1. CMS states error in command.
-   
-   Use case ends.
+    - 1a1. CMS states error in command.
+
+  Use case ends.
 
 ---
 
@@ -1242,7 +1373,7 @@ otherwise.
 **MSS:**
 
 1. Logged-in Owner types command to update a customer’s details with at least one field specified.
-2. CMS updates the details of the specified customer. 
+2. CMS updates the details of the specified customer.
 
    Use Case Ends.
 
@@ -1250,21 +1381,21 @@ otherwise.
 
 - 1a. CMS detects error in entered command.
 
-  - 1a1. CMS states error in command.
-   
-   Use case ends.
+    - 1a1. CMS states error in command.
+
+  Use case ends.
 
 - 1b. CMS detects customer does not exist.
 
-  - 1b1. CMS states that customer does not exist.
-   
-   Use case ends.
-   
+    - 1b1. CMS states that customer does not exist.
+
+  Use case ends.
+
 - 1c. CMS detects there are duplicated customers.
 
-  - 1c1. CMS states that edited details match existing Customer.
-   
-   Use case ends.
+    - 1c1. CMS states that edited details match existing Customer.
+
+  Use case ends.
 
 ---
 
@@ -1291,18 +1422,17 @@ otherwise.
 
 - 1a. CMS detects error in entered command.
 
-  - 1a1. CMS states error in command.
-   
-   Use case ends.
+    - 1a1. CMS states error in command.
+
+  Use case ends.
 
 - 1b. CMS detects Customer does not exist.
 
-  - 1b1. CMS states that Customer does not exist.
-   
-   Use case ends.
+    - 1b1. CMS states that Customer does not exist.
+
+  Use case ends.
 
 ---
-
 
 #### **Use case: UC12 - List Customers**
 
@@ -1340,7 +1470,7 @@ otherwise.
 **MSS:**
 
 1. Logged-in Owner types command to create a delivery.
-2. DMS adds the delivery to the delivery database. 
+2. DMS adds the delivery to the delivery database.
 
    Use Case Ends.
 
@@ -1349,11 +1479,11 @@ otherwise.
 - 1a. DMS detects error in entered command.
 
     - 1a1. DMS states error in command.
-  
+
       Use Case Ends.
 
 - 1b. DMS detects Customer linked to Delivery does not exist.
-    
+
     - 1b1. DMS states that the specified Customer does not exist.
 
       Use Case Ends.
@@ -1389,9 +1519,9 @@ otherwise.
 
 - 1b. DMS detects that the specified Delivery does not exist.
 
-   - 1b1. DMS states that the specified Delivery does not exist.
+    - 1b1. DMS states that the specified Delivery does not exist.
 
-     Use Case Ends.
+      Use Case Ends.
 
 --- 
 
@@ -1417,15 +1547,15 @@ otherwise.
 
 - 1a. DMS detects filters or sort options in the entered command.
 
-   - 1a1. DMS displays a list of deliveries filtered and sorted by the specified filters and sort order detected.
+    - 1a1. DMS displays a list of deliveries filtered and sorted by the specified filters and sort order detected.
 
-   Use Case Ends.
+  Use Case Ends.
 
 - 1b. DMS detects an error in the entered command.
 
-   - 1b1. DMS states the error in the entered command.
+    - 1b1. DMS states the error in the entered command.
 
-   Use Case Ends.
+  Use Case Ends.
 
 ---
 
@@ -1604,6 +1734,8 @@ otherwise.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -1625,6 +1757,8 @@ otherwise.
 
 <br>
 
+<div style="page-break-after: always;"></div><br/>
+
 ### Glossary
 
 | Term                           | Definition                                                                              |
@@ -1640,6 +1774,8 @@ otherwise.
 | Private Contact Detail         | A contact detail that is not meant to be shared with others                             |
 
 ---
+
+<div style="page-break-after: always;"></div><br/>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -1659,7 +1795,8 @@ testers are expected to do more _exploratory_ testing.
     1. Download the jar file and copy it into an empty folder.
 
     2. Run `HomeBoss.jar`{.swift}. If you are unsure how to run a `.jar` file, you may refer to this helpful
-       [guide](https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Run-JAR-file-example-windows-linux-ubuntu).
+       [guide](https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Run-JAR-file-example-windows-linux-ubuntu)
+       .
 
     3. First register for HomeBoss using the `register`{.swift} command. So, for example, if you want to register an
        account
@@ -2426,6 +2563,8 @@ testers are expected to do more _exploratory_ testing.
        Expected: Upon the next application start and login, `deliverybook.json`{.swift} is cleared.
 
 ---
+
+<div style="page-break-after: always;"></div><br/>
 
 ## **Appendix: Effort**
 
