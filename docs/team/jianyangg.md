@@ -64,8 +64,10 @@ Given below are my contributions to the project.
 <br>
 
 * **Bug fixing:**
-  * Fixed bugs in own features that arose after PE Dry Run
-    * Related Pull Request: [\#454](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/454/files)
+  * Fixed bugs in own features that arose after PE Dry Run and clarified usage in UG
+    * Related Pull Requests:
+      * [\#486](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/486)
+      * [\#345](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/345)
   * Fixed Ui text overflow problem
     * Related Pull Request: [\#339](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/339)
 
