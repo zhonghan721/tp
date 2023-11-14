@@ -67,7 +67,7 @@ public class DeliveryNameContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new DeliveryBuilder().withName("Gabriel Milk").build()));
 
         // Only one matching keyword
-        predicate = new DeliveryNameContainsKeywordsPredicate(Arrays.asList("Gabriel", "Milk"));
+        predicate = new DeliveryNameContainsKeywordsPredicate(Arrays.asList("Gabriel", "Bun"));
         assertTrue(predicate.test(new DeliveryBuilder().withName("Gabriel Milk").build()));
 
         // Mixed-case keywords

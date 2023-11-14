@@ -1,3 +1,4 @@
+//@@author {Gabriel4357}
 package seedu.address.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
@@ -42,12 +43,12 @@ public class CustomerEditCommand extends CustomerCommand {
     public static final String COMMAND_WORD = CustomerCommand.COMMAND_WORD + " " + "edit";
 
     /**
-     *  The text displayed to show what the command does and how to use it.
+     * The text displayed to show what the command does and how to use it.
      */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the customer ID used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n\n"
-            + "Parameters: CUSTOMER_ID (must be a positive integer) "
+            + "Parameters: CUSTOMER_ID (must be a positive integer and less than 2147483648) "
             + "[" + PREFIX_NAME + " NAME] "
             + "[" + PREFIX_PHONE + " PHONE] "
             + "[" + PREFIX_EMAIL + " EMAIL] "
@@ -73,6 +74,7 @@ public class CustomerEditCommand extends CustomerCommand {
 
     /**
      * Creates a CustomerEditCommand to edit the customers.
+     *
      * @param targetIndex            of the person in the filtered person list to edit
      * @param customerEditDescriptor details to edit the person with
      */
@@ -86,6 +88,7 @@ public class CustomerEditCommand extends CustomerCommand {
 
     /**
      * Executes the CustomerEditCommand.
+     *
      * @param model {@code Model} which the command should operate on.
      * @return The command result along with the message to be displayed to the user.
      * @throws CommandException If the user is not logged in or if the customer does not exist or if the edited
@@ -118,7 +121,13 @@ public class CustomerEditCommand extends CustomerCommand {
         Customer customerToEdit = targetCustomer.get();
         Customer editedCustomer = createEditedCustomer(customerToEdit, customerEditDescriptor);
 
-        if (!customerToEdit.hasSamePhone(editedCustomer) && model.hasCustomerWithSamePhone(editedCustomer)) {
+        logger.info("Customer to be edited: " + customerToEdit.toString() + "\n");
+        logger.info("Edited Customer: " + editedCustomer.toString() + "\n");
+
+        boolean isExistingCustomer = !customerToEdit.hasSamePhone(editedCustomer)
+                && model.hasCustomerWithSamePhone(editedCustomer);
+
+        if (isExistingCustomer) {
             logger.warning("Customer to be edited already exist.(has the same phone number as another customer)."
                     + "\n");
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -127,16 +136,12 @@ public class CustomerEditCommand extends CustomerCommand {
         assert customerToEdit != null : "Customer to be edited should exist.";
         assert editedCustomer != null : "Edited Customer should exist.";
 
-        logger.info("Customer to be edited: " + customerToEdit.toString() + "\n");
-        logger.info("Edited Customer: " + editedCustomer.toString() + "\n");
-
         model.setCustomer(customerToEdit, editedCustomer);
+        updateDelivery(model, editedCustomer);
         model.showAllFilteredCustomerList();
 
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS,
                 Messages.format(editedCustomer)), true);
-
-
     }
 
     /**
@@ -175,11 +180,14 @@ public class CustomerEditCommand extends CustomerCommand {
         });
     }
 
+
+    //@@author {zhonghan721}
+
     /**
      * Creates and returns a {@code Delivery} with the customer details edited.
      *
-     * @param deliveryToEdit         {@code Delivery} which the command edits.
-     * @param editedCustomer         {@code Customer} which the delivery is associated with.
+     * @param deliveryToEdit {@code Delivery} which the command edits.
+     * @param editedCustomer {@code Customer} which the delivery is associated with.
      */
     private static Delivery createEditedDelivery(Delivery deliveryToEdit, Customer editedCustomer) {
 
@@ -202,6 +210,7 @@ public class CustomerEditCommand extends CustomerCommand {
         return new Delivery(deliveryToEdit.getDeliveryId(), deliveryName, editedCustomer, orderDate,
                 deliveryDate, deliveryStatus, note);
     }
+    //@@author {zhonghan721}
 
     @Override
     public boolean equals(Object other) {
@@ -330,3 +339,4 @@ public class CustomerEditCommand extends CustomerCommand {
         }
     }
 }
+//@@author {Gabriel4357}

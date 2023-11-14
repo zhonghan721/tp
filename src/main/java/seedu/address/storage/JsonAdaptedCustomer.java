@@ -99,8 +99,7 @@ class JsonAdaptedCustomer {
                 throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
-            throw new IllegalValueException("Customer ID should only contain numbers, "
-                    + "and it should be more than 0");
+            throw new IllegalValueException("ID must be a positive integer and less than 2147483648");
         }
 
         return new Customer(modelCustomerId, modelName, modelPhone, modelEmail, modelAddress);

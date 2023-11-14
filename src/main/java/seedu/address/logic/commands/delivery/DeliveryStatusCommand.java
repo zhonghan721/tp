@@ -1,8 +1,8 @@
+//@@author {B-enguin}
 package seedu.address.logic.commands.delivery;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -28,10 +28,10 @@ public class DeliveryStatusCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " " + "status";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the status of the delivery identified "
-        + "by the ID of the delivery. Existing status will be overwritten by the input status.\n\n"
-        + "Parameters: ID (must be a integer representing a valid ID) "
-        + "STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED)\n\n"
-        + "Example: " + COMMAND_WORD + " 1 COMPLETED";
+            + "by the ID of the delivery. Existing status will be overwritten by the input status.\n\n"
+            + "Parameters: ID (must be a integer representing a valid ID) "
+            + "STATUS (must be one of CREATED/SHIPPED/COMPLETED/CANCELLED)\n\n"
+            + "Example: " + COMMAND_WORD + " 1 COMPLETED";
 
     public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery:\n\n%1$s";
 
@@ -59,8 +59,8 @@ public class DeliveryStatusCommand extends DeliveryCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         logger.info("Executing DeliveryStatusCommand:"
-            + " deliveryId " + targetId
-            + " and status " + updatedStatus);
+                + " deliveryId " + targetId
+                + " and status " + updatedStatus);
 
         // User cannot perform this operation before logging in
         if (!model.getUserLoginStatus()) {
@@ -79,13 +79,13 @@ public class DeliveryStatusCommand extends DeliveryCommand {
         Delivery editedDelivery = createDeliveryWithNewStatus(targetDelivery.get(), updatedStatus);
 
         logger.info("Updating Delivery:"
-            + " deliveryId " + targetId
-            + ", oldStatus " + targetDelivery.get().getStatus()
-            + " and newStatus " + updatedStatus);
+                + " deliveryId " + targetId
+                + ", oldStatus " + targetDelivery.get().getStatus()
+                + " and newStatus " + updatedStatus);
 
         // Update Delivery
         model.setDelivery(targetDelivery.get(), editedDelivery);
-        model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        model.showAllFilteredDeliveryList();
         return new CommandResult(String.format(MESSAGE_EDIT_DELIVERY_SUCCESS, Messages.format(editedDelivery)), true);
     }
 
@@ -107,7 +107,7 @@ public class DeliveryStatusCommand extends DeliveryCommand {
 
 
         return new Delivery(updatedId, updatedName, updatedCustomer, updatedOrderDate,
-            updatedDeliveryDate, updatedStatus, updatedNote);
+                updatedDeliveryDate, updatedStatus, updatedNote);
     }
 
     @Override
@@ -123,14 +123,15 @@ public class DeliveryStatusCommand extends DeliveryCommand {
 
         DeliveryStatusCommand otherStatusCommand = (DeliveryStatusCommand) other;
         return targetId == otherStatusCommand.targetId
-            && updatedStatus.equals(otherStatusCommand.updatedStatus);
+                && updatedStatus.equals(otherStatusCommand.updatedStatus);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("targetId", targetId)
-            .add("status", updatedStatus)
-            .toString();
+                .add("targetId", targetId)
+                .add("status", updatedStatus)
+                .toString();
     }
 }
+//@@author {B-enguin}

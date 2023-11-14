@@ -5,14 +5,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USER;
 
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.user.UserLoginCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
@@ -33,10 +31,10 @@ public class UserLoginCommandParser implements Parser<UserLoginCommand> {
      */
     public UserLoginCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_USER, PREFIX_PASSWORD);
+            ArgumentTokenizer.tokenize(args, PREFIX_USER, PREFIX_PASSWORD);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_USER, PREFIX_PASSWORD)
-                || !argMultimap.isEmptyPreamble()) {
+        if (!argMultimap.arePrefixesPresent(PREFIX_USER, PREFIX_PASSWORD)
+            || !argMultimap.isEmptyPreamble()) {
             logger.severe("Could not parse command");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UserLoginCommand.MESSAGE_USAGE));
         }
@@ -49,13 +47,4 @@ public class UserLoginCommandParser implements Parser<UserLoginCommand> {
 
         return new UserLoginCommand(user);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }

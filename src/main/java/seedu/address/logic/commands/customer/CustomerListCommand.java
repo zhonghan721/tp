@@ -2,7 +2,6 @@ package seedu.address.logic.commands.customer;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
 import java.util.logging.Logger;
 
@@ -32,12 +31,13 @@ public class CustomerListCommand extends CustomerCommand {
             throw new CommandException(MESSAGE_USER_NOT_AUTHENTICATED);
         }
 
-        model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+        model.showAllFilteredCustomerList();
 
-        if (model.getFilteredCustomerListSize() == 0) {
+        if (model.isFilteredCustomerListEmpty()) {
             return new CommandResult(MESSAGE_EMPTY, true);
         }
 
         return new CommandResult(MESSAGE_SUCCESS, true);
     }
 }
+//@@author {B-enguin}

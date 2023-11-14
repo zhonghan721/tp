@@ -99,7 +99,7 @@ class JsonAdaptedDelivery {
         try {
             customerIdInt = Integer.parseInt(customerId);
         } catch (NumberFormatException e) {
-            throw new IllegalValueException("Customer ID should only contain numbers");
+            throw new IllegalValueException("ID must be a positive integer and less than 2147483648");
         }
         Optional<Customer> c = customerBook.get().getById(customerIdInt);
         if (c.isEmpty()) {
@@ -167,11 +167,11 @@ class JsonAdaptedDelivery {
         try {
             modelDeliveryId = Integer.parseInt(deliveryId);
         } catch (NumberFormatException e) {
-            throw new IllegalValueException("Delivery ID should only contain numbers");
+            throw new IllegalValueException("ID must be a positive integer and less than 2147483648");
         }
 
         if (modelDeliveryId <= 0) {
-            throw new IllegalValueException("Delivery ID must be an integer more than 0.");
+            throw new IllegalValueException("ID must be a positive integer and less than 2147483648");
         }
 
         return new Delivery(

@@ -56,6 +56,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_CHIPS = "Chips";
     public static final String INVALID_NOTE = "";
+
+    public static final String INVALID_NOTE_SPACES = " ";
     public static final String INVALID_NOTE_DESC = " " + PREFIX_NOTE + INVALID_NOTE;
     public static final String VALID_NOTE = "VALID NOTE";
     public static final String VALID_NOTE_DESC = " " + PREFIX_NOTE + VALID_NOTE;
@@ -72,7 +74,8 @@ public class CommandTestUtil {
     public static final String VALID_STATUS_DESC = " " + PREFIX_STATUS + VALID_STATUS_CREATED;
     public static final String INVALID_ID_NEGATIVE = "-1";
     public static final String INVALID_ID_NAN = "NaN";
-
+    public static final String INVALID_ID_ZERO = "0";
+    public static final String INVALID_ID_MAX_VALUE = "2147483648";
     public static final String VALID_DELIVERY_DATE_1 = "2025-12-12";
 
     public static final String VALID_DELIVERY_DATE_2 = "2025-11-11";

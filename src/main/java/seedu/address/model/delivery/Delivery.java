@@ -6,6 +6,7 @@ import java.util.Optional;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.customer.Address;
 import seedu.address.model.customer.Customer;
+import seedu.address.model.customer.Name;
 
 /**
  * Represents a Delivery in the address book.
@@ -46,29 +47,6 @@ public class Delivery {
         this.deliveryDate = deliveryDate;
         this.status = status;
         this.note = note;
-    }
-
-
-    /**
-     * Constructor for Delivery.
-     *
-     * @param deliveryId   The ID of the delivery.
-     * @param name         The name of the delivery.
-     * @param customer     The customer who ordered the delivery.
-     * @param orderDate    The date the delivery was ordered.
-     * @param deliveryDate The date the delivery will be delivered.
-     * @param status       The status of the delivery.
-     */
-    public Delivery(int deliveryId, DeliveryName name, Customer customer, OrderDate orderDate,
-                    DeliveryDate deliveryDate,
-                    DeliveryStatus status) {
-        Delivery.deliveryCount = Math.max(deliveryCount, deliveryId + 1);
-        this.deliveryId = deliveryId;
-        this.name = name;
-        this.customer = customer;
-        this.orderDate = orderDate;
-        this.deliveryDate = deliveryDate;
-        this.status = status;
     }
 
     /**
@@ -145,6 +123,10 @@ public class Delivery {
         return customer;
     }
 
+    public Name getCustomerName() {
+        return customer.getName();
+    }
+
     public int getCustomerId() {
         return customer.getCustomerId();
     }
@@ -199,8 +181,22 @@ public class Delivery {
         return note;
     }
 
+    /**
+     * Sets the delivery count to the specified value.
+     *
+     * @param deliveryCount The value to set the delivery count to.
+     */
     public static void setDeliveryCount(int deliveryCount) {
         Delivery.deliveryCount = deliveryCount;
+    }
+
+    /**
+     * Returns the current delivery count.
+     *
+     * @return The current delivery count.
+     */
+    public static int getDeliveryCount() {
+        return deliveryCount;
     }
 
     /**
@@ -238,13 +234,13 @@ public class Delivery {
         Delivery otherDelivery = (Delivery) other;
 
         return otherDelivery.deliveryId == deliveryId
-                && otherDelivery.deliveryDate.equals(deliveryDate)
-                && otherDelivery.name.equals(name)
-                && otherDelivery.customer.equals(customer)
-                && Objects.equals(otherDelivery.note, note)
-                && otherDelivery.orderDate.equals(orderDate)
-                && otherDelivery.status.equals(status)
-                && otherDelivery.getAddress().equals(customer.getAddress());
+            && otherDelivery.deliveryDate.equals(deliveryDate)
+            && otherDelivery.name.equals(name)
+            && otherDelivery.customer.equals(customer)
+            && Objects.equals(otherDelivery.note, note)
+            && otherDelivery.orderDate.equals(orderDate)
+            && otherDelivery.status.equals(status)
+            && otherDelivery.getAddress().equals(customer.getAddress());
     }
 
     @Override
@@ -255,13 +251,13 @@ public class Delivery {
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("deliveryId", deliveryId)
-                .add("name", name)
-                .add("customer", customer)
-                .add("orderedAt", orderDate)
-                .add("deliveredAt", deliveryDate)
-                .add("address:", customer.getAddress())
-                .add("note:", Optional.ofNullable(note)
-                        .map(n -> String.format("\n Note:%s", n)).orElse(""))
-                .toString();
+            .add("name", name)
+            .add("customer", customer)
+            .add("orderedAt", orderDate)
+            .add("deliveredAt", deliveryDate)
+            .add("address:", customer.getAddress())
+            .add("note:", Optional.ofNullable(note)
+                .map(n -> String.format("\n Note:%s", n)).orElse(""))
+            .toString();
     }
 }

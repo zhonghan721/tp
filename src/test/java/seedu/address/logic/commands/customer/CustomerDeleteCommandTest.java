@@ -3,6 +3,7 @@ package seedu.address.logic.commands.customer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_USER_NOT_AUTHENTICATED;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showCustomerAtIndex;
@@ -15,6 +16,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.CommandTestUtil;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -68,6 +71,17 @@ public class CustomerDeleteCommandTest {
         expectedModel.deleteDeliveryByCustomer(customerToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel, true);
+    }
+
+    @Test
+    public void execute_notLoggedIn_throwsCommandException() {
+        Model emptyModel =
+            new ModelManager(new AddressBook(), getTypicalDeliveryBook(), new UserPrefs(), false);
+        Index index = Index.fromOneBased(1);
+        CommandTestUtil.assertCommandFailure(
+            new CustomerDeleteCommand(index),
+            emptyModel,
+            MESSAGE_USER_NOT_AUTHENTICATED);
     }
 
 

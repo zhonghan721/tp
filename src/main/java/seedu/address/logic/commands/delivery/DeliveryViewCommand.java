@@ -20,7 +20,7 @@ public class DeliveryViewCommand extends DeliveryCommand {
     public static final String COMMAND_WORD = DeliveryCommand.COMMAND_WORD + " view";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays a single delivery order.\n\n"
         + "Parameters: "
-        + "DELIVERY_ID (Must be a positive integer)\n\n"
+        + "DELIVERY_ID (Must be a positive integer and less than 2147483648)\n\n"
         + "Example: " + COMMAND_WORD + " "
         + "1";
 
@@ -52,7 +52,7 @@ public class DeliveryViewCommand extends DeliveryCommand {
         Optional<Delivery> delivery = model.getDelivery(deliveryId);
 
         if (delivery.isEmpty()) {
-            logger.warning("Executing DeliveryViewCommand failed: Delivery not found");
+            logger.warning("Executing DeliveryViewCommand: Delivery not found");
             throw new CommandException(MESSAGE_INVALID_DELIVERY_ID);
         }
 

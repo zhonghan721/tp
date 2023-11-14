@@ -34,13 +34,19 @@ public class NoteTest {
         // invalid note -> returns false
         assertFalse(Note.isValid("")); // empty string
 
-        // valid note -> returns false
+        // invalid note -> returns false
+        assertFalse(Note.isValid(" ")); // whitespace
+
+        // invalid note -> returns false
+        assertFalse(Note.isValid("\r\t\n")); // escape sequence
+
+        // valid note -> returns true
         assertTrue(Note.isValid("peter jack")); // alphabets only
 
-        // valid note -> returns false
+        // valid note -> returns true
         assertTrue(Note.isValid("az 09")); // alphanumeric
 
-        // valid note -> returns false
+        // valid note -> returns true
         assertTrue(Note.isValid("AZ 123")); // alphanumeric with capital letters
 
         // invalid note -> returns false

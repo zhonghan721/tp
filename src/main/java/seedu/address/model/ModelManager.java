@@ -94,6 +94,11 @@ public class ModelManager implements Model {
         userPrefs.setGuiSettings(guiSettings);
     }
 
+    //=========== UI List ====================================================================================
+
+    /**
+     * Sets the UI list to the delivery list.
+     */
     @Override
     public void setUiListDelivery() {
         this.uiList = this.getSortedDeliveryList()
@@ -102,14 +107,23 @@ public class ModelManager implements Model {
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
+    /**
+     * Transforms the given delivery to a ListItem to be shown in the UI List.
+     *
+     * @param delivery the delivery to be transformed.
+     * @return the ListItem to be shown in the UI List.
+     */
     private ListItem transformDeliveryToListItem(Delivery delivery) {
-        return new ListItem(String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName()),
-                String.format("Ordered on: %s", delivery.getOrderDate().toString()),
-                delivery.getStatus().toString(),
-                String.format("Deliver by: %s", delivery.getDeliveryDate().toString()));
+        String title = String.format("[%d] %s", delivery.getDeliveryId(), delivery.getName());
+        String description = String.format("Ordered on: %s", delivery.getOrderDate().toString());
+        String mainAccessory = delivery.getStatus().toString();
+        String accessory = String.format("Deliver by: %s", delivery.getDeliveryDate().toString());
+        return new ListItem(title, description, mainAccessory, accessory);
     }
 
-
+    /**
+     * Sets the UI list to the customer list.
+     */
     @Override
     public void setUiListCustomer() {
         this.uiList = this.getFilteredCustomerList()
@@ -118,13 +132,19 @@ public class ModelManager implements Model {
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
+    /**
+     * Transforms the given customer to a ListItem to be shown in the UI List.
+     *
+     * @param customer the customer to be transformed.
+     * @return the ListItem to be shown in the UI List.
+     */
     private ListItem transformCustomerToListItem(Customer customer) {
         String descriptionFormat = "Email: %s\nAddress: %s";
-        return new ListItem(String.format("[%d] %s", customer.getCustomerId(), customer.getName()),
-                String.format(descriptionFormat,
-                        customer.getEmail().toString(),
-                        customer.getAddress().toString()),
-                customer.getPhone().toString());
+        String title = String.format("[%d] %s", customer.getCustomerId(), customer.getName());
+        String description = String.format(descriptionFormat, customer.getEmail().toString(),
+                customer.getAddress().toString());
+        String accessory = customer.getPhone().toString();
+        return new ListItem(title, description, accessory);
     }
 
     @Override
@@ -132,7 +152,19 @@ public class ModelManager implements Model {
         return this.uiList;
     }
 
+    //=========== DeliveryBook ================================================================================
     @Override
+    public Path getDeliveryBookFilePath() {
+        return userPrefs.getDeliveryBookFilePath();
+    }
+
+    @Override
+    public void setDeliveryBookFilePath(Path deliveryBookFilePath) {
+        requireNonNull(deliveryBookFilePath);
+        userPrefs.setDeliveryBookFilePath(deliveryBookFilePath);
+    }
+    //=========== AddressBook ================================================================================
+
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
@@ -143,49 +175,8 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    @Override
-    public Path getDeliveryBookFilePath() {
-        return userPrefs.getDeliveryBookFilePath();
-    }
 
-    @Deprecated
-    @Override
-    public Delivery getDeliveryUsingFilteredList(int id) {
-        for (Delivery d : filteredDeliveries) {
-            if (d.getDeliveryId() == id) {
-                return d;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public void setDeliveryBookFilePath(Path deliveryBookFilePath) {
-        requireNonNull(deliveryBookFilePath);
-        userPrefs.setDeliveryBookFilePath(deliveryBookFilePath);
-    }
-
-    /**
-     * Returns the status of the login as a string.
-     *
-     * @return the status of the login as a string
-     */
-    @Override
-    public String getLoginStatus() {
-        if (loggedInUser.isEmpty()) {
-            return "No account found. Please register an account.";
-        }
-
-        if (isLoggedIn) {
-            User currLoggedInUser = this.loggedInUser.get();
-            return "Hello " + currLoggedInUser.getUsername() + ".";
-        }
-
-        return "Logged out. Please login to continue.";
-    }
-
-    //=========== AddressBook ================================================================================
-
+    //@@author {B-enguin}
     @Override
     public void setAddressBook(ReadOnlyBook<Customer> addressBook) {
         this.addressBook.resetData(addressBook);
@@ -195,6 +186,7 @@ public class ModelManager implements Model {
     public ReadOnlyBook<Customer> getAddressBook() {
         return addressBook;
     }
+    //@@author {B-enguin}
 
     @Override
     public Optional<Customer> getCustomer(int id) {
@@ -233,8 +225,6 @@ public class ModelManager implements Model {
         addressBook.setCustomer(target, editedCustomer);
         showAllFilteredCustomerList();
     }
-
-    //=========== Filtered Customer List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Customer} backed by the internal list of
@@ -302,6 +292,28 @@ public class ModelManager implements Model {
     }
 
     //=========== User Related Methods =======================================================================
+
+    //@@author {jianyangg}
+
+    /**
+     * Returns the status of the login as a string.
+     *
+     * @return the status of the login as a string
+     */
+    @Override
+    public String getLoginStatus() {
+        if (loggedInUser.isEmpty()) {
+            return "No account found. Please register an account.";
+        }
+
+        if (isLoggedIn) {
+            User currLoggedInUser = this.loggedInUser.get();
+            return "Hello " + currLoggedInUser.getUsername() + ".";
+        }
+
+        return "Logged out. Please login to continue.";
+    }
+    //@@author {jianyangg}
 
     /**
      * Returns true if the {@code user} is currently logged in.
@@ -438,7 +450,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteDelivery(Delivery target) {
         deliveryBook.removeDelivery(target);
-        updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        showAllFilteredDeliveryList();
     }
 
     /**
@@ -447,7 +459,7 @@ public class ModelManager implements Model {
     @Override
     public void addDelivery(Delivery delivery) {
         deliveryBook.addDelivery(delivery);
-        updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        showAllFilteredDeliveryList();
     }
 
     /**
@@ -458,7 +470,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedDelivery);
 
         deliveryBook.setDelivery(target, editedDelivery);
-        updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        showAllFilteredDeliveryList();
     }
 
     /**
@@ -507,8 +519,6 @@ public class ModelManager implements Model {
         return this.sortedDeliveries.isEmpty();
     }
 
-    //=========== Filtered Customer List Accessors =============================================================
-
     /**
      * Returns an unmodifiable view of the list of {@code Customer} backed by the internal list of
      * {@code versionedAddressBook}
@@ -556,7 +566,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteDeliveryByCustomer(Customer target) {
         deliveryBook.removeDeliveryByCustomer(target);
-        updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
+        showAllFilteredDeliveryList();
     }
 
 
@@ -579,5 +589,4 @@ public class ModelManager implements Model {
                 && filteredDeliveries.equals(otherModelManager.filteredDeliveries)
                 && isLoggedIn == otherModelManager.isLoggedIn;
     }
-
 }
