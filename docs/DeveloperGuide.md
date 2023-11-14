@@ -512,7 +512,7 @@ The following sequence diagram shows how the `customer add` command works:
 The `customer edit` command is used to edit an existing Customer with at least one of the information fields
 specified by the user, namely the customer's `Name`, `Phone`, `Email` or/and `Address`.
 
-The format for the `customer edit` command can be found [here](UserGuide.md#update-customer-details).
+The format for the `customer edit` command can be found [here](UserGuide.md#update-details-of-a-customer).
 
 #### Feature Details
 
@@ -571,7 +571,7 @@ The `delivery add` command is used to add a new Delivery with all the given info
 specified by the user, namely the delivery's `DeliveryName`, customer id of a `Customer` and `DeliveryDate`. All fields
 are compulsory.
 
-The format for the `delivery add` command can be found [here](UserGuide.md#create-delivery).
+The format for the `delivery add` command can be found [here](UserGuide.md#add-a-delivery).
 
 #### Feature Details
 
@@ -620,7 +620,7 @@ The following sequence diagram shows how the `delivery add` command works:
 The `delivery view` command is used to view a selected delivery with the id specified by the user.
 
 The format of the `delivery view` command can be found
-[here](./UserGuide.md#view-details-of-a-delivery)
+[here](./UserGuide.md#view-details-of-a-delivery).
 
 #### Feature Details
 
@@ -663,14 +663,14 @@ The following sequence diagram illustrates the `delivery view` command sequence:
 
 ### **Delivery List Command**
 
-### Overview
+#### Overview
 
 The `delivery list` command is used to list all deliveries in the delivery book.
 
 The format of the `delivery list` command can be found
-[here](./UserGuide.md#view-a-list-of-deliveries)
+[here](./UserGuide.md#view-a-list-of-deliveries).
 
-### Feature Details
+#### Feature Details
 
 1. The user can optionally specify a `status`, `customer id`, `date` and `sort` to filter and sort the
    current delivery list in any combination.
@@ -740,7 +740,7 @@ The `delivery status` command is used to update the `DeliveryStatus` of a select
 specified by the user.
 
 The format of the `delivery status` command can be found
-[here](./UserGuide.md#update-delivery-status)
+[here](./UserGuide.md#update-status-of-a-delivery).
 
 #### Feature Details
 
@@ -794,7 +794,7 @@ The `delivery note` command is used to create a new `Note` a selected delivery w
 specified by the user
 
 The format of the `delivery note` command can be found
-[here](./UserGuide.md#create-a-note-for-a-delivery)
+[here](./UserGuide.md#create-a-note-for-a-delivery).
 
 #### Feature Details
 
