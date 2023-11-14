@@ -28,8 +28,6 @@ Given below are my contributions to the project.
       * [\#194](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/194)
       * [\#225](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/225)
 
-<br>
-
 * **New Feature**: Added ability to recover an account in HomeBoss
     * What it does: Allows the user to recover their account in HomeBoss in case they forget their password.
     * Justification: This feature allows for corrective action to be taken in case the user forgets their password. This
@@ -38,19 +36,16 @@ Given below are my contributions to the project.
     * Related Pull Request: 
       * [\#198](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/198)
 
-<br>
-
 * **Major Enhancement:** Revamped the UI experience of the user
   * What it does: This enhancement reordered the UI elements and gave the GUI a more aesthetic look. The UI is also made more personalised
     for the user by displaying the user's username in the UI.
   * Justification: The AB3's implementation of the UI has the error messages squeezed into a narrow rectangle that frequently required scrolling to get through. Thus for displaying things like `Customer` or `Delivery` details, it's difficult to display all the information in a single page. This enhancement allows the user to read more data at once before having to scroll. The UI was also made to feel friendly and welcoming to the user by displaying the user's username in the UI.
-  * Highlights: Each ItemCard is redesigned to include details specific to our application. The footer was also edited to include information such as if the user is logged out or hasn't registered an account or if the user is logged in (where it'll then display the user's username instead).
+  * Highlights: Each ItemCard is redesigned to include details specific to our application. The footer was also edited to include information such as if the user is logged out or hasn't registered an account or if the user is logged in (where it'll then display the user's username instead). Also fixed Ui text overflow issue in AB3 such that text is wrapped.
   * Related Pull Requests: 
     * [\#271](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/271)
     * [\#222](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/222)
     * [\#119](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/119)
-
-<br>
+    * [\#339](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/339)
   
 * **Enhancements to existing features:** Updated the `delete ID` command from AB3 to `customer delete ID`, which allows for the deletion of `Delivery` objects linked to the deleted `Customer`.
   * What it does: Once a Customer is deleted, all Deliveries linked to the Customer will also be deleted.
@@ -61,22 +56,12 @@ Given below are my contributions to the project.
     * [\#109](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/109)
     * [\#230](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/230)
 
-<br>
-
-* **Bug fixing:**
-  * Fixed bugs in own features that arose after PE Dry Run and clarified usage in UG
-    * Related Pull Requests:
-      * [\#486](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/486)
-      * [\#345](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/345)
-  * Fixed Ui text overflow problem
-    * Related Pull Request: [\#339](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/339)
-
-<br>
-
 * **Code contributed:** 
     * [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=jianyangg&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code)
 
-<br>
+* **Community:**
+  * PRs reviewed: As of 14th November, I have reviewed 72 PRs [(GitHub)](https://github.com/AY2324S1-CS2103T-T13-3/tp/pulls?q=is%3Apr+reviewed-by%3Ajianyangg+is%3Aclosed+)
+  * Reported bugs for other teams during PE Dry Run: I found 11 [issues](https://github.com/jianyangg/ped/issues) with my allocated PE-Dry-Run project.
 
 * **Contributions to team-based tasks:** _Aside from those already mentioned in this document_
   * Made error messages in the GUI clearer by introducing whitespace where appropriate. 
@@ -107,8 +92,4 @@ Given below are my contributions to the project.
       * [\#546](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/546)
       * [\#498](https://github.com/AY2324S1-CS2103T-T13-3/tp/pull/498)
 
-<br>
 
-* **Community:**
-  * PRs reviewed: As of 14th November, I have reviewed 72 PRs [(GitHub)](https://github.com/AY2324S1-CS2103T-T13-3/tp/pulls?q=is%3Apr+reviewed-by%3Ajianyangg+is%3Aclosed+)
-  * Reported bugs for other teams during PE Dry Run: I found 11 [issues](https://github.com/jianyangg/ped/issues) with my allocated PE-Dry-Run project.
