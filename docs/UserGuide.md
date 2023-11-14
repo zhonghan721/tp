@@ -163,10 +163,10 @@ If you're unsure what a prefix is, you can refer to the [HomeBoss Command Format
 
 <br/>**Screenshots**
 
-* Screenshots are added below each example where it helps enhance the clarity of the **expected output** from running
+* Screenshots are added below each example where it helps enhance the clarity of the expected output from running
   the command that precedes it.
 
-* Whereever the explanation that follows each command is sufficient to convey the expected output, screenshots are
+* Wherever the explanation that follows each command is sufficient to convey the expected output, screenshots are
   omitted to reduce clutter. The output will be shown in `codeblocks` instead.
 
 <br/>
@@ -595,8 +595,7 @@ You can create a new User account by calling this command when you first start u
 
 </br>**Format:**
 
-`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`
-{.swift}
+`register --user USERNAME --password PASSWORD --confirmPass CONFIRM_PASSWORD --secretQn SECRET_QUESTION --answer ANSWER`{.swift}
 
 
 <br/>
@@ -642,8 +641,7 @@ question `First Pet Name?` and answer `Koko`.
 
 <box type="tip" background-color="#d9edf7" border-color="#bce8f1" icon=":bulb:">
 
-**Tip:** Since only one account can be registered at any one time, if you have already registered an account, you will
-not be able to register another account. If you must, you can delete your current account by using the `delete account`{.swift} command [here](#delete-account) before registering a new account.
+**Tip:** Since only one account can be registered at any one time, if you have already registered an account, you will not be able to register another account. If you must, you can delete your current account by using the `delete account`{.swift} command [here](#delete-account) before registering a new account.
 </box>
 
 <br/>
@@ -1496,8 +1494,7 @@ Delivery or in the event that you keyed in the Delivery's details wrongly.
 
 </br>**Format:**
 
-`delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE][--status STATUS] [--note NOTE]`
-{.swift}
+`delivery edit DELIVERY_ID [--name DELIVERY_NAME] [--customer CUSTOMER_ID] [--date EXPECTED_DELIVERY_DATE][--status STATUS] [--note NOTE]`{.swift}
 
 <br/>
 
